@@ -1,0 +1,96 @@
+name: 🔁 Retry Failed Dates
+
+# Run this after a backfill to re-attempt any dates that failed.
+# It reads the checkpoint file and retries only failed dates.
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_retries:
+        description: 'How many times to retry each date'
+        required: false
+        default: '3'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nse-backfill
+  cancel-in-progress: false
+
+jobs:
+  retry:
+    name: Retry Failed Dates
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Retry failed dates
+        run: |
+          python - <<'EOF'
+          import json, sys, time, random
+          from pathlib import Path
+          from datetime import date
+
+          sys.path.insert(0, "scripts")
+          from fetch_nse_data import run, build_session
+
+          CHECKPOINT = Path("data/.backfill_checkpoint.json")
+
+          if not CHECKPOINT.exists():
+              print("No checkpoint file found — nothing to retry.")
+              sys.exit(0)
+
+          cp = json.loads(CHECKPOINT.read_text())
+          failed = cp.get("failed_dates", [])
+          if not failed:
+              print("No failed dates in checkpoint.")
+              sys.exit(0)
+
+          print(f"Retrying {len(failed)} failed dates: {failed}")
+          session = build_session()
+          still_failing = []
+
+          for d_str in failed:
+              d = date.fromisoformat(d_str)
+              ok = run(d)
+              if ok:
+                  print(f"  ✓ {d_str} — success on retry")
+              else:
+                  print(f"  ✗ {d_str} — still failing")
+                  still_failing.append(d_str)
+              time.sleep(random.uniform(3, 6))
+
+          cp["failed_dates"] = still_failing
+          CHECKPOINT.write_text(json.dumps(cp, indent=2))
+          print(f"\nDone. Still failing: {still_failing}")
+          EOF
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          PYTHONUNBUFFERED: '1'
+
+      - name: Commit retried data
+        run: |
+          git config --global user.name  "NSE Data Bot 🤖"
+          git config --global user.email "nse-bot@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No new data."
+          else
+            git commit -m "🔁 Retry: recovered failed dates [auto]"
+            git push
+          fi

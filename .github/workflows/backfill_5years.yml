@@ -1,0 +1,291 @@
+# ──────────────────────────────────────────────────────────────────
+#  NSE 5-Year Historical Backfill
+#
+#  Architecture:
+#    • One job per year (2020-2024) — run in parallel
+#    • Each job uploads its data as a GitHub Actions artifact
+#    • A final "commit" job downloads ALL artifacts and pushes
+#      everything to main in ONE commit (avoids merge conflicts)
+#
+#  GitHub Actions FREE tier:
+#    • 2,000 min/month for public repos (unlimited)
+#    • 500 MB artifact storage per job
+#    • 6 hr timeout per job
+#    • ~10 GB repo storage
+#
+#  How to run:
+#    Actions → "📚 NSE 5-Year Backfill" → Run workflow
+# ──────────────────────────────────────────────────────────────────
+
+name: 📚 NSE 5-Year Historical Backfill
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_year:
+        description: 'First year to fetch (default 2020)'
+        required: false
+        default: '2020'
+      end_year:
+        description: 'Last year to fetch (default: current year)'
+        required: false
+        default: ''
+      delay_min:
+        description: 'Min sleep between requests in seconds (default 2)'
+        required: false
+        default: '2'
+      delay_max:
+        description: 'Max sleep between requests in seconds (default 4)'
+        required: false
+        default: '4'
+
+permissions:
+  contents: write
+
+# Only one backfill can run at a time (avoid git conflicts)
+concurrency:
+  group: nse-backfill
+  cancel-in-progress: false
+
+jobs:
+
+  # ── Generate matrix of years ─────────────────────────────────
+  setup:
+    name: Generate year matrix
+    runs-on: ubuntu-latest
+    outputs:
+      years: ${{ steps.gen.outputs.years }}
+
+    steps:
+      - name: Generate year list
+        id: gen
+        run: |
+          START=${{ github.event.inputs.start_year || '2020' }}
+          END_INPUT="${{ github.event.inputs.end_year }}"
+          if [ -z "$END_INPUT" ]; then
+            END=$(TZ="Asia/Kolkata" date +'%Y')
+          else
+            END="$END_INPUT"
+          fi
+
+          echo "Fetching years $START to $END"
+
+          YEARS="["
+          for Y in $(seq $START $END); do
+            YEARS="${YEARS}\"$Y\","
+          done
+          YEARS="${YEARS%,}]"   # remove trailing comma
+          echo "years=$YEARS" >> $GITHUB_OUTPUT
+          echo "Year matrix: $YEARS"
+
+  # ── One job per year, run in parallel ───────────────────────
+  fetch-year:
+    name: Fetch ${{ matrix.year }}
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 340    # ~5.5 hours (well within 6hr limit)
+
+    strategy:
+      matrix:
+        year: ${{ fromJson(needs.setup.outputs.years) }}
+      fail-fast: false       # if one year fails, others continue
+
+    steps:
+      - name: Checkout (sparse — no data/ yet)
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/
+            .gitignore
+          sparse-checkout-cone-mode: false
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Download existing data for this year (skip already-fetched)
+        run: |
+          YEAR=${{ matrix.year }}
+          mkdir -p data/equity/$YEAR data/fo/$YEAR data/index/$YEAR \
+                   data/delivery/$YEAR data/corporate_actions/$YEAR \
+                   data/sme/$YEAR data/full_bhav/$YEAR
+
+          # Pull existing files from main branch so we skip them
+          git fetch origin main --depth=1
+          git checkout origin/main -- data/equity/$YEAR   2>/dev/null || true
+          git checkout origin/main -- data/fo/$YEAR        2>/dev/null || true
+          git checkout origin/main -- data/index/$YEAR     2>/dev/null || true
+          git checkout origin/main -- data/delivery/$YEAR  2>/dev/null || true
+          git checkout origin/main -- data/corporate_actions/$YEAR 2>/dev/null || true
+          git checkout origin/main -- data/sme/$YEAR       2>/dev/null || true
+          git checkout origin/main -- data/full_bhav/$YEAR 2>/dev/null || true
+          echo "Existing files pulled for $YEAR"
+
+      - name: Run backfill for ${{ matrix.year }}
+        run: |
+          python scripts/backfill_historical.py \
+            --year ${{ matrix.year }} \
+            --delay-min ${{ github.event.inputs.delay_min || '2' }} \
+            --delay-max ${{ github.event.inputs.delay_max || '4' }}
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          PYTHONUNBUFFERED: '1'
+
+      # Upload this year's data as an artifact
+      - name: Upload ${{ matrix.year }} data artifact
+        if: always()   # upload even on partial failure
+        uses: actions/upload-artifact@v4
+        with:
+          name: nse-data-${{ matrix.year }}
+          path: data/
+          retention-days: 3
+          if-no-files-found: warn
+
+  # ── Collect all years and push once ──────────────────────────
+  commit-all:
+    name: Commit all years to main
+    needs: fetch-year
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    if: always()   # run even if some years failed
+
+    steps:
+      - name: Checkout main (full)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download all year artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: nse-data-*
+          path: data/
+          merge-multiple: true
+
+      - name: List downloaded files
+        run: |
+          echo "=== Downloaded data ==="
+          find data/ -name "*.csv" | sort | head -50
+          echo "Total CSV files: $(find data/ -name '*.csv' | wc -l)"
+
+      - name: Set up Python for manifest update
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Rebuild manifest from downloaded data
+        run: |
+          python - <<'EOF'
+          import json, sys
+          from pathlib import Path
+          from datetime import datetime
+
+          BASE = Path(".")
+          DATA = BASE / "data"
+          MANIFEST = DATA / "manifest.json"
+          SUMMARY  = DATA / "summary.json"
+
+          manifest = {}
+          if MANIFEST.exists():
+              try:
+                  manifest = json.loads(MANIFEST.read_text())
+              except Exception:
+                  manifest = {}
+
+          categories = ["equity","fo","index","delivery",
+                        "corporate_actions","sme","full_bhav"]
+
+          # Scan all CSV files on disk
+          for cat in categories:
+              cat_dir = DATA / cat
+              if not cat_dir.exists():
+                  continue
+              for csv in sorted(cat_dir.rglob("*.csv")):
+                  # filename like 2024-04-10.csv
+                  stem = csv.stem.split("_")[0]   # handle _tag suffix
+                  try:
+                      import re
+                      m = re.match(r"(\d{4}-\d{2}-\d{2})", stem)
+                      if not m:
+                          continue
+                      date_str = m.group(1)
+                  except Exception:
+                      continue
+
+                  if date_str not in manifest:
+                      manifest[date_str] = {
+                          "fetched_at": datetime.utcnow().isoformat() + "Z",
+                          "results": {},
+                          "success": True,
+                          "files": {},
+                      }
+                  manifest[date_str]["results"][cat] = True
+                  manifest[date_str]["files"][cat] = str(csv.relative_to(BASE))
+
+          # Sort newest first
+          manifest = dict(sorted(manifest.items(), reverse=True))
+          MANIFEST.write_text(json.dumps(manifest, indent=2))
+
+          # Summary
+          total = len(manifest)
+          ok = sum(1 for v in manifest.values() if v.get("success"))
+          cats = set()
+          for v in manifest.values():
+              cats.update(v.get("files",{}).keys())
+
+          summary = {
+              "last_updated": datetime.utcnow().isoformat() + "Z",
+              "total_trading_days": total,
+              "successful_fetches": ok,
+              "categories_available": sorted(cats),
+              "latest_date": next(iter(manifest), None),
+          }
+          SUMMARY.write_text(json.dumps(summary, indent=2))
+          print(f"Manifest: {total} dates, {ok} successful")
+          print(f"Summary written.")
+          EOF
+
+      - name: Commit and push everything
+        run: |
+          git config --global user.name  "NSE Data Bot 🤖"
+          git config --global user.email "nse-bot@users.noreply.github.com"
+
+          git add -A
+
+          if git diff --staged --quiet; then
+            echo "Nothing new to commit."
+          else
+            CSV_COUNT=$(find data/ -name "*.csv" | wc -l)
+            git commit -m "📚 5-Year Backfill: $CSV_COUNT CSV files [${{ github.event.inputs.start_year || '2020' }}-${{ github.event.inputs.end_year || 'present' }}] [auto]"
+
+            # Push with retries
+            for i in 1 2 3 4 5; do
+              git push && break || {
+                echo "Push attempt $i failed, rebasing and retrying..."
+                git pull --rebase
+                sleep 5
+              }
+            done
+          fi
+
+      - name: Print final stats
+        run: |
+          echo "════════════════════════════════════════"
+          echo " Backfill complete!"
+          echo " Total CSVs: $(find data/ -name '*.csv' | wc -l)"
+          if [ -f data/summary.json ]; then
+            cat data/summary.json
+          fi
+          echo "════════════════════════════════════════"

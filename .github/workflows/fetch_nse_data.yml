@@ -1,0 +1,184 @@
+# ─────────────────────────────────────────────────────────────
+#  NSE Daily Data Fetcher – GitHub Actions Workflow
+#
+#  Schedule (IST = UTC + 5:30):
+#    • 21:00 IST = 15:30 UTC  ← primary run
+#    • 21:30 IST = 16:00 UTC  ← first retry
+#    • 22:30 IST = 17:00 UTC  ← second retry (catches NSE delays)
+#    • 23:00 IST = 17:30 UTC  ← final safety net
+#
+#  Manual trigger also available (with optional date override).
+# ─────────────────────────────────────────────────────────────
+
+name: 📈 NSE Daily Data Fetch
+
+on:
+  schedule:
+    - cron: '30 15 * * 1-5'   # 21:00 IST – primary
+    - cron: '0  16 * * 1-5'   # 21:30 IST – retry 1
+    - cron: '0  17 * * 1-5'   # 22:30 IST – retry 2
+    - cron: '30 17 * * 1-5'   # 23:00 IST – final safety net
+
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Date to fetch (YYYY-MM-DD). Leave blank for today.'
+        required: false
+        default: ''
+      force:
+        description: 'Force re-download even if data exists'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write   # allow committing data back to repo
+  issues:   write   # allow creating failure-alert issues
+
+concurrency:
+  group: nse-fetch-${{ github.ref }}
+  cancel-in-progress: false   # never cancel a running fetch
+
+jobs:
+  fetch:
+    name: Fetch NSE Data
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      # ── 1. Checkout ──────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── 2. Python setup ──────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: scripts/requirements.txt
+
+      # ── 3. Install deps ──────────────────────────────────────
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      # ── 4. Determine date ────────────────────────────────────
+      - name: Determine target date
+        id: date
+        run: |
+          if [ -n "${{ github.event.inputs.date }}" ]; then
+            TARGET="${{ github.event.inputs.date }}"
+          else
+            # Use IST date (UTC+5:30)
+            TARGET=$(TZ="Asia/Kolkata" date +'%Y-%m-%d')
+          fi
+          echo "target=$TARGET" >> $GITHUB_OUTPUT
+          echo "Target date: $TARGET"
+
+      # ── 5. Skip if data already exists ───────────────────────
+      - name: Check if data already fetched
+        id: check
+        run: |
+          DATE="${{ steps.date.outputs.target }}"
+          YEAR=$(echo $DATE | cut -d'-' -f1)
+          MONTH=$(echo $DATE | cut -d'-' -f2)
+          FILE="data/equity/$YEAR/$MONTH/$DATE.csv"
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            echo "skip=false" >> $GITHUB_OUTPUT
+            echo "Force mode: will re-download."
+          elif [ -f "$FILE" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "Data already exists for $DATE – skipping."
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+            echo "No existing data for $DATE – will fetch."
+          fi
+
+      # ── 6. Fetch NSE data ────────────────────────────────────
+      - name: Fetch NSE data
+        id: fetch
+        if: steps.check.outputs.skip == 'false'
+        run: |
+          python scripts/fetch_nse_data.py "${{ steps.date.outputs.target }}"
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          PYTHONUNBUFFERED: '1'
+
+      # ── 7. Commit & push ─────────────────────────────────────
+      - name: Commit and push new data
+        if: steps.check.outputs.skip == 'false'
+        run: |
+          git config --global user.name  "NSE Data Bot 🤖"
+          git config --global user.email "nse-bot@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "Nothing new to commit."
+          else
+            COMMIT_MSG="📊 NSE Data: ${{ steps.date.outputs.target }} [auto-fetch]"
+            git commit -m "$COMMIT_MSG"
+
+            # Push with retry
+            for i in 1 2 3; do
+              git push && break
+              echo "Push attempt $i failed, retrying in 10s..."
+              sleep 10
+              git pull --rebase
+            done
+          fi
+
+      # ── 8. Failure alert via GitHub Issue ────────────────────
+      - name: Create failure issue
+        if: failure() && steps.check.outputs.skip == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const date = '${{ steps.date.outputs.target }}';
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            
+            // Check if an open issue already exists for today
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo:  context.repo.repo,
+              labels: 'fetch-failure',
+              state: 'open',
+            });
+            
+            const alreadyOpen = issues.data.some(i => i.title.includes(date));
+            if (!alreadyOpen) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo:  context.repo.repo,
+                title: `⚠️ NSE Fetch Failed: ${date}`,
+                body: [
+                  `## NSE Data Fetch Failure`,
+                  ``,
+                  `**Date:** ${date}`,
+                  `**Workflow run:** [View logs](${runUrl})`,
+                  ``,
+                  `### What to do`,
+                  `1. Check the [workflow logs](${runUrl}) for the root cause.`,
+                  `2. If NSE site is down, retry manually via [Actions tab](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions).`,
+                  `3. To manually backfill, trigger the workflow with date \`${date}\`.`,
+                  ``,
+                  `*This issue was auto-created by the NSE Data Bot.*`,
+                ].join('\n'),
+                labels: ['fetch-failure'],
+              });
+            }
+
+      # ── 9. Summary ───────────────────────────────────────────
+      - name: Print summary
+        if: always()
+        run: |
+          echo "════════════════════════════════════"
+          echo " Job      : ${{ job.status }}"
+          echo " Date     : ${{ steps.date.outputs.target }}"
+          echo " Skipped  : ${{ steps.check.outputs.skip }}"
+          echo "════════════════════════════════════"
+          if [ -f data/summary.json ]; then
+            cat data/summary.json
+          fi
