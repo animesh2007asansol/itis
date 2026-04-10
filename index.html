@@ -1,1 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NSE Market Data Portal</title>
+<style>
+  :root {
+    --bg:       #0d1117;
+    --surface:  #161b22;
+    --border:   #30363d;
+    --accent:   #238636;
+    --accent2:  #1f6feb;
+    --text:     #c9d1d9;
+    --muted:    #8b949e;
+    --success:  #3fb950;
+    --warning:  #d29922;
+    --danger:   #f85149;
+    --green-dim:#0d4429;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
 
+  /* ── Header ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  header h1 { font-size: 18px; font-weight: 600; }
+  .badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: var(--green-dim);
+    color: var(--success);
+    font-weight: 500;
+  }
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%,100% { opacity:1; }
+    50%      { opacity:.4; }
+  }
+
+  /* ── Layout ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+  /* ── Hero stats ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .stat-card .val { font-size: 28px; font-weight: 700; color: #fff; }
+  .stat-card .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ── Section headings ── */
+  h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #fff; }
+
+  /* ── Category cards ── */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .cat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    transition: border-color .2s;
+  }
+  .cat-card:hover { border-color: var(--accent2); }
+  .cat-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .cat-icon { font-size: 20px; }
+  .cat-name { font-weight: 600; font-size: 14px; color: #fff; }
+  .cat-desc { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .cat-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .cat-status.ok  { background:#0d4429; color: var(--success); }
+  .cat-status.fail{ background:#3d1a1a; color: var(--danger); }
+
+  /* ── Data table ── */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    background: #1c2128;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--muted);
+    padding: 8px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td { padding: 8px 16px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,.03); }
+  .pill {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .pill-ok   { background: var(--green-dim); color: var(--success); }
+  .pill-fail { background: #3d1a1a; color: var(--danger); }
+  .pill-skip { background: #2a2a1a; color: var(--warning); }
+
+  /* ── API section ── */
+  .api-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 28px;
+  }
+  .code-block {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 12px;
+    color: #e6edf3;
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin-top: 8px;
+    cursor: text;
+  }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 16px 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  /* ── Loading ── */
+  #loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 60px;
+    color: var(--muted);
+  }
+  .spinner {
+    width: 20px; height: 20px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent2);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  #main { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="status-dot"></div>
+  <h1>📈 NSE Market Data Portal</h1>
+  <span class="badge">FREE &amp; OPEN</span>
+</header>
+
+<div class="container">
+  <div id="loading">
+    <div class="spinner"></div>
+    Loading data catalogue…
+  </div>
+
+  <div id="main">
+
+    <!-- Stats row -->
+    <div class="stats-grid" id="stats-grid"></div>
+
+    <!-- Category status -->
+    <h2>Data Categories</h2>
+    <div class="cat-grid" id="cat-grid"></div>
+
+    <!-- Recent dates table -->
+    <h2>Recent Fetch History</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Equity</th>
+            <th>F&amp;O</th>
+            <th>Index</th>
+            <th>Delivery</th>
+            <th>Corp Actions</th>
+            <th>SME</th>
+            <th>Fetched At (UTC)</th>
+          </tr>
+        </thead>
+        <tbody id="history-body"></tbody>
+      </table>
+    </div>
+
+    <!-- API / direct access -->
+    <h2>Direct Data Access (API)</h2>
+    <div class="api-box">
+      <p style="color:var(--muted);font-size:12px;margin-bottom:8px;">
+        All data is plain CSV, directly accessible via raw GitHub URLs.
+        Use these patterns in your applications:
+      </p>
+
+      <div class="code-block" id="api-urls"></div>
+
+      <p style="color:var(--muted);font-size:12px;margin-top:12px;">
+        📁 <strong>manifest.json</strong> — complete index of all available dates and files:
+      </p>
+      <div class="code-block" id="manifest-url"></div>
+    </div>
+
+    <!-- Download helper -->
+    <h2>Download Latest Data</h2>
+    <div class="cat-grid" id="download-grid"></div>
+
+  </div><!-- #main -->
+</div><!-- .container -->
+
+<footer>
+  Auto-updated daily at 9 PM IST via GitHub Actions &nbsp;·&nbsp;
+  Data source: NSE India &nbsp;·&nbsp;
+  <a href="https://github.com/animesh2007asansol/itis" style="color:var(--accent2);">GitHub</a>
+</footer>
+
+<script>
+// ─── Configuration ────────────────────────────────────────────
+const REPO_RAW   = "https://raw.githubusercontent.com/animesh2007asansol/itis/main";
+const REPO_PAGES = "https://animesh2007asansol.github.io/itis";
+const MANIFEST_URL = `${REPO_RAW}/data/manifest.json`;
+const SUMMARY_URL  = `${REPO_RAW}/data/summary.json`;
+
+// ─── Category metadata ────────────────────────────────────────
+const CATEGORIES = [
+  {
+    key:  "equity",
+    icon: "🏦",
+    name: "Equity Bhav Copy",
+    desc: "OHLCV for all NSE-listed stocks (CM segment). Includes ISIN, series, turnover.",
+  },
+  {
+    key:  "fo",
+    icon: "📊",
+    name: "F&O Bhav Copy",
+    desc: "Futures & Options daily settlement. Includes OI, contracts, settle price.",
+  },
+  {
+    key:  "index",
+    icon: "📉",
+    name: "Index Data",
+    desc: "All NSE indices (Nifty 50, Bank Nifty, etc.) — open, high, low, close.",
+  },
+  {
+    key:  "delivery",
+    icon: "📦",
+    name: "Delivery Data",
+    desc: "Deliverable quantity & percentage per symbol per day.",
+  },
+  {
+    key:  "corporate_actions",
+    icon: "🔔",
+    name: "Corporate Actions",
+    desc: "Splits, bonuses, dividends, rights issues. Rolling 7-day window + master CSV.",
+  },
+  {
+    key:  "sme",
+    icon: "🏪",
+    name: "SME / Emerge",
+    desc: "NSE Emerge (SME) platform OHLCV data.",
+  },
+  {
+    key:  "full_bhav",
+    icon: "📋",
+    name: "Full Bhav (PR)",
+    desc: "PR series — comprehensive bhavcopy with 50+ fields per security.",
+  },
+];
+
+// ─── Helpers ─────────────────────────────────────────────────
+function pill(ok) {
+  if (ok === true)  return `<span class="pill pill-ok">✓ OK</span>`;
+  if (ok === false) return `<span class="pill pill-fail">✗ Failed</span>`;
+  return `<span class="pill pill-skip">– N/A</span>`;
+}
+
+function rawUrl(category, dateStr) {
+  const [y, m] = dateStr.split("-");
+  return `${REPO_RAW}/data/${category}/${y}/${m}/${dateStr}.csv`;
+}
+
+function fmtDate(iso) {
+  return new Date(iso).toLocaleDateString("en-IN", {
+    day: "2-digit", month: "short", year: "numeric"
+  });
+}
+
+// ─── Main render ──────────────────────────────────────────────
+async function init() {
+  let summary = {}, manifest = {};
+
+  try {
+    const [sr, mr] = await Promise.all([
+      fetch(SUMMARY_URL),
+      fetch(MANIFEST_URL),
+    ]);
+    summary  = sr.ok ? await sr.json() : {};
+    manifest = mr.ok ? await mr.json() : {};
+  } catch (e) {
+    console.error("Failed to load data:", e);
+  }
+
+  document.getElementById("loading").style.display = "none";
+  document.getElementById("main").style.display    = "block";
+
+  const dates     = Object.keys(manifest).sort().reverse();
+  const latestKey = dates[0] || "";
+  const latestVal = manifest[latestKey] || {};
+
+  // ── Stats ──────────────────────────────────────────────────
+  const sg = document.getElementById("stats-grid");
+  const stats = [
+    { val: summary.total_trading_days  || dates.length, lbl: "Trading Days Tracked" },
+    { val: summary.successful_fetches  || "—",          lbl: "Successful Fetches"   },
+    { val: fmtDate(latestKey + "T00:00:00") || "—",     lbl: "Latest Data Date"     },
+    { val: (summary.categories_available || []).length, lbl: "Data Categories"      },
+  ];
+  sg.innerHTML = stats.map(s => `
+    <div class="stat-card">
+      <div class="val">${s.val}</div>
+      <div class="lbl">${s.lbl}</div>
+    </div>
+  `).join("");
+
+  // ── Category cards ─────────────────────────────────────────
+  const latestResults = latestVal.results || {};
+  const cg = document.getElementById("cat-grid");
+  cg.innerHTML = CATEGORIES.map(c => {
+    const ok = latestResults[c.key];
+    const statusHTML = ok === true
+      ? `<span class="cat-status ok">✓ Available</span>`
+      : ok === false
+        ? `<span class="cat-status fail">✗ Failed last fetch</span>`
+        : `<span class="cat-status" style="background:#1c2128;color:var(--muted)">Pending</span>`;
+    return `
+      <div class="cat-card">
+        <div class="cat-header">
+          <span class="cat-icon">${c.icon}</span>
+          <span class="cat-name">${c.name}</span>
+        </div>
+        <div class="cat-desc">${c.desc}</div>
+        ${statusHTML}
+      </div>
+    `;
+  }).join("");
+
+  // ── History table ──────────────────────────────────────────
+  const tbody = document.getElementById("history-body");
+  const recent = dates.slice(0, 30);
+  tbody.innerHTML = recent.map(d => {
+    const v = manifest[d];
+    const r = v.results || {};
+    const fa = v.fetched_at
+      ? new Date(v.fetched_at).toLocaleString("en-IN", { timeZone: "UTC",
+          day:"2-digit", month:"short", hour:"2-digit", minute:"2-digit" }) + " UTC"
+      : "—";
+    return `
+      <tr>
+        <td style="font-weight:600;color:#fff">${d}</td>
+        <td>${pill(r.equity)}</td>
+        <td>${pill(r.fo)}</td>
+        <td>${pill(r.index)}</td>
+        <td>${pill(r.delivery)}</td>
+        <td>${pill(r.corporate_actions)}</td>
+        <td>${pill(r.sme)}</td>
+        <td style="color:var(--muted);font-size:12px">${fa}</td>
+      </tr>
+    `;
+  }).join("");
+
+  // ── API URLs ───────────────────────────────────────────────
+  const apiEl = document.getElementById("api-urls");
+  apiEl.textContent = [
+    "# Equity Bhav Copy",
+    `${REPO_RAW}/data/equity/{YYYY}/{MM}/{YYYY-MM-DD}.csv`,
+    "",
+    "# F&O Bhav Copy",
+    `${REPO_RAW}/data/fo/{YYYY}/{MM}/{YYYY-MM-DD}.csv`,
+    "",
+    "# Index Data",
+    `${REPO_RAW}/data/index/{YYYY}/{MM}/{YYYY-MM-DD}.csv`,
+    "",
+    "# Delivery Data",
+    `${REPO_RAW}/data/delivery/{YYYY}/{MM}/{YYYY-MM-DD}.csv`,
+    "",
+    "# Corporate Actions (daily)",
+    `${REPO_RAW}/data/corporate_actions/{YYYY}/{MM}/{YYYY-MM-DD}.csv`,
+    "",
+    "# Corporate Actions (master — all time)",
+    `${REPO_RAW}/data/corporate_actions/master.csv`,
+  ].join("\n");
+
+  document.getElementById("manifest-url").textContent = MANIFEST_URL;
+
+  // ── Download links for latest ──────────────────────────────
+  const dg = document.getElementById("download-grid");
+  if (latestKey) {
+    dg.innerHTML = CATEGORIES.map(c => {
+      const url = rawUrl(c.key, latestKey);
+      const ok  = latestResults[c.key];
+      if (!ok) return "";
+      return `
+        <div class="cat-card" style="padding:12px 16px;">
+          <div class="cat-header">
+            <span class="cat-icon">${c.icon}</span>
+            <span class="cat-name" style="font-size:13px">${c.name}</span>
+          </div>
+          <div class="cat-desc">${latestKey}</div>
+          <a href="${url}" target="_blank"
+             style="display:inline-block;margin-top:8px;padding:4px 12px;
+                    border-radius:6px;background:var(--accent2);color:#fff;
+                    text-decoration:none;font-size:12px;font-weight:500;">
+            ⬇ Download CSV
+          </a>
+        </div>
+      `;
+    }).join("");
+  } else {
+    dg.innerHTML = `<p style="color:var(--muted)">No data fetched yet. Run the workflow.</p>`;
+  }
+}
+
+init();
+</script>
+</body>
+</html>
