@@ -1,0 +1,91 @@
+name: 🕯️ Pin Bar Analysis & Alerts
+
+on:
+  # Run automatically after the daily data fetch completes
+  workflow_run:
+    workflows: ["📈 NSE Daily Data Fetch"]
+    types: [completed]
+
+  # Also allow manual trigger
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    name: Run Pin Bar Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run pin bar analysis
+        run: python scripts/analyze_pinbar.py
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          PYTHONUNBUFFERED: '1'
+
+      - name: Commit results
+        run: |
+          git config --global user.name  "NSE Analysis Bot 📊"
+          git config --global user.email "nse-bot@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes."
+          else
+            SIGNALS=$(python -c "
+          import json
+          try:
+            d = json.load(open('data/analysis/pinbar_signals.json'))
+            print(d.get('count', 0))
+          except:
+            print(0)
+          ")
+            git commit -m "🕯️ Pin Bar Analysis: ${SIGNALS} signals today [auto]"
+            for i in 1 2 3; do
+              git push && break || { sleep 5; git pull --rebase; }
+            done
+          fi
+
+      - name: Print alert summary
+        run: |
+          echo "════════════════════════════════════════"
+          if [ -f data/analysis/pinbar_signals.json ]; then
+            python -c "
+          import json
+          d = json.load(open('data/analysis/pinbar_signals.json'))
+          print(f\"Signal date : {d.get('signal_date')}\")
+          print(f\"Alerts today: {d.get('count')}\")
+          for a in d.get('alerts', [])[:10]:
+            print(f\"  {a['symbol']:12} close={a['close']:8.2f}  wick_ratio={a['wick_ratio']:.1f}x  {a['color']}\")
+          "
+          fi
+          if [ -f data/analysis/pinbar_backtest.json ]; then
+            python -c "
+          import json
+          d = json.load(open('data/analysis/pinbar_backtest.json'))
+          print(f\"Win rate    : {d.get('win_rate_pct')}%\")
+          print(f\"Total signals: {d.get('total_signals')}\")
+          print(f\"Avg next return: {d.get('avg_next_return')}%\")
+          "
+          fi
+          echo "════════════════════════════════════════"
