@@ -527,16 +527,25 @@ def run(target: Optional[date] = None) -> bool:
     log.info(f"  NSE Fetcher v2 (Cloudflare-proof) -- {target}")
     log.info("=" * 60)
 
+    # NSE_SKIP_HOLIDAYS=true bypasses all weekend/holiday guards.
+    # Set via the "skip_holidays" input on manual workflow runs.
+    skip_holidays = os.environ.get("NSE_SKIP_HOLIDAYS", "false").lower() == "true"
+
     if target.weekday() >= 5:
-        log.info("  Weekend -- nothing to fetch.")
-        return True
+        if skip_holidays:
+            log.info(f"  {target} is a weekend but NSE_SKIP_HOLIDAYS=true -- proceeding.")
+        else:
+            log.info("  Weekend -- nothing to fetch. (Use skip_holidays=true to override)")
+            return True
 
     session, engine = build_session()
     log.info(f"  Session engine: {engine}")
 
-    if is_holiday(target, session):
-        log.info(f"  {target} is a market holiday.")
+    if not skip_holidays and is_holiday(target, session):
+        log.info(f"  {target} is a market holiday. (Use skip_holidays=true to override)")
         return True
+    elif skip_holidays:
+        log.info("  Holiday check skipped (NSE_SKIP_HOLIDAYS=true).")
 
     results: Dict[str, bool] = {}
 
