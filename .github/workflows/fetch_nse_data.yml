@@ -30,6 +30,9 @@ on:
         required: false
         default: 'false'
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: write   # allow committing data back to repo
   issues:   write   # allow creating failure-alert issues
