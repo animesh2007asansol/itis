@@ -1,0 +1,19 @@
+{
+  "last_updated": "2026-04-11T15:14:47.690993Z",
+  "total_trading_days": 176,
+  "successful_fetches": 164,
+  "categories_available": [
+    "equity",
+    "fo",
+    "index"
+  ],
+  "latest_date": "2024-09-02",
+  "latest_status": {
+    "equity": false,
+    "fo": false,
+    "index": true,
+    "delivery": false,
+    "corporate_actions": false,
+    "sme": false
+  }
+}
