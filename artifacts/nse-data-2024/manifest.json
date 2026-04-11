@@ -1,9 +1,9 @@
 {
   "2024-12-31": {
-    "fetched_at": "2026-04-11T19:42:51.942914Z",
+    "fetched_at": "2026-04-11T20:20:26.601546Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -11,14 +11,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-31.csv",
+      "fo": "data/fo/2024/12/2024-12-31.csv",
       "index": "data/index/2024/12/2024-12-31.csv"
     }
   },
   "2024-12-30": {
-    "fetched_at": "2026-04-11T19:42:46.914360Z",
+    "fetched_at": "2026-04-11T20:20:20.170336Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -26,14 +28,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-30.csv",
+      "fo": "data/fo/2024/12/2024-12-30.csv",
       "index": "data/index/2024/12/2024-12-30.csv"
     }
   },
   "2024-12-27": {
-    "fetched_at": "2026-04-11T19:42:41.955099Z",
+    "fetched_at": "2026-04-11T20:20:13.792719Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -41,14 +45,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-27.csv",
+      "fo": "data/fo/2024/12/2024-12-27.csv",
       "index": "data/index/2024/12/2024-12-27.csv"
     }
   },
   "2024-12-26": {
-    "fetched_at": "2026-04-11T19:42:37.829846Z",
+    "fetched_at": "2026-04-11T20:20:07.127159Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -56,11 +62,13 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-26.csv",
+      "fo": "data/fo/2024/12/2024-12-26.csv",
       "index": "data/index/2024/12/2024-12-26.csv"
     }
   },
   "2024-12-25": {
-    "fetched_at": "2026-04-11T19:42:33.178303Z",
+    "fetched_at": "2026-04-11T20:20:00.949882Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -73,10 +81,10 @@
     "files": {}
   },
   "2024-12-24": {
-    "fetched_at": "2026-04-11T19:42:28.668259Z",
+    "fetched_at": "2026-04-11T20:19:54.528684Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -84,14 +92,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-24.csv",
+      "fo": "data/fo/2024/12/2024-12-24.csv",
       "index": "data/index/2024/12/2024-12-24.csv"
     }
   },
   "2024-12-23": {
-    "fetched_at": "2026-04-11T19:42:23.782850Z",
+    "fetched_at": "2026-04-11T20:19:48.539679Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -99,14 +109,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-23.csv",
+      "fo": "data/fo/2024/12/2024-12-23.csv",
       "index": "data/index/2024/12/2024-12-23.csv"
     }
   },
   "2024-12-20": {
-    "fetched_at": "2026-04-11T19:42:19.084977Z",
+    "fetched_at": "2026-04-11T20:19:42.142110Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -114,14 +126,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-20.csv",
+      "fo": "data/fo/2024/12/2024-12-20.csv",
       "index": "data/index/2024/12/2024-12-20.csv"
     }
   },
   "2024-12-19": {
-    "fetched_at": "2026-04-11T19:42:14.897965Z",
+    "fetched_at": "2026-04-11T20:19:35.186951Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -129,14 +143,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-19.csv",
+      "fo": "data/fo/2024/12/2024-12-19.csv",
       "index": "data/index/2024/12/2024-12-19.csv"
     }
   },
   "2024-12-18": {
-    "fetched_at": "2026-04-11T19:42:10.706622Z",
+    "fetched_at": "2026-04-11T20:19:28.201676Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -144,14 +160,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-18.csv",
+      "fo": "data/fo/2024/12/2024-12-18.csv",
       "index": "data/index/2024/12/2024-12-18.csv"
     }
   },
   "2024-12-17": {
-    "fetched_at": "2026-04-11T19:42:06.685497Z",
+    "fetched_at": "2026-04-11T20:19:21.600791Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -159,14 +177,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-17.csv",
+      "fo": "data/fo/2024/12/2024-12-17.csv",
       "index": "data/index/2024/12/2024-12-17.csv"
     }
   },
   "2024-12-16": {
-    "fetched_at": "2026-04-11T19:42:02.576546Z",
+    "fetched_at": "2026-04-11T20:19:15.187672Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -174,14 +194,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-16.csv",
+      "fo": "data/fo/2024/12/2024-12-16.csv",
       "index": "data/index/2024/12/2024-12-16.csv"
     }
   },
   "2024-12-13": {
-    "fetched_at": "2026-04-11T19:41:58.218767Z",
+    "fetched_at": "2026-04-11T20:19:08.956501Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -189,14 +211,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-13.csv",
+      "fo": "data/fo/2024/12/2024-12-13.csv",
       "index": "data/index/2024/12/2024-12-13.csv"
     }
   },
   "2024-12-12": {
-    "fetched_at": "2026-04-11T19:41:54.093327Z",
+    "fetched_at": "2026-04-11T20:19:02.646735Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -204,14 +228,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-12.csv",
+      "fo": "data/fo/2024/12/2024-12-12.csv",
       "index": "data/index/2024/12/2024-12-12.csv"
     }
   },
   "2024-12-11": {
-    "fetched_at": "2026-04-11T19:41:48.953636Z",
+    "fetched_at": "2026-04-11T20:18:55.796773Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -219,14 +245,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-11.csv",
+      "fo": "data/fo/2024/12/2024-12-11.csv",
       "index": "data/index/2024/12/2024-12-11.csv"
     }
   },
   "2024-12-10": {
-    "fetched_at": "2026-04-11T19:41:43.853586Z",
+    "fetched_at": "2026-04-11T20:18:49.132950Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -234,14 +262,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-10.csv",
+      "fo": "data/fo/2024/12/2024-12-10.csv",
       "index": "data/index/2024/12/2024-12-10.csv"
     }
   },
   "2024-12-09": {
-    "fetched_at": "2026-04-11T19:41:39.040132Z",
+    "fetched_at": "2026-04-11T20:18:43.041258Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -249,14 +279,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-09.csv",
+      "fo": "data/fo/2024/12/2024-12-09.csv",
       "index": "data/index/2024/12/2024-12-09.csv"
     }
   },
   "2024-12-06": {
-    "fetched_at": "2026-04-11T19:41:34.199523Z",
+    "fetched_at": "2026-04-11T20:18:36.266666Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -264,14 +296,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-06.csv",
+      "fo": "data/fo/2024/12/2024-12-06.csv",
       "index": "data/index/2024/12/2024-12-06.csv"
     }
   },
   "2024-12-05": {
-    "fetched_at": "2026-04-11T19:41:29.971436Z",
+    "fetched_at": "2026-04-11T20:18:30.728556Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -279,14 +313,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-05.csv",
+      "fo": "data/fo/2024/12/2024-12-05.csv",
       "index": "data/index/2024/12/2024-12-05.csv"
     }
   },
   "2024-12-04": {
-    "fetched_at": "2026-04-11T19:41:25.137498Z",
+    "fetched_at": "2026-04-11T20:18:24.601506Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -294,14 +330,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-04.csv",
+      "fo": "data/fo/2024/12/2024-12-04.csv",
       "index": "data/index/2024/12/2024-12-04.csv"
     }
   },
   "2024-12-03": {
-    "fetched_at": "2026-04-11T19:41:20.002445Z",
+    "fetched_at": "2026-04-11T20:18:18.013981Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -309,14 +347,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-03.csv",
+      "fo": "data/fo/2024/12/2024-12-03.csv",
       "index": "data/index/2024/12/2024-12-03.csv"
     }
   },
   "2024-12-02": {
-    "fetched_at": "2026-04-11T19:41:15.507642Z",
+    "fetched_at": "2026-04-11T20:18:12.256842Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -324,14 +364,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/12/2024-12-02.csv",
+      "fo": "data/fo/2024/12/2024-12-02.csv",
       "index": "data/index/2024/12/2024-12-02.csv"
     }
   },
   "2024-11-29": {
-    "fetched_at": "2026-04-11T19:41:11.196915Z",
+    "fetched_at": "2026-04-11T20:18:05.645692Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -339,14 +381,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-29.csv",
+      "fo": "data/fo/2024/11/2024-11-29.csv",
       "index": "data/index/2024/11/2024-11-29.csv"
     }
   },
   "2024-11-28": {
-    "fetched_at": "2026-04-11T19:41:06.900373Z",
+    "fetched_at": "2026-04-11T20:17:59.838673Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -354,14 +398,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-28.csv",
+      "fo": "data/fo/2024/11/2024-11-28.csv",
       "index": "data/index/2024/11/2024-11-28.csv"
     }
   },
   "2024-11-27": {
-    "fetched_at": "2026-04-11T19:41:02.507525Z",
+    "fetched_at": "2026-04-11T20:17:53.710671Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -369,14 +415,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-27.csv",
+      "fo": "data/fo/2024/11/2024-11-27.csv",
       "index": "data/index/2024/11/2024-11-27.csv"
     }
   },
   "2024-11-26": {
-    "fetched_at": "2026-04-11T19:40:58.289954Z",
+    "fetched_at": "2026-04-11T20:17:46.969595Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -384,14 +432,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-26.csv",
+      "fo": "data/fo/2024/11/2024-11-26.csv",
       "index": "data/index/2024/11/2024-11-26.csv"
     }
   },
   "2024-11-25": {
-    "fetched_at": "2026-04-11T19:40:53.458087Z",
+    "fetched_at": "2026-04-11T20:17:41.087858Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -399,14 +449,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-25.csv",
+      "fo": "data/fo/2024/11/2024-11-25.csv",
       "index": "data/index/2024/11/2024-11-25.csv"
     }
   },
   "2024-11-22": {
-    "fetched_at": "2026-04-11T19:40:48.338282Z",
+    "fetched_at": "2026-04-11T20:17:34.408783Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -414,14 +466,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-22.csv",
+      "fo": "data/fo/2024/11/2024-11-22.csv",
       "index": "data/index/2024/11/2024-11-22.csv"
     }
   },
   "2024-11-21": {
-    "fetched_at": "2026-04-11T19:40:43.702544Z",
+    "fetched_at": "2026-04-11T20:17:27.901930Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -429,11 +483,13 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-21.csv",
+      "fo": "data/fo/2024/11/2024-11-21.csv",
       "index": "data/index/2024/11/2024-11-21.csv"
     }
   },
   "2024-11-20": {
-    "fetched_at": "2026-04-11T19:40:38.995007Z",
+    "fetched_at": "2026-04-11T20:17:21.533166Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -446,10 +502,10 @@
     "files": {}
   },
   "2024-11-19": {
-    "fetched_at": "2026-04-11T19:40:33.954576Z",
+    "fetched_at": "2026-04-11T20:17:14.870873Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -457,14 +513,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-19.csv",
+      "fo": "data/fo/2024/11/2024-11-19.csv",
       "index": "data/index/2024/11/2024-11-19.csv"
     }
   },
   "2024-11-18": {
-    "fetched_at": "2026-04-11T19:40:29.715630Z",
+    "fetched_at": "2026-04-11T20:17:08.564521Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -472,11 +530,13 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-18.csv",
+      "fo": "data/fo/2024/11/2024-11-18.csv",
       "index": "data/index/2024/11/2024-11-18.csv"
     }
   },
   "2024-11-15": {
-    "fetched_at": "2026-04-11T19:40:25.519384Z",
+    "fetched_at": "2026-04-11T20:17:02.019598Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -489,10 +549,10 @@
     "files": {}
   },
   "2024-11-14": {
-    "fetched_at": "2026-04-11T19:40:20.879803Z",
+    "fetched_at": "2026-04-11T20:16:56.093495Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -500,14 +560,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-14.csv",
+      "fo": "data/fo/2024/11/2024-11-14.csv",
       "index": "data/index/2024/11/2024-11-14.csv"
     }
   },
   "2024-11-13": {
-    "fetched_at": "2026-04-11T19:40:15.790644Z",
+    "fetched_at": "2026-04-11T20:16:49.530920Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -515,14 +577,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-13.csv",
+      "fo": "data/fo/2024/11/2024-11-13.csv",
       "index": "data/index/2024/11/2024-11-13.csv"
     }
   },
   "2024-11-12": {
-    "fetched_at": "2026-04-11T19:40:11.709787Z",
+    "fetched_at": "2026-04-11T20:16:43.503155Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -530,14 +594,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-12.csv",
+      "fo": "data/fo/2024/11/2024-11-12.csv",
       "index": "data/index/2024/11/2024-11-12.csv"
     }
   },
   "2024-11-11": {
-    "fetched_at": "2026-04-11T19:40:07.098095Z",
+    "fetched_at": "2026-04-11T20:16:37.178663Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -545,14 +611,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-11.csv",
+      "fo": "data/fo/2024/11/2024-11-11.csv",
       "index": "data/index/2024/11/2024-11-11.csv"
     }
   },
   "2024-11-08": {
-    "fetched_at": "2026-04-11T19:40:02.904755Z",
+    "fetched_at": "2026-04-11T20:16:31.480738Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -560,14 +628,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-08.csv",
+      "fo": "data/fo/2024/11/2024-11-08.csv",
       "index": "data/index/2024/11/2024-11-08.csv"
     }
   },
   "2024-11-07": {
-    "fetched_at": "2026-04-11T19:39:58.643470Z",
+    "fetched_at": "2026-04-11T20:16:25.306236Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -575,14 +645,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-07.csv",
+      "fo": "data/fo/2024/11/2024-11-07.csv",
       "index": "data/index/2024/11/2024-11-07.csv"
     }
   },
   "2024-11-06": {
-    "fetched_at": "2026-04-11T19:39:54.213310Z",
+    "fetched_at": "2026-04-11T20:16:19.437019Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -590,14 +662,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-06.csv",
+      "fo": "data/fo/2024/11/2024-11-06.csv",
       "index": "data/index/2024/11/2024-11-06.csv"
     }
   },
   "2024-11-05": {
-    "fetched_at": "2026-04-11T19:39:49.202425Z",
+    "fetched_at": "2026-04-11T20:16:12.554798Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -605,14 +679,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-05.csv",
+      "fo": "data/fo/2024/11/2024-11-05.csv",
       "index": "data/index/2024/11/2024-11-05.csv"
     }
   },
   "2024-11-04": {
-    "fetched_at": "2026-04-11T19:39:44.639555Z",
+    "fetched_at": "2026-04-11T20:16:05.999051Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -620,14 +696,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-04.csv",
+      "fo": "data/fo/2024/11/2024-11-04.csv",
       "index": "data/index/2024/11/2024-11-04.csv"
     }
   },
   "2024-11-01": {
-    "fetched_at": "2026-04-11T19:39:40.364175Z",
+    "fetched_at": "2026-04-11T20:15:58.773101Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -635,14 +713,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/11/2024-11-01.csv",
+      "fo": "data/fo/2024/11/2024-11-01.csv",
       "index": "data/index/2024/11/2024-11-01.csv"
     }
   },
   "2024-10-31": {
-    "fetched_at": "2026-04-11T19:39:36.043427Z",
+    "fetched_at": "2026-04-11T20:15:52.598000Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -650,14 +730,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-31.csv",
+      "fo": "data/fo/2024/10/2024-10-31.csv",
       "index": "data/index/2024/10/2024-10-31.csv"
     }
   },
   "2024-10-30": {
-    "fetched_at": "2026-04-11T19:39:31.079820Z",
+    "fetched_at": "2026-04-11T20:15:45.699989Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -665,14 +747,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-30.csv",
+      "fo": "data/fo/2024/10/2024-10-30.csv",
       "index": "data/index/2024/10/2024-10-30.csv"
     }
   },
   "2024-10-29": {
-    "fetched_at": "2026-04-11T19:39:26.140901Z",
+    "fetched_at": "2026-04-11T20:15:39.807067Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -680,14 +764,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-29.csv",
+      "fo": "data/fo/2024/10/2024-10-29.csv",
       "index": "data/index/2024/10/2024-10-29.csv"
     }
   },
   "2024-10-28": {
-    "fetched_at": "2026-04-11T19:39:21.483537Z",
+    "fetched_at": "2026-04-11T20:15:33.277443Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -695,14 +781,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-28.csv",
+      "fo": "data/fo/2024/10/2024-10-28.csv",
       "index": "data/index/2024/10/2024-10-28.csv"
     }
   },
   "2024-10-25": {
-    "fetched_at": "2026-04-11T19:39:17.291484Z",
+    "fetched_at": "2026-04-11T20:15:27.032546Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -710,14 +798,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-25.csv",
+      "fo": "data/fo/2024/10/2024-10-25.csv",
       "index": "data/index/2024/10/2024-10-25.csv"
     }
   },
   "2024-10-24": {
-    "fetched_at": "2026-04-11T19:39:12.532845Z",
+    "fetched_at": "2026-04-11T20:15:20.812150Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -725,14 +815,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-24.csv",
+      "fo": "data/fo/2024/10/2024-10-24.csv",
       "index": "data/index/2024/10/2024-10-24.csv"
     }
   },
   "2024-10-23": {
-    "fetched_at": "2026-04-11T19:39:08.349755Z",
+    "fetched_at": "2026-04-11T20:15:14.267357Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -740,14 +832,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-23.csv",
+      "fo": "data/fo/2024/10/2024-10-23.csv",
       "index": "data/index/2024/10/2024-10-23.csv"
     }
   },
   "2024-10-22": {
-    "fetched_at": "2026-04-11T19:39:03.442859Z",
+    "fetched_at": "2026-04-11T20:15:07.982279Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -755,14 +849,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-22.csv",
+      "fo": "data/fo/2024/10/2024-10-22.csv",
       "index": "data/index/2024/10/2024-10-22.csv"
     }
   },
   "2024-10-21": {
-    "fetched_at": "2026-04-11T19:38:58.702685Z",
+    "fetched_at": "2026-04-11T20:15:01.997913Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -770,14 +866,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-21.csv",
+      "fo": "data/fo/2024/10/2024-10-21.csv",
       "index": "data/index/2024/10/2024-10-21.csv"
     }
   },
   "2024-10-18": {
-    "fetched_at": "2026-04-11T19:38:54.116243Z",
+    "fetched_at": "2026-04-11T20:14:55.738427Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -785,14 +883,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-18.csv",
+      "fo": "data/fo/2024/10/2024-10-18.csv",
       "index": "data/index/2024/10/2024-10-18.csv"
     }
   },
   "2024-10-17": {
-    "fetched_at": "2026-04-11T19:38:50.009370Z",
+    "fetched_at": "2026-04-11T20:14:49.901612Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -800,14 +900,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-17.csv",
+      "fo": "data/fo/2024/10/2024-10-17.csv",
       "index": "data/index/2024/10/2024-10-17.csv"
     }
   },
   "2024-10-16": {
-    "fetched_at": "2026-04-11T19:38:44.678489Z",
+    "fetched_at": "2026-04-11T20:14:43.506141Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -815,14 +917,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-16.csv",
+      "fo": "data/fo/2024/10/2024-10-16.csv",
       "index": "data/index/2024/10/2024-10-16.csv"
     }
   },
   "2024-10-15": {
-    "fetched_at": "2026-04-11T19:38:39.933719Z",
+    "fetched_at": "2026-04-11T20:14:37.014306Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -830,14 +934,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-15.csv",
+      "fo": "data/fo/2024/10/2024-10-15.csv",
       "index": "data/index/2024/10/2024-10-15.csv"
     }
   },
   "2024-10-14": {
-    "fetched_at": "2026-04-11T19:38:35.400728Z",
+    "fetched_at": "2026-04-11T20:14:30.943676Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -845,14 +951,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-14.csv",
+      "fo": "data/fo/2024/10/2024-10-14.csv",
       "index": "data/index/2024/10/2024-10-14.csv"
     }
   },
   "2024-10-11": {
-    "fetched_at": "2026-04-11T19:38:31.422359Z",
+    "fetched_at": "2026-04-11T20:14:23.529257Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -860,14 +968,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-11.csv",
+      "fo": "data/fo/2024/10/2024-10-11.csv",
       "index": "data/index/2024/10/2024-10-11.csv"
     }
   },
   "2024-10-10": {
-    "fetched_at": "2026-04-11T19:38:26.822717Z",
+    "fetched_at": "2026-04-11T20:14:17.159631Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -875,14 +985,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-10.csv",
+      "fo": "data/fo/2024/10/2024-10-10.csv",
       "index": "data/index/2024/10/2024-10-10.csv"
     }
   },
   "2024-10-09": {
-    "fetched_at": "2026-04-11T19:38:22.124471Z",
+    "fetched_at": "2026-04-11T20:14:11.341705Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -890,14 +1002,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-09.csv",
+      "fo": "data/fo/2024/10/2024-10-09.csv",
       "index": "data/index/2024/10/2024-10-09.csv"
     }
   },
   "2024-10-08": {
-    "fetched_at": "2026-04-11T19:38:17.591834Z",
+    "fetched_at": "2026-04-11T20:14:04.922052Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -905,14 +1019,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-08.csv",
+      "fo": "data/fo/2024/10/2024-10-08.csv",
       "index": "data/index/2024/10/2024-10-08.csv"
     }
   },
   "2024-10-07": {
-    "fetched_at": "2026-04-11T19:38:11.473752Z",
+    "fetched_at": "2026-04-11T20:13:58.783251Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -920,14 +1036,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-07.csv",
+      "fo": "data/fo/2024/10/2024-10-07.csv",
       "index": "data/index/2024/10/2024-10-07.csv"
     }
   },
   "2024-10-04": {
-    "fetched_at": "2026-04-11T19:38:07.101175Z",
+    "fetched_at": "2026-04-11T20:13:53.090826Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -935,14 +1053,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-04.csv",
+      "fo": "data/fo/2024/10/2024-10-04.csv",
       "index": "data/index/2024/10/2024-10-04.csv"
     }
   },
   "2024-10-03": {
-    "fetched_at": "2026-04-11T19:38:02.185426Z",
+    "fetched_at": "2026-04-11T20:13:47.518683Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -950,11 +1070,13 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-03.csv",
+      "fo": "data/fo/2024/10/2024-10-03.csv",
       "index": "data/index/2024/10/2024-10-03.csv"
     }
   },
   "2024-10-02": {
-    "fetched_at": "2026-04-11T19:37:57.347231Z",
+    "fetched_at": "2026-04-11T20:13:40.958172Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -967,10 +1089,10 @@
     "files": {}
   },
   "2024-10-01": {
-    "fetched_at": "2026-04-11T19:37:52.251669Z",
+    "fetched_at": "2026-04-11T20:13:32.873163Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -978,14 +1100,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/10/2024-10-01.csv",
+      "fo": "data/fo/2024/10/2024-10-01.csv",
       "index": "data/index/2024/10/2024-10-01.csv"
     }
   },
   "2024-09-30": {
-    "fetched_at": "2026-04-11T19:37:48.092582Z",
+    "fetched_at": "2026-04-11T20:13:26.819416Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -993,14 +1117,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-30.csv",
+      "fo": "data/fo/2024/09/2024-09-30.csv",
       "index": "data/index/2024/09/2024-09-30.csv"
     }
   },
   "2024-09-27": {
-    "fetched_at": "2026-04-11T19:37:43.922728Z",
+    "fetched_at": "2026-04-11T20:13:20.859853Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1008,14 +1134,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-27.csv",
+      "fo": "data/fo/2024/09/2024-09-27.csv",
       "index": "data/index/2024/09/2024-09-27.csv"
     }
   },
   "2024-09-26": {
-    "fetched_at": "2026-04-11T19:37:39.881029Z",
+    "fetched_at": "2026-04-11T20:13:14.341244Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1023,14 +1151,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-26.csv",
+      "fo": "data/fo/2024/09/2024-09-26.csv",
       "index": "data/index/2024/09/2024-09-26.csv"
     }
   },
   "2024-09-25": {
-    "fetched_at": "2026-04-11T19:37:35.045579Z",
+    "fetched_at": "2026-04-11T20:13:08.158397Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1038,14 +1168,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-25.csv",
+      "fo": "data/fo/2024/09/2024-09-25.csv",
       "index": "data/index/2024/09/2024-09-25.csv"
     }
   },
   "2024-09-24": {
-    "fetched_at": "2026-04-11T19:37:30.234946Z",
+    "fetched_at": "2026-04-11T20:13:02.209780Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1053,14 +1185,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-24.csv",
+      "fo": "data/fo/2024/09/2024-09-24.csv",
       "index": "data/index/2024/09/2024-09-24.csv"
     }
   },
   "2024-09-23": {
-    "fetched_at": "2026-04-11T19:37:26.199367Z",
+    "fetched_at": "2026-04-11T20:12:55.195198Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1068,14 +1202,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-23.csv",
+      "fo": "data/fo/2024/09/2024-09-23.csv",
       "index": "data/index/2024/09/2024-09-23.csv"
     }
   },
   "2024-09-20": {
-    "fetched_at": "2026-04-11T19:37:22.188687Z",
+    "fetched_at": "2026-04-11T20:12:48.686835Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1083,14 +1219,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-20.csv",
+      "fo": "data/fo/2024/09/2024-09-20.csv",
       "index": "data/index/2024/09/2024-09-20.csv"
     }
   },
   "2024-09-19": {
-    "fetched_at": "2026-04-11T19:37:17.793761Z",
+    "fetched_at": "2026-04-11T20:12:42.590797Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1098,14 +1236,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-19.csv",
+      "fo": "data/fo/2024/09/2024-09-19.csv",
       "index": "data/index/2024/09/2024-09-19.csv"
     }
   },
   "2024-09-18": {
-    "fetched_at": "2026-04-11T19:37:13.370744Z",
+    "fetched_at": "2026-04-11T20:12:36.105651Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1113,14 +1253,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-18.csv",
+      "fo": "data/fo/2024/09/2024-09-18.csv",
       "index": "data/index/2024/09/2024-09-18.csv"
     }
   },
   "2024-09-17": {
-    "fetched_at": "2026-04-11T19:37:09.455663Z",
+    "fetched_at": "2026-04-11T20:12:30.076752Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1128,14 +1270,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-17.csv",
+      "fo": "data/fo/2024/09/2024-09-17.csv",
       "index": "data/index/2024/09/2024-09-17.csv"
     }
   },
   "2024-09-16": {
-    "fetched_at": "2026-04-11T19:37:05.399836Z",
+    "fetched_at": "2026-04-11T20:12:24.732194Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1143,14 +1287,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-16.csv",
+      "fo": "data/fo/2024/09/2024-09-16.csv",
       "index": "data/index/2024/09/2024-09-16.csv"
     }
   },
   "2024-09-13": {
-    "fetched_at": "2026-04-11T19:37:00.687799Z",
+    "fetched_at": "2026-04-11T20:12:18.865744Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1158,14 +1304,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-13.csv",
+      "fo": "data/fo/2024/09/2024-09-13.csv",
       "index": "data/index/2024/09/2024-09-13.csv"
     }
   },
   "2024-09-12": {
-    "fetched_at": "2026-04-11T19:36:55.983918Z",
+    "fetched_at": "2026-04-11T20:12:13.151816Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1173,14 +1321,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-12.csv",
+      "fo": "data/fo/2024/09/2024-09-12.csv",
       "index": "data/index/2024/09/2024-09-12.csv"
     }
   },
   "2024-09-11": {
-    "fetched_at": "2026-04-11T19:36:51.448507Z",
+    "fetched_at": "2026-04-11T20:12:07.353582Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1188,14 +1338,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-11.csv",
+      "fo": "data/fo/2024/09/2024-09-11.csv",
       "index": "data/index/2024/09/2024-09-11.csv"
     }
   },
   "2024-09-10": {
-    "fetched_at": "2026-04-11T19:36:46.889761Z",
+    "fetched_at": "2026-04-11T20:12:00.841416Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1203,14 +1355,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-10.csv",
+      "fo": "data/fo/2024/09/2024-09-10.csv",
       "index": "data/index/2024/09/2024-09-10.csv"
     }
   },
   "2024-09-09": {
-    "fetched_at": "2026-04-11T19:36:42.790575Z",
+    "fetched_at": "2026-04-11T20:11:52.828810Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1218,14 +1372,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-09.csv",
+      "fo": "data/fo/2024/09/2024-09-09.csv",
       "index": "data/index/2024/09/2024-09-09.csv"
     }
   },
   "2024-09-06": {
-    "fetched_at": "2026-04-11T19:36:38.189801Z",
+    "fetched_at": "2026-04-11T20:11:46.457290Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1233,14 +1389,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-06.csv",
+      "fo": "data/fo/2024/09/2024-09-06.csv",
       "index": "data/index/2024/09/2024-09-06.csv"
     }
   },
   "2024-09-05": {
-    "fetched_at": "2026-04-11T19:36:33.614315Z",
+    "fetched_at": "2026-04-11T20:11:40.020708Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1248,14 +1406,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-05.csv",
+      "fo": "data/fo/2024/09/2024-09-05.csv",
       "index": "data/index/2024/09/2024-09-05.csv"
     }
   },
   "2024-09-04": {
-    "fetched_at": "2026-04-11T19:36:28.879018Z",
+    "fetched_at": "2026-04-11T20:11:34.169451Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1263,14 +1423,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-04.csv",
+      "fo": "data/fo/2024/09/2024-09-04.csv",
       "index": "data/index/2024/09/2024-09-04.csv"
     }
   },
   "2024-09-03": {
-    "fetched_at": "2026-04-11T19:36:24.095793Z",
+    "fetched_at": "2026-04-11T20:11:28.080087Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1278,14 +1440,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-03.csv",
+      "fo": "data/fo/2024/09/2024-09-03.csv",
       "index": "data/index/2024/09/2024-09-03.csv"
     }
   },
   "2024-09-02": {
-    "fetched_at": "2026-04-11T19:36:19.521069Z",
+    "fetched_at": "2026-04-11T20:11:21.341527Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1293,14 +1457,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/09/2024-09-02.csv",
+      "fo": "data/fo/2024/09/2024-09-02.csv",
       "index": "data/index/2024/09/2024-09-02.csv"
     }
   },
   "2024-08-30": {
-    "fetched_at": "2026-04-11T19:36:15.436158Z",
+    "fetched_at": "2026-04-11T20:11:14.915455Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1308,14 +1474,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-30.csv",
+      "fo": "data/fo/2024/08/2024-08-30.csv",
       "index": "data/index/2024/08/2024-08-30.csv"
     }
   },
   "2024-08-29": {
-    "fetched_at": "2026-04-11T19:36:11.293007Z",
+    "fetched_at": "2026-04-11T20:11:07.859530Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1323,14 +1491,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-29.csv",
+      "fo": "data/fo/2024/08/2024-08-29.csv",
       "index": "data/index/2024/08/2024-08-29.csv"
     }
   },
   "2024-08-28": {
-    "fetched_at": "2026-04-11T19:36:06.489859Z",
+    "fetched_at": "2026-04-11T20:11:01.975865Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1338,14 +1508,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-28.csv",
+      "fo": "data/fo/2024/08/2024-08-28.csv",
       "index": "data/index/2024/08/2024-08-28.csv"
     }
   },
   "2024-08-27": {
-    "fetched_at": "2026-04-11T19:36:01.842662Z",
+    "fetched_at": "2026-04-11T20:10:54.891668Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1353,14 +1525,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-27.csv",
+      "fo": "data/fo/2024/08/2024-08-27.csv",
       "index": "data/index/2024/08/2024-08-27.csv"
     }
   },
   "2024-08-26": {
-    "fetched_at": "2026-04-11T19:35:57.744056Z",
+    "fetched_at": "2026-04-11T20:10:49.007815Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1368,14 +1542,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-26.csv",
+      "fo": "data/fo/2024/08/2024-08-26.csv",
       "index": "data/index/2024/08/2024-08-26.csv"
     }
   },
   "2024-08-23": {
-    "fetched_at": "2026-04-11T19:35:53.793950Z",
+    "fetched_at": "2026-04-11T20:10:42.493941Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1383,14 +1559,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-23.csv",
+      "fo": "data/fo/2024/08/2024-08-23.csv",
       "index": "data/index/2024/08/2024-08-23.csv"
     }
   },
   "2024-08-22": {
-    "fetched_at": "2026-04-11T19:35:49.341241Z",
+    "fetched_at": "2026-04-11T20:10:36.150725Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1398,14 +1576,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-22.csv",
+      "fo": "data/fo/2024/08/2024-08-22.csv",
       "index": "data/index/2024/08/2024-08-22.csv"
     }
   },
   "2024-08-21": {
-    "fetched_at": "2026-04-11T19:35:45.207410Z",
+    "fetched_at": "2026-04-11T20:10:29.289007Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1413,14 +1593,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-21.csv",
+      "fo": "data/fo/2024/08/2024-08-21.csv",
       "index": "data/index/2024/08/2024-08-21.csv"
     }
   },
   "2024-08-20": {
-    "fetched_at": "2026-04-11T19:35:40.395747Z",
+    "fetched_at": "2026-04-11T20:10:22.492970Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1428,14 +1610,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-20.csv",
+      "fo": "data/fo/2024/08/2024-08-20.csv",
       "index": "data/index/2024/08/2024-08-20.csv"
     }
   },
   "2024-08-19": {
-    "fetched_at": "2026-04-11T19:35:35.436681Z",
+    "fetched_at": "2026-04-11T20:10:15.746213Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1443,14 +1627,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-19.csv",
+      "fo": "data/fo/2024/08/2024-08-19.csv",
       "index": "data/index/2024/08/2024-08-19.csv"
     }
   },
   "2024-08-16": {
-    "fetched_at": "2026-04-11T19:35:31.027631Z",
+    "fetched_at": "2026-04-11T20:10:08.852634Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1458,11 +1644,13 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-16.csv",
+      "fo": "data/fo/2024/08/2024-08-16.csv",
       "index": "data/index/2024/08/2024-08-16.csv"
     }
   },
   "2024-08-15": {
-    "fetched_at": "2026-04-11T19:35:26.676530Z",
+    "fetched_at": "2026-04-11T20:10:02.057508Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -1475,10 +1663,10 @@
     "files": {}
   },
   "2024-08-14": {
-    "fetched_at": "2026-04-11T19:35:21.961710Z",
+    "fetched_at": "2026-04-11T20:09:54.686579Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1486,14 +1674,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-14.csv",
+      "fo": "data/fo/2024/08/2024-08-14.csv",
       "index": "data/index/2024/08/2024-08-14.csv"
     }
   },
   "2024-08-13": {
-    "fetched_at": "2026-04-11T19:35:17.462856Z",
+    "fetched_at": "2026-04-11T20:09:48.158291Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1501,14 +1691,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-13.csv",
+      "fo": "data/fo/2024/08/2024-08-13.csv",
       "index": "data/index/2024/08/2024-08-13.csv"
     }
   },
   "2024-08-12": {
-    "fetched_at": "2026-04-11T19:35:13.017791Z",
+    "fetched_at": "2026-04-11T20:09:42.321671Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1516,14 +1708,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-12.csv",
+      "fo": "data/fo/2024/08/2024-08-12.csv",
       "index": "data/index/2024/08/2024-08-12.csv"
     }
   },
   "2024-08-09": {
-    "fetched_at": "2026-04-11T19:35:08.708673Z",
+    "fetched_at": "2026-04-11T20:09:36.275253Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1531,14 +1725,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-09.csv",
+      "fo": "data/fo/2024/08/2024-08-09.csv",
       "index": "data/index/2024/08/2024-08-09.csv"
     }
   },
   "2024-08-08": {
-    "fetched_at": "2026-04-11T19:35:04.691355Z",
+    "fetched_at": "2026-04-11T20:09:29.538628Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1546,14 +1742,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-08.csv",
+      "fo": "data/fo/2024/08/2024-08-08.csv",
       "index": "data/index/2024/08/2024-08-08.csv"
     }
   },
   "2024-08-07": {
-    "fetched_at": "2026-04-11T19:34:59.791698Z",
+    "fetched_at": "2026-04-11T20:09:23.013989Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1561,14 +1759,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-07.csv",
+      "fo": "data/fo/2024/08/2024-08-07.csv",
       "index": "data/index/2024/08/2024-08-07.csv"
     }
   },
   "2024-08-06": {
-    "fetched_at": "2026-04-11T19:34:55.478013Z",
+    "fetched_at": "2026-04-11T20:09:17.269844Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1576,14 +1776,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-06.csv",
+      "fo": "data/fo/2024/08/2024-08-06.csv",
       "index": "data/index/2024/08/2024-08-06.csv"
     }
   },
   "2024-08-05": {
-    "fetched_at": "2026-04-11T19:34:51.345219Z",
+    "fetched_at": "2026-04-11T20:09:11.606074Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1591,14 +1793,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-05.csv",
+      "fo": "data/fo/2024/08/2024-08-05.csv",
       "index": "data/index/2024/08/2024-08-05.csv"
     }
   },
   "2024-08-02": {
-    "fetched_at": "2026-04-11T19:34:46.765457Z",
+    "fetched_at": "2026-04-11T20:09:05.204044Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1606,14 +1810,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-02.csv",
+      "fo": "data/fo/2024/08/2024-08-02.csv",
       "index": "data/index/2024/08/2024-08-02.csv"
     }
   },
   "2024-08-01": {
-    "fetched_at": "2026-04-11T19:34:41.854538Z",
+    "fetched_at": "2026-04-11T20:08:58.930273Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1621,14 +1827,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/08/2024-08-01.csv",
+      "fo": "data/fo/2024/08/2024-08-01.csv",
       "index": "data/index/2024/08/2024-08-01.csv"
     }
   },
   "2024-07-31": {
-    "fetched_at": "2026-04-11T19:34:37.661230Z",
+    "fetched_at": "2026-04-11T20:08:52.275970Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1636,14 +1844,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-31.csv",
+      "fo": "data/fo/2024/07/2024-07-31.csv",
       "index": "data/index/2024/07/2024-07-31.csv"
     }
   },
   "2024-07-30": {
-    "fetched_at": "2026-04-11T19:34:32.738417Z",
+    "fetched_at": "2026-04-11T20:08:46.267195Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1651,14 +1861,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-30.csv",
+      "fo": "data/fo/2024/07/2024-07-30.csv",
       "index": "data/index/2024/07/2024-07-30.csv"
     }
   },
   "2024-07-29": {
-    "fetched_at": "2026-04-11T19:34:27.730063Z",
+    "fetched_at": "2026-04-11T20:08:39.618190Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1666,14 +1878,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-29.csv",
+      "fo": "data/fo/2024/07/2024-07-29.csv",
       "index": "data/index/2024/07/2024-07-29.csv"
     }
   },
   "2024-07-26": {
-    "fetched_at": "2026-04-11T19:34:22.920941Z",
+    "fetched_at": "2026-04-11T20:08:33.055533Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1681,14 +1895,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-26.csv",
+      "fo": "data/fo/2024/07/2024-07-26.csv",
       "index": "data/index/2024/07/2024-07-26.csv"
     }
   },
   "2024-07-25": {
-    "fetched_at": "2026-04-11T19:34:18.003473Z",
+    "fetched_at": "2026-04-11T20:08:25.207977Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1696,14 +1912,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-25.csv",
+      "fo": "data/fo/2024/07/2024-07-25.csv",
       "index": "data/index/2024/07/2024-07-25.csv"
     }
   },
   "2024-07-24": {
-    "fetched_at": "2026-04-11T19:34:13.227967Z",
+    "fetched_at": "2026-04-11T20:08:18.302893Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1711,14 +1929,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-24.csv",
+      "fo": "data/fo/2024/07/2024-07-24.csv",
       "index": "data/index/2024/07/2024-07-24.csv"
     }
   },
   "2024-07-23": {
-    "fetched_at": "2026-04-11T19:34:08.292556Z",
+    "fetched_at": "2026-04-11T20:08:12.545832Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1726,14 +1946,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-23.csv",
+      "fo": "data/fo/2024/07/2024-07-23.csv",
       "index": "data/index/2024/07/2024-07-23.csv"
     }
   },
   "2024-07-22": {
-    "fetched_at": "2026-04-11T19:34:03.855252Z",
+    "fetched_at": "2026-04-11T20:08:04.927810Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1741,14 +1963,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-22.csv",
+      "fo": "data/fo/2024/07/2024-07-22.csv",
       "index": "data/index/2024/07/2024-07-22.csv"
     }
   },
   "2024-07-19": {
-    "fetched_at": "2026-04-11T19:33:59.468501Z",
+    "fetched_at": "2026-04-11T20:07:58.929032Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1756,14 +1980,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-19.csv",
+      "fo": "data/fo/2024/07/2024-07-19.csv",
       "index": "data/index/2024/07/2024-07-19.csv"
     }
   },
   "2024-07-18": {
-    "fetched_at": "2026-04-11T19:33:54.545351Z",
+    "fetched_at": "2026-04-11T20:07:52.746694Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1771,11 +1997,13 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-18.csv",
+      "fo": "data/fo/2024/07/2024-07-18.csv",
       "index": "data/index/2024/07/2024-07-18.csv"
     }
   },
   "2024-07-17": {
-    "fetched_at": "2026-04-11T19:33:49.596985Z",
+    "fetched_at": "2026-04-11T20:07:46.374967Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -1788,10 +2016,10 @@
     "files": {}
   },
   "2024-07-16": {
-    "fetched_at": "2026-04-11T19:33:44.454423Z",
+    "fetched_at": "2026-04-11T20:07:39.860780Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1799,14 +2027,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-16.csv",
+      "fo": "data/fo/2024/07/2024-07-16.csv",
       "index": "data/index/2024/07/2024-07-16.csv"
     }
   },
   "2024-07-15": {
-    "fetched_at": "2026-04-11T19:33:39.427331Z",
+    "fetched_at": "2026-04-11T20:07:33.444702Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1814,14 +2044,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-15.csv",
+      "fo": "data/fo/2024/07/2024-07-15.csv",
       "index": "data/index/2024/07/2024-07-15.csv"
     }
   },
   "2024-07-12": {
-    "fetched_at": "2026-04-11T19:33:35.082861Z",
+    "fetched_at": "2026-04-11T20:07:25.895998Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1829,14 +2061,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-12.csv",
+      "fo": "data/fo/2024/07/2024-07-12.csv",
       "index": "data/index/2024/07/2024-07-12.csv"
     }
   },
   "2024-07-11": {
-    "fetched_at": "2026-04-11T19:33:30.595852Z",
+    "fetched_at": "2026-04-11T20:07:19.937933Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1844,14 +2078,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-11.csv",
+      "fo": "data/fo/2024/07/2024-07-11.csv",
       "index": "data/index/2024/07/2024-07-11.csv"
     }
   },
   "2024-07-10": {
-    "fetched_at": "2026-04-11T19:33:25.870961Z",
+    "fetched_at": "2026-04-11T20:07:14.039179Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1859,14 +2095,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-10.csv",
+      "fo": "data/fo/2024/07/2024-07-10.csv",
       "index": "data/index/2024/07/2024-07-10.csv"
     }
   },
   "2024-07-09": {
-    "fetched_at": "2026-04-11T19:33:21.253899Z",
+    "fetched_at": "2026-04-11T20:07:07.559909Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1874,14 +2112,16 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-09.csv",
+      "fo": "data/fo/2024/07/2024-07-09.csv",
       "index": "data/index/2024/07/2024-07-09.csv"
     }
   },
   "2024-07-08": {
-    "fetched_at": "2026-04-11T19:33:16.631441Z",
+    "fetched_at": "2026-04-11T20:07:00.812700Z",
     "results": {
-      "equity": false,
-      "fo": false,
+      "equity": true,
+      "fo": true,
       "index": true,
       "delivery": false,
       "corporate_actions": false,
@@ -1889,11 +2129,13 @@
     },
     "success": true,
     "files": {
+      "equity": "data/equity/2024/07/2024-07-08.csv",
+      "fo": "data/fo/2024/07/2024-07-08.csv",
       "index": "data/index/2024/07/2024-07-08.csv"
     }
   },
   "2024-07-05": {
-    "fetched_at": "2026-04-11T19:33:12.425419Z",
+    "fetched_at": "2026-04-11T20:06:52.866065Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -1910,7 +2152,7 @@
     }
   },
   "2024-07-04": {
-    "fetched_at": "2026-04-11T19:33:07.527120Z",
+    "fetched_at": "2026-04-11T20:06:47.498459Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -1927,7 +2169,7 @@
     }
   },
   "2024-07-03": {
-    "fetched_at": "2026-04-11T19:33:02.284062Z",
+    "fetched_at": "2026-04-11T20:06:43.149310Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -1944,7 +2186,7 @@
     }
   },
   "2024-07-02": {
-    "fetched_at": "2026-04-11T19:32:58.391602Z",
+    "fetched_at": "2026-04-11T20:06:38.024086Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -1961,7 +2203,7 @@
     }
   },
   "2024-07-01": {
-    "fetched_at": "2026-04-11T19:32:53.384439Z",
+    "fetched_at": "2026-04-11T20:06:33.458390Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -1978,7 +2220,7 @@
     }
   },
   "2024-06-28": {
-    "fetched_at": "2026-04-11T19:32:48.955299Z",
+    "fetched_at": "2026-04-11T20:06:29.018061Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -1995,7 +2237,7 @@
     }
   },
   "2024-06-27": {
-    "fetched_at": "2026-04-11T19:32:44.197791Z",
+    "fetched_at": "2026-04-11T20:06:24.763332Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2012,7 +2254,7 @@
     }
   },
   "2024-06-26": {
-    "fetched_at": "2026-04-11T19:32:39.432749Z",
+    "fetched_at": "2026-04-11T20:06:19.909053Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2029,7 +2271,7 @@
     }
   },
   "2024-06-25": {
-    "fetched_at": "2026-04-11T19:32:34.060306Z",
+    "fetched_at": "2026-04-11T20:06:15.250557Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2046,7 +2288,7 @@
     }
   },
   "2024-06-24": {
-    "fetched_at": "2026-04-11T19:32:28.713363Z",
+    "fetched_at": "2026-04-11T20:06:11.160398Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2063,7 +2305,7 @@
     }
   },
   "2024-06-21": {
-    "fetched_at": "2026-04-11T19:32:23.646027Z",
+    "fetched_at": "2026-04-11T20:06:06.521003Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2080,7 +2322,7 @@
     }
   },
   "2024-06-20": {
-    "fetched_at": "2026-04-11T19:32:18.795613Z",
+    "fetched_at": "2026-04-11T20:06:02.178929Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2097,7 +2339,7 @@
     }
   },
   "2024-06-19": {
-    "fetched_at": "2026-04-11T19:32:13.826846Z",
+    "fetched_at": "2026-04-11T20:05:57.790158Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2114,7 +2356,7 @@
     }
   },
   "2024-06-18": {
-    "fetched_at": "2026-04-11T19:32:08.488078Z",
+    "fetched_at": "2026-04-11T20:05:53.578711Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2131,7 +2373,7 @@
     }
   },
   "2024-06-17": {
-    "fetched_at": "2026-04-11T19:32:03.762414Z",
+    "fetched_at": "2026-04-11T20:05:48.586154Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -2144,7 +2386,7 @@
     "files": {}
   },
   "2024-06-14": {
-    "fetched_at": "2026-04-11T19:31:59.412262Z",
+    "fetched_at": "2026-04-11T20:05:42.629563Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2161,7 +2403,7 @@
     }
   },
   "2024-06-13": {
-    "fetched_at": "2026-04-11T19:31:55.205742Z",
+    "fetched_at": "2026-04-11T20:05:38.348084Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2178,7 +2420,7 @@
     }
   },
   "2024-06-12": {
-    "fetched_at": "2026-04-11T19:31:50.229677Z",
+    "fetched_at": "2026-04-11T20:05:33.300637Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2195,7 +2437,7 @@
     }
   },
   "2024-06-11": {
-    "fetched_at": "2026-04-11T19:31:45.843449Z",
+    "fetched_at": "2026-04-11T20:05:28.752667Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2212,7 +2454,7 @@
     }
   },
   "2024-06-10": {
-    "fetched_at": "2026-04-11T19:31:41.256470Z",
+    "fetched_at": "2026-04-11T20:05:23.706098Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2229,7 +2471,7 @@
     }
   },
   "2024-06-07": {
-    "fetched_at": "2026-04-11T19:31:36.930565Z",
+    "fetched_at": "2026-04-11T20:05:19.091000Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2246,7 +2488,7 @@
     }
   },
   "2024-06-06": {
-    "fetched_at": "2026-04-11T19:31:32.710443Z",
+    "fetched_at": "2026-04-11T20:05:14.890138Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2263,7 +2505,7 @@
     }
   },
   "2024-06-05": {
-    "fetched_at": "2026-04-11T19:31:27.300091Z",
+    "fetched_at": "2026-04-11T20:05:10.543426Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2280,7 +2522,7 @@
     }
   },
   "2024-06-04": {
-    "fetched_at": "2026-04-11T19:31:23.181536Z",
+    "fetched_at": "2026-04-11T20:05:06.373007Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2297,7 +2539,7 @@
     }
   },
   "2024-06-03": {
-    "fetched_at": "2026-04-11T19:31:17.797733Z",
+    "fetched_at": "2026-04-11T20:05:01.222315Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2314,7 +2556,7 @@
     }
   },
   "2024-05-31": {
-    "fetched_at": "2026-04-11T19:31:13.779901Z",
+    "fetched_at": "2026-04-11T20:04:56.617589Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2331,7 +2573,7 @@
     }
   },
   "2024-05-30": {
-    "fetched_at": "2026-04-11T19:31:09.695028Z",
+    "fetched_at": "2026-04-11T20:04:51.794331Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2348,7 +2590,7 @@
     }
   },
   "2024-05-29": {
-    "fetched_at": "2026-04-11T19:31:04.715635Z",
+    "fetched_at": "2026-04-11T20:04:47.353335Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2365,7 +2607,7 @@
     }
   },
   "2024-05-28": {
-    "fetched_at": "2026-04-11T19:30:59.871893Z",
+    "fetched_at": "2026-04-11T20:04:43.093214Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2382,7 +2624,7 @@
     }
   },
   "2024-05-27": {
-    "fetched_at": "2026-04-11T19:30:54.920763Z",
+    "fetched_at": "2026-04-11T20:04:38.266933Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2399,7 +2641,7 @@
     }
   },
   "2024-05-24": {
-    "fetched_at": "2026-04-11T19:30:50.193473Z",
+    "fetched_at": "2026-04-11T20:04:33.249275Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2416,7 +2658,7 @@
     }
   },
   "2024-05-23": {
-    "fetched_at": "2026-04-11T19:30:45.341432Z",
+    "fetched_at": "2026-04-11T20:04:28.227825Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2433,7 +2675,7 @@
     }
   },
   "2024-05-22": {
-    "fetched_at": "2026-04-11T19:30:40.647146Z",
+    "fetched_at": "2026-04-11T20:04:23.657205Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2450,7 +2692,7 @@
     }
   },
   "2024-05-21": {
-    "fetched_at": "2026-04-11T19:30:35.736548Z",
+    "fetched_at": "2026-04-11T20:04:18.774701Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2467,7 +2709,7 @@
     }
   },
   "2024-05-20": {
-    "fetched_at": "2026-04-11T19:30:30.893379Z",
+    "fetched_at": "2026-04-11T20:04:14.334686Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -2480,7 +2722,7 @@
     "files": {}
   },
   "2024-05-17": {
-    "fetched_at": "2026-04-11T19:30:25.808366Z",
+    "fetched_at": "2026-04-11T20:04:06.720258Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2497,7 +2739,7 @@
     }
   },
   "2024-05-16": {
-    "fetched_at": "2026-04-11T19:30:21.153287Z",
+    "fetched_at": "2026-04-11T20:04:01.671145Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2514,7 +2756,7 @@
     }
   },
   "2024-05-15": {
-    "fetched_at": "2026-04-11T19:30:16.790306Z",
+    "fetched_at": "2026-04-11T20:03:56.715891Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2531,7 +2773,7 @@
     }
   },
   "2024-05-14": {
-    "fetched_at": "2026-04-11T19:30:12.158430Z",
+    "fetched_at": "2026-04-11T20:03:52.150042Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2548,7 +2790,7 @@
     }
   },
   "2024-05-13": {
-    "fetched_at": "2026-04-11T19:30:07.818471Z",
+    "fetched_at": "2026-04-11T20:03:47.650902Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2565,7 +2807,7 @@
     }
   },
   "2024-05-10": {
-    "fetched_at": "2026-04-11T19:30:03.354773Z",
+    "fetched_at": "2026-04-11T20:03:42.515004Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2582,7 +2824,7 @@
     }
   },
   "2024-05-09": {
-    "fetched_at": "2026-04-11T19:29:58.833572Z",
+    "fetched_at": "2026-04-11T20:03:38.084977Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2599,7 +2841,7 @@
     }
   },
   "2024-05-08": {
-    "fetched_at": "2026-04-11T19:29:53.930574Z",
+    "fetched_at": "2026-04-11T20:03:33.393174Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2616,7 +2858,7 @@
     }
   },
   "2024-05-07": {
-    "fetched_at": "2026-04-11T19:29:49.316415Z",
+    "fetched_at": "2026-04-11T20:03:28.770385Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2633,7 +2875,7 @@
     }
   },
   "2024-05-06": {
-    "fetched_at": "2026-04-11T19:29:44.165686Z",
+    "fetched_at": "2026-04-11T20:03:23.552751Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2650,7 +2892,7 @@
     }
   },
   "2024-05-03": {
-    "fetched_at": "2026-04-11T19:29:40.008562Z",
+    "fetched_at": "2026-04-11T20:03:19.123560Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2667,7 +2909,7 @@
     }
   },
   "2024-05-02": {
-    "fetched_at": "2026-04-11T19:29:35.077819Z",
+    "fetched_at": "2026-04-11T20:03:14.630190Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2684,7 +2926,7 @@
     }
   },
   "2024-05-01": {
-    "fetched_at": "2026-04-11T19:29:30.285825Z",
+    "fetched_at": "2026-04-11T20:03:09.906766Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -2697,7 +2939,7 @@
     "files": {}
   },
   "2024-04-30": {
-    "fetched_at": "2026-04-11T19:29:25.357552Z",
+    "fetched_at": "2026-04-11T20:03:02.124210Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2714,7 +2956,7 @@
     }
   },
   "2024-04-29": {
-    "fetched_at": "2026-04-11T19:29:20.385929Z",
+    "fetched_at": "2026-04-11T20:02:57.924194Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2731,7 +2973,7 @@
     }
   },
   "2024-04-26": {
-    "fetched_at": "2026-04-11T19:29:16.296947Z",
+    "fetched_at": "2026-04-11T20:02:53.784883Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2748,7 +2990,7 @@
     }
   },
   "2024-04-25": {
-    "fetched_at": "2026-04-11T19:29:11.895204Z",
+    "fetched_at": "2026-04-11T20:02:49.030501Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2765,7 +3007,7 @@
     }
   },
   "2024-04-24": {
-    "fetched_at": "2026-04-11T19:29:07.127321Z",
+    "fetched_at": "2026-04-11T20:02:44.285007Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2782,7 +3024,7 @@
     }
   },
   "2024-04-23": {
-    "fetched_at": "2026-04-11T19:29:02.038737Z",
+    "fetched_at": "2026-04-11T20:02:37.742462Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2799,7 +3041,7 @@
     }
   },
   "2024-04-22": {
-    "fetched_at": "2026-04-11T19:28:58.093521Z",
+    "fetched_at": "2026-04-11T20:02:32.236272Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2816,7 +3058,7 @@
     }
   },
   "2024-04-19": {
-    "fetched_at": "2026-04-11T19:28:53.028136Z",
+    "fetched_at": "2026-04-11T20:02:27.720499Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2833,7 +3075,7 @@
     }
   },
   "2024-04-18": {
-    "fetched_at": "2026-04-11T19:28:47.942536Z",
+    "fetched_at": "2026-04-11T20:02:22.657553Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2850,7 +3092,7 @@
     }
   },
   "2024-04-17": {
-    "fetched_at": "2026-04-11T19:28:42.929022Z",
+    "fetched_at": "2026-04-11T20:02:18.050111Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -2863,7 +3105,7 @@
     "files": {}
   },
   "2024-04-16": {
-    "fetched_at": "2026-04-11T19:28:36.812828Z",
+    "fetched_at": "2026-04-11T20:02:10.812402Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2880,7 +3122,7 @@
     }
   },
   "2024-04-15": {
-    "fetched_at": "2026-04-11T19:28:32.999485Z",
+    "fetched_at": "2026-04-11T20:02:06.463923Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2897,7 +3139,7 @@
     }
   },
   "2024-04-12": {
-    "fetched_at": "2026-04-11T19:28:28.646638Z",
+    "fetched_at": "2026-04-11T20:02:01.876460Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2914,7 +3156,7 @@
     }
   },
   "2024-04-11": {
-    "fetched_at": "2026-04-11T19:28:24.406368Z",
+    "fetched_at": "2026-04-11T20:01:56.239526Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -2927,7 +3169,7 @@
     "files": {}
   },
   "2024-04-10": {
-    "fetched_at": "2026-04-11T19:28:19.792145Z",
+    "fetched_at": "2026-04-11T20:01:49.828461Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2944,7 +3186,7 @@
     }
   },
   "2024-04-09": {
-    "fetched_at": "2026-04-11T19:28:15.857049Z",
+    "fetched_at": "2026-04-11T20:01:45.131412Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2961,7 +3203,7 @@
     }
   },
   "2024-04-08": {
-    "fetched_at": "2026-04-11T19:28:11.601182Z",
+    "fetched_at": "2026-04-11T20:01:39.824129Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2978,7 +3220,7 @@
     }
   },
   "2024-04-05": {
-    "fetched_at": "2026-04-11T19:28:07.849241Z",
+    "fetched_at": "2026-04-11T20:01:35.310242Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -2995,7 +3237,7 @@
     }
   },
   "2024-04-04": {
-    "fetched_at": "2026-04-11T19:28:03.493593Z",
+    "fetched_at": "2026-04-11T20:01:30.083592Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3012,7 +3254,7 @@
     }
   },
   "2024-04-03": {
-    "fetched_at": "2026-04-11T19:27:58.959257Z",
+    "fetched_at": "2026-04-11T20:01:24.997008Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3029,7 +3271,7 @@
     }
   },
   "2024-04-02": {
-    "fetched_at": "2026-04-11T19:27:54.331737Z",
+    "fetched_at": "2026-04-11T20:01:19.668701Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3046,7 +3288,7 @@
     }
   },
   "2024-04-01": {
-    "fetched_at": "2026-04-11T19:27:50.185140Z",
+    "fetched_at": "2026-04-11T20:01:14.254637Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3063,7 +3305,7 @@
     }
   },
   "2024-03-29": {
-    "fetched_at": "2026-04-11T19:27:45.554990Z",
+    "fetched_at": "2026-04-11T20:01:08.447832Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -3076,7 +3318,7 @@
     "files": {}
   },
   "2024-03-28": {
-    "fetched_at": "2026-04-11T19:27:41.402228Z",
+    "fetched_at": "2026-04-11T20:01:01.537557Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3093,7 +3335,7 @@
     }
   },
   "2024-03-27": {
-    "fetched_at": "2026-04-11T19:27:36.855711Z",
+    "fetched_at": "2026-04-11T20:00:54.816893Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3110,7 +3352,7 @@
     }
   },
   "2024-03-26": {
-    "fetched_at": "2026-04-11T19:27:32.801157Z",
+    "fetched_at": "2026-04-11T20:00:50.077560Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3127,7 +3369,7 @@
     }
   },
   "2024-03-25": {
-    "fetched_at": "2026-04-11T19:27:28.451692Z",
+    "fetched_at": "2026-04-11T20:00:45.129880Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -3140,7 +3382,7 @@
     "files": {}
   },
   "2024-03-22": {
-    "fetched_at": "2026-04-11T19:27:22.585562Z",
+    "fetched_at": "2026-04-11T20:00:37.941615Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3157,7 +3399,7 @@
     }
   },
   "2024-03-21": {
-    "fetched_at": "2026-04-11T19:27:18.065662Z",
+    "fetched_at": "2026-04-11T20:00:32.819473Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3174,7 +3416,7 @@
     }
   },
   "2024-03-20": {
-    "fetched_at": "2026-04-11T19:27:13.734481Z",
+    "fetched_at": "2026-04-11T20:00:27.761441Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3191,7 +3433,7 @@
     }
   },
   "2024-03-19": {
-    "fetched_at": "2026-04-11T19:27:08.865364Z",
+    "fetched_at": "2026-04-11T20:00:21.237181Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3208,7 +3450,7 @@
     }
   },
   "2024-03-18": {
-    "fetched_at": "2026-04-11T19:27:04.115657Z",
+    "fetched_at": "2026-04-11T20:00:16.224852Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3225,7 +3467,7 @@
     }
   },
   "2024-03-15": {
-    "fetched_at": "2026-04-11T19:27:00.151310Z",
+    "fetched_at": "2026-04-11T20:00:11.381763Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3242,7 +3484,7 @@
     }
   },
   "2024-03-14": {
-    "fetched_at": "2026-04-11T19:26:55.667872Z",
+    "fetched_at": "2026-04-11T20:00:06.559166Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3259,7 +3501,7 @@
     }
   },
   "2024-03-13": {
-    "fetched_at": "2026-04-11T19:26:51.066237Z",
+    "fetched_at": "2026-04-11T20:00:01.858629Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3276,7 +3518,7 @@
     }
   },
   "2024-03-12": {
-    "fetched_at": "2026-04-11T19:26:45.992170Z",
+    "fetched_at": "2026-04-11T19:59:57.297779Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3293,7 +3535,7 @@
     }
   },
   "2024-03-11": {
-    "fetched_at": "2026-04-11T19:26:41.582362Z",
+    "fetched_at": "2026-04-11T19:59:51.663737Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3310,7 +3552,7 @@
     }
   },
   "2024-03-08": {
-    "fetched_at": "2026-04-11T19:26:37.447617Z",
+    "fetched_at": "2026-04-11T19:59:47.107750Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -3323,7 +3565,7 @@
     "files": {}
   },
   "2024-03-07": {
-    "fetched_at": "2026-04-11T19:26:32.160993Z",
+    "fetched_at": "2026-04-11T19:59:39.531310Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3340,7 +3582,7 @@
     }
   },
   "2024-03-06": {
-    "fetched_at": "2026-04-11T19:26:27.415561Z",
+    "fetched_at": "2026-04-11T19:59:34.538400Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3357,7 +3599,7 @@
     }
   },
   "2024-03-05": {
-    "fetched_at": "2026-04-11T19:26:23.363428Z",
+    "fetched_at": "2026-04-11T19:59:29.667725Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3374,7 +3616,7 @@
     }
   },
   "2024-03-04": {
-    "fetched_at": "2026-04-11T19:26:18.959958Z",
+    "fetched_at": "2026-04-11T19:59:24.925630Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3391,7 +3633,7 @@
     }
   },
   "2024-03-01": {
-    "fetched_at": "2026-04-11T19:26:14.484805Z",
+    "fetched_at": "2026-04-11T19:59:20.234403Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3408,7 +3650,7 @@
     }
   },
   "2024-02-29": {
-    "fetched_at": "2026-04-11T19:26:09.763681Z",
+    "fetched_at": "2026-04-11T19:59:15.429834Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3425,7 +3667,7 @@
     }
   },
   "2024-02-28": {
-    "fetched_at": "2026-04-11T19:26:02.135099Z",
+    "fetched_at": "2026-04-11T19:59:10.762534Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3442,7 +3684,7 @@
     }
   },
   "2024-02-27": {
-    "fetched_at": "2026-04-11T19:25:57.494857Z",
+    "fetched_at": "2026-04-11T19:59:05.768751Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3459,7 +3701,7 @@
     }
   },
   "2024-02-26": {
-    "fetched_at": "2026-04-11T19:25:52.555162Z",
+    "fetched_at": "2026-04-11T19:59:01.047099Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3476,7 +3718,7 @@
     }
   },
   "2024-02-23": {
-    "fetched_at": "2026-04-11T19:25:48.143235Z",
+    "fetched_at": "2026-04-11T19:58:56.085262Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3493,7 +3735,7 @@
     }
   },
   "2024-02-22": {
-    "fetched_at": "2026-04-11T19:25:43.520339Z",
+    "fetched_at": "2026-04-11T19:58:50.917397Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3510,7 +3752,7 @@
     }
   },
   "2024-02-21": {
-    "fetched_at": "2026-04-11T19:25:38.412889Z",
+    "fetched_at": "2026-04-11T19:58:46.096419Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3527,7 +3769,7 @@
     }
   },
   "2024-02-20": {
-    "fetched_at": "2026-04-11T19:25:33.956152Z",
+    "fetched_at": "2026-04-11T19:58:41.312800Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3544,7 +3786,7 @@
     }
   },
   "2024-02-19": {
-    "fetched_at": "2026-04-11T19:25:28.943068Z",
+    "fetched_at": "2026-04-11T19:58:35.965168Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3561,7 +3803,7 @@
     }
   },
   "2024-02-16": {
-    "fetched_at": "2026-04-11T19:25:24.050179Z",
+    "fetched_at": "2026-04-11T19:58:31.666259Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3578,7 +3820,7 @@
     }
   },
   "2024-02-15": {
-    "fetched_at": "2026-04-11T19:25:19.845373Z",
+    "fetched_at": "2026-04-11T19:58:26.951276Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3595,7 +3837,7 @@
     }
   },
   "2024-02-14": {
-    "fetched_at": "2026-04-11T19:25:14.429629Z",
+    "fetched_at": "2026-04-11T19:58:21.540471Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3612,7 +3854,7 @@
     }
   },
   "2024-02-13": {
-    "fetched_at": "2026-04-11T19:25:10.185985Z",
+    "fetched_at": "2026-04-11T19:58:15.949024Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3629,7 +3871,7 @@
     }
   },
   "2024-02-12": {
-    "fetched_at": "2026-04-11T19:25:05.710374Z",
+    "fetched_at": "2026-04-11T19:58:09.998828Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3646,7 +3888,7 @@
     }
   },
   "2024-02-09": {
-    "fetched_at": "2026-04-11T19:25:00.956281Z",
+    "fetched_at": "2026-04-11T19:58:04.875825Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3663,7 +3905,7 @@
     }
   },
   "2024-02-08": {
-    "fetched_at": "2026-04-11T19:24:56.815229Z",
+    "fetched_at": "2026-04-11T19:57:59.736273Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3680,7 +3922,7 @@
     }
   },
   "2024-02-07": {
-    "fetched_at": "2026-04-11T19:24:52.422016Z",
+    "fetched_at": "2026-04-11T19:57:54.185393Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3697,7 +3939,7 @@
     }
   },
   "2024-02-06": {
-    "fetched_at": "2026-04-11T19:24:47.738853Z",
+    "fetched_at": "2026-04-11T19:57:48.514494Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3714,7 +3956,7 @@
     }
   },
   "2024-02-05": {
-    "fetched_at": "2026-04-11T19:24:43.130214Z",
+    "fetched_at": "2026-04-11T19:57:43.129288Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3731,7 +3973,7 @@
     }
   },
   "2024-02-02": {
-    "fetched_at": "2026-04-11T19:24:37.982484Z",
+    "fetched_at": "2026-04-11T19:57:37.730171Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3748,7 +3990,7 @@
     }
   },
   "2024-02-01": {
-    "fetched_at": "2026-04-11T19:24:33.522382Z",
+    "fetched_at": "2026-04-11T19:57:32.537330Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3765,7 +4007,7 @@
     }
   },
   "2024-01-31": {
-    "fetched_at": "2026-04-11T19:24:28.728172Z",
+    "fetched_at": "2026-04-11T19:57:27.603480Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3782,7 +4024,7 @@
     }
   },
   "2024-01-30": {
-    "fetched_at": "2026-04-11T19:24:24.576586Z",
+    "fetched_at": "2026-04-11T19:57:23.060278Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3799,7 +4041,7 @@
     }
   },
   "2024-01-29": {
-    "fetched_at": "2026-04-11T19:24:20.189626Z",
+    "fetched_at": "2026-04-11T19:57:18.446811Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3816,7 +4058,7 @@
     }
   },
   "2024-01-26": {
-    "fetched_at": "2026-04-11T19:24:15.675703Z",
+    "fetched_at": "2026-04-11T19:57:13.551286Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -3829,7 +4071,7 @@
     "files": {}
   },
   "2024-01-25": {
-    "fetched_at": "2026-04-11T19:24:10.522003Z",
+    "fetched_at": "2026-04-11T19:57:07.185097Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3846,7 +4088,7 @@
     }
   },
   "2024-01-24": {
-    "fetched_at": "2026-04-11T19:24:05.945559Z",
+    "fetched_at": "2026-04-11T19:57:02.659847Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3863,7 +4105,7 @@
     }
   },
   "2024-01-23": {
-    "fetched_at": "2026-04-11T19:23:58.446545Z",
+    "fetched_at": "2026-04-11T19:56:58.184913Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3880,7 +4122,7 @@
     }
   },
   "2024-01-22": {
-    "fetched_at": "2026-04-11T19:23:53.095981Z",
+    "fetched_at": "2026-04-11T19:56:52.286683Z",
     "results": {
       "equity": false,
       "fo": false,
@@ -3893,7 +4135,7 @@
     "files": {}
   },
   "2024-01-19": {
-    "fetched_at": "2026-04-11T19:23:41.773067Z",
+    "fetched_at": "2026-04-11T19:56:39.762927Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3910,7 +4152,7 @@
     }
   },
   "2024-01-18": {
-    "fetched_at": "2026-04-11T19:23:36.971286Z",
+    "fetched_at": "2026-04-11T19:56:34.276028Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3927,7 +4169,7 @@
     }
   },
   "2024-01-17": {
-    "fetched_at": "2026-04-11T19:23:31.142040Z",
+    "fetched_at": "2026-04-11T19:56:29.356299Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3944,7 +4186,7 @@
     }
   },
   "2024-01-16": {
-    "fetched_at": "2026-04-11T19:23:26.873174Z",
+    "fetched_at": "2026-04-11T19:56:24.750758Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3961,7 +4203,7 @@
     }
   },
   "2024-01-15": {
-    "fetched_at": "2026-04-11T19:23:22.214982Z",
+    "fetched_at": "2026-04-11T19:56:20.572277Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3978,7 +4220,7 @@
     }
   },
   "2024-01-12": {
-    "fetched_at": "2026-04-11T19:23:17.758988Z",
+    "fetched_at": "2026-04-11T19:56:14.959096Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -3995,7 +4237,7 @@
     }
   },
   "2024-01-11": {
-    "fetched_at": "2026-04-11T19:23:12.909246Z",
+    "fetched_at": "2026-04-11T19:56:09.404413Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -4012,7 +4254,7 @@
     }
   },
   "2024-01-10": {
-    "fetched_at": "2026-04-11T19:23:08.919704Z",
+    "fetched_at": "2026-04-11T19:56:04.516791Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -4029,7 +4271,7 @@
     }
   },
   "2024-01-09": {
-    "fetched_at": "2026-04-11T19:23:03.562365Z",
+    "fetched_at": "2026-04-11T19:55:58.544142Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -4046,7 +4288,7 @@
     }
   },
   "2024-01-08": {
-    "fetched_at": "2026-04-11T19:22:58.905660Z",
+    "fetched_at": "2026-04-11T19:55:53.131802Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -4063,7 +4305,7 @@
     }
   },
   "2024-01-05": {
-    "fetched_at": "2026-04-11T19:22:54.824105Z",
+    "fetched_at": "2026-04-11T19:55:47.803885Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -4080,7 +4322,7 @@
     }
   },
   "2024-01-04": {
-    "fetched_at": "2026-04-11T19:22:50.012170Z",
+    "fetched_at": "2026-04-11T19:55:43.009492Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -4097,7 +4339,7 @@
     }
   },
   "2024-01-03": {
-    "fetched_at": "2026-04-11T19:22:45.495810Z",
+    "fetched_at": "2026-04-11T19:55:37.501421Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -4114,7 +4356,7 @@
     }
   },
   "2024-01-02": {
-    "fetched_at": "2026-04-11T19:22:40.901670Z",
+    "fetched_at": "2026-04-11T19:55:32.207173Z",
     "results": {
       "equity": true,
       "fo": true,
@@ -4131,7 +4373,7 @@
     }
   },
   "2024-01-01": {
-    "fetched_at": "2026-04-11T19:22:35.963210Z",
+    "fetched_at": "2026-04-11T19:55:27.684729Z",
     "results": {
       "equity": true,
       "fo": true,

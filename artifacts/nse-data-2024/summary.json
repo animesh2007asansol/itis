@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-11T19:42:51.946101Z",
+  "last_updated": "2026-04-11T20:20:26.605102Z",
   "total_trading_days": 262,
   "successful_fetches": 246,
   "categories_available": [
@@ -9,8 +9,8 @@
   ],
   "latest_date": "2024-12-31",
   "latest_status": {
-    "equity": false,
-    "fo": false,
+    "equity": true,
+    "fo": true,
     "index": true,
     "delivery": false,
     "corporate_actions": false,
