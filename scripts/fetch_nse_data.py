@@ -211,7 +211,10 @@ def fetch_equity_bhav(d: date, session) -> bool:
     mon = d.strftime("%b").upper()
 
     urls = [
+        # Historical archive path (works for older data ~2020-2024)
         f"{NSE_ARCHIVE}/content/historical/EQUITIES/{yr}/{mon}/cm{ds}bhav.csv.zip",
+        # Recent data path (works for ~2025 onwards)
+        f"{NSE_ARCHIVE}/archives/equities/bhavcopy/cm{ds}bhav.csv.zip",
     ]
 
     for url in urls:
@@ -306,7 +309,10 @@ def fetch_fo_bhav(d: date, session) -> bool:
     mon = d.strftime("%b").upper()
 
     for url in [
+        # Historical archive path
         f"{NSE_ARCHIVE}/content/historical/DERIVATIVES/{yr}/{mon}/fo{ds}bhav.csv.zip",
+        # Recent data path
+        f"{NSE_ARCHIVE}/archives/derivatives/bhavcopy/fo{ds}bhav.csv.zip",
     ]:
         raw = download(url, session)
         if raw:
