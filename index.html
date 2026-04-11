@@ -2,482 +2,333 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>NSE Market Data Portal</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>NSE Pin Bar Analyser</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --bg:       #0d1117;
-    --surface:  #161b22;
-    --border:   #30363d;
-    --accent:   #238636;
-    --accent2:  #1f6feb;
-    --text:     #c9d1d9;
-    --muted:    #8b949e;
-    --success:  #3fb950;
-    --warning:  #d29922;
-    --danger:   #f85149;
-    --green-dim:#0d4429;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-
-  /* ── Header ── */
-  header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  header h1 { font-size: 18px; font-weight: 600; }
-  .badge {
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 20px;
-    background: var(--green-dim);
-    color: var(--success);
-    font-weight: 500;
-  }
-  .status-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--success);
-    animation: pulse 2s infinite;
-    flex-shrink: 0;
-  }
-  @keyframes pulse {
-    0%,100% { opacity:1; }
-    50%      { opacity:.4; }
-  }
-
-  /* ── Layout ── */
-  .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
-
-  /* ── Hero stats ── */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-  .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-  }
-  .stat-card .val { font-size: 28px; font-weight: 700; color: #fff; }
-  .stat-card .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
-
-  /* ── Section headings ── */
-  h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #fff; }
-
-  /* ── Category cards ── */
-  .cat-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-  .cat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    transition: border-color .2s;
-  }
-  .cat-card:hover { border-color: var(--accent2); }
-  .cat-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-  .cat-icon { font-size: 20px; }
-  .cat-name { font-weight: 600; font-size: 14px; color: #fff; }
-  .cat-desc { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
-  .cat-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 4px;
-  }
-  .cat-status.ok  { background:#0d4429; color: var(--success); }
-  .cat-status.fail{ background:#3d1a1a; color: var(--danger); }
-
-  /* ── Data table ── */
-  .table-wrap {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 28px;
-  }
-  table { width: 100%; border-collapse: collapse; }
-  th {
-    background: #1c2128;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .05em;
-    color: var(--muted);
-    padding: 8px 16px;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-  }
-  td { padding: 8px 16px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: rgba(255,255,255,.03); }
-  .pill {
-    display: inline-block;
-    padding: 1px 7px;
-    border-radius: 10px;
-    font-size: 11px;
-    font-weight: 500;
-  }
-  .pill-ok   { background: var(--green-dim); color: var(--success); }
-  .pill-fail { background: #3d1a1a; color: var(--danger); }
-  .pill-skip { background: #2a2a1a; color: var(--warning); }
-
-  /* ── API section ── */
-  .api-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 28px;
-  }
-  .code-block {
-    background: #0d1117;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 12px 16px;
-    font-family: "SFMono-Regular", Consolas, monospace;
-    font-size: 12px;
-    color: #e6edf3;
-    white-space: pre-wrap;
-    word-break: break-all;
-    margin-top: 8px;
-    cursor: text;
-  }
-
-  /* ── Footer ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 16px 24px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 12px;
-  }
-
-  /* ── Loading ── */
-  #loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 60px;
-    color: var(--muted);
-  }
-  .spinner {
-    width: 20px; height: 20px;
-    border: 2px solid var(--border);
-    border-top-color: var(--accent2);
-    border-radius: 50%;
-    animation: spin .8s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  #main { display: none; }
+:root{--bg:#080c10;--surface:#0f1620;--card:#141e2a;--border:#1e2d3d;--accent:#00d4aa;--accent2:#3b82f6;--gold:#f59e0b;--text:#e2e8f0;--muted:#64748b;--green:#22c55e;--red:#ef4444;--green-bg:rgba(34,197,94,0.1);--red-bg:rgba(239,68,68,0.1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:"Space Grotesk",sans-serif;font-size:14px;min-height:100vh}
+a{color:var(--accent2);text-decoration:none}
+header{background:linear-gradient(135deg,#0a1628 0%,#0f2040 100%);border-bottom:1px solid var(--border);padding:20px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100}
+.logo{font-size:22px;font-weight:700;color:#fff;letter-spacing:-.5px}.logo span{color:var(--accent)}
+.tagline{color:var(--muted);font-size:12px;margin-left:auto}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(34,197,94,0)}}
+.tabs{display:flex;border-bottom:1px solid var(--border);background:var(--surface);padding:0 32px;overflow-x:auto}
+.tab{padding:14px 22px;cursor:pointer;font-weight:600;font-size:13px;color:var(--muted);border-bottom:2px solid transparent;transition:.2s;white-space:nowrap}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}.tab:hover:not(.active){color:var(--text)}
+.pane{display:none;padding:28px 32px}.pane.active{display:block}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:28px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
+.stat .val{font-size:30px;font-weight:700;color:#fff;font-family:"JetBrains Mono",monospace;line-height:1}
+.stat .val.green{color:var(--green)}.stat .val.red{color:var(--red)}.stat .val.gold{color:var(--gold)}
+.stat .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:6px}
+.sh{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.sh h2{font-size:15px;font-weight:700;color:#fff}
+.sh .count{background:var(--accent);color:#000;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+.sh .muted-label{color:var(--muted);font-size:12px;margin-left:auto}
+.alerts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:28px}
+.alert-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;position:relative;overflow:hidden;transition:.2s}
+.alert-card:hover{border-color:var(--accent);transform:translateY(-1px)}
+.alert-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.alert-card.red-candle::before{background:linear-gradient(90deg,var(--red),#f97316)}
+.ac-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.ac-sym{font-size:16px;font-weight:700;color:#fff}
+.ac-badge{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600}
+.badge-green{background:var(--green-bg);color:var(--green)}.badge-red{background:var(--red-bg);color:var(--red)}
+.ohlc{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.ohlc-item{background:rgba(255,255,255,.03);border-radius:6px;padding:6px 8px}
+.ohlc-label{font-size:10px;color:var(--muted);text-transform:uppercase}
+.ohlc-val{font-size:13px;font-weight:600;font-family:"JetBrains Mono",monospace;color:#fff}
+.wick-ratio-val{font-size:12px;color:var(--accent);font-weight:700;margin-top:8px;font-family:"JetBrains Mono",monospace}
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:28px}
+table{width:100%;border-collapse:collapse}
+th{background:#0a1220;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
+td{padding:9px 14px;border-bottom:1px solid rgba(30,45,61,.5);font-family:"JetBrains Mono",monospace;font-size:12px}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)}
+.pos{color:var(--green)}.neg{color:var(--red)}.sym-cell{color:#fff;font-weight:600;font-family:"Space Grotesk",sans-serif}
+.year-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-bottom:28px}
+.year-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.year-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px;font-family:"JetBrains Mono",monospace}
+.year-sub{font-size:11px;color:var(--muted);margin-bottom:10px}
+.win-bar-track{height:8px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:6px}
+.win-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--accent));border-radius:4px}
+.pattern-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:28px;display:grid;grid-template-columns:160px 1fr;gap:28px}
+@media(max-width:600px){.pattern-box{grid-template-columns:1fr}}
+.pattern-note{margin-top:12px;font-size:12px;color:var(--muted);line-height:1.6;padding:10px 14px;background:rgba(0,212,170,.05);border-left:3px solid var(--accent);border-radius:0 6px 6px 0}
+.loading{display:flex;align-items:center;justify-content:center;gap:10px;padding:60px;color:var(--muted)}
+.spin{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.no-signal{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;text-align:center;color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:16px 32px;text-align:center;color:var(--muted);font-size:12px}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="status-dot"></div>
-  <h1>📈 NSE Market Data Portal</h1>
-  <span class="badge">FREE &amp; OPEN</span>
+  <div class="live-dot"></div>
+  <div class="logo">NSE <span>Pin Bar</span> Analyser</div>
+  <div class="tagline">Hammer · Backtest &amp; Live Alerts · 2020–2026</div>
 </header>
 
-<div class="container">
-  <div id="loading">
-    <div class="spinner"></div>
-    Loading data catalogue…
+<div class="tabs">
+  <div class="tab active" onclick="showTab('alerts')">🔔 Live Alerts</div>
+  <div class="tab" onclick="showTab('backtest')">📊 Backtest</div>
+  <div class="tab" onclick="showTab('history')">📋 History</div>
+  <div class="tab" onclick="showTab('pattern')">📖 Pattern</div>
+  <div class="tab" onclick="showTab('data')">🗂️ Data Portal</div>
+</div>
+
+<div id="pane-alerts" class="pane active">
+  <div id="al-load" class="loading"><div class="spin"></div>Loading signals…</div>
+  <div id="al-body" style="display:none">
+    <div class="stats-row" id="al-stats"></div>
+    <div class="sh">
+      <h2>Today's Pin Bar Signals</h2>
+      <span class="count" id="al-cnt">0</span>
+      <span class="muted-label" id="al-date"></span>
+    </div>
+    <div id="al-cards" class="alerts-grid"></div>
+    <div class="pattern-note" style="max-width:700px;margin-bottom:28px">
+      ⚡ These stocks formed a hammer/pin-bar on the latest trading day. Historically this pattern is followed by a positive next-day return in <strong id="iwr">–</strong> of cases on NSE. Always use risk management — this is a statistical edge, not a guarantee.
+    </div>
   </div>
+</div>
 
-  <div id="main">
+<div id="pane-backtest" class="pane">
+  <div id="bt-load" class="loading"><div class="spin"></div>Loading backtest…</div>
+  <div id="bt-body" style="display:none">
+    <div class="stats-row" id="bt-stats"></div>
+    <div class="sh"><h2>Win Rate by Year</h2></div>
+    <div class="year-grid" id="yr-grid"></div>
+    <div class="sh"><h2>Top 10 Best Next-Day Moves</h2></div>
+    <div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Date</th><th>Next Return</th><th>Wick Ratio</th><th>Candle</th></tr></thead><tbody id="tg-body"></tbody></table></div>
+    <div class="sh"><h2>Top 10 Worst Next-Day Moves</h2></div>
+    <div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Date</th><th>Next Return</th><th>Wick Ratio</th><th>Candle</th></tr></thead><tbody id="tl-body"></tbody></table></div>
+  </div>
+</div>
 
-    <!-- Stats row -->
-    <div class="stats-grid" id="stats-grid"></div>
-
-    <!-- Category status -->
-    <h2>Data Categories</h2>
-    <div class="cat-grid" id="cat-grid"></div>
-
-    <!-- Recent dates table -->
-    <h2>Recent Fetch History</h2>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Equity</th>
-            <th>F&amp;O</th>
-            <th>Index</th>
-            <th>Delivery</th>
-            <th>Corp Actions</th>
-            <th>SME</th>
-            <th>Fetched At (UTC)</th>
-          </tr>
-        </thead>
-        <tbody id="history-body"></tbody>
-      </table>
+<div id="pane-history" class="pane">
+  <div id="hi-load" class="loading"><div class="spin"></div>Loading history…</div>
+  <div id="hi-body" style="display:none">
+    <div class="sh">
+      <h2>All Historical Signals</h2>
+      <span class="count" id="hi-cnt">0</span>
+      <input id="hi-search" placeholder="Filter symbol…" style="margin-left:auto;background:var(--card);border:1px solid var(--border);color:var(--text);padding:6px 12px;border-radius:6px;font-family:inherit;font-size:12px"/>
     </div>
+    <div class="table-wrap"><table><thead><tr><th>Date</th><th>Symbol</th><th>Close</th><th>Body</th><th>Lower Wick</th><th>Ratio</th><th>Next Return</th><th>Result</th></tr></thead><tbody id="hi-tbl"></tbody></table></div>
+    <div id="hi-pag" style="display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap"></div>
+  </div>
+</div>
 
-    <!-- API / direct access -->
-    <h2>Direct Data Access (API)</h2>
-    <div class="api-box">
-      <p style="color:var(--muted);font-size:12px;margin-bottom:8px;">
-        All data is plain CSV, directly accessible via raw GitHub URLs.
-        Use these patterns in your applications:
-      </p>
-
-      <div class="code-block" id="api-urls"></div>
-
-      <p style="color:var(--muted);font-size:12px;margin-top:12px;">
-        📁 <strong>manifest.json</strong> — complete index of all available dates and files:
-      </p>
-      <div class="code-block" id="manifest-url"></div>
+<div id="pane-pattern" class="pane">
+  <div class="pattern-box">
+    <div style="text-align:center">
+      <svg viewBox="0 0 80 210" width="80" height="210">
+        <line x1="40" y1="8" x2="40" y2="38" stroke="#64748b" stroke-width="2"/>
+        <rect x="24" y="38" width="32" height="44" fill="#22c55e" rx="2"/>
+        <line x1="40" y1="82" x2="40" y2="198" stroke="#00d4aa" stroke-width="3"/>
+        <text x="52" y="26" fill="#64748b" font-size="9" font-family="monospace">≤25%</text>
+        <text x="52" y="62" fill="#fff" font-size="9" font-family="monospace">BODY</text>
+        <text x="52" y="140" fill="#00d4aa" font-size="9" font-family="monospace">≥2×body</text>
+      </svg>
     </div>
+    <div>
+      <div style="font-size:20px;font-weight:700;color:#fff;margin-bottom:10px">Hammer / Pin Bar Pattern</div>
+      <div style="color:var(--muted);font-size:13px;margin-bottom:16px;line-height:1.6">
+        A bullish reversal signal. Sellers drove price far down intraday, but buyers pushed it back up by close — showing buying strength at lower levels.
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+        <div style="display:flex;gap:8px"><span style="color:var(--accent);font-size:16px">✅</span><span><strong>Lower wick ≥ 2× body</strong> — strong intraday rejection of lows</span></div>
+        <div style="display:flex;gap:8px"><span style="color:var(--accent);font-size:16px">✅</span><span><strong>Upper wick ≤ 25% of body</strong> — minimal selling at the top</span></div>
+        <div style="display:flex;gap:8px"><span style="color:var(--accent);font-size:16px">✅</span><span><strong>Body &gt; 0</strong> — must have a real Open vs Close difference</span></div>
+        <div style="display:flex;gap:8px"><span style="color:var(--muted);font-size:16px">📐</span><span style="color:var(--muted)">Body = |Close − Open|  |  Lower wick = min(O,C) − Low  |  Upper wick = High − max(O,C)</span></div>
+      </div>
+      <div class="pattern-note">
+        <strong>How to use:</strong> When you see a signal in the Alerts tab, the stock rejected lower prices strongly that day. Watch for continuation upward on the next trading session. Works best after a pullback or at key support. Always confirm with volume — higher volume on the signal day = stronger confirmation.
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- Download helper -->
-    <h2>Download Latest Data</h2>
-    <div class="cat-grid" id="download-grid"></div>
+<div id="pane-data" class="pane">
+  <div id="dp-load" class="loading"><div class="spin"></div>Loading data index…</div>
+  <div id="dp-body" style="display:none">
+    <div class="stats-row" id="dp-stats"></div>
+    <div class="sh"><h2>Recent 30 Trading Days</h2></div>
+    <div class="table-wrap"><table><thead><tr><th>Date</th><th>Equity</th><th>F&amp;O</th><th>Index</th><th>Delivery</th><th>Corp Actions</th><th>SME</th></tr></thead><tbody id="dp-tbl"></tbody></table></div>
+    <div class="sh"><h2>Direct Data Access URLs</h2></div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:28px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2" id="dp-urls"></div>
+  </div>
+</div>
 
-  </div><!-- #main -->
-</div><!-- .container -->
-
-<footer>
-  Auto-updated daily at 9 PM IST via GitHub Actions &nbsp;·&nbsp;
-  Data source: NSE India &nbsp;·&nbsp;
-  <a href="https://github.com/animesh2007asansol/itis" style="color:var(--accent2);">GitHub</a>
-</footer>
+<footer>NSE Pin Bar Analyser · Data from NSE India public archives · <a href="https://github.com/animesh2007asansol/itis">GitHub</a></footer>
 
 <script>
-// ─── Configuration ────────────────────────────────────────────
-const REPO_RAW   = "https://raw.githubusercontent.com/animesh2007asansol/itis/main";
-const REPO_PAGES = "https://animesh2007asansol.github.io/itis";
-const MANIFEST_URL = `${REPO_RAW}/data/manifest.json`;
-const SUMMARY_URL  = `${REPO_RAW}/data/summary.json`;
+const RAW="https://raw.githubusercontent.com/animesh2007asansol/itis/main";
+function showTab(id){
+  const ids=["alerts","backtest","history","pattern","data"];
+  document.querySelectorAll(".tab").forEach((t,i)=>t.classList.toggle("active",ids[i]===id));
+  document.querySelectorAll(".pane").forEach(p=>p.classList.remove("active"));
+  document.getElementById("pane-"+id).classList.add("active");
+}
+const f2=n=>typeof n==="number"?n.toFixed(2):n;
+const pill=ok=>ok
+  ? '<span style="background:rgba(34,197,94,.12);color:#22c55e;padding:2px 8px;border-radius:4px;font-size:11px">✓</span>'
+  : '<span style="background:rgba(239,68,68,.12);color:#ef4444;padding:2px 8px;border-radius:4px;font-size:11px">✗</span>';
 
-// ─── Category metadata ────────────────────────────────────────
-const CATEGORIES = [
-  {
-    key:  "equity",
-    icon: "🏦",
-    name: "Equity Bhav Copy",
-    desc: "OHLCV for all NSE-listed stocks (CM segment). Includes ISIN, series, turnover.",
-  },
-  {
-    key:  "fo",
-    icon: "📊",
-    name: "F&O Bhav Copy",
-    desc: "Futures & Options daily settlement. Includes OI, contracts, settle price.",
-  },
-  {
-    key:  "index",
-    icon: "📉",
-    name: "Index Data",
-    desc: "All NSE indices (Nifty 50, Bank Nifty, etc.) — open, high, low, close.",
-  },
-  {
-    key:  "delivery",
-    icon: "📦",
-    name: "Delivery Data",
-    desc: "Deliverable quantity & percentage per symbol per day.",
-  },
-  {
-    key:  "corporate_actions",
-    icon: "🔔",
-    name: "Corporate Actions",
-    desc: "Splits, bonuses, dividends, rights issues. Rolling 7-day window + master CSV.",
-  },
-  {
-    key:  "sme",
-    icon: "🏪",
-    name: "SME / Emerge",
-    desc: "NSE Emerge (SME) platform OHLCV data.",
-  },
-  {
-    key:  "full_bhav",
-    icon: "📋",
-    name: "Full Bhav (PR)",
-    desc: "PR series — comprehensive bhavcopy with 50+ fields per security.",
-  },
-];
-
-// ─── Helpers ─────────────────────────────────────────────────
-function pill(ok) {
-  if (ok === true)  return `<span class="pill pill-ok">✓ OK</span>`;
-  if (ok === false) return `<span class="pill pill-fail">✗ Failed</span>`;
-  return `<span class="pill pill-skip">– N/A</span>`;
+function candleSVG(o,h,l,c){
+  const range=h-l||1,H=70,W=38;
+  const sc=v=>H-((v-l)/range*H);
+  const bT=sc(Math.max(o,c)),bB=sc(Math.min(o,c)),bH=Math.max(bB-bT,2);
+  const col=c>=o?"#22c55e":"#ef4444";
+  return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" style="display:block">
+    <line x1="${W/2}" y1="${sc(h)}" x2="${W/2}" y2="${bT}" stroke="${col}" stroke-width="1.5"/>
+    <rect x="${W/2-7}" y="${bT}" width="14" height="${bH}" fill="${col}" rx="1"/>
+    <line x1="${W/2}" y1="${bB}" x2="${W/2}" y2="${sc(l)}" stroke="#00d4aa" stroke-width="2.5"/>
+  </svg>`;
 }
 
-function rawUrl(category, dateStr) {
-  const [y, m] = dateStr.split("-");
-  return `${REPO_RAW}/data/${category}/${y}/${m}/${dateStr}.csv`;
-}
-
-function fmtDate(iso) {
-  return new Date(iso).toLocaleDateString("en-IN", {
-    day: "2-digit", month: "short", year: "numeric"
-  });
-}
-
-// ─── Main render ──────────────────────────────────────────────
-async function init() {
-  let summary = {}, manifest = {};
-
-  try {
-    const [sr, mr] = await Promise.all([
-      fetch(SUMMARY_URL),
-      fetch(MANIFEST_URL),
-    ]);
-    summary  = sr.ok ? await sr.json() : {};
-    manifest = mr.ok ? await mr.json() : {};
-  } catch (e) {
-    console.error("Failed to load data:", e);
-  }
-
-  document.getElementById("loading").style.display = "none";
-  document.getElementById("main").style.display    = "block";
-
-  const dates     = Object.keys(manifest).sort().reverse();
-  const latestKey = dates[0] || "";
-  const latestVal = manifest[latestKey] || {};
-
-  // ── Stats ──────────────────────────────────────────────────
-  const sg = document.getElementById("stats-grid");
-  const stats = [
-    { val: summary.total_trading_days  || dates.length, lbl: "Trading Days Tracked" },
-    { val: summary.successful_fetches  || "—",          lbl: "Successful Fetches"   },
-    { val: fmtDate(latestKey + "T00:00:00") || "—",     lbl: "Latest Data Date"     },
-    { val: (summary.categories_available || []).length, lbl: "Data Categories"      },
-  ];
-  sg.innerHTML = stats.map(s => `
-    <div class="stat-card">
-      <div class="val">${s.val}</div>
-      <div class="lbl">${s.lbl}</div>
-    </div>
-  `).join("");
-
-  // ── Category cards ─────────────────────────────────────────
-  const latestResults = latestVal.results || {};
-  const cg = document.getElementById("cat-grid");
-  cg.innerHTML = CATEGORIES.map(c => {
-    const ok = latestResults[c.key];
-    const statusHTML = ok === true
-      ? `<span class="cat-status ok">✓ Available</span>`
-      : ok === false
-        ? `<span class="cat-status fail">✗ Failed last fetch</span>`
-        : `<span class="cat-status" style="background:#1c2128;color:var(--muted)">Pending</span>`;
-    return `
-      <div class="cat-card">
-        <div class="cat-header">
-          <span class="cat-icon">${c.icon}</span>
-          <span class="cat-name">${c.name}</span>
-        </div>
-        <div class="cat-desc">${c.desc}</div>
-        ${statusHTML}
-      </div>
-    `;
-  }).join("");
-
-  // ── History table ──────────────────────────────────────────
-  const tbody = document.getElementById("history-body");
-  const recent = dates.slice(0, 30);
-  tbody.innerHTML = recent.map(d => {
-    const v = manifest[d];
-    const r = v.results || {};
-    const fa = v.fetched_at
-      ? new Date(v.fetched_at).toLocaleString("en-IN", { timeZone: "UTC",
-          day:"2-digit", month:"short", hour:"2-digit", minute:"2-digit" }) + " UTC"
-      : "—";
-    return `
-      <tr>
-        <td style="font-weight:600;color:#fff">${d}</td>
-        <td>${pill(r.equity)}</td>
-        <td>${pill(r.fo)}</td>
-        <td>${pill(r.index)}</td>
-        <td>${pill(r.delivery)}</td>
-        <td>${pill(r.corporate_actions)}</td>
-        <td>${pill(r.sme)}</td>
-        <td style="color:var(--muted);font-size:12px">${fa}</td>
-      </tr>
-    `;
-  }).join("");
-
-  // ── API URLs ───────────────────────────────────────────────
-  const apiEl = document.getElementById("api-urls");
-  apiEl.textContent = [
-    "# Equity Bhav Copy",
-    `${REPO_RAW}/data/equity/{YYYY}/{MM}/{YYYY-MM-DD}.csv`,
-    "",
-    "# F&O Bhav Copy",
-    `${REPO_RAW}/data/fo/{YYYY}/{MM}/{YYYY-MM-DD}.csv`,
-    "",
-    "# Index Data",
-    `${REPO_RAW}/data/index/{YYYY}/{MM}/{YYYY-MM-DD}.csv`,
-    "",
-    "# Delivery Data",
-    `${REPO_RAW}/data/delivery/{YYYY}/{MM}/{YYYY-MM-DD}.csv`,
-    "",
-    "# Corporate Actions (daily)",
-    `${REPO_RAW}/data/corporate_actions/{YYYY}/{MM}/{YYYY-MM-DD}.csv`,
-    "",
-    "# Corporate Actions (master — all time)",
-    `${REPO_RAW}/data/corporate_actions/master.csv`,
-  ].join("\n");
-
-  document.getElementById("manifest-url").textContent = MANIFEST_URL;
-
-  // ── Download links for latest ──────────────────────────────
-  const dg = document.getElementById("download-grid");
-  if (latestKey) {
-    dg.innerHTML = CATEGORIES.map(c => {
-      const url = rawUrl(c.key, latestKey);
-      const ok  = latestResults[c.key];
-      if (!ok) return "";
-      return `
-        <div class="cat-card" style="padding:12px 16px;">
-          <div class="cat-header">
-            <span class="cat-icon">${c.icon}</span>
-            <span class="cat-name" style="font-size:13px">${c.name}</span>
+async function loadAlerts(){
+  try{
+    const[sr,br]=await Promise.all([fetch(`${RAW}/data/analysis/pinbar_signals.json`),fetch(`${RAW}/data/analysis/pinbar_backtest.json`)]);
+    const sig=sr.ok?await sr.json():{count:0,alerts:[],signal_date:"–"};
+    const bt=br.ok?await br.json():{};
+    document.getElementById("al-load").style.display="none";
+    document.getElementById("al-body").style.display="block";
+    const wr=bt.win_rate_pct??"–";
+    document.getElementById("iwr").textContent=wr+"%";
+    document.getElementById("al-stats").innerHTML=`
+      <div class="stat"><div class="val gold">${sig.count}</div><div class="lbl">Signals Today</div></div>
+      <div class="stat"><div class="val green">${wr}%</div><div class="lbl">Historical Win Rate</div></div>
+      <div class="stat"><div class="val">${bt.avg_next_return??"–"}%</div><div class="lbl">Avg Next-Day Return</div></div>
+      <div class="stat"><div class="val">${bt.total_signals??"–"}</div><div class="lbl">Total Historical Signals</div></div>`;
+    document.getElementById("al-cnt").textContent=sig.count;
+    document.getElementById("al-date").textContent=sig.signal_date?"Signal date: "+sig.signal_date:"";
+    const grid=document.getElementById("al-cards");
+    if(!sig.alerts||!sig.alerts.length){
+      grid.innerHTML='<div class="no-signal" style="grid-column:1/-1"><div style="font-size:40px;margin-bottom:12px">🔍</div><div style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:8px">No signals today</div><div>No stocks formed the hammer/pin-bar pattern on the latest trading day.</div></div>';
+      return;
+    }
+    grid.innerHTML=sig.alerts.map(a=>`
+      <div class="alert-card ${a.color==="red"?"red-candle":""}">
+        <div class="ac-header">
+          ${candleSVG(a.open,a.high,a.low,a.close)}
+          <div>
+            <div class="ac-sym">${a.symbol}</div>
+            <span class="ac-badge ${a.color==="green"?"badge-green":"badge-red"}">${a.color==="green"?"Bullish":"Bearish"} Hammer</span>
           </div>
-          <div class="cat-desc">${latestKey}</div>
-          <a href="${url}" target="_blank"
-             style="display:inline-block;margin-top:8px;padding:4px 12px;
-                    border-radius:6px;background:var(--accent2);color:#fff;
-                    text-decoration:none;font-size:12px;font-weight:500;">
-            ⬇ Download CSV
-          </a>
+          <div style="margin-left:auto;text-align:right">
+            <div style="font-size:18px;font-weight:700;color:#fff;font-family:'JetBrains Mono',monospace">&#8377;${a.close}</div>
+            <div style="font-size:10px;color:var(--muted)">${a.date}</div>
+          </div>
         </div>
-      `;
-    }).join("");
-  } else {
-    dg.innerHTML = `<p style="color:var(--muted)">No data fetched yet. Run the workflow.</p>`;
+        <div class="ohlc">
+          <div class="ohlc-item"><div class="ohlc-label">Open</div><div class="ohlc-val">&#8377;${a.open}</div></div>
+          <div class="ohlc-item"><div class="ohlc-label">High</div><div class="ohlc-val">&#8377;${a.high}</div></div>
+          <div class="ohlc-item"><div class="ohlc-label">Low</div><div class="ohlc-val">&#8377;${a.low}</div></div>
+          <div class="ohlc-item"><div class="ohlc-label">Body</div><div class="ohlc-val">&#8377;${a.body}</div></div>
+        </div>
+        <div class="wick-ratio-val">&#8595; ${a.lower_wick} lower wick = ${a.wick_ratio}× body ✓</div>
+      </div>`).join("");
+  }catch(e){document.getElementById("al-load").innerHTML='<span style="color:var(--red)">Run the analysis workflow first.</span>';}
+}
+
+async function loadBacktest(){
+  try{
+    const r=await fetch(`${RAW}/data/analysis/pinbar_backtest.json`);
+    if(!r.ok)throw new Error();
+    const bt=await r.json();
+    document.getElementById("bt-load").style.display="none";
+    document.getElementById("bt-body").style.display="block";
+    document.getElementById("bt-stats").innerHTML=`
+      <div class="stat"><div class="val green">${bt.win_rate_pct}%</div><div class="lbl">Win Rate</div></div>
+      <div class="stat"><div class="val">${bt.total_signals}</div><div class="lbl">Total Signals</div></div>
+      <div class="stat"><div class="val ${bt.avg_next_return>=0?"green":"red"}">${bt.avg_next_return}%</div><div class="lbl">Avg Next-Day Return</div></div>
+      <div class="stat"><div class="val green">${bt.avg_win_return}%</div><div class="lbl">Avg Win Return</div></div>
+      <div class="stat"><div class="val red">${bt.avg_loss_return}%</div><div class="lbl">Avg Loss Return</div></div>
+      <div class="stat"><div class="val green">+${bt.max_gain_pct}%</div><div class="lbl">Best Signal</div></div>
+      <div class="stat"><div class="val red">${bt.max_loss_pct}%</div><div class="lbl">Worst Signal</div></div>`;
+    document.getElementById("yr-grid").innerHTML=(bt.by_year||[]).map(y=>`
+      <div class="year-card">
+        <div class="year-title">${y.year}</div>
+        <div class="year-sub">${y.total} signals · ${y.wins} wins</div>
+        <div class="win-bar-track"><div class="win-bar-fill" style="width:${y.win_rate}%"></div></div>
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-size:14px;font-weight:700;color:var(--green)">${y.win_rate}%</span>
+          <span style="font-size:12px;color:${y.avg_return>=0?"var(--green)":"var(--red)"}">${y.avg_return>0?"+":""}${y.avg_return}% avg</span>
+        </div>
+      </div>`).join("");
+    const mkRow=s=>`<tr><td class="sym-cell">${s.symbol}</td><td>${s.date}</td><td class="${(s.next_return||0)>=0?"pos":"neg"}">${(s.next_return||0)>0?"+":""}${f2(s.next_return)}%</td><td>${f2(s.wick_ratio)}x</td><td><span class="ac-badge ${s.color==="green"?"badge-green":"badge-red"}">${s.color}</span></td></tr>`;
+    document.getElementById("tg-body").innerHTML=(bt.top_gains||[]).map(mkRow).join("");
+    document.getElementById("tl-body").innerHTML=(bt.top_losses||[]).map(mkRow).join("");
+  }catch(e){document.getElementById("bt-load").innerHTML='<span style="color:var(--red)">Run \u{1F56F}\uFE0F Pin Bar Analysis workflow first.</span>';}
+}
+
+let hdata=[],hpage=0,hper=50;
+async function loadHistory(){
+  try{
+    const r=await fetch(`${RAW}/data/analysis/pinbar_history.json`);
+    if(!r.ok)throw new Error();
+    hdata=await r.json();hdata.sort((a,b)=>b.date.localeCompare(a.date));
+    document.getElementById("hi-load").style.display="none";
+    document.getElementById("hi-body").style.display="block";
+    renderHist();
+    document.getElementById("hi-search").addEventListener("input",e=>{
+      hpage=0;const q=e.target.value.trim().toUpperCase();
+      renderHist(q?hdata.filter(s=>s.symbol.includes(q)):hdata);
+    });
+  }catch(e){document.getElementById("hi-load").innerHTML='<span style="color:var(--red)">Run analysis workflow first.</span>';}
+}
+function renderHist(data=hdata){
+  document.getElementById("hi-cnt").textContent=data.length;
+  const page=data.slice(hpage*hper,(hpage+1)*hper);
+  document.getElementById("hi-tbl").innerHTML=page.map(s=>`<tr>
+    <td>${s.date}</td><td class="sym-cell">${s.symbol}</td>
+    <td>&#8377;${f2(s.close)}</td><td>&#8377;${f2(s.body)}</td>
+    <td style="color:var(--accent)">&#8377;${f2(s.lower_wick)}</td>
+    <td style="color:var(--accent)">${f2(s.wick_ratio)}x</td>
+    <td class="${s.next_return>=0?"pos":"neg"}">${s.next_return>0?"+":""}${f2(s.next_return)}%</td>
+    <td>${s.positive?'<span style="color:var(--green)">✓ Win</span>':'<span style="color:var(--red)">✗ Loss</span>'}</td>
+  </tr>`).join("");
+  const pages=Math.ceil(data.length/hper);
+  const pag=document.getElementById("hi-pag");pag.innerHTML="";
+  for(let i=0;i<Math.min(pages,15);i++){
+    const b=document.createElement("button");b.textContent=i+1;
+    b.style.cssText=`padding:4px 10px;border-radius:4px;border:1px solid var(--border);background:${i===hpage?"var(--accent)":"var(--card)"};color:${i===hpage?"#000":"var(--text)"};cursor:pointer;font-family:inherit;font-size:12px`;
+    b.onclick=()=>{hpage=i;renderHist(data)};pag.appendChild(b);
   }
 }
 
-init();
+async function loadData(){
+  try{
+    const[mr,sr]=await Promise.all([fetch(`${RAW}/data/manifest.json`),fetch(`${RAW}/data/summary.json`)]);
+    const m=mr.ok?await mr.json():{},s=sr.ok?await sr.json():{};
+    document.getElementById("dp-load").style.display="none";
+    document.getElementById("dp-body").style.display="block";
+    document.getElementById("dp-stats").innerHTML=`
+      <div class="stat"><div class="val">${s.total_trading_days||"–"}</div><div class="lbl">Trading Days</div></div>
+      <div class="stat"><div class="val green">${s.successful_fetches||"–"}</div><div class="lbl">Successful Fetches</div></div>
+      <div class="stat"><div class="val">${s.latest_date||"–"}</div><div class="lbl">Latest Date</div></div>
+      <div class="stat"><div class="val">${(s.categories_available||[]).length}</div><div class="lbl">Data Categories</div></div>`;
+    const dates=Object.keys(m).sort().reverse().slice(0,30);
+    document.getElementById("dp-tbl").innerHTML=dates.map(d=>{const v=m[d];const r=v.results||{};return`<tr><td style="color:#fff;font-weight:600">${d}</td><td>${pill(r.equity)}</td><td>${pill(r.fo)}</td><td>${pill(r.index)}</td><td>${pill(r.delivery)}</td><td>${pill(r.corporate_actions)}</td><td>${pill(r.sme)}</td></tr>`;}).join("");
+    document.getElementById("dp-urls").innerHTML=[
+      `<span style="color:var(--muted)"># Equity OHLCV</span>`,
+      `${RAW}/data/equity/{YYYY}/{MM}/{YYYY-MM-DD}.csv`,
+      `<span style="color:var(--muted)"># Pin Bar Signals (today)</span>`,
+      `${RAW}/data/analysis/pinbar_signals.json`,
+      `<span style="color:var(--muted)"># Backtest Results</span>`,
+      `${RAW}/data/analysis/pinbar_backtest.json`,
+      `<span style="color:var(--muted)"># Full Signal History</span>`,
+      `${RAW}/data/analysis/pinbar_history.json`,
+      `<span style="color:var(--muted)"># Manifest</span>`,
+      `${RAW}/data/manifest.json`,
+    ].map(l=>l.startsWith("<")?l:`<a href="${l}" target="_blank" style="color:var(--accent)">${l}</a>`).join("<br/>");
+  }catch(e){document.getElementById("dp-load").innerHTML='<span style="color:var(--red)">Failed to load.</span>';}
+}
+
+loadAlerts();loadBacktest();loadHistory();loadData();
 </script>
 </body>
 </html>
