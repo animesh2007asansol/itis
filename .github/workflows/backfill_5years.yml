@@ -99,7 +99,7 @@ jobs:
 
       # 1. Checkout scripts only — fast, no data bloat
       - name: Checkout (scripts only)
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           sparse-checkout: scripts/
           sparse-checkout-cone-mode: false
