@@ -1,2 +1,10 @@
+# Core HTTP — Cloudflare bypass
+curl_cffi==0.7.3         # Chrome TLS fingerprint impersonation (primary)
+cloudscraper==1.2.71     # JS-challenge solver (fallback)
+
+# Data
 requests==2.31.0
 pandas==2.2.2
+
+# Yahoo Finance fallback (for when NSE blocks GitHub Actions)
+yfinance==0.2.40
