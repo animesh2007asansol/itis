@@ -195,7 +195,7 @@ def save(df: pd.DataFrame, category: str, d: date, tag: str = "") -> Path:
     name = d.isoformat() + (f"_{tag}" if tag else "") + ".csv"
     path = out / name
     df.columns = df.columns.str.strip()
-    df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+    df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
     df.to_csv(path, index=False)
     log.info(f"  Saved -> {path.relative_to(BASE_DIR)}")
     return path
@@ -210,11 +210,16 @@ def fetch_equity_bhav(d: date, session) -> bool:
     yr  = d.strftime("%Y")
     mon = d.strftime("%b").upper()
 
+    ds_new = d.strftime("%Y%m%d")   # new NSE format: YYYYMMDD
     urls = [
-        # Historical archive path (works for older data ~2020-2024)
+        # Format 1: Old historical path  (works ~2020 – mid 2024)
         f"{NSE_ARCHIVE}/content/historical/EQUITIES/{yr}/{mon}/cm{ds}bhav.csv.zip",
-        # Recent data path (works for ~2025 onwards)
-        f"{NSE_ARCHIVE}/archives/equities/bhavcopy/cm{ds}bhav.csv.zip",
+        # Format 2: Mid-era archives path (no "bhav" suffix in filename)
+        f"{NSE_ARCHIVE}/archives/equities/bhavcopy/cm{ds}.csv.zip",
+        # Format 3: New NSE format post mid-2024 (nsearchives subdomain, YYYYMMDD)
+        f"https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_{ds_new}_F_0000.csv.zip",
+        # Format 4: New NSE format alternate filename
+        f"https://nsearchives.nseindia.com/archives/equities/bhavcopy/cm{ds}.csv.zip",
     ]
 
     for url in urls:
@@ -308,11 +313,16 @@ def fetch_fo_bhav(d: date, session) -> bool:
     yr  = d.strftime("%Y")
     mon = d.strftime("%b").upper()
 
+    ds_new = d.strftime("%Y%m%d")
     for url in [
-        # Historical archive path
+        # Format 1: Old historical path
         f"{NSE_ARCHIVE}/content/historical/DERIVATIVES/{yr}/{mon}/fo{ds}bhav.csv.zip",
-        # Recent data path
-        f"{NSE_ARCHIVE}/archives/derivatives/bhavcopy/fo{ds}bhav.csv.zip",
+        # Format 2: Mid-era archives path
+        f"{NSE_ARCHIVE}/archives/derivatives/bhavcopy/fo{ds}.csv.zip",
+        # Format 3: New NSE format post mid-2024
+        f"https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_{ds_new}_F_0000.csv.zip",
+        # Format 4: New format alternate
+        f"https://nsearchives.nseindia.com/archives/derivatives/bhavcopy/fo{ds}.csv.zip",
     ]:
         raw = download(url, session)
         if raw:
@@ -451,9 +461,16 @@ def fetch_sme_bhav(d: date, session) -> bool:
     ds  = d.strftime("%d%b%Y").upper()
     yr  = d.strftime("%Y")
     mon = d.strftime("%b").upper()
-    url = (f"{NSE_ARCHIVE}/content/historical/EQUITIES/{yr}/{mon}/"
-           f"SME{ds}BHAV.csv.zip")
-    raw = download(url, session)
+    ds_new = d.strftime("%Y%m%d")
+    sme_urls = [
+        f"{NSE_ARCHIVE}/content/historical/EQUITIES/{yr}/{mon}/SME{ds}BHAV.csv.zip",
+        f"https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_SME_0_0_0_{ds_new}_F_0000.csv.zip",
+    ]
+    raw = None
+    for url in sme_urls:
+        raw = download(url, session)
+        if raw:
+            break
     if raw:
         df = zip_to_df(raw)
         if df is not None and not df.empty:
