@@ -29,6 +29,10 @@ on:
         description: 'Force re-download even if data exists'
         required: false
         default: 'false'
+      skip_holidays:
+        description: 'Skip weekend/holiday check? Set true to fetch on any day.'
+        required: false
+        default: 'false'
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -50,7 +54,7 @@ jobs:
     steps:
       # ── 1. Checkout ──────────────────────────────────────────
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -110,6 +114,7 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
           PYTHONUNBUFFERED: '1'
+          NSE_SKIP_HOLIDAYS: ${{ github.event.inputs.skip_holidays || 'false' }}
 
       # ── 7. Commit & push ─────────────────────────────────────
       - name: Commit and push new data
