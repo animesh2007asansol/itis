@@ -154,6 +154,7 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
           PYTHONUNBUFFERED: '1'
+          NSE_SKIP_WARMUP: 'true'
 
       # 6. Show what we got
       - name: Count results
