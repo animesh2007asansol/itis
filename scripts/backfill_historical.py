@@ -33,7 +33,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 BASE_DIR   = SCRIPT_DIR.parent
 sys.path.insert(0, str(SCRIPT_DIR))
 
-from fetch_nse_data import run, build_session, is_market_holiday, DATA_DIR
+from fetch_nse_data import run, build_session, is_holiday as is_market_holiday, DATA_DIR
 
 # ── logging ───────────────────────────────────────────────────
 logging.basicConfig(
