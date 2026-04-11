@@ -98,15 +98,19 @@ def build_session():
             s, name = factory()
             log.info(f"  HTTP engine: {name}")
             # Warm up — seeds NSE cookies
-            try:
-                r = s.get(NSE_WWW, timeout=20)
-                log.info(f"  Warm-up {NSE_WWW} → {r.status_code}")
-                time.sleep(random.uniform(2, 4))
-                r2 = s.get(f"{NSE_WWW}/market-data/live-equity-market", timeout=20)
-                log.info(f"  Warm-up market-data → {r2.status_code}")
-                time.sleep(random.uniform(1, 2))
-            except Exception as e:
-                log.warning(f"  Warm-up error (non-fatal): {e}")
+            # Skip in backfill mode (session reused across dates)
+            if os.environ.get("NSE_SKIP_WARMUP") != "true":
+                try:
+                    r = s.get(NSE_WWW, timeout=20)
+                    log.info(f"  Warm-up {NSE_WWW} -> {r.status_code}")
+                    time.sleep(random.uniform(1, 2))
+                    r2 = s.get(f"{NSE_WWW}/market-data/live-equity-market", timeout=20)
+                    log.info(f"  Warm-up market-data -> {r2.status_code}")
+                    time.sleep(random.uniform(0.5, 1))
+                except Exception as e:
+                    log.warning(f"  Warm-up error (non-fatal): {e}")
+            else:
+                log.info("  Warm-up skipped (NSE_SKIP_WARMUP=true)")
             return s, name
         except ImportError:
             continue
@@ -117,7 +121,7 @@ def build_session():
     raise RuntimeError("No HTTP engine available. Install curl_cffi or cloudscraper.")
 
 
-def download(url: str, session, retries: int = 6) -> Optional[bytes]:
+def download(url: str, session, retries: int = 3) -> Optional[bytes]:
     """Download URL with retries. Returns bytes or None."""
     for attempt in range(1, retries + 1):
         try:
@@ -151,7 +155,7 @@ def download(url: str, session, retries: int = 6) -> Optional[bytes]:
         except Exception as exc:
             log.warning(f"  Error: {exc}")
 
-        wait = (attempt * 8) + random.uniform(0, 4)
+        wait = (attempt * 4) + random.uniform(0, 2)
         log.info(f"  Sleeping {wait:.1f}s...")
         time.sleep(wait)
 
@@ -208,7 +212,6 @@ def fetch_equity_bhav(d: date, session) -> bool:
 
     urls = [
         f"{NSE_ARCHIVE}/content/historical/EQUITIES/{yr}/{mon}/cm{ds}bhav.csv.zip",
-        f"https://www1.nseindia.com/content/historical/EQUITIES/{yr}/{mon}/cm{ds}bhav.csv.zip",
     ]
 
     for url in urls:
@@ -304,7 +307,6 @@ def fetch_fo_bhav(d: date, session) -> bool:
 
     for url in [
         f"{NSE_ARCHIVE}/content/historical/DERIVATIVES/{yr}/{mon}/fo{ds}bhav.csv.zip",
-        f"https://www1.nseindia.com/content/historical/DERIVATIVES/{yr}/{mon}/fo{ds}bhav.csv.zip",
     ]:
         raw = download(url, session)
         if raw:
