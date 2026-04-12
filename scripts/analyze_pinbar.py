@@ -30,6 +30,23 @@ from itertools import product
 import pandas as pd
 import numpy as np
 
+class SafeEncoder(json.JSONEncoder):
+    """Handles date, numpy int/float types that json.dumps chokes on."""
+    def default(self, obj):
+        if isinstance(obj, (date, datetime)):
+            return str(obj)
+        if isinstance(obj, (np.integer,)):
+            return int(obj)
+        if isinstance(obj, (np.floating,)):
+            return float(obj)
+        if isinstance(obj, np.bool_):
+            return bool(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        if pd.isna(obj):
+            return None
+        return super().default(obj)
+
 warnings.filterwarnings("ignore")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -160,13 +177,13 @@ def build_features(master: pd.DataFrame, delivery: pd.DataFrame) -> pd.DataFrame
 
         # Next-day return
         grp["NEXT_CLOSE"]  = c.shift(-1)
-        grp["NEXT_DATE"]   = grp["DATE"].shift(-1)
+        grp["NEXT_DATE"]   = grp["DATE"].shift(-1).astype(str)   # str avoids date serialization issues
         grp["NEXT_RETURN"] = (grp["NEXT_CLOSE"] - c) / c * 100
         grp["POSITIVE"]    = grp["NEXT_RETURN"] > 0
 
         # Days gap check (must be actual next trading day)
         grp["NEXT_DATE_GAP"] = (
-            pd.to_datetime(grp["NEXT_DATE"]) - pd.to_datetime(grp["DATE"])
+            pd.to_datetime(grp["NEXT_DATE"], errors="coerce") - pd.to_datetime(grp["DATE"].astype(str))
         ).dt.days
 
         dfs.append(grp)
@@ -432,7 +449,7 @@ def main():
 
     # Save full optimizer rankings
     (OUT_DIR / "optimizer_results.json").write_text(
-        json.dumps(results[:200], indent=2)   # top 200
+        json.dumps(results[:200], indent=2, cls=SafeEncoder)   # top 200
     )
     log.info(f"  Optimizer results saved ({len(results)} combos)")
 
@@ -446,16 +463,16 @@ def main():
     # Full backtest with best params
     bt = full_backtest(features, best_params)
     (OUT_DIR / "pinbar_backtest.json").write_text(
-        json.dumps(bt["stats"], indent=2)
+        json.dumps(bt["stats"], indent=2, cls=SafeEncoder)
     )
     (OUT_DIR / "pinbar_history.json").write_text(
-        json.dumps(bt["history"], indent=2)
+        json.dumps(bt["history"], indent=2, cls=SafeEncoder)
     )
 
     # Today's alerts
     alerts = todays_alerts(features, best_params)
     (OUT_DIR / "pinbar_signals.json").write_text(
-        json.dumps(alerts, indent=2)
+        json.dumps(alerts, indent=2, cls=SafeEncoder)
     )
 
     log.info("\n=== FINAL SUMMARY ===")
