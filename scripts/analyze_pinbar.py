@@ -1,32 +1,40 @@
 #!/usr/bin/env python3
 """
-Pin Bar (Hammer) Pattern Analyzer & Backtester
-================================================
-Pattern definition:
-  - Lower wick  >= 2 × body  (|close - open|)
-  - Upper wick  <= 0.25 × body
-  - Body > 0 (not a doji)
+Pin Bar Pattern OPTIMIZER
+===========================
+Goal: Find the combination of filters that gives the highest win rate
+on next-day positive close.
 
-For each signal:
-  - Next-day return = (next_close - signal_close) / signal_close × 100
-  - Positive = next_day return > 0
+Filters tested in combination:
+  1. wick_ratio       : lower_wick / body  (2x, 3x, 4x, 5x)
+  2. upper_wick_pct   : upper_wick / body  (25%, 15%, 10%, 5%)
+  3. min_prev_red     : previous N days must be red closes (0,1,2,3)
+  4. trend_filter     : close < N-day SMA (stock in downtrend) (False,10,20)
+  5. volume_filter    : volume > N × 20-day avg volume (False,1.5,2.0,2.5)
+  6. delivery_filter  : delivery% > threshold (False,40,50,60)
+  7. min_price        : ignore stocks below Rs X (0, 50, 100)
+  8. min_signals      : only show combos with >= N historical signals (10,20,50)
 
-Outputs:
-  data/analysis/pinbar_backtest.json   ← historical win-rate stats
-  data/analysis/pinbar_signals.json    ← today's signals (live alerts)
-  data/analysis/pinbar_history.json    ← all past signals with outcomes
+Output:
+  data/analysis/optimizer_results.json   — all tested combos ranked by win rate
+  data/analysis/pinbar_signals.json      — today's alerts using BEST combo
+  data/analysis/pinbar_backtest.json     — best combo backtest stats
+  data/analysis/pinbar_history.json      — all signals under best combo
 """
 
-import json
-import sys
-import logging
-from datetime import date, datetime, timedelta
+import json, sys, logging, warnings
+from datetime import datetime, date, timedelta
 from pathlib import Path
-import pandas as pd
+from itertools import product
 
-BASE_DIR  = Path(__file__).resolve().parent.parent
-DATA_DIR  = BASE_DIR / "data"
-OUT_DIR   = DATA_DIR / "analysis"
+import pandas as pd
+import numpy as np
+
+warnings.filterwarnings("ignore")
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
+OUT_DIR  = DATA_DIR / "analysis"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 logging.basicConfig(
@@ -34,261 +42,380 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[logging.StreamHandler(sys.stdout)],
 )
-log = logging.getLogger("pinbar")
-
-# ─────────────────────────────────────────────
-# PATTERN DETECTION
-# ─────────────────────────────────────────────
-
-def is_pin_bar(row: pd.Series) -> bool:
-    """
-    Returns True if the candle matches the hammer/pin-bar pattern:
-      lower_wick >= 2 × body   AND   upper_wick <= 0.25 × body
-    """
-    o, h, l, c = row["OPEN"], row["HIGH"], row["LOW"], row["CLOSE"]
-
-    body       = abs(c - o)
-    if body == 0:
-        return False   # doji — skip
-
-    upper_wick = h - max(o, c)
-    lower_wick = min(o, c) - l
-
-    return (lower_wick >= 2 * body) and (upper_wick <= 0.25 * body)
-
-
-def candle_color(row: pd.Series) -> str:
-    return "green" if row["CLOSE"] >= row["OPEN"] else "red"
+log = logging.getLogger("optimizer")
 
 
 # ─────────────────────────────────────────────
 # DATA LOADING
 # ─────────────────────────────────────────────
 
-def load_all_equity() -> pd.DataFrame:
-    """
-    Load all equity CSV files into a single DataFrame.
-    Columns kept: DATE, SYMBOL, OPEN, HIGH, LOW, CLOSE, TOTTRDQTY
-    """
-    log.info("Loading all equity CSV files...")
+def load_equity() -> pd.DataFrame:
+    log.info("Loading equity data...")
     frames = []
-    eq_dir = DATA_DIR / "equity"
-
-    for csv_path in sorted(eq_dir.rglob("*.csv")):
+    for csv_path in sorted((DATA_DIR / "equity").rglob("*.csv")):
         try:
             df = pd.read_csv(csv_path)
             df.columns = df.columns.str.strip()
-
-            # Normalise column names across NSE format versions
             col_map = {}
-            for col in df.columns:
-                cu = col.upper().strip()
-                if cu in ("TIMESTAMP", "DATE", "DATE2"):
-                    col_map[col] = "DATE"
-                elif cu == "TOTTRDQTY":
-                    col_map[col] = "VOLUME"
-                elif cu == "TOTTRDVAL":
-                    col_map[col] = "TURNOVER"
+            for c in df.columns:
+                cu = c.upper().strip()
+                if cu in ("TIMESTAMP","DATE","DATE2"): col_map[c]="DATE"
+                elif cu == "TOTTRDQTY":               col_map[c]="VOLUME"
             df = df.rename(columns=col_map)
-
-            needed = ["SYMBOL", "OPEN", "HIGH", "LOW", "CLOSE"]
-            if not all(c in df.columns for c in needed):
-                continue
-
-            # Add date from filename if not in CSV
+            needed = ["SYMBOL","OPEN","HIGH","LOW","CLOSE"]
+            if not all(c in df.columns for c in needed): continue
             if "DATE" not in df.columns:
-                date_str = csv_path.stem[:10]   # YYYY-MM-DD
-                df["DATE"] = date_str
-
-            df = df[["DATE", "SYMBOL", "OPEN", "HIGH", "LOW", "CLOSE"]
-                    + (["VOLUME"] if "VOLUME" in df.columns else [])
-                    + (["SERIES"] if "SERIES" in df.columns else [])]
-
-            frames.append(df)
-        except Exception as e:
-            log.warning(f"  Skip {csv_path.name}: {e}")
+                df["DATE"] = csv_path.stem[:10]
+            keep = needed + ["DATE"]
+            if "VOLUME" in df.columns: keep.append("VOLUME")
+            if "SERIES" in df.columns: keep.append("SERIES")
+            frames.append(df[keep])
+        except Exception:
+            continue
 
     if not frames:
-        log.error("No equity data found!")
-        return pd.DataFrame()
+        log.error("No equity data!")
+        sys.exit(1)
 
     master = pd.concat(frames, ignore_index=True)
     master["DATE"] = pd.to_datetime(master["DATE"], errors="coerce").dt.date
     master = master.dropna(subset=["DATE"])
 
-    # Keep EQ series only if column exists
     if "SERIES" in master.columns:
         master = master[master["SERIES"].str.strip() == "EQ"]
 
-    for col in ["OPEN", "HIGH", "LOW", "CLOSE"]:
-        master[col] = pd.to_numeric(master[col], errors="coerce")
+    for c in ["OPEN","HIGH","LOW","CLOSE"]:
+        master[c] = pd.to_numeric(master[c], errors="coerce")
+    if "VOLUME" in master.columns:
+        master["VOLUME"] = pd.to_numeric(master["VOLUME"], errors="coerce")
 
-    master = master.dropna(subset=["OPEN", "HIGH", "LOW", "CLOSE"])
-    master = master.sort_values(["SYMBOL", "DATE"]).reset_index(drop=True)
-
-    log.info(f"  Loaded {len(master):,} rows, "
-             f"{master['SYMBOL'].nunique()} symbols, "
+    master = master.dropna(subset=["OPEN","HIGH","LOW","CLOSE"])
+    master = master.sort_values(["SYMBOL","DATE"]).reset_index(drop=True)
+    log.info(f"  {len(master):,} rows | {master['SYMBOL'].nunique()} symbols | "
              f"{master['DATE'].min()} → {master['DATE'].max()}")
     return master
 
 
-# ─────────────────────────────────────────────
-# BACKTESTING
-# ─────────────────────────────────────────────
-
-def run_backtest(master: pd.DataFrame) -> dict:
-    """
-    For every symbol, scan all historical dates for pin-bar signals.
-    Record the next-day outcome (positive / negative).
-    """
-    log.info("Running backtest...")
-
-    signals = []
-    symbols = master["SYMBOL"].unique()
-
-    for sym in symbols:
-        df = master[master["SYMBOL"] == sym].copy().reset_index(drop=True)
-        if len(df) < 2:
+def load_delivery() -> pd.DataFrame:
+    """Load delivery % per symbol per date."""
+    frames = []
+    for csv_path in sorted((DATA_DIR / "delivery").rglob("*.csv")):
+        try:
+            df = pd.read_csv(csv_path)
+            df.columns = df.columns.str.strip().str.upper()
+            if "DELIV_PER" not in df.columns: continue
+            if "DATE" not in df.columns:
+                df["DATE"] = csv_path.stem[:10]
+            if "NAME" in df.columns and "SYMBOL" not in df.columns:
+                df = df.rename(columns={"NAME":"SYMBOL"})
+            if "SYMBOL" not in df.columns: continue
+            df["DATE"]     = pd.to_datetime(df["DATE"], errors="coerce").dt.date
+            df["DELIV_PER"] = pd.to_numeric(df["DELIV_PER"], errors="coerce")
+            frames.append(df[["DATE","SYMBOL","DELIV_PER"]].dropna())
+        except Exception:
             continue
+    if not frames:
+        return pd.DataFrame(columns=["DATE","SYMBOL","DELIV_PER"])
+    return pd.concat(frames, ignore_index=True)
 
-        for i in range(len(df) - 1):   # -1 because we need next day
-            row      = df.iloc[i]
-            next_row = df.iloc[i + 1]
 
-            if not is_pin_bar(row):
-                continue
+# ─────────────────────────────────────────────
+# FEATURE ENGINEERING
+# ─────────────────────────────────────────────
 
-            # Next-day must be the actual next trading day (within 5 cal days)
-            days_gap = (next_row["DATE"] - row["DATE"]).days
-            if days_gap > 5:
-                continue   # data gap, skip
+def build_features(master: pd.DataFrame, delivery: pd.DataFrame) -> pd.DataFrame:
+    """Add all derived columns needed for filtering."""
+    log.info("Building features...")
+    dfs = []
 
-            next_ret = (next_row["CLOSE"] - row["CLOSE"]) / row["CLOSE"] * 100
-            body     = abs(row["CLOSE"] - row["OPEN"])
-            upper_w  = row["HIGH"] - max(row["OPEN"], row["CLOSE"])
-            lower_w  = min(row["OPEN"], row["CLOSE"]) - row["LOW"]
+    for sym, grp in master.groupby("SYMBOL"):
+        grp = grp.copy().sort_values("DATE").reset_index(drop=True)
+        n   = len(grp)
+        if n < 25: continue
 
-            signals.append({
-                "symbol":       sym,
-                "date":         str(row["DATE"]),
-                "open":         round(float(row["OPEN"]),  2),
-                "high":         round(float(row["HIGH"]),  2),
-                "low":          round(float(row["LOW"]),   2),
-                "close":        round(float(row["CLOSE"]), 2),
-                "body":         round(float(body),    2),
-                "lower_wick":   round(float(lower_w), 2),
-                "upper_wick":   round(float(upper_w), 2),
-                "wick_ratio":   round(float(lower_w / body), 2),
-                "color":        candle_color(row),
-                "next_date":    str(next_row["DATE"]),
-                "next_close":   round(float(next_row["CLOSE"]), 2),
-                "next_return":  round(float(next_ret), 2),
-                "positive":     bool(next_ret > 0),
-            })
+        o, h, l, c = grp.OPEN, grp.HIGH, grp.LOW, grp.CLOSE
 
-    if not signals:
-        log.warning("No pin-bar signals found in historical data.")
-        return {"signals": [], "stats": {}}
+        grp["BODY"]        = (c - o).abs()
+        grp["UPPER_WICK"]  = h - pd.concat([o,c],axis=1).max(axis=1)
+        grp["LOWER_WICK"]  = pd.concat([o,c],axis=1).min(axis=1) - l
+        grp["WICK_RATIO"]  = grp["LOWER_WICK"] / grp["BODY"].replace(0, np.nan)
+        grp["UPPER_PCT"]   = grp["UPPER_WICK"]  / grp["BODY"].replace(0, np.nan)
 
-    df_sig = pd.DataFrame(signals)
+        # Is today red (close < open)?
+        grp["IS_RED"] = (c < o).astype(int)
+        grp["PREV1_RED"] = grp["IS_RED"].shift(1)
+        grp["PREV2_RED"] = grp["IS_RED"].shift(2)
+        grp["PREV3_RED"] = grp["IS_RED"].shift(3)
 
-    # ── Overall stats ──────────────────────────────────────────
-    total       = len(df_sig)
-    positive    = df_sig["positive"].sum()
-    win_rate    = round(positive / total * 100, 1)
-    avg_ret     = round(df_sig["next_return"].mean(), 2)
-    avg_ret_win = round(df_sig[df_sig["positive"]]["next_return"].mean(), 2)
-    avg_ret_los = round(df_sig[~df_sig["positive"]]["next_return"].mean(), 2)
-    max_gain    = round(df_sig["next_return"].max(), 2)
-    max_loss    = round(df_sig["next_return"].min(), 2)
+        # SMAs for trend
+        grp["SMA10"]  = c.rolling(10).mean()
+        grp["SMA20"]  = c.rolling(20).mean()
 
-    # ── By year ───────────────────────────────────────────────
-    df_sig["year"] = pd.to_datetime(df_sig["date"]).dt.year
-    by_year = (
-        df_sig.groupby("year")
-        .agg(
-            total=("positive", "count"),
-            wins=("positive", "sum"),
-            avg_return=("next_return", "mean"),
+        # Volume vs 20-day avg
+        if "VOLUME" in grp.columns:
+            grp["VOL_AVG20"] = grp["VOLUME"].rolling(20).mean()
+            grp["VOL_RATIO"] = grp["VOLUME"] / grp["VOL_AVG20"].replace(0, np.nan)
+        else:
+            grp["VOL_RATIO"] = np.nan
+
+        # Next-day return
+        grp["NEXT_CLOSE"]  = c.shift(-1)
+        grp["NEXT_DATE"]   = grp["DATE"].shift(-1)
+        grp["NEXT_RETURN"] = (grp["NEXT_CLOSE"] - c) / c * 100
+        grp["POSITIVE"]    = grp["NEXT_RETURN"] > 0
+
+        # Days gap check (must be actual next trading day)
+        grp["NEXT_DATE_GAP"] = (
+            pd.to_datetime(grp["NEXT_DATE"]) - pd.to_datetime(grp["DATE"])
+        ).dt.days
+
+        dfs.append(grp)
+
+    combined = pd.concat(dfs, ignore_index=True)
+
+    # Merge delivery %
+    if not delivery.empty:
+        combined = combined.merge(
+            delivery.rename(columns={"DELIV_PER":"DELIV_PCT"}),
+            on=["DATE","SYMBOL"], how="left"
         )
-        .round(2)
-        .reset_index()
-    )
-    by_year["win_rate"] = (by_year["wins"] / by_year["total"] * 100).round(1)
+    else:
+        combined["DELIV_PCT"] = np.nan
 
-    # ── Top performing signals ─────────────────────────────────
-    top_gains = (
-        df_sig.nlargest(10, "next_return")
-        [["symbol","date","next_return","wick_ratio","color"]]
-        .to_dict("records")
-    )
-    top_losses = (
-        df_sig.nsmallest(10, "next_return")
-        [["symbol","date","next_return","wick_ratio","color"]]
-        .to_dict("records")
-    )
+    log.info(f"  Features built: {len(combined):,} rows")
+    return combined
 
-    stats = {
-        "total_signals":   int(total),
-        "positive_signals":int(positive),
-        "win_rate_pct":    win_rate,
-        "avg_next_return": avg_ret,
-        "avg_win_return":  avg_ret_win,
-        "avg_loss_return": avg_ret_los,
-        "max_gain_pct":    max_gain,
-        "max_loss_pct":    max_loss,
-        "by_year":         by_year.to_dict("records"),
-        "top_gains":       top_gains,
-        "top_losses":      top_losses,
-        "generated_at":    datetime.utcnow().isoformat() + "Z",
+
+# ─────────────────────────────────────────────
+# SIGNAL DETECTION WITH FILTERS
+# ─────────────────────────────────────────────
+
+def detect_signals(df: pd.DataFrame, params: dict) -> pd.DataFrame:
+    """Apply all filters and return matching rows (excluding last row = no next day)."""
+    mask = pd.Series(True, index=df.index)
+
+    # Base pattern
+    mask &= df["BODY"] > 0
+    mask &= df["WICK_RATIO"]  >= params["wick_ratio"]
+    mask &= df["UPPER_PCT"]   <= params["upper_wick_pct"]
+
+    # Min price filter (removes penny stocks)
+    mask &= df["CLOSE"] >= params["min_price"]
+
+    # Previous red days
+    if params["min_prev_red"] >= 1: mask &= df["PREV1_RED"] == 1
+    if params["min_prev_red"] >= 2: mask &= df["PREV2_RED"] == 1
+    if params["min_prev_red"] >= 3: mask &= df["PREV3_RED"] == 1
+
+    # Trend filter: stock must be in downtrend (close < SMA)
+    if params["trend_filter"] == 10:
+        mask &= df["CLOSE"] < df["SMA10"]
+    elif params["trend_filter"] == 20:
+        mask &= df["CLOSE"] < df["SMA20"]
+
+    # Volume filter
+    if params["volume_filter"]:
+        mask &= df["VOL_RATIO"] >= params["volume_filter"]
+
+    # Delivery filter
+    if params["delivery_filter"]:
+        mask &= df["DELIV_PCT"] >= params["delivery_filter"]
+
+    # Must have valid next day (not too far gap)
+    mask &= df["NEXT_DATE_GAP"].between(1, 5)
+    mask &= df["NEXT_CLOSE"].notna()
+
+    return df[mask].copy()
+
+
+# ─────────────────────────────────────────────
+# OPTIMIZER
+# ─────────────────────────────────────────────
+
+PARAM_GRID = {
+    "wick_ratio":      [2.0, 2.5, 3.0, 4.0, 5.0],
+    "upper_wick_pct":  [0.25, 0.15, 0.10, 0.05],
+    "min_prev_red":    [0, 1, 2, 3],
+    "trend_filter":    [False, 10, 20],
+    "volume_filter":   [False, 1.5, 2.0, 2.5],
+    "delivery_filter": [False, 40, 50, 60],
+    "min_price":       [50, 100],
+}
+
+MIN_SIGNALS = 20   # ignore combos with fewer than this many signals
+
+
+def run_optimizer(features: pd.DataFrame) -> list:
+    log.info("Running optimizer (this takes a few minutes)...")
+
+    keys   = list(PARAM_GRID.keys())
+    values = list(PARAM_GRID.values())
+    combos = list(product(*values))
+    total  = len(combos)
+    log.info(f"  Testing {total:,} parameter combinations...")
+
+    results = []
+    for i, combo in enumerate(combos):
+        params = dict(zip(keys, combo))
+        sigs   = detect_signals(features, params)
+        n      = len(sigs)
+        if n < MIN_SIGNALS:
+            continue
+        wins    = sigs["POSITIVE"].sum()
+        wr      = round(wins / n * 100, 1)
+        avg_ret = round(sigs["NEXT_RETURN"].mean(), 2)
+        results.append({
+            **params,
+            "total_signals": int(n),
+            "wins":          int(wins),
+            "win_rate":      wr,
+            "avg_return":    avg_ret,
+        })
+        if (i+1) % 500 == 0:
+            log.info(f"  Progress: {i+1}/{total} ({(i+1)/total*100:.0f}%)")
+
+    results.sort(key=lambda x: (x["win_rate"], x["avg_return"]), reverse=True)
+    log.info(f"  Combos with >={MIN_SIGNALS} signals: {len(results)}")
+    if results:
+        best = results[0]
+        log.info(f"  BEST: win_rate={best['win_rate']}% | "
+                 f"signals={best['total_signals']} | "
+                 f"avg_return={best['avg_return']}%")
+        log.info(f"  BEST params: {best}")
+    return results
+
+
+# ─────────────────────────────────────────────
+# FULL BACKTEST STATS FOR BEST PARAMS
+# ─────────────────────────────────────────────
+
+def full_backtest(features: pd.DataFrame, params: dict) -> dict:
+    sigs = detect_signals(features, params)
+    if sigs.empty:
+        return {}
+
+    total    = len(sigs)
+    wins     = int(sigs["POSITIVE"].sum())
+    wr       = round(wins / total * 100, 1)
+    avg_ret  = round(sigs["NEXT_RETURN"].mean(), 2)
+    avg_win  = round(sigs[sigs["POSITIVE"]]["NEXT_RETURN"].mean(), 2)
+    avg_loss = round(sigs[~sigs["POSITIVE"]]["NEXT_RETURN"].mean(), 2)
+
+    sigs["year"] = pd.to_datetime(sigs["DATE"]).dt.year
+    by_year = (
+        sigs.groupby("year")
+        .agg(total=("POSITIVE","count"), wins=("POSITIVE","sum"),
+             avg_return=("NEXT_RETURN","mean"))
+        .round(2).reset_index()
+    )
+    by_year["win_rate"] = (by_year["wins"]/by_year["total"]*100).round(1)
+
+    top_gains  = (sigs.nlargest(10,"NEXT_RETURN")
+                  [["SYMBOL","DATE","NEXT_RETURN","WICK_RATIO","BODY"]]
+                  .rename(columns={"SYMBOL":"symbol","DATE":"date",
+                                   "NEXT_RETURN":"next_return",
+                                   "WICK_RATIO":"wick_ratio","BODY":"body"})
+                  .assign(color=lambda d: "green")
+                  .to_dict("records"))
+
+    top_losses = (sigs.nsmallest(10,"NEXT_RETURN")
+                  [["SYMBOL","DATE","NEXT_RETURN","WICK_RATIO","BODY"]]
+                  .rename(columns={"SYMBOL":"symbol","DATE":"date",
+                                   "NEXT_RETURN":"next_return",
+                                   "WICK_RATIO":"wick_ratio","BODY":"body"})
+                  .assign(color=lambda d: "red")
+                  .to_dict("records"))
+
+    # History list
+    history = []
+    for _, r in sigs.iterrows():
+        history.append({
+            "symbol":      str(r["SYMBOL"]),
+            "date":        str(r["DATE"]),
+            "open":        round(float(r["OPEN"]),  2),
+            "high":        round(float(r["HIGH"]),  2),
+            "low":         round(float(r["LOW"]),   2),
+            "close":       round(float(r["CLOSE"]), 2),
+            "body":        round(float(r["BODY"]),  2),
+            "lower_wick":  round(float(r["LOWER_WICK"]), 2),
+            "upper_wick":  round(float(r["UPPER_WICK"]), 2),
+            "wick_ratio":  round(float(r["WICK_RATIO"]), 2),
+            "color":       "green" if r["CLOSE"] >= r["OPEN"] else "red",
+            "next_date":   str(r["NEXT_DATE"]) if pd.notna(r["NEXT_DATE"]) else "",
+            "next_close":  round(float(r["NEXT_CLOSE"]), 2) if pd.notna(r["NEXT_CLOSE"]) else 0,
+            "next_return": round(float(r["NEXT_RETURN"]), 2),
+            "positive":    bool(r["POSITIVE"]),
+        })
+
+    return {
+        "stats": {
+            "total_signals":    total,
+            "positive_signals": wins,
+            "win_rate_pct":     wr,
+            "avg_next_return":  avg_ret,
+            "avg_win_return":   avg_win,
+            "avg_loss_return":  avg_loss,
+            "max_gain_pct":     round(float(sigs["NEXT_RETURN"].max()), 2),
+            "max_loss_pct":     round(float(sigs["NEXT_RETURN"].min()), 2),
+            "by_year":          by_year.to_dict("records"),
+            "top_gains":        top_gains,
+            "top_losses":       top_losses,
+            "best_params":      {k:v for k,v in params.items()
+                                 if k not in ("min_signals",)},
+            "generated_at":     datetime.utcnow().isoformat() + "Z",
+        },
+        "history": history,
     }
-
-    log.info(f"  Signals: {total}, Win rate: {win_rate}%, Avg return: {avg_ret}%")
-    return {"stats": stats, "signals": signals}
 
 
 # ─────────────────────────────────────────────
 # TODAY'S LIVE ALERTS
 # ─────────────────────────────────────────────
 
-def find_todays_signals(master: pd.DataFrame) -> list:
-    """
-    Find pin-bar signals that formed on the latest available trading date.
-    These are stocks to watch for next-day positive move.
-    """
-    if master.empty:
-        return []
+def todays_alerts(features: pd.DataFrame, params: dict) -> dict:
+    latest = features["DATE"].max()
+    today  = features[features["DATE"] == latest].copy()
 
-    latest_date = master["DATE"].max()
-    log.info(f"Scanning for signals on latest date: {latest_date}")
+    # For live alerts we don't require next_close (it's future)
+    mask = pd.Series(True, index=today.index)
+    mask &= today["BODY"] > 0
+    mask &= today["WICK_RATIO"]  >= params["wick_ratio"]
+    mask &= today["UPPER_PCT"]   <= params["upper_wick_pct"]
+    mask &= today["CLOSE"]       >= params["min_price"]
+    if params["min_prev_red"] >= 1: mask &= today["PREV1_RED"] == 1
+    if params["min_prev_red"] >= 2: mask &= today["PREV2_RED"] == 1
+    if params["min_prev_red"] >= 3: mask &= today["PREV3_RED"] == 1
+    if params["trend_filter"] == 10:  mask &= today["CLOSE"] < today["SMA10"]
+    if params["trend_filter"] == 20:  mask &= today["CLOSE"] < today["SMA20"]
+    if params["volume_filter"]:       mask &= today["VOL_RATIO"] >= params["volume_filter"]
+    if params["delivery_filter"]:     mask &= today["DELIV_PCT"] >= params["delivery_filter"]
 
-    today_df = master[master["DATE"] == latest_date]
-    alerts   = []
-
-    for _, row in today_df.iterrows():
-        if not is_pin_bar(row):
-            continue
-
-        body    = abs(row["CLOSE"] - row["OPEN"])
-        upper_w = row["HIGH"] - max(row["OPEN"], row["CLOSE"])
-        lower_w = min(row["OPEN"], row["CLOSE"]) - row["LOW"]
-
+    alerts_df = today[mask]
+    alerts = []
+    for _, r in alerts_df.iterrows():
         alerts.append({
-            "symbol":     row["SYMBOL"],
-            "date":       str(latest_date),
-            "open":       round(float(row["OPEN"]),  2),
-            "high":       round(float(row["HIGH"]),  2),
-            "low":        round(float(row["LOW"]),   2),
-            "close":      round(float(row["CLOSE"]), 2),
-            "body":       round(float(body),    2),
-            "lower_wick": round(float(lower_w), 2),
-            "upper_wick": round(float(upper_w), 2),
-            "wick_ratio": round(float(lower_w / body), 2),
-            "color":      candle_color(row),
+            "symbol":      str(r["SYMBOL"]),
+            "date":        str(latest),
+            "open":        round(float(r["OPEN"]),  2),
+            "high":        round(float(r["HIGH"]),  2),
+            "low":         round(float(r["LOW"]),   2),
+            "close":       round(float(r["CLOSE"]), 2),
+            "body":        round(float(r["BODY"]),  2),
+            "lower_wick":  round(float(r["LOWER_WICK"]), 2),
+            "upper_wick":  round(float(r["UPPER_WICK"]), 2),
+            "wick_ratio":  round(float(r["WICK_RATIO"]), 2),
+            "color":       "green" if r["CLOSE"] >= r["OPEN"] else "red",
+            "vol_ratio":   round(float(r["VOL_RATIO"]), 2) if pd.notna(r.get("VOL_RATIO")) else None,
+            "deliv_pct":   round(float(r["DELIV_PCT"]), 1) if pd.notna(r.get("DELIV_PCT")) else None,
         })
 
-    log.info(f"  Found {len(alerts)} pin-bar signals today")
-    return alerts
+    log.info(f"  Today's signals ({latest}): {len(alerts)}")
+    return {
+        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "signal_date":  str(latest),
+        "count":        len(alerts),
+        "alerts":       alerts,
+    }
 
 
 # ─────────────────────────────────────────────
@@ -296,40 +423,47 @@ def find_todays_signals(master: pd.DataFrame) -> list:
 # ─────────────────────────────────────────────
 
 def main():
-    master = load_all_equity()
-    if master.empty:
+    master   = load_equity()
+    delivery = load_delivery()
+    features = build_features(master, delivery)
+
+    # Run optimizer
+    results  = run_optimizer(features)
+
+    # Save full optimizer rankings
+    (OUT_DIR / "optimizer_results.json").write_text(
+        json.dumps(results[:200], indent=2)   # top 200
+    )
+    log.info(f"  Optimizer results saved ({len(results)} combos)")
+
+    if not results:
+        log.error("No valid parameter combinations found!")
         sys.exit(1)
 
-    # ── Backtest ───────────────────────────────────────────────
-    result  = run_backtest(master)
-    stats   = result.get("stats", {})
-    signals = result.get("signals", [])
+    # Use best params for everything else
+    best_params = {k: results[0][k] for k in PARAM_GRID}
 
-    # Save full history
-    history_path = OUT_DIR / "pinbar_history.json"
-    with open(history_path, "w") as f:
-        json.dump(signals, f, indent=2)
-    log.info(f"  History saved: {len(signals)} signals")
+    # Full backtest with best params
+    bt = full_backtest(features, best_params)
+    (OUT_DIR / "pinbar_backtest.json").write_text(
+        json.dumps(bt["stats"], indent=2)
+    )
+    (OUT_DIR / "pinbar_history.json").write_text(
+        json.dumps(bt["history"], indent=2)
+    )
 
-    # Save backtest summary
-    bt_path = OUT_DIR / "pinbar_backtest.json"
-    with open(bt_path, "w") as f:
-        json.dump(stats, f, indent=2)
-    log.info(f"  Backtest saved → {bt_path.relative_to(BASE_DIR)}")
+    # Today's alerts
+    alerts = todays_alerts(features, best_params)
+    (OUT_DIR / "pinbar_signals.json").write_text(
+        json.dumps(alerts, indent=2)
+    )
 
-    # ── Today's alerts ─────────────────────────────────────────
-    alerts = find_todays_signals(master)
-    alerts_path = OUT_DIR / "pinbar_signals.json"
-    with open(alerts_path, "w") as f:
-        json.dump({
-            "generated_at":  datetime.utcnow().isoformat() + "Z",
-            "signal_date":   str(master["DATE"].max()),
-            "count":         len(alerts),
-            "alerts":        alerts,
-        }, f, indent=2)
-    log.info(f"  Alerts saved: {len(alerts)} signals → {alerts_path.relative_to(BASE_DIR)}")
-
-    log.info("Done.")
+    log.info("\n=== FINAL SUMMARY ===")
+    log.info(f"  Best win rate  : {results[0]['win_rate']}%")
+    log.info(f"  Total signals  : {results[0]['total_signals']}")
+    log.info(f"  Avg return     : {results[0]['avg_return']}%")
+    log.info(f"  Best params    : {best_params}")
+    log.info(f"  Today alerts   : {alerts['count']}")
 
 
 if __name__ == "__main__":
