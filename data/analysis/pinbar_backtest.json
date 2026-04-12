@@ -1,0 +1,192 @@
+{
+  "total_signals": 32422,
+  "positive_signals": 16119,
+  "win_rate_pct": 49.7,
+  "avg_next_return": 0.36,
+  "avg_win_return": 2.56,
+  "avg_loss_return": -1.82,
+  "max_gain_pct": 23.38,
+  "max_loss_pct": -90.05,
+  "by_year": [
+    {
+      "year": 2020,
+      "total": 8771,
+      "wins": 4294,
+      "avg_return": 0.43,
+      "win_rate": 49.0
+    },
+    {
+      "year": 2021,
+      "total": 6927,
+      "wins": 3654,
+      "avg_return": 0.62,
+      "win_rate": 52.8
+    },
+    {
+      "year": 2022,
+      "total": 7197,
+      "wins": 3491,
+      "avg_return": 0.24,
+      "win_rate": 48.5
+    },
+    {
+      "year": 2023,
+      "total": 6128,
+      "wins": 2855,
+      "avg_return": 0.1,
+      "win_rate": 46.6
+    },
+    {
+      "year": 2024,
+      "total": 3399,
+      "wins": 1825,
+      "avg_return": 0.34,
+      "win_rate": 53.7
+    }
+  ],
+  "top_gains": [
+    {
+      "symbol": "ZUARIGLOB",
+      "date": "2020-11-13",
+      "next_return": 23.38,
+      "wick_ratio": 2.14,
+      "color": "red"
+    },
+    {
+      "symbol": "AARON",
+      "date": "2021-05-11",
+      "next_return": 20.0,
+      "wick_ratio": 4.4,
+      "color": "red"
+    },
+    {
+      "symbol": "ARENTERP",
+      "date": "2021-12-06",
+      "next_return": 20.0,
+      "wick_ratio": 4.5,
+      "color": "green"
+    },
+    {
+      "symbol": "BLS",
+      "date": "2021-01-06",
+      "next_return": 20.0,
+      "wick_ratio": 2.93,
+      "color": "red"
+    },
+    {
+      "symbol": "DELPHIFX",
+      "date": "2022-03-09",
+      "next_return": 20.0,
+      "wick_ratio": 4.45,
+      "color": "red"
+    },
+    {
+      "symbol": "GKWLIMITED",
+      "date": "2021-10-01",
+      "next_return": 20.0,
+      "wick_ratio": 4.44,
+      "color": "red"
+    },
+    {
+      "symbol": "GOKEX",
+      "date": "2020-06-05",
+      "next_return": 20.0,
+      "wick_ratio": 3.9,
+      "color": "red"
+    },
+    {
+      "symbol": "GPTINFRA",
+      "date": "2022-09-12",
+      "next_return": 20.0,
+      "wick_ratio": 2.24,
+      "color": "red"
+    },
+    {
+      "symbol": "GROBTEA",
+      "date": "2020-08-18",
+      "next_return": 20.0,
+      "wick_ratio": 7.13,
+      "color": "red"
+    },
+    {
+      "symbol": "GROBTEA",
+      "date": "2022-01-10",
+      "next_return": 20.0,
+      "wick_ratio": 2.16,
+      "color": "red"
+    }
+  ],
+  "top_losses": [
+    {
+      "symbol": "HDFCNIFBAN",
+      "date": "2024-02-01",
+      "next_return": -90.05,
+      "wick_ratio": 2.17,
+      "color": "red"
+    },
+    {
+      "symbol": "LOWVOLIETF",
+      "date": "2024-02-29",
+      "next_return": -89.94,
+      "wick_ratio": 2.26,
+      "color": "red"
+    },
+    {
+      "symbol": "SPLPETRO",
+      "date": "2023-01-05",
+      "next_return": -51.07,
+      "wick_ratio": 43.75,
+      "color": "red"
+    },
+    {
+      "symbol": "SONAMCLOCK",
+      "date": "2022-07-13",
+      "next_return": -49.07,
+      "wick_ratio": 6.78,
+      "color": "red"
+    },
+    {
+      "symbol": "GLOBAL",
+      "date": "2022-10-18",
+      "next_return": -47.5,
+      "wick_ratio": 5.09,
+      "color": "green"
+    },
+    {
+      "symbol": "SHRIPISTON",
+      "date": "2023-07-21",
+      "next_return": -47.5,
+      "wick_ratio": 2.26,
+      "color": "red"
+    },
+    {
+      "symbol": "JAYBARMARU",
+      "date": "2021-06-04",
+      "next_return": -40.0,
+      "wick_ratio": 6.83,
+      "color": "red"
+    },
+    {
+      "symbol": "SAGARDEEP",
+      "date": "2020-10-01",
+      "next_return": -30.05,
+      "wick_ratio": 2.0,
+      "color": "red"
+    },
+    {
+      "symbol": "HARDWYN",
+      "date": "2022-07-22",
+      "next_return": -30.01,
+      "wick_ratio": 2.54,
+      "color": "green"
+    },
+    {
+      "symbol": "MSUMI",
+      "date": "2022-11-15",
+      "next_return": -26.93,
+      "wick_ratio": 27.09,
+      "color": "red"
+    }
+  ],
+  "generated_at": "2026-04-12T06:10:18.570855Z"
+}
