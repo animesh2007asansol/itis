@@ -1,192 +1,221 @@
 {
-  "total_signals": 32422,
-  "positive_signals": 16119,
-  "win_rate_pct": 49.7,
-  "avg_next_return": 0.36,
-  "avg_win_return": 2.56,
-  "avg_loss_return": -1.82,
-  "max_gain_pct": 23.38,
-  "max_loss_pct": -90.05,
+  "total_signals": 33,
+  "positive_signals": 23,
+  "win_rate_pct": 69.7,
+  "avg_next_return": 1.37,
+  "avg_win_return": 2.64,
+  "avg_loss_return": -1.55,
+  "max_gain_pct": 20.0,
+  "max_loss_pct": -5.98,
   "by_year": [
     {
       "year": 2020,
-      "total": 8771,
-      "wins": 4294,
-      "avg_return": 0.43,
-      "win_rate": 49.0
+      "total": 6,
+      "wins": 5,
+      "avg_return": 0.36,
+      "win_rate": 83.3
     },
     {
       "year": 2021,
-      "total": 6927,
-      "wins": 3654,
-      "avg_return": 0.62,
-      "win_rate": 52.8
+      "total": 5,
+      "wins": 4,
+      "avg_return": 0.71,
+      "win_rate": 80.0
     },
     {
       "year": 2022,
-      "total": 7197,
-      "wins": 3491,
-      "avg_return": 0.24,
-      "win_rate": 48.5
+      "total": 9,
+      "wins": 5,
+      "avg_return": 2.88,
+      "win_rate": 55.6
     },
     {
       "year": 2023,
-      "total": 6128,
-      "wins": 2855,
-      "avg_return": 0.1,
-      "win_rate": 46.6
+      "total": 5,
+      "wins": 5,
+      "avg_return": 2.52,
+      "win_rate": 100.0
     },
     {
       "year": 2024,
-      "total": 3399,
-      "wins": 1825,
-      "avg_return": 0.34,
-      "win_rate": 53.7
+      "total": 8,
+      "wins": 4,
+      "avg_return": 0.12,
+      "win_rate": 50.0
     }
   ],
   "top_gains": [
     {
-      "symbol": "ZUARIGLOB",
-      "date": "2020-11-13",
-      "next_return": 23.38,
-      "wick_ratio": 2.14,
-      "color": "red"
-    },
-    {
-      "symbol": "AARON",
-      "date": "2021-05-11",
-      "next_return": 20.0,
-      "wick_ratio": 4.4,
-      "color": "red"
-    },
-    {
-      "symbol": "ARENTERP",
-      "date": "2021-12-06",
-      "next_return": 20.0,
-      "wick_ratio": 4.5,
+      "symbol": "WFL",
+      "date": "2022-10-17",
+      "next_return": 20.000000000000007,
+      "wick_ratio": 12.449999999999989,
+      "body": 1.0,
       "color": "green"
     },
     {
-      "symbol": "BLS",
-      "date": "2021-01-06",
-      "next_return": 20.0,
-      "wick_ratio": 2.93,
-      "color": "red"
+      "symbol": "ABMINTLLTD",
+      "date": "2024-03-20",
+      "next_return": 9.943181818181818,
+      "wick_ratio": 50.00000000000284,
+      "body": 0.04999999999999716,
+      "color": "green"
     },
     {
-      "symbol": "DELPHIFX",
-      "date": "2022-03-09",
-      "next_return": 20.0,
-      "wick_ratio": 4.45,
-      "color": "red"
+      "symbol": "NITIRAJ",
+      "date": "2023-05-08",
+      "next_return": 5.854956753160334,
+      "wick_ratio": 9.857142857143025,
+      "body": 0.3499999999999943,
+      "color": "green"
     },
     {
-      "symbol": "GKWLIMITED",
-      "date": "2021-10-01",
-      "next_return": 20.0,
-      "wick_ratio": 4.44,
-      "color": "red"
-    },
-    {
-      "symbol": "GOKEX",
-      "date": "2020-06-05",
-      "next_return": 20.0,
-      "wick_ratio": 3.9,
-      "color": "red"
-    },
-    {
-      "symbol": "GPTINFRA",
-      "date": "2022-09-12",
-      "next_return": 20.0,
-      "wick_ratio": 2.24,
-      "color": "red"
-    },
-    {
-      "symbol": "GROBTEA",
-      "date": "2020-08-18",
-      "next_return": 20.0,
-      "wick_ratio": 7.13,
-      "color": "red"
-    },
-    {
-      "symbol": "GROBTEA",
+      "symbol": "GODHA",
       "date": "2022-01-10",
-      "next_return": 20.0,
-      "wick_ratio": 2.16,
-      "color": "red"
+      "next_return": 4.976303317535531,
+      "wick_ratio": 10.999999999999858,
+      "body": 0.4000000000000057,
+      "color": "green"
+    },
+    {
+      "symbol": "ZENITHEXPO",
+      "date": "2023-11-21",
+      "next_return": 4.970178926441352,
+      "wick_ratio": 5.428571428571402,
+      "body": 0.7000000000000028,
+      "color": "green"
+    },
+    {
+      "symbol": "SRPL",
+      "date": "2022-03-31",
+      "next_return": 2.4436807941962715,
+      "wick_ratio": 5.714285714285639,
+      "body": 1.0500000000000114,
+      "color": "green"
+    },
+    {
+      "symbol": "UTISENSETF",
+      "date": "2021-02-01",
+      "next_return": 2.34020797561399,
+      "wick_ratio": 12.772455089820697,
+      "body": 1.669999999999959,
+      "color": "green"
+    },
+    {
+      "symbol": "ICICIALPLV",
+      "date": "2022-03-08",
+      "next_return": 1.6065512283553123,
+      "wick_ratio": 15.00000000000117,
+      "body": 0.1699999999999875,
+      "color": "green"
+    },
+    {
+      "symbol": "AGCNET",
+      "date": "2020-07-01",
+      "next_return": 1.5134255492270063,
+      "wick_ratio": 115.79999999999995,
+      "body": 0.25,
+      "color": "green"
+    },
+    {
+      "symbol": "UTISXN50",
+      "date": "2024-06-05",
+      "next_return": 1.3904269718223328,
+      "wick_ratio": 7.11428571428567,
+      "body": 0.7000000000000028,
+      "color": "green"
     }
   ],
   "top_losses": [
     {
-      "symbol": "HDFCNIFBAN",
-      "date": "2024-02-01",
-      "next_return": -90.05,
-      "wick_ratio": 2.17,
+      "symbol": "GEECEE",
+      "date": "2024-02-08",
+      "next_return": -5.9841047218326455,
+      "wick_ratio": 8.98701298701294,
+      "body": 3.8500000000000227,
       "color": "red"
     },
     {
-      "symbol": "LOWVOLIETF",
-      "date": "2024-02-29",
-      "next_return": -89.94,
-      "wick_ratio": 2.26,
+      "symbol": "IITL",
+      "date": "2024-04-26",
+      "next_return": -2.5150355385456504,
+      "wick_ratio": 6.181818181818224,
+      "body": 1.0999999999999943,
       "color": "red"
     },
     {
-      "symbol": "SPLPETRO",
-      "date": "2023-01-05",
-      "next_return": -51.07,
-      "wick_ratio": 43.75,
+      "symbol": "SVLL",
+      "date": "2024-06-11",
+      "next_return": -2.237336674422767,
+      "wick_ratio": 5.813602015113347,
+      "body": 3.969999999999999,
       "color": "red"
     },
     {
-      "symbol": "SONAMCLOCK",
-      "date": "2022-07-13",
-      "next_return": -49.07,
-      "wick_ratio": 6.78,
+      "symbol": "SHAILY",
+      "date": "2022-08-18",
+      "next_return": -1.8862370919080698,
+      "wick_ratio": 5.146596858638778,
+      "body": 9.549999999999955,
       "color": "red"
     },
     {
-      "symbol": "GLOBAL",
-      "date": "2022-10-18",
-      "next_return": -47.5,
-      "wick_ratio": 5.09,
-      "color": "green"
-    },
-    {
-      "symbol": "SHRIPISTON",
-      "date": "2023-07-21",
-      "next_return": -47.5,
-      "wick_ratio": 2.26,
+      "symbol": "ICICIMCAP",
+      "date": "2020-08-13",
+      "next_return": -1.047286575690263,
+      "wick_ratio": 5.263157894736905,
+      "body": 0.37999999999999545,
       "color": "red"
     },
     {
-      "symbol": "JAYBARMARU",
-      "date": "2021-06-04",
-      "next_return": -40.0,
-      "wick_ratio": 6.83,
+      "symbol": "NETF",
+      "date": "2022-08-18",
+      "next_return": -0.8106666666666722,
+      "wick_ratio": 6.9599999999999795,
+      "body": 0.5,
       "color": "red"
     },
     {
-      "symbol": "SAGARDEEP",
-      "date": "2020-10-01",
-      "next_return": -30.05,
-      "wick_ratio": 2.0,
+      "symbol": "ICICISENSX",
+      "date": "2021-11-23",
+      "next_return": -0.5414710485133077,
+      "wick_ratio": 11.11111111111101,
+      "body": 0.9900000000000091,
       "color": "red"
     },
     {
-      "symbol": "HARDWYN",
-      "date": "2022-07-22",
-      "next_return": -30.01,
-      "wick_ratio": 2.54,
-      "color": "green"
+      "symbol": "CHOLAHLDNG",
+      "date": "2022-11-14",
+      "next_return": -0.4448105436573386,
+      "wick_ratio": 6.305555555555728,
+      "body": 1.7999999999999545,
+      "color": "red"
     },
     {
-      "symbol": "MSUMI",
-      "date": "2022-11-15",
-      "next_return": -26.93,
-      "wick_ratio": 27.09,
+      "symbol": "CHEMBOND",
+      "date": "2024-05-27",
+      "next_return": 0.0,
+      "wick_ratio": 6.675675675675693,
+      "body": 3.6999999999999886,
+      "color": "red"
+    },
+    {
+      "symbol": "ICICILIQ",
+      "date": "2022-06-10",
+      "next_return": 0.0,
+      "wick_ratio": 32.50000000002842,
+      "body": 0.01999999999998181,
       "color": "red"
     }
   ],
-  "generated_at": "2026-04-12T06:10:18.570855Z"
+  "best_params": {
+    "wick_ratio": 5.0,
+    "upper_wick_pct": 0.15,
+    "min_prev_red": 3,
+    "trend_filter": false,
+    "volume_filter": 2.5,
+    "delivery_filter": false,
+    "min_price": 50
+  },
+  "generated_at": "2026-04-12T14:14:17.161819Z"
 }
