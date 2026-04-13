@@ -1,0 +1,110 @@
+name: NSE Pattern Discovery
+
+on:
+  schedule:
+    # 6:15 PM UTC = 11:45 PM IST, Mon-Fri (after NSE fetch + seasonal signals)
+    - cron: '15 18 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason'
+        required: false
+        default: 'Manual trigger'
+
+jobs:
+  discover-patterns:
+    name: Discover NSE Patterns
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pandas numpy --quiet
+
+      - name: Show trigger info
+        run: |
+          echo "Trigger: ${{ github.event_name }}"
+          echo "UTC: $(date -u)"
+          echo "IST: $(TZ='Asia/Kolkata' date)"
+          echo "Files in data/equity:"
+          find data/equity -name "*.csv" | wc -l
+
+      - name: Run pattern discovery
+        run: |
+          python scripts/pattern_discovery.py
+        timeout-minutes: 25
+
+      - name: Show output summary
+        run: |
+          echo "=== Output files ==="
+          ls -lh pattern_signals/ 2>/dev/null || echo "pattern_signals/ not created!"
+          echo ""
+          if [ -f "pattern_signals/patterns.json" ]; then
+            python -c "
+          import json
+          with open('pattern_signals/patterns.json') as f:
+              d = json.load(f)
+          print(f'Stocks analyzed:  {d[\"stocks_analyzed\"]}')
+          print(f'Trading days:     {d[\"trading_days\"]}')
+          print(f'Data range:       {d[\"data_range\"]}')
+          print(f'Grade counts:     {d[\"grade_counts\"]}')
+          print()
+          print('Top 10 patterns by score:')
+          for p in d['patterns'][:10]:
+              print(f'  {p[\"grade\"]}  {p[\"signal\"]:<5}  WR20:{str(p.get(\"wr_20d\",\"—\"))+\"%\":<8}  '
+                    f'Avg20:{str(p.get(\"avg_20d\",\"—\"))+\"%\":<8}  Score:{p.get(\"score\",0):<8}  {p[\"name\"][:35]}')
+          "
+          fi
+          echo ""
+          if [ -f "pattern_signals/alerts.json" ]; then
+            python -c "
+          import json
+          with open('pattern_signals/alerts.json') as f:
+              d = json.load(f)
+          print(f'Alert date: {d[\"alert_date\"]}')
+          print(f'Total alerts: {d[\"total_alerts\"]}')
+          print(f'Grade A alerts: {d[\"grade_a\"]}')
+          print()
+          for a in d['alerts'][:15]:
+              print(f'  [{a[\"grade\"]}] {a[\"sym\"]:<14} {a[\"signal_name\"][:30]:<30}  '
+                    f'WR20:{a.get(\"win_rate_20d\",0)}%  Avg:{a.get(\"avg_ret_20d\",0)}%  Close:Rs{a[\"close\"]}')
+          "
+          fi
+          echo ""
+          if [ -f "pattern_signals/stock_profiles.json" ]; then
+            python -c "
+          import json
+          with open('pattern_signals/stock_profiles.json') as f:
+              d = json.load(f)
+          print(f'Stocks with 100% patterns: {d[\"stocks_with_100pct\"]}')
+          print()
+          print('Top 15 Grade A stock patterns by avg return:')
+          for r in d['all_grade_a'][:15]:
+              print(f'  {r[\"sym\"]:<14} {r[\"signal\"]:<5}  {r[\"hold_days\"]}d  '
+                    f'WR:{r[\"win_rate\"]}%  Avg:{r[\"avg_ret\"]:+.1f}%  Occ:{r[\"occ\"]}  '
+                    f'Yrs:{r[\"years\"]}')
+          "
+          fi
+
+      - name: Commit and push
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pattern_signals/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            DATE_IST=$(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M IST')
+            git commit -m "Pattern signals update — ${DATE_IST}"
+            git push
+            echo "Pushed pattern_signals/ to repo."
+          fi
