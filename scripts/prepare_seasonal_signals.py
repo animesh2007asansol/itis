@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 prepare_seasonal_signals.py  v2
-=================================
+================================
 Reads NSE equity bhav copy CSVs from the GitHub data repo.
 
 Outputs (all in seasonal_signals/ — raw data/ is NEVER touched):
