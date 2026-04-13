@@ -206,24 +206,23 @@ ALL_SYMS = {t["sym"] for t in TRADE_DEFS} | {
 # ---------------------------------------------------------------------------
 # ROBUST CSV PARSER — handles both old and new NSE formats
 # ---------------------------------------------------------------------------
+# NSE CSV column name aliases — covers ALL known format variants
+#
+# Old format  (pre mid-2024):  SYMBOL, SERIES, OPEN, HIGH, LOW, CLOSE, ...
+# New format  (mid-2024+):     TradDt, BizDt, Sgmt, Src, FinInstrmTp,
+#                               FinInstrmId, ISIN, TckrSymb, SctySrs, ...
+#                               OpnPric, HghPric, LwPric, ClsPric, LastPric, ...
+# ---------------------------------------------------------------------------
 
-# Old NSE format column names
-OLD_COL_MAP = {
-    "SYMBOL":   ["SYMBOL"],
-    "SERIES":   ["SERIES"],
-    "CLOSE":    ["CLOSE"],
-}
+# All known aliases for the SYMBOL column
+SYMBOL_ALIASES = ["SYMBOL", "TCKRSYMB"]
 
-# New NSE format (mid-2024+) — column names changed
-NEW_COL_MAP = {
-    "SYMBOL":   ["SYMBOL"],
-    "SERIES":   ["SERIES"],
-    "CLOSE":    ["CLOSE PRICE", "CLOSE_PRICE", "CLOSEPRICE"],
-}
+# All known aliases for the SERIES column
+SERIES_ALIASES = ["SERIES", "SCTYSRS"]
 
-# Any of these close column aliases work
-ALL_CLOSE_ALIASES = ["CLOSE", "CLOSE PRICE", "CLOSE_PRICE", "CLOSEPRICE",
-                     "LAST PRICE", "LAST_PRICE"]
+# All known aliases for the CLOSE price column (prefer official close over last)
+CLOSE_ALIASES  = ["CLOSE", "CLSPRIC", "CLOSE PRICE", "CLOSE_PRICE",
+                  "CLOSEPRICE", "LASTPRIC", "LAST PRICE", "LAST_PRICE"]
 
 
 def find_col(hdr, aliases):
@@ -245,6 +244,8 @@ def parse_csv_file(path, syms_wanted, label=""):
     Parse one NSE equity CSV file.
     Returns (prices_dict, format_detected, diagnostic_str).
     prices_dict = {SYM: close_price}
+    Handles both old format (SYMBOL/SERIES/CLOSE) and new format
+    (TckrSymb/SctySrs/ClsPric introduced mid-2024).
     """
     prices  = {}
     fmt     = "unknown"
@@ -261,26 +262,28 @@ def parse_csv_file(path, syms_wanted, label=""):
         diag.append(f"Header ({len(hdr)} cols): {hdr[:8]}")
 
         # Detect SYMBOL column
-        i_sym = find_col(hdr, ["SYMBOL"])
+        i_sym = find_col(hdr, SYMBOL_ALIASES)
         if i_sym < 0:
-            return prices, "bad-header", f"No SYMBOL column. Header: {hdr[:10]}"
+            return prices, "bad-header", f"No SYMBOL column. Header: {hdr[:12]}"
 
         # Detect SERIES column
-        i_series = find_col(hdr, ["SERIES"])
+        i_series = find_col(hdr, SERIES_ALIASES)
 
-        # Detect CLOSE column — try all known aliases
-        i_close = find_col(hdr, ALL_CLOSE_ALIASES)
+        # Detect CLOSE column
+        i_close = find_col(hdr, CLOSE_ALIASES)
         if i_close < 0:
             return prices, "bad-header", f"No close price column. Header: {hdr[:12]}"
 
-        diag.append(f"SYMBOL@{i_sym}  SERIES@{i_series}  CLOSE@{i_close}({hdr[i_close]})")
+        sym_col_name   = hdr[i_sym]
+        close_col_name = hdr[i_close]
+        diag.append(f"SYMBOL@{i_sym}({sym_col_name})  "
+                    f"SERIES@{i_series}  CLOSE@{i_close}({close_col_name})")
 
         # Detect format
-        close_col_name = hdr[i_close]
-        if close_col_name == "CLOSE":
+        if sym_col_name == "SYMBOL":
             fmt = "old-format"
         else:
-            fmt = f"new-format({close_col_name})"
+            fmt = f"new-format(sym={sym_col_name},close={close_col_name})"
 
         # Collect sample SERIES values for diagnosis
         series_seen = set()
@@ -386,32 +389,61 @@ class PriceDB:
 # ---------------------------------------------------------------------------
 # Backtest engine
 # ---------------------------------------------------------------------------
-def find_price(db, date_target, sym, direction="after", max_delta=7):
-    if direction == "after":
-        d = db.nearest_on_or_after(date_target)
-    else:
-        d = db.nearest_on_or_before(date_target)
+def find_price(db, date_target, sym, direction="after", max_days=7):
+    """
+    Find a price for sym near date_target.
 
-    if d:
+    direction = "after"  (for buy dates):
+        Try nearest trading day on-or-after target first.
+        If no price, walk BACKWARD up to max_days calendar days.
+        Then walk FORWARD up to max_days calendar days.
+
+    direction = "before" (for sell dates):
+        Try nearest trading day on-or-before target first.
+        If no price, walk BACKWARD up to max_days calendar days.
+        Then walk FORWARD up to max_days calendar days.
+
+    Logic: buy on the nearest available trading day to the target.
+    If the target is a Sunday/holiday we just need the closest day
+    with actual traded data — prefer the direction that matches
+    intent (after for buys, before for sells) then relax.
+    """
+    def try_day(d):
+        if not d:
+            return None
         px = db.get(d, sym)
-        if px:
-            return d, px
+        return px
 
-    for delta in range(1, max_delta + 1):
-        for sign in ([-1, 1] if direction == "before" else [1, -1]):
-            try:
-                d2 = (datetime.strptime(date_target, "%Y-%m-%d")
-                      + timedelta(days=delta * sign)).strftime("%Y-%m-%d")
-            except Exception:
-                continue
-            if direction == "after":
-                cand = db.nearest_on_or_after(d2)
-            else:
-                cand = db.nearest_on_or_before(d2)
-            if cand:
-                px = db.get(cand, sym)
-                if px:
-                    return cand, px
+    # Primary direction
+    if direction == "after":
+        primary = db.nearest_on_or_after(date_target)
+    else:
+        primary = db.nearest_on_or_before(date_target)
+
+    if primary:
+        px = try_day(primary)
+        if px:
+            return primary, px
+
+    # Walk backward from target date (calendar days, map to trading days)
+    base = datetime.strptime(date_target, "%Y-%m-%d")
+    for delta in range(1, max_days + 1):
+        d_back = (base - timedelta(days=delta)).strftime("%Y-%m-%d")
+        cand = db.nearest_on_or_before(d_back)
+        if cand and cand != primary:
+            px = try_day(cand)
+            if px:
+                return cand, px
+
+    # Walk forward from target date
+    for delta in range(1, max_days + 1):
+        d_fwd = (base + timedelta(days=delta)).strftime("%Y-%m-%d")
+        cand = db.nearest_on_or_after(d_fwd)
+        if cand and cand != primary:
+            px = try_day(cand)
+            if px:
+                return cand, px
+
     return None, None
 
 
