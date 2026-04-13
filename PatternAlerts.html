@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NSE Pattern Alerts — 100% Win Rate Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090F;--s:#0D1119;--card:#101520;--card2:#161E2C;
+  --b:#1A2B42;--b2:#213554;
+  --gold:#C9A84C;--g2:#9A6F28;--gbg:rgba(201,168,76,.08);
+  --green:#22C55E;--gr2:#166534;--grb:rgba(34,197,94,.08);
+  --red:#EF4444;--r2:#7F1D1D;--rb:rgba(239,68,68,.09);
+  --blue:#60A5FA;--bl2:#1E3A5F;--blb:rgba(96,165,250,.09);
+  --amber:#F59E0B;--amb:#78350F;--ab:rgba(245,158,11,.09);
+  --purple:#A855F7;--pb:rgba(168,85,247,.09);
+  --text:#DCE8F5;--t2:#94A3B8;--t3:#5A7090;--r:11px;
+  --font:'IBM Plex Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;min-height:100vh}
+nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--b);display:flex;align-items:center;
+  padding:0 14px;height:52px;gap:10px}
+.brand{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);
+  display:flex;align-items:center;gap:7px;flex-shrink:0}
+.brand small{font-size:9px;color:var(--t3);font-family:var(--font);font-weight:400}
+.ldot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 5px transparent}}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:5px 11px;border-radius:7px;cursor:pointer;font-size:11px;font-weight:500;
+  color:var(--t3);border:none;background:none;transition:.2s;white-space:nowrap;flex-shrink:0}
+.tab:hover{color:var(--text);background:var(--s)}
+.tab.active{color:var(--gold);background:var(--gbg);border:1px solid var(--g2)}
+.page{display:none;max-width:1400px;margin:0 auto;padding:16px 14px 50px}
+.page.active{display:block}
+.sh{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sh small{font-size:10px;font-family:var(--font);color:var(--t3);font-weight:400}
+.pill-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.kpill{background:var(--card);border:1px solid var(--b);border-radius:10px;
+  padding:9px 14px;min-width:120px}
+.kpill .kl{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:2px}
+.kpill .kv{font-family:'DM Mono';font-size:15px;font-weight:500}
+.kpill .ks{font-size:10px;color:var(--t2)}
+.kpill.g{border-color:var(--gr2)}.kpill.g .kv{color:var(--green)}
+.kpill.y{border-color:var(--amb)}.kpill.y .kv{color:var(--amber)}
+.kpill.b{border-color:var(--bl2)}.kpill.b .kv{color:var(--blue)}
+/* GRADE BADGES */
+.grade{display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:5px;font-weight:700;font-size:11px;flex-shrink:0}
+.grade-A{background:var(--grb);color:var(--green);border:1px solid var(--gr2)}
+.grade-B{background:var(--ab);color:var(--amber);border:1px solid var(--amb)}
+.grade-C{background:var(--blb);color:var(--blue);border:1px solid var(--bl2)}
+.grade-D{background:rgba(168,85,247,.1);color:var(--purple);border:1px solid #6B21A8}
+.grade-dash{background:var(--s);color:var(--t3);border:1px solid var(--b)}
+/* ALERT CARDS */
+.alert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px;margin-bottom:16px}
+.acard{background:var(--card);border:1px solid var(--b);border-radius:var(--r);
+  padding:13px;transition:.2s;position:relative;overflow:hidden}
+.acard:hover{border-color:var(--g2);transform:translateY(-2px)}
+.acard-A{border-left:3px solid var(--green)}
+.acard-B{border-left:3px solid var(--amber)}
+.acard-C{border-left:3px solid var(--blue)}
+.acard-D{border-left:3px solid var(--purple)}
+.ac-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.ac-sym{font-family:'DM Mono';font-size:16px;font-weight:600;color:var(--gold)}
+.ac-sig{font-size:9px;color:var(--t2);margin-top:2px}
+.ac-wr{text-align:right}
+.ac-pct{font-family:'DM Mono';font-size:18px;font-weight:700;color:var(--green)}
+.ac-lbl{font-size:9px;color:var(--t3)}
+.ac-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin:8px 0}
+.ac-stat{background:var(--s);border-radius:6px;padding:5px 7px}
+.ac-stat .asl{font-size:9px;color:var(--t3);margin-bottom:1px}
+.ac-stat .asv{font-family:'DM Mono';font-size:11px;font-weight:500}
+.ac-zones{background:var(--s);border-radius:7px;padding:8px 10px;font-size:11px;margin-top:6px}
+.zrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
+.zrow:last-child{margin-bottom:0}
+.zlbl{color:var(--t3);font-size:9px;text-transform:uppercase;letter-spacing:.8px}
+.zval{font-family:'DM Mono';font-weight:600}
+.z-buy{color:var(--green)}.z-sl{color:var(--red)}.z-t1{color:var(--amber)}.z-t2{color:var(--gold)}
+.vol-badge{display:inline-flex;align-items:center;gap:3px;font-size:9px;
+  padding:2px 6px;border-radius:3px;margin-top:5px}
+.vol-high{background:var(--grb);color:var(--green);border:1px solid var(--gr2)}
+.vol-norm{background:var(--blb);color:var(--blue);border:1px solid var(--bl2)}
+.vol-low{background:var(--rb);color:var(--red);border:1px solid var(--r2)}
+/* TABLES */
+.twrap{overflow-x:auto;background:var(--card);border:1px solid var(--b);border-radius:var(--r);margin-bottom:16px}
+.tbl{width:100%;border-collapse:collapse;min-width:700px}
+.tbl th{background:var(--s);color:var(--t3);font-size:9px;text-transform:uppercase;
+  letter-spacing:.8px;padding:8px 10px;text-align:left;border-bottom:1px solid var(--b);white-space:nowrap}
+.tbl td{padding:7px 10px;border-bottom:1px solid rgba(26,43,66,.5);font-size:12px;vertical-align:middle}
+.tbl tr:hover td{background:rgba(255,255,255,.02)}
+.tbl tfoot td{font-weight:600;background:var(--card2);font-family:'DM Mono';font-size:11px}
+.mono{font-family:'DM Mono'}
+.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}
+.blue{color:var(--blue)}.muted{color:var(--t3)}
+/* FILTERS */
+.fbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.fbtn{background:var(--card);border:1px solid var(--b);color:var(--t3);padding:4px 10px;
+  border-radius:14px;font-size:10px;cursor:pointer;transition:.2s;white-space:nowrap}
+.fbtn:hover{color:var(--text);border-color:var(--b2)}
+.fbtn.on{background:var(--gbg);color:var(--gold);border-color:var(--g2)}
+.fsep{color:var(--t3);font-size:10px;padding:0 4px}
+.search-inp{background:var(--s);border:1px solid var(--b2);color:var(--text);
+  border-radius:7px;padding:5px 10px;font-size:12px;font-family:'DM Mono';outline:none;width:140px}
+.search-inp:focus{border-color:var(--gold)}
+/* SPINNER / EMPTY */
+.spinner{width:22px;height:22px;border:2px solid var(--b);border-top-color:var(--gold);
+  border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{text-align:center;padding:36px;color:var(--t3)}
+/* STOCK PROFILE ACCORDION */
+.spcard{background:var(--card);border:1px solid var(--b);border-radius:var(--r);
+  margin-bottom:7px;overflow:hidden}
+.sp-head{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;gap:8px}
+.sp-head:hover{background:rgba(255,255,255,.02)}
+.sp-sym{font-family:'DM Mono';font-size:13px;font-weight:600;color:var(--gold)}
+.sp-meta{font-size:10px;color:var(--t2)}
+.sp-body{display:none;padding:0 14px 12px;border-top:1px solid var(--b)}
+.sp-body.open{display:block}
+.sp-row{display:grid;grid-template-columns:80px 1fr 60px 80px 80px 80px 70px;gap:6px;
+  padding:5px 0;border-bottom:1px solid rgba(26,43,66,.3);font-size:11px;align-items:center}
+.sp-row:last-child{border-bottom:none}
+.sp-hdr{color:var(--t3);font-size:9px;text-transform:uppercase;letter-spacing:.8px;
+  margin:8px 0 4px}
+/* DATASRC */
+.dsrc{display:inline-flex;align-items:center;gap:4px;background:var(--grb);
+  border:1px solid var(--gr2);color:var(--green);padding:3px 9px;border-radius:10px;
+  font-size:9px;font-family:'DM Mono'}
+.dsrc.warn{background:var(--ab);border-color:var(--amb);color:var(--amber)}
+/* HOW IT WORKS */
+.how-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px;margin-bottom:16px}
+.how-card{background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:11px 13px}
+.how-card h3{font-size:12px;font-weight:600;color:var(--gold);margin-bottom:5px}
+.how-card p{font-size:11px;color:var(--t2);line-height:1.6}
+/* Mobile */
+@media(max-width:640px){
+  .alert-grid{grid-template-columns:1fr}
+  .fbar{gap:4px}
+  .page{padding:10px 8px 40px}
+  .sp-row{grid-template-columns:70px 1fr 50px 70px 70px;font-size:10px}
+  .sp-row > *:nth-child(n+6){display:none}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="brand"><div class="ldot"></div>📡 Pattern Alerts <small>NSE 100% Win-Rate System</small></div>
+  <div class="tabs">
+    <button class="tab active" onclick="showPage('alerts',this)">🚨 Live Alerts</button>
+    <button class="tab" onclick="showPage('patterns',this)">📊 All Patterns</button>
+    <button class="tab" onclick="showPage('stocks',this)">📈 Stock Profiles</button>
+    <button class="tab" onclick="showPage('howto',this)">📖 How It Works</button>
+  </div>
+</nav>
+
+<!-- ══ PAGE 1: LIVE ALERTS ══════════════════════════════════════════ -->
+<div class="page active" id="page-alerts">
+  <div id="alert-banner" style="margin-bottom:12px"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+    <div class="sh" style="margin:0">🚨 Today's Active Signals <small id="alert-date-lbl"></small></div>
+    <span id="alert-dsrc" class="dsrc warn">Loading…</span>
+  </div>
+  <div class="pill-row" id="alert-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Grade:</span>
+    <button class="fbtn on" onclick="filterAlerts('ALL',this)">All</button>
+    <button class="fbtn" onclick="filterAlerts('A',this)">A — 100%</button>
+    <button class="fbtn" onclick="filterAlerts('B',this)">B — 100% (few)</button>
+    <button class="fbtn" onclick="filterAlerts('C',this)">C — 90%+</button>
+    <button class="fbtn" onclick="filterAlerts('D',this)">D — 80%+</button>
+    <span class="fsep">|</span>
+    <input class="search-inp" id="alert-search" placeholder="Filter symbol…" oninput="renderAlerts()">
+  </div>
+  <div class="alert-grid" id="alert-grid"><div class="empty"><div class="spinner"></div>Loading alerts from GitHub…</div></div>
+</div>
+
+<!-- ══ PAGE 2: ALL PATTERNS ══════════════════════════════════════════ -->
+<div class="page" id="page-patterns">
+  <div class="sh">📊 All Discovered Patterns <small>sorted by Grade then Win Rate × Avg Return score</small></div>
+  <div id="pat-pills" class="pill-row"></div>
+  <div class="fbar">
+    <span class="fsep">Sort:</span>
+    <button class="fbtn on" onclick="sortPatterns('score',this)">Score</button>
+    <button class="fbtn" onclick="sortPatterns('wr',this)">Win Rate 20d</button>
+    <button class="fbtn" onclick="sortPatterns('avg',this)">Avg Return 20d</button>
+    <span class="fsep">|</span>
+    <button class="fbtn on" id="pf-all"  onclick="filterPat('ALL',this)">All</button>
+    <button class="fbtn"    id="pf-a"    onclick="filterPat('A',this)">Grade A only</button>
+    <button class="fbtn"    id="pf-ab"   onclick="filterPat('AB',this)">A + B</button>
+  </div>
+  <div class="twrap">
+    <table class="tbl" id="pat-tbl">
+      <thead><tr>
+        <th>#</th><th>Grade</th><th>Signal</th><th>Name</th>
+        <th>Occ</th>
+        <th>WR 5d</th><th>WR 10d</th><th>WR 20d</th>
+        <th>Avg 5d</th><th>Avg 10d</th><th>Avg 20d</th>
+        <th>Score</th><th>Years</th>
+      </tr></thead>
+      <tbody id="pat-body"><tr><td colspan="13" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══ PAGE 3: STOCK PROFILES ════════════════════════════════════════ -->
+<div class="page" id="page-stocks">
+  <div class="sh">📈 Per-Stock 100% Win-Rate Patterns <small>Grade A &amp; B only — must appear in 2+ years</small></div>
+  <div class="pill-row" id="sp-pills"></div>
+  <div class="fbar">
+    <input class="search-inp" id="sp-search" placeholder="Search symbol…" oninput="renderStockProfiles()" style="width:180px">
+    <span class="fsep">|</span>
+    <span class="fsep">Sort by avg return:</span>
+    <button class="fbtn on" onclick="sortSP('ret',this)">Highest Return</button>
+    <button class="fbtn" onclick="sortSP('wr',this)">Win Rate</button>
+    <button class="fbtn" onclick="sortSP('occ',this)">Most Occurrences</button>
+  </div>
+  <div id="sp-grid"><div class="empty"><div class="spinner"></div>Loading stock profiles…</div></div>
+</div>
+
+<!-- ══ PAGE 4: HOW IT WORKS ════════════════════════════════════════ -->
+<div class="page" id="page-howto">
+  <div class="sh">📖 How the Pattern System Works</div>
+  <div class="how-grid">
+    <div class="how-card">
+      <h3>🔬 What it analyzes</h3>
+      <p>Reads 5+ years of NSE daily OHLCV data for ~2000 stocks from your GitHub data repo. Tests 30 signal types across volume, candle, breakout, trend, and combination categories. All prices are actual NSE closing prices — no estimated data.</p>
+    </div>
+    <div class="how-card">
+      <h3>📐 Win Rate Calculation</h3>
+      <p>For each signal occurrence, looks at the closing price 5, 10, and 20 trading days later. If close is higher → WIN. Win Rate = wins / total occurrences × 100. Measured separately at each time window.</p>
+    </div>
+    <div class="how-card">
+      <h3>🏆 Grade System</h3>
+      <p><strong style="color:var(--green)">Grade A</strong> = 100% win rate with 10+ occurrences. Strongest possible. <strong style="color:var(--amber)">Grade B</strong> = 100% win rate with 5-9 occurrences (validate manually). <strong style="color:var(--blue)">Grade C</strong> = 90%+ win rate with 20+ occurrences. <strong style="color:var(--purple)">Grade D</strong> = 80%+ with 30+ occurrences.</p>
+    </div>
+    <div class="how-card">
+      <h3>🌐 Cross-Year Filter</h3>
+      <p>A pattern must appear in at least 2 different calendar years to be included. This eliminates COVID-era artifacts and other one-time events. If a pattern only worked in 2020 — it's excluded.</p>
+    </div>
+    <div class="how-card">
+      <h3>💰 Buy Zone Calculation</h3>
+      <p>Buy zone is ±0.3–0.5 × ATR(14) around the signal close price. Stop loss = 1.5 × ATR below close. Target 1 = 1.5 × ATR above. Target 2 = historical average 20-day return above close. ATR adapts to each stock's volatility.</p>
+    </div>
+    <div class="how-card">
+      <h3>⚙️ Update Schedule</h3>
+      <p>Pattern discovery runs nightly at 11:45 PM IST after the NSE data fetch. Today's alerts reflect the latest NSE closing prices. GitHub Actions runs the engine automatically — just open this page fresh each morning for today's signals.</p>
+    </div>
+  </div>
+  <div class="sh" style="margin-top:20px">📋 Signal Reference</div>
+  <div class="twrap">
+    <table class="tbl">
+      <thead><tr><th>Code</th><th>Name</th><th>Category</th><th>Logic</th></tr></thead>
+      <tbody id="sig-ref-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+const REPO = 'https://raw.githubusercontent.com/animesh2007asansol/itis/main/pattern_signals';
+
+let ALL_ALERTS  = [];
+let ALL_PATS    = [];
+let ALL_PROFS   = {};
+let ALL_GRADE_A = [];
+let META        = {};
+let alertGrade  = 'ALL';
+let patSort     = 'score';
+let patGradeF   = 'ALL';
+let spSort      = 'ret';
+
+// ── Fetch ──────────────────────────────────────────────────────────
+async function loadData() {
+  try {
+    const [aRes, pRes, sRes] = await Promise.all([
+      fetch(REPO + '/alerts.json'),
+      fetch(REPO + '/patterns.json'),
+      fetch(REPO + '/stock_profiles.json'),
+    ]);
+    if (!aRes.ok) throw new Error('alerts.json HTTP ' + aRes.status);
+    if (!pRes.ok) throw new Error('patterns.json HTTP ' + pRes.status);
+    if (!sRes.ok) throw new Error('stock_profiles.json HTTP ' + sRes.status);
+
+    const [aData, pData, sData] = await Promise.all([aRes.json(), pRes.json(), sRes.json()]);
+
+    ALL_ALERTS  = aData.alerts || [];
+    META        = { alertDate: aData.alert_date, alertGen: aData.generated_at,
+                    gradeA: aData.grade_a || 0, total: aData.total_alerts || 0,
+                    stocks: pData.stocks_analyzed || 0,
+                    tradingDays: pData.trading_days || 0,
+                    dataRange: pData.data_range || '',
+                    grades: pData.grade_counts || {} };
+    ALL_PATS    = pData.patterns || [];
+    ALL_PROFS   = sData.profiles || {};
+    ALL_GRADE_A = sData.all_grade_a || [];
+
+    renderPage();
+  } catch(e) {
+    showError(e.message);
+  }
+}
+
+function showError(msg) {
+  document.getElementById('alert-banner').innerHTML =
+    `<div style="background:var(--rb);border:1px solid var(--r2);border-radius:9px;padding:10px 14px;color:#FCA5A5;font-size:12px">
+      ⚠ Could not load pattern data from GitHub. Run the GitHub Action (pattern_discovery workflow) first.<br>
+      <span style="color:var(--t3);font-size:10px">${msg}</span>
+    </div>`;
+  document.getElementById('alert-dsrc').textContent = '✗ Load failed';
+  document.getElementById('alert-dsrc').className = 'dsrc warn';
+  document.getElementById('alert-grid').innerHTML =
+    '<div class="empty">No data available. Trigger the GitHub Action to generate pattern data.</div>';
+}
+
+function renderPage() {
+  renderAlertBanner();
+  renderAlerts();
+  renderPatternPills();
+  renderPatterns();
+  renderStockPills();
+  renderStockProfiles();
+  renderSigRef();
+}
+
+// ── Alert page ─────────────────────────────────────────────────────
+function renderAlertBanner() {
+  const dt = META.alertDate || '—';
+  document.getElementById('alert-date-lbl').textContent = formatDate(dt);
+  document.getElementById('alert-dsrc').textContent =
+    `✓ ${dt} · ${META.stocks} stocks analyzed`;
+  document.getElementById('alert-dsrc').className = 'dsrc';
+
+  const g = META.grades || {};
+  document.getElementById('alert-pills').innerHTML = [
+    ['Grade A Alerts', META.gradeA, 'g', '100% win rate'],
+    ['Total Alerts',   META.total,  'b', 'All signals active'],
+    ['Stocks Scanned', META.stocks, 'b', META.dataRange],
+    ['Patterns Found', ALL_PATS.length, 'y', 'Cross-validated'],
+  ].map(([l,v,c,s]) => `<div class="kpill ${c}">
+    <div class="kl">${l}</div>
+    <div class="kv">${v}</div>
+    <div class="ks">${s}</div>
+  </div>`).join('');
+}
+
+function filterAlerts(g, btn) {
+  alertGrade = g;
+  document.querySelectorAll('#page-alerts .fbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderAlerts();
+}
+
+function renderAlerts() {
+  const q = (document.getElementById('alert-search')?.value || '').toUpperCase().trim();
+  let rows = ALL_ALERTS.filter(a => {
+    if (alertGrade !== 'ALL' && a.grade !== alertGrade) return false;
+    if (q && !a.sym.includes(q) && !a.signal_name.toUpperCase().includes(q)) return false;
+    return true;
+  });
+
+  if (!rows.length) {
+    document.getElementById('alert-grid').innerHTML =
+      '<div class="empty">No alerts match filters. Try "All" grade or clear the search.</div>';
+    return;
+  }
+
+  document.getElementById('alert-grid').innerHTML = rows.map(a => {
+    const wr = a.win_rate_20d || 0;
+    const wrColor = wr >= 90 ? 'var(--green)' : wr >= 80 ? 'var(--amber)' : 'var(--blue)';
+    const volClass = a.vol_ratio >= 5 ? 'vol-high' : a.vol_ratio >= 1.5 ? 'vol-norm' : 'vol-low';
+    const volLbl   = a.vol_ratio >= 5 ? `⚡ Vol ${a.vol_ratio}x avg` :
+                     a.vol_ratio >= 1.5 ? `↑ Vol ${a.vol_ratio}x` : `Vol ${a.vol_ratio}x avg`;
+    const ma200 = a.above_200ma
+      ? '<span style="color:var(--green);font-size:9px">▲ Above 200MA</span>'
+      : '<span style="color:var(--amber);font-size:9px">▼ Below 200MA</span>';
+    return `<div class="acard acard-${a.grade}">
+      <div class="ac-head">
+        <div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <div class="ac-sym">${a.sym}</div>
+            <div class="grade grade-${a.grade}">${a.grade}</div>
+          </div>
+          <div class="ac-sig">${a.signal_name}</div>
+          <div style="margin-top:3px">${ma200}</div>
+        </div>
+        <div class="ac-wr">
+          <div class="ac-pct" style="color:${wrColor}">${wr}%</div>
+          <div class="ac-lbl">Win rate 20d</div>
+        </div>
+      </div>
+      <div class="ac-stats">
+        <div class="ac-stat"><div class="asl">WR 5d</div><div class="asv" style="color:${(a.win_rate_5d||0)>=80?'var(--green)':'var(--amber)'}">${a.win_rate_5d||'—'}%</div></div>
+        <div class="ac-stat"><div class="asl">WR 10d</div><div class="asv" style="color:${(a.win_rate_10d||0)>=80?'var(--green)':'var(--amber)'}">${a.win_rate_10d||'—'}%</div></div>
+        <div class="ac-stat"><div class="asl">Avg Ret 20d</div><div class="asv green">+${a.avg_ret_20d||'—'}%</div></div>
+      </div>
+      <div class="ac-zones">
+        <div class="zrow">
+          <span class="zlbl">NSE Close</span>
+          <span class="zval" style="color:var(--text)">₹${fmt(a.close)}</span>
+        </div>
+        <div class="zrow">
+          <span class="zlbl">Buy Zone</span>
+          <span class="zval z-buy">₹${fmt(a.buy_zone_lo)} – ₹${fmt(a.buy_zone_hi)}</span>
+        </div>
+        <div class="zrow">
+          <span class="zlbl">Stop Loss</span>
+          <span class="zval z-sl">₹${fmt(a.stop_loss)}</span>
+        </div>
+        <div class="zrow">
+          <span class="zlbl">Target 1</span>
+          <span class="zval z-t1">₹${fmt(a.target_1)}</span>
+        </div>
+        <div class="zrow">
+          <span class="zlbl">Target 2 (avg 20d hist)</span>
+          <span class="zval z-t2">₹${fmt(a.target_2)}</span>
+        </div>
+      </div>
+      <div class="vol-badge ${volClass}">${volLbl}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── Patterns page ──────────────────────────────────────────────────
+function renderPatternPills() {
+  const g = META.grades || {};
+  document.getElementById('pat-pills').innerHTML = [
+    ['Grade A (100% / 10+occ)', g.A||0, 'g'],
+    ['Grade B (100% / 5+occ)',  g.B||0, 'y'],
+    ['Grade C (90%+ / 20+occ)', g.C||0, 'b'],
+    ['Grade D (80%+ / 30+occ)', g.D||0, 'b'],
+  ].map(([l,v,c]) => `<div class="kpill ${c}">
+    <div class="kl">${l}</div><div class="kv">${v}</div></div>`).join('');
+}
+
+function sortPatterns(s, btn) {
+  patSort = s;
+  document.querySelectorAll('#page-patterns .fbtn:not(#pf-all):not(#pf-a):not(#pf-ab)').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderPatterns();
+}
+
+function filterPat(f, btn) {
+  patGradeF = f;
+  document.querySelectorAll('#pf-all,#pf-a,#pf-ab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderPatterns();
+}
+
+function renderPatterns() {
+  let rows = [...ALL_PATS];
+  if (patGradeF === 'A')  rows = rows.filter(p => p.grade === 'A');
+  if (patGradeF === 'AB') rows = rows.filter(p => ['A','B'].includes(p.grade));
+  rows.sort((a,b) => {
+    if (patSort === 'wr')  return (b.wr_20d||0) - (a.wr_20d||0);
+    if (patSort === 'avg') return (b.avg_20d||0) - (a.avg_20d||0);
+    return (b.score||0) - (a.score||0);
+  });
+  const gradeOrder = {A:0,B:1,C:2,D:3,'—':4};
+  rows.sort((a,b) => gradeOrder[a.grade||'—'] - gradeOrder[b.grade||'—'] ||
+                     (b.score||0) - (a.score||0));
+
+  document.getElementById('pat-body').innerHTML = rows.map((p, i) => {
+    const wr5  = p.wr_5d  != null ? p.wr_5d+'%'  : '—';
+    const wr10 = p.wr_10d != null ? p.wr_10d+'%' : '—';
+    const wr20 = p.wr_20d != null ? p.wr_20d+'%' : '—';
+    const a5   = p.avg_5d  != null ? retStr(p.avg_5d)  : '—';
+    const a10  = p.avg_10d != null ? retStr(p.avg_10d) : '—';
+    const a20  = p.avg_20d != null ? retStr(p.avg_20d) : '—';
+    const yrStr= (p.years||[]).map(y=>String(y).slice(2)).join("'");
+    const wrColor = (p.wr_20d||0) >= 90 ? 'green' : (p.wr_20d||0) >= 80 ? 'amber' : '';
+    return `<tr>
+      <td class="mono muted">${i+1}</td>
+      <td><span class="grade grade-${p.grade||'dash'}">${p.grade||'—'}</span></td>
+      <td class="mono blue">${p.signal}</td>
+      <td style="font-size:11px">${p.name}</td>
+      <td class="mono">${p.occurrences}</td>
+      <td class="mono ${wr5==='100%'?'green':''}">${wr5}</td>
+      <td class="mono ${wr10==='100%'?'green':''}">${wr10}</td>
+      <td class="mono ${wrColor}">${wr20}</td>
+      <td class="mono">${a5}</td>
+      <td class="mono">${a10}</td>
+      <td class="mono">${a20}</td>
+      <td class="mono amber">${p.score||'—'}</td>
+      <td style="font-size:9px;color:var(--t3)">${yrStr}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="13" class="empty">No patterns match filter.</td></tr>';
+}
+
+// ── Stock profiles page ─────────────────────────────────────────────
+function renderStockPills() {
+  const grade_a = ALL_GRADE_A.length;
+  const syms    = Object.keys(ALL_PROFS).length;
+  document.getElementById('sp-pills').innerHTML = [
+    ['Stocks with 100% Patterns', syms, 'g'],
+    ['Total Grade A Entries', grade_a, 'g'],
+    ['Highest Avg Return', grade_a ? retStr(ALL_GRADE_A[0].avg_ret) : '—', 'y'],
+  ].map(([l,v,c]) => `<div class="kpill ${c}">
+    <div class="kl">${l}</div><div class="kv">${v}</div></div>`).join('');
+}
+
+function sortSP(s, btn) {
+  spSort = s;
+  document.querySelectorAll('#page-stocks .fbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderStockProfiles();
+}
+
+function renderStockProfiles() {
+  const q   = (document.getElementById('sp-search')?.value || '').toUpperCase().trim();
+  let syms  = Object.keys(ALL_PROFS).filter(s => !q || s.includes(q));
+
+  // Sort symbols by their best pattern
+  const bestOf = sym => {
+    const pats = ALL_PROFS[sym] || [];
+    if (!pats.length) return 0;
+    if (spSort === 'ret') return Math.max(...pats.map(p => p.avg_ret || 0));
+    if (spSort === 'wr')  return Math.max(...pats.map(p => p.win_rate || 0));
+    return Math.max(...pats.map(p => p.occ || 0));
+  };
+  syms.sort((a,b) => bestOf(b) - bestOf(a));
+  syms = syms.slice(0, 200);
+
+  if (!syms.length) {
+    document.getElementById('sp-grid').innerHTML =
+      '<div class="empty">No stock profiles found. Run the GitHub Action to generate data.</div>';
+    return;
+  }
+
+  document.getElementById('sp-grid').innerHTML = syms.map(sym => {
+    const pats = (ALL_PROFS[sym] || []).filter(p => ['A','B'].includes(p.grade));
+    if (!pats.length) return '';
+    const best  = pats[0];
+    const gradeA= pats.filter(p => p.grade==='A').length;
+    const rows  = pats.map(p => `
+      <div class="sp-row">
+        <span><span class="grade grade-${p.grade}">${p.grade}</span></span>
+        <span style="font-size:10px">${p.name}</span>
+        <span class="mono green">${p.win_rate}%</span>
+        <span class="mono ${p.avg_ret>0?'green':'red'}">${p.avg_ret>0?'+':''}${p.avg_ret}%</span>
+        <span class="mono muted">${p.occ} occ</span>
+        <span class="mono muted">${p.hold_days}d</span>
+        <span style="font-size:9px;color:var(--t3)">${(p.years||[]).map(y=>String(y).slice(2)).join("'")}</span>
+      </div>`).join('');
+    return `<div class="spcard">
+      <div class="sp-head" onclick="this.nextElementSibling.classList.toggle('open')">
+        <div>
+          <span class="sp-sym">${sym}</span>
+          <span class="sp-meta" style="margin-left:8px">${pats.length} pattern(s) · 
+            ${gradeA} Grade A · Best: ${best.avg_ret>0?'+':''}${best.avg_ret}% avg (${best.hold_days}d)</span>
+        </div>
+        <span class="grade grade-${best.grade}">${best.grade}</span>
+      </div>
+      <div class="sp-body">
+        <div class="sp-hdr" style="display:grid;grid-template-columns:80px 1fr 60px 80px 80px 80px 70px;gap:6px">
+          <span>Grade</span><span>Pattern</span><span>WR</span><span>Avg Ret</span>
+          <span>Occ</span><span>Hold</span><span>Years</span>
+        </div>
+        ${rows}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── Signal reference table ─────────────────────────────────────────
+const SIG_REF = {
+  V1:  ['Volume','Volume > 5× avg on a green close'],
+  V2:  ['Volume','Volume > 10× avg on a green close'],
+  V3:  ['Volume','Volume < 0.3× avg (drying up)'],
+  V4:  ['Volume','Highest volume in past 252 trading days'],
+  C1:  ['Candle','Hammer: lower wick ≥ 2× body, close in top 30% of range'],
+  C2:  ['Candle','Marubozu Bull: body ≥ 85% of range, closes at high'],
+  C3:  ['Candle','Bullish Engulfing: green candle body covers prior red candle'],
+  C4:  ['Candle','Green close after 3+ consecutive red days'],
+  C5:  ['Candle','NR7: today has the narrowest range of last 7 days'],
+  C6:  ['Candle','Wide Range Day: range > 1.5× avg, closes green in top 70%'],
+  B1:  ['Breakout','New 20-day high close + volume ≥ 1.5× avg'],
+  B2:  ['Breakout','New 52-week high close + volume ≥ 1.5× avg'],
+  B3:  ['Structure','Inside Bar: today\'s range is within prior day\'s range'],
+  T1:  ['Trend','Price crosses above 50MA after being below for 10+ days'],
+  T2:  ['Trend','Golden Cross: 50MA crosses above 200MA (first day)'],
+  T3:  ['Trend','Above 200MA + volume spike (2× avg) + green close'],
+  T4:  ['Trend','> 20% below 200MA + volume spike ≥ 3× avg + green close'],
+  Q1:  ['Sequence','5 or more consecutive red closes — entry on open next day'],
+  Q2:  ['Sequence','7 consecutive green closes (momentum continuation test)'],
+  K1:  ['Combo','Vol 10× + Hammer (operator accumulation + reversal candle)'],
+  K2:  ['Combo','Vol dry-up 5 days then 20-day high breakout'],
+  K3:  ['Combo','5 red days + Vol 10× spike (capitulation bottom)'],
+  K4:  ['Combo','Deep oversold (>20% below 200MA) + Hammer candle'],
+  K5:  ['Combo','52-week high + Marubozu Bull (unstoppable momentum)'],
+  K6:  ['Combo','NR7 + Above 200MA + vol ≥ 1.5× (coiled spring in uptrend)'],
+  K7:  ['Combo','Engulfing + 20d breakout + vol 5× (triple confirmation)'],
+  K8:  ['Combo','5 red days + Hammer + Above 200MA (pullback + reversal)'],
+  K9:  ['Combo','Annual vol climax + Hammer + Below 200MA (capitulation)'],
+  K10: ['Combo','Vol dry-up 3d + NR4 + Above 200MA (compression in uptrend)'],
+};
+function renderSigRef() {
+  document.getElementById('sig-ref-body').innerHTML =
+    Object.entries(SIG_REF).map(([k, [cat, desc]]) =>
+      `<tr>
+        <td class="mono blue">${k}</td>
+        <td>${(SIG_REF[k] && typeof ALL_PATS.find===undefined ? k : (ALL_PATS.find(p=>p.signal===k)||{name:k}).name)}</td>
+        <td style="font-size:10px;padding:3px 10px">
+          <span style="background:var(--blb);color:var(--blue);border:1px solid var(--bl2);
+          padding:1px 6px;border-radius:3px;font-size:9px">${cat}</span></td>
+        <td style="font-size:11px;color:var(--t2)">${desc}</td>
+      </tr>`).join('');
+}
+
+// ── Nav ─────────────────────────────────────────────────────────────
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b  => b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── Helpers ─────────────────────────────────────────────────────────
+function fmt(n) {
+  if (n == null) return '—';
+  return Number(n).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+function retStr(r) {
+  if (r == null) return '—';
+  return `<span style="color:${r>0?'var(--green)':'var(--red)'}">${r>0?'+':''}${r}%</span>`;
+}
+function formatDate(s) {
+  if (!s) return '—';
+  const [y,m,d] = s.split('-');
+  const mns = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${parseInt(d)} ${mns[parseInt(m)]} ${y}`;
+}
+
+// Boot
+loadData();
+</script>
+</body>
+</html>
