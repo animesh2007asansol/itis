@@ -1,11 +1,122 @@
 {
   "label": "latest",
-  "date": "2026-04-10",
-  "generated_at": "2026-04-13T17:46:34+05:30",
+  "date": "2026-04-13",
+  "generated_at": "2026-04-13T20:16:30+05:30",
   "trading_day": true,
-  "symbol_count": 0,
-  "prices": {},
-  "csv_format": "bad-header",
+  "symbol_count": 22,
+  "prices": {
+    "AMBER": {
+      "close": 7178.5,
+      "prev_close": 7245.0,
+      "chg_pct": -0.92
+    },
+    "ASIANPAINT": {
+      "close": 2352.4,
+      "prev_close": 2360.7,
+      "chg_pct": -0.35
+    },
+    "BALRAMCHIN": {
+      "close": 475.5,
+      "prev_close": 473.5,
+      "chg_pct": 0.42
+    },
+    "BERGEPAINT": {
+      "close": 460.7,
+      "prev_close": 454.0,
+      "chg_pct": 1.48
+    },
+    "BLUESTARCO": {
+      "close": 1730.0,
+      "prev_close": 1690.0,
+      "chg_pct": 2.37
+    },
+    "CHAMBLFERT": {
+      "close": 457.25,
+      "prev_close": 456.7,
+      "chg_pct": 0.12
+    },
+    "COALINDIA": {
+      "close": 435.1,
+      "prev_close": 434.1,
+      "chg_pct": 0.23
+    },
+    "COROMANDEL": {
+      "close": 2093.6,
+      "prev_close": 2154.8,
+      "chg_pct": -2.84
+    },
+    "DEEPAKFERT": {
+      "close": 1071.65,
+      "prev_close": 1088.85,
+      "chg_pct": -1.58
+    },
+    "EIDPARRY": {
+      "close": 856.45,
+      "prev_close": 854.5,
+      "chg_pct": 0.23
+    },
+    "IRFC": {
+      "close": 98.92,
+      "prev_close": 100.26,
+      "chg_pct": -1.34
+    },
+    "JWL": {
+      "close": 261.88,
+      "prev_close": 268.16,
+      "chg_pct": -2.34
+    },
+    "KALYANKJIL": {
+      "close": 441.65,
+      "prev_close": 449.15,
+      "chg_pct": -1.67
+    },
+    "KANSAINER": {
+      "close": 188.65,
+      "prev_close": 191.52,
+      "chg_pct": -1.5
+    },
+    "NTPC": {
+      "close": 386.25,
+      "prev_close": 380.15,
+      "chg_pct": 1.6
+    },
+    "RVNL": {
+      "close": 271.79,
+      "prev_close": 275.0,
+      "chg_pct": -1.17
+    },
+    "RCF": {
+      "close": 126.21,
+      "prev_close": 128.2,
+      "chg_pct": -1.55
+    },
+    "SENCO": {
+      "close": 323.25,
+      "prev_close": 323.0,
+      "chg_pct": 0.08
+    },
+    "TITAGARH": {
+      "close": 696.8,
+      "prev_close": 710.25,
+      "chg_pct": -1.89
+    },
+    "TITAN": {
+      "close": 4439.3,
+      "prev_close": 4505.0,
+      "chg_pct": -1.46
+    },
+    "TRIVENI": {
+      "close": 384.1,
+      "prev_close": 383.0,
+      "chg_pct": 0.29
+    },
+    "VOLTAS": {
+      "close": 1361.6,
+      "prev_close": 1315.6,
+      "chg_pct": 3.5
+    }
+  },
+  "csv_format": "new-format(sym=TCKRSYMB,close=CLSPRIC)",
   "source": "NSE CM equity bhav copy \u2014 EQ/BE series",
   "note": "NSE official closing prices. Updated nightly after 11 PM IST."
 }

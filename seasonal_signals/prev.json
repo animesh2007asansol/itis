@@ -1,10 +1,77 @@
 {
   "label": "prev",
-  "date": "2026-04-09",
-  "generated_at": "2026-04-13T17:46:34+05:30",
+  "date": "2026-04-10",
+  "generated_at": "2026-04-13T20:16:30+05:30",
   "trading_day": true,
-  "symbol_count": 0,
-  "prices": {},
-  "csv_format": "bad-header",
+  "symbol_count": 22,
+  "prices": {
+    "AMBER": {
+      "close": 7245.0
+    },
+    "ASIANPAINT": {
+      "close": 2360.7
+    },
+    "BALRAMCHIN": {
+      "close": 473.5
+    },
+    "BERGEPAINT": {
+      "close": 454.0
+    },
+    "BLUESTARCO": {
+      "close": 1690.0
+    },
+    "CHAMBLFERT": {
+      "close": 456.7
+    },
+    "COALINDIA": {
+      "close": 434.1
+    },
+    "COROMANDEL": {
+      "close": 2154.8
+    },
+    "DEEPAKFERT": {
+      "close": 1088.85
+    },
+    "EIDPARRY": {
+      "close": 854.5
+    },
+    "IRFC": {
+      "close": 100.26
+    },
+    "JWL": {
+      "close": 268.16
+    },
+    "KALYANKJIL": {
+      "close": 449.15
+    },
+    "KANSAINER": {
+      "close": 191.52
+    },
+    "NTPC": {
+      "close": 380.15
+    },
+    "RVNL": {
+      "close": 275.0
+    },
+    "RCF": {
+      "close": 128.2
+    },
+    "SENCO": {
+      "close": 323.0
+    },
+    "TITAGARH": {
+      "close": 710.25
+    },
+    "TITAN": {
+      "close": 4505.0
+    },
+    "TRIVENI": {
+      "close": 383.0
+    },
+    "VOLTAS": {
+      "close": 1315.6
+    }
+  },
+  "csv_format": "new-format(sym=TCKRSYMB,close=CLSPRIC)",
   "source": "NSE CM equity bhav copy \u2014 EQ/BE series"
 }
