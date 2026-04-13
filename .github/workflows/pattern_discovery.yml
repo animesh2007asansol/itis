@@ -41,7 +41,7 @@ jobs:
       - name: Run pattern discovery
         run: |
           python scripts/pattern_discovery.py
-        timeout-minutes: 25
+        timeout-minutes: 300
 
       - name: Show output summary
         run: |
