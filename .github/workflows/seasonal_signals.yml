@@ -1,12 +1,9 @@
 name: Seasonal Signals — Prepare JSON
 
 on:
-  # Auto-trigger: runs at 6 PM UTC = 11:30 PM IST, Mon–Fri
-  # This is 2.5 hrs after the 9 PM IST NSE data fetch, giving plenty of time
   schedule:
-    - cron: '30 18 * * 1-5'
-
-  # Manual trigger from GitHub Actions UI — useful for testing
+    # 6:00 PM UTC = 11:30 PM IST, Mon-Fri (2.5 hrs after 9 PM IST NSE fetch)
+    - cron: '0 18 * * 1-5'
   workflow_dispatch:
     inputs:
       reason:
@@ -18,9 +15,8 @@ jobs:
   prepare-signals:
     name: Prepare Seasonal Signals JSON
     runs-on: ubuntu-latest
-
     permissions:
-      contents: write   # needed to push output files back to repo
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -34,67 +30,99 @@ jobs:
       - name: Show trigger info
         run: |
           echo "Trigger: ${{ github.event_name }}"
-          echo "Time (UTC): $(date -u)"
-          echo "Time (IST): $(TZ='Asia/Kolkata' date)"
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "Reason: ${{ github.event.inputs.reason }}"
-          fi
+          echo "UTC: $(date -u)"
+          echo "IST: $(TZ='Asia/Kolkata' date)"
+          [ "${{ github.event_name }}" = "workflow_dispatch" ] && echo "Reason: ${{ github.event.inputs.reason }}" || true
 
-      - name: Check data directory exists
+      - name: Check equity data directory
         run: |
           if [ ! -d "data/equity" ]; then
-            echo "ERROR: data/equity/ directory not found. Has the NSE fetch run today?"
+            echo "ERROR: data/equity/ not found"
             exit 1
           fi
-          echo "Equity data directory exists ✓"
-          echo "Most recent files:"
-          find data/equity -name "*.csv" | sort -r | head -5
+          echo "Latest CSVs:"
+          find data/equity -name "*.csv" | sort -r | head -5 || true
+
+      - name: Inspect latest CSV (format diagnostic)
+        run: |
+          LATEST=$(find data/equity -name "*.csv" | sort -r | head -1)
+          echo "Inspecting: $LATEST"
+          echo ""
+          echo "=== First line (header) ==="
+          head -1 "$LATEST"
+          echo ""
+          echo "=== Second line (first data row) ==="
+          sed -n '2p' "$LATEST"
+          echo ""
+          echo "=== Lines containing VOLTAS or TITAN ==="
+          grep -m3 "VOLTAS\|TITAN\|AMBER\|COALINDIA\|KALYANKJIL" "$LATEST" | head -5 || echo "(none found with grep)"
+          echo ""
+          echo "=== Total rows ==="
+          wc -l "$LATEST"
 
       - name: Run seasonal signals script
         run: |
           python scripts/prepare_seasonal_signals.py
 
-      - name: Verify output
+      - name: Verify output files
         run: |
-          echo "Output files:"
+          echo "=== Output files ==="
           ls -lh seasonal_signals/ 2>/dev/null || echo "seasonal_signals/ not created!"
+          echo ""
           if [ -f "seasonal_signals/latest.json" ]; then
-            echo ""
-            echo "=== latest.json preview ==="
+            echo "=== latest.json summary ==="
             python -c "
           import json
           with open('seasonal_signals/latest.json') as f:
               d = json.load(f)
-          print(f'Date: {d[\"date\"]}')
+          print(f'Date:    {d[\"date\"]}')
+          print(f'Format:  {d.get(\"csv_format\",\"unknown\")}')
           print(f'Symbols: {d[\"symbol_count\"]}')
-          print(f'Generated: {d[\"generated_at\"]}')
           prices = d['prices']
           for sym in sorted(prices.keys()):
-              entry = prices[sym]
-              close = entry['close'] if isinstance(entry, dict) else entry
-              chg = entry.get('chg_pct', '') if isinstance(entry, dict) else ''
-              chg_str = f' ({chg:+.2f}%)' if isinstance(chg, float) else ''
-              print(f'  {sym:<14} ₹{close:.2f}{chg_str}')
+              e = prices[sym]
+              close = e['close'] if isinstance(e, dict) else e
+              chg   = e.get('chg_pct','') if isinstance(e, dict) else ''
+              chg_s = f' ({chg:+.2f}%)' if isinstance(chg, float) else ''
+              print(f'  {sym:<14} Rs{close:.2f}{chg_s}')
           "
-          else
-            echo "ERROR: latest.json was not created!"
-            exit 1
+          fi
+          echo ""
+          if [ -f "seasonal_signals/backtest.json" ]; then
+            echo "=== backtest.json summary ==="
+            python -c "
+          import json
+          with open('seasonal_signals/backtest.json') as f:
+              d = json.load(f)
+          print(f'Start:      Rs{d[\"start_capital\"]:,}')
+          print(f'Final:      Rs{d[\"final_capital\"]:,}')
+          print(f'Total ret:  {d[\"total_ret_pct\"]:+.1f}%')
+          print(f'5yr CAGR:   {d[\"cagr_5yr\"]:+.1f}%')
+          print(f'Win rate:   {d[\"win_rate_pct\"]}% ({d[\"total_wins\"]}/{d[\"total_trades\"]})')
+          print(f'Formats:    {d.get(\"csv_formats_used\",{})}')
+          print()
+          for y in d['year_summary']:
+              p = y['partial']
+              print(f'  {y[\"fy\"]}  {y[\"ret_pct\"]:>+6.1f}%  {y[\"wins\"]}W {y[\"losses\"]}L  Rs{y[\"end_capital\"]:>9,}  {\"(partial)\" if p else \"\"}')
+          print()
+          missing = [t for t in d['trades'] if t.get('verdict','').startswith('DATA MISSING')]
+          if missing:
+              print(f'DATA MISSING ({len(missing)} trades):')
+              for t in missing:
+                  print(f'  {t[\"sym\"]} {t[\"fy\"]}: {t[\"data_note\"] or t[\"verdict\"]}')
+          "
           fi
 
-      - name: Commit and push seasonal_signals/ to repo
+      - name: Commit and push to repo
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          git add seasonal_signals/latest.json
-          git add seasonal_signals/prev.json 2>/dev/null || true
-
-          # Only commit if there are actual changes
+          git add seasonal_signals/latest.json seasonal_signals/prev.json seasonal_signals/backtest.json 2>/dev/null || true
           if git diff --cached --quiet; then
-            echo "No changes to commit — prices unchanged since last run."
+            echo "No changes — prices unchanged since last run."
           else
             DATE_IST=$(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M IST')
-            git commit -m "🔄 Seasonal signals update — ${DATE_IST}"
+            git commit -m "Seasonal signals update — ${DATE_IST}"
             git push
-            echo "✅ Pushed seasonal_signals/ to repo."
+            echo "Pushed seasonal_signals/ to repo."
           fi
