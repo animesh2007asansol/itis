@@ -1,6 +1,6 @@
 # ─────────────────────────────────────────────────────────────
 #  NSE Daily Data Fetcher – GitHub Actions Workflow
-# 
+#
 #  Schedule (IST = UTC + 5:30):
 #    • 21:00 IST = 15:30 UTC  ← primary run
 #    • 21:30 IST = 16:00 UTC  ← first retry
