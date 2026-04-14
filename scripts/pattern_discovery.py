@@ -360,37 +360,69 @@ def mine_stock(g, sym):
     for sig, name in ALL_SIGNALS.items():
         if sig not in g.columns:
             continue
-        mask  = g[sig].fillna(False)
-        hits  = g[mask]
+        mask = g[sig].fillna(False)
+        hits = g[mask]
         if len(hits) < 3:
             continue
-        if hits["year"].nunique() < 2:
-            continue
+
         for w in FWD_WINDOWS:
             col   = f"fwd_{w}"
-            valid = hits[col].dropna()
-            if len(valid) < 3:
+            # valid = rows where the signal fired AND forward return is available
+            valid_rows = hits[hits[col].notna()].copy()
+            if len(valid_rows) < 3:
                 continue
+
+            # CROSS-YEAR FILTER on ACTUAL FORWARD RETURN DATA (not just signal dates)
+            # The pattern must have produced measurable outcomes in 2+ different years
+            years_with_data = sorted(valid_rows["year"].unique())
+            if len(years_with_data) < CROSS_YEAR_FILTER:
+                continue
+
+            # Also require it to NOT be dominated by a single year
+            # (>80% of occurrences in one year = bull market artifact)
+            year_counts = valid_rows["year"].value_counts()
+            max_year_pct = year_counts.iloc[0] / len(valid_rows)
+            if max_year_pct > 0.80 and len(valid_rows) < 10:
+                # Only flag if sample is small; large samples can have natural concentration
+                continue
+
+            valid = valid_rows[col]
             wr = (valid > 0).sum() / len(valid) * 100
             if wr < 80:
                 continue
             avg_r = round(valid.mean() * 100, 2)
             med_r = round(valid.median() * 100, 2)
+
+            # Year-wise breakdown: show win rate per year
+            yr_breakdown = {}
+            for yr in years_with_data:
+                yr_data = valid_rows[valid_rows["year"] == yr][col]
+                if len(yr_data):
+                    yr_wr = round((yr_data > 0).sum() / len(yr_data) * 100, 1)
+                    yr_avg = round(yr_data.mean() * 100, 2)
+                    yr_breakdown[str(int(yr))] = {"occ": len(yr_data), "wr": yr_wr, "avg": yr_avg}
+
             found.append({
-                "sym": sym, "signal": sig, "name": name,
-                "hold_days": w, "occ": int(len(valid)),
-                "win_rate": round(wr, 1), "avg_ret": avg_r,
-                "med_ret": med_r,
-                "max_ret": round(valid.max() * 100, 2),
-                "min_ret": round(valid.min() * 100, 2),
-                "years":   [int(y) for y in sorted(hits["year"].unique())],
-                "grade": ("A" if wr == 100 and len(valid) >= 5 else
-                          "B" if wr == 100 else
-                          "C" if wr >= 90  else "D"),
+                "sym":       sym,
+                "signal":    sig,
+                "name":      name,
+                "hold_days": w,
+                "occ":       int(len(valid)),
+                "win_rate":  round(wr, 1),
+                "avg_ret":   avg_r,
+                "med_ret":   med_r,
+                "max_ret":   round(valid.max() * 100, 2),
+                "min_ret":   round(valid.min() * 100, 2),
+                "years":     [int(y) for y in years_with_data],
+                "yr_detail": yr_breakdown,
+                "grade":     ("A" if wr == 100 and len(valid) >= 5 else
+                              "B" if wr == 100 else
+                              "C" if wr >= 90  else "D"),
             })
-    # deduplicate: keep best hold_days per signal
+
+    # Deduplicate: keep best hold_days per signal (highest WR, then avg_ret)
     found.sort(key=lambda x: (-x["win_rate"], -x["avg_ret"]))
-    seen = set()
+    seen   = set()
     unique = []
     for f in found:
         k = f["signal"]
