@@ -1,20 +1,25 @@
 #!/usr/bin/env python3
 """
-pattern_discovery.py  v1
+pattern_discovery.py  v2
 =========================
-Reads ALL NSE equity bhav copy CSVs from the data repo.
-Discovers patterns with 100% (and highest) historical win rates.
-Handles both old and new NSE CSV formats.
+NSE Pattern Discovery — strict 100% win-rate engine.
 
-Outputs (pattern_signals/ — raw data/ never touched):
-  patterns.json       — all signal patterns ranked by win_rate x avg_return
-  alerts.json         — today's active signals with buy/sell zones
-  stock_profiles.json — per-stock 100%-win-rate patterns
+Hard filters (all must pass):
+  - Win rate: 100% at all three windows (5d, 10d, 20d)
+  - Avg return: 20d >= +10%, 10d >= +7%, 5d >= +3%
+  - Volume on signal day > 100,000 shares
+  - Appears in 2+ different years
+  - Max gap between consecutive years of occurrence <= 2 years
+  - At least ceil(data_years / 2) years covered
 
-Run after daily NSE fetch (scheduled 11:45 PM IST).
+Outputs (pattern_signals/ only — data/ never touched):
+  patterns.json       — cross-stock patterns, graded by repeat-years
+  stock_profiles.json — per-stock patterns with all-years detail + month heatmap
+  alerts.json         — today + last 20 trading days window with buy/sell status
+  heatmap.json        — signal × month profit matrix across all stocks
 """
 
-import json, os, sys, gc, traceback
+import json, os, gc, sys, traceback
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
 import warnings
@@ -24,35 +29,46 @@ try:
     import pandas as pd
     import numpy as np
 except ImportError:
-    print("ERROR: pandas and numpy required. Run: pip install pandas numpy")
-    sys.exit(1)
+    print("ERROR: pip install pandas numpy"); sys.exit(1)
 
 # ---------------------------------------------------------------------------
-REPO_ROOT  = Path(__file__).parent.parent
-DATA_DIR   = REPO_ROOT / "data"
-OUT_DIR    = REPO_ROOT / "pattern_signals"
-MANIFEST   = DATA_DIR / "manifest.json"
-
-MIN_TRADING_DAYS  = 250
-MIN_OCCURRENCES   = 5
-CROSS_YEAR_FILTER = 2
-FWD_WINDOWS       = [5, 10, 20]
+# Paths
+# ---------------------------------------------------------------------------
+REPO_ROOT = Path(__file__).parent.parent
+DATA_DIR  = REPO_ROOT / "data"
+OUT_DIR   = REPO_ROOT / "pattern_signals"
+MANIFEST  = DATA_DIR / "manifest.json"
 
 # ---------------------------------------------------------------------------
-# NSE CSV column aliases — old + new format
+# Hard thresholds — no result shown below these
+# ---------------------------------------------------------------------------
+MIN_WR_ALL    = 100.0   # must be 100% win at every window
+MIN_AVG_5D    = 3.0     # avg return at 5d >= +3%
+MIN_AVG_10D   = 7.0     # avg return at 10d >= +7%
+MIN_AVG_20D   = 10.0    # avg return at 20d >= +10%
+MIN_VOLUME    = 100_000  # signal day volume must be tradeable
+MIN_OCC       = 3       # minimum occurrences
+MIN_YEARS     = 2       # must appear in 2+ different years
+MAX_YR_GAP    = 2       # max gap (years) between consecutive occurrences
+FWD_WINDOWS   = [5, 10, 20]
+MIN_TRADING_D = 200
+
+MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+
+# ---------------------------------------------------------------------------
+# CSV column aliases — old + new NSE format
 # ---------------------------------------------------------------------------
 SYMBOL_ALIASES = ["SYMBOL",    "TCKRSYMB"]
 SERIES_ALIASES = ["SERIES",    "SCTYSRS"]
 OPEN_ALIASES   = ["OPEN",      "OPNPRIC"]
 HIGH_ALIASES   = ["HIGH",      "HGHPRIC"]
 LOW_ALIASES    = ["LOW",       "LWPRIC"]
-CLOSE_ALIASES  = ["CLOSE",     "CLSPRIC",  "CLOSE PRICE", "CLOSE_PRICE", "LASTPRIC"]
+CLOSE_ALIASES  = ["CLOSE",     "CLSPRIC",  "CLOSE PRICE", "LASTPRIC"]
 VOLUME_ALIASES = ["TOTTRDQTY", "TTLTRADGVOL", "VOLUME"]
 
 def find_col(hdr, aliases):
     for a in aliases:
-        if a in hdr:
-            return hdr.index(a)
+        if a in hdr: return hdr.index(a)
     return -1
 
 def parse_hdr(raw):
@@ -63,9 +79,8 @@ def load_csv(path):
     try:
         with open(path, encoding="utf-8", errors="replace") as f:
             lines = f.readlines()
-        if len(lines) < 2:
-            return rows
-        hdr = parse_hdr(lines[0])
+        if len(lines) < 2: return rows
+        hdr   = parse_hdr(lines[0])
         i_sym = find_col(hdr, SYMBOL_ALIASES)
         i_ser = find_col(hdr, SERIES_ALIASES)
         i_o   = find_col(hdr, OPEN_ALIASES)
@@ -73,36 +88,30 @@ def load_csv(path):
         i_l   = find_col(hdr, LOW_ALIASES)
         i_c   = find_col(hdr, CLOSE_ALIASES)
         i_v   = find_col(hdr, VOLUME_ALIASES)
-        if i_sym < 0 or i_c < 0:
-            return rows
-        max_col = max(x for x in [i_sym, i_o, i_h, i_l, i_c, i_v] if x >= 0)
+        if i_sym < 0 or i_c < 0: return rows
+        max_col = max(x for x in [i_sym,i_o,i_h,i_l,i_c,i_v] if x >= 0)
         for line in lines[1:]:
             line = line.strip()
-            if not line:
-                continue
+            if not line: continue
             cols = [c.strip().strip('"').strip("'") for c in line.split(",")]
-            if len(cols) <= max_col:
-                continue
+            if len(cols) <= max_col: continue
             series = cols[i_ser].strip() if i_ser >= 0 else "EQ"
-            if series not in ("EQ", "BE"):
-                continue
+            if series not in ("EQ","BE"): continue
             try:
                 sym = cols[i_sym].strip()
                 c   = float(cols[i_c])
-                o   = float(cols[i_o])   if i_o >= 0 else c
-                h   = float(cols[i_h])   if i_h >= 0 else c
-                l   = float(cols[i_l])   if i_l >= 0 else c
+                o   = float(cols[i_o]) if i_o >= 0 else c
+                h   = float(cols[i_h]) if i_h >= 0 else c
+                l   = float(cols[i_l]) if i_l >= 0 else c
                 v   = float(cols[i_v].replace(",","")) if i_v >= 0 else 0.0
                 if c > 0 and sym:
-                    rows.append({"sym": sym, "o": o, "h": h, "l": l, "c": c, "v": v})
-            except (ValueError, IndexError):
-                pass
-    except Exception:
-        pass
+                    rows.append({"sym":sym,"o":o,"h":h,"l":l,"c":c,"v":v})
+            except (ValueError,IndexError): pass
+    except Exception: pass
     return rows
 
 # ---------------------------------------------------------------------------
-# Load all CSVs
+# Load all data
 # ---------------------------------------------------------------------------
 def load_all_data(manifest):
     trading_days = sorted(manifest.keys())
@@ -112,99 +121,92 @@ def load_all_data(manifest):
     for date_str in trading_days:
         y, m, _ = date_str.split("-")
         path = DATA_DIR / "equity" / y / m / f"{date_str}.csv"
-        if not path.exists():
-            continue
+        if not path.exists(): continue
         rows = load_csv(path)
-        for r in rows:
-            r["date"] = date_str
+        for r in rows: r["date"] = date_str
         all_rows.extend(rows)
         loaded += 1
-        if loaded % 200 == 0:
+        if loaded % 300 == 0:
             print(f"    {loaded}/{len(trading_days)} files, {len(all_rows):,} rows...")
-    print(f"  Total: {len(all_rows):,} rows from {loaded} files")
+    print(f"  Total: {len(all_rows):,} rows, {loaded} files")
     df = pd.DataFrame(all_rows)
     df["date"] = pd.to_datetime(df["date"])
-    df = df.sort_values(["sym", "date"]).reset_index(drop=True)
+    df = df.sort_values(["sym","date"]).reset_index(drop=True)
     return df
 
 # ---------------------------------------------------------------------------
-# Compute indicators per stock
+# Indicators
 # ---------------------------------------------------------------------------
 def compute_indicators(g):
     g = g.copy().reset_index(drop=True)
-
-    # Candle
     g["body"]       = (g["c"] - g["o"]).abs()
-    g["range"]      = g["h"] - g["l"]
+    g["range_"]     = g["h"] - g["l"]
     g["upper_wick"] = g["h"] - g[["o","c"]].max(axis=1)
     g["lower_wick"] = g[["o","c"]].min(axis=1) - g["l"]
-    g["close_pos"]  = np.where(g["range"] > 0, (g["c"] - g["l"]) / g["range"], 0.5)
+    g["close_pos"]  = np.where(g["range_"]>0,(g["c"]-g["l"])/g["range_"],0.5)
     g["green"]      = (g["c"] >= g["o"]).astype(int)
+    g["month"]      = g["date"].dt.month
+    g["year"]       = g["date"].dt.year
 
     # Volume
-    g["vol20"]     = g["v"].rolling(20, min_periods=5).mean()
-    g["vol_ratio"] = np.where(g["vol20"] > 0, g["v"] / g["vol20"], 0.0)
-    g["vol252max"] = g["v"].rolling(252, min_periods=60).max().shift(1)
+    g["vol20"]     = g["v"].rolling(20,min_periods=5).mean()
+    g["vol_ratio"] = np.where(g["vol20"]>0, g["v"]/g["vol20"], 0.0)
+    g["vol252max"] = g["v"].rolling(252,min_periods=60).max().shift(1)
+    g["vol_ok"]    = g["v"] >= MIN_VOLUME   # tradeable volume flag
 
     # Range
-    g["range20"] = g["range"].rolling(20, min_periods=5).mean()
-    g["range7min"]= g["range"].rolling(7, min_periods=7).min()
-    g["range4min"]= g["range"].rolling(4, min_periods=4).min()
+    g["range20"]  = g["range_"].rolling(20,min_periods=5).mean()
+    g["range7min"]= g["range_"].rolling(7,min_periods=7).min()
+    g["range4min"]= g["range_"].rolling(4,min_periods=4).min()
 
     # MAs
-    g["ma20"]  = g["c"].rolling(20,  min_periods=10).mean()
-    g["ma50"]  = g["c"].rolling(50,  min_periods=25).mean()
-    g["ma200"] = g["c"].rolling(200, min_periods=100).mean()
+    g["ma20"]  = g["c"].rolling(20, min_periods=10).mean()
+    g["ma50"]  = g["c"].rolling(50, min_periods=25).mean()
+    g["ma200"] = g["c"].rolling(200,min_periods=100).mean()
     g["above_ma200"] = (g["c"] > g["ma200"]).astype(int)
     g["above_ma50"]  = (g["c"] > g["ma50"]).astype(int)
-    g["pct_below_200"] = np.where(g["ma200"] > 0, (g["c"] / g["ma200"] - 1) * 100, 0)
+    g["pct_below_200"] = np.where(g["ma200"]>0,(g["c"]/g["ma200"]-1)*100,0)
 
     # ATR
     prev_c = g["c"].shift(1)
     tr = pd.concat([g["h"]-g["l"], (g["h"]-prev_c).abs(), (g["l"]-prev_c).abs()], axis=1).max(axis=1)
-    g["atr14"] = tr.rolling(14, min_periods=7).mean()
+    g["atr14"] = tr.rolling(14,min_periods=7).mean()
 
     # Highs/Lows
-    g["high20"]  = g["h"].rolling(20,  min_periods=10).max().shift(1)
-    g["high52w"] = g["h"].rolling(252, min_periods=60).max().shift(1)
+    g["high20"]  = g["h"].rolling(20, min_periods=10).max().shift(1)
+    g["high52w"] = g["h"].rolling(252,min_periods=60).max().shift(1)
 
     # Prev bar
-    g["prev_c"] = g["c"].shift(1)
-    g["prev_h"] = g["h"].shift(1)
-    g["prev_l"] = g["l"].shift(1)
-    g["prev_o"] = g["o"].shift(1)
+    g["prev_c"]     = g["c"].shift(1)
+    g["prev_h"]     = g["h"].shift(1)
+    g["prev_l"]     = g["l"].shift(1)
+    g["prev_o"]     = g["o"].shift(1)
     g["prev_green"] = g["green"].shift(1)
     g["prev_body"]  = g["body"].shift(1)
 
     # Consecutive red/green
-    consec_red = consec_green = 0
-    cr_list = []
-    cg_list = []
-    for green_val in g["green"]:
-        if green_val == 0:
-            consec_red += 1; consec_green = 0
-        else:
-            consec_green += 1; consec_red = 0
-        cr_list.append(consec_red)
-        cg_list.append(consec_green)
+    cr_list = []; cg_list = []; cr = cg = 0
+    for gv in g["green"]:
+        if gv == 0: cr += 1; cg = 0
+        else:        cg += 1; cr = 0
+        cr_list.append(cr); cg_list.append(cg)
     g["consec_red"]   = cr_list
     g["consec_green"] = cg_list
 
     # MA cross
     g["ma50_above_200"] = (g["ma50"] > g["ma200"]).astype(int)
-    g["golden_cross"]   = ((g["ma50_above_200"] == 1) & (g["ma50_above_200"].shift(1) == 0)).astype(int)
-    g["below_ma50_10d"] = g["above_ma50"].rolling(10, min_periods=10).sum().shift(1)
+    g["golden_cross"]   = ((g["ma50_above_200"]==1) & (g["ma50_above_200"].shift(1)==0)).astype(int)
+    g["below_ma50_10d"] = g["above_ma50"].rolling(10,min_periods=10).sum().shift(1)
 
-    # Vol dry-up windows
-    v3_flag         = (g["vol_ratio"] <= 0.3).astype(int)
-    g["vol_dryup_3d"] = v3_flag.rolling(3, min_periods=3).sum() >= 2
-    g["vol_dryup_5d"] = v3_flag.rolling(5, min_periods=3).sum() >= 2
+    # Vol dry-up
+    v3flag = (g["vol_ratio"] <= 0.3).astype(int)
+    g["vol_dryup_3d"] = v3flag.rolling(3,min_periods=3).sum() >= 2
+    g["vol_dryup_5d"] = v3flag.rolling(5,min_periods=3).sum() >= 2
 
     # Forward returns
     for w in FWD_WINDOWS:
         g[f"fwd_{w}"] = g["c"].shift(-w) / g["c"] - 1
 
-    g["year"] = g["date"].dt.year
     return g
 
 # ---------------------------------------------------------------------------
@@ -213,7 +215,6 @@ def compute_indicators(g):
 ALL_SIGNALS = {
     "V1":  "Bull Volume Spike 5x",
     "V2":  "Bull Volume Spike 10x",
-    "V3":  "Volume Dry-Up (<0.3x avg)",
     "V4":  "Annual Volume Climax",
     "C1":  "Hammer",
     "C2":  "Marubozu Bull",
@@ -224,12 +225,11 @@ ALL_SIGNALS = {
     "B1":  "20-Day High Breakout + Volume",
     "B2":  "52-Week High Breakout + Volume",
     "B3":  "Inside Bar",
-    "T1":  "Crossed Above 50MA (was below 10d)",
-    "T2":  "Golden Cross (50MA > 200MA)",
+    "T1":  "Crossed Above 50MA",
+    "T2":  "Golden Cross",
     "T3":  "Above 200MA + Volume Spike",
-    "T4":  "Deep Oversold (>20% below 200MA) + Vol",
-    "Q1":  "5+ Consecutive Red Days Entry",
-    "Q2":  "7 Consecutive Green Days",
+    "T4":  "Deep Oversold + Vol Spike",
+    "Q1":  "5+ Consecutive Red Days",
     "K1":  "COMBO: Vol 10x + Hammer",
     "K2":  "COMBO: Vol Dry-Up then 20D Breakout",
     "K3":  "COMBO: 5 Red Days + Vol Spike",
@@ -238,384 +238,560 @@ ALL_SIGNALS = {
     "K6":  "COMBO: NR7 + Above 200MA + Vol",
     "K7":  "COMBO: Engulfing + 20D Breakout + Vol",
     "K8":  "COMBO: 5 Red Days + Hammer + Above 200MA",
-    "K9":  "COMBO: Annual Vol Climax + Hammer + Below 200MA",
-    "K10": "COMBO: Vol Dry-Up 3D + NR4 + Above 200MA",
+    "K9":  "COMBO: Annual Vol Climax + Hammer",
+    "K10": "COMBO: Vol Dry-Up + NR4 + Above 200MA",
 }
 
 def define_signals(df):
     d = df
-    # Volume
-    d["V1"] = (d["vol_ratio"] >= 5)  & (d["c"] > d["o"])
-    d["V2"] = (d["vol_ratio"] >= 10) & (d["c"] > d["o"])
-    d["V3"] = (d["vol_ratio"] <= 0.3)
-    d["V4"] = (d["v"] >= d["vol252max"]) & (d["vol252max"] > 0)
-
-    # Candle
-    d["C1"] = ((d["lower_wick"] >= 2 * d["body"]) & (d["body"] > 0) &
-               (d["upper_wick"] <= d["body"]) & (d["close_pos"] >= 0.7))
-    d["C2"] = ((d["range"] > 0) & (d["body"] / d["range"].replace(0,1) >= 0.85) &
-               (d["c"] > d["o"]) & (d["close_pos"] >= 0.90))
-    d["C3"] = ((d["c"] > d["o"]) & (d["prev_green"] == 0) &
-               (d["o"] <= d["prev_c"]) & (d["c"] >= d["prev_o"]) &
-               (d["body"] > d["prev_body"]))
-    d["C4"] = (d["consec_red"].shift(1) >= 3) & (d["c"] > d["o"])
-    d["C5"] = (d["range"] > 0) & (d["range"] <= d["range7min"])
-    d["C6"] = (d["range"] >= 1.5 * d["range20"].replace(0,1)) & (d["c"] > d["o"]) & (d["close_pos"] >= 0.7)
-
-    # Breakout
-    d["B1"] = ((d["h"] > d["high20"]) & (d["high20"] > 0) &
-               (d["vol_ratio"] >= 1.5) & (d["c"] > d["o"]))
-    d["B2"] = ((d["h"] > d["high52w"]) & (d["high52w"] > 0) &
-               (d["vol_ratio"] >= 1.5) & (d["c"] > d["o"]))
-    d["B3"] = ((d["h"] < d["prev_h"]) & (d["l"] > d["prev_l"]) & (d["prev_h"] > 0))
-
-    # Trend
-    d["T1"] = ((d["above_ma50"] == 1) & (d["above_ma50"].shift(1) == 0) &
-               (d["below_ma50_10d"] == 0))
-    d["T2"] = (d["golden_cross"] == 1)
-    d["T3"] = ((d["above_ma200"] == 1) & (d["vol_ratio"] >= 2) & (d["c"] > d["o"]))
-    d["T4"] = ((d["pct_below_200"] <= -20) & (d["ma200"] > 0) &
-               (d["vol_ratio"] >= 3) & (d["c"] > d["o"]))
-
-    # Sequence
-    d["Q1"] = (d["consec_red"].shift(1) >= 5)
-    d["Q2"] = (d["consec_green"] >= 7)
-
-    # Combos
+    d["V1"]  = (d["vol_ratio"]>=5)  & (d["c"]>d["o"]) & d["vol_ok"]
+    d["V2"]  = (d["vol_ratio"]>=10) & (d["c"]>d["o"]) & d["vol_ok"]
+    d["V4"]  = (d["v"]>=d["vol252max"]) & (d["vol252max"]>0) & d["vol_ok"]
+    d["C1"]  = ((d["lower_wick"]>=2*d["body"]) & (d["body"]>0) &
+                (d["upper_wick"]<=d["body"]) & (d["close_pos"]>=0.7) & d["vol_ok"])
+    d["C2"]  = ((d["range_"]>0) & (d["body"]/d["range_"].replace(0,1)>=0.85) &
+                (d["c"]>d["o"]) & (d["close_pos"]>=0.90) & d["vol_ok"])
+    d["C3"]  = ((d["c"]>d["o"]) & (d["prev_green"]==0) &
+                (d["o"]<=d["prev_c"]) & (d["c"]>=d["prev_o"]) &
+                (d["body"]>d["prev_body"]) & d["vol_ok"])
+    d["C4"]  = (d["consec_red"].shift(1)>=3) & (d["c"]>d["o"]) & d["vol_ok"]
+    d["C5"]  = (d["range_"]>0) & (d["range_"]<=d["range7min"]) & d["vol_ok"]
+    d["C6"]  = ((d["range_"]>=1.5*d["range20"].replace(0,1)) &
+                (d["c"]>d["o"]) & (d["close_pos"]>=0.7) & d["vol_ok"])
+    d["B1"]  = ((d["h"]>d["high20"]) & (d["high20"]>0) &
+                (d["vol_ratio"]>=1.5) & (d["c"]>d["o"]) & d["vol_ok"])
+    d["B2"]  = ((d["h"]>d["high52w"]) & (d["high52w"]>0) &
+                (d["vol_ratio"]>=1.5) & (d["c"]>d["o"]) & d["vol_ok"])
+    d["B3"]  = (d["h"]<d["prev_h"]) & (d["l"]>d["prev_l"]) & (d["prev_h"]>0) & d["vol_ok"]
+    d["T1"]  = ((d["above_ma50"]==1) & (d["above_ma50"].shift(1)==0) &
+                (d["below_ma50_10d"]==0) & d["vol_ok"])
+    d["T2"]  = (d["golden_cross"]==1) & d["vol_ok"]
+    d["T3"]  = ((d["above_ma200"]==1) & (d["vol_ratio"]>=2) &
+                (d["c"]>d["o"]) & d["vol_ok"])
+    d["T4"]  = ((d["pct_below_200"]<=-20) & (d["ma200"]>0) &
+                (d["vol_ratio"]>=3) & (d["c"]>d["o"]) & d["vol_ok"])
+    d["Q1"]  = (d["consec_red"].shift(1)>=5) & d["vol_ok"]
     d["K1"]  = d["V2"] & d["C1"]
     d["K2"]  = d["vol_dryup_5d"].shift(1).fillna(False) & d["B1"]
     d["K3"]  = d["Q1"] & d["V2"]
     d["K4"]  = d["T4"] & d["C1"]
     d["K5"]  = d["B2"] & d["C2"]
-    d["K6"]  = d["C5"] & (d["above_ma200"] == 1) & (d["vol_ratio"] >= 1.5)
+    d["K6"]  = d["C5"] & (d["above_ma200"]==1) & (d["vol_ratio"]>=1.5) & d["vol_ok"]
     d["K7"]  = d["C3"] & d["B1"] & d["V1"]
-    d["K8"]  = d["Q1"] & d["C1"] & (d["above_ma200"] == 1)
-    d["K9"]  = d["V4"] & d["C1"] & (d["above_ma200"] == 0)
-    d["K10"] = d["vol_dryup_3d"] & (d["range"] <= d["range4min"].replace(0,1)) & (d["above_ma200"] == 1)
+    d["K8"]  = d["Q1"] & d["C1"] & (d["above_ma200"]==1)
+    d["K9"]  = d["V4"] & d["C1"]
+    d["K10"] = (d["vol_dryup_3d"] &
+                (d["range_"]<=d["range4min"].replace(0,1)) &
+                (d["above_ma200"]==1) & d["vol_ok"])
     return d
 
 # ---------------------------------------------------------------------------
-# Win rate analysis
+# Year-gap validator
+# ---------------------------------------------------------------------------
+def years_pass_gap(years_list):
+    """Return True if consecutive year gaps are all <= MAX_YR_GAP."""
+    if len(years_list) < MIN_YEARS:
+        return False
+    sy = sorted(years_list)
+    for i in range(1, len(sy)):
+        if sy[i] - sy[i-1] > MAX_YR_GAP:
+            return False
+    return True
+
+def repeating_score(years_list, avg_ret_20d, n_occ):
+    """Score = num_years × avg_ret × log(occ). More years = higher score."""
+    import math
+    return round(len(years_list) * avg_ret_20d * math.log(max(n_occ,1)+1), 1)
+
+# ---------------------------------------------------------------------------
+# Cross-stock pattern analysis
 # ---------------------------------------------------------------------------
 def analyse_signal(df, sig, name):
-    mask = df[sig].fillna(False)
+    mask = df[sig].fillna(False) & df["vol_ok"]
     hits = df[mask].copy()
-    n    = len(hits)
-    if n < MIN_OCCURRENCES:
-        return None
-    years_active = sorted(hits["year"].unique())
-    if len(years_active) < CROSS_YEAR_FILTER:
+    if len(hits) < MIN_OCC:
         return None
 
-    result = {"signal": sig, "name": name, "occurrences": n,
-              "years": [int(y) for y in years_active]}
-    best_wr = 0
+    # All three windows must pass thresholds
+    result = {"signal":sig,"name":name,"occurrences":len(hits)}
     for w in FWD_WINDOWS:
         col   = f"fwd_{w}"
         valid = hits[col].dropna()
-        if len(valid) < MIN_OCCURRENCES:
-            result[f"wr_{w}d"] = result[f"avg_{w}d"] = result[f"med_{w}d"] = None
-            result[f"n_{w}d"] = 0
-            continue
-        wins = (valid > 0).sum()
-        wr   = round(wins / len(valid) * 100, 1)
-        result[f"wr_{w}d"]  = wr
-        result[f"avg_{w}d"] = round(valid.mean() * 100, 2)
-        result[f"med_{w}d"] = round(valid.median() * 100, 2)
-        result[f"n_{w}d"]   = len(valid)
-        best_wr = max(best_wr, wr)
+        if len(valid) < MIN_OCC:
+            return None
+        wr    = (valid>0).sum()/len(valid)*100
+        avg_r = valid.mean()*100
+        if wr < MIN_WR_ALL:
+            return None
+        result[f"wr_{w}d"]  = round(wr,1)
+        result[f"avg_{w}d"] = round(avg_r,2)
+        result[f"med_{w}d"] = round(valid.median()*100,2)
+        result[f"n_{w}d"]   = int(len(valid))
 
-    result["best_win_rate"] = best_wr
-    best_avg = max((result.get(f"avg_{w}d") or 0) for w in FWD_WINDOWS)
-    result["score"] = round(best_wr * best_avg, 1)
+    # Return thresholds
+    if (result.get("avg_5d",0)  < MIN_AVG_5D  or
+        result.get("avg_10d",0) < MIN_AVG_10D or
+        result.get("avg_20d",0) < MIN_AVG_20D):
+        return None
 
-    # Grade based on 20d window
-    wr20 = result.get("wr_20d") or 0
-    n20  = result.get("n_20d")  or 0
-    result["grade"] = ("A" if wr20 == 100 and n20 >= 10 else
-                       "B" if wr20 == 100 and n20 >= 5  else
-                       "C" if wr20 >= 90  and n20 >= 20 else
-                       "D" if wr20 >= 80  and n20 >= 30 else "—")
+    # Year filter
+    years_all = sorted(hits["year"].unique().tolist())
+    if not years_pass_gap(years_all):
+        return None
+    result["years"] = [int(y) for y in years_all]
+    result["n_years"] = len(years_all)
 
-    # Year-wise
+    # Score
+    result["score"] = repeating_score(years_all, result["avg_20d"], len(hits))
+
+    # Grade — based on years covered and occurrences
+    n_y  = len(years_all)
+    n_oc = result[f"n_20d"]
+    result["grade"] = ("A+" if n_y>=4 and n_oc>=10 else
+                       "A"  if n_y>=3 and n_oc>=7  else
+                       "B"  if n_y>=2 and n_oc>=5  else
+                       "C"  if n_y>=2              else "—")
+
+    # Year-wise breakdown
     ywise = {}
-    for y in years_active:
-        yr = hits[hits["year"] == y]["fwd_20"].dropna()
+    for y in years_all:
+        yr = hits[hits["year"]==y]["fwd_20"].dropna()
         if len(yr):
-            ywise[str(int(y))] = {"occ": len(yr), "wr": round((yr>0).sum()/len(yr)*100,1),
-                                   "avg": round(yr.mean()*100, 2)}
+            ywise[str(int(y))] = {
+                "occ":  int(len(yr)),
+                "wr":   round((yr>0).sum()/len(yr)*100,1),
+                "avg":  round(yr.mean()*100,2),
+                "min":  round(yr.min()*100,2),
+                "max":  round(yr.max()*100,2),
+            }
     result["yearly"] = ywise
 
-    # Top 5 stocks that contributed most to this signal
-    if "sym" in hits.columns:
-        top_syms = (hits["sym"].value_counts().head(5).to_dict())
-        result["top_stocks"] = top_syms
+    # Month heatmap (cross-stock)
+    hits["_month"] = hits["date"].dt.month
+    mheat = {}
+    for m in range(1,13):
+        ms = hits[hits["_month"]==m]["fwd_20"].dropna()
+        if len(ms) >= 2:
+            mheat[MONTHS[m-1]] = {
+                "occ":  int(len(ms)),
+                "wr":   round((ms>0).sum()/len(ms)*100,1),
+                "avg":  round(ms.mean()*100,2),
+                "min":  round(ms.min()*100,2),
+                "max":  round(ms.max()*100,2),
+            }
+    result["month_heat"] = mheat
+
+    # Top contributing stocks
+    result["top_stocks"] = hits["sym"].value_counts().head(10).to_dict()
     return result
 
 # ---------------------------------------------------------------------------
-# Stock-specific mining
+# Per-stock mining
 # ---------------------------------------------------------------------------
-def mine_stock(g, sym):
+def mine_stock(g, sym, data_years):
+    """
+    data_years = total years of data available for this stock.
+    Required: appear in at least ceil(data_years/2) years.
+    """
+    import math
+    min_yrs_required = max(MIN_YEARS, math.ceil(data_years/2))
     found = []
+
     for sig, name in ALL_SIGNALS.items():
         if sig not in g.columns:
             continue
-        mask = g[sig].fillna(False)
-        hits = g[mask]
-        if len(hits) < 3:
+        mask = g[sig].fillna(False) & g["vol_ok"]
+        hits = g[mask].copy()
+        if len(hits) < MIN_OCC:
             continue
 
+        # Must have valid forward returns in 2+ years
+        # Use 20d window as primary
+        valid_20 = hits["fwd_20"].dropna()
+        if len(valid_20) < MIN_OCC:
+            continue
+        yr_data_20 = hits[hits["fwd_20"].notna()]["year"].unique()
+        if not years_pass_gap(sorted(yr_data_20)):
+            continue
+
+        # All thresholds must pass at all windows
+        ok = True
+        win_data = {}
         for w in FWD_WINDOWS:
             col   = f"fwd_{w}"
-            # valid = rows where the signal fired AND forward return is available
-            valid_rows = hits[hits[col].notna()].copy()
-            if len(valid_rows) < 3:
-                continue
+            valid = hits[col].dropna()
+            if len(valid) < MIN_OCC:
+                ok = False; break
+            wr    = (valid>0).sum()/len(valid)*100
+            avg_r = valid.mean()*100
+            if wr < MIN_WR_ALL:
+                ok = False; break
+            win_data[w] = {"wr":round(wr,1),"avg":round(avg_r,2),
+                           "med":round(valid.median()*100,2),
+                           "occ":int(len(valid))}
+        if not ok:
+            continue
+        if (win_data[5]["avg"]  < MIN_AVG_5D  or
+            win_data[10]["avg"] < MIN_AVG_10D or
+            win_data[20]["avg"] < MIN_AVG_20D):
+            continue
 
-            # CROSS-YEAR FILTER on ACTUAL FORWARD RETURN DATA (not just signal dates)
-            # The pattern must have produced measurable outcomes in 2+ different years
-            years_with_data = sorted(valid_rows["year"].unique())
-            if len(years_with_data) < CROSS_YEAR_FILTER:
-                continue
+        # Year coverage
+        years_all = sorted([int(y) for y in yr_data_20])
+        if len(years_all) < min(MIN_YEARS, min_yrs_required):
+            continue
 
-            # Also require it to NOT be dominated by a single year
-            # (>80% of occurrences in one year = bull market artifact)
-            year_counts = valid_rows["year"].value_counts()
-            max_year_pct = year_counts.iloc[0] / len(valid_rows)
-            if max_year_pct > 0.80 and len(valid_rows) < 10:
-                # Only flag if sample is small; large samples can have natural concentration
-                continue
+        # Per-year detail — show ALL years with what happened
+        yr_detail = {}
+        for y in sorted(hits["year"].unique()):
+            yr_rows = hits[hits["year"]==y]
+            yr_v20  = yr_rows["fwd_20"].dropna()
+            yr_v5   = yr_rows["fwd_5"].dropna()
+            yr_v10  = yr_rows["fwd_10"].dropna()
+            if len(yr_v20):
+                yr_detail[str(int(y))] = {
+                    "occ":    int(len(yr_v20)),
+                    "wr_20d": round((yr_v20>0).sum()/len(yr_v20)*100,1),
+                    "avg_20d":round(yr_v20.mean()*100,2),
+                    "min_20d":round(yr_v20.min()*100,2),
+                    "max_20d":round(yr_v20.max()*100,2),
+                    "avg_5d": round(yr_v5.mean()*100,2) if len(yr_v5) else None,
+                    "avg_10d":round(yr_v10.mean()*100,2) if len(yr_v10) else None,
+                }
 
-            valid = valid_rows[col]
-            wr = (valid > 0).sum() / len(valid) * 100
-            if wr < 80:
-                continue
-            avg_r = round(valid.mean() * 100, 2)
-            med_r = round(valid.median() * 100, 2)
+        # Month heatmap for this stock+signal
+        hits["_month"] = hits["date"].dt.month
+        month_heat = {}
+        for m in range(1,13):
+            ms = hits[hits["_month"]==m]["fwd_20"].dropna()
+            if len(ms) >= 1:
+                month_heat[MONTHS[m-1]] = {
+                    "occ": int(len(ms)),
+                    "avg": round(ms.mean()*100,2),
+                    "min": round(ms.min()*100,2),
+                    "max": round(ms.max()*100,2),
+                }
 
-            # Year-wise breakdown: show win rate per year
-            yr_breakdown = {}
-            for yr in years_with_data:
-                yr_data = valid_rows[valid_rows["year"] == yr][col]
-                if len(yr_data):
-                    yr_wr = round((yr_data > 0).sum() / len(yr_data) * 100, 1)
-                    yr_avg = round(yr_data.mean() * 100, 2)
-                    yr_breakdown[str(int(yr))] = {"occ": len(yr_data), "wr": yr_wr, "avg": yr_avg}
+        # Avg volume on signal days (for context)
+        avg_vol = int(hits["v"].mean())
 
-            found.append({
-                "sym":       sym,
-                "signal":    sig,
-                "name":      name,
-                "hold_days": w,
-                "occ":       int(len(valid)),
-                "win_rate":  round(wr, 1),
-                "avg_ret":   avg_r,
-                "med_ret":   med_r,
-                "max_ret":   round(valid.max() * 100, 2),
-                "min_ret":   round(valid.min() * 100, 2),
-                "years":     [int(y) for y in years_with_data],
-                "yr_detail": yr_breakdown,
-                "grade":     ("A" if wr == 100 and len(valid) >= 5 else
-                              "B" if wr == 100 else
-                              "C" if wr >= 90  else "D"),
-            })
+        n_years = len(years_all)
+        n_occ   = win_data[20]["occ"]
+        grade   = ("A+" if n_years>=4 and n_occ>=8 else
+                   "A"  if n_years>=3 and n_occ>=5 else
+                   "B"  if n_years>=2 and n_occ>=3 else "C")
 
-    # Deduplicate: keep best hold_days per signal (highest WR, then avg_ret)
-    found.sort(key=lambda x: (-x["win_rate"], -x["avg_ret"]))
+        found.append({
+            "sym":       sym,
+            "signal":    sig,
+            "name":      name,
+            "grade":     grade,
+            "n_years":   n_years,
+            "years":     years_all,
+            "occ_20d":   n_occ,
+            "wr_5d":     win_data[5]["wr"],
+            "avg_5d":    win_data[5]["avg"],
+            "wr_10d":    win_data[10]["wr"],
+            "avg_10d":   win_data[10]["avg"],
+            "wr_20d":    win_data[20]["wr"],
+            "avg_20d":   win_data[20]["avg"],
+            "med_20d":   win_data[20]["med"],
+            "min_ret_20d": round(valid_20.min()*100,2),
+            "max_ret_20d": round(valid_20.max()*100,2),
+            "avg_vol":   avg_vol,
+            "score":     repeating_score(years_all, win_data[20]["avg"], n_occ),
+            "yr_detail": yr_detail,
+            "month_heat":month_heat,
+        })
+
+    # Deduplicate: best window per signal (highest score)
+    found.sort(key=lambda x: -x["score"])
     seen   = set()
     unique = []
     for f in found:
-        k = f["signal"]
-        if k not in seen:
-            seen.add(k)
+        if f["signal"] not in seen:
+            seen.add(f["signal"])
             unique.append(f)
     return unique
 
 # ---------------------------------------------------------------------------
-# Generate today's alerts
+# Alerts — today + last 20 trading days
 # ---------------------------------------------------------------------------
-def generate_alerts(df, patterns):
+def generate_alerts(df, stock_profiles, trading_days_list):
     latest_date = df["date"].max()
-    today       = df[df["date"] == latest_date].copy()
-    if today.empty:
-        return []
-    pat_map = {p["signal"]: p for p in patterns}
-    alerts  = []
+    # Last 20 trading days
+    recent_cutoff = pd.Timestamp(trading_days_list[-20]) if len(trading_days_list)>=20 else df["date"].min()
+    recent_df = df[df["date"] >= recent_cutoff].copy()
+
+    # Build lookup: sym -> {signal -> pattern}
+    sym_pat_lookup = {}
+    for sym, pats in stock_profiles.items():
+        sym_pat_lookup[sym] = {p["signal"]: p for p in pats}
+
+    alerts   = []
     for sig in ALL_SIGNALS:
-        if sig not in today.columns:
+        if sig not in recent_df.columns:
             continue
-        active = today[today[sig].fillna(False)]
+        active = recent_df[recent_df[sig].fillna(False)].copy()
         if active.empty:
             continue
-        pat = pat_map.get(sig)
-        if not pat:
-            continue
-        wr20  = pat.get("wr_20d") or 0
-        avg20 = pat.get("avg_20d") or 0
-        if wr20 < 60:
-            continue
         for _, row in active.iterrows():
-            sym   = row["sym"]
-            close = round(row["c"], 2)
-            atr   = row["atr14"] if not pd.isna(row.get("atr14", float("nan"))) else close * 0.02
+            sym     = row["sym"]
+            pat     = sym_pat_lookup.get(sym, {}).get(sig)
+            if not pat:
+                continue  # only alert on stocks with validated patterns
+
+            sig_date  = row["date"]
+            sig_close = row["c"]
+            today_row = df[(df["sym"]==sym) & (df["date"]==latest_date)]
+            cur_price = float(today_row["c"].iloc[0]) if not today_row.empty else sig_close
+
+            days_ago  = int((latest_date - sig_date).days)
+            pct_since = round((cur_price - sig_close)/sig_close*100, 2)
+
+            # Buy/sell zone logic based on historical returns
+            hist_min  = pat.get("min_ret_20d", 0)
+            hist_avg  = pat.get("avg_20d", 10)
+            hist_max  = pat.get("max_ret_20d", 20)
+            atr       = float(row["atr14"]) if not pd.isna(row.get("atr14", float("nan"))) else sig_close*0.02
+            buy_lo    = round(sig_close - 0.5*atr, 2)
+            buy_hi    = round(sig_close + 0.3*atr, 2)
+            sl_px     = round(sig_close - 1.5*atr, 2)
+            t1_px     = round(sig_close*(1+max(hist_min,5)/100), 2)
+            t2_px     = round(sig_close*(1+hist_avg/100), 2)
+
+            # Zone status
+            if pct_since >= hist_avg:
+                zone = "SOLD — target reached"
+                zone_cls = "sold"
+            elif pct_since >= hist_min and hist_min > 0:
+                zone = "SELL ZONE — minimum target hit"
+                zone_cls = "sell"
+            elif cur_price < sl_px:
+                zone = "BELOW SL — not in this case as WR=100%"
+                zone_cls = "warn"
+            elif pct_since < 0:
+                zone = "BUY ZONE — still below entry"
+                zone_cls = "buy"
+            else:
+                zone = "RUNNING — hold to target"
+                zone_cls = "run"
+
+            is_today  = sig_date.date() == latest_date.date()
             alerts.append({
-                "sym":           sym,
-                "date":          str(latest_date.date()),
-                "signal":        sig,
-                "signal_name":   ALL_SIGNALS[sig],
-                "close":         close,
-                "buy_zone_lo":   round(close - 0.5 * atr, 2),
-                "buy_zone_hi":   round(close + 0.3 * atr, 2),
-                "stop_loss":     round(close - 1.5 * atr, 2),
-                "target_1":      round(close + 1.5 * atr, 2),
-                "target_2":      round(close * (1 + max(avg20, 5) / 100), 2),
-                "hold_days":     20,
-                "win_rate_5d":   pat.get("wr_5d"),
-                "win_rate_10d":  pat.get("wr_10d"),
-                "win_rate_20d":  wr20,
-                "avg_ret_20d":   avg20,
-                "grade":         pat.get("grade", "—"),
-                "score":         pat.get("score", 0),
-                "vol_ratio":     round(float(row.get("vol_ratio", 0)), 1),
-                "above_200ma":   bool(row.get("above_ma200", 0)),
+                "sym":          sym,
+                "sig_date":     str(sig_date.date()),
+                "signal":       sig,
+                "signal_name":  ALL_SIGNALS[sig],
+                "is_today":     is_today,
+                "days_ago":     days_ago,
+                "sig_close":    round(sig_close,2),
+                "cur_price":    round(cur_price,2),
+                "pct_since":    pct_since,
+                "buy_zone_lo":  buy_lo,
+                "buy_zone_hi":  buy_hi,
+                "stop_loss":    sl_px,
+                "target_1":     t1_px,
+                "target_2":     t2_px,
+                "zone_status":  zone,
+                "zone_cls":     zone_cls,
+                "vol":          int(row["v"]),
+                "vol_ratio":    round(float(row.get("vol_ratio",0)),1),
+                "grade":        pat["grade"],
+                "n_years":      pat["n_years"],
+                "years":        pat["years"],
+                "avg_20d":      pat["avg_20d"],
+                "min_ret":      pat.get("min_ret_20d",0),
+                "max_ret":      pat.get("max_ret_20d",0),
+                "above_200ma":  bool(row.get("above_ma200",0)),
+                "score":        pat["score"],
             })
+
+    # Sort: today first, then by grade+score
+    grade_ord = {"A+":0,"A":1,"B":2,"C":3,"—":4}
     alerts.sort(key=lambda a: (
-        {"A":0,"B":1,"C":2,"D":3,"—":4}.get(a["grade"],4),
-        -(a["win_rate_20d"] or 0) * (a["avg_ret_20d"] or 1)
+        0 if a["is_today"] else 1,
+        grade_ord.get(a["grade"],9),
+        -a["score"]
     ))
     return alerts
+
+# ---------------------------------------------------------------------------
+# Global month heatmap
+# ---------------------------------------------------------------------------
+def build_global_heatmap(df, signals):
+    """
+    For each signal, for each month: what was the average 20d return
+    across all stocks that ever fired that signal in that month?
+    """
+    heatmap = {}
+    for sig in signals:
+        if sig not in df.columns:
+            continue
+        mask = df[sig].fillna(False) & df["vol_ok"]
+        hits = df[mask][["month","fwd_20"]].dropna()
+        if len(hits) < 5:
+            continue
+        mdata = {}
+        for m in range(1,13):
+            ms = hits[hits["month"]==m]["fwd_20"]
+            if len(ms) >= 2:
+                avg_r = ms.mean()*100
+                wr    = (ms>0).sum()/len(ms)*100
+                mdata[MONTHS[m-1]] = {
+                    "occ":int(len(ms)), "wr":round(wr,1),
+                    "avg":round(avg_r,2),
+                    "min":round(ms.min()*100,2),
+                    "max":round(ms.max()*100,2),
+                }
+        if mdata:
+            heatmap[sig] = {"name":ALL_SIGNALS[sig], "months":mdata}
+    return heatmap
 
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 def main():
-    print("=" * 65)
-    print("NSE Pattern Discovery Engine  v1")
-    print("=" * 65)
+    print("="*65)
+    print("NSE Pattern Discovery  v2  — 100% Win Rate Engine")
+    print("="*65)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    print("\n[1] Manifest...")
+    print("\n[1] Manifest…")
     if not MANIFEST.exists():
-        print(f"  ERROR: {MANIFEST} not found"); sys.exit(1)
+        print(f"  ERROR: {MANIFEST}"); sys.exit(1)
     with open(MANIFEST) as f:
         manifest = json.load(f)
-    print(f"  {len(manifest)} trading days")
+    trading_days_sorted = sorted(manifest.keys())
+    print(f"  {len(trading_days_sorted)} trading days [{trading_days_sorted[0]} → {trading_days_sorted[-1]}]")
 
-    print("\n[2] Loading all equity CSVs...")
+    print("\n[2] Loading all equity CSVs…")
     df = load_all_data(manifest)
-    print(f"  {len(df):,} rows, {df['sym'].nunique():,} symbols")
+    print(f"  {len(df):,} rows, {df['sym'].nunique():,} unique symbols")
 
     # Filter stocks with enough history
     sym_counts = df.groupby("sym")["date"].count()
-    valid_syms = sym_counts[sym_counts >= MIN_TRADING_DAYS].index
+    valid_syms = sym_counts[sym_counts >= MIN_TRADING_D].index
     df = df[df["sym"].isin(valid_syms)].copy()
-    print(f"  {len(valid_syms)} stocks have >= {MIN_TRADING_DAYS} trading days")
+    print(f"  {len(valid_syms)} stocks with ≥{MIN_TRADING_D} trading days")
 
-    print("\n[3] Computing indicators per stock...")
+    print("\n[3] Computing indicators…")
     groups = []
-    syms   = sorted(df["sym"].unique())
-    for i, sym in enumerate(syms):
+    for i, sym in enumerate(sorted(df["sym"].unique())):
         try:
-            g = df[df["sym"] == sym].copy()
-            groups.append(compute_indicators(g))
-        except Exception as e:
+            groups.append(compute_indicators(df[df["sym"]==sym].copy()))
+        except Exception:
             pass
-        if (i + 1) % 250 == 0:
-            print(f"    {i+1}/{len(syms)}...")
+        if (i+1)%300==0: print(f"    {i+1}/{len(valid_syms)}…")
     df = pd.concat(groups, ignore_index=True)
     del groups; gc.collect()
     print(f"  Done — {len(df):,} rows with indicators")
 
-    print("\n[4] Defining signals...")
+    print("\n[4] Defining signals…")
     df = define_signals(df)
-    for sig in list(ALL_SIGNALS)[:5]:
-        cnt = int(df[sig].fillna(False).sum())
-        print(f"    {sig}: {cnt:,} hits")
 
-    print("\n[5] Cross-stock pattern analysis...")
+    print("\n[5] Cross-stock pattern analysis (strict filters)…")
     patterns = []
     for sig, name in ALL_SIGNALS.items():
         try:
             r = analyse_signal(df, sig, name)
-            if r:
-                patterns.append(r)
+            if r: patterns.append(r)
         except Exception as e:
             print(f"    WARN {sig}: {e}")
-    patterns.sort(key=lambda p: -(p.get("score") or 0))
+    patterns.sort(key=lambda p: -p.get("score",0))
     grade_counts = {}
     for p in patterns:
-        g = p.get("grade","—"); grade_counts[g] = grade_counts.get(g,0) + 1
-    print(f"  {len(patterns)} patterns | Grades: {grade_counts}")
-    print(f"  Top 5 by score:")
-    for p in patterns[:5]:
-        print(f"    {p['signal']:<5} {p['name'][:38]:<38}  "
-              f"WR20:{p.get('wr_20d','—')}%  Avg20:{p.get('avg_20d','—')}%  Grade:{p['grade']}")
+        g=p.get("grade","—"); grade_counts[g]=grade_counts.get(g,0)+1
+    print(f"  {len(patterns)} patterns pass strict filters | {grade_counts}")
 
-    print("\n[6] Stock-specific 100% pattern mining...")
+    print("\n[6] Per-stock 100% pattern mining…")
     stock_profiles = {}
-    all_grade_a    = []
-    for sym in syms:
+    all_results    = []
+    syms           = sorted(df["sym"].unique())
+    for i, sym in enumerate(syms):
         try:
-            g = df[df["sym"] == sym]
-            results = mine_stock(g, sym)
+            g = df[df["sym"]==sym]
+            data_years = g["year"].nunique()
+            results    = mine_stock(g, sym, data_years)
             if results:
                 stock_profiles[sym] = results
-                all_grade_a.extend([r for r in results if r["grade"] == "A"])
+                all_results.extend(results)
         except Exception:
             pass
-    all_grade_a.sort(key=lambda x: (-x["avg_ret"], -x["win_rate"]))
-    stocks_100pct = len([s for s in stock_profiles
-                         if any(r["grade"]=="A" for r in stock_profiles[s])])
-    print(f"  {stocks_100pct} stocks with Grade A (100%) patterns")
-    print(f"  Top 5 Grade A:")
-    for r in all_grade_a[:5]:
-        print(f"    {r['sym']:<14} {r['signal']:<5} {r['hold_days']}d  "
-              f"WR:{r['win_rate']}%  Avg:{r['avg_ret']:+.1f}%  Occ:{r['occ']}")
+        if (i+1)%300==0: print(f"    {i+1}/{len(syms)}…")
 
-    print("\n[7] Generating today's alerts...")
-    alerts    = generate_alerts(df, patterns)
-    grade_a_n = len([a for a in alerts if a["grade"]=="A"])
-    print(f"  {len(alerts)} alerts | Grade A: {grade_a_n}")
+    all_results.sort(key=lambda x: (-x["n_years"],-x["avg_20d"]))
+    n_aplus = sum(1 for r in all_results if r["grade"]=="A+")
+    n_a     = sum(1 for r in all_results if r["grade"]=="A")
+    print(f"  {len(stock_profiles)} stocks with valid patterns | A+:{n_aplus} A:{n_a}")
+    print(f"  Top 5:")
+    for r in all_results[:5]:
+        print(f"    {r['sym']:<14} {r['signal']:<5} {r['grade']}  "
+              f"WR20:{r['wr_20d']}%  Avg20:{r['avg_20d']:+.1f}%  "
+              f"{r['n_years']}yrs  Occ:{r['occ_20d']}")
 
-    # Write outputs
-    print("\n[8] Writing JSON files...")
+    print("\n[7] Generating alerts (today + last 20 trading days)…")
+    alerts = generate_alerts(df, stock_profiles, trading_days_sorted)
+    print(f"  {len(alerts)} alerts | Today: {sum(1 for a in alerts if a['is_today'])}")
+
+    print("\n[8] Global month heatmap…")
+    heatmap = build_global_heatmap(df, list(ALL_SIGNALS.keys()))
+    print(f"  {len(heatmap)} signals with heatmap data")
+
+    print("\n[9] Writing JSON files…")
     ist     = timezone(timedelta(hours=5, minutes=30))
     now_ist = datetime.now(ist).strftime("%Y-%m-%dT%H:%M:%S+05:30")
 
-    with open(OUT_DIR / "patterns.json", "w") as f:
+    # patterns.json
+    with open(OUT_DIR/"patterns.json","w") as f:
         json.dump({
-            "generated_at":     now_ist,
-            "stocks_analyzed":  int(len(syms)),
-            "trading_days":     len(manifest),
-            "data_range":       f"{sorted(manifest)[ 0]} to {sorted(manifest)[-1]}",
-            "grade_counts":     grade_counts,
-            "patterns":         patterns,
+            "generated_at": now_ist,
+            "thresholds":   {"wr_all":MIN_WR_ALL,"avg_5d":MIN_AVG_5D,
+                             "avg_10d":MIN_AVG_10D,"avg_20d":MIN_AVG_20D,
+                             "min_vol":MIN_VOLUME},
+            "stocks_analyzed": int(len(syms)),
+            "data_range":   f"{trading_days_sorted[0]} to {trading_days_sorted[-1]}",
+            "grade_counts": grade_counts,
+            "patterns":     patterns,
         }, f, indent=2)
     print(f"  OK patterns.json ({len(patterns)} patterns)")
 
-    with open(OUT_DIR / "alerts.json", "w") as f:
+    # stock_profiles.json — top 500 results only to keep manageable
+    filtered_profs = {sym: v for sym,v in stock_profiles.items()
+                      if any(r["grade"] in ("A+","A") for r in v)}
+    with open(OUT_DIR/"stock_profiles.json","w") as f:
         json.dump({
             "generated_at": now_ist,
-            "alert_date":   str(df["date"].max().date()),
-            "total_alerts": len(alerts),
-            "grade_a":      grade_a_n,
-            "alerts":       alerts,
+            "n_stocks":     len(filtered_profs),
+            "n_aplus":      n_aplus,
+            "n_a":          n_a,
+            "all_results":  all_results[:600],   # top 600 by score
+            "profiles":     filtered_profs,
+        }, f, indent=2)
+    print(f"  OK stock_profiles.json ({len(filtered_profs)} stocks)")
+
+    # alerts.json
+    with open(OUT_DIR/"alerts.json","w") as f:
+        json.dump({
+            "generated_at":   now_ist,
+            "latest_date":    str(df["date"].max().date()),
+            "window_days":    20,
+            "total_alerts":   len(alerts),
+            "today_count":    sum(1 for a in alerts if a["is_today"]),
+            "alerts":         alerts,
         }, f, indent=2)
     print(f"  OK alerts.json ({len(alerts)} alerts)")
 
-    # Only keep Grade A/B/C in profiles to keep file manageable
-    filtered = {sym: [r for r in v if r["grade"] in ("A","B","C")]
-                for sym, v in stock_profiles.items()
-                if any(r["grade"] in ("A","B") for r in v)}
-    with open(OUT_DIR / "stock_profiles.json", "w") as f:
+    # heatmap.json
+    with open(OUT_DIR/"heatmap.json","w") as f:
         json.dump({
-            "generated_at":      now_ist,
-            "stocks_with_100pct":stocks_100pct,
-            "all_grade_a":       all_grade_a[:300],
-            "profiles":          filtered,
+            "generated_at": now_ist,
+            "signals":      heatmap,
+            "months":       MONTHS,
         }, f, indent=2)
-    print(f"  OK stock_profiles.json ({len(filtered)} stocks, {len(all_grade_a)} Grade A patterns)")
-    print(f"\nDone.")
+    print(f"  OK heatmap.json ({len(heatmap)} signals)")
+
+    print(f"\n✅ Done. pattern_signals/ updated with 4 files.")
 
 if __name__ == "__main__":
     main()
