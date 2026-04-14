@@ -15,626 +15,884 @@
   --blue:#60A5FA;--bl2:#1E3A5F;--blb:rgba(96,165,250,.09);
   --amber:#F59E0B;--amb:#78350F;--ab:rgba(245,158,11,.09);
   --purple:#A855F7;--pb:rgba(168,85,247,.09);
-  --text:#DCE8F5;--t2:#94A3B8;--t3:#5A7090;--r:11px;
+  --text:#DCE8F5;--t2:#94A3B8;--t3:#5A7090;--r:10px;
   --font:'IBM Plex Sans',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;min-height:100vh}
 nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--b);display:flex;align-items:center;
-  padding:0 14px;height:52px;gap:10px}
-.brand{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);
-  display:flex;align-items:center;gap:7px;flex-shrink:0}
+  border-bottom:1px solid var(--b);display:flex;align-items:center;padding:0 12px;height:50px;gap:8px}
+.brand{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);
+  display:flex;align-items:center;gap:6px;flex-shrink:0}
 .brand small{font-size:9px;color:var(--t3);font-family:var(--font);font-weight:400}
 .ldot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 5px transparent}}
 .tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1}
 .tabs::-webkit-scrollbar{display:none}
-.tab{padding:5px 11px;border-radius:7px;cursor:pointer;font-size:11px;font-weight:500;
-  color:var(--t3);border:none;background:none;transition:.2s;white-space:nowrap;flex-shrink:0}
+.tab{padding:4px 10px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:500;
+  color:var(--t3);border:none;background:none;white-space:nowrap;flex-shrink:0;transition:.2s}
 .tab:hover{color:var(--text);background:var(--s)}
 .tab.active{color:var(--gold);background:var(--gbg);border:1px solid var(--g2)}
-.page{display:none;max-width:1400px;margin:0 auto;padding:16px 14px 50px}
+.page{display:none;max-width:1500px;margin:0 auto;padding:14px 12px 50px}
 .page.active{display:block}
-.sh{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);
-  margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.sh small{font-size:10px;font-family:var(--font);color:var(--t3);font-weight:400}
-.pill-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
-.kpill{background:var(--card);border:1px solid var(--b);border-radius:10px;
-  padding:9px 14px;min-width:120px}
-.kpill .kl{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:2px}
-.kpill .kv{font-family:'DM Mono';font-size:15px;font-weight:500}
-.kpill .ks{font-size:10px;color:var(--t2)}
-.kpill.g{border-color:var(--gr2)}.kpill.g .kv{color:var(--green)}
-.kpill.y{border-color:var(--amb)}.kpill.y .kv{color:var(--amber)}
-.kpill.b{border-color:var(--bl2)}.kpill.b .kv{color:var(--blue)}
-/* GRADE BADGES */
-.grade{display:inline-flex;align-items:center;justify-content:center;
-  width:22px;height:22px;border-radius:5px;font-weight:700;font-size:11px;flex-shrink:0}
-.grade-A{background:var(--grb);color:var(--green);border:1px solid var(--gr2)}
-.grade-B{background:var(--ab);color:var(--amber);border:1px solid var(--amb)}
-.grade-C{background:var(--blb);color:var(--blue);border:1px solid var(--bl2)}
-.grade-D{background:rgba(168,85,247,.1);color:var(--purple);border:1px solid #6B21A8}
-.grade-dash{background:var(--s);color:var(--t3);border:1px solid var(--b)}
-/* ALERT CARDS */
-.alert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px;margin-bottom:16px}
-.acard{background:var(--card);border:1px solid var(--b);border-radius:var(--r);
-  padding:13px;transition:.2s;position:relative;overflow:hidden}
-.acard:hover{border-color:var(--g2);transform:translateY(-2px)}
-.acard-A{border-left:3px solid var(--green)}
-.acard-B{border-left:3px solid var(--amber)}
-.acard-C{border-left:3px solid var(--blue)}
-.acard-D{border-left:3px solid var(--purple)}
-.ac-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.ac-sym{font-family:'DM Mono';font-size:16px;font-weight:600;color:var(--gold)}
-.ac-sig{font-size:9px;color:var(--t2);margin-top:2px}
-.ac-wr{text-align:right}
-.ac-pct{font-family:'DM Mono';font-size:18px;font-weight:700;color:var(--green)}
-.ac-lbl{font-size:9px;color:var(--t3)}
-.ac-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin:8px 0}
-.ac-stat{background:var(--s);border-radius:6px;padding:5px 7px}
-.ac-stat .asl{font-size:9px;color:var(--t3);margin-bottom:1px}
-.ac-stat .asv{font-family:'DM Mono';font-size:11px;font-weight:500}
-.ac-zones{background:var(--s);border-radius:7px;padding:8px 10px;font-size:11px;margin-top:6px}
-.zrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
-.zrow:last-child{margin-bottom:0}
-.zlbl{color:var(--t3);font-size:9px;text-transform:uppercase;letter-spacing:.8px}
-.zval{font-family:'DM Mono';font-weight:600}
-.z-buy{color:var(--green)}.z-sl{color:var(--red)}.z-t1{color:var(--amber)}.z-t2{color:var(--gold)}
-.vol-badge{display:inline-flex;align-items:center;gap:3px;font-size:9px;
-  padding:2px 6px;border-radius:3px;margin-top:5px}
-.vol-high{background:var(--grb);color:var(--green);border:1px solid var(--gr2)}
-.vol-norm{background:var(--blb);color:var(--blue);border:1px solid var(--bl2)}
-.vol-low{background:var(--rb);color:var(--red);border:1px solid var(--r2)}
-/* TABLES */
-.twrap{overflow-x:auto;background:var(--card);border:1px solid var(--b);border-radius:var(--r);margin-bottom:16px}
-.tbl{width:100%;border-collapse:collapse;min-width:700px}
+.sh{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);
+  margin-bottom:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.sh small{font-size:9px;font-family:var(--font);color:var(--t3);font-weight:400}
+
+/* ─── GRADES ─────────────────────────────────────── */
+.g{display:inline-flex;align-items:center;justify-content:center;
+   min-width:26px;height:20px;border-radius:4px;font-weight:700;font-size:10px;
+   padding:0 4px;flex-shrink:0;white-space:nowrap}
+.gAp{background:linear-gradient(135deg,var(--grb),rgba(34,197,94,.15));
+     color:var(--green);border:1px solid var(--gr2)}
+.gA{background:var(--grb);color:var(--green);border:1px solid var(--gr2)}
+.gB{background:var(--ab);color:var(--amber);border:1px solid var(--amb)}
+.gC{background:var(--blb);color:var(--blue);border:1px solid var(--bl2)}
+.gD{background:rgba(168,85,247,.1);color:var(--purple);border:1px solid #6B21A8}
+.gX{background:var(--s);color:var(--t3);border:1px solid var(--b)}
+
+/* ─── PILLS ──────────────────────────────────────── */
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.kp{background:var(--card);border:1px solid var(--b);border-radius:9px;padding:8px 12px;min-width:110px}
+.kp .kl{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);margin-bottom:2px}
+.kp .kv{font-family:'DM Mono';font-size:15px;font-weight:500}
+.kp .ks{font-size:10px;color:var(--t2)}
+.kp.g{border-color:var(--gr2)}.kp.g .kv{color:var(--green)}
+.kp.y{border-color:var(--amb)}.kp.y .kv{color:var(--amber)}
+.kp.b{border-color:var(--bl2)}.kp.b .kv{color:var(--blue)}
+.kp.r{border-color:var(--r2)}.kp.r .kv{color:var(--red)}
+
+/* ─── FILTER BAR ─────────────────────────────────── */
+.fbar{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.fb{background:var(--card);border:1px solid var(--b);color:var(--t3);padding:3px 9px;
+  border-radius:12px;font-size:10px;cursor:pointer;white-space:nowrap;transition:.2s}
+.fb:hover{color:var(--text);border-color:var(--b2)}
+.fb.on{background:var(--gbg);color:var(--gold);border-color:var(--g2)}
+.fsep{color:var(--t3);font-size:10px;padding:0 3px}
+.si{background:var(--s);border:1px solid var(--b2);color:var(--text);
+  border-radius:6px;padding:4px 9px;font-size:12px;font-family:'DM Mono';
+  outline:none;transition:.2s}
+.si:focus{border-color:var(--gold)}
+
+/* ─── SORTABLE TABLE ─────────────────────────────── */
+.twrap{overflow-x:auto;background:var(--card);border:1px solid var(--b);border-radius:var(--r);margin-bottom:14px}
+.tbl{width:100%;border-collapse:collapse;min-width:800px}
 .tbl th{background:var(--s);color:var(--t3);font-size:9px;text-transform:uppercase;
-  letter-spacing:.8px;padding:8px 10px;text-align:left;border-bottom:1px solid var(--b);white-space:nowrap}
-.tbl td{padding:7px 10px;border-bottom:1px solid rgba(26,43,66,.5);font-size:12px;vertical-align:middle}
-.tbl tr:hover td{background:rgba(255,255,255,.02)}
-.tbl tfoot td{font-weight:600;background:var(--card2);font-family:'DM Mono';font-size:11px}
+  letter-spacing:.7px;padding:7px 9px;text-align:left;border-bottom:1px solid var(--b);
+  white-space:nowrap;cursor:pointer;user-select:none;position:relative}
+.tbl th:hover{color:var(--text);background:rgba(255,255,255,.03)}
+.tbl th .arr{font-size:8px;margin-left:3px;opacity:.4}
+.tbl th.sort-asc .arr::after{content:'▲';opacity:1}
+.tbl th.sort-desc .arr::after{content:'▼';opacity:1}
+.tbl th .arr::after{content:'⇅';opacity:.4}
+.tbl td{padding:6px 9px;border-bottom:1px solid rgba(26,43,66,.5);font-size:12px;vertical-align:middle}
+.tbl tr:hover td{background:rgba(255,255,255,.025)}
+.tbl tfoot td{font-weight:600;background:var(--card2);font-size:11px}
 .mono{font-family:'DM Mono'}
 .green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}
-.blue{color:var(--blue)}.muted{color:var(--t3)}
-/* FILTERS */
-.fbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
-.fbtn{background:var(--card);border:1px solid var(--b);color:var(--t3);padding:4px 10px;
-  border-radius:14px;font-size:10px;cursor:pointer;transition:.2s;white-space:nowrap}
-.fbtn:hover{color:var(--text);border-color:var(--b2)}
-.fbtn.on{background:var(--gbg);color:var(--gold);border-color:var(--g2)}
-.fsep{color:var(--t3);font-size:10px;padding:0 4px}
-.search-inp{background:var(--s);border:1px solid var(--b2);color:var(--text);
-  border-radius:7px;padding:5px 10px;font-size:12px;font-family:'DM Mono';outline:none;width:140px}
-.search-inp:focus{border-color:var(--gold)}
-/* SPINNER / EMPTY */
-.spinner{width:22px;height:22px;border:2px solid var(--b);border-top-color:var(--gold);
-  border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 8px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.empty{text-align:center;padding:36px;color:var(--t3)}
-/* STOCK PROFILE ACCORDION */
+.blue{color:var(--blue)}.muted{color:var(--t3)}.gold{color:var(--gold)}
+.ret-cell{font-family:'DM Mono';font-weight:600}
+
+/* ─── YEAR TAGS ──────────────────────────────────── */
+.yr-tags{display:flex;flex-wrap:wrap;gap:2px}
+.yr-tag{font-size:9px;font-family:'DM Mono';padding:1px 5px;border-radius:3px;white-space:nowrap}
+.yr-win{background:var(--grb);color:var(--green);border:1px solid var(--gr2)}
+.yr-neu{background:var(--s);color:var(--t3);border:1px solid var(--b)}
+
+/* ─── ALERT CARDS ────────────────────────────────── */
+.alert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:9px;margin-bottom:14px}
+.ac{background:var(--card);border:1px solid var(--b);border-radius:var(--r);
+  padding:12px;transition:.2s;position:relative}
+.ac:hover{border-color:var(--g2);transform:translateY(-1px)}
+.ac-Ap{border-left:3px solid #22C55E}
+.ac-A{border-left:3px solid #22C55E}
+.ac-B{border-left:3px solid var(--amber)}
+.ac-C{border-left:3px solid var(--blue)}
+.ac-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px}
+.ac-sym{font-family:'DM Mono';font-size:17px;font-weight:700;color:var(--gold)}
+.ac-sig{font-size:10px;color:var(--t2);margin-top:2px}
+.ac-wr{text-align:right}
+.ac-pct{font-family:'DM Mono';font-size:20px;font-weight:700;color:var(--green)}
+.ac-lbl{font-size:9px;color:var(--t3)}
+.ac-row3{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:7px 0}
+.ac-mini{background:var(--s);border-radius:5px;padding:5px 7px}
+.ac-ml{font-size:9px;color:var(--t3);margin-bottom:1px}
+.ac-mv{font-family:'DM Mono';font-size:11px;font-weight:500}
+.zones{background:var(--s);border-radius:6px;padding:7px 9px;font-size:11px;margin-top:6px}
+.zr{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
+.zr:last-child{margin:0}
+.zl{color:var(--t3);font-size:9px;text-transform:uppercase;letter-spacing:.7px}
+.zv{font-family:'DM Mono';font-weight:600}
+.zbuy{color:var(--green)}.zsl{color:var(--red)}.zt1{color:var(--amber)}.zt2{color:var(--gold)}
+.zone-banner{margin-top:7px;border-radius:5px;padding:5px 8px;font-size:10px;font-weight:600}
+.zone-buy{background:var(--grb);border:1px solid var(--gr2);color:var(--green)}
+.zone-sell{background:var(--ab);border:1px solid var(--amb);color:var(--amber)}
+.zone-sold{background:var(--rb);border:1px solid var(--r2);color:#FCA5A5}
+.zone-run{background:var(--blb);border:1px solid var(--bl2);color:var(--blue)}
+.zone-warn{background:var(--pb);border:1px solid #6B21A8;color:var(--purple)}
+.days-ago{position:absolute;top:10px;right:10px;font-size:9px;
+  background:var(--s);border:1px solid var(--b);border-radius:3px;
+  padding:2px 5px;color:var(--t3);font-family:'DM Mono'}
+.today-badge{background:var(--grb);border-color:var(--gr2);color:var(--green)}
+
+/* ─── STOCK PROFILE CARDS ────────────────────────── */
 .spcard{background:var(--card);border:1px solid var(--b);border-radius:var(--r);
-  margin-bottom:7px;overflow:hidden}
-.sp-head{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;
-  cursor:pointer;gap:8px}
+  margin-bottom:6px;overflow:hidden}
+.sp-head{padding:9px 12px;display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;gap:6px}
 .sp-head:hover{background:rgba(255,255,255,.02)}
 .sp-sym{font-family:'DM Mono';font-size:13px;font-weight:600;color:var(--gold)}
 .sp-meta{font-size:10px;color:var(--t2)}
-.sp-body{display:none;padding:0 14px 12px;border-top:1px solid var(--b)}
+.sp-body{display:none;padding:0 12px 10px;border-top:1px solid var(--b)}
 .sp-body.open{display:block}
-.sp-row{display:grid;grid-template-columns:80px 1fr 60px 80px 80px 80px 70px;gap:6px;
-  padding:5px 0;border-bottom:1px solid rgba(26,43,66,.3);font-size:11px;align-items:center}
-.sp-row:last-child{border-bottom:none}
-.sp-hdr{color:var(--t3);font-size:9px;text-transform:uppercase;letter-spacing:.8px;
-  margin:8px 0 4px}
-/* DATASRC */
+.yr-row{display:flex;flex-wrap:wrap;gap:3px;margin:5px 0 8px}
+
+/* ─── HEATMAP ────────────────────────────────────── */
+.hm-wrap{overflow-x:auto;margin-bottom:14px}
+.hm-tbl{border-collapse:separate;border-spacing:3px;min-width:900px}
+.hm-tbl th{font-size:9px;text-transform:uppercase;letter-spacing:.7px;
+  color:var(--t3);padding:4px 7px;text-align:center;white-space:nowrap}
+.hm-tbl td{border-radius:5px;padding:4px 6px;text-align:center;
+  font-size:10px;font-family:'DM Mono';cursor:default;transition:.2s;
+  min-width:60px;white-space:nowrap}
+.hm-tbl td:hover{transform:scale(1.05);z-index:2;position:relative}
+.hm-tbl .sig-col{font-size:9px;color:var(--t3);text-align:right;
+  padding-right:8px;min-width:140px;white-space:nowrap;
+  font-family:var(--font)}
+.hm-empty{background:rgba(26,43,66,.3);color:var(--t3)}
+.hm-tip{position:fixed;display:none;background:var(--card2);border:1px solid var(--b2);
+  border-radius:8px;padding:8px 11px;font-size:11px;z-index:1000;
+  pointer-events:none;max-width:220px;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+
+/* ─── SPINNER ────────────────────────────────────── */
+.spinner{width:20px;height:20px;border:2px solid var(--b);
+  border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{text-align:center;padding:32px;color:var(--t3)}
 .dsrc{display:inline-flex;align-items:center;gap:4px;background:var(--grb);
-  border:1px solid var(--gr2);color:var(--green);padding:3px 9px;border-radius:10px;
+  border:1px solid var(--gr2);color:var(--green);padding:2px 8px;border-radius:8px;
   font-size:9px;font-family:'DM Mono'}
 .dsrc.warn{background:var(--ab);border-color:var(--amb);color:var(--amber)}
-/* HOW IT WORKS */
-.how-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px;margin-bottom:16px}
-.how-card{background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:11px 13px}
-.how-card h3{font-size:12px;font-weight:600;color:var(--gold);margin-bottom:5px}
-.how-card p{font-size:11px;color:var(--t2);line-height:1.6}
-/* Mobile */
+
 @media(max-width:640px){
   .alert-grid{grid-template-columns:1fr}
-  .fbar{gap:4px}
   .page{padding:10px 8px 40px}
-  .sp-row{grid-template-columns:70px 1fr 50px 70px 70px;font-size:10px}
-  .sp-row > *:nth-child(n+6){display:none}
+  .tbl{font-size:11px}
+  .tbl th,.tbl td{padding:5px 6px}
 }
 </style>
 </head>
 <body>
+
 <nav>
-  <div class="brand"><div class="ldot"></div>📡 Pattern Alerts <small>NSE 100% Win-Rate System</small></div>
+  <div class="brand"><div class="ldot"></div>📡 Pattern Alerts <small>NSE 100% Win-Rate · Strict Filters</small></div>
   <div class="tabs">
-    <button class="tab active" onclick="showPage('alerts',this)">🚨 Live Alerts</button>
-    <button class="tab" onclick="showPage('patterns',this)">📊 All Patterns</button>
+    <button class="tab active" onclick="showPage('alerts',this)">🚨 Alerts</button>
+    <button class="tab" onclick="showPage('patterns',this)">📊 Cross-Stock</button>
     <button class="tab" onclick="showPage('stocks',this)">📈 Stock Profiles</button>
+    <button class="tab" onclick="showPage('repeating',this)">🏆 Most Reliable</button>
+    <button class="tab" onclick="showPage('heatmap',this)">🗓 Month Heatmap</button>
     <button class="tab" onclick="showPage('howto',this)">📖 How It Works</button>
   </div>
 </nav>
 
-<!-- ══ PAGE 1: LIVE ALERTS ══════════════════════════════════════════ -->
+<div class="hm-tip" id="hmTip"></div>
+
+<!-- ═══ PAGE 1: ALERTS ════════════════════════════════════════ -->
 <div class="page active" id="page-alerts">
-  <div id="alert-banner" style="margin-bottom:12px"></div>
-  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px">
-    <div class="sh" style="margin:0">🚨 Today's Active Signals <small id="alert-date-lbl"></small></div>
-    <span id="alert-dsrc" class="dsrc warn">Loading…</span>
+  <div id="alrt-banner" style="margin-bottom:10px"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px;margin-bottom:10px">
+    <div class="sh" style="margin:0">🚨 Active Signals <small id="alrt-lbl">last 20 trading days</small></div>
+    <span id="alrt-dsrc" class="dsrc warn">Loading…</span>
   </div>
-  <div class="pill-row" id="alert-pills"></div>
+  <div class="pill-row" id="alrt-pills"></div>
   <div class="fbar">
-    <span class="fsep">Grade:</span>
-    <button class="fbtn on" onclick="filterAlerts('ALL',this)">All</button>
-    <button class="fbtn" onclick="filterAlerts('A',this)">A — 100%</button>
-    <button class="fbtn" onclick="filterAlerts('B',this)">B — 100% (few)</button>
-    <button class="fbtn" onclick="filterAlerts('C',this)">C — 90%+</button>
-    <button class="fbtn" onclick="filterAlerts('D',this)">D — 80%+</button>
+    <span class="fsep">Period:</span>
+    <button class="fb on" onclick="alrtF('ALL',this)">All 20 days</button>
+    <button class="fb" onclick="alrtF('TODAY',this)">Today only</button>
+    <button class="fb" onclick="alrtF('WEEK',this)">Last 7 days</button>
     <span class="fsep">|</span>
-    <input class="search-inp" id="alert-search" placeholder="Filter symbol…" oninput="renderAlerts()">
+    <span class="fsep">Grade:</span>
+    <button class="fb on" id="ag-all" onclick="alrtG('ALL',this)">All</button>
+    <button class="fb" id="ag-ap"  onclick="alrtG('A+',this)">A+ (4+ yrs)</button>
+    <button class="fb" id="ag-a"   onclick="alrtG('A',this)">A (3+ yrs)</button>
+    <button class="fb" id="ag-b"   onclick="alrtG('B',this)">B (2 yrs)</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Zone:</span>
+    <button class="fb on" id="az-all" onclick="alrtZ('ALL',this)">All zones</button>
+    <button class="fb" onclick="alrtZ('buy',this)">🟢 Buy zone</button>
+    <button class="fb" onclick="alrtZ('run',this)">🔵 Running</button>
+    <button class="fb" onclick="alrtZ('sell',this)">🟡 Sell zone</button>
+    <span class="fsep">|</span>
+    <input class="si" id="alrt-q" placeholder="Symbol…" style="width:110px" oninput="renderAlerts()">
+    <button class="fb on" onclick="alrtSort('score',this)">Sort: Score</button>
+    <button class="fb" onclick="alrtSort('ret',this)">Avg Ret</button>
+    <button class="fb" onclick="alrtSort('days',this)">Days Ago</button>
   </div>
-  <div class="alert-grid" id="alert-grid"><div class="empty"><div class="spinner"></div>Loading alerts from GitHub…</div></div>
+  <div class="alert-grid" id="alrt-grid"><div class="empty"><div class="spinner"></div>Loading…</div></div>
 </div>
 
-<!-- ══ PAGE 2: ALL PATTERNS ══════════════════════════════════════════ -->
+<!-- ═══ PAGE 2: CROSS-STOCK PATTERNS ═════════════════════════ -->
 <div class="page" id="page-patterns">
-  <div class="sh">📊 All Discovered Patterns <small>sorted by Grade then Win Rate × Avg Return score</small></div>
-  <div id="pat-pills" class="pill-row"></div>
+  <div class="sh">📊 Cross-Stock Patterns <small>100% win rate · all thresholds met · sortable columns</small></div>
+  <div class="pill-row" id="pat-pills"></div>
   <div class="fbar">
-    <span class="fsep">Sort:</span>
-    <button class="fbtn on" onclick="sortPatterns('score',this)">Score</button>
-    <button class="fbtn" onclick="sortPatterns('wr',this)">Win Rate 20d</button>
-    <button class="fbtn" onclick="sortPatterns('avg',this)">Avg Return 20d</button>
+    <button class="fb on" id="pf-all" onclick="patF('ALL',this)">All Grades</button>
+    <button class="fb" id="pf-ap"  onclick="patF('A+',this)">A+ only</button>
+    <button class="fb" id="pf-ab"  onclick="patF('AB',this)">A+ & A</button>
     <span class="fsep">|</span>
-    <button class="fbtn on" id="pf-all"  onclick="filterPat('ALL',this)">All</button>
-    <button class="fbtn"    id="pf-a"    onclick="filterPat('A',this)">Grade A only</button>
-    <button class="fbtn"    id="pf-ab"   onclick="filterPat('AB',this)">A + B</button>
+    <input class="si" id="pat-q" placeholder="Signal name…" style="width:130px" oninput="renderPat()">
   </div>
   <div class="twrap">
     <table class="tbl" id="pat-tbl">
-      <thead><tr>
-        <th>#</th><th>Grade</th><th>Signal</th><th>Name</th>
-        <th>Occ</th>
-        <th>WR 5d</th><th>WR 10d</th><th>WR 20d</th>
-        <th>Avg 5d</th><th>Avg 10d</th><th>Avg 20d</th>
-        <th>Score</th><th>Years</th>
-      </tr></thead>
-      <tbody id="pat-body"><tr><td colspan="13" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+      <thead><tr id="pat-hdr"></tr></thead>
+      <tbody id="pat-body"><tr><td colspan="20" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
     </table>
   </div>
 </div>
 
-<!-- ══ PAGE 3: STOCK PROFILES ════════════════════════════════════════ -->
+<!-- ═══ PAGE 3: STOCK PROFILES ═══════════════════════════════ -->
 <div class="page" id="page-stocks">
-  <div class="sh">📈 Per-Stock 100% Win-Rate Patterns <small>Grade A &amp; B only — must appear in 2+ years</small></div>
+  <div class="sh">📈 Per-Stock 100% Win-Rate Patterns <small>each row = signal proven 100% every time for that stock · hover year tag for detail</small></div>
   <div class="pill-row" id="sp-pills"></div>
   <div class="fbar">
-    <input class="search-inp" id="sp-search" placeholder="Search symbol…" oninput="renderStockProfiles()" style="width:180px">
+    <input class="si" id="sp-q" placeholder="Symbol…" style="width:120px" oninput="renderSP()">
     <span class="fsep">|</span>
-    <span class="fsep">Sort by avg return:</span>
-    <button class="fbtn on" onclick="sortSP('ret',this)">Highest Return</button>
-    <button class="fbtn" onclick="sortSP('wr',this)">Win Rate</button>
-    <button class="fbtn" onclick="sortSP('occ',this)">Most Occurrences</button>
+    <button class="fb on" id="sp-sort-score" onclick="spSort('score',this)">Score</button>
+    <button class="fb" id="sp-sort-ret"   onclick="spSort('ret',this)">Avg Ret 20d</button>
+    <button class="fb" id="sp-sort-yrs"   onclick="spSort('yrs',this)">Most Years</button>
+    <button class="fb" id="sp-sort-occ"   onclick="spSort('occ',this)">Most Occ</button>
+    <button class="fb" id="sp-sort-5d"    onclick="spSort('5d',this)">Avg Ret 5d</button>
+    <button class="fb" id="sp-sort-10d"   onclick="spSort('10d',this)">Avg Ret 10d</button>
+    <span class="fsep">|</span>
+    <button class="fb on" id="spg-all" onclick="spGrade('ALL',this)">All</button>
+    <button class="fb" id="spg-ap"  onclick="spGrade('A+',this)">A+</button>
+    <button class="fb" id="spg-a"   onclick="spGrade('A',this)">A</button>
+    <button class="fb" id="spg-b"   onclick="spGrade('B',this)">B</button>
   </div>
-  <div id="sp-grid"><div class="empty"><div class="spinner"></div>Loading stock profiles…</div></div>
+  <div class="twrap">
+    <table class="tbl" id="sp-tbl">
+      <thead><tr id="sp-hdr"></tr></thead>
+      <tbody id="sp-body"><tr><td colspan="20" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+    </table>
+  </div>
 </div>
 
-<!-- ══ PAGE 4: HOW IT WORKS ════════════════════════════════════════ -->
+<!-- ═══ PAGE 4: MOST RELIABLE ════════════════════════════════ -->
+<div class="page" id="page-repeating">
+  <div class="sh">🏆 Most Reliable — Patterns Across 4–5 Years <small>highest trust · ranked by avg 20d return · 100% win rate every year</small></div>
+  <div class="pill-row" id="rep-pills"></div>
+  <div class="fbar">
+    <button class="fb on" id="rp-4" onclick="repF(4,this)">4+ Years</button>
+    <button class="fb" id="rp-3" onclick="repF(3,this)">3+ Years</button>
+    <span class="fsep">|</span>
+    <button class="fb on" onclick="repSort('ret',this)">Highest Return</button>
+    <button class="fb" onclick="repSort('score',this)">Score</button>
+    <button class="fb" onclick="repSort('occ',this)">Most Occurrences</button>
+    <span class="fsep">|</span>
+    <input class="si" id="rep-q" placeholder="Symbol…" style="width:110px" oninput="renderRep()">
+  </div>
+  <div class="twrap">
+    <table class="tbl" id="rep-tbl">
+      <thead><tr id="rep-hdr"></tr></thead>
+      <tbody id="rep-body"><tr><td colspan="20" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ PAGE 5: MONTH HEATMAP ════════════════════════════════ -->
+<div class="page" id="page-heatmap">
+  <div class="sh">🗓 Signal × Month Profit Heatmap <small>cross-stock · avg 20-day return from min (red) to max (green)</small></div>
+  <div class="fbar">
+    <span class="fsep">Color by:</span>
+    <button class="fb on" onclick="hmColor('avg',this)">Avg Return</button>
+    <button class="fb" onclick="hmColor('wr',this)">Win Rate</button>
+    <button class="fb" onclick="hmColor('max',this)">Max Return</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Show:</span>
+    <button class="fb on" onclick="hmFilter('pct',this)">% Return</button>
+    <button class="fb" onclick="hmFilter('occ',this)">Occurrences</button>
+    <button class="fb" onclick="hmFilter('range',this)">Range</button>
+  </div>
+  <div class="hm-wrap"><table class="hm-tbl" id="hm-tbl"></table></div>
+  <div style="font-size:10px;color:var(--t3);margin-bottom:16px">
+    Hover a cell for details. Color intensity = magnitude. Grey = no data or too few occurrences.
+    <span style="display:inline-block;width:50px;height:10px;border-radius:3px;
+    background:linear-gradient(90deg,var(--rb),var(--s),var(--grb));vertical-align:middle;margin:0 4px"></span>
+    low → high return.
+  </div>
+</div>
+
+<!-- ═══ PAGE 6: HOW IT WORKS ═════════════════════════════════ -->
 <div class="page" id="page-howto">
-  <div class="sh">📖 How the Pattern System Works</div>
-  <div class="how-grid">
-    <div class="how-card">
-      <h3>🔬 What it analyzes</h3>
-      <p>Reads 5+ years of NSE daily OHLCV data for ~2000 stocks from your GitHub data repo. Tests 30 signal types across volume, candle, breakout, trend, and combination categories. All prices are actual NSE closing prices — no estimated data.</p>
+  <div class="sh">📖 System Rules &amp; Signal Reference</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px;margin-bottom:16px">
+    <div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:11px 13px">
+      <h3 style="font-size:12px;color:var(--gold);margin-bottom:5px">Hard Thresholds (all must pass)</h3>
+      <p style="font-size:11px;color:var(--t2);line-height:1.7">
+        ✓ Win rate: <strong style="color:var(--green)">100% at 5d, 10d, AND 20d</strong><br>
+        ✓ Avg return 5d: <strong style="color:var(--green)">≥ +3%</strong><br>
+        ✓ Avg return 10d: <strong style="color:var(--green)">≥ +7%</strong><br>
+        ✓ Avg return 20d: <strong style="color:var(--green)">≥ +10%</strong><br>
+        ✓ Volume on signal day: <strong style="color:var(--green)">≥ 1,00,000 shares</strong><br>
+        ✓ Appears in: <strong style="color:var(--green)">2+ different years</strong><br>
+        ✓ Max gap between years: <strong style="color:var(--green)">≤ 2 years</strong>
+      </p>
     </div>
-    <div class="how-card">
-      <h3>📐 Win Rate Calculation</h3>
-      <p>For each signal occurrence, looks at the closing price 5, 10, and 20 trading days later. If close is higher → WIN. Win Rate = wins / total occurrences × 100. Measured separately at each time window.</p>
+    <div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:11px 13px">
+      <h3 style="font-size:12px;color:var(--gold);margin-bottom:5px">Grade System</h3>
+      <p style="font-size:11px;color:var(--t2);line-height:1.8">
+        <span class="g gAp">A+</span> Pattern fired in <strong>4+ years</strong>, 8+ occurrences<br>
+        <span class="g gA">A</span> Pattern fired in <strong>3+ years</strong>, 5+ occurrences<br>
+        <span class="g gB">B</span> Pattern fired in <strong>2 years</strong>, 3+ occurrences<br>
+        <span class="g gC">C</span> 2 years, fewer occurrences<br>
+        <em style="color:var(--t3);font-size:10px">More years = more reliable = higher score</em>
+      </p>
     </div>
-    <div class="how-card">
-      <h3>🏆 Grade System</h3>
-      <p><strong style="color:var(--green)">Grade A</strong> = 100% win rate with 10+ occurrences. Strongest possible. <strong style="color:var(--amber)">Grade B</strong> = 100% win rate with 5-9 occurrences (validate manually). <strong style="color:var(--blue)">Grade C</strong> = 90%+ win rate with 20+ occurrences. <strong style="color:var(--purple)">Grade D</strong> = 80%+ with 30+ occurrences.</p>
+    <div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:11px 13px">
+      <h3 style="font-size:12px;color:var(--gold);margin-bottom:5px">Alert Window</h3>
+      <p style="font-size:11px;color:var(--t2);line-height:1.6">
+        Shows signals from the last 20 trading days (not just today). For each, shows: how many days ago it fired, current price vs signal price, and whether the stock is still in the buy zone (below historical average return), running (between min and avg return), or has hit the sell zone. Filter by Today / Last 7 days / All 20 days.
+      </p>
     </div>
-    <div class="how-card">
-      <h3>🌐 Cross-Year Filter</h3>
-      <p>A pattern must appear in at least 2 different calendar years to be included. This eliminates COVID-era artifacts and other one-time events. If a pattern only worked in 2020 — it's excluded.</p>
-    </div>
-    <div class="how-card">
-      <h3>💰 Buy Zone Calculation</h3>
-      <p>Buy zone is ±0.3–0.5 × ATR(14) around the signal close price. Stop loss = 1.5 × ATR below close. Target 1 = 1.5 × ATR above. Target 2 = historical average 20-day return above close. ATR adapts to each stock's volatility.</p>
-    </div>
-    <div class="how-card">
-      <h3>⚙️ Update Schedule</h3>
-      <p>Pattern discovery runs nightly at 11:45 PM IST after the NSE data fetch. Today's alerts reflect the latest NSE closing prices. GitHub Actions runs the engine automatically — just open this page fresh each morning for today's signals.</p>
+    <div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:11px 13px">
+      <h3 style="font-size:12px;color:var(--gold);margin-bottom:5px">Repeating Score</h3>
+      <p style="font-size:11px;color:var(--t2);line-height:1.6">
+        Score = <code style="background:var(--s);padding:1px 4px;border-radius:3px">n_years × avg_ret_20d × log(occ+1)</code><br>
+        A pattern firing in 4 years with 15% avg return scores much higher than one firing in 2 years with 15%. The Most Reliable tab ranks purely by this across 4+ year patterns.
+      </p>
     </div>
   </div>
-  <div class="sh" style="margin-top:20px">📋 Signal Reference</div>
+  <div class="sh" style="margin-top:6px">Signal Reference</div>
   <div class="twrap">
-    <table class="tbl">
-      <thead><tr><th>Code</th><th>Name</th><th>Category</th><th>Logic</th></tr></thead>
-      <tbody id="sig-ref-body"></tbody>
+    <table class="tbl" style="min-width:600px">
+      <thead><tr><th>Code</th><th>Category</th><th>Name</th><th>Definition</th></tr></thead>
+      <tbody id="sig-ref"></tbody>
     </table>
   </div>
 </div>
 
 <script>
+// ─── Data ──────────────────────────────────────────────────────────
 const REPO = 'https://raw.githubusercontent.com/animesh2007asansol/itis/main/pattern_signals';
+let DATA = { alerts:[], patterns:[], profiles:{}, allResults:[], heatmap:{}, meta:{} };
+let alrtPeriod='ALL', alrtGrade='ALL', alrtZone='ALL', alrtSortKey='score';
+let patGrade='ALL', spSortKey='score', spGradeF='ALL', repMinYrs=4, repSortKey='ret';
+let hmColorKey='avg', hmShowKey='pct';
+const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const SIG_INFO = {
+  V1:['Volume','Bull Volume Spike 5x','Volume > 5× 20-day avg on a green close'],
+  V2:['Volume','Bull Volume Spike 10x','Volume > 10× 20-day avg on a green close'],
+  V4:['Volume','Annual Volume Climax','Highest volume in past 252 trading days'],
+  C1:['Candle','Hammer','Lower wick ≥ 2× body, close in top 30% of range'],
+  C2:['Candle','Marubozu Bull','Body ≥ 85% of range, closes at/near high'],
+  C3:['Candle','Bullish Engulfing','Green candle body covers prior red candle body'],
+  C4:['Candle','Bounce After 3+ Red Days','Green close after 3+ consecutive red days'],
+  C5:['Candle','NR7','Narrowest range of last 7 days'],
+  C6:['Candle','Wide Range Green','Range > 1.5× avg, closes green in top 70%'],
+  B1:['Breakout','20D High Breakout + Vol','New 20-day high + volume ≥ 1.5× avg'],
+  B2:['Breakout','52W High Breakout + Vol','New 52-week high + volume ≥ 1.5× avg'],
+  B3:['Structure','Inside Bar','Today high < prev high AND low > prev low'],
+  T1:['Trend','Crossed Above 50MA','Price crosses 50MA after 10+ days below'],
+  T2:['Trend','Golden Cross','50MA crosses above 200MA (first day)'],
+  T3:['Trend','Above 200MA + Vol Spike','Above 200MA + vol ≥ 2× + green close'],
+  T4:['Trend','Deep Oversold + Vol','> 20% below 200MA + vol ≥ 3× + green'],
+  Q1:['Sequence','5+ Consecutive Red Days','Entry after 5+ red closes'],
+  K1:['Combo','Vol 10x + Hammer','Volume 10× spike AND hammer candle'],
+  K2:['Combo','Dry-Up then 20D Breakout','5-day vol dry-up then 20-day high breakout'],
+  K3:['Combo','5 Red + Vol 10x','5 red days AND volume 10× (capitulation)'],
+  K4:['Combo','Deep Oversold + Hammer','> 20% below 200MA AND hammer candle'],
+  K5:['Combo','52W High + Marubozu','52-week high AND marubozu bull candle'],
+  K6:['Combo','NR7 + 200MA + Vol','NR7 AND above 200MA AND vol ≥ 1.5×'],
+  K7:['Combo','Engulfing + 20D Break + Vol','Engulfing AND 20D breakout AND vol 5×'],
+  K8:['Combo','5 Red + Hammer + 200MA','5 red days AND hammer AND above 200MA'],
+  K9:['Combo','Annual Climax + Hammer','Annual vol climax AND hammer candle'],
+  K10:['Combo','Dry-Up + NR4 + 200MA','3-day vol dry-up AND NR4 AND above 200MA'],
+};
 
-let ALL_ALERTS  = [];
-let ALL_PATS    = [];
-let ALL_PROFS   = {};
-let ALL_GRADE_A = [];
-let META        = {};
-let alertGrade  = 'ALL';
-let patSort     = 'score';
-let patGradeF   = 'ALL';
-let spSort      = 'ret';
-
-// ── Fetch ──────────────────────────────────────────────────────────
+// ─── Fetch ─────────────────────────────────────────────────────────
 async function loadData() {
   try {
-    const [aRes, pRes, sRes] = await Promise.all([
-      fetch(REPO + '/alerts.json'),
-      fetch(REPO + '/patterns.json'),
-      fetch(REPO + '/stock_profiles.json'),
+    const [aR,pR,sR,hR] = await Promise.all([
+      fetch(REPO+'/alerts.json'),
+      fetch(REPO+'/patterns.json'),
+      fetch(REPO+'/stock_profiles.json'),
+      fetch(REPO+'/heatmap.json'),
     ]);
-    if (!aRes.ok) throw new Error('alerts.json HTTP ' + aRes.status);
-    if (!pRes.ok) throw new Error('patterns.json HTTP ' + pRes.status);
-    if (!sRes.ok) throw new Error('stock_profiles.json HTTP ' + sRes.status);
-
-    const [aData, pData, sData] = await Promise.all([aRes.json(), pRes.json(), sRes.json()]);
-
-    ALL_ALERTS  = aData.alerts || [];
-    META        = { alertDate: aData.alert_date, alertGen: aData.generated_at,
-                    gradeA: aData.grade_a || 0, total: aData.total_alerts || 0,
-                    stocks: pData.stocks_analyzed || 0,
-                    tradingDays: pData.trading_days || 0,
-                    dataRange: pData.data_range || '',
-                    grades: pData.grade_counts || {} };
-    ALL_PATS    = pData.patterns || [];
-    ALL_PROFS   = sData.profiles || {};
-    ALL_GRADE_A = sData.all_grade_a || [];
-
-    renderPage();
+    const [aD,pD,sD,hD] = await Promise.all([aR.json(),pR.json(),sR.json(),hR.json()]);
+    DATA.alerts     = aD.alerts || [];
+    DATA.patterns   = pD.patterns || [];
+    DATA.profiles   = sD.profiles || {};
+    DATA.allResults = sD.all_results || [];
+    DATA.heatmap    = hD.signals || {};
+    DATA.meta = {
+      latestDate: aD.latest_date, gen: aD.generated_at,
+      todayCount: aD.today_count || 0, total: aD.total_alerts || 0,
+      stocks: pD.stocks_analyzed || 0, range: pD.data_range || '',
+      grades: pD.grade_counts || {},
+      nAplus: sD.n_aplus || 0, nA: sD.n_a || 0,
+      thr: pD.thresholds || {},
+    };
+    renderAll();
   } catch(e) {
-    showError(e.message);
+    err('Could not load data from GitHub. Run the pattern_discovery workflow first.<br>'
+      + '<span style="color:var(--t3);font-size:10px">'+e.message+'</span>');
   }
 }
 
-function showError(msg) {
-  document.getElementById('alert-banner').innerHTML =
-    `<div style="background:var(--rb);border:1px solid var(--r2);border-radius:9px;padding:10px 14px;color:#FCA5A5;font-size:12px">
-      ⚠ Could not load pattern data from GitHub. Run the GitHub Action (pattern_discovery workflow) first.<br>
-      <span style="color:var(--t3);font-size:10px">${msg}</span>
-    </div>`;
-  document.getElementById('alert-dsrc').textContent = '✗ Load failed';
-  document.getElementById('alert-dsrc').className = 'dsrc warn';
-  document.getElementById('alert-grid').innerHTML =
-    '<div class="empty">No data available. Trigger the GitHub Action to generate pattern data.</div>';
+function err(msg) {
+  document.getElementById('alrt-banner').innerHTML =
+    `<div style="background:var(--rb);border:1px solid var(--r2);border-radius:8px;padding:9px 12px;color:#FCA5A5;font-size:12px">⚠ ${msg}</div>`;
+  document.getElementById('alrt-dsrc').textContent='✗ Load failed';
+  document.getElementById('alrt-dsrc').className='dsrc warn';
+  document.getElementById('alrt-grid').innerHTML='<div class="empty">No data.</div>';
 }
 
-function renderPage() {
-  renderAlertBanner();
+function renderAll(){
+  renderAlertHeader();
   renderAlerts();
-  renderPatternPills();
-  renderPatterns();
-  renderStockPills();
-  renderStockProfiles();
+  renderPatHeader();
+  renderPat();
+  renderSPHeader();
+  renderSP();
+  renderRepHeader();
+  renderRep();
+  renderHeatmap();
   renderSigRef();
+  renderSPPills();
+  renderRepPills();
 }
 
-// ── Alert page ─────────────────────────────────────────────────────
-function renderAlertBanner() {
-  const dt = META.alertDate || '—';
-  document.getElementById('alert-date-lbl').textContent = formatDate(dt);
-  document.getElementById('alert-dsrc').textContent =
-    `✓ ${dt} · ${META.stocks} stocks analyzed`;
-  document.getElementById('alert-dsrc').className = 'dsrc';
-
-  const g = META.grades || {};
-  document.getElementById('alert-pills').innerHTML = [
-    ['Grade A Alerts', META.gradeA, 'g', '100% win rate'],
-    ['Total Alerts',   META.total,  'b', 'All signals active'],
-    ['Stocks Scanned', META.stocks, 'b', META.dataRange],
-    ['Patterns Found', ALL_PATS.length, 'y', 'Cross-validated'],
-  ].map(([l,v,c,s]) => `<div class="kpill ${c}">
-    <div class="kl">${l}</div>
-    <div class="kv">${v}</div>
-    <div class="ks">${s}</div>
-  </div>`).join('');
+// ─── Helpers ───────────────────────────────────────────────────────
+const fmt = n => n==null?'—':Number(n).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtI = n => n==null?'—':Number(n).toLocaleString('en-IN');
+const rc = (r,g='green',b='red') => r==null?'<span class="muted">—</span>'
+  :`<span style="color:var(--${r>0?g:b});font-family:'DM Mono';font-weight:600">${r>0?'+':''}${r}%</span>`;
+const gradeClass = g => g==='A+'?'gAp':g==='A'?'gA':g==='B'?'gB':g==='C'?'gC':'gX';
+const gradeBadge = g => `<span class="g ${gradeClass(g)}">${g||'—'}</span>`;
+function fmtDate(s){ if(!s)return'—'; const[y,m,d]=s.split('-');
+  return `${parseInt(d)} ${MONTHS[parseInt(m)-1]} ${y}`; }
+function yrTags(yr_detail){
+  if(!yr_detail||!Object.keys(yr_detail).length) return '—';
+  return '<div class="yr-tags">'+Object.entries(yr_detail).sort(([a],[b])=>a-b).map(([yr,d])=>{
+    const tt = `${yr}: WR ${d.wr_20d}% · Avg ${d.avg_20d>0?'+':''}${d.avg_20d}% · ${d.occ} occ · Range [${d.min_20d}%,${d.max_20d}%]`;
+    return `<span class="yr-tag yr-win" title="${tt}">${yr.slice(2)} +${d.avg_20d}%</span>`;
+  }).join('')+'</div>';
 }
 
-function filterAlerts(g, btn) {
-  alertGrade = g;
-  document.querySelectorAll('#page-alerts .fbtn').forEach(b => b.classList.remove('on'));
+// ─── Sortable table helper ─────────────────────────────────────────
+let tblState = {}; // {tblId: {col, dir}}
+
+function makeTh(id, label, key, title='') {
+  return `<th onclick="sortTbl('${id}','${key}')" title="${title}">
+    ${label}<span class="arr" id="${id}-arr-${key}"></span></th>`;
+}
+
+function sortTbl(id, key) {
+  if (!tblState[id]) tblState[id] = {col:key, dir:'desc'};
+  else if (tblState[id].col===key) tblState[id].dir = tblState[id].dir==='desc'?'asc':'desc';
+  else { tblState[id].col=key; tblState[id].dir='desc'; }
+  // update arrows
+  document.querySelectorAll(`#${id} th`).forEach(th=>{
+    th.classList.remove('sort-asc','sort-desc');
+  });
+  const dir = tblState[id].dir;
+  if(id==='pat-tbl')  { renderPat();  }
+  if(id==='sp-tbl')   { renderSP();   }
+  if(id==='rep-tbl')  { renderRep();  }
+}
+
+function getSort(id, fallbackKey='score') {
+  const s = tblState[id];
+  return s ? {col:s.col, dir:s.dir} : {col:fallbackKey, dir:'desc'};
+}
+
+function sortRows(rows, col, dir) {
+  return [...rows].sort((a,b)=>{
+    let av=a[col]??-Infinity, bv=b[col]??-Infinity;
+    if(typeof av==='string') av=av.toLowerCase();
+    if(typeof bv==='string') bv=bv.toLowerCase();
+    const c = av<bv?-1:av>bv?1:0;
+    return dir==='asc'?c:-c;
+  });
+}
+
+// ─── PAGE 1: ALERTS ────────────────────────────────────────────────
+function renderAlertHeader(){
+  const m = DATA.meta;
+  document.getElementById('alrt-lbl').textContent =
+    `${fmtDate(m.latestDate)} · last 20 trading days`;
+  document.getElementById('alrt-dsrc').textContent =
+    `✓ ${m.latestDate||'—'} · ${m.stocks} stocks`;
+  document.getElementById('alrt-dsrc').className='dsrc';
+  document.getElementById('alrt-pills').innerHTML=[
+    ['Today\'s Alerts',  m.todayCount,'g','Signals fired today'],
+    ['Last 20d Alerts',  m.total,'b','All signals in window'],
+    ['Stocks Scanned',   m.stocks,'b', m.range],
+  ].map(([l,v,c,s])=>`<div class="kp ${c}"><div class="kl">${l}</div>
+    <div class="kv">${v}</div><div class="ks">${s}</div></div>`).join('');
+}
+function alrtF(p,btn){ alrtPeriod=p; setOn('#page-alerts .fbar .fb',btn); renderAlerts(); }
+function alrtG(g,btn){ alrtGrade=g;  setOn('#ag-all,#ag-ap,#ag-a,#ag-b',btn); renderAlerts(); }
+function alrtZ(z,btn){ alrtZone=z;   setOn('#az-all',btn); renderAlerts(); }
+function alrtSort(k,btn){ alrtSortKey=k; renderAlerts(); }
+function setOn(sel,btn){
+  document.querySelectorAll(sel).forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
-  renderAlerts();
 }
 
-function renderAlerts() {
-  const q = (document.getElementById('alert-search')?.value || '').toUpperCase().trim();
-  let rows = ALL_ALERTS.filter(a => {
-    if (alertGrade !== 'ALL' && a.grade !== alertGrade) return false;
-    if (q && !a.sym.includes(q) && !a.signal_name.toUpperCase().includes(q)) return false;
+function renderAlerts(){
+  const q = (document.getElementById('alrt-q')?.value||'').toUpperCase().trim();
+  let rows = DATA.alerts.filter(a=>{
+    if(q && !a.sym.includes(q) && !a.signal_name.toUpperCase().includes(q)) return false;
+    if(alrtGrade!=='ALL' && a.grade!==alrtGrade) return false;
+    if(alrtZone!=='ALL' && a.zone_cls!==alrtZone) return false;
+    if(alrtPeriod==='TODAY' && !a.is_today) return false;
+    if(alrtPeriod==='WEEK'  && a.days_ago>7) return false;
     return true;
   });
-
-  if (!rows.length) {
-    document.getElementById('alert-grid').innerHTML =
-      '<div class="empty">No alerts match filters. Try "All" grade or clear the search.</div>';
+  rows.sort((a,b)=>{
+    if(alrtSortKey==='ret')  return (b.avg_20d||0)-(a.avg_20d||0);
+    if(alrtSortKey==='days') return (a.days_ago||0)-(b.days_ago||0);
+    const go={'A+':0,'A':1,'B':2,'C':3};
+    return (go[a.grade]||9)-(go[b.grade]||9) || (b.score||0)-(a.score||0);
+  });
+  if(!rows.length){
+    document.getElementById('alrt-grid').innerHTML='<div class="empty">No alerts match filters.</div>';
     return;
   }
-
-  document.getElementById('alert-grid').innerHTML = rows.map(a => {
-    const wr = a.win_rate_20d || 0;
-    const wrColor = wr >= 90 ? 'var(--green)' : wr >= 80 ? 'var(--amber)' : 'var(--blue)';
-    const volClass = a.vol_ratio >= 5 ? 'vol-high' : a.vol_ratio >= 1.5 ? 'vol-norm' : 'vol-low';
-    const volLbl   = a.vol_ratio >= 5 ? `⚡ Vol ${a.vol_ratio}x avg` :
-                     a.vol_ratio >= 1.5 ? `↑ Vol ${a.vol_ratio}x` : `Vol ${a.vol_ratio}x avg`;
-    const ma200 = a.above_200ma
-      ? '<span style="color:var(--green);font-size:9px">▲ Above 200MA</span>'
-      : '<span style="color:var(--amber);font-size:9px">▼ Below 200MA</span>';
-    return `<div class="acard acard-${a.grade}">
+  document.getElementById('alrt-grid').innerHTML=rows.map(a=>{
+    const zCls = `zone-${a.zone_cls}`;
+    const zIcon = a.zone_cls==='buy'?'🟢':a.zone_cls==='run'?'🔵':a.zone_cls==='sell'?'🟡':a.zone_cls==='sold'?'🔴':'⚪';
+    const chgColor = a.pct_since>=0?'var(--green)':'var(--red)';
+    const dayBadge = a.is_today
+      ? `<span class="days-ago today-badge">TODAY</span>`
+      : `<span class="days-ago">${a.days_ago}d ago</span>`;
+    const yrs = (a.years||[]).map(y=>`<span class="yr-tag yr-win" style="font-size:8px">${y}</span>`).join('');
+    return `<div class="ac ac-${a.grade.replace('+','p')}">
+      ${dayBadge}
       <div class="ac-head">
         <div>
-          <div style="display:flex;align-items:center;gap:6px">
-            <div class="ac-sym">${a.sym}</div>
-            <div class="grade grade-${a.grade}">${a.grade}</div>
+          <div style="display:flex;align-items:center;gap:5px">
+            ${gradeBadge(a.grade)}
+            <span class="ac-sym">${a.sym}</span>
           </div>
           <div class="ac-sig">${a.signal_name}</div>
-          <div style="margin-top:3px">${ma200}</div>
+          <div style="margin-top:3px;display:flex;flex-wrap:wrap;gap:2px">${yrs}</div>
         </div>
         <div class="ac-wr">
-          <div class="ac-pct" style="color:${wrColor}">${wr}%</div>
-          <div class="ac-lbl">Win rate 20d</div>
+          <div class="ac-pct">+${a.avg_20d||0}%</div>
+          <div class="ac-lbl">hist avg 20d</div>
         </div>
       </div>
-      <div class="ac-stats">
-        <div class="ac-stat"><div class="asl">WR 5d</div><div class="asv" style="color:${(a.win_rate_5d||0)>=80?'var(--green)':'var(--amber)'}">${a.win_rate_5d||'—'}%</div></div>
-        <div class="ac-stat"><div class="asl">WR 10d</div><div class="asv" style="color:${(a.win_rate_10d||0)>=80?'var(--green)':'var(--amber)'}">${a.win_rate_10d||'—'}%</div></div>
-        <div class="ac-stat"><div class="asl">Avg Ret 20d</div><div class="asv green">+${a.avg_ret_20d||'—'}%</div></div>
+      <div class="ac-row3">
+        <div class="ac-mini"><div class="ac-ml">5d avg</div>
+          <div class="ac-mv green">+${a.avg_20d||0}%</div></div>
+        <div class="ac-mini"><div class="ac-ml">Since signal</div>
+          <div class="ac-mv" style="color:${chgColor}">${a.pct_since>0?'+':''}${a.pct_since}%</div></div>
+        <div class="ac-mini"><div class="ac-ml">Vol</div>
+          <div class="ac-mv">${fmtI(a.vol)}</div></div>
       </div>
-      <div class="ac-zones">
-        <div class="zrow">
-          <span class="zlbl">NSE Close</span>
-          <span class="zval" style="color:var(--text)">₹${fmt(a.close)}</span>
-        </div>
-        <div class="zrow">
-          <span class="zlbl">Buy Zone</span>
-          <span class="zval z-buy">₹${fmt(a.buy_zone_lo)} – ₹${fmt(a.buy_zone_hi)}</span>
-        </div>
-        <div class="zrow">
-          <span class="zlbl">Stop Loss</span>
-          <span class="zval z-sl">₹${fmt(a.stop_loss)}</span>
-        </div>
-        <div class="zrow">
-          <span class="zlbl">Target 1</span>
-          <span class="zval z-t1">₹${fmt(a.target_1)}</span>
-        </div>
-        <div class="zrow">
-          <span class="zlbl">Target 2 (avg 20d hist)</span>
-          <span class="zval z-t2">₹${fmt(a.target_2)}</span>
-        </div>
+      <div class="zones">
+        <div class="zr"><span class="zl">Signal close</span>
+          <span class="zv">₹${fmt(a.sig_close)}</span></div>
+        <div class="zr"><span class="zl">Current price</span>
+          <span class="zv" style="color:${chgColor}">₹${fmt(a.cur_price)}</span></div>
+        <div class="zr"><span class="zl">Buy zone</span>
+          <span class="zv zbuy">₹${fmt(a.buy_zone_lo)} – ₹${fmt(a.buy_zone_hi)}</span></div>
+        <div class="zr"><span class="zl">Stop loss</span>
+          <span class="zv zsl">₹${fmt(a.stop_loss)}</span></div>
+        <div class="zr"><span class="zl">Target 1 (hist min)</span>
+          <span class="zv zt1">₹${fmt(a.target_1)}</span></div>
+        <div class="zr"><span class="zl">Target 2 (hist avg)</span>
+          <span class="zv zt2">₹${fmt(a.target_2)}</span></div>
       </div>
-      <div class="vol-badge ${volClass}">${volLbl}</div>
+      <div class="zone-banner ${zCls}">${zIcon} ${a.zone_status}</div>
     </div>`;
   }).join('');
 }
 
-// ── Patterns page ──────────────────────────────────────────────────
-function renderPatternPills() {
-  const g = META.grades || {};
-  document.getElementById('pat-pills').innerHTML = [
-    ['Grade A (100% / 10+occ)', g.A||0, 'g'],
-    ['Grade B (100% / 5+occ)',  g.B||0, 'y'],
-    ['Grade C (90%+ / 20+occ)', g.C||0, 'b'],
-    ['Grade D (80%+ / 30+occ)', g.D||0, 'b'],
-  ].map(([l,v,c]) => `<div class="kpill ${c}">
-    <div class="kl">${l}</div><div class="kv">${v}</div></div>`).join('');
+// ─── PAGE 2: CROSS-STOCK PATTERNS ─────────────────────────────────
+const PAT_COLS = [
+  {key:'grade',   lbl:'Grade'},
+  {key:'signal',  lbl:'Signal'},
+  {key:'name',    lbl:'Pattern Name'},
+  {key:'occurrences',lbl:'Occ'},
+  {key:'n_years', lbl:'Years'},
+  {key:'wr_5d',   lbl:'WR 5d %'},
+  {key:'avg_5d',  lbl:'Avg 5d %'},
+  {key:'wr_10d',  lbl:'WR 10d %'},
+  {key:'avg_10d', lbl:'Avg 10d %'},
+  {key:'wr_20d',  lbl:'WR 20d %'},
+  {key:'avg_20d', lbl:'Avg 20d %'},
+  {key:'med_20d', lbl:'Med 20d %'},
+  {key:'score',   lbl:'Score'},
+  {key:'_years',  lbl:'Year Tags'},
+];
+function renderPatHeader(){
+  document.getElementById('pat-hdr').innerHTML = PAT_COLS.map(c=>
+    `<th onclick="sortTbl('pat-tbl','${c.key}')">${c.lbl}<span class="arr"></span></th>`).join('');
 }
-
-function sortPatterns(s, btn) {
-  patSort = s;
-  document.querySelectorAll('#page-patterns .fbtn:not(#pf-all):not(#pf-a):not(#pf-ab)').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  renderPatterns();
-}
-
-function filterPat(f, btn) {
-  patGradeF = f;
-  document.querySelectorAll('#pf-all,#pf-a,#pf-ab').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  renderPatterns();
-}
-
-function renderPatterns() {
-  let rows = [...ALL_PATS];
-  if (patGradeF === 'A')  rows = rows.filter(p => p.grade === 'A');
-  if (patGradeF === 'AB') rows = rows.filter(p => ['A','B'].includes(p.grade));
-  rows.sort((a,b) => {
-    if (patSort === 'wr')  return (b.wr_20d||0) - (a.wr_20d||0);
-    if (patSort === 'avg') return (b.avg_20d||0) - (a.avg_20d||0);
-    return (b.score||0) - (a.score||0);
+function patF(f,btn){ patGrade=f; setOn('#pf-all,#pf-ap,#pf-ab',btn); renderPat(); }
+function renderPat(){
+  const q = (document.getElementById('pat-q')?.value||'').toLowerCase();
+  let rows = DATA.patterns.filter(p=>{
+    if(patGrade==='A+' && p.grade!=='A+') return false;
+    if(patGrade==='AB' && !['A+','A'].includes(p.grade)) return false;
+    if(q && !p.name.toLowerCase().includes(q) && !p.signal.toLowerCase().includes(q)) return false;
+    return true;
   });
-  const gradeOrder = {A:0,B:1,C:2,D:3,'—':4};
-  rows.sort((a,b) => gradeOrder[a.grade||'—'] - gradeOrder[b.grade||'—'] ||
-                     (b.score||0) - (a.score||0));
-
-  document.getElementById('pat-body').innerHTML = rows.map((p, i) => {
-    const wr5  = p.wr_5d  != null ? p.wr_5d+'%'  : '—';
-    const wr10 = p.wr_10d != null ? p.wr_10d+'%' : '—';
-    const wr20 = p.wr_20d != null ? p.wr_20d+'%' : '—';
-    const a5   = p.avg_5d  != null ? retStr(p.avg_5d)  : '—';
-    const a10  = p.avg_10d != null ? retStr(p.avg_10d) : '—';
-    const a20  = p.avg_20d != null ? retStr(p.avg_20d) : '—';
-    const yrStr= (p.years||[]).map(y=>String(y).slice(2)).join("'");
-    const wrColor = (p.wr_20d||0) >= 90 ? 'green' : (p.wr_20d||0) >= 80 ? 'amber' : '';
-    return `<tr>
-      <td class="mono muted">${i+1}</td>
-      <td><span class="grade grade-${p.grade||'dash'}">${p.grade||'—'}</span></td>
+  const {col,dir}=getSort('pat-tbl','score');
+  rows=sortRows(rows.map(p=>({...p,_years:(p.years||[]).join('')})),col,dir);
+  renderPatPills(rows);
+  document.getElementById('pat-body').innerHTML=rows.length
+    ?rows.map((p,i)=>`<tr>
+      <td>${gradeBadge(p.grade)}</td>
       <td class="mono blue">${p.signal}</td>
       <td style="font-size:11px">${p.name}</td>
       <td class="mono">${p.occurrences}</td>
-      <td class="mono ${wr5==='100%'?'green':''}">${wr5}</td>
-      <td class="mono ${wr10==='100%'?'green':''}">${wr10}</td>
-      <td class="mono ${wrColor}">${wr20}</td>
-      <td class="mono">${a5}</td>
-      <td class="mono">${a10}</td>
-      <td class="mono">${a20}</td>
+      <td class="mono gold">${p.n_years||'—'}</td>
+      <td class="mono green">${p.wr_5d!=null?p.wr_5d+'%':'—'}</td>
+      <td>${rc(p.avg_5d)}</td>
+      <td class="mono green">${p.wr_10d!=null?p.wr_10d+'%':'—'}</td>
+      <td>${rc(p.avg_10d)}</td>
+      <td class="mono green">${p.wr_20d!=null?p.wr_20d+'%':'—'}</td>
+      <td>${rc(p.avg_20d)}</td>
+      <td>${rc(p.med_20d)}</td>
       <td class="mono amber">${p.score||'—'}</td>
-      <td style="font-size:9px;color:var(--t3)">${yrStr}</td>
-    </tr>`;
-  }).join('') || '<tr><td colspan="13" class="empty">No patterns match filter.</td></tr>';
+      <td>${(p.years||[]).map(y=>`<span class="yr-tag yr-win">${y}</span>`).join(' ')}</td>
+    </tr>`).join('')
+    :'<tr><td colspan="14" class="empty">No patterns match.</td></tr>';
+}
+function renderPatPills(rows){
+  const gc={};rows.forEach(p=>{gc[p.grade]=(gc[p.grade]||0)+1;});
+  document.getElementById('pat-pills').innerHTML=[
+    ['A+',gc['A+']||0,'g'],['A',gc['A']||0,'g'],
+    ['B',gc['B']||0,'y'],['Total',rows.length,'b'],
+  ].map(([l,v,c])=>`<div class="kp ${c}"><div class="kl">Grade ${l}</div>
+    <div class="kv">${v}</div></div>`).join('');
 }
 
-// ── Stock profiles page ─────────────────────────────────────────────
-function renderStockPills() {
-  const grade_a = ALL_GRADE_A.length;
-  const syms    = Object.keys(ALL_PROFS).length;
-  document.getElementById('sp-pills').innerHTML = [
-    ['Stocks with 100% Patterns', syms, 'g'],
-    ['Total Grade A Entries', grade_a, 'g'],
-    ['Highest Avg Return', grade_a ? retStr(ALL_GRADE_A[0].avg_ret) : '—', 'y'],
-  ].map(([l,v,c]) => `<div class="kpill ${c}">
-    <div class="kl">${l}</div><div class="kv">${v}</div></div>`).join('');
+// ─── PAGE 3: STOCK PROFILES ────────────────────────────────────────
+const SP_COLS=[
+  {key:'grade',   lbl:'Grade'},
+  {key:'sym',     lbl:'Stock'},
+  {key:'signal',  lbl:'Signal'},
+  {key:'name',    lbl:'Pattern'},
+  {key:'n_years', lbl:'# Yrs'},
+  {key:'occ_20d', lbl:'Occ'},
+  {key:'avg_vol', lbl:'Avg Vol'},
+  {key:'avg_5d',  lbl:'Avg 5d %'},
+  {key:'avg_10d', lbl:'Avg 10d %'},
+  {key:'avg_20d', lbl:'Avg 20d %'},
+  {key:'min_ret_20d',lbl:'Min Ret'},
+  {key:'max_ret_20d',lbl:'Max Ret'},
+  {key:'score',   lbl:'Score'},
+  {key:'_yrs',    lbl:'All Years (hover for detail)'},
+];
+function renderSPHeader(){
+  document.getElementById('sp-hdr').innerHTML=SP_COLS.map(c=>
+    `<th onclick="sortTbl('sp-tbl','${c.key}')" title="${c.lbl}">${c.lbl}<span class="arr"></span></th>`).join('');
+}
+function renderSPPills(){
+  const m=DATA.meta;
+  document.getElementById('sp-pills').innerHTML=[
+    ['A+ Stocks', m.nAplus,'g','4+ yrs, 8+ occ'],
+    ['A Stocks',  m.nA,'g','3+ yrs'],
+    ['Total Stocks',Object.keys(DATA.profiles).length,'b','with valid patterns'],
+    ['Total Records',DATA.allResults.length,'b','pattern×stock entries'],
+  ].map(([l,v,c,s])=>`<div class="kp ${c}"><div class="kl">${l}</div>
+    <div class="kv">${v}</div><div class="ks">${s}</div></div>`).join('');
+}
+function spSort(k,btn){ spSortKey=k; setOn('#sp-sort-score,#sp-sort-ret,#sp-sort-yrs,#sp-sort-occ,#sp-sort-5d,#sp-sort-10d',btn); renderSP(); }
+function spGrade(g,btn){ spGradeF=g; setOn('#spg-all,#spg-ap,#spg-a,#spg-b',btn); renderSP(); }
+function renderSP(){
+  const q=(document.getElementById('sp-q')?.value||'').toUpperCase().trim();
+  let rows=[...DATA.allResults].map(r=>({...r,
+    _yrs:(r.years||[]).join(''),
+  }));
+  if(q) rows=rows.filter(r=>r.sym.includes(q));
+  if(spGradeF==='A+') rows=rows.filter(r=>r.grade==='A+');
+  else if(spGradeF==='A') rows=rows.filter(r=>r.grade==='A');
+  else if(spGradeF==='B') rows=rows.filter(r=>r.grade==='B');
+  const colMap={score:'score',ret:'avg_20d',yrs:'n_years',occ:'occ_20d','5d':'avg_5d','10d':'avg_10d'};
+  const primaryCol = colMap[spSortKey]||'score';
+  const {col,dir}=getSort('sp-tbl',primaryCol);
+  rows=sortRows(rows,col,dir);
+  document.getElementById('sp-body').innerHTML=rows.length
+    ?rows.slice(0,500).map(r=>{
+      const yrDetail=r.yr_detail||{};
+      const yrHtml=Object.entries(yrDetail).sort(([a],[b])=>a-b).map(([y,d])=>{
+        const tt=`${y}: WR ${d.wr_20d}% · Avg 20d ${d.avg_20d>0?'+':''}${d.avg_20d}% · 5d ${d.avg_5d!=null?(d.avg_5d>0?'+':'')+d.avg_5d+'%':'—'} · ${d.occ} occ · Range [${d.min_20d}%,${d.max_20d}%]`;
+        return `<span class="yr-tag yr-win" title="${tt}">${y} +${d.avg_20d}%</span>`;
+      }).join(' ');
+      return `<tr>
+        <td>${gradeBadge(r.grade)}</td>
+        <td class="mono gold">${r.sym}</td>
+        <td class="mono blue">${r.signal}</td>
+        <td style="font-size:10px">${r.name}</td>
+        <td class="mono gold">${r.n_years}</td>
+        <td class="mono">${r.occ_20d}</td>
+        <td class="mono muted" style="font-size:10px">${fmtI(r.avg_vol)}</td>
+        <td>${rc(r.avg_5d)}</td>
+        <td>${rc(r.avg_10d)}</td>
+        <td>${rc(r.avg_20d)}</td>
+        <td>${rc(r.min_ret_20d,'amber','red')}</td>
+        <td>${rc(r.max_ret_20d)}</td>
+        <td class="mono amber">${r.score}</td>
+        <td style="max-width:280px">${yrHtml||'—'}</td>
+      </tr>`;
+    }).join('')
+    :'<tr><td colspan="14" class="empty">No results match filters.</td></tr>';
 }
 
-function sortSP(s, btn) {
-  spSort = s;
-  document.querySelectorAll('#page-stocks .fbtn').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  renderStockProfiles();
+// ─── PAGE 4: MOST RELIABLE ─────────────────────────────────────────
+const REP_COLS=[
+  {key:'grade',   lbl:'Grade'},
+  {key:'sym',     lbl:'Stock'},
+  {key:'signal',  lbl:'Signal'},
+  {key:'name',    lbl:'Pattern Name'},
+  {key:'n_years', lbl:'# Years'},
+  {key:'occ_20d', lbl:'Total Occ'},
+  {key:'avg_5d',  lbl:'Avg 5d %'},
+  {key:'avg_10d', lbl:'Avg 10d %'},
+  {key:'avg_20d', lbl:'Avg 20d %'},
+  {key:'min_ret_20d',lbl:'Min Ret'},
+  {key:'max_ret_20d',lbl:'Max Ret'},
+  {key:'score',   lbl:'Score'},
+  {key:'_yrs',    lbl:'All Years + Returns'},
+];
+function renderRepHeader(){
+  document.getElementById('rep-hdr').innerHTML=REP_COLS.map(c=>
+    `<th onclick="sortTbl('rep-tbl','${c.key}')" title="${c.lbl}">${c.lbl}<span class="arr"></span></th>`).join('');
+}
+function renderRepPills(){
+  const rows=DATA.allResults.filter(r=>r.n_years>=4);
+  const rows3=DATA.allResults.filter(r=>r.n_years>=3);
+  document.getElementById('rep-pills').innerHTML=[
+    ['4+ Year Patterns',rows.length,'g','Highest trust'],
+    ['3+ Year Patterns',rows3.length,'y','High trust'],
+    ['Best Avg Return', rows.length?Math.max(...rows.map(r=>r.avg_20d)).toFixed(1)+'%':'—','g','Among 4+ yr'],
+    ['Best Score',      rows.length?Math.max(...rows.map(r=>r.score||0)).toFixed(0):'—','y','Among 4+ yr'],
+  ].map(([l,v,c,s])=>`<div class="kp ${c}"><div class="kl">${l}</div>
+    <div class="kv">${v}</div><div class="ks">${s}</div></div>`).join('');
+}
+function repF(n,btn){ repMinYrs=n; setOn('#rp-4,#rp-3',btn); renderRep(); }
+function repSort(k,btn){ repSortKey=k; renderRep(); }
+function renderRep(){
+  const q=(document.getElementById('rep-q')?.value||'').toUpperCase().trim();
+  let rows=[...DATA.allResults].map(r=>({...r,_yrs:(r.years||[]).join('')}))
+    .filter(r=>r.n_years>=repMinYrs);
+  if(q) rows=rows.filter(r=>r.sym.includes(q));
+  const {col,dir}=getSort('rep-tbl',repSortKey==='ret'?'avg_20d':repSortKey==='occ'?'occ_20d':'score');
+  rows=sortRows(rows,col,dir);
+  document.getElementById('rep-body').innerHTML=rows.length
+    ?rows.map((r,i)=>{
+      const yrDetail=r.yr_detail||{};
+      const yrHtml=Object.entries(yrDetail).sort(([a],[b])=>a-b).map(([y,d])=>{
+        const tt=`${y}: Avg 20d ${d.avg_20d>0?'+':''}${d.avg_20d}% · 5d ${d.avg_5d!=null?(d.avg_5d>0?'+':'')+d.avg_5d+'%':'—'} · ${d.occ} occ · [${d.min_20d}%,${d.max_20d}%]`;
+        return `<span class="yr-tag yr-win" title="${tt}">${y} ${d.avg_20d>0?'+':''}${d.avg_20d}%</span>`;
+      }).join(' ');
+      return `<tr style="${i<3?'background:rgba(201,168,76,.04)':''}">
+        <td>${gradeBadge(r.grade)}</td>
+        <td class="mono gold" style="font-weight:600">${r.sym}</td>
+        <td class="mono blue">${r.signal}</td>
+        <td style="font-size:11px">${r.name}</td>
+        <td class="mono gold" style="font-weight:700">${r.n_years}</td>
+        <td class="mono">${r.occ_20d}</td>
+        <td>${rc(r.avg_5d)}</td>
+        <td>${rc(r.avg_10d)}</td>
+        <td style="font-size:14px;font-weight:700">${rc(r.avg_20d)}</td>
+        <td>${rc(r.min_ret_20d,'amber','red')}</td>
+        <td>${rc(r.max_ret_20d)}</td>
+        <td class="mono amber" style="font-weight:600">${r.score}</td>
+        <td style="max-width:300px">${yrHtml||'—'}</td>
+      </tr>`;
+    }).join('')
+    :'<tr><td colspan="13" class="empty">No patterns with '+(repMinYrs)+'+ years found.</td></tr>';
 }
 
-function renderStockProfiles() {
-  const q   = (document.getElementById('sp-search')?.value || '').toUpperCase().trim();
-  let syms  = Object.keys(ALL_PROFS).filter(s => !q || s.includes(q));
+// ─── PAGE 5: HEATMAP ───────────────────────────────────────────────
+function hmColor(k,btn){ hmColorKey=k; setOn('#page-heatmap .fb',btn); renderHeatmap(); }
+function hmFilter(k,btn){ hmShowKey=k; renderHeatmap(); }
 
-  // Sort symbols by their best pattern
-  const bestOf = sym => {
-    const pats = ALL_PROFS[sym] || [];
-    if (!pats.length) return 0;
-    if (spSort === 'ret') return Math.max(...pats.map(p => p.avg_ret || 0));
-    if (spSort === 'wr')  return Math.max(...pats.map(p => p.win_rate || 0));
-    return Math.max(...pats.map(p => p.occ || 0));
-  };
-  syms.sort((a,b) => bestOf(b) - bestOf(a));
-  syms = syms.slice(0, 200);
+function hmCellColor(val, min, max) {
+  if(val==null) return 'var(--s)';
+  const t = max===min ? 0.5 : (val-min)/(max-min);
+  // Red(low) → neutral → Green(high)
+  if(t<0.5){
+    const x=t*2;
+    return `rgba(239,68,68,${0.15+0.35*(1-x)})`;
+  } else {
+    const x=(t-0.5)*2;
+    return `rgba(34,197,94,${0.15+0.5*x})`;
+  }
+}
 
-  if (!syms.length) {
-    document.getElementById('sp-grid').innerHTML =
-      '<div class="empty">No stock profiles found. Run the GitHub Action to generate data.</div>';
+function renderHeatmap(){
+  const sigs = Object.keys(DATA.heatmap);
+  if(!sigs.length){
+    document.getElementById('hm-tbl').innerHTML='<tr><td class="empty">No heatmap data. Run the workflow first.</td></tr>';
     return;
   }
+  // Compute global min/max for color scaling
+  const key=hmColorKey; // 'avg','wr','max'
+  let gmin=Infinity,gmax=-Infinity;
+  sigs.forEach(sig=>{
+    const mdata=DATA.heatmap[sig].months||{};
+    MONTHS.forEach(m=>{ const v=mdata[m]?.[key]; if(v!=null){gmin=Math.min(gmin,v);gmax=Math.max(gmax,v);}});
+  });
 
-  document.getElementById('sp-grid').innerHTML = syms.map(sym => {
-    const pats = (ALL_PROFS[sym] || []).filter(p => ['A','B'].includes(p.grade));
-    if (!pats.length) return '';
-    const best  = pats[0];
-    const gradeA= pats.filter(p => p.grade==='A').length;
-    const rows  = pats.map(p => `
-      <div class="sp-row">
-        <span><span class="grade grade-${p.grade}">${p.grade}</span></span>
-        <span style="font-size:10px">${p.name}</span>
-        <span class="mono green">${p.win_rate}%</span>
-        <span class="mono ${p.avg_ret>0?'green':'red'}">${p.avg_ret>0?'+':''}${p.avg_ret}%</span>
-        <span class="mono muted">${p.occ} occ</span>
-        <span class="mono muted">${p.hold_days}d</span>
-        <span style="font-size:9px;color:var(--t3)">${(p.years||[]).map(y=>String(y).slice(2)).join("'")}</span>
-      </div>`).join('');
-    return `<div class="spcard">
-      <div class="sp-head" onclick="this.nextElementSibling.classList.toggle('open')">
-        <div>
-          <span class="sp-sym">${sym}</span>
-          <span class="sp-meta" style="margin-left:8px">${pats.length} pattern(s) · 
-            ${gradeA} Grade A · Best: ${best.avg_ret>0?'+':''}${best.avg_ret}% avg (${best.hold_days}d)</span>
-        </div>
-        <span class="grade grade-${best.grade}">${best.grade}</span>
-      </div>
-      <div class="sp-body">
-        <div class="sp-hdr" style="display:grid;grid-template-columns:80px 1fr 60px 80px 80px 80px 70px;gap:6px">
-          <span>Grade</span><span>Pattern</span><span>WR</span><span>Avg Ret</span>
-          <span>Occ</span><span>Hold</span><span>Years</span>
-        </div>
-        ${rows}
-      </div>
-    </div>`;
+  const showKey=hmShowKey; // 'pct','occ','range'
+  const hdr='<tr><th class="sig-col">Signal</th>'+MONTHS.map(m=>`<th>${m}</th>`).join('')+'</tr>';
+  const rows=sigs.map(sig=>{
+    const d=DATA.heatmap[sig];
+    const mdata=d.months||{};
+    const cells=MONTHS.map(m=>{
+      const cell=mdata[m];
+      if(!cell||cell.occ<2) return `<td class="hm-empty">—</td>`;
+      const colorVal=cell[key];
+      const bg=hmCellColor(colorVal,gmin,gmax);
+      const disp=showKey==='pct'  ? `${cell.avg>0?'+':''}${cell.avg}%`
+                :showKey==='occ'  ? `${cell.occ}×`
+                : `${cell.min}–${cell.max}%`;
+      const tt=`${d.name} · ${m}: avg ${cell.avg>0?'+':''}${cell.avg}% · WR ${cell.wr}% · ${cell.occ} occ · range [${cell.min}%, ${cell.max}%]`;
+      return `<td style="background:${bg}" onmouseenter="showTip(event,'${tt}')" onmouseleave="hideTip()">${disp}</td>`;
+    }).join('');
+    return `<tr><td class="sig-col">${d.name}</td>${cells}</tr>`;
   }).join('');
+  document.getElementById('hm-tbl').innerHTML=hdr+rows;
 }
 
-// ── Signal reference table ─────────────────────────────────────────
-const SIG_REF = {
-  V1:  ['Volume','Volume > 5× avg on a green close'],
-  V2:  ['Volume','Volume > 10× avg on a green close'],
-  V3:  ['Volume','Volume < 0.3× avg (drying up)'],
-  V4:  ['Volume','Highest volume in past 252 trading days'],
-  C1:  ['Candle','Hammer: lower wick ≥ 2× body, close in top 30% of range'],
-  C2:  ['Candle','Marubozu Bull: body ≥ 85% of range, closes at high'],
-  C3:  ['Candle','Bullish Engulfing: green candle body covers prior red candle'],
-  C4:  ['Candle','Green close after 3+ consecutive red days'],
-  C5:  ['Candle','NR7: today has the narrowest range of last 7 days'],
-  C6:  ['Candle','Wide Range Day: range > 1.5× avg, closes green in top 70%'],
-  B1:  ['Breakout','New 20-day high close + volume ≥ 1.5× avg'],
-  B2:  ['Breakout','New 52-week high close + volume ≥ 1.5× avg'],
-  B3:  ['Structure','Inside Bar: today\'s range is within prior day\'s range'],
-  T1:  ['Trend','Price crosses above 50MA after being below for 10+ days'],
-  T2:  ['Trend','Golden Cross: 50MA crosses above 200MA (first day)'],
-  T3:  ['Trend','Above 200MA + volume spike (2× avg) + green close'],
-  T4:  ['Trend','> 20% below 200MA + volume spike ≥ 3× avg + green close'],
-  Q1:  ['Sequence','5 or more consecutive red closes — entry on open next day'],
-  Q2:  ['Sequence','7 consecutive green closes (momentum continuation test)'],
-  K1:  ['Combo','Vol 10× + Hammer (operator accumulation + reversal candle)'],
-  K2:  ['Combo','Vol dry-up 5 days then 20-day high breakout'],
-  K3:  ['Combo','5 red days + Vol 10× spike (capitulation bottom)'],
-  K4:  ['Combo','Deep oversold (>20% below 200MA) + Hammer candle'],
-  K5:  ['Combo','52-week high + Marubozu Bull (unstoppable momentum)'],
-  K6:  ['Combo','NR7 + Above 200MA + vol ≥ 1.5× (coiled spring in uptrend)'],
-  K7:  ['Combo','Engulfing + 20d breakout + vol 5× (triple confirmation)'],
-  K8:  ['Combo','5 red days + Hammer + Above 200MA (pullback + reversal)'],
-  K9:  ['Combo','Annual vol climax + Hammer + Below 200MA (capitulation)'],
-  K10: ['Combo','Vol dry-up 3d + NR4 + Above 200MA (compression in uptrend)'],
-};
-function renderSigRef() {
-  document.getElementById('sig-ref-body').innerHTML =
-    Object.entries(SIG_REF).map(([k, [cat, desc]]) =>
-      `<tr>
-        <td class="mono blue">${k}</td>
-        <td>${(SIG_REF[k] && typeof ALL_PATS.find===undefined ? k : (ALL_PATS.find(p=>p.signal===k)||{name:k}).name)}</td>
-        <td style="font-size:10px;padding:3px 10px">
-          <span style="background:var(--blb);color:var(--blue);border:1px solid var(--bl2);
-          padding:1px 6px;border-radius:3px;font-size:9px">${cat}</span></td>
-        <td style="font-size:11px;color:var(--t2)">${desc}</td>
-      </tr>`).join('');
+function showTip(e,txt){
+  const tip=document.getElementById('hmTip');
+  tip.textContent=txt;
+  tip.style.display='block';
+  tip.style.left=(e.clientX+12)+'px';
+  tip.style.top=(e.clientY-10)+'px';
+}
+function hideTip(){ document.getElementById('hmTip').style.display='none'; }
+
+// ─── Signal reference ───────────────────────────────────────────────
+function renderSigRef(){
+  document.getElementById('sig-ref').innerHTML=Object.entries(SIG_INFO).map(([k,[cat,name,def]])=>
+    `<tr>
+      <td class="mono blue" style="white-space:nowrap">${k}</td>
+      <td><span style="background:var(--blb);color:var(--blue);border:1px solid var(--bl2);
+        padding:1px 5px;border-radius:3px;font-size:9px">${cat}</span></td>
+      <td style="font-size:11px">${name}</td>
+      <td style="font-size:11px;color:var(--t2)">${def}</td>
+    </tr>`).join('');
 }
 
-// ── Nav ─────────────────────────────────────────────────────────────
-function showPage(id, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(b  => b.classList.remove('active'));
+// ─── Nav ────────────────────────────────────────────────────────────
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   btn.classList.add('active');
 }
 
-// ── Helpers ─────────────────────────────────────────────────────────
-function fmt(n) {
-  if (n == null) return '—';
-  return Number(n).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
-}
-function retStr(r) {
-  if (r == null) return '—';
-  return `<span style="color:${r>0?'var(--green)':'var(--red)'}">${r>0?'+':''}${r}%</span>`;
-}
-function formatDate(s) {
-  if (!s) return '—';
-  const [y,m,d] = s.split('-');
-  const mns = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return `${parseInt(d)} ${mns[parseInt(m)]} ${y}`;
-}
-
-// Boot
 loadData();
 </script>
 </body>
