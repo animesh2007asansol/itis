@@ -2,7 +2,7 @@ name: NSE Pattern Discovery
 
 on:
   schedule:
-    # 11:45 PM IST = 6:15 PM UTC, Mon-Fri (after NSE fetch + pin bar analysis)
+    # 11:45 PM IST = 6:15 PM UTC, runs after NSE fetch + pin bar analysis
     - cron: '15 18 * * 1-5'
   workflow_dispatch:
     inputs:
@@ -10,6 +10,10 @@ on:
         description: 'Reason for manual trigger'
         required: false
         default: 'Manual trigger'
+      force_full_rerun:
+        description: 'Force full rerun even if no new dates (true/false)'
+        required: false
+        default: 'false'
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -21,6 +25,7 @@ jobs:
   discover-patterns:
     name: Discover NSE Patterns
     runs-on: ubuntu-latest
+    timeout-minutes: 360
 
     steps:
       - name: Checkout
@@ -38,16 +43,24 @@ jobs:
         run: |
           echo "Trigger : ${{ github.event_name }}"
           echo "Reason  : ${{ github.event.inputs.reason || 'scheduled' }}"
+          echo "Force   : ${{ github.event.inputs.force_full_rerun || 'false' }}"
           echo "UTC     : $(date -u)"
           echo "IST     : $(TZ='Asia/Kolkata' date)"
-          echo "Equity CSVs available: $(find data/equity -name '*.csv' 2>/dev/null | wc -l)"
+          echo "Equity CSVs: $(find data/equity -name '*.csv' 2>/dev/null | wc -l)"
+          if [ -f "pattern_signals/checkpoint.json" ]; then
+            echo "Last run checkpoint:"
+            cat pattern_signals/checkpoint.json
+          else
+            echo "No checkpoint — this will be a full run"
+          fi
 
       - name: Run pattern discovery
         run: python scripts/pattern_discovery.py
-        timeout-minutes: 300
+        timeout-minutes: 350
         env:
           PYTHONPATH: ${{ github.workspace }}
           PYTHONUNBUFFERED: '1'
+          FORCE_FULL_RERUN: ${{ github.event.inputs.force_full_rerun || 'false' }}
 
       - name: Show output summary
         if: always()
@@ -56,70 +69,91 @@ jobs:
           ls -lh pattern_signals/ 2>/dev/null || echo "pattern_signals/ not created!"
           echo ""
 
-          # ── patterns.json ──────────────────────────────────────
+          # patterns.json — keys: stocks_analyzed, trading_days, data_range, grade_counts, patterns
           if [ -f "pattern_signals/patterns.json" ]; then
             python3 - << 'PYEOF'
           import json
           with open('pattern_signals/patterns.json') as f:
               d = json.load(f)
-          print(f"Stocks analyzed : {d.get('stocks_analyzed', '—')}")
-          print(f"Trading days    : {d.get('trading_days', '—')}")
-          print(f"Data range      : {d.get('data_range', '—')}")
-          print(f"Grade counts    : {d.get('grade_counts', {})}")
-          print()
-          patterns = d.get('patterns', [])
-          print(f"Top 10 cross-stock patterns ({len(patterns)} total):")
+          print(f"Stocks analyzed : {d.get('stocks_analyzed','—')}")
+          print(f"Trading days    : {d.get('trading_days','—')}")
+          print(f"Data range      : {d.get('data_range','—')}")
+          print(f"Grade counts    : {d.get('grade_counts',{})}")
+          patterns = d.get('patterns',[])
+          print(f"\nTop 10 cross-stock patterns ({len(patterns)} total):")
           for p in patterns[:10]:
               print(f"  {p.get('grade','—')}  {p.get('signal',''):<5}  "
                     f"WR20:{p.get('wr_20d','—')}%  "
                     f"Avg20:{p.get('avg_20d','—')}%  "
-                    f"Score:{p.get('score',0):<8}  "
+                    f"Min20:{p.get('min_20d','—')}%  "
+                    f"Score:{p.get('score',0):<8.1f}  "
                     f"{p.get('name','')[:35]}")
           PYEOF
           fi
           echo ""
 
-          # ── alerts.json ────────────────────────────────────────
+          # alerts.json — keys: alert_date, total_alerts, today_count, grade_a
           if [ -f "pattern_signals/alerts.json" ]; then
             python3 - << 'PYEOF'
           import json
           with open('pattern_signals/alerts.json') as f:
               d = json.load(f)
-          print(f"Alert date      : {d.get('alert_date') or d.get('latest_date', '—')}")
-          print(f"Total alerts    : {d.get('total_alerts', 0)}")
-          print(f"Today alerts    : {d.get('today_count', 0)}")
-          print(f"Grade A alerts  : {d.get('grade_a', 0)}")
+          print(f"Alert date      : {d.get('alert_date','—')}")
+          print(f"Window          : {d.get('window_note','last 20 trading days')}")
+          print(f"Total alerts    : {d.get('total_alerts',0)}")
+          print(f"Today alerts    : {d.get('today_count',0)}")
+          print(f"Grade A alerts  : {d.get('grade_a',0)}")
           print()
-          for a in d.get('alerts', [])[:15]:
+          for a in d.get('alerts',[])[:15]:
               print(f"  [{a.get('grade','—')}] {a.get('sym',''):<14}  "
                     f"{a.get('signal_name','')[:28]:<30}  "
-                    f"WR20:{a.get('win_rate_20d') or a.get('wr_20d',0)}%  "
-                    f"Close:Rs{a.get('sig_close') or a.get('close',0)}")
+                    f"WR20:{a.get('win_rate_20d',0)}%  "
+                    f"Min20:{a.get('min_ret_20d',0):+.1f}%  "
+                    f"Close:Rs{a.get('sig_close',0)}  "
+                    f"{a.get('zone_status','')}")
           PYEOF
           fi
           echo ""
 
-          # ── stock_profiles.json ────────────────────────────────
+          # stock_profiles.json — keys: stocks_with_100pct, n_aplus, n_a, all_grade_a
           if [ -f "pattern_signals/stock_profiles.json" ]; then
             python3 - << 'PYEOF'
           import json
           with open('pattern_signals/stock_profiles.json') as f:
               d = json.load(f)
-          print(f"Stocks with 100% patterns : {d.get('stocks_with_100pct') or d.get('n_stocks', 0)}")
-          print(f"Grade A+                  : {d.get('n_aplus', 0)}")
-          print(f"Grade A                   : {d.get('n_a', 0)}")
+          print(f"Stocks with 100% patterns : {d.get('stocks_with_100pct',0)}")
+          print(f"Grade A+                  : {d.get('n_aplus',0)}")
+          print(f"Grade A                   : {d.get('n_a',0)}")
+          print(f"Grade B                   : {d.get('n_b',0)}")
           print()
-          print("Top 15 Grade A+ / A stock patterns (by avg 20d return):")
-          grade_a = d.get('all_grade_a') or [
-              r for r in d.get('all_results', [])
-              if r.get('grade') in ('A+', 'A')
-          ]
+          grade_a = d.get('all_grade_a') or []
+          print(f"Top 15 Grade A+/A patterns ({len(grade_a)} total):")
           for r in grade_a[:15]:
-              print(f"  {r.get('sym',''):<14}  {r.get('signal',''):<5}  "
+              print(f"  {r.get('sym',''):<14}  {r.get('signal',''):<5}  {r.get('grade','')}  "
                     f"WR20:{r.get('wr_20d',0)}%  "
                     f"Avg20:{r.get('avg_20d',0):+.1f}%  "
-                    f"Occ:{r.get('occ_20d',0)}  "
-                    f"Yrs:{r.get('n_years',0)}")
+                    f"Min20:{r.get('min_20d',0):+.1f}%  "
+                    f"Worst:{r.get('worst_return',0):+.1f}%  "
+                    f"Occ:{r.get('occ_20d',0)}  Yrs:{r.get('n_years',0)}")
+          PYEOF
+          fi
+          echo ""
+
+          # candle_morphology.json
+          if [ -f "pattern_signals/candle_morphology.json" ]; then
+            python3 - << 'PYEOF'
+          import json
+          with open('pattern_signals/candle_morphology.json') as f:
+              d = json.load(f)
+          print(f"Candle buckets : {d.get('n_buckets',0)}")
+          print()
+          print("Top 10 candle shapes by week>7% rate:")
+          for k, v in list(d.get('buckets',{}).items())[:10]:
+              print(f"  {k:<45}  "
+                    f"nd>3%:{v.get('next_day_gt3pct',0)}%  "
+                    f"wk>7%:{v.get('week_gt7pct',0)}%  "
+                    f"gap_up:{v.get('gap_up_rate_pct',0)}%  "
+                    f"occ:{v.get('occurrences',0)}")
           PYEOF
           fi
 
@@ -132,9 +166,13 @@ jobs:
             echo "No changes to commit."
           else
             DATE_IST=$(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M IST')
-            git commit -m "📊 Pattern signals update — ${DATE_IST}"
+            git commit -m "📊 Pattern signals — ${DATE_IST}"
             for i in 1 2 3; do
-              git push && break || { echo "Retry $i..."; sleep 5; git pull --rebase; }
+              git push && break || {
+                echo "Push attempt $i failed, retrying..."
+                sleep 5
+                git pull --rebase
+              }
             done
-            echo "Pushed pattern_signals/ to repo."
+            echo "Pushed to repo."
           fi
