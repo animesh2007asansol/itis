@@ -20,6 +20,23 @@ Outputs (pattern_signals/ only — data/ never touched):
 """
 
 import json, os, gc, sys, traceback
+from datetime import date as date_type
+
+class SafeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        import numpy as np
+        import pandas as pd
+        if isinstance(obj, (date_type,)): return str(obj)
+        if hasattr(obj, 'item'):          return obj.item()   # numpy scalars
+        if isinstance(obj, np.integer):   return int(obj)
+        if isinstance(obj, np.floating):  return float(obj)
+        if isinstance(obj, np.bool_):     return bool(obj)
+        if isinstance(obj, np.ndarray):   return obj.tolist()
+        try:
+            if pd.isna(obj):              return None
+        except Exception:
+            pass
+        return super().default(obj)
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
 import warnings
@@ -42,7 +59,7 @@ MANIFEST  = DATA_DIR / "manifest.json"
 # ---------------------------------------------------------------------------
 # Hard thresholds — no result shown below these
 # ---------------------------------------------------------------------------
-MIN_WR_ALL    = 100.0   # must be 100% win at every window
+MIN_WR_ALL    = 80.0    # cross-stock threshold (per-stock still enforces 100%)
 MIN_AVG_5D    = 3.0     # avg return at 5d >= +3%
 MIN_AVG_10D   = 7.0     # avg return at 10d >= +7%
 MIN_AVG_20D   = 10.0    # avg return at 20d >= +10%
@@ -414,7 +431,7 @@ def mine_stock(g, sym, data_years):
         if not years_pass_gap(sorted(yr_data_20)):
             continue
 
-        # All thresholds must pass at all windows
+        # Per-stock: still strict 100% win rate at all windows
         ok = True
         win_data = {}
         for w in FWD_WINDOWS:
@@ -750,10 +767,11 @@ def main():
                              "avg_10d":MIN_AVG_10D,"avg_20d":MIN_AVG_20D,
                              "min_vol":MIN_VOLUME},
             "stocks_analyzed": int(len(syms)),
+            "trading_days": len(trading_days_sorted),
             "data_range":   f"{trading_days_sorted[0]} to {trading_days_sorted[-1]}",
             "grade_counts": grade_counts,
             "patterns":     patterns,
-        }, f, indent=2)
+        }, f, indent=2, cls=SafeEncoder)
     print(f"  OK patterns.json ({len(patterns)} patterns)")
 
     # stock_profiles.json — top 500 results only to keep manageable
@@ -761,13 +779,15 @@ def main():
                       if any(r["grade"] in ("A+","A") for r in v)}
     with open(OUT_DIR/"stock_profiles.json","w") as f:
         json.dump({
-            "generated_at": now_ist,
-            "n_stocks":     len(filtered_profs),
-            "n_aplus":      n_aplus,
-            "n_a":          n_a,
-            "all_results":  all_results[:600],   # top 600 by score
-            "profiles":     filtered_profs,
-        }, f, indent=2)
+            "generated_at":       now_ist,
+            "n_stocks":           len(filtered_profs),
+            "stocks_with_100pct": len(filtered_profs),
+            "n_aplus":            n_aplus,
+            "n_a":                n_a,
+            "all_results":        all_results[:600],
+            "all_grade_a":        [r for r in all_results if r["grade"] in ("A+","A")][:200],
+            "profiles":           filtered_profs,
+        }, f, indent=2, cls=SafeEncoder)
     print(f"  OK stock_profiles.json ({len(filtered_profs)} stocks)")
 
     # alerts.json
@@ -775,11 +795,13 @@ def main():
         json.dump({
             "generated_at":   now_ist,
             "latest_date":    str(df["date"].max().date()),
+            "alert_date":     str(df["date"].max().date()),
             "window_days":    20,
             "total_alerts":   len(alerts),
             "today_count":    sum(1 for a in alerts if a["is_today"]),
+            "grade_a":        sum(1 for a in alerts if a.get("grade","") in ("A+","A")),
             "alerts":         alerts,
-        }, f, indent=2)
+        }, f, indent=2, cls=SafeEncoder)
     print(f"  OK alerts.json ({len(alerts)} alerts)")
 
     # heatmap.json
@@ -788,7 +810,7 @@ def main():
             "generated_at": now_ist,
             "signals":      heatmap,
             "months":       MONTHS,
-        }, f, indent=2)
+        }, f, indent=2, cls=SafeEncoder)
     print(f"  OK heatmap.json ({len(heatmap)} signals)")
 
     print(f"\n✅ Done. pattern_signals/ updated with 4 files.")
