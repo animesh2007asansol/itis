@@ -1,0 +1,177 @@
+{
+  "generated_at": "2026-04-16T02:50:47+05:30",
+  "description": "Candle shape -> next-day open gap + next-week return",
+  "thresholds": {
+    "next_day_pct": 3.0,
+    "next_week_pct": 7.0,
+    "min_occ": 5
+  },
+  "n_buckets": 15,
+  "buckets": {
+    "green_huge_Llong_Unone": {
+      "description": "green huge Llong Unone",
+      "occurrences": 14,
+      "gap_up_rate_pct": 85.7,
+      "avg_gap_pct": 4.88,
+      "next_day_gt3pct": 57.1,
+      "week_gt7pct": 50.0,
+      "week_win_rate": 57.1,
+      "week_avg_return": 9.65,
+      "week_min_return": -19.06
+    },
+    "green_medium_Lvery_long_Unone": {
+      "description": "green medium Lvery long Unone",
+      "occurrences": 110,
+      "gap_up_rate_pct": 84.5,
+      "avg_gap_pct": 4.07,
+      "next_day_gt3pct": 62.7,
+      "week_gt7pct": 34.5,
+      "week_win_rate": 55.5,
+      "week_avg_return": 4.47,
+      "week_min_return": -19.93
+    },
+    "green_large_Lmedium_Uvery_long": {
+      "description": "green large Lmedium Uvery long",
+      "occurrences": 6,
+      "gap_up_rate_pct": 83.3,
+      "avg_gap_pct": 2.56,
+      "next_day_gt3pct": 33.3,
+      "week_gt7pct": 33.3,
+      "week_win_rate": 66.7,
+      "week_avg_return": 0.41,
+      "week_min_return": -15.97
+    },
+    "red_huge_Llong_Usmall": {
+      "description": "red huge Llong Usmall",
+      "occurrences": 36,
+      "gap_up_rate_pct": 58.3,
+      "avg_gap_pct": 1.03,
+      "next_day_gt3pct": 19.4,
+      "week_gt7pct": 33.3,
+      "week_win_rate": 66.7,
+      "week_avg_return": 6.0,
+      "week_min_return": -25.04
+    },
+    "red_large_Lvery_long_Ulong": {
+      "description": "red large Lvery long Ulong",
+      "occurrences": 6,
+      "gap_up_rate_pct": 66.7,
+      "avg_gap_pct": 0.82,
+      "next_day_gt3pct": 0.0,
+      "week_gt7pct": 33.3,
+      "week_win_rate": 50.0,
+      "week_avg_return": 8.75,
+      "week_min_return": -3.24
+    },
+    "green_small_Lvery_long_Unone": {
+      "description": "green small Lvery long Unone",
+      "occurrences": 941,
+      "gap_up_rate_pct": 85.4,
+      "avg_gap_pct": 2.96,
+      "next_day_gt3pct": 53.8,
+      "week_gt7pct": 32.3,
+      "week_win_rate": 51.4,
+      "week_avg_return": 3.06,
+      "week_min_return": -47.12
+    },
+    "red_huge_Lmedium_Umedium": {
+      "description": "red huge Lmedium Umedium",
+      "occurrences": 48,
+      "gap_up_rate_pct": 62.5,
+      "avg_gap_pct": 0.6,
+      "next_day_gt3pct": 8.3,
+      "week_gt7pct": 31.2,
+      "week_win_rate": 43.8,
+      "week_avg_return": 0.94,
+      "week_min_return": -25.89
+    },
+    "red_large_Llong_Ulong": {
+      "description": "red large Llong Ulong",
+      "occurrences": 20,
+      "gap_up_rate_pct": 55.0,
+      "avg_gap_pct": -0.23,
+      "next_day_gt3pct": 20.0,
+      "week_gt7pct": 30.0,
+      "week_win_rate": 45.0,
+      "week_avg_return": 0.03,
+      "week_min_return": -25.71
+    },
+    "green_large_Llong_Unone": {
+      "description": "green large Llong Unone",
+      "occurrences": 88,
+      "gap_up_rate_pct": 83.0,
+      "avg_gap_pct": 3.33,
+      "next_day_gt3pct": 45.5,
+      "week_gt7pct": 29.5,
+      "week_win_rate": 55.7,
+      "week_avg_return": 2.7,
+      "week_min_return": -33.99
+    },
+    "green_huge_Lmedium_Unone": {
+      "description": "green huge Lmedium Unone",
+      "occurrences": 447,
+      "gap_up_rate_pct": 45.0,
+      "avg_gap_pct": 1.4,
+      "next_day_gt3pct": 31.8,
+      "week_gt7pct": 27.7,
+      "week_win_rate": 40.0,
+      "week_avg_return": 2.21,
+      "week_min_return": -35.71
+    },
+    "green_medium_Llong_Unone": {
+      "description": "green medium Llong Unone",
+      "occurrences": 903,
+      "gap_up_rate_pct": 80.5,
+      "avg_gap_pct": 2.46,
+      "next_day_gt3pct": 43.3,
+      "week_gt7pct": 27.6,
+      "week_win_rate": 51.6,
+      "week_avg_return": 2.51,
+      "week_min_return": -44.4
+    },
+    "green_large_Lmedium_Unone": {
+      "description": "green large Lmedium Unone",
+      "occurrences": 1667,
+      "gap_up_rate_pct": 71.9,
+      "avg_gap_pct": 2.06,
+      "next_day_gt3pct": 38.6,
+      "week_gt7pct": 27.4,
+      "week_win_rate": 49.1,
+      "week_avg_return": 2.53,
+      "week_min_return": -78.69
+    },
+    "green_tiny_Lvery_long_Unone": {
+      "description": "green tiny Lvery long Unone",
+      "occurrences": 999,
+      "gap_up_rate_pct": 84.9,
+      "avg_gap_pct": 2.98,
+      "next_day_gt3pct": 56.7,
+      "week_gt7pct": 27.2,
+      "week_win_rate": 53.0,
+      "week_avg_return": 2.15,
+      "week_min_return": -89.58
+    },
+    "green_small_Llong_Unone": {
+      "description": "green small Llong Unone",
+      "occurrences": 1340,
+      "gap_up_rate_pct": 80.0,
+      "avg_gap_pct": 2.34,
+      "next_day_gt3pct": 42.5,
+      "week_gt7pct": 24.6,
+      "week_win_rate": 51.4,
+      "week_avg_return": 2.08,
+      "week_min_return": -81.75
+    },
+    "green_tiny_Llong_Unone": {
+      "description": "green tiny Llong Unone",
+      "occurrences": 224,
+      "gap_up_rate_pct": 74.6,
+      "avg_gap_pct": 1.86,
+      "next_day_gt3pct": 33.0,
+      "week_gt7pct": 17.9,
+      "week_win_rate": 57.1,
+      "week_avg_return": 1.91,
+      "week_min_return": -36.63
+    }
+  }
+}
