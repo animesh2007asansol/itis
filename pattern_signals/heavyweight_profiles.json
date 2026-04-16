@@ -1,0 +1,742 @@
+{
+  "generated_at": "2026-04-16T13:00:20+05:30",
+  "data_range": "2020-01-01 to 2026-04-15",
+  "thresholds": {
+    "min_years_traded": 4,
+    "min_turnover_cr": 5.0,
+    "floor_threshold_pct": 10.0,
+    "min_recovery_pct": 15.0,
+    "min_win_rate_pct": 80.0
+  },
+  "n_stocks": 4,
+  "n_aplus": 0,
+  "n_a": 0,
+  "n_b": 2,
+  "profiles": {
+    "BDL": {
+      "sym": "BDL",
+      "grade": "B",
+      "score": 75.2,
+      "n_years": 3,
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "n_events": 4,
+      "best_window_days": 30,
+      "best_beats15_rate": 100.0,
+      "best_min_return": 15.58,
+      "avg_floor_depth": 6.4,
+      "win_stats": {
+        "5": {
+          "n": 4,
+          "win_rate": 50.0,
+          "beats15_rate": 25.0,
+          "avg_return": 5.04,
+          "min_return": -5.63,
+          "max_return": 22.94,
+          "med_return": 3.92
+        },
+        "10": {
+          "n": 4,
+          "win_rate": 50.0,
+          "beats15_rate": 25.0,
+          "avg_return": 10.07,
+          "min_return": -2.42,
+          "max_return": 30.4,
+          "med_return": 14.42
+        },
+        "20": {
+          "n": 3,
+          "win_rate": 66.7,
+          "beats15_rate": 33.3,
+          "avg_return": 10.62,
+          "min_return": -12.38,
+          "max_return": 32.48,
+          "med_return": 11.76
+        },
+        "30": {
+          "n": 3,
+          "win_rate": 100.0,
+          "beats15_rate": 100.0,
+          "avg_return": 20.65,
+          "min_return": 15.58,
+          "max_return": 25.34,
+          "med_return": 21.03
+        }
+      },
+      "events": [
+        {
+          "date": "2024-10-22",
+          "close": 1057.85,
+          "low": 1030.75,
+          "year": 2024,
+          "pos_in_range": 7.7,
+          "vol": 1277242,
+          "recovery": {
+            "5": {
+              "return_pct": -1.05,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": -2.42,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": -12.38,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "30": {
+              "return_pct": 15.58,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2024-11-22",
+          "close": 935.4,
+          "low": 917.0,
+          "year": 2024,
+          "pos_in_range": 2.2,
+          "vol": 491353,
+          "recovery": {
+            "5": {
+              "return_pct": 22.94,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "10": {
+              "return_pct": 30.4,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "20": {
+              "return_pct": 32.48,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 21.03,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2025-02-17",
+          "close": 1071.9,
+          "low": 1058.3,
+          "year": 2025,
+          "pos_in_range": 8.8,
+          "vol": 1085852,
+          "recovery": {
+            "5": {
+              "return_pct": -5.63,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": -2.11,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": 11.76,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "30": {
+              "return_pct": 25.34,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2026-03-23",
+          "close": 1158.5,
+          "low": 1151.0,
+          "year": 2026,
+          "pos_in_range": 7.0,
+          "vol": 1773436,
+          "recovery": {
+            "5": {
+              "return_pct": 3.92,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": 14.42,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "20": null,
+            "30": null
+          }
+        }
+      ]
+    },
+    "TATAMTRDVR": {
+      "sym": "TATAMTRDVR",
+      "grade": "C",
+      "score": 54.5,
+      "n_years": 2,
+      "years": [
+        2020,
+        2022
+      ],
+      "n_events": 3,
+      "best_window_days": 10,
+      "best_beats15_rate": 100.0,
+      "best_min_return": 19.64,
+      "avg_floor_depth": 7.7,
+      "win_stats": {
+        "5": {
+          "n": 3,
+          "win_rate": 66.7,
+          "beats15_rate": 0.0,
+          "avg_return": 2.27,
+          "min_return": -0.82,
+          "max_return": 4.36,
+          "med_return": 3.26
+        },
+        "10": {
+          "n": 3,
+          "win_rate": 100.0,
+          "beats15_rate": 100.0,
+          "avg_return": 22.32,
+          "min_return": 19.64,
+          "max_return": 24.44,
+          "med_return": 22.88
+        },
+        "20": {
+          "n": 3,
+          "win_rate": 100.0,
+          "beats15_rate": 100.0,
+          "avg_return": 21.91,
+          "min_return": 17.33,
+          "max_return": 30.11,
+          "med_return": 18.29
+        },
+        "30": {
+          "n": 3,
+          "win_rate": 100.0,
+          "beats15_rate": 100.0,
+          "avg_return": 17.68,
+          "min_return": 15.55,
+          "max_return": 18.83,
+          "med_return": 18.67
+        }
+      },
+      "events": [
+        {
+          "date": "2020-03-27",
+          "close": 30.55,
+          "low": 30.1,
+          "year": 2020,
+          "pos_in_range": 3.9,
+          "vol": 3170729,
+          "recovery": {
+            "5": {
+              "return_pct": -0.82,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": 19.64,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "20": {
+              "return_pct": 30.11,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 15.55,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2020-05-18",
+          "close": 33.75,
+          "low": 33.4,
+          "year": 2020,
+          "pos_in_range": 9.6,
+          "vol": 3116753,
+          "recovery": {
+            "5": {
+              "return_pct": 3.26,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": 24.44,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "20": {
+              "return_pct": 17.33,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 18.67,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2022-10-14",
+          "close": 191.4,
+          "low": 190.6,
+          "year": 2022,
+          "pos_in_range": 9.7,
+          "vol": 1512366,
+          "recovery": {
+            "5": {
+              "return_pct": 4.36,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": 22.88,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "20": {
+              "return_pct": 18.29,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 18.83,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        }
+      ]
+    },
+    "POONAWALLA": {
+      "sym": "POONAWALLA",
+      "grade": "C",
+      "score": 50.7,
+      "n_years": 2,
+      "years": [
+        2024,
+        2025
+      ],
+      "n_events": 4,
+      "best_window_days": 30,
+      "best_beats15_rate": 100.0,
+      "best_min_return": 15.75,
+      "avg_floor_depth": 0.4,
+      "win_stats": {
+        "5": {
+          "n": 4,
+          "win_rate": 75.0,
+          "beats15_rate": 50.0,
+          "avg_return": 12.57,
+          "min_return": -2.02,
+          "max_return": 27.34,
+          "med_return": 19.9
+        },
+        "10": {
+          "n": 4,
+          "win_rate": 75.0,
+          "beats15_rate": 75.0,
+          "avg_return": 14.12,
+          "min_return": -2.93,
+          "max_return": 23.18,
+          "med_return": 20.63
+        },
+        "20": {
+          "n": 4,
+          "win_rate": 75.0,
+          "beats15_rate": 50.0,
+          "avg_return": 15.72,
+          "min_return": -3.48,
+          "max_return": 32.8,
+          "med_return": 22.4
+        },
+        "30": {
+          "n": 4,
+          "win_rate": 100.0,
+          "beats15_rate": 100.0,
+          "avg_return": 22.68,
+          "min_return": 15.75,
+          "max_return": 33.92,
+          "med_return": 20.82
+        }
+      },
+      "events": [
+        {
+          "date": "2024-08-05",
+          "close": 345.75,
+          "low": 343.5,
+          "year": 2024,
+          "pos_in_range": 5.2,
+          "vol": 2764797,
+          "recovery": {
+            "5": {
+              "return_pct": 5.05,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": 15.62,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "20": {
+              "return_pct": 11.18,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "30": {
+              "return_pct": 15.75,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2024-10-25",
+          "close": 297.05,
+          "low": 287.0,
+          "year": 2024,
+          "pos_in_range": -21.4,
+          "vol": 12657285,
+          "recovery": {
+            "5": {
+              "return_pct": 27.34,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "10": {
+              "return_pct": 23.18,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "20": {
+              "return_pct": 22.4,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 20.82,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2025-02-12",
+          "close": 291.5,
+          "low": 287.9,
+          "year": 2025,
+          "pos_in_range": 8.8,
+          "vol": 1865540,
+          "recovery": {
+            "5": {
+              "return_pct": -2.02,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": -2.93,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": -3.48,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "30": {
+              "return_pct": 20.22,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2025-03-17",
+          "close": 289.65,
+          "low": 281.35,
+          "year": 2025,
+          "pos_in_range": 9.1,
+          "vol": 2066710,
+          "recovery": {
+            "5": {
+              "return_pct": 19.9,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "10": {
+              "return_pct": 20.63,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "20": {
+              "return_pct": 32.8,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 33.92,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        }
+      ]
+    },
+    "BFUTILITIE": {
+      "sym": "BFUTILITIE",
+      "grade": "B",
+      "score": -12.3,
+      "n_years": 4,
+      "years": [
+        2020,
+        2022,
+        2023,
+        2025
+      ],
+      "n_events": 6,
+      "best_window_days": 30,
+      "best_beats15_rate": 83.3,
+      "best_min_return": -1.58,
+      "avg_floor_depth": 8.0,
+      "win_stats": {
+        "5": {
+          "n": 6,
+          "win_rate": 83.3,
+          "beats15_rate": 0.0,
+          "avg_return": 5.64,
+          "min_return": -8.64,
+          "max_return": 11.12,
+          "med_return": 7.56
+        },
+        "10": {
+          "n": 6,
+          "win_rate": 83.3,
+          "beats15_rate": 0.0,
+          "avg_return": 8.52,
+          "min_return": -4.21,
+          "max_return": 14.76,
+          "med_return": 12.66
+        },
+        "20": {
+          "n": 6,
+          "win_rate": 83.3,
+          "beats15_rate": 83.3,
+          "avg_return": 13.87,
+          "min_return": -11.32,
+          "max_return": 22.04,
+          "med_return": 17.78
+        },
+        "30": {
+          "n": 6,
+          "win_rate": 83.3,
+          "beats15_rate": 83.3,
+          "avg_return": 19.73,
+          "min_return": -1.58,
+          "max_return": 33.93,
+          "med_return": 20.71
+        }
+      },
+      "events": [
+        {
+          "date": "2020-03-27",
+          "close": 142.25,
+          "low": 139.25,
+          "year": 2020,
+          "pos_in_range": 3.6,
+          "vol": 160618,
+          "recovery": {
+            "5": {
+              "return_pct": 6.05,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": 14.2,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": 22.04,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 17.79,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2020-05-19",
+          "close": 153.85,
+          "low": 153.15,
+          "year": 2020,
+          "pos_in_range": 8.7,
+          "vol": 245216,
+          "recovery": {
+            "5": {
+              "return_pct": -8.64,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": 7.05,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": 16.93,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 33.93,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2022-05-25",
+          "close": 307.45,
+          "low": 306.0,
+          "year": 2022,
+          "pos_in_range": 9.5,
+          "vol": 75793,
+          "recovery": {
+            "5": {
+              "return_pct": 7.56,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": 6.68,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": -11.32,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "30": {
+              "return_pct": -1.58,
+              "positive": false,
+              "beats_15pct": false
+            }
+          }
+        },
+        {
+          "date": "2022-06-23",
+          "close": 281.25,
+          "low": 275.2,
+          "year": 2022,
+          "pos_in_range": 6.8,
+          "vol": 105626,
+          "recovery": {
+            "5": {
+              "return_pct": 6.86,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": 12.66,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": 15.96,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 18.06,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2023-03-28",
+          "close": 284.6,
+          "low": 283.4,
+          "year": 2023,
+          "pos_in_range": 9.7,
+          "vol": 212477,
+          "recovery": {
+            "5": {
+              "return_pct": 11.12,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": 14.76,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": 17.78,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 20.71,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2025-02-28",
+          "close": 611.95,
+          "low": 599.0,
+          "year": 2025,
+          "pos_in_range": 9.6,
+          "vol": 67180,
+          "recovery": {
+            "5": {
+              "return_pct": 10.88,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": -4.21,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": 21.8,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 29.49,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        }
+      ]
+    }
+  }
+}
