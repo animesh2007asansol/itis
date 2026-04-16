@@ -76,8 +76,8 @@ CHECKPOINT = OUT_DIR / "checkpoint.json"
 # ─────────────────────────────────────────────────────────────────────────────
 CROSS_MIN_WR      = 80.0    # cross-stock win rate threshold (relaxed)
 STOCK_MIN_WR      = 100.0   # per-stock win rate (strict 100%)
-STOCK_MIN_AVG     = 5.0     # avg return >= +5% at every window
-STOCK_MIN_MIN_RET = 5.0     # worst single occurrence >= +5% at every window
+STOCK_MIN_AVG     = 5.0     # avg return >= +5% at each window (base filter)
+STOCK_MIN_ANY_ONE = 15.0    # at least ONE window must have avg >= 15% (OR logic)
 MIN_VOLUME        = 100_000  # minimum tradeable volume
 MIN_OCC           = 3        # minimum occurrences
 MIN_YEARS         = 2        # must appear in 2+ years
@@ -460,16 +460,21 @@ def mine_stock(g, sym, data_years):
             max_r = valid.max()*100
             med_r = valid.median()*100
 
-            # STRICT filters — all must pass
-            if wr    < STOCK_MIN_WR:      ok = False; break
-            if avg_r < STOCK_MIN_AVG:     ok = False; break
-            if min_r < STOCK_MIN_MIN_RET: ok = False; break   # worst case >= +5%
+            # STRICT filters
+            if wr    < STOCK_MIN_WR:  ok = False; break   # 100% win rate required
+            if avg_r < STOCK_MIN_AVG: ok = False; break   # avg return required
 
             win_data[w] = {"wr":round(wr,1),"avg":round(avg_r,2),
                            "min":round(min_r,2),"max":round(max_r,2),
                            "med":round(med_r,2),"occ":int(len(valid))}
 
         if not ok: continue
+
+        # MIN 15% RETURN IN AT LEAST ONE WINDOW (OR logic, not AND)
+        # Any one of 5d, 10d, 20d must have avg return >= 15%
+        max_avg_any_window = max(win_data[w]["avg"] for w in FWD_WINDOWS)
+        if max_avg_any_window < 15.0:
+            continue
 
         years_all = sorted([int(y) for y in yr_data])
         if len(years_all) < min(MIN_YEARS, min_yrs): continue
