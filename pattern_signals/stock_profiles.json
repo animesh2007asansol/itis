@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-04-16T12:59:55+05:30",
-  "n_stocks": 30,
-  "stocks_with_100pct": 30,
+  "generated_at": "2026-04-16T16:22:21+05:30",
+  "n_stocks": 32,
+  "stocks_with_100pct": 32,
   "n_aplus": 0,
-  "n_a": 0,
-  "n_b": 4,
+  "n_a": 2,
+  "n_b": 32,
   "all_results": [
     {
       "sym": "KAYA",
       "signal": "C4",
       "name": "Bounce After 3+ Red Days",
-      "grade": "C",
+      "grade": "A",
       "n_years": 4,
       "years": [
         2021,
@@ -76,7 +76,7 @@
       "sym": "URJA",
       "signal": "T2",
       "name": "Golden Cross",
-      "grade": "C",
+      "grade": "B",
       "n_years": 3,
       "years": [
         2020,
@@ -132,7 +132,7 @@
       "sym": "UMESLTD",
       "signal": "C3",
       "name": "Bullish Engulfing",
-      "grade": "C",
+      "grade": "B",
       "n_years": 3,
       "years": [
         2021,
@@ -188,7 +188,7 @@
       "sym": "ITDCEM",
       "signal": "T2",
       "name": "Golden Cross",
-      "grade": "C",
+      "grade": "B",
       "n_years": 3,
       "years": [
         2020,
@@ -244,7 +244,7 @@
       "sym": "LIBERTSHOE",
       "signal": "C1",
       "name": "Hammer",
-      "grade": "C",
+      "grade": "A",
       "n_years": 3,
       "years": [
         2022,
@@ -300,7 +300,7 @@
       "sym": "EXCEL",
       "signal": "T2",
       "name": "Golden Cross",
-      "grade": "C",
+      "grade": "B",
       "n_years": 3,
       "years": [
         2022,
@@ -356,7 +356,7 @@
       "sym": "CUPID",
       "signal": "K2",
       "name": "COMBO: Vol Dry-Up then 20D Breakout",
-      "grade": "C",
+      "grade": "B",
       "n_years": 3,
       "years": [
         2021,
@@ -412,7 +412,7 @@
       "sym": "CENTRUM",
       "signal": "K6",
       "name": "COMBO: NR7 + Above 200MA + Vol",
-      "grade": "C",
+      "grade": "B",
       "n_years": 3,
       "years": [
         2020,
@@ -468,7 +468,7 @@
       "sym": "SCAPDVR",
       "signal": "V1",
       "name": "Bull Volume Spike 5x",
-      "grade": "C",
+      "grade": "B",
       "n_years": 3,
       "years": [
         2020,
@@ -524,7 +524,7 @@
       "sym": "JAIPURKURT",
       "signal": "V2",
       "name": "Bull Volume Spike 10x",
-      "grade": "C",
+      "grade": "B",
       "n_years": 3,
       "years": [
         2022,
@@ -580,7 +580,7 @@
       "sym": "CCCL",
       "signal": "V4",
       "name": "Annual Volume Climax",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2024,
@@ -672,7 +672,7 @@
       "sym": "ANGELBRKG",
       "signal": "C3",
       "name": "Bullish Engulfing",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2020,
@@ -718,7 +718,7 @@
       "sym": "CUPID",
       "signal": "K5",
       "name": "COMBO: 52W High + Marubozu",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2023,
@@ -764,7 +764,7 @@
       "sym": "PDSMFL",
       "signal": "V4",
       "name": "Annual Volume Climax",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2020,
@@ -810,7 +810,7 @@
       "sym": "MCDHOLDING",
       "signal": "V4",
       "name": "Annual Volume Climax",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2020,
@@ -902,7 +902,7 @@
       "sym": "PDSMFL",
       "signal": "T3",
       "name": "Above 200MA + Volume Spike",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2020,
@@ -948,7 +948,7 @@
       "sym": "STARHEALTH",
       "signal": "C2",
       "name": "Marubozu Bull",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2022,
@@ -994,7 +994,7 @@
       "sym": "ASIANENE",
       "signal": "K6",
       "name": "COMBO: NR7 + Above 200MA + Vol",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2023,
@@ -1086,7 +1086,7 @@
       "sym": "JBMA",
       "signal": "K5",
       "name": "COMBO: 52W High + Marubozu",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2022,
@@ -1132,7 +1132,7 @@
       "sym": "SPCENET",
       "signal": "K10",
       "name": "COMBO: Vol Dry-Up + NR4 + Above 200MA",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2022,
@@ -1175,10 +1175,56 @@
       }
     },
     {
+      "sym": "UPL",
+      "signal": "K10",
+      "name": "COMBO: Vol Dry-Up + NR4 + Above 200MA",
+      "grade": "B",
+      "n_years": 2,
+      "years": [
+        2020,
+        2021
+      ],
+      "occ_20d": 5,
+      "wr_5d": 100.0,
+      "avg_5d": 4.14,
+      "min_5d": 0.43,
+      "wr_10d": 100.0,
+      "avg_10d": 12.15,
+      "min_10d": 9.37,
+      "wr_20d": 100.0,
+      "avg_20d": 20.56,
+      "min_20d": 13.03,
+      "max_20d": 29.72,
+      "med_20d": 18.46,
+      "worst_return": 0.43,
+      "avg_vol": 3260823,
+      "score": 73.7,
+      "yr_detail": {
+        "2020": {
+          "occ": 2,
+          "wr_20d": 100.0,
+          "avg_20d": 27.94,
+          "min_20d": 26.16,
+          "max_20d": 29.72,
+          "avg_5d": 4.39,
+          "avg_10d": 10.89
+        },
+        "2021": {
+          "occ": 3,
+          "wr_20d": 100.0,
+          "avg_20d": 15.63,
+          "min_20d": 13.03,
+          "max_20d": 18.46,
+          "avg_5d": 3.98,
+          "avg_10d": 12.98
+        }
+      }
+    },
+    {
       "sym": "PREMEXPLN",
       "signal": "K10",
       "name": "COMBO: Vol Dry-Up + NR4 + Above 200MA",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2023,
@@ -1224,7 +1270,7 @@
       "sym": "NUVAMA",
       "signal": "V1",
       "name": "Bull Volume Spike 5x",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2023,
@@ -1270,7 +1316,7 @@
       "sym": "SIGNATURE",
       "signal": "B2",
       "name": "52-Week High Breakout + Volume",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2023,
@@ -1362,7 +1408,7 @@
       "sym": "DJML",
       "signal": "C1",
       "name": "Hammer",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2024,
@@ -1408,7 +1454,7 @@
       "sym": "ZUARIIND",
       "signal": "C1",
       "name": "Hammer",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2024,
@@ -1454,7 +1500,7 @@
       "sym": "LTI",
       "signal": "K6",
       "name": "COMBO: NR7 + Above 200MA + Vol",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2020,
@@ -1500,7 +1546,7 @@
       "sym": "HITECH",
       "signal": "K6",
       "name": "COMBO: NR7 + Above 200MA + Vol",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2021,
@@ -1546,7 +1592,7 @@
       "sym": "ANIKINDS",
       "signal": "T1",
       "name": "Crossed Above 50MA",
-      "grade": "C",
+      "grade": "B",
       "n_years": 2,
       "years": [
         2021,
@@ -1587,8 +1633,304 @@
           "avg_10d": 8.09
         }
       }
+    },
+    {
+      "sym": "VADILALIND",
+      "signal": "Q1",
+      "name": "5+ Consecutive Red Days",
+      "grade": "B",
+      "n_years": 2,
+      "years": [
+        2023,
+        2025
+      ],
+      "occ_20d": 3,
+      "wr_5d": 100.0,
+      "avg_5d": 2.02,
+      "min_5d": 0.13,
+      "wr_10d": 100.0,
+      "avg_10d": 18.02,
+      "min_10d": 14.73,
+      "wr_20d": 100.0,
+      "avg_20d": 13.64,
+      "min_20d": 4.61,
+      "max_20d": 21.71,
+      "med_20d": 14.61,
+      "worst_return": 0.13,
+      "avg_vol": 247344,
+      "score": 37.8,
+      "yr_detail": {
+        "2023": {
+          "occ": 1,
+          "wr_20d": 100.0,
+          "avg_20d": 21.71,
+          "min_20d": 21.71,
+          "max_20d": 21.71,
+          "avg_5d": 1.87,
+          "avg_10d": 19.55
+        },
+        "2025": {
+          "occ": 2,
+          "wr_20d": 100.0,
+          "avg_20d": 9.61,
+          "min_20d": 4.61,
+          "max_20d": 14.61,
+          "avg_5d": 2.09,
+          "avg_10d": 17.25
+        }
+      }
     }
   ],
-  "all_grade_a": [],
-  "profiles": {}
+  "all_grade_a": [
+    {
+      "sym": "KAYA",
+      "signal": "C4",
+      "name": "Bounce After 3+ Red Days",
+      "grade": "A",
+      "n_years": 4,
+      "years": [
+        2021,
+        2023,
+        2024,
+        2025
+      ],
+      "occ_20d": 5,
+      "wr_5d": 100.0,
+      "avg_5d": 16.98,
+      "min_5d": 2.03,
+      "wr_10d": 100.0,
+      "avg_10d": 17.5,
+      "min_10d": 2.61,
+      "wr_20d": 100.0,
+      "avg_20d": 38.97,
+      "min_20d": 4.72,
+      "max_20d": 114.61,
+      "med_20d": 22.22,
+      "worst_return": 2.03,
+      "avg_vol": 247624,
+      "score": 279.3,
+      "yr_detail": {
+        "2021": {
+          "occ": 2,
+          "wr_20d": 100.0,
+          "avg_20d": 26.65,
+          "min_20d": 12.74,
+          "max_20d": 40.57,
+          "avg_5d": 21.26,
+          "avg_10d": 21.52
+        },
+        "2023": {
+          "occ": 1,
+          "wr_20d": 100.0,
+          "avg_20d": 4.72,
+          "min_20d": 4.72,
+          "max_20d": 4.72,
+          "avg_5d": 2.03,
+          "avg_10d": 3.01
+        },
+        "2024": {
+          "occ": 1,
+          "wr_20d": 100.0,
+          "avg_20d": 114.61,
+          "min_20d": 114.61,
+          "max_20d": 114.61,
+          "avg_5d": 32.24,
+          "avg_10d": 37.37
+        },
+        "2025": {
+          "occ": 1,
+          "wr_20d": 100.0,
+          "avg_20d": 22.22,
+          "min_20d": 22.22,
+          "max_20d": 22.22,
+          "avg_5d": 8.11,
+          "avg_10d": 4.07
+        }
+      }
+    },
+    {
+      "sym": "LIBERTSHOE",
+      "signal": "C1",
+      "name": "Hammer",
+      "grade": "A",
+      "n_years": 3,
+      "years": [
+        2022,
+        2023,
+        2024
+      ],
+      "occ_20d": 5,
+      "wr_5d": 100.0,
+      "avg_5d": 12.95,
+      "min_5d": 0.74,
+      "wr_10d": 100.0,
+      "avg_10d": 31.03,
+      "min_10d": 15.5,
+      "wr_20d": 100.0,
+      "avg_20d": 28.97,
+      "min_20d": 2.68,
+      "max_20d": 97.81,
+      "med_20d": 12.93,
+      "worst_return": 0.74,
+      "avg_vol": 259465,
+      "score": 155.7,
+      "yr_detail": {
+        "2022": {
+          "occ": 3,
+          "wr_20d": 100.0,
+          "avg_20d": 37.81,
+          "min_20d": 2.68,
+          "max_20d": 97.81,
+          "avg_5d": 12.86,
+          "avg_10d": 39.98
+        },
+        "2023": {
+          "occ": 1,
+          "wr_20d": 100.0,
+          "avg_20d": 11.6,
+          "min_20d": 11.6,
+          "max_20d": 11.6,
+          "avg_5d": 0.74,
+          "avg_10d": 15.5
+        },
+        "2024": {
+          "occ": 1,
+          "wr_20d": 100.0,
+          "avg_20d": 19.84,
+          "min_20d": 19.84,
+          "max_20d": 19.84,
+          "avg_5d": 25.45,
+          "avg_10d": 19.74
+        }
+      }
+    }
+  ],
+  "profiles": {
+    "KAYA": [
+      {
+        "sym": "KAYA",
+        "signal": "C4",
+        "name": "Bounce After 3+ Red Days",
+        "grade": "A",
+        "n_years": 4,
+        "years": [
+          2021,
+          2023,
+          2024,
+          2025
+        ],
+        "occ_20d": 5,
+        "wr_5d": 100.0,
+        "avg_5d": 16.98,
+        "min_5d": 2.03,
+        "wr_10d": 100.0,
+        "avg_10d": 17.5,
+        "min_10d": 2.61,
+        "wr_20d": 100.0,
+        "avg_20d": 38.97,
+        "min_20d": 4.72,
+        "max_20d": 114.61,
+        "med_20d": 22.22,
+        "worst_return": 2.03,
+        "avg_vol": 247624,
+        "score": 279.3,
+        "yr_detail": {
+          "2021": {
+            "occ": 2,
+            "wr_20d": 100.0,
+            "avg_20d": 26.65,
+            "min_20d": 12.74,
+            "max_20d": 40.57,
+            "avg_5d": 21.26,
+            "avg_10d": 21.52
+          },
+          "2023": {
+            "occ": 1,
+            "wr_20d": 100.0,
+            "avg_20d": 4.72,
+            "min_20d": 4.72,
+            "max_20d": 4.72,
+            "avg_5d": 2.03,
+            "avg_10d": 3.01
+          },
+          "2024": {
+            "occ": 1,
+            "wr_20d": 100.0,
+            "avg_20d": 114.61,
+            "min_20d": 114.61,
+            "max_20d": 114.61,
+            "avg_5d": 32.24,
+            "avg_10d": 37.37
+          },
+          "2025": {
+            "occ": 1,
+            "wr_20d": 100.0,
+            "avg_20d": 22.22,
+            "min_20d": 22.22,
+            "max_20d": 22.22,
+            "avg_5d": 8.11,
+            "avg_10d": 4.07
+          }
+        }
+      }
+    ],
+    "LIBERTSHOE": [
+      {
+        "sym": "LIBERTSHOE",
+        "signal": "C1",
+        "name": "Hammer",
+        "grade": "A",
+        "n_years": 3,
+        "years": [
+          2022,
+          2023,
+          2024
+        ],
+        "occ_20d": 5,
+        "wr_5d": 100.0,
+        "avg_5d": 12.95,
+        "min_5d": 0.74,
+        "wr_10d": 100.0,
+        "avg_10d": 31.03,
+        "min_10d": 15.5,
+        "wr_20d": 100.0,
+        "avg_20d": 28.97,
+        "min_20d": 2.68,
+        "max_20d": 97.81,
+        "med_20d": 12.93,
+        "worst_return": 0.74,
+        "avg_vol": 259465,
+        "score": 155.7,
+        "yr_detail": {
+          "2022": {
+            "occ": 3,
+            "wr_20d": 100.0,
+            "avg_20d": 37.81,
+            "min_20d": 2.68,
+            "max_20d": 97.81,
+            "avg_5d": 12.86,
+            "avg_10d": 39.98
+          },
+          "2023": {
+            "occ": 1,
+            "wr_20d": 100.0,
+            "avg_20d": 11.6,
+            "min_20d": 11.6,
+            "max_20d": 11.6,
+            "avg_5d": 0.74,
+            "avg_10d": 15.5
+          },
+          "2024": {
+            "occ": 1,
+            "wr_20d": 100.0,
+            "avg_20d": 19.84,
+            "min_20d": 19.84,
+            "max_20d": 19.84,
+            "avg_5d": 25.45,
+            "avg_10d": 19.74
+          }
+        }
+      }
+    ]
+  }
 }
