@@ -366,13 +366,8 @@ def years_pass_gap(years_list):
 def score(years_list, avg_ret_20d, n_occ):
     return round(len(years_list) * avg_ret_20d * math.log(max(n_occ,1)+1), 1)
 
-def grade_pattern(n_years, n_occ, all_100pct, worst_return):
-    """
-    Grade strictly based on:
-      - Consistency across years and occurrences
-      - Whether EVERY occurrence at EVERY window is positive
-      - Whether worst single return >= +5%
-    """
+def grade_pattern(n_years, n_occ, all_100pct):
+    """Grade based on years/occurrences consistency."""
     if not all_100pct:
         return "C"
     if n_years >= 4 and n_occ >= 8: return "A+"
@@ -468,10 +463,10 @@ def mine_stock(g, sym, data_years):
 
         if not ok: continue
 
-        # MIN 15% RETURN IN AT LEAST ONE WINDOW (OR logic, not AND)
-        # Any one of 5d, 10d, 20d must have avg return >= 15%
-        max_avg_any_window = max(win_data[w]["avg"] for w in FWD_WINDOWS)
-        if max_avg_any_window < 15.0:
+        # MIN 15% IN AT LEAST ONE WINDOW — every occurrence in that window must be >= 15%
+        # min >= 15% means worst-case is still 15% => 100% of occurrences were >= 15%
+        qualifies_15 = any(win_data[w]["min"] >= 15.0 for w in FWD_WINDOWS)
+        if not qualifies_15:
             continue
 
         years_all = sorted([int(y) for y in yr_data])
@@ -504,7 +499,7 @@ def mine_stock(g, sym, data_years):
             "sym":        sym,
             "signal":     sig,
             "name":       ALL_SIGNALS[sig],
-            "grade":      grade_pattern(n_years, n_occ, all_100, worst),
+            "grade":      grade_pattern(n_years, n_occ, all_100),
             "n_years":    n_years,
             "years":      years_all,
             "occ_20d":    n_occ,
@@ -523,6 +518,7 @@ def mine_stock(g, sym, data_years):
             "avg_vol":    int(hits["v"].mean()),
             "score":      score(years_all, win_data[20]["avg"], n_occ),
             "yr_detail":  yr_detail,
+            "best_window_min": max(win_data[w]["min"] for w in FWD_WINDOWS),
         })
 
     found.sort(key=lambda x: -x["score"])

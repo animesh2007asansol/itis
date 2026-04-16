@@ -52,7 +52,7 @@ MANIFEST  = DATA_DIR / "manifest.json"
 # THRESHOLDS
 # ─────────────────────────────────────────────────────────────────────────────
 MIN_YEARS_TRADED      = 4        # must have 4+ years of data
-MIN_DAILY_TURNOVER_CR = 5.0      # avg daily turnover >= Rs 5 crore (heavyweight)
+MIN_DAILY_TURNOVER_CR = 2.0      # avg daily turnover >= Rs 2 crore (heavyweight)
 MIN_TRADING_DAYS      = 800      # ~4 years × ~200 trading days
 FLOOR_PCT_THRESHOLD   = 10.0     # price in bottom 10% of 52-week range = floor
 FLOOR_LOOKBACK        = 252      # 52-week window for floor detection
@@ -318,6 +318,7 @@ def analyse_stock(g, sym):
                 best_min_return = ws["min_return"]
 
     if best_window is None: return None
+    if best_min_return <= 0.0: return None   # only show positive recovery
 
     # ── Compute floor depth stats ─────────────────────────────────────────────
     all_pos = [e["pos_in_range"] for e in events]
