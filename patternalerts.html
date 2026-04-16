@@ -188,10 +188,10 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
   <div class="brand"><div class="ldot"></div>📡 Pattern Alerts <small>NSE 100% Win-Rate · Strict Filters</small></div>
   <div class="tabs">
     <button class="tab active" onclick="showPage('alerts',this)">🚨 Alerts</button>
-    <button class="tab" onclick="showPage('patterns',this)">📊 Cross-Stock</button>
     <button class="tab" onclick="showPage('stocks',this)">📈 Stock Profiles</button>
     <button class="tab" onclick="showPage('repeating',this)">🏆 Most Reliable</button>
-    <button class="tab" onclick="showPage('candle-best',this)">🕯 Best Candles</button>
+    <button class="tab" onclick="showPage('candle-alert',this)">🕯 Candle Alerts</button>
+    <button class="tab" onclick="showPage('candle-best',this)">⭐ Best Candles</button>
     <button class="tab" onclick="showPage('candle-search',this)">🔍 Candle Search</button>
     <button class="tab" onclick="showPage('hw-dip',this)">🏦 HW Dip</button>
     <button class="tab" onclick="showPage('hw-alerts',this)">🔔 HW Alerts</button>
@@ -233,25 +233,6 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <button class="fb" onclick="alrtSort('days',this)">Days Ago</button>
   </div>
   <div class="alert-grid" id="alrt-grid"><div class="empty"><div class="spinner"></div>Loading…</div></div>
-</div>
-
-<!-- ═══ PAGE 2: CROSS-STOCK PATTERNS ═════════════════════════ -->
-<div class="page" id="page-patterns">
-  <div class="sh">📊 Cross-Stock Patterns <small>100% win rate · all thresholds met · sortable columns</small></div>
-  <div class="pill-row" id="pat-pills"></div>
-  <div class="fbar">
-    <button class="fb on" id="pf-all" onclick="patF('ALL',this)">All Grades</button>
-    <button class="fb" id="pf-ap"  onclick="patF('A+',this)">A+ only</button>
-    <button class="fb" id="pf-ab"  onclick="patF('AB',this)">A+ & A</button>
-    <span class="fsep">|</span>
-    <input class="si" id="pat-q" placeholder="Signal name…" style="width:130px" oninput="renderPat()">
-  </div>
-  <div class="twrap">
-    <table class="tbl" id="pat-tbl">
-      <thead><tr id="pat-hdr"></tr></thead>
-      <tbody id="pat-body"><tr><td colspan="20" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
-    </table>
-  </div>
 </div>
 
 <!-- ═══ PAGE 3: STOCK PROFILES ═══════════════════════════════ -->
@@ -303,105 +284,97 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
   </div>
 </div>
 
-<!-- ═══ PAGE 5: MONTH HEATMAP ════════════════════════════════ -->
-<div class="page" id="page-heatmap">
-  <div class="sh">🗓 Signal × Month Profit Heatmap <small>cross-stock · avg 20-day return from min (red) to max (green)</small></div>
+<!-- PAGE: CANDLE ALERTS -->
+<div class="page" id="page-candle-alert">
+  <div class="sh">🕯 Candle Alerts <small>today candle shape matches 100%-win historical pattern for that stock · ranked by min return</small></div>
+  <div class="pill-row" id="ca-pills"></div>
   <div class="fbar">
-    <span class="fsep">Color by:</span>
-    <button class="fb on" onclick="hmColor('avg',this)">Avg Return</button>
-    <button class="fb" onclick="hmColor('wr',this)">Win Rate</button>
-    <button class="fb" onclick="hmColor('max',this)">Max Return</button>
-    <span class="fsep">|</span>
-    <span class="fsep">Show:</span>
-    <button class="fb on" onclick="hmFilter('pct',this)">% Return</button>
-    <button class="fb" onclick="hmFilter('occ',this)">Occurrences</button>
-    <button class="fb" onclick="hmFilter('range',this)">Range</button>
+    <input class="si" id="ca-q" placeholder="Symbol…" style="width:120px" oninput="renderCA()">
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="cas-min" onclick="caSort('nd_min',this)">Min Return</button>
+    <button class="fb" id="cas-avg" onclick="caSort('nd_avg',this)">Avg Return</button>
+    <button class="fb" id="cas-occ" onclick="caSort('occurrences',this)">Occurrences</button>
   </div>
-  <div class="hm-wrap"><table class="hm-tbl" id="hm-tbl"></table></div>
-  <div style="font-size:10px;color:var(--t3);margin-bottom:16px">
-    Hover a cell for details. Color intensity = magnitude. Grey = no data or too few occurrences.
-    <span style="display:inline-block;width:50px;height:10px;border-radius:3px;
-    background:linear-gradient(90deg,var(--rb),var(--s),var(--grb));vertical-align:middle;margin:0 4px"></span>
-    low → high return.
-  </div>
+  <div class="alert-grid" id="ca-grid"><div class="empty"><div class="spinner"></div>Loading…</div></div>
 </div>
 
-
-<!-- PAGE: BEST CANDLE PATTERNS -->
+<!-- PAGE: BEST CANDLES -->
 <div class="page" id="page-candle-best">
-  <div class="sh">🕯 Best Candle Patterns <small>100% next-day win + avg 15% in any of 5/10/20d</small></div>
+  <div class="sh">⭐ Best Candle Patterns <small>100% next-day positive in ALL occurrences · ranked by minimum return</small></div>
   <div class="pill-row" id="cb-pills"></div>
   <div class="fbar">
-    <button class="fb on" id="cbf-100" onclick="cbFltr(true,this)">100% ND only</button>
-    <button class="fb" id="cbf-all" onclick="cbFltr(false,this)">All strong</button>
-    <span class="fsep">|</span>
-    <input class="si" id="cb-q" placeholder="Symbol..." style="width:110px" oninput="renderCB()">
+    <input class="si" id="cb-q" placeholder="Symbol…" style="width:120px" oninput="renderCB()">
     <span class="fsep">Sort:</span>
-    <button class="fb on" onclick="cbSrt('nd_win_rate',this)">ND Win%</button>
-    <button class="fb" onclick="cbSrt('nd_avg_ret',this)">ND Avg%</button>
-    <button class="fb" onclick="cbSrt('max_avg_any_window',this)">Best Window</button>
-    <button class="fb" onclick="cbSrt('occurrences',this)">Occurrences</button>
+    <button class="fb on" id="cbs-min" onclick="cbSort('nd_min',this)">Min Return</button>
+    <button class="fb" id="cbs-avg" onclick="cbSort('nd_avg',this)">Avg Return</button>
+    <button class="fb" id="cbs-max" onclick="cbSort('nd_max',this)">Max Return</button>
+    <button class="fb" id="cbs-occ" onclick="cbSort('occurrences',this)">Occurrences</button>
   </div>
   <div class="twrap">
     <table class="tbl" id="cb-tbl">
       <thead><tr>
-        <th onclick="sortTbl('cb-tbl','sym')">Stock<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','desc')">Candle Pattern<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','occurrences')">Occ<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','nd_win_rate')">ND Win%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','nd_avg_ret')">ND Avg%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','nd_max_ret')">ND Max%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','gap_up_rate')">Gap Up%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','_b5')">5d Avg%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','_b10')">10d Avg%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','_b20')">20d Avg%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','max_avg_any_window')">Best Win<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','last_date')">Last Seen<span class="arr"></span></th>
+        <th onclick="cbTh('sym')">Stock<span class="arr"></span></th>
+        <th onclick="cbTh('desc')">Candle<span class="arr"></span></th>
+        <th onclick="cbTh('occurrences')">Occ<span class="arr"></span></th>
+        <th onclick="cbTh('nd_min')">ND Min%<span class="arr"></span></th>
+        <th onclick="cbTh('nd_avg')">ND Avg%<span class="arr"></span></th>
+        <th onclick="cbTh('nd_max')">ND Max%<span class="arr"></span></th>
+        <th onclick="cbTh('gap_up_rate')">Gap Up%<span class="arr"></span></th>
+        <th onclick="cbTh('_5d_avg')">5d Avg%<span class="arr"></span></th>
+        <th onclick="cbTh('_10d_avg')">10d Avg%<span class="arr"></span></th>
+        <th onclick="cbTh('_20d_avg')">20d Avg%<span class="arr"></span></th>
+        <th onclick="cbTh('_years_str')">Years<span class="arr"></span></th>
+        <th onclick="cbTh('last_date')">Last Seen<span class="arr"></span></th>
       </tr></thead>
-      <tbody id="cb-tbody"><tr><td colspan="12" class="empty">Run candle_patterns workflow first.</td></tr></tbody>
+      <tbody id="cb-tbody"><tr><td colspan="12" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
     </table>
   </div>
 </div>
 
 <!-- PAGE: CANDLE SEARCH -->
 <div class="page" id="page-candle-search">
-  <div class="sh">🔍 Candle Pattern Search <small>type any stock symbol to see its full candle history</small></div>
+  <div class="sh">🔍 Candle Search <small>search any stock symbol</small></div>
   <div class="fbar">
-    <input class="si" id="cs-sym" placeholder="Symbol e.g. RELIANCE, TCS, INFY..." style="width:220px"
-      onkeydown="if(event.key==='Enter')doSearchCandle()">
-    <button class="fb on" onclick="doSearchCandle()">Search</button>
+    <input class="si" id="cs-sym" placeholder="Symbol e.g. RELIANCE, TCS…" style="width:220px"
+      onkeydown="if(event.key==='Enter')doCS()">
+    <button class="fb on" onclick="doCS()">Search</button>
   </div>
   <div id="cs-result" style="margin-top:12px">
-    <div class="empty" style="color:var(--t3)">Enter a stock symbol above and press Search.</div>
+    <div class="empty" style="color:var(--t3)">Enter a symbol above.</div>
   </div>
 </div>
 
-<!-- PAGE: HEAVYWEIGHT DIP -->
+<!-- PAGE: HW DIP -->
 <div class="page" id="page-hw-dip">
-  <div class="sh">🏦 Heavyweight Dip-Recover <small>large-cap stocks (avg turnover >= Rs 5Cr, 4+ yrs) with repeating floor+recover pattern</small></div>
+  <div class="sh">🏦 Heavyweight Dip-Recover <small>large-cap stocks (avg turnover &gt;= Rs 2Cr, 4+ yrs) with repeating floor+recover pattern</small></div>
   <div class="pill-row" id="hw-pills"></div>
   <div class="fbar">
     <button class="fb on" id="hwg-all" onclick="hwGrd('ALL',this)">All</button>
-    <button class="fb" id="hwg-ap"  onclick="hwGrd('A+',this)">A+</button>
-    <button class="fb" id="hwg-a"   onclick="hwGrd('A',this)">A</button>
-    <button class="fb" id="hwg-b"   onclick="hwGrd('B',this)">B</button>
+    <button class="fb" id="hwg-ap" onclick="hwGrd('A+',this)">A+</button>
+    <button class="fb" id="hwg-a" onclick="hwGrd('A',this)">A</button>
+    <button class="fb" id="hwg-b" onclick="hwGrd('B',this)">B</button>
     <span class="fsep">|</span>
-    <input class="si" id="hw-q" placeholder="Symbol..." style="width:100px" oninput="renderHW()">
+    <input class="si" id="hw-q" placeholder="Symbol…" style="width:100px" oninput="renderHW()">
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="hws-min" onclick="hwSort('best_min_return',this)">Min Recovery</button>
+    <button class="fb" id="hws-b15" onclick="hwSort('best_beats15_rate',this)">Beats 15%</button>
+    <button class="fb" id="hws-evt" onclick="hwSort('n_events',this)">Events</button>
   </div>
   <div class="twrap">
     <table class="tbl" id="hw-tbl">
       <thead><tr>
-        <th>#</th>
-        <th onclick="sortTbl('hw-tbl','sym')">Stock<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','grade')">Grade<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','best_window_days')">Best Window<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','best_min_return')">Min Recovery%<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','best_beats15_rate')">Beats 15% Rate<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','_avg_r')">Avg Recovery%<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','n_events')">Events<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','n_years')">Years<span class="arr"></span></th>
+        <th onclick="hwTh('_rank')">#<span class="arr"></span></th>
+        <th onclick="hwTh('sym')">Stock<span class="arr"></span></th>
+        <th onclick="hwTh('grade')">Grade<span class="arr"></span></th>
+        <th onclick="hwTh('best_window_days')">Best Window<span class="arr"></span></th>
+        <th onclick="hwTh('best_min_return')">Min Recovery%<span class="arr"></span></th>
+        <th onclick="hwTh('best_beats15_rate')">Beats 15%<span class="arr"></span></th>
+        <th onclick="hwTh('_avg_r')">Avg Recovery%<span class="arr"></span></th>
+        <th onclick="hwTh('n_events')">Events<span class="arr"></span></th>
+        <th onclick="hwTh('n_years')">Yrs Count<span class="arr"></span></th>
+        <th onclick="hwTh('_years_str')">Years<span class="arr"></span></th>
       </tr></thead>
-      <tbody id="hw-tbody"><tr><td colspan="9" class="empty">Run pattern_discovery workflow first.</td></tr></tbody>
+      <tbody id="hw-tbody"><tr><td colspan="10" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
     </table>
   </div>
   <div id="hw-detail"></div>
@@ -409,9 +382,9 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 
 <!-- PAGE: HW ALERTS -->
 <div class="page" id="page-hw-alerts">
-  <div class="sh">🔔 Heavyweight Floor Alerts <small>last 20 TRADING days</small></div>
+  <div class="sh">🔔 HW Floor Alerts <small>last 20 TRADING days</small></div>
   <div class="pill-row" id="hwa-pills"></div>
-  <div class="alert-grid" id="hwa-grid"><div class="empty">Run pattern_discovery workflow first.</div></div>
+  <div class="alert-grid" id="hwa-grid"><div class="empty"><div class="spinner"></div>Loading…</div></div>
 </div>
 
 <!-- ═══ PAGE 6: HOW IT WORKS ═════════════════════════════════ -->
@@ -502,13 +475,13 @@ const SIG_INFO = {
 };
 
 // ─── Fetch ─────────────────────────────────────────────────────────
+const TS='?v='+Date.now();
 async function loadData() {
-  // Core pattern data
   try {
     const [aR,pR,sR] = await Promise.all([
-      fetch(REPO+'/alerts.json'),
-      fetch(REPO+'/patterns.json'),
-      fetch(REPO+'/stock_profiles.json'),
+      fetch(REPO+'/alerts.json'+TS),
+      fetch(REPO+'/patterns.json'+TS),
+      fetch(REPO+'/stock_profiles.json'+TS),
     ]);
     const [aD,pD,sD] = await Promise.all([aR.json(),pR.json(),sR.json()]);
     DATA.alerts     = aD.alerts || [];
@@ -529,30 +502,18 @@ async function loadData() {
     err('Could not load pattern data. Run the pattern_discovery workflow first.<br>'
       + '<span style="color:var(--t3);font-size:10px">'+e.message+'</span>');
   }
-
-  // Candle patterns (optional — available after candle_patterns workflow)
   try {
-    const [cbR,ctR] = await Promise.all([
-      fetch(REPO+'/candle_best_patterns.json'),
-      fetch(REPO+'/candle_today.json'),
-    ]);
-    if(cbR.ok){ const d=await cbR.json(); DATA.candleBest=d.patterns||[]; }
-    if(ctR.ok){ const d=await ctR.json(); DATA.candleToday=d.alerts||[]; DATA.candleTodayDate=d.signal_date||''; }
-    renderCB();
-    renderCandleTodayBanner();
-  } catch(e){ console.log('Candle data:', e.message); }
-
-  // Heavyweight data (optional — available after pattern_discovery workflow)
+    const [cbR,ctR]=await Promise.all([fetch(REPO+'/candle_best_patterns.json'+TS),fetch(REPO+'/candle_today.json'+TS)]);
+    if(cbR.ok){const d=await cbR.json();DATA.candleBest=d.patterns||[];}
+    if(ctR.ok){const d=await ctR.json();DATA.candleToday=d.alerts||[];}
+    renderCA();renderCB();
+  }catch(e){console.log('Candle:',e.message);}
   try {
-    const [hwpR,hwaR] = await Promise.all([
-      fetch(REPO+'/heavyweight_profiles.json'),
-      fetch(REPO+'/heavyweight_alerts.json'),
-    ]);
-    if(hwpR.ok){ const d=await hwpR.json(); DATA.hwProfiles=d.profiles||{}; DATA.hwMeta=d; }
-    if(hwaR.ok){ const d=await hwaR.json(); DATA.hwAlerts=d.alerts||[]; DATA.hwAlertMeta=d; }
-    renderHW();
-    renderHWA();
-  } catch(e){ console.log('Heavyweight data:', e.message); }
+    const [hwpR,hwaR]=await Promise.all([fetch(REPO+'/heavyweight_profiles.json'+TS),fetch(REPO+'/heavyweight_alerts.json'+TS)]);
+    if(hwpR.ok){const d=await hwpR.json();DATA.hwProfiles=d.profiles||{};DATA.hwMeta=d;}
+    if(hwaR.ok){const d=await hwaR.json();DATA.hwAlerts=d.alerts||[];DATA.hwAlertMeta=d;}
+    renderHW();renderHWA();
+  }catch(e){console.log('HW:',e.message);}
 }
 
 function err(msg) {
@@ -796,11 +757,10 @@ const SP_COLS=[
   {key:'n_years', lbl:'# Yrs'},
   {key:'occ_20d', lbl:'Occ'},
   {key:'avg_vol', lbl:'Avg Vol'},
-  {key:'avg_5d',  lbl:'Avg 5d %'},
-  {key:'avg_10d', lbl:'Avg 10d %'},
-  {key:'avg_20d', lbl:'Avg 20d %'},
-  {key:'min_ret_20d',lbl:'Min Ret'},
-  {key:'max_ret_20d',lbl:'Max Ret'},
+  {key:'avg_5d',  lbl:'Avg 5d %'},{key:'min_5d', lbl:'Min 5d %'},
+  {key:'avg_10d', lbl:'Avg 10d %'},{key:'min_10d', lbl:'Min 10d %'},
+  {key:'avg_20d', lbl:'Avg 20d %'},{key:'min_20d', lbl:'Min 20d %'},{key:'max_20d', lbl:'Max 20d %'},
+  {key:'best_window_min',lbl:'Best Win Min%'},
   {key:'score',   lbl:'Score'},
   {key:'_yrs',    lbl:'All Years (hover for detail)'},
 ];
@@ -868,11 +828,10 @@ const REP_COLS=[
   {key:'name',    lbl:'Pattern Name'},
   {key:'n_years', lbl:'# Years'},
   {key:'occ_20d', lbl:'Total Occ'},
-  {key:'avg_5d',  lbl:'Avg 5d %'},
-  {key:'avg_10d', lbl:'Avg 10d %'},
-  {key:'avg_20d', lbl:'Avg 20d %'},
-  {key:'min_ret_20d',lbl:'Min Ret'},
-  {key:'max_ret_20d',lbl:'Max Ret'},
+  {key:'avg_5d',  lbl:'Avg 5d %'},{key:'min_5d', lbl:'Min 5d %'},
+  {key:'avg_10d', lbl:'Avg 10d %'},{key:'min_10d', lbl:'Min 10d %'},
+  {key:'avg_20d', lbl:'Avg 20d %'},{key:'min_20d', lbl:'Min 20d %'},{key:'max_20d', lbl:'Max 20d %'},
+  {key:'best_window_min',lbl:'Best Win Min%'},
   {key:'score',   lbl:'Score'},
   {key:'_yrs',    lbl:'All Years + Returns'},
 ];
@@ -1007,219 +966,225 @@ function showPage(id,btn){
   btn.classList.add('active');
 }
 
-// ═══ CANDLE BEST PATTERNS ════════════════════════════════════════════
-let _cbOnly100=true, _cbSort='nd_win_rate';
-function cbFltr(v,btn){ _cbOnly100=v; setOn('#cbf-100,#cbf-all',btn); renderCB(); }
-function cbSrt(k,btn){ _cbSort=k; renderCB(); }
-function renderCB(){
-  const q=(document.getElementById('cb-q')?.value||'').toUpperCase().trim();
-  let rows=[...DATA.candleBest].map(p=>({...p,
-    _b5:p.win_5d?.avg??-999, _b10:p.win_10d?.avg??-999, _b20:p.win_20d?.avg??-999
-  }));
-  if(_cbOnly100) rows=rows.filter(r=>r.nd_win_rate===100);
-  if(q) rows=rows.filter(r=>(r.sym||'').includes(q));
-  rows.sort((a,b)=>(b[_cbSort]??0)-(a[_cbSort]??0));
-  document.getElementById('cb-pills').innerHTML=[
-    ['100% ND Win',rows.filter(r=>r.nd_win_rate===100).length,'g','perfect next-day'],
-    ['Meets 15% Rule',rows.filter(r=>r.meets_15pct).length,'y','any window avg >= 15%'],
-    ['Shown',rows.length,'b','matching filters'],
-  ].map(([l,v,c,s])=>`<div class="kp ${c}"><div class="kl">${l}</div><div class="kv">${v}</div><div class="ks">${s}</div></div>`).join('');
+// ═══ CANDLE ALERTS ═══════════════════════════════════════════════════
+var _caSortKey='nd_min';
+function caSort(k,btn){_caSortKey=k;setOn('#cas-min,#cas-avg,#cas-occ',btn);renderCA();}
+function renderCA(){
+  var q=(document.getElementById('ca-q')?.value||'').toUpperCase().trim();
+  var rows=[...DATA.candleToday];
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  rows.sort(function(a,b){return (b[_caSortKey]??0)-(a[_caSortKey]??0);});
+  document.getElementById('ca-pills').innerHTML=[
+    ['Alerts',rows.length,'g','today candle = 100%-win pattern'],
+    ['Date',rows[0]?.today_date||'—','b',''],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>';}).join('');
   if(!rows.length){
-    document.getElementById('cb-tbody').innerHTML='<tr><td colspan="12" class="empty">No patterns match. Run candle_patterns workflow.</td></tr>';
+    document.getElementById('ca-grid').innerHTML='<div class="empty" style="grid-column:1/-1">No candle alerts. Run candle_patterns workflow.</div>';
     return;
   }
-  document.getElementById('cb-tbody').innerHTML=rows.map(p=>{
-    const b5=p.win_5d?.avg, b10=p.win_10d?.avg, b20=p.win_20d?.avg;
-    const best=Math.max(b5??-999,b10??-999,b20??-999);
-    return `<tr onclick="goCandle('${p.sym}')" style="cursor:pointer">
-      <td class="mono gold" style="font-weight:600">${p.sym}</td>
-      <td style="font-size:10px;color:var(--t2);max-width:180px">${p.desc||''}</td>
-      <td class="mono">${p.occurrences}</td>
-      <td class="mono green" style="font-weight:${p.nd_win_rate===100?700:400}">${p.nd_win_rate}%</td>
-      <td>${rc(p.nd_avg_ret)}</td>
-      <td>${rc(p.nd_max_ret)}</td>
-      <td class="mono">${p.gap_up_rate??0}%</td>
-      <td>${b5!=null?rc(b5):'<span class="muted">—</span>'}</td>
-      <td>${b10!=null?rc(b10):'<span class="muted">—</span>'}</td>
-      <td>${b20!=null?rc(b20):'<span class="muted">—</span>'}</td>
-      <td class="mono amber" style="font-weight:700">${best>-900?'+'+best.toFixed(1)+'%':'—'}</td>
-      <td class="mono muted">${p.last_date||'—'}</td>
-    </tr>`;
+  document.getElementById('ca-grid').innerHTML=rows.map(function(a){
+    var b5=a.win_5d,b10=a.win_10d,b20=a.win_20d;
+    var yrs=(a.years||[]).map(function(y){return '<span class="yr-tag yr-win">'+y+'</span>';}).join('');
+    return '<div class="ac ac-Ap">'
+      +'<div class="ac-head"><div>'
+      +'<div style="display:flex;align-items:center;gap:5px"><span class="g gAp">100%</span><span class="ac-sym">'+a.sym+'</span></div>'
+      +'<div class="ac-sig">'+a.candle_desc+'</div>'
+      +'<div style="margin-top:3px">'+yrs+'</div>'
+      +'</div>'
+      +'<div class="ac-wr"><div class="ac-pct">+'+(a.nd_min||0).toFixed(1)+'%</div><div class="ac-lbl">min next-day</div></div>'
+      +'</div>'
+      +'<div class="ac-row3">'
+      +'<div class="ac-mini"><div class="ac-ml">ND Average</div><div class="ac-mv green">+'+(a.nd_avg||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">ND Maximum</div><div class="ac-mv green">+'+(a.nd_max||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Gap Up Rate</div><div class="ac-mv">'+(a.gap_up_rate||0)+'%</div></div>'
+      +'</div>'
+      +'<div class="zones">'
+      +'<div class="zr"><span class="zl">Close</span><span class="zv">&#8377;'+fmt(a.today_close)+'</span></div>'
+      +'<div class="zr"><span class="zl">Occurrences</span><span class="zv">'+a.occurrences+'</span></div>'
+      +'<div class="zr"><span class="zl">5d / 10d / 20d avg</span><span class="zv">'
+      +(b5?rc(b5.avg):'—')+' / '+(b10?rc(b10.avg):'—')+' / '+(b20?rc(b20.avg):'—')+'</span></div>'
+      +'</div>'
+      +'<div class="zone-banner zone-buy">BUY — 100% win in all '+a.occurrences+' occurrences</div>'
+      +'</div>';
   }).join('');
 }
-function goCandle(sym){ document.getElementById('cs-sym').value=sym; showPage('candle-search',document.querySelectorAll('.tab')[5]); doSearchCandle(); }
-function renderCandleTodayBanner(){
-  const perfect=DATA.candleToday.filter(a=>a.is_100pct);
-  if(!perfect.length||!document.getElementById('alrt-banner')) return;
-  document.getElementById('alrt-banner').innerHTML+=`<div style="background:var(--gbg);border:1px solid var(--g2);border-radius:8px;padding:8px 12px;font-size:11px;color:var(--gold);margin-top:6px">
-    Candle: <strong>${perfect.length}</strong> stocks formed 100%-win candle pattern today
-    ${perfect.slice(0,6).map(a=>'<span class="mono" style="background:var(--s);border:1px solid var(--b2);padding:1px 6px;border-radius:3px;margin:0 2px">'+a.sym+'</span>').join('')}
-  </div>`;
-}
 
-// ═══ CANDLE SEARCH ════════════════════════════════════════════════════
-let _csProfiles={}, _csLoaded=false;
-async function doSearchCandle(){
-  const sym=(document.getElementById('cs-sym')?.value||'').trim().toUpperCase();
-  const res=document.getElementById('cs-result');
-  if(!sym){ res.innerHTML='<div class="empty">Enter a symbol above.</div>'; return; }
-  res.innerHTML='<div class="empty"><div class="spinner"></div>Loading '+sym+'...</div>';
+// ═══ BEST CANDLES ════════════════════════════════════════════════════
+var _cbSortKey='nd_min',_cbDir='desc';
+function cbSort(k,btn){_cbSortKey=k;setOn('#cbs-min,#cbs-avg,#cbs-max,#cbs-occ',btn);renderCB();}
+function cbTh(k){if(_cbSortKey===k)_cbDir=_cbDir==='desc'?'asc':'desc';else{_cbSortKey=k;_cbDir='desc';}renderCB();}
+function renderCB(){
+  var q=(document.getElementById('cb-q')?.value||'').toUpperCase().trim();
+  var rows=[...DATA.candleBest].map(function(p){
+    return Object.assign({},p,{_5d_avg:p.win_5d?.avg??-999,_10d_avg:p.win_10d?.avg??-999,_20d_avg:p.win_20d?.avg??-999,_years_str:(p.years||[]).join(',')});
+  });
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  rows.sort(function(a,b){var v=(b[_cbSortKey]??0)-(a[_cbSortKey]??0);return _cbDir==='asc'?-v:v;});
+  document.getElementById('cb-pills').innerHTML=[
+    ['100%-Win Patterns',rows.length,'g',''],
+    ['Unique Stocks',[...new Set(rows.map(function(r){return r.sym;}))].length,'b',''],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
+  if(!rows.length){
+    document.getElementById('cb-tbody').innerHTML='<tr><td colspan="12" class="empty">No data. Run candle_patterns workflow.</td></tr>';return;
+  }
+  document.getElementById('cb-tbody').innerHTML=rows.map(function(p){
+    var b5=p.win_5d?.avg,b10=p.win_10d?.avg,b20=p.win_20d?.avg;
+    return '<tr onclick="csGo(\''+p.sym+'\')" style="cursor:pointer">'
+      +'<td class="mono gold" style="font-weight:600">'+p.sym+'</td>'
+      +'<td style="font-size:10px;color:var(--t2);max-width:170px">'+p.desc+'</td>'
+      +'<td class="mono">'+p.occurrences+'</td>'
+      +'<td class="mono green" style="font-weight:700">+'+(p.nd_min||0).toFixed(1)+'%</td>'
+      +'<td>'+rc(p.nd_avg)+'</td>'
+      +'<td>'+rc(p.nd_max)+'</td>'
+      +'<td class="mono">'+(p.gap_up_rate||0)+'%</td>'
+      +'<td>'+(b5!=null?rc(b5):'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(b10!=null?rc(b10):'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(b20!=null?rc(b20):'<span class="muted">—</span>')+'</td>'
+      +'<td class="mono muted" style="font-size:10px">'+((p.years||[]).join(', '))+'</td>'
+      +'<td class="mono muted">'+(p.last_date||'—')+'</td>'
+      +'</tr>';
+  }).join('');
+}
+function csGo(sym){document.getElementById('cs-sym').value=sym;showPage('candle-search',Array.from(document.querySelectorAll('.tab')).find(function(t){return t.textContent.includes('Search');}));doCS();}
+
+// ═══ CANDLE SEARCH ═══════════════════════════════════════════════════
+var _csP={},_csL=false;
+async function doCS(){
+  var sym=(document.getElementById('cs-sym')?.value||'').trim().toUpperCase();
+  var res=document.getElementById('cs-result');
+  if(!sym){res.innerHTML='<div class="empty">Enter a symbol.</div>';return;}
+  res.innerHTML='<div class="empty"><div class="spinner"></div>Loading '+sym+'…</div>';
   try{
-    if(!_csLoaded){
-      const r=await fetch(REPO+'/candle_stock_patterns.json');
-      if(!r.ok) throw new Error('candle_stock_patterns.json not found — run candle_patterns workflow');
-      const d=await r.json();
-      _csProfiles=d.profiles||{};
-      _csLoaded=true;
+    if(!_csL){
+      var r=await fetch(REPO+'/candle_stock_patterns.json'+TS);
+      if(!r.ok) throw new Error('candle_stock_patterns.json not found');
+      var d=await r.json(); _csP=d.profiles||{}; _csL=true;
     }
-    const prof=_csProfiles[sym];
-    if(!prof){ res.innerHTML='<div class="empty">Symbol <strong>'+sym+'</strong> not found.</div>'; return; }
-    const pats=prof.patterns||[];
-    const today=prof.today_candle||null;
-    const todayH=prof.today_hist||null;
-    const todayKey=prof.today_key||'';
-    const todayBadge=todayH
-      ?'<span style="'+(todayH.nd_win_rate===100
-          ?'background:rgba(34,197,94,.15);border:1px solid var(--gr2);color:var(--green)'
-          :'background:var(--ab);border:1px solid var(--amb);color:var(--amber)')
-        +';padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600">Historically '
-        +todayH.nd_win_rate+'% next-day win ('+todayH.occurrences+'x)</span>'
-      :'<span style="background:var(--s);border:1px solid var(--b);border-radius:5px;padding:2px 8px;font-size:11px;color:var(--t3)">No history for this exact candle shape</span>';
-    const todayDesc=today?'<span style="font-size:11px;background:var(--s);border:1px solid var(--b);border-radius:5px;padding:2px 8px;color:var(--t2)">Today: '+today.desc+'</span>':'';
-    const pillsHtml=[['Patterns',pats.length,'b'],['100% ND Win',prof.n_100pct||0,'g'],['Meets 15%',prof.n_meets_15pct||0,'y']]
-      .map(function(x){ return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>'; }).join('');
-    const rowsHtml=pats.map(function(p){
-      const isT=p.candle_key===todayKey;
-      const bg=isT?'background:rgba(201,168,76,.07);':'';
-      const todayMark=isT?'<strong style="color:var(--gold)"> TODAY</strong>':'';
-      const minRet=p.nd_min_ret!=null?(p.nd_min_ret>0?'+':'')+p.nd_min_ret.toFixed(1)+'%':'—';
-      const minCls=p.nd_min_ret!=null&&p.nd_min_ret>=0?'green':'red';
-      const b5=p.win_5d?.avg, b10=p.win_10d?.avg, b20=p.win_20d?.avg;
-      return '<tr style="'+bg+'"><td style="font-size:10px;max-width:200px;color:var(--t2)">'+p.desc+todayMark+'</td>'
+    var prof=_csP[sym];
+    if(!prof){res.innerHTML='<div class="empty">'+sym+' not found.</div>';return;}
+    var pats=prof.patterns||[],today=prof.today_candle,todayH=prof.today_hist,todayKey=prof.today_key||'';
+    var tBadge=todayH
+      ?'<span style="background:rgba(34,197,94,.15);border:1px solid var(--gr2);color:var(--green);padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600">100% win — min:+'+(todayH.nd_min||0).toFixed(1)+'% avg:+'+(todayH.nd_avg||0).toFixed(1)+'%</span>'
+      :'<span style="background:var(--s);border:1px solid var(--b);border-radius:5px;padding:2px 8px;font-size:11px;color:var(--t3)">No 100%-win history for today candle</span>';
+    var tDesc=today?'<span style="font-size:11px;background:var(--s);border:1px solid var(--b);border-radius:5px;padding:2px 8px;color:var(--t2)">Today: '+today.desc+'</span>':'';
+    var rHtml=pats.map(function(p){
+      var isT=p.candle_key===todayKey,bg=isT?'background:rgba(201,168,76,.07);':'';
+      var mark=isT?'<strong style="color:var(--gold)"> TODAY</strong>':'';
+      var b5=p.win_5d?.avg,b10=p.win_10d?.avg,b20=p.win_20d?.avg;
+      return '<tr style="'+bg+'">'
+        +'<td style="font-size:10px;max-width:200px;color:var(--t2)">'+p.desc+mark+'</td>'
         +'<td class="mono">'+p.occurrences+'</td>'
-        +'<td class="mono green" style="font-weight:'+(p.nd_win_rate===100?700:400)+'">'+p.nd_win_rate+'%</td>'
-        +'<td>'+rc(p.nd_avg_ret)+'</td>'
-        +'<td class="mono '+minCls+'">'+minRet+'</td>'
-        +'<td>'+rc(p.nd_max_ret)+'</td>'
-        +'<td class="mono">'+p.gap_up_rate+'%</td>'
+        +'<td class="mono green" style="font-weight:700">100%</td>'
+        +'<td class="mono green" style="font-weight:700">+'+(p.nd_min||0).toFixed(1)+'%</td>'
+        +'<td>'+rc(p.nd_avg)+'</td><td>'+rc(p.nd_max)+'</td>'
+        +'<td class="mono">'+(p.gap_up_rate||0)+'%</td>'
         +'<td>'+(b5!=null?rc(b5):'<span class="muted">—</span>')+'</td>'
         +'<td>'+(b10!=null?rc(b10):'<span class="muted">—</span>')+'</td>'
         +'<td>'+(b20!=null?rc(b20):'<span class="muted">—</span>')+'</td>'
-        +'<td>'+(p.meets_15pct?'<span class="mono amber">Yes</span>':'<span class="muted">—</span>')+'</td>'
+        +'<td class="mono muted" style="font-size:10px">'+((p.years||[]).join(', '))+'</td>'
         +'<td class="mono muted">'+(p.last_date||'—')+'</td>'
         +'</tr>';
     }).join('');
     res.innerHTML='<div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:12px;margin-bottom:10px">'
-      +'<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">'
+      +'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">'
       +'<span class="mono gold" style="font-size:18px;font-weight:700">'+sym+'</span>'
-      +'<span style="font-size:11px;color:var(--t2)">'+prof.today_date+' · Close Rs '+prof.today_close+'</span>'
-      +todayDesc+todayBadge+'</div>'
-      +'<div class="pill-row" style="margin:0">'+pillsHtml+'</div>'
-      +'</div>'
+      +'<span style="font-size:11px;color:var(--t2)">'+prof.today_date+' · &#8377;'+prof.today_close+'</span>'
+      +tDesc+tBadge+'</div>'
+      +'<div class="pill-row" style="margin:0">'
+      +'<div class="kp g"><div class="kl">100%-Win Patterns</div><div class="kv">'+pats.length+'</div></div>'
+      +'</div></div>'
       +'<div class="twrap"><table class="tbl">'
-      +'<thead><tr><th>Candle</th><th>Occ</th><th>ND Win%</th><th>ND Avg%</th><th>ND Min%</th>'
-      +'<th>ND Max%</th><th>Gap Up%</th><th>5d Avg%</th><th>10d Avg%</th><th>20d Avg%</th>'
-      +'<th>15% Rule</th><th>Last</th></tr></thead>'
-      +'<tbody>'+rowsHtml+'</tbody></table></div>';
-  }catch(e){
-    res.innerHTML='<div class="empty">Error: '+e.message+'</div>';
-  }
+      +'<thead><tr><th>Candle</th><th>Occ</th><th>ND Win%</th><th>ND Min%</th><th>ND Avg%</th><th>ND Max%</th>'
+      +'<th>Gap Up%</th><th>5d Avg%</th><th>10d Avg%</th><th>20d Avg%</th><th>Years</th><th>Last</th></tr></thead>'
+      +'<tbody>'+rHtml+'</tbody></table></div>';
+  }catch(e){res.innerHTML='<div class="empty">Error: '+e.message+'</div>';}
 }
 
-// ═══ HEAVYWEIGHT DIP ══════════════════════════════════════════════════
-let _hwGrd='ALL';
-function hwGrd(g,btn){ _hwGrd=g; setOn('#hwg-all,#hwg-ap,#hwg-a,#hwg-b',btn); renderHW(); }
+// ═══ HEAVYWEIGHT DIP ═════════════════════════════════════════════════
+var _hwGrd='ALL',_hwSK='best_min_return',_hwSD='desc';
+function hwGrd(g,btn){_hwGrd=g;setOn('#hwg-all,#hwg-ap,#hwg-a,#hwg-b',btn);renderHW();}
+function hwSort(k,btn){_hwSK=k;setOn('#hws-min,#hws-b15,#hws-evt',btn);renderHW();}
+function hwTh(k){if(_hwSK===k)_hwSD=_hwSD==='desc'?'asc':'desc';else{_hwSK=k;_hwSD='desc';}renderHW();}
 function renderHW(){
-  const q=(document.getElementById('hw-q')?.value||'').toUpperCase().trim();
-  const meta=DATA.hwMeta||{};
+  var q=(document.getElementById('hw-q')?.value||'').toUpperCase().trim();
+  var meta=DATA.hwMeta||{};
   document.getElementById('hw-pills').innerHTML=[
-    ['Qualifying',Object.keys(DATA.hwProfiles).length,'b','heavyweight stocks'],
-    ['A+',meta.n_aplus||0,'g','highest reliability'],
-    ['A',meta.n_a||0,'g','high reliability'],
-  ].map(function(x){ return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>'; }).join('');
-  let rows=Object.entries(DATA.hwProfiles).map(function(e,i){
-    const sym=e[0], p=e[1];
-    const ws=p.win_stats&&p.win_stats[p.best_window_days]?p.win_stats[p.best_window_days]:{};
-    return Object.assign({},p,{sym:sym,_rank:i+1,_avg_r:ws.avg_return||0});
+    ['Stocks',Object.keys(DATA.hwProfiles).length,'b',''],
+    ['A+',meta.n_aplus||0,'g',''],['A',meta.n_a||0,'g',''],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
+  var rows=Object.entries(DATA.hwProfiles).map(function(e,i){
+    var sym=e[0],p=e[1],ws=p.win_stats&&p.win_stats[p.best_window_days]?p.win_stats[p.best_window_days]:{};
+    return Object.assign({},p,{sym:sym,_rank:i+1,_avg_r:ws.avg_return||0,_years_str:(p.years||[]).join(',')});
   });
-  if(_hwGrd!=='ALL') rows=rows.filter(function(r){ return r.grade===_hwGrd; });
-  if(q) rows=rows.filter(function(r){ return r.sym.includes(q); });
-  if(!rows.length){
-    document.getElementById('hw-tbody').innerHTML='<tr><td colspan="9" class="empty">No data. Run pattern_discovery workflow.</td></tr>';
-    return;
-  }
-  const tbody = document.getElementById('hw-tbody');
+  if(_hwGrd!=='ALL') rows=rows.filter(function(r){return r.grade===_hwGrd;});
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  rows.sort(function(a,b){var v=(b[_hwSK]??0)-(a[_hwSK]??0);return _hwSD==='asc'?-v:v;});
+  if(!rows.length){document.getElementById('hw-tbody').innerHTML='<tr><td colspan="10" class="empty">No data. Run pattern_discovery workflow.</td></tr>';return;}
+  var tbody=document.getElementById('hw-tbody');
   tbody.innerHTML=rows.map(function(p,i){
-    const minR=p.best_min_return!=null?'+'+p.best_min_return.toFixed(1)+'%':'--';
-    const bRate=p.best_beats15_rate!=null?p.best_beats15_rate.toFixed(0)+'%':'--';
     return '<tr class="hw-row" data-sym="'+p.sym+'" style="cursor:pointer">'
       +'<td class="mono muted">'+(i+1)+'</td>'
       +'<td class="mono gold" style="font-weight:600">'+p.sym+'</td>'
       +'<td>'+gradeBadge(p.grade||'C')+'</td>'
       +'<td class="mono">'+p.best_window_days+'d</td>'
-      +'<td class="mono green" style="font-weight:700">'+minR+'</td>'
-      +'<td class="mono">'+bRate+'</td>'
+      +'<td class="mono green" style="font-weight:700">+'+(p.best_min_return||0).toFixed(1)+'%</td>'
+      +'<td class="mono">'+(p.best_beats15_rate||0).toFixed(0)+'%</td>'
       +'<td>'+rc(p._avg_r)+'</td>'
       +'<td class="mono">'+p.n_events+'</td>'
-      +'<td class="mono muted">'+((p.years||[]).join(', '))+'</td>'
+      +'<td class="mono">'+p.n_years+'</td>'
+      +'<td class="mono muted" style="font-size:10px">'+((p.years||[]).join(', '))+'</td>'
       +'</tr>';
   }).join('');
-  tbody.onclick=function(ev){ var r=ev.target.closest('tr'); if(r&&r.dataset.sym) showHWD(r.dataset.sym); };
+  tbody.onclick=function(ev){var r=ev.target.closest('tr');if(r&&r.dataset.sym)showHWD(r.dataset.sym);};
 }
 function showHWD(sym){
-  const p=DATA.hwProfiles[sym]; if(!p) return;
-  const evts=(p.events||[]).slice(-30).reverse();
+  var p=DATA.hwProfiles[sym];if(!p)return;
+  var evts=(p.events||[]).slice(-30).reverse();
   function fmtW(e,w){
-    const r=e.recovery&&e.recovery[String(w)];
-    if(!r) return '<td class="muted">—</td>';
-    const v=r.return_pct;
-    const cls=v>=15?'green':v>=0?'amber':'red';
-    const fw=v>=15?'font-weight:700;':'';
-    return '<td class="mono '+cls+'" style="'+fw+'">'+(v>0?'+':'')+v.toFixed(1)+'%</td>';
+    var r=e.recovery&&e.recovery[String(w)];if(!r)return '<td class="muted">—</td>';
+    var v=r.return_pct;
+    return '<td class="mono '+(v>=15?'green':v>=0?'amber':'red')+'" style="'+(v>=15?'font-weight:700':'')+'">'+( v>0?'+':'')+v.toFixed(1)+'%</td>';
   }
   document.getElementById('hw-detail').innerHTML='<div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);margin-top:10px;overflow:hidden">'
-    +'<div style="padding:9px 12px;background:var(--s);font-size:12px;color:var(--gold);font-weight:600">'+sym+' — Floor Events (last '+evts.length+' of '+(p.events||[]).length+')</div>'
-    +'<div class="twrap" style="margin:0;border:none;border-radius:0"><table class="tbl"><thead><tr>'
-    +'<th>Floor Date</th><th>Close</th><th>Floor Depth</th><th>+5d</th><th>+10d</th><th>+20d</th><th>+30d</th>'
-    +'</tr></thead><tbody>'
-    +evts.map(function(e){ return '<tr><td class="mono">'+e.date+'</td><td class="mono">Rs '+e.close+'</td><td class="mono amber">'+e.pos_in_range+'%</td>'+fmtW(e,5)+fmtW(e,10)+fmtW(e,20)+fmtW(e,30)+'</tr>'; }).join('')
+    +'<div style="padding:9px 12px;background:var(--s);font-size:12px;color:var(--gold);font-weight:600">'+sym+' — floor events (last '+evts.length+' of '+(p.events||[]).length+')</div>'
+    +'<div class="twrap" style="margin:0;border:none;border-radius:0"><table class="tbl">'
+    +'<thead><tr><th>Floor Date</th><th>Close</th><th>Floor Depth</th><th>+5d</th><th>+10d</th><th>+20d</th><th>+30d</th></tr></thead><tbody>'
+    +evts.map(function(e){return '<tr><td class="mono">'+e.date+'</td><td class="mono">&#8377;'+e.close+'</td><td class="mono amber">'+e.pos_in_range+'%</td>'+fmtW(e,5)+fmtW(e,10)+fmtW(e,20)+fmtW(e,30)+'</tr>';}).join('')
     +'</tbody></table></div></div>';
 }
 
-// ═══ HW ALERTS ════════════════════════════════════════════════════════
+// ═══ HW ALERTS ═══════════════════════════════════════════════════════
 function renderHWA(){
-  const meta=DATA.hwAlertMeta||{};
+  var meta=DATA.hwAlertMeta||{};
   document.getElementById('hwa-pills').innerHTML=[
-    ['Alerts',meta.total_alerts||0,'b','last 20 trading days'],
-    ['Today',meta.today_count||0,'g','floor today'],
-    ['Grade A+/A',meta.grade_a||0,'g','top grade'],
-  ].map(function(x){ return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>'; }).join('');
-  const rows=DATA.hwAlerts;
-  if(!rows||!rows.length){
-    document.getElementById('hwa-grid').innerHTML='<div class="empty" style="grid-column:1/-1">No heavyweight floor alerts in last 20 trading days.</div>';
-    return;
-  }
+    ['Alerts',meta.total_alerts||0,'b',''],['Today',meta.today_count||0,'g',''],['A+/A',meta.grade_a||0,'g',''],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
+  var rows=DATA.hwAlerts||[];
+  if(!rows.length){document.getElementById('hwa-grid').innerHTML='<div class="empty" style="grid-column:1/-1">No heavyweight floor alerts in last 20 trading days.</div>';return;}
   document.getElementById('hwa-grid').innerHTML=rows.map(function(a){
-    const chgC=a.pct_since>=0?'var(--green)':'var(--red)';
-    const dayBadge=a.is_today?'<span class="days-ago today-badge">TODAY</span>':'<span class="days-ago">'+a.days_ago+'d ago</span>';
-    const zCls=a.zone==='BUY ZONE'?'zone-buy':a.zone==='RUNNING'?'zone-run':'zone-sell';
-    const grade=a.grade||'B';
-    return '<div class="ac ac-'+grade.replace('+','p')+'">'
-      +dayBadge
+    var chgC=a.pct_since>=0?'var(--green)':'var(--red)';
+    var db=a.is_today?'<span class="days-ago today-badge">TODAY</span>':'<span class="days-ago">'+a.days_ago+'d ago</span>';
+    var zCls=a.zone==='BUY ZONE'?'zone-buy':a.zone==='RUNNING'?'zone-run':'zone-sell';
+    var g=a.grade||'B';
+    var yrs=(a.years||[]).map(function(y){return '<span class="yr-tag yr-win">'+y+'</span>';}).join('');
+    return '<div class="ac ac-'+g.replace('+','p')+'">'+db
       +'<div class="ac-head"><div>'
-      +'<div style="display:flex;align-items:center;gap:5px">'+gradeBadge(grade)+'<span class="ac-sym">'+a.sym+'</span></div>'
-      +'<div class="ac-sig">Floor Alert · '+a.best_window_days+'d · '+(a.years||[]).join(', ')+'</div>'
-      +'</div><div class="ac-wr"><div class="ac-pct">+'+(a.min_return!=null?a.min_return.toFixed(1):'—')+'%</div><div class="ac-lbl">min recovery</div></div></div>'
+      +'<div style="display:flex;align-items:center;gap:5px">'+gradeBadge(g)+'<span class="ac-sym">'+a.sym+'</span></div>'
+      +'<div class="ac-sig">'+a.best_window_days+'d window</div>'
+      +'<div style="margin-top:3px">'+yrs+'</div>'
+      +'</div>'
+      +'<div class="ac-wr"><div class="ac-pct">+'+(a.min_return||0).toFixed(1)+'%</div><div class="ac-lbl">min recovery</div></div>'
+      +'</div>'
       +'<div class="ac-row3">'
       +'<div class="ac-mini"><div class="ac-ml">Floor depth</div><div class="ac-mv amber">'+a.floor_depth_pct+'%</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Beats 15% rate</div><div class="ac-mv green">'+(a.beats15_rate!=null?a.beats15_rate.toFixed(0):'—')+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Beats 15%</div><div class="ac-mv green">'+(a.beats15_rate||0).toFixed(0)+'%</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">Since signal</div><div class="ac-mv" style="color:'+chgC+'">'+(a.pct_since>0?'+':'')+a.pct_since+'%</div></div>'
       +'</div>'
       +'<div class="zones">'
-      +'<div class="zr"><span class="zl">Signal close</span><span class="zv">Rs '+fmt(a.sig_close)+'</span></div>'
-      +'<div class="zr"><span class="zl">Current price</span><span class="zv" style="color:'+chgC+'">Rs '+fmt(a.cur_price)+'</span></div>'
-      +'<div class="zr"><span class="zl">Conservative target</span><span class="zv zt1">Rs '+fmt(a.target_conservative)+'</span></div>'
-      +'<div class="zr"><span class="zl">Realistic target</span><span class="zv zt2">Rs '+fmt(a.target_realistic)+'</span></div>'
+      +'<div class="zr"><span class="zl">Signal close</span><span class="zv">&#8377;'+fmt(a.sig_close)+'</span></div>'
+      +'<div class="zr"><span class="zl">Current</span><span class="zv" style="color:'+chgC+'">&#8377;'+fmt(a.cur_price)+'</span></div>'
+      +'<div class="zr"><span class="zl">Conservative target</span><span class="zv zt1">&#8377;'+fmt(a.target_conservative)+'</span></div>'
+      +'<div class="zr"><span class="zl">Realistic target</span><span class="zv zt2">&#8377;'+fmt(a.target_realistic)+'</span></div>'
       +'</div>'
       +'<div class="zone-banner '+zCls+'">'+a.zone+'</div>'
       +'</div>';
