@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>NSE Pattern Alerts</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#080c10;--surface:#0f1620;--card:#141e2a;--border:#1e2d3d;--accent:#00d4aa;--accent2:#3b82f6;--gold:#f59e0b;--text:#e2e8f0;--muted:#64748b;--green:#22c55e;--red:#ef4444;--green-bg:rgba(34,197,94,.1);--red-bg:rgba(239,68,68,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:"Space Grotesk",sans-serif;font-size:14px}
+a{color:var(--accent2)}
+header{background:linear-gradient(135deg,#0a1628,#0f2040);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+.logo{font-size:19px;font-weight:700;color:#fff}.logo span{color:var(--accent)}
+.ldot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{opacity:.7;box-shadow:0 0 0 6px transparent}}
+.nav{display:flex;border-bottom:1px solid var(--border);background:var(--surface);padding:0 28px;overflow-x:auto;gap:0}
+.tab{padding:12px 18px;cursor:pointer;font-weight:600;font-size:13px;color:var(--muted);border-bottom:2px solid transparent;transition:.15s;white-space:nowrap}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}.tab:hover:not(.active){color:var(--text)}
+.pane{display:none;padding:22px 28px}.pane.active{display:block}
+/* stat row */
+.sr{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px}
+.sv{font-size:26px;font-weight:700;color:#fff;font-family:"JetBrains Mono",monospace;line-height:1}
+.sv.g{color:var(--green)}.sv.r{color:var(--red)}.sv.go{color:var(--gold)}
+.sl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-top:4px}
+/* section heading */
+.sh{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.sh h2{font-size:14px;font-weight:700;color:#fff}
+.cnt{background:var(--accent);color:#000;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+.ml{color:var(--muted);font-size:12px;margin-left:auto}
+/* alert cards */
+.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;margin-bottom:20px}
+.ac{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;position:relative;overflow:hidden;transition:.15s}
+.ac:hover{border-color:var(--accent);transform:translateY(-1px)}
+.ac::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.ac.rc::before{background:linear-gradient(90deg,var(--red),#f97316)}
+.ach{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.asy{font-size:15px;font-weight:700;color:#fff}
+.abg{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600}
+.bgg{background:var(--green-bg);color:var(--green)}.bgr{background:var(--red-bg);color:var(--red)}
+.bgg2{background:rgba(245,158,11,.15);color:var(--gold)}
+.og{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px}
+.oi{background:rgba(255,255,255,.03);border-radius:5px;padding:5px 7px}
+.ol{font-size:10px;color:var(--muted);text-transform:uppercase}.ov{font-size:12px;font-weight:600;font-family:"JetBrains Mono",monospace;color:#fff}
+.wr2{font-size:11px;color:var(--accent);font-weight:600;margin-top:6px}
+/* table */
+.tw{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:20px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:600px}
+th{background:#0a1220;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap}
+th:hover{color:var(--accent)}
+th.sorted-asc::after{content:" ▲";color:var(--accent)}
+th.sorted-desc::after{content:" ▼";color:var(--accent)}
+td{padding:8px 12px;border-bottom:1px solid rgba(30,45,61,.5);font-family:"JetBrains Mono",monospace;font-size:12px}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)}
+.pos{color:var(--green)}.neg{color:var(--red)}.sym{color:#fff;font-weight:600;font-family:"Space Grotesk",sans-serif}
+/* search */
+.search-bar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.search-bar input{background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:7px;font-family:inherit;font-size:13px;flex:1;min-width:200px}
+.search-bar input:focus{outline:none;border-color:var(--accent)}
+.search-bar button{background:var(--accent);color:#000;border:none;padding:8px 18px;border-radius:7px;font-family:inherit;font-weight:700;font-size:13px;cursor:pointer}
+/* note */
+.note{padding:10px 14px;background:rgba(0,212,170,.05);border-left:3px solid var(--accent);border-radius:0 7px 7px 0;font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+/* heavyweight cards */
+.yc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px}
+.wt{height:7px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:5px}
+.wf{height:100%;background:linear-gradient(90deg,var(--green),var(--accent));border-radius:4px}
+/* loading */
+.load{display:flex;align-items:center;justify-content:center;gap:10px;padding:50px;color:var(--muted)}
+.sp{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ns{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:28px;text-align:center;color:var(--muted)}
+/* stock detail panel */
+.detail-panel{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-top:16px}
+.detail-panel h3{color:#fff;font-size:14px;font-weight:700;margin-bottom:12px}
+footer{border-top:1px solid var(--border);padding:14px 28px;text-align:center;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <div class="ldot"></div>
+  <div class="logo">NSE <span>Pattern Alerts</span></div>
+  <div style="margin-left:auto;color:var(--muted);font-size:12px">
+    <a href="index.html" style="color:var(--accent2)">← Pin Bar Dashboard</a>
+  </div>
+</header>
+
+<div class="nav">
+  <div class="tab active" onclick="T('la')">🔔 Live Alerts</div>
+  <div class="tab" onclick="T('bp')">⭐ Best Patterns</div>
+  <div class="tab" onclick="T('cs')">🕯️ Candle Search</div>
+  <div class="tab" onclick="T('pt')">📊 Pattern Library</div>
+  <div class="tab" onclick="T('hw')">🏦 Heavyweight Dip</div>
+  <div class="tab" onclick="T('wa')">🔔 HW Alerts</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TAB 1: LIVE ALERTS (today's candle matches historical pattern)
+════════════════════════════════════════════════════════════════════ -->
+<div id="pla" class="pane active">
+  <div id="la-load" class="load"><div class="sp"></div>Loading alerts…</div>
+  <div id="la-body" style="display:none">
+    <div class="sr" id="la-stats"></div>
+    <div class="note">
+      Today's candle for each stock is matched against its own 5-year history.
+      Stocks shown here formed a candle pattern that historically led to a positive next day.
+      <strong>100%</strong> = every single time this candle formed on this stock, next day was positive.
+    </div>
+    <div class="sh">
+      <h2>Today's Candle Pattern Matches</h2>
+      <span class="cnt" id="la-cnt">0</span>
+      <span class="ml" id="la-date"></span>
+      <label style="margin-left:8px;color:var(--muted);font-size:12px">
+        <input type="checkbox" id="la-100only" onchange="renderLiveAlerts()"> 100% only
+      </label>
+    </div>
+    <div id="la-cards" class="ag"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TAB 2: BEST PATTERNS (100% next-day + ≥15% in any window)
+════════════════════════════════════════════════════════════════════ -->
+<div id="pbp" class="pane">
+  <div id="bp-load" class="load"><div class="sp"></div>Loading best patterns…</div>
+  <div id="bp-body" style="display:none">
+    <div class="note">
+      Candle patterns where: (1) next-day close was <strong>positive 100% of the time</strong>
+      AND (2) average return was ≥ 15% in at least one of next 5/10/20 trading days.
+      Click column headers to sort.
+    </div>
+    <div class="sh">
+      <h2>100% Next-Day Win + ≥15% in 5d/10d/20d</h2>
+      <span class="cnt" id="bp-cnt">0</span>
+    </div>
+    <div class="tw"><table id="bp-table">
+      <thead><tr>
+        <th onclick="sortTable('bp-table',0)">Symbol</th>
+        <th onclick="sortTable('bp-table',1)">Candle Pattern</th>
+        <th onclick="sortTable('bp-table',2)">Occ</th>
+        <th onclick="sortTable('bp-table',3)">ND Win%</th>
+        <th onclick="sortTable('bp-table',4)">ND Avg%</th>
+        <th onclick="sortTable('bp-table',5)">ND Max%</th>
+        <th onclick="sortTable('bp-table',6)">Gap Up%</th>
+        <th onclick="sortTable('bp-table',7)">5d Avg%</th>
+        <th onclick="sortTable('bp-table',8)">10d Avg%</th>
+        <th onclick="sortTable('bp-table',9)">20d Avg%</th>
+        <th onclick="sortTable('bp-table',10)">Best Win</th>
+        <th onclick="sortTable('bp-table',11)">Last Date</th>
+      </tr></thead>
+      <tbody id="bp-tbody"></tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TAB 3: CANDLE SEARCH (search by stock symbol)
+════════════════════════════════════════════════════════════════════ -->
+<div id="pcs" class="pane">
+  <div class="note">Search any stock symbol to see its full candle pattern history — which candle shapes have historically led to positive next-day moves and by how much.</div>
+  <div class="search-bar">
+    <input id="cs-input" placeholder="Enter stock symbol e.g. RELIANCE, TCS, INFY…" onkeydown="if(event.key==='Enter')searchStock()"/>
+    <button onclick="searchStock()">Search</button>
+  </div>
+  <div id="cs-result"></div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TAB 4: PATTERN LIBRARY (all stocks ranked by pattern strength)
+════════════════════════════════════════════════════════════════════ -->
+<div id="ppt" class="pane">
+  <div id="pt-load" class="load"><div class="sp"></div>Loading pattern library…</div>
+  <div id="pt-body" style="display:none">
+    <div class="note">All stocks that have at least one candle pattern with ≥60% next-day win rate. Click any row to see full pattern details. Click column headers to sort.</div>
+    <div class="sh">
+      <h2>All Stocks with Strong Candle Patterns</h2>
+      <span class="cnt" id="pt-cnt">0</span>
+      <input id="pt-filter" placeholder="Filter symbol…"
+        style="margin-left:auto;background:var(--card);border:1px solid var(--border);color:var(--text);padding:5px 10px;border-radius:6px;font-size:12px;font-family:inherit"
+        oninput="renderPatternLib()"/>
+    </div>
+    <div class="tw"><table id="pt-table">
+      <thead><tr>
+        <th onclick="sortTable('pt-table',0)">Symbol</th>
+        <th onclick="sortTable('pt-table',1)">Total Patterns</th>
+        <th onclick="sortTable('pt-table',2)">100% Win Patterns</th>
+        <th onclick="sortTable('pt-table',3)">Meets 15% Rule</th>
+        <th onclick="sortTable('pt-table',4)">Best ND Win%</th>
+        <th onclick="sortTable('pt-table',5)">Best ND Avg%</th>
+        <th onclick="sortTable('pt-table',6)">Today's Candle</th>
+        <th onclick="sortTable('pt-table',7)">Today's Match Win%</th>
+      </tr></thead>
+      <tbody id="pt-tbody"></tbody>
+    </table></div>
+    <div id="pt-detail"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TAB 5: HEAVYWEIGHT DIP-RECOVER
+════════════════════════════════════════════════════════════════════ -->
+<div id="phw" class="pane">
+  <div id="hw-load" class="load"><div class="sp"></div>Loading heavyweight analysis…</div>
+  <div id="hw-body" style="display:none">
+    <div class="note">Large-cap stocks (avg daily turnover ≥ Rs 5 Cr, 4+ years listed) with a repeating floor-and-recover pattern. Ranked by minimum guaranteed recovery %. Click any row to see all historical floor events.</div>
+    <div class="sr" id="hw-stats"></div>
+    <div class="sh"><h2>Heavyweight Dip-Recover Stocks</h2><span class="cnt" id="hw-cnt">0</span></div>
+    <div class="tw"><table id="hw-table">
+      <thead><tr>
+        <th onclick="sortTable('hw-table',0)">#</th>
+        <th onclick="sortTable('hw-table',1)">Stock</th>
+        <th onclick="sortTable('hw-table',2)">Grade</th>
+        <th onclick="sortTable('hw-table',3)">Best Window</th>
+        <th onclick="sortTable('hw-table',4)">Min Recovery%</th>
+        <th onclick="sortTable('hw-table',5)">Beats 15% Rate</th>
+        <th onclick="sortTable('hw-table',6)">Avg Recovery%</th>
+        <th onclick="sortTable('hw-table',7)">Events</th>
+        <th onclick="sortTable('hw-table',8)">Years</th>
+      </tr></thead>
+      <tbody id="hw-tbody"></tbody>
+    </table></div>
+    <div id="hw-detail"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TAB 6: HEAVYWEIGHT ALERTS
+════════════════════════════════════════════════════════════════════ -->
+<div id="pwa" class="pane">
+  <div id="wa-load" class="load"><div class="sp"></div>Loading heavyweight alerts…</div>
+  <div id="wa-body" style="display:none">
+    <div class="sr" id="wa-stats"></div>
+    <div class="note">Heavyweight stocks that hit their historical price floor in the last 20 TRADING days. Based on history these stocks recovered by the shown minimum % within the indicated timeframe.</div>
+    <div class="sh"><h2>Heavyweight Floor Alerts</h2><span class="cnt" id="wa-cnt">0</span><span class="ml" id="wa-date"></span></div>
+    <div id="wa-cards" class="ag"></div>
+  </div>
+</div>
+
+<footer>NSE Pattern Alerts · Data from NSE India · <a href="index.html">← Pin Bar Dashboard</a></footer>
+
+<script>
+const R="https://raw.githubusercontent.com/animesh2007asansol/itis/main";
+const PS=`${R}/pattern_signals`;
+
+// ── Tab switching ─────────────────────────────────────────────────────────
+function T(id){
+  const ids=["la","bp","cs","pt","hw","wa"];
+  document.querySelectorAll(".tab").forEach((t,i)=>t.classList.toggle("active",ids[i]===id));
+  document.querySelectorAll(".pane").forEach(p=>p.classList.remove("active"));
+  document.getElementById("p"+id).classList.add("active");
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────
+const f2=n=>typeof n==="number"?n.toFixed(2):(n??"—");
+const pct=n=>typeof n==="number"?(n>0?`<span class="pos">+${f2(n)}%</span>`:`<span class="neg">${f2(n)}%</span>`):"—";
+const pill=ok=>ok
+  ?'<span class="abg bgg">✓</span>'
+  :'<span class="abg bgr">✗</span>';
+
+// ── Table sort ────────────────────────────────────────────────────────────
+let _sortState={};
+function sortTable(tid,col){
+  const tbl=document.getElementById(tid);
+  if(!tbl)return;
+  const prev=_sortState[tid]||{col:-1,asc:true};
+  const asc=prev.col===col?!prev.asc:true;
+  _sortState[tid]={col,asc};
+  const tbody=tbl.querySelector("tbody");
+  const rows=[...tbody.querySelectorAll("tr")];
+  rows.sort((a,b)=>{
+    const av=a.cells[col]?.dataset?.val??a.cells[col]?.textContent??"";
+    const bv=b.cells[col]?.dataset?.val??b.cells[col]?.textContent??"";
+    const an=parseFloat(av),bn=parseFloat(bv);
+    if(!isNaN(an)&&!isNaN(bn)) return asc?an-bn:bn-an;
+    return asc?av.localeCompare(bv):bv.localeCompare(av);
+  });
+  rows.forEach(r=>tbody.appendChild(r));
+  tbl.querySelectorAll("th").forEach((th,i)=>{
+    th.classList.remove("sorted-asc","sorted-desc");
+    if(i===col) th.classList.add(asc?"sorted-asc":"sorted-desc");
+  });
+}
+
+// ── DATA STORE ────────────────────────────────────────────────────────────
+let _liveAlerts=[], _bestPatterns=[], _profiles={}, _hwProfiles={}, _hwAlerts=[];
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TAB 1: LIVE ALERTS
+// ═══════════════════════════════════════════════════════════════════════════
+async function loadLiveAlerts(){
+  try{
+    const r=await fetch(`${PS}/candle_today.json`);
+    if(!r.ok) throw new Error();
+    const d=await r.json();
+    _liveAlerts=d.alerts||[];
+    document.getElementById("la-load").style.display="none";
+    document.getElementById("la-body").style.display="block";
+    document.getElementById("la-date").textContent=d.signal_date?"Date: "+d.signal_date:"";
+    document.getElementById("la-stats").innerHTML=`
+      <div class="sc"><div class="sv go">${d.total_alerts}</div><div class="sl">Total Alerts</div></div>
+      <div class="sc"><div class="sv g">${d.perfect_alerts||0}</div><div class="sl">100% Win Rate</div></div>`;
+    renderLiveAlerts();
+  }catch(e){
+    document.getElementById("la-load").innerHTML='<span style="color:var(--red)">Run candle_patterns workflow first.</span>';
+  }
+}
+
+function renderLiveAlerts(){
+  const only100=document.getElementById("la-100only")?.checked;
+  let data=_liveAlerts;
+  if(only100) data=data.filter(a=>a.is_100pct);
+  document.getElementById("la-cnt").textContent=data.length;
+  const grid=document.getElementById("la-cards");
+  if(!data.length){
+    grid.innerHTML='<div class="ns" style="grid-column:1/-1"><div style="font-size:32px;margin-bottom:8px">🔍</div><div>No matching alerts today.</div></div>';
+    return;
+  }
+  grid.innerHTML=data.map(a=>`
+    <div class="ac">
+      <div class="ach">
+        <div>
+          <div class="asy">${a.sym}</div>
+          <span class="abg ${a.is_100pct?"bgg2":"bgg"}">${a.nd_win_rate}% next-day win</span>
+        </div>
+        <div style="margin-left:auto;text-align:right">
+          <div style="font-size:16px;font-weight:700;color:#fff;font-family:'JetBrains Mono',monospace">₹${a.today_close}</div>
+          <div style="font-size:10px;color:var(--muted)">${a.today_date}</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.4">${a.candle_desc}</div>
+      <div class="og">
+        <div class="oi"><div class="ol">ND Avg Return</div><div class="ov pos">+${f2(a.nd_avg_ret)}%</div></div>
+        <div class="oi"><div class="ol">ND Max Return</div><div class="ov pos">+${f2(a.nd_max_ret)}%</div></div>
+        <div class="oi"><div class="ol">Gap Up Rate</div><div class="ov">${a.gap_up_rate}%</div></div>
+        <div class="oi"><div class="ol">Occurrences</div><div class="ov">${a.occurrences}</div></div>
+      </div>
+      <div class="wr2">
+        ${a.win_5d?.avg?`5d:+${f2(a.win_5d.avg)}%`:""}
+        ${a.win_10d?.avg?` | 10d:+${f2(a.win_10d.avg)}%`:""}
+        ${a.win_20d?.avg?` | 20d:+${f2(a.win_20d.avg)}%`:""}
+        ${a.meets_15pct?'<span style="color:var(--gold)"> ★ ≥15% rule</span>':""}
+      </div>
+    </div>`).join("");
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TAB 2: BEST PATTERNS
+// ═══════════════════════════════════════════════════════════════════════════
+async function loadBestPatterns(){
+  try{
+    const r=await fetch(`${PS}/candle_best_patterns.json`);
+    if(!r.ok) throw new Error();
+    const d=await r.json();
+    _bestPatterns=d.patterns||[];
+    document.getElementById("bp-load").style.display="none";
+    document.getElementById("bp-body").style.display="block";
+    document.getElementById("bp-cnt").textContent=_bestPatterns.length;
+    const tbody=document.getElementById("bp-tbody");
+    tbody.innerHTML=_bestPatterns.map(p=>{
+      const b5=p.win_5d?.avg??null, b10=p.win_10d?.avg??null, b20=p.win_20d?.avg??null;
+      const bestW=Math.max(b5??0,b10??0,b20??0);
+      return`<tr onclick="quickSearchCandle('${p.sym}','${p.candle_key}')" style="cursor:pointer">
+        <td class="sym" data-val="${p.sym}">${p.sym}</td>
+        <td style="font-size:11px;color:var(--muted)" data-val="${p.desc}">${p.desc}</td>
+        <td data-val="${p.occurrences}">${p.occurrences}</td>
+        <td class="pos" data-val="${p.nd_win_rate}">${p.nd_win_rate}%</td>
+        <td class="pos" data-val="${p.nd_avg_ret}">+${f2(p.nd_avg_ret)}%</td>
+        <td class="pos" data-val="${p.nd_max_ret}">+${f2(p.nd_max_ret)}%</td>
+        <td data-val="${p.gap_up_rate}">${p.gap_up_rate}%</td>
+        <td class="${b5>=0?"pos":"neg"}" data-val="${b5??-99}">${b5!=null?`+${f2(b5)}%`:"—"}</td>
+        <td class="${b10>=0?"pos":"neg"}" data-val="${b10??-99}">${b10!=null?`+${f2(b10)}%`:"—"}</td>
+        <td class="${b20>=0?"pos":"neg"}" data-val="${b20??-99}">${b20!=null?`+${f2(b20)}%`:"—"}</td>
+        <td style="color:var(--gold);font-weight:700" data-val="${bestW}">+${f2(bestW)}%</td>
+        <td style="color:var(--muted)" data-val="${p.last_date}">${p.last_date}</td>
+      </tr>`;
+    }).join("");
+  }catch(e){
+    document.getElementById("bp-load").innerHTML='<span style="color:var(--red)">Run candle_patterns workflow first.</span>';
+  }
+}
+
+function quickSearchCandle(sym,key){
+  document.getElementById("cs-input").value=sym;
+  T("cs");
+  searchStock(key);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TAB 3: CANDLE SEARCH
+// ═══════════════════════════════════════════════════════════════════════════
+async function searchStock(highlightKey){
+  const sym=document.getElementById("cs-input").value.trim().toUpperCase();
+  if(!sym){document.getElementById("cs-result").innerHTML='<div class="ns">Enter a symbol above.</div>';return;}
+  document.getElementById("cs-result").innerHTML='<div class="load"><div class="sp"></div>Loading…</div>';
+  try{
+    if(!_profiles||!Object.keys(_profiles).length){
+      const r=await fetch(`${PS}/candle_stock_patterns.json`);
+      if(!r.ok) throw new Error("not found");
+      const d=await r.json();
+      _profiles=d.profiles||{};
+    }
+    const prof=_profiles[sym];
+    if(!prof){
+      document.getElementById("cs-result").innerHTML=`<div class="ns">Symbol <strong>${sym}</strong> not found. Check spelling or run candle_patterns workflow.</div>`;
+      return;
+    }
+    const pats=prof.patterns||[];
+    const today=prof.today_candle;
+    const todayH=prof.today_hist;
+    document.getElementById("cs-result").innerHTML=`
+      <div class="detail-panel">
+        <h3>${sym} — ${pats.length} candle patterns found</h3>
+        ${today?`<div style="margin-bottom:12px;font-size:13px;color:var(--text)">
+          <strong>Today's candle (${prof.today_date}):</strong> ${today.desc} | Close: ₹${prof.today_close}
+          ${todayH?`<span class="abg ${todayH.nd_win_rate>=80?"bgg":"bgg2"}" style="margin-left:8px">
+            Historically: ${todayH.nd_win_rate}% next-day positive (${todayH.occurrences} times)
+          </span>`:'<span class="abg bgr" style="margin-left:8px">No historical data for this exact pattern</span>'}
+        </div>`:""}
+        <div class="tw"><table id="cs-table">
+          <thead><tr>
+            <th onclick="sortTable('cs-table',0)">Pattern</th>
+            <th onclick="sortTable('cs-table',1)">Occ</th>
+            <th onclick="sortTable('cs-table',2)">ND Win%</th>
+            <th onclick="sortTable('cs-table',3)">ND Avg%</th>
+            <th onclick="sortTable('cs-table',4)">ND Min%</th>
+            <th onclick="sortTable('cs-table',5)">ND Max%</th>
+            <th onclick="sortTable('cs-table',6)">Gap Up%</th>
+            <th onclick="sortTable('cs-table',7)">5d Avg%</th>
+            <th onclick="sortTable('cs-table',8)">10d Avg%</th>
+            <th onclick="sortTable('cs-table',9)">20d Avg%</th>
+            <th onclick="sortTable('cs-table',10)">≥15% Rule</th>
+            <th onclick="sortTable('cs-table',11)">Last Seen</th>
+          </tr></thead>
+          <tbody>${pats.map(p=>{
+            const isToday=highlightKey&&p.candle_key===highlightKey;
+            const isTodayMatch=today&&p.candle_key===today.key;
+            const rowStyle=isToday||isTodayMatch?"background:rgba(0,212,170,.08)!important;":"";
+            return`<tr style="${rowStyle}">
+              <td style="font-size:11px;max-width:220px" data-val="${p.desc}">${p.desc}${isTodayMatch?' <span style="color:var(--accent);font-size:10px">← TODAY</span>':""}</td>
+              <td data-val="${p.occurrences}">${p.occurrences}</td>
+              <td class="${p.nd_win_rate>=80?"pos":p.nd_win_rate>=60?"":"neg"}" data-val="${p.nd_win_rate}">${p.nd_win_rate}%</td>
+              <td class="pos" data-val="${p.nd_avg_ret}">+${f2(p.nd_avg_ret)}%</td>
+              <td class="${p.nd_min_ret>=0?"pos":"neg"}" data-val="${p.nd_min_ret}">${p.nd_min_ret>0?"+":""}${f2(p.nd_min_ret)}%</td>
+              <td class="pos" data-val="${p.nd_max_ret}">+${f2(p.nd_max_ret)}%</td>
+              <td data-val="${p.gap_up_rate}">${p.gap_up_rate}%</td>
+              <td class="${(p.win_5d?.avg??0)>=0?"pos":"neg"}" data-val="${p.win_5d?.avg??-99}">${p.win_5d?.avg!=null?`+${f2(p.win_5d.avg)}%`:"—"}</td>
+              <td class="${(p.win_10d?.avg??0)>=0?"pos":"neg"}" data-val="${p.win_10d?.avg??-99}">${p.win_10d?.avg!=null?`+${f2(p.win_10d.avg)}%`:"—"}</td>
+              <td class="${(p.win_20d?.avg??0)>=0?"pos":"neg"}" data-val="${p.win_20d?.avg??-99}">${p.win_20d?.avg!=null?`+${f2(p.win_20d.avg)}%`:"—"}</td>
+              <td>${p.meets_15pct?'<span style="color:var(--gold)">★ Yes</span>':"—"}</td>
+              <td style="color:var(--muted)" data-val="${p.last_date}">${p.last_date}</td>
+            </tr>`;
+          }).join("")}</tbody>
+        </table></div>
+      </div>`;
+  }catch(e){
+    document.getElementById("cs-result").innerHTML='<div class="ns">Failed to load. Run candle_patterns workflow first.</div>';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TAB 4: PATTERN LIBRARY
+// ═══════════════════════════════════════════════════════════════════════════
+let _ptData=[];
+async function loadPatternLib(){
+  try{
+    const r=await fetch(`${PS}/candle_stock_patterns.json`);
+    if(!r.ok) throw new Error();
+    const d=await r.json();
+    _profiles=d.profiles||{};
+    // Build flat list of stocks with strong patterns
+    _ptData=Object.values(_profiles).filter(p=>{
+      const pats=p.patterns||[];
+      return pats.some(pat=>pat.nd_win_rate>=60);
+    }).map(p=>{
+      const pats=p.patterns||[];
+      const best=pats.reduce((a,b)=>b.nd_win_rate>a.nd_win_rate?b:a,pats[0]||{});
+      return{
+        sym:p.sym,
+        n_patterns:p.n_patterns,
+        n_100pct:p.n_100pct,
+        n_meets_15pct:p.n_meets_15pct,
+        best_nd_wr:best.nd_win_rate||0,
+        best_nd_avg:best.nd_avg_ret||0,
+        today_desc:p.today_candle?.desc||"—",
+        today_wr:p.today_hist?.nd_win_rate??null,
+      };
+    });
+    _ptData.sort((a,b)=>b.best_nd_wr-a.best_nd_wr||b.n_100pct-a.n_100pct);
+    document.getElementById("pt-load").style.display="none";
+    document.getElementById("pt-body").style.display="block";
+    renderPatternLib();
+  }catch(e){
+    document.getElementById("pt-load").innerHTML='<span style="color:var(--red)">Run candle_patterns workflow first.</span>';
+  }
+}
+
+function renderPatternLib(){
+  const q=document.getElementById("pt-filter")?.value?.trim()?.toUpperCase()||"";
+  const data=q?_ptData.filter(d=>d.sym.includes(q)):_ptData;
+  document.getElementById("pt-cnt").textContent=data.length;
+  document.getElementById("pt-tbody").innerHTML=data.map(d=>`<tr onclick="goSearch('${d.sym}')" style="cursor:pointer">
+    <td class="sym" data-val="${d.sym}">${d.sym}</td>
+    <td data-val="${d.n_patterns}">${d.n_patterns}</td>
+    <td data-val="${d.n_100pct}"><span style="color:${d.n_100pct>0?"var(--gold)":"var(--muted)"}">${d.n_100pct}</span></td>
+    <td data-val="${d.n_meets_15pct}"><span style="color:${d.n_meets_15pct>0?"var(--green)":"var(--muted)"}">${d.n_meets_15pct}</span></td>
+    <td class="${d.best_nd_wr>=80?"pos":""}" data-val="${d.best_nd_wr}">${d.best_nd_wr}%</td>
+    <td class="pos" data-val="${d.best_nd_avg}">+${f2(d.best_nd_avg)}%</td>
+    <td style="font-size:11px;color:var(--muted)" data-val="${d.today_desc}">${d.today_desc}</td>
+    <td data-val="${d.today_wr??-1}">${d.today_wr!=null?`<span class="${d.today_wr>=80?"pos":""}">${d.today_wr}%</span>`:"—"}</td>
+  </tr>`).join("");
+}
+
+function goSearch(sym){
+  document.getElementById("cs-input").value=sym;
+  T("cs");
+  searchStock();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TAB 5: HEAVYWEIGHT DIP
+// ═══════════════════════════════════════════════════════════════════════════
+async function loadHW(){
+  try{
+    const r=await fetch(`${PS}/heavyweight_profiles.json`);
+    if(!r.ok) throw new Error();
+    const d=await r.json();
+    _hwProfiles=d.profiles||{};
+    const keys=Object.keys(_hwProfiles);
+    document.getElementById("hw-load").style.display="none";
+    document.getElementById("hw-body").style.display="block";
+    document.getElementById("hw-cnt").textContent=keys.length;
+    document.getElementById("hw-stats").innerHTML=`
+      <div class="sc"><div class="sv">${keys.length}</div><div class="sl">Qualifying Stocks</div></div>
+      <div class="sc"><div class="sv go">${d.n_aplus||0}</div><div class="sl">Grade A+</div></div>
+      <div class="sc"><div class="sv g">${d.n_a||0}</div><div class="sl">Grade A</div></div>`;
+    document.getElementById("hw-tbody").innerHTML=keys.map((sym,i)=>{
+      const p=_hwProfiles[sym];
+      const bw=p.best_window_days;
+      const ws=p.win_stats&&p.win_stats[bw]?p.win_stats[bw]:{};
+      return`<tr onclick="showHWDetail('${sym}')" style="cursor:pointer">
+        <td data-val="${i+1}">${i+1}</td>
+        <td class="sym" data-val="${sym}">${sym}</td>
+        <td data-val="${p.grade}"><span class="abg ${p.grade==="A+"||p.grade==="A"?"bgg":"bgr"}">${p.grade}</span></td>
+        <td data-val="${bw}">${bw}d</td>
+        <td class="pos" style="font-weight:700" data-val="${p.best_min_return}">+${f2(p.best_min_return)}%</td>
+        <td data-val="${p.best_beats15_rate}">${p.best_beats15_rate}%</td>
+        <td class="pos" data-val="${ws.avg_return||0}">+${f2(ws.avg_return||0)}%</td>
+        <td data-val="${p.n_events}">${p.n_events}</td>
+        <td style="color:var(--muted)" data-val="${p.n_years}">${(p.years||[]).join(", ")}</td>
+      </tr>`;
+    }).join("");
+    window._hwData=_hwProfiles;
+  }catch(e){
+    document.getElementById("hw-load").innerHTML='<span style="color:var(--red)">Run pattern_discovery workflow first.</span>';
+  }
+}
+
+function showHWDetail(sym){
+  const p=window._hwData&&window._hwData[sym]; if(!p) return;
+  const evts=(p.events||[]).slice(-30).reverse();
+  document.getElementById("hw-detail").innerHTML=`
+    <div class="detail-panel">
+      <h3>${sym} — Historical Floor Events (showing last 30 of ${(p.events||[]).length})</h3>
+      <div class="tw"><table>
+        <thead><tr><th>Floor Date</th><th>Close</th><th>Floor Depth</th>
+          <th>+5d</th><th>+10d</th><th>+20d</th><th>+30d</th></tr></thead>
+        <tbody>${evts.map(e=>{
+          const fmt=w=>{
+            const r=e.recovery&&e.recovery[String(w)];
+            if(!r) return"<td>—</td>";
+            const v=r.return_pct;
+            return`<td class="${v>=0?"pos":"neg"}">${v>0?"+":""}${f2(v)}%</td>`;
+          };
+          return`<tr><td>${e.date}</td><td>₹${e.close}</td>
+            <td style="color:var(--accent)">${e.pos_in_range}%</td>
+            ${fmt(5)}${fmt(10)}${fmt(20)}${fmt(30)}</tr>`;
+        }).join("")}</tbody>
+      </table></div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TAB 6: HEAVYWEIGHT ALERTS
+// ═══════════════════════════════════════════════════════════════════════════
+async function loadHWAlerts(){
+  try{
+    const r=await fetch(`${PS}/heavyweight_alerts.json`);
+    if(!r.ok) throw new Error();
+    const d=await r.json();
+    _hwAlerts=d.alerts||[];
+    document.getElementById("wa-load").style.display="none";
+    document.getElementById("wa-body").style.display="block";
+    document.getElementById("wa-cnt").textContent=_hwAlerts.length;
+    document.getElementById("wa-date").textContent=d.alert_date?"Date: "+d.alert_date:"";
+    document.getElementById("wa-stats").innerHTML=`
+      <div class="sc"><div class="sv go">${_hwAlerts.length}</div><div class="sl">Floor Alerts</div></div>
+      <div class="sc"><div class="sv g">${d.today_count||0}</div><div class="sl">Today</div></div>
+      <div class="sc"><div class="sv">${d.grade_a||0}</div><div class="sl">Grade A+/A</div></div>`;
+    const grid=document.getElementById("wa-cards");
+    if(!_hwAlerts.length){
+      grid.innerHTML='<div class="ns" style="grid-column:1/-1"><div style="font-size:32px;margin-bottom:8px">📈</div><div>No heavyweight floor alerts in last 20 trading days.</div></div>';
+      return;
+    }
+    grid.innerHTML=_hwAlerts.map(a=>`
+      <div class="ac">
+        <div class="ach">
+          <div>
+            <div class="asy">${a.sym}</div>
+            <span class="abg ${a.grade==="A+"||a.grade==="A"?"bgg":"bgr"}">${a.grade} · ${a.best_window_days||"?"}d</span>
+          </div>
+          <div style="margin-left:auto;text-align:right">
+            <div style="font-size:16px;font-weight:700;color:#fff;font-family:'JetBrains Mono',monospace">₹${a.sig_close}</div>
+            <div style="font-size:10px;color:var(--muted)">${a.sig_date}</div>
+          </div>
+        </div>
+        <div class="og">
+          <div class="oi"><div class="ol">Floor Depth</div><div class="ov" style="color:var(--accent)">${a.floor_depth_pct}%</div></div>
+          <div class="oi"><div class="ol">Min Recovery</div><div class="ov pos">+${f2(a.min_return)}%</div></div>
+          <div class="oi"><div class="ol">Beats 15%</div><div class="ov">${a.beats15_rate}% of times</div></div>
+          <div class="oi"><div class="ol">Current</div><div class="ov">₹${a.cur_price} <span class="${a.pct_since>=0?"pos":"neg"}">(${a.pct_since>0?"+":""}${a.pct_since}%)</span></div></div>
+        </div>
+        <div class="wr2">Target: ₹${a.target_conservative} – ₹${a.target_realistic} · ${a.zone}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">${a.n_events} floor events, ${a.n_years} years</div>
+      </div>`).join("");
+  }catch(e){
+    document.getElementById("wa-load").innerHTML='<span style="color:var(--red)">Run pattern_discovery workflow first.</span>';
+  }
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────
+loadLiveAlerts();
+loadBestPatterns();
+loadPatternLib();
+loadHW();
+loadHWAlerts();
+</script>
+</body>
+</html>
