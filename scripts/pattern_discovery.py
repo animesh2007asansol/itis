@@ -373,7 +373,7 @@ def grade_pattern(n_years, n_occ, all_100pct, worst_return):
       - Whether EVERY occurrence at EVERY window is positive
       - Whether worst single return >= +5%
     """
-    if not all_100pct or worst_return < STOCK_MIN_MIN_RET:
+    if not all_100pct or worst_return < STOCK_MIN_AVG:
         return "C"
     if n_years >= 4 and n_occ >= 8: return "A+"
     if n_years >= 3 and n_occ >= 5: return "A"
@@ -841,7 +841,7 @@ def main():
 
     jdump({"generated_at":now_ist,
            "thresholds":{"cross_min_wr":CROSS_MIN_WR,"stock_min_wr":STOCK_MIN_WR,
-                         "min_avg_all":STOCK_MIN_AVG,"min_single":STOCK_MIN_MIN_RET,
+                         "min_avg_all":STOCK_MIN_AVG,"min_single":STOCK_MIN_AVG,
                          "min_vol":MIN_VOLUME},
            "stocks_analyzed":int(len(sym_list)),
            "trading_days":len(tds),
