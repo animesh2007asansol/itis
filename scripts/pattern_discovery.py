@@ -373,7 +373,7 @@ def grade_pattern(n_years, n_occ, all_100pct, worst_return):
       - Whether EVERY occurrence at EVERY window is positive
       - Whether worst single return >= +5%
     """
-    if not all_100pct or worst_return < STOCK_MIN_AVG:
+    if not all_100pct:
         return "C"
     if n_years >= 4 and n_occ >= 8: return "A+"
     if n_years >= 3 and n_occ >= 5: return "A"
@@ -397,7 +397,6 @@ def analyse_cross(df, sig, name):
         avg_r = valid.mean()*100                    # verified
         min_r = valid.min()*100                     # verified
         if wr < CROSS_MIN_WR: return None
-        if avg_r < STOCK_MIN_AVG: return None
         res[f"wr_{w}d"]  = round(wr,1)
         res[f"avg_{w}d"] = round(avg_r,2)
         res[f"min_{w}d"] = round(min_r,2)
@@ -460,9 +459,8 @@ def mine_stock(g, sym, data_years):
             max_r = valid.max()*100
             med_r = valid.median()*100
 
-            # STRICT filters
-            if wr    < STOCK_MIN_WR:  ok = False; break   # 100% win rate required
-            if avg_r < STOCK_MIN_AVG: ok = False; break   # avg return required
+            # Only require 100% win rate — all occurrences must be positive
+            if wr < STOCK_MIN_WR:  ok = False; break
 
             win_data[w] = {"wr":round(wr,1),"avg":round(avg_r,2),
                            "min":round(min_r,2),"max":round(max_r,2),
@@ -745,9 +743,11 @@ def main():
     if not force and ver_ok and last:
         new_dates = [d for d in tds if d > last]
         if not new_dates:
-            print(f"  No new dates since {last}. Nothing to do.")
-            print("  To force rerun: set env FORCE_FULL_RERUN=true")
-            sys.exit(0)
+            if not force:
+                print(f"  No new dates since {last}. Skipping.")
+                sys.exit(0)
+            else:
+                print(f"  No new dates but FORCE=true — running.")
         print(f"  {len(new_dates)} new dates since {last}. Running full recompute.")
     else:
         print("  Full run (first time, new version, or forced).")
@@ -827,10 +827,7 @@ def main():
     today_cnt  = sum(1 for a in alerts if a["is_today"])
     print(f"  {len(alerts)} alerts | Today: {today_cnt}")
 
-    # [9] Candle morphology
-    print("\n[9] Candle morphology...")
-    morph = build_morphology(df)
-    print(f"  {len(morph)} useful candle buckets")
+    # Candle morphology computation removed
 
     # [10] Write outputs
     print("\n[10] Writing JSON files...")
@@ -841,7 +838,7 @@ def main():
 
     jdump({"generated_at":now_ist,
            "thresholds":{"cross_min_wr":CROSS_MIN_WR,"stock_min_wr":STOCK_MIN_WR,
-                         "min_avg_all":STOCK_MIN_AVG,"min_single":STOCK_MIN_AVG,
+                         "min_avg_15pct_any_window":STOCK_MIN_ANY_ONE,
                          "min_vol":MIN_VOLUME},
            "stocks_analyzed":int(len(sym_list)),
            "trading_days":len(tds),
@@ -872,14 +869,7 @@ def main():
           OUT_DIR/"alerts.json")
     print(f"  OK alerts.json ({len(alerts)} alerts)")
 
-    jdump({"generated_at":now_ist,
-           "description":"Candle shape -> next-day open gap + next-week return",
-           "thresholds":{"next_day_pct":MORPH_ND_THRESH,"next_week_pct":MORPH_WK_THRESH,
-                         "min_occ":MORPH_MIN_OCC},
-           "n_buckets":len(morph),
-           "buckets":morph},
-          OUT_DIR/"candle_morphology.json")
-    print(f"  OK candle_morphology.json ({len(morph)} buckets)")
+    # candle_morphology output removed per user request
 
     # [11] Checkpoint
     save_checkpoint({"last_full_run_date":latest_str,"script_version":SCRIPT_VERSION,
