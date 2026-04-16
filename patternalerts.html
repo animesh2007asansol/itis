@@ -191,7 +191,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <button class="tab" onclick="showPage('patterns',this)">📊 Cross-Stock</button>
     <button class="tab" onclick="showPage('stocks',this)">📈 Stock Profiles</button>
     <button class="tab" onclick="showPage('repeating',this)">🏆 Most Reliable</button>
-    <button class="tab" onclick="showPage('candle-best',this)">🕯️ Best Candles</button>
+    <button class="tab" onclick="showPage('candle-best',this)">🕯 Best Candles</button>
     <button class="tab" onclick="showPage('candle-search',this)">🔍 Candle Search</button>
     <button class="tab" onclick="showPage('hw-dip',this)">🏦 HW Dip</button>
     <button class="tab" onclick="showPage('hw-alerts',this)">🔔 HW Alerts</button>
@@ -303,95 +303,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
   </div>
 </div>
 
-<!-- ═══ PAGE 5: BEST CANDLE PATTERNS ════════════════════════ -->
-<div class="page" id="page-candle-best">
-  <div class="sh">🕯️ Best Candle Patterns <small>100% next-day win + avg ≥15% in any of 5/10/20d · click header to sort</small></div>
-  <div class="pill-row" id="cb-pills"></div>
-  <div class="fbar">
-    <input class="si" id="cb-q" placeholder="Symbol…" style="width:110px" oninput="renderCandleBest()">
-    <span class="fsep">|</span>
-    <button class="fb on" id="cb-f100" onclick="cbFilter('100',this)">100% ND only</button>
-    <button class="fb" id="cb-fall" onclick="cbFilter('all',this)">All strong</button>
-    <span class="fsep">|</span>
-    <span class="fsep">Sort:</span>
-    <button class="fb on" onclick="cbSort('nd_win_rate',this)">ND Win%</button>
-    <button class="fb" onclick="cbSort('nd_avg_ret',this)">ND Avg%</button>
-    <button class="fb" onclick="cbSort('max_avg_any_window',this)">Best Window</button>
-    <button class="fb" onclick="cbSort('occurrences',this)">Occurrences</button>
-  </div>
-  <div class="twrap">
-    <table class="tbl" id="cb-tbl">
-      <thead><tr>
-        <th onclick="sortTbl('cb-tbl','sym')">Stock<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','desc')">Candle Pattern<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','occurrences')">Occ<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','nd_win_rate')">ND Win%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','nd_avg_ret')">ND Avg%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','nd_max_ret')">ND Max%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','gap_up_rate')">Gap Up%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','_5d_avg')">5d Avg%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','_10d_avg')">10d Avg%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','_20d_avg')">20d Avg%<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','max_avg_any_window')">Best Win<span class="arr"></span></th>
-        <th onclick="sortTbl('cb-tbl','last_date')">Last Seen<span class="arr"></span></th>
-      </tr></thead>
-      <tbody id="cb-tbody"><tr><td colspan="12" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ═══ PAGE 6: CANDLE SEARCH ════════════════════════════════════ -->
-<div class="page" id="page-candle-search">
-  <div class="sh">🔍 Candle Pattern Search <small>search any stock symbol to see its full candle history</small></div>
-  <div class="fbar">
-    <input class="si" id="cs-sym" placeholder="Type symbol e.g. RELIANCE, TCS…" style="width:200px"
-      onkeydown="if(event.key==='Enter')searchCandle()">
-    <button class="fb on" onclick="searchCandle()">🔍 Search</button>
-  </div>
-  <div id="cs-result" style="margin-top:10px">
-    <div class="empty" style="color:var(--t3)">Enter a stock symbol above and press Enter or click Search.</div>
-  </div>
-</div>
-
-<!-- ═══ PAGE 7: HEAVYWEIGHT DIP-RECOVER ══════════════════════════ -->
-<div class="page" id="page-hw-dip">
-  <div class="sh">🏦 Heavyweight Dip-Recover <small>large-cap stocks with repeating floor+recover pattern · avg turnover ≥ Rs 5Cr · 4+ years</small></div>
-  <div class="pill-row" id="hw-pills"></div>
-  <div class="fbar">
-    <button class="fb on" id="hwg-all" onclick="hwGrade('ALL',this)">All</button>
-    <button class="fb" id="hwg-ap"  onclick="hwGrade('A+',this)">A+</button>
-    <button class="fb" id="hwg-a"   onclick="hwGrade('A',this)">A</button>
-    <button class="fb" id="hwg-b"   onclick="hwGrade('B',this)">B</button>
-    <span class="fsep">|</span>
-    <input class="si" id="hw-q" placeholder="Symbol…" style="width:100px" oninput="renderHW()">
-  </div>
-  <div class="twrap">
-    <table class="tbl" id="hw-tbl">
-      <thead><tr>
-        <th onclick="sortTbl('hw-tbl','_rank')">#<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','sym')">Stock<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','grade')">Grade<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','best_window_days')">Best Window<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','best_min_return')">Min Recovery%<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','best_beats15_rate')">Beats 15% Rate<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','_avg_ret')">Avg Recovery%<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','n_events')">Events<span class="arr"></span></th>
-        <th onclick="sortTbl('hw-tbl','n_years')">Years<span class="arr"></span></th>
-      </tr></thead>
-      <tbody id="hw-tbody"><tr><td colspan="9" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
-    </table>
-  </div>
-  <div id="hw-detail"></div>
-</div>
-
-<!-- ═══ PAGE 8: HW ALERTS ════════════════════════════════════════ -->
-<div class="page" id="page-hw-alerts">
-  <div class="sh">🔔 Heavyweight Floor Alerts <small>last 20 TRADING days · floor = bottom 10% of 52-week range</small></div>
-  <div class="pill-row" id="hwa-pills"></div>
-  <div id="hwa-grid" class="alert-grid"><div class="empty"><div class="spinner"></div>Loading…</div></div>
-</div>
-
-<!-- ═══ OLD HEATMAP PAGE (now placeholder for existing page-heatmap id) ══ -->
+<!-- ═══ PAGE 5: MONTH HEATMAP ════════════════════════════════ -->
 <div class="page" id="page-heatmap">
   <div class="sh">🗓 Signal × Month Profit Heatmap <small>cross-stock · avg 20-day return from min (red) to max (green)</small></div>
   <div class="fbar">
@@ -412,6 +324,94 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     background:linear-gradient(90deg,var(--rb),var(--s),var(--grb));vertical-align:middle;margin:0 4px"></span>
     low → high return.
   </div>
+</div>
+
+
+<!-- PAGE: BEST CANDLE PATTERNS -->
+<div class="page" id="page-candle-best">
+  <div class="sh">🕯 Best Candle Patterns <small>100% next-day win + avg 15% in any of 5/10/20d</small></div>
+  <div class="pill-row" id="cb-pills"></div>
+  <div class="fbar">
+    <button class="fb on" id="cbf-100" onclick="cbFltr(true,this)">100% ND only</button>
+    <button class="fb" id="cbf-all" onclick="cbFltr(false,this)">All strong</button>
+    <span class="fsep">|</span>
+    <input class="si" id="cb-q" placeholder="Symbol..." style="width:110px" oninput="renderCB()">
+    <span class="fsep">Sort:</span>
+    <button class="fb on" onclick="cbSrt('nd_win_rate',this)">ND Win%</button>
+    <button class="fb" onclick="cbSrt('nd_avg_ret',this)">ND Avg%</button>
+    <button class="fb" onclick="cbSrt('max_avg_any_window',this)">Best Window</button>
+    <button class="fb" onclick="cbSrt('occurrences',this)">Occurrences</button>
+  </div>
+  <div class="twrap">
+    <table class="tbl" id="cb-tbl">
+      <thead><tr>
+        <th onclick="sortTbl('cb-tbl','sym')">Stock<span class="arr"></span></th>
+        <th onclick="sortTbl('cb-tbl','desc')">Candle Pattern<span class="arr"></span></th>
+        <th onclick="sortTbl('cb-tbl','occurrences')">Occ<span class="arr"></span></th>
+        <th onclick="sortTbl('cb-tbl','nd_win_rate')">ND Win%<span class="arr"></span></th>
+        <th onclick="sortTbl('cb-tbl','nd_avg_ret')">ND Avg%<span class="arr"></span></th>
+        <th onclick="sortTbl('cb-tbl','nd_max_ret')">ND Max%<span class="arr"></span></th>
+        <th onclick="sortTbl('cb-tbl','gap_up_rate')">Gap Up%<span class="arr"></span></th>
+        <th onclick="sortTbl('cb-tbl','_b5')">5d Avg%<span class="arr"></span></th>
+        <th onclick="sortTbl('cb-tbl','_b10')">10d Avg%<span class="arr"></span></th>
+        <th onclick="sortTbl('cb-tbl','_b20')">20d Avg%<span class="arr"></span></th>
+        <th onclick="sortTbl('cb-tbl','max_avg_any_window')">Best Win<span class="arr"></span></th>
+        <th onclick="sortTbl('cb-tbl','last_date')">Last Seen<span class="arr"></span></th>
+      </tr></thead>
+      <tbody id="cb-tbody"><tr><td colspan="12" class="empty">Run candle_patterns workflow first.</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PAGE: CANDLE SEARCH -->
+<div class="page" id="page-candle-search">
+  <div class="sh">🔍 Candle Pattern Search <small>type any stock symbol to see its full candle history</small></div>
+  <div class="fbar">
+    <input class="si" id="cs-sym" placeholder="Symbol e.g. RELIANCE, TCS, INFY..." style="width:220px"
+      onkeydown="if(event.key==='Enter')doSearchCandle()">
+    <button class="fb on" onclick="doSearchCandle()">Search</button>
+  </div>
+  <div id="cs-result" style="margin-top:12px">
+    <div class="empty" style="color:var(--t3)">Enter a stock symbol above and press Search.</div>
+  </div>
+</div>
+
+<!-- PAGE: HEAVYWEIGHT DIP -->
+<div class="page" id="page-hw-dip">
+  <div class="sh">🏦 Heavyweight Dip-Recover <small>large-cap stocks (avg turnover >= Rs 5Cr, 4+ yrs) with repeating floor+recover pattern</small></div>
+  <div class="pill-row" id="hw-pills"></div>
+  <div class="fbar">
+    <button class="fb on" id="hwg-all" onclick="hwGrd('ALL',this)">All</button>
+    <button class="fb" id="hwg-ap"  onclick="hwGrd('A+',this)">A+</button>
+    <button class="fb" id="hwg-a"   onclick="hwGrd('A',this)">A</button>
+    <button class="fb" id="hwg-b"   onclick="hwGrd('B',this)">B</button>
+    <span class="fsep">|</span>
+    <input class="si" id="hw-q" placeholder="Symbol..." style="width:100px" oninput="renderHW()">
+  </div>
+  <div class="twrap">
+    <table class="tbl" id="hw-tbl">
+      <thead><tr>
+        <th>#</th>
+        <th onclick="sortTbl('hw-tbl','sym')">Stock<span class="arr"></span></th>
+        <th onclick="sortTbl('hw-tbl','grade')">Grade<span class="arr"></span></th>
+        <th onclick="sortTbl('hw-tbl','best_window_days')">Best Window<span class="arr"></span></th>
+        <th onclick="sortTbl('hw-tbl','best_min_return')">Min Recovery%<span class="arr"></span></th>
+        <th onclick="sortTbl('hw-tbl','best_beats15_rate')">Beats 15% Rate<span class="arr"></span></th>
+        <th onclick="sortTbl('hw-tbl','_avg_r')">Avg Recovery%<span class="arr"></span></th>
+        <th onclick="sortTbl('hw-tbl','n_events')">Events<span class="arr"></span></th>
+        <th onclick="sortTbl('hw-tbl','n_years')">Years<span class="arr"></span></th>
+      </tr></thead>
+      <tbody id="hw-tbody"><tr><td colspan="9" class="empty">Run pattern_discovery workflow first.</td></tr></tbody>
+    </table>
+  </div>
+  <div id="hw-detail"></div>
+</div>
+
+<!-- PAGE: HW ALERTS -->
+<div class="page" id="page-hw-alerts">
+  <div class="sh">🔔 Heavyweight Floor Alerts <small>last 20 TRADING days</small></div>
+  <div class="pill-row" id="hwa-pills"></div>
+  <div class="alert-grid" id="hwa-grid"><div class="empty">Run pattern_discovery workflow first.</div></div>
 </div>
 
 <!-- ═══ PAGE 6: HOW IT WORKS ═════════════════════════════════ -->
@@ -466,7 +466,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 <script>
 // ─── Data ──────────────────────────────────────────────────────────
 const REPO = 'https://raw.githubusercontent.com/animesh2007asansol/itis/main/pattern_signals';
-let DATA = { alerts:[], patterns:[], profiles:{}, allResults:[], meta:{}, candleBest:[], candleToday:[], candleTodayDate:'', hwProfiles:{}, hwAlerts:[], hwMeta:{}, hwAlertMeta:{} };
+let DATA = { alerts:[], patterns:[], profiles:{}, allResults:[], heatmap:{}, meta:{}, candleBest:[], candleToday:[], hwProfiles:{}, hwAlerts:[], hwMeta:{}, hwAlertMeta:{} };
 let alrtPeriod='ALL', alrtGrade='ALL', alrtZone='ALL', alrtSortKey='score';
 let patGrade='ALL', spSortKey='score', spGradeF='ALL', repMinYrs=4, repSortKey='ret';
 let hmColorKey='avg', hmShowKey='pct';
@@ -503,8 +503,8 @@ const SIG_INFO = {
 
 // ─── Fetch ─────────────────────────────────────────────────────────
 async function loadData() {
+  // Core pattern data
   try {
-    // Core pattern data — required
     const [aR,pR,sR] = await Promise.all([
       fetch(REPO+'/alerts.json'),
       fetch(REPO+'/patterns.json'),
@@ -515,8 +515,9 @@ async function loadData() {
     DATA.patterns   = pD.patterns || [];
     DATA.profiles   = sD.profiles || {};
     DATA.allResults = sD.all_results || [];
+    DATA.heatmap    = {};
     DATA.meta = {
-      latestDate: aD.latest_date, gen: aD.generated_at,
+      latestDate: aD.latest_date||aD.alert_date, gen: aD.generated_at,
       todayCount: aD.today_count || 0, total: aD.total_alerts || 0,
       stocks: pD.stocks_analyzed || 0, range: pD.data_range || '',
       grades: pD.grade_counts || {},
@@ -529,35 +530,29 @@ async function loadData() {
       + '<span style="color:var(--t3);font-size:10px">'+e.message+'</span>');
   }
 
-  // Candle patterns — loaded separately (optional, may not exist yet)
+  // Candle patterns (optional — available after candle_patterns workflow)
   try {
     const [cbR,ctR] = await Promise.all([
       fetch(REPO+'/candle_best_patterns.json'),
       fetch(REPO+'/candle_today.json'),
     ]);
-    if(cbR.ok) { const d=await cbR.json(); DATA.candleBest=d.patterns||[]; }
-    if(ctR.ok) { const d=await ctR.json(); DATA.candleToday=d.alerts||[]; DATA.candleTodayDate=d.signal_date||''; }
-    renderCandleBest();
-    renderCandleAlertBanner();
-  } catch(e) {
-    console.log('Candle data not yet available:', e.message);
-    DATA.candleBest=[]; DATA.candleToday=[];
-  }
+    if(cbR.ok){ const d=await cbR.json(); DATA.candleBest=d.patterns||[]; }
+    if(ctR.ok){ const d=await ctR.json(); DATA.candleToday=d.alerts||[]; DATA.candleTodayDate=d.signal_date||''; }
+    renderCB();
+    renderCandleTodayBanner();
+  } catch(e){ console.log('Candle data:', e.message); }
 
-  // Heavyweight data — loaded separately (optional)
+  // Heavyweight data (optional — available after pattern_discovery workflow)
   try {
     const [hwpR,hwaR] = await Promise.all([
       fetch(REPO+'/heavyweight_profiles.json'),
       fetch(REPO+'/heavyweight_alerts.json'),
     ]);
-    if(hwpR.ok) { const d=await hwpR.json(); DATA.hwProfiles=d.profiles||{}; DATA.hwMeta=d; }
-    if(hwaR.ok) { const d=await hwaR.json(); DATA.hwAlerts=d.alerts||[]; DATA.hwAlertMeta=d; }
+    if(hwpR.ok){ const d=await hwpR.json(); DATA.hwProfiles=d.profiles||{}; DATA.hwMeta=d; }
+    if(hwaR.ok){ const d=await hwaR.json(); DATA.hwAlerts=d.alerts||[]; DATA.hwAlertMeta=d; }
     renderHW();
-    renderHWAlerts();
-  } catch(e) {
-    console.log('Heavyweight data not yet available:', e.message);
-    DATA.hwProfiles={}; DATA.hwAlerts=[];
-  }
+    renderHWA();
+  } catch(e){ console.log('Heavyweight data:', e.message); }
 }
 
 function err(msg) {
@@ -706,7 +701,7 @@ function renderAlerts(){
       </div>
       <div class="ac-row3">
         <div class="ac-mini"><div class="ac-ml">5d avg</div>
-          <div class="ac-mv green">+${fmt(a.avg_ret_5d||a.avg_5d||0)}%</div></div>
+          <div class="ac-mv green">+${fmt(a.avg_ret_5d??a.avg_5d??0)}%</div></div>
         <div class="ac-mini"><div class="ac-ml">Since signal</div>
           <div class="ac-mv" style="color:${chgColor}">${a.pct_since>0?'+':''}${a.pct_since}%</div></div>
         <div class="ac-mini"><div class="ac-ml">Vol</div>
@@ -1012,236 +1007,222 @@ function showPage(id,btn){
   btn.classList.add('active');
 }
 
-// ─── PAGE 5: BEST CANDLE PATTERNS ─────────────────────────────────────────
-let cbFilter100=true, cbSortKey='nd_win_rate';
-function cbFilter(f,btn){ cbFilter100=(f==='100'); setOn('#cb-f100,#cb-fall',btn); renderCandleBest(); }
-function cbSort(k,btn){ cbSortKey=k; renderCandleBest(); }
-function renderCandleBest(){
+// ═══ CANDLE BEST PATTERNS ════════════════════════════════════════════
+let _cbOnly100=true, _cbSort='nd_win_rate';
+function cbFltr(v,btn){ _cbOnly100=v; setOn('#cbf-100,#cbf-all',btn); renderCB(); }
+function cbSrt(k,btn){ _cbSort=k; renderCB(); }
+function renderCB(){
   const q=(document.getElementById('cb-q')?.value||'').toUpperCase().trim();
-  let rows=[...DATA.candleBest].map(p=>({
-    ...p,
-    _5d_avg:p.win_5d?.avg??-999,
-    _10d_avg:p.win_10d?.avg??-999,
-    _20d_avg:p.win_20d?.avg??-999,
+  let rows=[...DATA.candleBest].map(p=>({...p,
+    _b5:p.win_5d?.avg??-999, _b10:p.win_10d?.avg??-999, _b20:p.win_20d?.avg??-999
   }));
-  if(cbFilter100) rows=rows.filter(r=>r.nd_win_rate===100);
+  if(_cbOnly100) rows=rows.filter(r=>r.nd_win_rate===100);
   if(q) rows=rows.filter(r=>(r.sym||'').includes(q));
-  rows.sort((a,b)=>(b[cbSortKey]??0)-(a[cbSortKey]??0));
+  rows.sort((a,b)=>(b[_cbSort]??0)-(a[_cbSort]??0));
   document.getElementById('cb-pills').innerHTML=[
     ['100% ND Win',rows.filter(r=>r.nd_win_rate===100).length,'g','perfect next-day'],
-    ['Meets 15% Rule',rows.filter(r=>r.meets_15pct).length,'y','≥15% avg any window'],
-    ['Total Shown',rows.length,'b','matching filters'],
+    ['Meets 15% Rule',rows.filter(r=>r.meets_15pct).length,'y','any window avg >= 15%'],
+    ['Shown',rows.length,'b','matching filters'],
   ].map(([l,v,c,s])=>`<div class="kp ${c}"><div class="kl">${l}</div><div class="kv">${v}</div><div class="ks">${s}</div></div>`).join('');
-  document.getElementById('cb-tbody').innerHTML=rows.length
-    ?rows.map(p=>{
-      const b5=p.win_5d?.avg,b10=p.win_10d?.avg,b20=p.win_20d?.avg;
-      const best=Math.max(b5??-999,b10??-999,b20??-999);
-      return`<tr onclick="goSearchCandle('${p.sym}')" style="cursor:pointer">
-        <td class="mono gold" style="font-weight:600">${p.sym}</td>
-        <td style="font-size:10px;color:var(--t2);max-width:180px">${p.desc}</td>
-        <td class="mono">${p.occurrences}</td>
-        <td class="mono green" style="font-weight:700">${p.nd_win_rate}%</td>
-        <td>${rc(p.nd_avg_ret)}</td>
-        <td>${rc(p.nd_max_ret)}</td>
-        <td class="mono">${p.gap_up_rate}%</td>
-        <td>${b5!=null?rc(b5):'<span class="muted">—</span>'}</td>
-        <td>${b10!=null?rc(b10):'<span class="muted">—</span>'}</td>
-        <td>${b20!=null?rc(b20):'<span class="muted">—</span>'}</td>
-        <td class="mono amber" style="font-weight:700">${best>-900?`+${best.toFixed(1)}%`:'—'}</td>
-        <td class="mono muted">${p.last_date||'—'}</td>
-      </tr>`;
-    }).join('')
-    :'<tr><td colspan="12" class="empty">No patterns match. Run candle_patterns workflow.</td></tr>';
+  if(!rows.length){
+    document.getElementById('cb-tbody').innerHTML='<tr><td colspan="12" class="empty">No patterns match. Run candle_patterns workflow.</td></tr>';
+    return;
+  }
+  document.getElementById('cb-tbody').innerHTML=rows.map(p=>{
+    const b5=p.win_5d?.avg, b10=p.win_10d?.avg, b20=p.win_20d?.avg;
+    const best=Math.max(b5??-999,b10??-999,b20??-999);
+    return `<tr onclick="goCandle('${p.sym}')" style="cursor:pointer">
+      <td class="mono gold" style="font-weight:600">${p.sym}</td>
+      <td style="font-size:10px;color:var(--t2);max-width:180px">${p.desc||''}</td>
+      <td class="mono">${p.occurrences}</td>
+      <td class="mono green" style="font-weight:${p.nd_win_rate===100?700:400}">${p.nd_win_rate}%</td>
+      <td>${rc(p.nd_avg_ret)}</td>
+      <td>${rc(p.nd_max_ret)}</td>
+      <td class="mono">${p.gap_up_rate??0}%</td>
+      <td>${b5!=null?rc(b5):'<span class="muted">—</span>'}</td>
+      <td>${b10!=null?rc(b10):'<span class="muted">—</span>'}</td>
+      <td>${b20!=null?rc(b20):'<span class="muted">—</span>'}</td>
+      <td class="mono amber" style="font-weight:700">${best>-900?'+'+best.toFixed(1)+'%':'—'}</td>
+      <td class="mono muted">${p.last_date||'—'}</td>
+    </tr>`;
+  }).join('');
 }
-function goSearchCandle(sym){ document.getElementById('cs-sym').value=sym; showPage('candle-search',document.querySelectorAll('.tab')[5]); searchCandle(); }
-function renderCandleAlertBanner(){
-  // Add today's candle matches to the alerts page banner area if any are 100%
+function goCandle(sym){ document.getElementById('cs-sym').value=sym; showPage('candle-search',document.querySelectorAll('.tab')[5]); doSearchCandle(); }
+function renderCandleTodayBanner(){
   const perfect=DATA.candleToday.filter(a=>a.is_100pct);
-  if(!perfect.length) return;
-  const existing=document.getElementById('alrt-banner');
-  existing.innerHTML+= `<div style="background:rgba(201,168,76,.08);border:1px solid var(--g2);border-radius:8px;padding:8px 12px;font-size:11px;color:var(--gold);margin-top:6px">
-    🕯️ <strong>${perfect.length}</strong> stocks formed their 100%-win candle pattern today →
-    ${perfect.slice(0,8).map(a=>`<span class="mono" style="background:var(--gbg);border:1px solid var(--g2);padding:1px 5px;border-radius:3px;margin:0 2px">${a.sym}</span>`).join('')}
-    <a onclick="showPage('candle-best',document.querySelectorAll('.tab')[4])" style="color:var(--blue);cursor:pointer;margin-left:4px">View →</a>
+  if(!perfect.length||!document.getElementById('alrt-banner')) return;
+  document.getElementById('alrt-banner').innerHTML+=`<div style="background:var(--gbg);border:1px solid var(--g2);border-radius:8px;padding:8px 12px;font-size:11px;color:var(--gold);margin-top:6px">
+    Candle: <strong>${perfect.length}</strong> stocks formed 100%-win candle pattern today
+    ${perfect.slice(0,6).map(a=>'<span class="mono" style="background:var(--s);border:1px solid var(--b2);padding:1px 6px;border-radius:3px;margin:0 2px">'+a.sym+'</span>').join('')}
   </div>`;
 }
 
-// ─── PAGE 6: CANDLE SEARCH ─────────────────────────────────────────────────
-let _csCache={};
-async function searchCandle(){
+// ═══ CANDLE SEARCH ════════════════════════════════════════════════════
+let _csProfiles={}, _csLoaded=false;
+async function doSearchCandle(){
   const sym=(document.getElementById('cs-sym')?.value||'').trim().toUpperCase();
-  if(!sym){ document.getElementById('cs-result').innerHTML='<div class="empty">Enter a symbol.</div>'; return; }
-  document.getElementById('cs-result').innerHTML='<div class="empty"><div class="spinner"></div>Loading '+sym+'…</div>';
+  const res=document.getElementById('cs-result');
+  if(!sym){ res.innerHTML='<div class="empty">Enter a symbol above.</div>'; return; }
+  res.innerHTML='<div class="empty"><div class="spinner"></div>Loading '+sym+'...</div>';
   try{
-    if(!_csCache._loaded){
+    if(!_csLoaded){
       const r=await fetch(REPO+'/candle_stock_patterns.json');
-      if(!r.ok) throw new Error('candle_stock_patterns.json not found');
+      if(!r.ok) throw new Error('candle_stock_patterns.json not found — run candle_patterns workflow');
       const d=await r.json();
-      _csCache=d.profiles||{};
-      _csCache._loaded=true;
+      _csProfiles=d.profiles||{};
+      _csLoaded=true;
     }
-    const prof=_csCache[sym];
-    if(!prof){ document.getElementById('cs-result').innerHTML=`<div class="empty">Symbol <strong>${sym}</strong> not found. Check spelling.</div>`; return; }
+    const prof=_csProfiles[sym];
+    if(!prof){ res.innerHTML='<div class="empty">Symbol <strong>'+sym+'</strong> not found.</div>'; return; }
     const pats=prof.patterns||[];
-    const today=prof.today_candle;
-    const todayH=prof.today_hist;
+    const today=prof.today_candle||null;
+    const todayH=prof.today_hist||null;
     const todayKey=prof.today_key||'';
-    document.getElementById('cs-result').innerHTML=`
-      <div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:12px;margin-bottom:10px">
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-          <span class="mono gold" style="font-size:18px;font-weight:700">${sym}</span>
-          <span style="font-size:11px;color:var(--t2)">${prof.today_date||''} · Close ₹${prof.today_close||'—'}</span>
-          ${today?`<span style="font-size:11px;background:var(--s);border:1px solid var(--b);border-radius:5px;padding:2px 8px;color:var(--t2)">Today: ${today.desc}</span>`:''}
-          ${todayH?`<span style="${todayH.nd_win_rate===100?'background:rgba(34,197,94,.15);border:1px solid var(--gr2);color:var(--green)':'background:var(--ab);border:1px solid var(--amb);color:var(--amber)'};padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600">
-            Historically ${todayH.nd_win_rate}% next-day win (${todayH.occurrences}×)</span>`
-            :'<span style="background:var(--s);border:1px solid var(--b);border-radius:5px;padding:2px 8px;font-size:11px;color:var(--t3)">No history for today's exact candle</span>'}
-        </div>
-        <div class="pill-row" style="margin:0">
-          ${[['Patterns Found',pats.length,'b'],['100% ND Win',prof.n_100pct||0,'g'],['Meets 15% Rule',prof.n_meets_15pct||0,'y']].map(([l,v,c])=>`<div class="kp ${c}"><div class="kl">${l}</div><div class="kv">${v}</div></div>`).join('')}
-        </div>
-      </div>
-      <div class="twrap">
-        <table class="tbl">
-          <thead><tr>
-            <th>Candle Pattern</th><th>Occ</th>
-            <th>ND Win%</th><th>ND Avg%</th><th>ND Min%</th><th>ND Max%</th>
-            <th>Gap Up%</th><th>5d Avg%</th><th>10d Avg%</th><th>20d Avg%</th>
-            <th>≥15% Rule</th><th>Last Seen</th>
-          </tr></thead>
-          <tbody>${pats.map(p=>{
-            const isToday=p.candle_key===todayKey;
-            const bg=isToday?'background:rgba(201,168,76,.07)':'';
-            return`<tr style="${bg}">
-              <td style="font-size:10px;max-width:200px;color:var(--t2)">${p.desc}${isToday?` <span style="color:var(--gold);font-weight:700">← TODAY</span>`:''}</td>
-              <td class="mono">${p.occurrences}</td>
-              <td class="mono ${p.nd_win_rate===100?'green':p.nd_win_rate>=80?'green':''}" style="${p.nd_win_rate===100?'font-weight:700':''}">${p.nd_win_rate}%</td>
-              <td>${rc(p.nd_avg_ret)}</td>
-              <td class="mono ${p.nd_min_ret>=0?'green':'red'}">${p.nd_min_ret>0?'+':''}${p.nd_min_ret?.toFixed(1)??'—'}%</td>
-              <td>${rc(p.nd_max_ret)}</td>
-              <td class="mono">${p.gap_up_rate}%</td>
-              <td>${p.win_5d?.avg!=null?rc(p.win_5d.avg):'<span class="muted">—</span>'}</td>
-              <td>${p.win_10d?.avg!=null?rc(p.win_10d.avg):'<span class="muted">—</span>'}</td>
-              <td>${p.win_20d?.avg!=null?rc(p.win_20d.avg):'<span class="muted">—</span>'}</td>
-              <td>${p.meets_15pct?'<span class="mono amber">★ Yes</span>':'<span class="muted">—</span>'}</td>
-              <td class="mono muted">${p.last_date||'—'}</td>
-            </tr>`;
-          }).join('')}</tbody>
-        </table>
-      </div>`;
+    const todayBadge=todayH
+      ?'<span style="'+(todayH.nd_win_rate===100
+          ?'background:rgba(34,197,94,.15);border:1px solid var(--gr2);color:var(--green)'
+          :'background:var(--ab);border:1px solid var(--amb);color:var(--amber)')
+        +';padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600">Historically '
+        +todayH.nd_win_rate+'% next-day win ('+todayH.occurrences+'x)</span>'
+      :'<span style="background:var(--s);border:1px solid var(--b);border-radius:5px;padding:2px 8px;font-size:11px;color:var(--t3)">No history for this exact candle shape</span>';
+    const todayDesc=today?'<span style="font-size:11px;background:var(--s);border:1px solid var(--b);border-radius:5px;padding:2px 8px;color:var(--t2)">Today: '+today.desc+'</span>':'';
+    const pillsHtml=[['Patterns',pats.length,'b'],['100% ND Win',prof.n_100pct||0,'g'],['Meets 15%',prof.n_meets_15pct||0,'y']]
+      .map(function(x){ return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>'; }).join('');
+    const rowsHtml=pats.map(function(p){
+      const isT=p.candle_key===todayKey;
+      const bg=isT?'background:rgba(201,168,76,.07);':'';
+      const todayMark=isT?'<strong style="color:var(--gold)"> TODAY</strong>':'';
+      const minRet=p.nd_min_ret!=null?(p.nd_min_ret>0?'+':'')+p.nd_min_ret.toFixed(1)+'%':'—';
+      const minCls=p.nd_min_ret!=null&&p.nd_min_ret>=0?'green':'red';
+      const b5=p.win_5d?.avg, b10=p.win_10d?.avg, b20=p.win_20d?.avg;
+      return '<tr style="'+bg+'"><td style="font-size:10px;max-width:200px;color:var(--t2)">'+p.desc+todayMark+'</td>'
+        +'<td class="mono">'+p.occurrences+'</td>'
+        +'<td class="mono green" style="font-weight:'+(p.nd_win_rate===100?700:400)+'">'+p.nd_win_rate+'%</td>'
+        +'<td>'+rc(p.nd_avg_ret)+'</td>'
+        +'<td class="mono '+minCls+'">'+minRet+'</td>'
+        +'<td>'+rc(p.nd_max_ret)+'</td>'
+        +'<td class="mono">'+p.gap_up_rate+'%</td>'
+        +'<td>'+(b5!=null?rc(b5):'<span class="muted">—</span>')+'</td>'
+        +'<td>'+(b10!=null?rc(b10):'<span class="muted">—</span>')+'</td>'
+        +'<td>'+(b20!=null?rc(b20):'<span class="muted">—</span>')+'</td>'
+        +'<td>'+(p.meets_15pct?'<span class="mono amber">Yes</span>':'<span class="muted">—</span>')+'</td>'
+        +'<td class="mono muted">'+(p.last_date||'—')+'</td>'
+        +'</tr>';
+    }).join('');
+    res.innerHTML='<div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:12px;margin-bottom:10px">'
+      +'<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">'
+      +'<span class="mono gold" style="font-size:18px;font-weight:700">'+sym+'</span>'
+      +'<span style="font-size:11px;color:var(--t2)">'+prof.today_date+' · Close Rs '+prof.today_close+'</span>'
+      +todayDesc+todayBadge+'</div>'
+      +'<div class="pill-row" style="margin:0">'+pillsHtml+'</div>'
+      +'</div>'
+      +'<div class="twrap"><table class="tbl">'
+      +'<thead><tr><th>Candle</th><th>Occ</th><th>ND Win%</th><th>ND Avg%</th><th>ND Min%</th>'
+      +'<th>ND Max%</th><th>Gap Up%</th><th>5d Avg%</th><th>10d Avg%</th><th>20d Avg%</th>'
+      +'<th>15% Rule</th><th>Last</th></tr></thead>'
+      +'<tbody>'+rowsHtml+'</tbody></table></div>';
   }catch(e){
-    document.getElementById('cs-result').innerHTML=`<div class="empty">Failed: ${e.message}<br><span style="color:var(--t3);font-size:10px">Run candle_patterns workflow first.</span></div>`;
+    res.innerHTML='<div class="empty">Error: '+e.message+'</div>';
   }
 }
 
-// ─── PAGE 7: HEAVYWEIGHT DIP ───────────────────────────────────────────────
-let hwGradeF='ALL';
-function hwGrade(g,btn){ hwGradeF=g; setOn('#hwg-all,#hwg-ap,#hwg-a,#hwg-b',btn); renderHW(); }
+// ═══ HEAVYWEIGHT DIP ══════════════════════════════════════════════════
+let _hwGrd='ALL';
+function hwGrd(g,btn){ _hwGrd=g; setOn('#hwg-all,#hwg-ap,#hwg-a,#hwg-b',btn); renderHW(); }
 function renderHW(){
   const q=(document.getElementById('hw-q')?.value||'').toUpperCase().trim();
-  const profs=DATA.hwProfiles;
   const meta=DATA.hwMeta||{};
   document.getElementById('hw-pills').innerHTML=[
-    ['Stocks Found',Object.keys(profs).length,'b','qualifying heavyweights'],
-    ['Grade A+',meta.n_aplus||0,'g','highest reliability'],
-    ['Grade A', meta.n_a||0,'g','high reliability'],
-  ].map(([l,v,c,s])=>`<div class="kp ${c}"><div class="kl">${l}</div><div class="kv">${v}</div><div class="ks">${s||''}</div></div>`).join('');
-  let rows=Object.entries(profs).map(([sym,p],i)=>({...p,sym,_rank:i+1,_avg_ret:(p.win_stats&&p.win_stats[p.best_window_days])?p.win_stats[p.best_window_days].avg_return:0}));
-  if(hwGradeF!=='ALL') rows=rows.filter(r=>r.grade===hwGradeF);
-  if(q) rows=rows.filter(r=>r.sym.includes(q));
-  document.getElementById('hw-tbody').innerHTML=rows.length
-    ?rows.map((p,i)=>`<tr onclick="showHWDetail('${p.sym}')" style="cursor:pointer">
-        <td class="mono muted">${i+1}</td>
-        <td class="mono gold" style="font-weight:600">${p.sym}</td>
-        <td>${gradeBadge(p.grade)}</td>
-        <td class="mono">${p.best_window_days}d</td>
-        <td class="mono green" style="font-weight:700">+${p.best_min_return?.toFixed(1)??'—'}%</td>
-        <td class="mono">${p.best_beats15_rate?.toFixed(0)??'—'}%</td>
-        <td>${rc(p._avg_ret)}</td>
-        <td class="mono">${p.n_events}</td>
-        <td class="mono muted">${(p.years||[]).join(', ')}</td>
-      </tr>`).join('')
-    :'<tr><td colspan="9" class="empty">Run pattern_discovery workflow first.</td></tr>';
+    ['Qualifying',Object.keys(DATA.hwProfiles).length,'b','heavyweight stocks'],
+    ['A+',meta.n_aplus||0,'g','highest reliability'],
+    ['A',meta.n_a||0,'g','high reliability'],
+  ].map(function(x){ return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>'; }).join('');
+  let rows=Object.entries(DATA.hwProfiles).map(function(e,i){
+    const sym=e[0], p=e[1];
+    const ws=p.win_stats&&p.win_stats[p.best_window_days]?p.win_stats[p.best_window_days]:{};
+    return Object.assign({},p,{sym:sym,_rank:i+1,_avg_r:ws.avg_return||0});
+  });
+  if(_hwGrd!=='ALL') rows=rows.filter(function(r){ return r.grade===_hwGrd; });
+  if(q) rows=rows.filter(function(r){ return r.sym.includes(q); });
+  if(!rows.length){
+    document.getElementById('hw-tbody').innerHTML='<tr><td colspan="9" class="empty">No data. Run pattern_discovery workflow.</td></tr>';
+    return;
+  }
+  const tbody = document.getElementById('hw-tbody');
+  tbody.innerHTML=rows.map(function(p,i){
+    const minR=p.best_min_return!=null?'+'+p.best_min_return.toFixed(1)+'%':'--';
+    const bRate=p.best_beats15_rate!=null?p.best_beats15_rate.toFixed(0)+'%':'--';
+    return '<tr class="hw-row" data-sym="'+p.sym+'" style="cursor:pointer">'
+      +'<td class="mono muted">'+(i+1)+'</td>'
+      +'<td class="mono gold" style="font-weight:600">'+p.sym+'</td>'
+      +'<td>'+gradeBadge(p.grade||'C')+'</td>'
+      +'<td class="mono">'+p.best_window_days+'d</td>'
+      +'<td class="mono green" style="font-weight:700">'+minR+'</td>'
+      +'<td class="mono">'+bRate+'</td>'
+      +'<td>'+rc(p._avg_r)+'</td>'
+      +'<td class="mono">'+p.n_events+'</td>'
+      +'<td class="mono muted">'+((p.years||[]).join(', '))+'</td>'
+      +'</tr>';
+  }).join('');
+  tbody.onclick=function(ev){ var r=ev.target.closest('tr'); if(r&&r.dataset.sym) showHWD(r.dataset.sym); };
 }
-function showHWDetail(sym){
+function showHWD(sym){
   const p=DATA.hwProfiles[sym]; if(!p) return;
   const evts=(p.events||[]).slice(-30).reverse();
-  document.getElementById('hw-detail').innerHTML=`
-    <div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);margin-top:10px;overflow:hidden">
-      <div style="padding:9px 12px;background:var(--s);font-size:12px;color:var(--gold);font-weight:600">
-        ${sym} — Historical Floor Events (last ${evts.length} of ${(p.events||[]).length} total)
-        <span style="color:var(--t3);font-size:10px;font-weight:400;margin-left:8px">Floor = bottom 10% of 52-week range</span>
-      </div>
-      <div class="twrap" style="margin:0;border:none;border-radius:0">
-        <table class="tbl">
-          <thead><tr><th>Floor Date</th><th>Close</th><th>Floor Depth</th><th>+5d</th><th>+10d</th><th>+20d</th><th>+30d</th></tr></thead>
-          <tbody>${evts.map(e=>{
-            const fmt_w=w=>{
-              const r=e.recovery&&e.recovery[String(w)];
-              if(!r) return'<td class="muted">—</td>';
-              const v=r.return_pct;
-              return`<td class="mono ${v>=15?'green':v>=0?'amber':'red'}" style="${v>=15?'font-weight:700':''}">${v>0?'+':''}${v?.toFixed(1)??'—'}%</td>`;
-            };
-            return`<tr><td class="mono">${e.date}</td><td class="mono">₹${e.close}</td>
-              <td class="mono amber">${e.pos_in_range}%</td>
-              ${fmt_w(5)}${fmt_w(10)}${fmt_w(20)}${fmt_w(30)}</tr>`;
-          }).join('')}</tbody>
-        </table>
-      </div>
-    </div>`;
+  function fmtW(e,w){
+    const r=e.recovery&&e.recovery[String(w)];
+    if(!r) return '<td class="muted">—</td>';
+    const v=r.return_pct;
+    const cls=v>=15?'green':v>=0?'amber':'red';
+    const fw=v>=15?'font-weight:700;':'';
+    return '<td class="mono '+cls+'" style="'+fw+'">'+(v>0?'+':'')+v.toFixed(1)+'%</td>';
+  }
+  document.getElementById('hw-detail').innerHTML='<div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);margin-top:10px;overflow:hidden">'
+    +'<div style="padding:9px 12px;background:var(--s);font-size:12px;color:var(--gold);font-weight:600">'+sym+' — Floor Events (last '+evts.length+' of '+(p.events||[]).length+')</div>'
+    +'<div class="twrap" style="margin:0;border:none;border-radius:0"><table class="tbl"><thead><tr>'
+    +'<th>Floor Date</th><th>Close</th><th>Floor Depth</th><th>+5d</th><th>+10d</th><th>+20d</th><th>+30d</th>'
+    +'</tr></thead><tbody>'
+    +evts.map(function(e){ return '<tr><td class="mono">'+e.date+'</td><td class="mono">Rs '+e.close+'</td><td class="mono amber">'+e.pos_in_range+'%</td>'+fmtW(e,5)+fmtW(e,10)+fmtW(e,20)+fmtW(e,30)+'</tr>'; }).join('')
+    +'</tbody></table></div></div>';
 }
 
-// ─── PAGE 8: HEAVYWEIGHT ALERTS ────────────────────────────────────────────
-function renderHWAlerts(){
-  const d=DATA.hwAlertMeta||{};
+// ═══ HW ALERTS ════════════════════════════════════════════════════════
+function renderHWA(){
+  const meta=DATA.hwAlertMeta||{};
   document.getElementById('hwa-pills').innerHTML=[
-    ['Floor Alerts',d.total_alerts||0,'b','last 20 trading days'],
-    ['Today',d.today_count||0,'g','fired today'],
-    ['Grade A+/A',d.grade_a||0,'g','highest grade'],
-  ].map(([l,v,c,s])=>`<div class="kp ${c}"><div class="kl">${l}</div><div class="kv">${v}</div><div class="ks">${s||''}</div></div>`).join('');
+    ['Alerts',meta.total_alerts||0,'b','last 20 trading days'],
+    ['Today',meta.today_count||0,'g','floor today'],
+    ['Grade A+/A',meta.grade_a||0,'g','top grade'],
+  ].map(function(x){ return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>'; }).join('');
   const rows=DATA.hwAlerts;
-  if(!rows.length){
+  if(!rows||!rows.length){
     document.getElementById('hwa-grid').innerHTML='<div class="empty" style="grid-column:1/-1">No heavyweight floor alerts in last 20 trading days.</div>';
     return;
   }
-  document.getElementById('hwa-grid').innerHTML=rows.map(a=>{
-    const chgColor=a.pct_since>=0?'var(--green)':'var(--red)';
-    const dayBadge=a.is_today
-      ?`<span class="days-ago today-badge">TODAY</span>`
-      :`<span class="days-ago">${a.days_ago}d ago</span>`;
+  document.getElementById('hwa-grid').innerHTML=rows.map(function(a){
+    const chgC=a.pct_since>=0?'var(--green)':'var(--red)';
+    const dayBadge=a.is_today?'<span class="days-ago today-badge">TODAY</span>':'<span class="days-ago">'+a.days_ago+'d ago</span>';
     const zCls=a.zone==='BUY ZONE'?'zone-buy':a.zone==='RUNNING'?'zone-run':'zone-sell';
-    const bw=a.best_window_days;
-    return`<div class="ac ac-${(a.grade||'B').replace('+','p')}">
-      ${dayBadge}
-      <div class="ac-head">
-        <div>
-          <div style="display:flex;align-items:center;gap:5px">
-            ${gradeBadge(a.grade||'B')}
-            <span class="ac-sym">${a.sym}</span>
-          </div>
-          <div class="ac-sig">Floor Alert · ${bw}d window · ${(a.years||[]).join(', ')}</div>
-        </div>
-        <div class="ac-wr">
-          <div class="ac-pct">+${a.min_return?.toFixed(1)??'—'}%</div>
-          <div class="ac-lbl">min recovery</div>
-        </div>
-      </div>
-      <div class="ac-row3">
-        <div class="ac-mini"><div class="ac-ml">Floor depth</div>
-          <div class="ac-mv amber">${a.floor_depth_pct}% of range</div></div>
-        <div class="ac-mini"><div class="ac-ml">Beats 15% rate</div>
-          <div class="ac-mv green">${a.beats15_rate?.toFixed(0)??'—'}%</div></div>
-        <div class="ac-mini"><div class="ac-ml">Since signal</div>
-          <div class="ac-mv" style="color:${chgColor}">${a.pct_since>0?'+':''}${a.pct_since}%</div></div>
-      </div>
-      <div class="zones">
-        <div class="zr"><span class="zl">Signal close</span><span class="zv">₹${fmt(a.sig_close)}</span></div>
-        <div class="zr"><span class="zl">Current price</span><span class="zv" style="color:${chgColor}">₹${fmt(a.cur_price)}</span></div>
-        <div class="zr"><span class="zl">Conservative target</span><span class="zv zt1">₹${fmt(a.target_conservative)}</span></div>
-        <div class="zr"><span class="zl">Realistic target</span><span class="zv zt2">₹${fmt(a.target_realistic)}</span></div>
-        <div class="zr"><span class="zl">Events | Years</span><span class="zv muted">${a.n_events} | ${a.n_years}</span></div>
-      </div>
-      <div class="zone-banner ${zCls}">${a.zone}</div>
-    </div>`;
+    const grade=a.grade||'B';
+    return '<div class="ac ac-'+grade.replace('+','p')+'">'
+      +dayBadge
+      +'<div class="ac-head"><div>'
+      +'<div style="display:flex;align-items:center;gap:5px">'+gradeBadge(grade)+'<span class="ac-sym">'+a.sym+'</span></div>'
+      +'<div class="ac-sig">Floor Alert · '+a.best_window_days+'d · '+(a.years||[]).join(', ')+'</div>'
+      +'</div><div class="ac-wr"><div class="ac-pct">+'+(a.min_return!=null?a.min_return.toFixed(1):'—')+'%</div><div class="ac-lbl">min recovery</div></div></div>'
+      +'<div class="ac-row3">'
+      +'<div class="ac-mini"><div class="ac-ml">Floor depth</div><div class="ac-mv amber">'+a.floor_depth_pct+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Beats 15% rate</div><div class="ac-mv green">'+(a.beats15_rate!=null?a.beats15_rate.toFixed(0):'—')+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Since signal</div><div class="ac-mv" style="color:'+chgC+'">'+(a.pct_since>0?'+':'')+a.pct_since+'%</div></div>'
+      +'</div>'
+      +'<div class="zones">'
+      +'<div class="zr"><span class="zl">Signal close</span><span class="zv">Rs '+fmt(a.sig_close)+'</span></div>'
+      +'<div class="zr"><span class="zl">Current price</span><span class="zv" style="color:'+chgC+'">Rs '+fmt(a.cur_price)+'</span></div>'
+      +'<div class="zr"><span class="zl">Conservative target</span><span class="zv zt1">Rs '+fmt(a.target_conservative)+'</span></div>'
+      +'<div class="zr"><span class="zl">Realistic target</span><span class="zv zt2">Rs '+fmt(a.target_realistic)+'</span></div>'
+      +'</div>'
+      +'<div class="zone-banner '+zCls+'">'+a.zone+'</div>'
+      +'</div>';
   }).join('');
 }
 
