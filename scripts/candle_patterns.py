@@ -180,13 +180,13 @@ def analyse_stock(g, sym, latest_str, prev_str):
     c,o,h,l,v = g["c"],g["o"],g["h"],g["l"],g["v"]
     stock_latest = str(g["date"].max().date())
 
-    # ── CRITICAL FIX: stock must have data on the latest manifest date ──────
-    # If a stock's last trade was in 2022, exclude it from today's alerts
-    is_current = (stock_latest == latest_str)
-
-    # Check today's volume (only if stock is current)
-    today_vol = float(v.iloc[-1]) if is_current else 0.0
-    today_vol_ok = today_vol >= MIN_VOLUME
+    # ── STRICT CURRENT CHECK: stock must have data ON the latest manifest date ──
+    # stock_latest is the last date THIS stock appeared in ANY equity CSV
+    # latest_str is what the manifest says is the most recent trading day globally
+    # If stock_latest != latest_str → stock didn't trade recently → NOT in today alerts
+    is_current  = (stock_latest == latest_str)
+    today_vol   = float(v.iloc[-1]) if is_current else 0.0
+    today_vol_ok = (today_vol >= MIN_VOLUME)
 
     # Forward returns (vectorised) — shift(-1) uses next row's close
     g["fwd1"]  = c.shift(-1)/c - 1
@@ -203,10 +203,15 @@ def analyse_stock(g, sym, latest_str, prev_str):
         keys.append(k); descs.append(d)
     g["ckey"]=keys; g["cdesc"]=descs
 
-    # TRAINING ROWS: exclude today (last row) because fwd1 is unknown for it
-    # Also only include rows with sufficient volume
-    training = g.iloc[:-1].copy() if is_current else g.copy()
-    training  = training[training["v"] >= MIN_VOLUME].copy()
+    # TRAINING ROWS:
+    # Always exclude the LAST row for is_current stocks — its fwd1 is the future
+    # For non-current stocks all rows have known outcomes so include all
+    # Volume filter applies to ALL training rows
+    if is_current:
+        training = g.iloc[:-1].copy()   # exclude today — fwd1 unknown
+    else:
+        training = g.copy()
+    training = training[training["v"] >= MIN_VOLUME].copy()
     if len(training) < 5: return None
 
     # Get today's candle (last row)
@@ -346,15 +351,20 @@ def main():
     print(f"  Latest trading day: {latest_str}")
     print(f"  Previous trading day: {prev_str}")
 
-    # Checkpoint
+    # Checkpoint — version-aware so script upgrades always force a fresh run
+    SCRIPT_VERSION = "v3.1"
     cp       = load_cp()
     last_run = cp.get("last_run_date","")
+    last_ver = cp.get("script_version","")
     force    = os.environ.get("FORCE_FULL_RERUN","").lower()=="true"
-    if last_run == latest_str and not force:
-        print(f"  Already ran for {latest_str}. Set FORCE_FULL_RERUN=true to rerun.")
-        if (OUT_DIR/"candle_best_patterns.json").exists():
+    version_changed = (last_ver != SCRIPT_VERSION)
+    if last_run == latest_str and not force and not version_changed:
+        print(f"  Already ran for {latest_str} (version {SCRIPT_VERSION}). Skipping.")
+        if (OUT_DIR/"candle_today.json").exists():
             print("  Files are current. Done.")
             return
+    if version_changed:
+        print(f"  Script version changed ({last_ver} -> {SCRIPT_VERSION}). Full rerun.")
 
     print("\n[2] Loading data...")
     df = load_all(manifest)
@@ -516,7 +526,7 @@ def main():
           OUT_DIR/"candle_yesterday.json")
     print(f"  OK candle_yesterday.json ({len(perf_track)} tracked)")
 
-    save_cp({"last_run_date":latest_str, "run_at":now_ist,
+    save_cp({"last_run_date":latest_str, "script_version":SCRIPT_VERSION, "run_at":now_ist,
              "stocks_analysed":n_current, "best_patterns":len(best_pats),
              "today_alerts":n_alerts})
     print("  OK candle_checkpoint.json")
