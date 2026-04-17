@@ -191,6 +191,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <button class="tab" onclick="showPage('stocks',this)">📈 Stock Profiles</button>
     <button class="tab" onclick="showPage('repeating',this)">🏆 Most Reliable</button>
     <button class="tab" onclick="showPage('candle-alert',this)">🕯 Candle Alerts</button>
+    <button class="tab" onclick="showPage('candle-perf',this)">📈 Yesterday Results</button>
     <button class="tab" onclick="showPage('candle-best',this)">⭐ Best Candles</button>
     <button class="tab" onclick="showPage('candle-search',this)">🔍 Candle Search</button>
     <button class="tab" onclick="showPage('hw-dip',this)">🏦 HW Dip</button>
@@ -286,7 +287,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 
 <!-- PAGE: CANDLE ALERTS -->
 <div class="page" id="page-candle-alert">
-  <div class="sh">🕯 Candle Alerts <small>today candle shape matches 100%-win historical pattern for that stock · ranked by min return</small></div>
+  <div class="sh">🕯 Candle Alerts <small id="ca-date-note">next-day predictions based on latest trading day data · only stocks with data on the latest date</small></div>
   <div class="pill-row" id="ca-pills"></div>
   <div class="fbar">
     <input class="si" id="ca-q" placeholder="Symbol…" style="width:120px" oninput="renderCA()">
@@ -296,6 +297,37 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <button class="fb" id="cas-occ" onclick="caSort('occurrences',this)">Occurrences</button>
   </div>
   <div class="alert-grid" id="ca-grid"><div class="empty"><div class="spinner"></div>Loading…</div></div>
+</div>
+
+<!-- PAGE: CANDLE PERFORMANCE — yesterday's alerts + actual results -->
+<div class="page" id="page-candle-perf">
+  <div class="sh">📈 Yesterday Results <small>candle alerts from previous trading day vs actual next-day return</small></div>
+  <div class="pill-row" id="cp-pills"></div>
+  <div class="fbar">
+    <button class="fb on" id="cpf-all" onclick="cpFilter('all',this)">All</button>
+    <button class="fb" id="cpf-pat" onclick="cpFilter('pattern',this)">Had Pattern</button>
+    <button class="fb" id="cpf-brk" onclick="cpFilter('broken',this)">Broken Patterns</button>
+    <span class="fsep">|</span>
+    <input class="si" id="cp-q" placeholder="Symbol…" style="width:100px" oninput="renderCP()">
+  </div>
+  <div class="twrap">
+    <table class="tbl" id="cp-tbl">
+      <thead><tr>
+        <th onclick="cpTh('sym')">Stock<span class="arr"></span></th>
+        <th onclick="cpTh('signal_date')">Signal Date<span class="arr"></span></th>
+        <th onclick="cpTh('candle_desc')">Candle Shape<span class="arr"></span></th>
+        <th onclick="cpTh('close_signal')">Signal Close<span class="arr"></span></th>
+        <th onclick="cpTh('close_next')">Next Close<span class="arr"></span></th>
+        <th onclick="cpTh('actual_return')">Actual Return<span class="arr"></span></th>
+        <th onclick="cpTh('was_positive')">Result<span class="arr"></span></th>
+        <th onclick="cpTh('had_pattern')">Had Pattern<span class="arr"></span></th>
+        <th onclick="cpTh('pattern_pred_min')">Predicted Min%<span class="arr"></span></th>
+        <th onclick="cpTh('pattern_broken')">Pattern Broken?<span class="arr"></span></th>
+      </tr></thead>
+      <tbody id="cp-tbody"><tr><td colspan="10" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+    </table>
+  </div>
+  <div id="cp-broken" style="margin-top:10px"></div>
 </div>
 
 <!-- PAGE: BEST CANDLES -->
@@ -439,7 +471,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 <script>
 // ─── Data ──────────────────────────────────────────────────────────
 const REPO = 'https://raw.githubusercontent.com/animesh2007asansol/itis/main/pattern_signals';
-let DATA = { alerts:[], patterns:[], profiles:{}, allResults:[], heatmap:{}, meta:{}, candleBest:[], candleToday:[], hwProfiles:{}, hwAlerts:[], hwMeta:{}, hwAlertMeta:{} };
+let DATA = { alerts:[], patterns:[], profiles:{}, allResults:[], heatmap:{}, meta:{}, candleBest:[], candleToday:[], candleYesterday:[], hwProfiles:{}, hwAlerts:[], hwMeta:{}, hwAlertMeta:{} };
 let alrtPeriod='ALL', alrtGrade='ALL', alrtZone='ALL', alrtSortKey='score';
 let patGrade='ALL', spSortKey='score', spGradeF='ALL', repMinYrs=4, repSortKey='ret';
 let hmColorKey='avg', hmShowKey='pct';
@@ -506,6 +538,11 @@ async function loadData() {
     if(cbR.ok){const d=await cbR.json();DATA.candleBest=d.patterns||[];}
     if(ctR.ok){const d=await ctR.json();DATA.candleToday=d.alerts||[];}
     renderCA();renderCB();
+    // Load yesterday results
+    try{
+      const cyR=await fetch(REPO+'/candle_yesterday.json');
+      if(cyR.ok){const d=await cyR.json();DATA.candleYesterday=d;renderCP();}
+    }catch(e){console.log('Yesterday:',e.message);}
   }catch(e){console.log('Candle:',e.message);}
   try {
     const [hwpR,hwaR]=await Promise.all([fetch(REPO+'/heavyweight_profiles.json'),fetch(REPO+'/heavyweight_alerts.json')]);
@@ -975,9 +1012,14 @@ function renderCA(){
   var rows=[...DATA.candleToday];
   if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
   rows.sort(function(a,b){return (b[_caSortKey]??0)-(a[_caSortKey]??0);});
+  var sigDate=rows[0]?.today_date||'—';
+  // Update page subtitle with exact date context
+  var noteEl=document.getElementById('ca-date-note');
+  if(noteEl) noteEl.textContent='Signals from '+sigDate+' — valid for next trading day only · '+rows.length+' stocks';
   document.getElementById('ca-pills').innerHTML=[
-    ['Alerts',rows.length,'g','today candle = 100%-win pattern'],
-    ['Date',rows[0]?.today_date||'—','b',''],
+    ['Signal Date',sigDate,'b','data date of the candle'],
+    ['Valid For','Next trading day after '+sigDate,'g',''],
+    ['Alerts',rows.length,'g','stocks with 100%-win candle today'],
   ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>';}).join('');
   if(!rows.length){
     document.getElementById('ca-grid').innerHTML='<div class="empty" style="grid-column:1/-1">No candle alerts. Run candle_patterns workflow.</div>';
@@ -1190,6 +1232,80 @@ function renderHWA(){
       +'<div class="zone-banner '+zCls+'">'+a.zone+'</div>'
       +'</div>';
   }).join('');
+}
+
+// ═══ CANDLE PERFORMANCE (YESTERDAY RESULTS) ══════════════════════════
+var _cpFilter='all', _cpSortKey='actual_return', _cpDir='asc';
+function cpFilter(f,btn){_cpFilter=f;setOn('#cpf-all,#cpf-pat,#cpf-brk',btn);renderCP();}
+function cpTh(k){if(_cpSortKey===k)_cpDir=_cpDir==='desc'?'asc':'desc';else{_cpSortKey=k;_cpDir='desc';}renderCP();}
+function renderCP(){
+  var d=DATA.candleYesterday||{};
+  var rows=(d.results||[]).slice();
+  // Filter
+  var q=(document.getElementById('cp-q')?.value||'').toUpperCase().trim();
+  if(_cpFilter==='pattern') rows=rows.filter(function(r){return r.had_pattern;});
+  else if(_cpFilter==='broken') rows=rows.filter(function(r){return r.pattern_broken;});
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  // Sort
+  rows.sort(function(a,b){
+    var av=a[_cpSortKey],bv=b[_cpSortKey];
+    if(typeof av==='boolean') av=av?1:0;
+    if(typeof bv==='boolean') bv=bv?1:0;
+    var v=(av??-9999)-(bv??-9999);
+    return _cpDir==='asc'?v:-v;
+  });
+  // Pills
+  var nPat=d.with_pattern||0, nPatPos=d.pattern_positive||0, nBroken=(d.broken_patterns||[]).length;
+  var acc=d.pattern_accuracy_pct;
+  document.getElementById('cp-pills').innerHTML=[
+    ['Signal Date',d.signal_date||'—','b',''],
+    ['Result Date',d.result_date||'—','b',''],
+    ['With Pattern',nPat,'g','had 100%-win candle yesterday'],
+    ['Pattern Correct',nPatPos,'g',acc!=null?acc+'% accuracy':''],
+    ['Patterns Broken',nBroken,'r','pattern had neg result — removed'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>';}).join('');
+  if(!rows.length){
+    document.getElementById('cp-tbody').innerHTML='<tr><td colspan="10" class="empty">No performance data. Run candle_patterns workflow for two consecutive days.</td></tr>';
+    document.getElementById('cp-broken').innerHTML='';
+    return;
+  }
+  document.getElementById('cp-tbody').innerHTML=rows.map(function(r){
+    var retCls=r.actual_return>0?'green':'red';
+    var resSym=r.was_positive?'<span class="green">✓ Positive</span>':'<span class="red">✗ Negative</span>';
+    var patSym=r.had_pattern?'<span class="gold">Yes</span>':'<span class="muted">—</span>';
+    var brokenSym=r.pattern_broken?'<span class="red" style="font-weight:700">⚠ BROKEN</span>':'<span class="muted">—</span>';
+    var predMin=r.pattern_pred_min!=null?'<span class="green">+'+(r.pattern_pred_min||0).toFixed(1)+'%</span>':'<span class="muted">—</span>';
+    return '<tr style="'+(r.pattern_broken?'background:rgba(239,68,68,.06)':r.was_positive&&r.had_pattern?'background:rgba(34,197,94,.04)':'')+'">'+
+      '<td class="mono gold" style="font-weight:600">'+r.sym+'</td>'+
+      '<td class="mono muted">'+r.signal_date+'</td>'+
+      '<td style="font-size:10px;color:var(--t2);max-width:160px">'+r.candle_desc+'</td>'+
+      '<td class="mono">&#8377;'+fmt(r.close_signal)+'</td>'+
+      '<td class="mono">&#8377;'+fmt(r.close_next)+'</td>'+
+      '<td class="mono '+retCls+'" style="font-weight:700">'+(r.actual_return>0?'+':'')+r.actual_return.toFixed(2)+'%</td>'+
+      '<td>'+resSym+'</td>'+
+      '<td>'+patSym+'</td>'+
+      '<td>'+predMin+'</td>'+
+      '<td>'+brokenSym+'</td>'+
+      '</tr>';
+  }).join('');
+  // Broken patterns summary
+  var bp=d.broken_patterns||[];
+  if(bp.length){
+    document.getElementById('cp-broken').innerHTML='<div style="background:var(--rb);border:1px solid var(--r2);border-radius:var(--r);padding:12px;margin-top:10px">'
+      +'<div style="font-weight:700;color:#FCA5A5;margin-bottom:8px;font-size:13px">⚠ '+bp.length+' Pattern(s) Broken — Auto-removed from future alerts</div>'
+      +'<div style="font-size:11px;color:var(--t2);margin-bottom:8px">These candle patterns predicted 100% positive next-day returns but failed. They have been removed from the analysis and will not appear in today candle alerts.</div>'
+      +bp.map(function(b){
+        return '<div style="background:rgba(0,0,0,.2);border-radius:6px;padding:8px 10px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center">'
+          +'<div><span class="mono gold" style="font-weight:600">'+b.sym+'</span>'
+          +' <span style="font-size:10px;color:var(--t2);margin-left:6px">'+b.candle_desc+'</span></div>'
+          +'<div style="text-align:right"><span class="red" style="font-weight:700">'+b.actual_return.toFixed(2)+'%</span>'
+          +' <span style="font-size:10px;color:var(--t3);margin-left:6px">was predicted +'+b.pred_min.toFixed(1)+'%</span></div>'
+          +'</div>';
+      }).join('')
+      +'</div>';
+  } else {
+    document.getElementById('cp-broken').innerHTML='';
+  }
 }
 
 loadData();
