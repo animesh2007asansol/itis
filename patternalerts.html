@@ -196,6 +196,9 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <button class="tab" onclick="showPage('candle-search',this)">🔍 Candle Search</button>
     <button class="tab" onclick="showPage('hw-dip',this)">🏦 HW Dip</button>
     <button class="tab" onclick="showPage('hw-alerts',this)">🔔 HW Alerts</button>
+    <button class="tab" onclick="showPage('top5',this)">🏆 Top 5 Stocks</button>
+    <button class="tab" onclick="showPage('deep',this)">🔬 Deep Analysis</button>
+    <button class="tab" onclick="showPage('calert',this)">📋 Candle Table</button>
     <button class="tab" onclick="showPage('howto',this)">📖 How It Works</button>
   </div>
 </nav>
@@ -419,6 +422,96 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
   <div class="alert-grid" id="hwa-grid"><div class="empty"><div class="spinner"></div>Loading…</div></div>
 </div>
 
+
+<!-- PAGE: TOP 5 STOCKS -->
+<div class="page" id="page-top5">
+  <div class="sh">🏆 Top 5 Guaranteed Stocks <small>100%-win candle pattern · deepest analysis · ranked by confidence score</small></div>
+  <div id="t5-body"><div class="empty"><div class="spinner"></div>Loading deep analysis…</div></div>
+</div>
+
+<!-- PAGE: DEEP ANALYSIS — all enriched patterns, fully sortable -->
+<div class="page" id="page-deep">
+  <div class="sh">🔬 Deep Pattern Analysis <small>all top patterns with entry/gap/liquidity/context · click header to sort</small></div>
+  <div class="pill-row" id="dp-pills"></div>
+  <div class="fbar">
+    <input class="si" id="dp-q" placeholder="Symbol…" style="width:120px" oninput="renderDP()">
+    <span class="fsep">|</span>
+    <button class="fb on" id="dps-score" onclick="dpSort('score',this)">Score</button>
+    <button class="fb" id="dps-avg" onclick="dpSort('nd_avg_return',this)">Avg Return</button>
+    <button class="fb" id="dps-min" onclick="dpSort('nd_min_return',this)">Min Return</button>
+    <button class="fb" id="dps-gap" onclick="dpSort('avg_gap_pct',this)">Gap%</button>
+    <button class="fb" id="dps-liq" onclick="dpSort('avg_turnover_rs',this)">Liquidity</button>
+  </div>
+  <div class="twrap">
+    <table class="tbl" id="dp-tbl" style="min-width:1400px">
+      <thead><tr>
+        <th onclick="dpTh('sym')">Stock<span class="arr"></span></th>
+        <th onclick="dpTh('candle_key')">Candle<span class="arr"></span></th>
+        <th onclick="dpTh('n_occurrences')">Occ<span class="arr"></span></th>
+        <th onclick="dpTh('score')">Score<span class="arr"></span></th>
+        <th onclick="dpTh('nd_min_return')">ND Min%<span class="arr"></span></th>
+        <th onclick="dpTh('nd_avg_return')">ND Avg%<span class="arr"></span></th>
+        <th onclick="dpTh('nd_max_return')">ND Max%<span class="arr"></span></th>
+        <th onclick="dpTh('pct_gap_up')">Gap Up%<span class="arr"></span></th>
+        <th onclick="dpTh('avg_gap_pct')">Avg Gap%<span class="arr"></span></th>
+        <th onclick="dpTh('pct_entry_dip')">Dip Opp%<span class="arr"></span></th>
+        <th onclick="dpTh('avg_dip_pct')">Avg Dip%<span class="arr"></span></th>
+        <th onclick="dpTh('best_entry_vs_close')">Best Entry%<span class="arr"></span></th>
+        <th onclick="dpTh('nd_avg_high')">Avg Day High%<span class="arr"></span></th>
+        <th onclick="dpTh('max_gain_from_best_entry')">Max Gain%<span class="arr"></span></th>
+        <th onclick="dpTh('avg_vol_ratio_on_signal')">Vol Ratio<span class="arr"></span></th>
+        <th onclick="dpTh('avg_trend_20d_before')">Pre-20d Trend%<span class="arr"></span></th>
+        <th onclick="dpTh('avg_turnover_rs')">Avg Turnover Rs<span class="arr"></span></th>
+        <th onclick="dpTh('liquidity_ok')">Rs2L Liq<span class="arr"></span></th>
+        <th onclick="dpTh('max_adverse_excursion')">Max Adverse%<span class="arr"></span></th>
+        <th onclick="dpTh('sl_needed')">SL Needed<span class="arr"></span></th>
+        <th onclick="dpTh('target_conservative')">Target Consv%<span class="arr"></span></th>
+        <th onclick="dpTh('target_realistic')">Target Real%<span class="arr"></span></th>
+        <th onclick="dpTh('_years_str')">Years<span class="arr"></span></th>
+      </tr></thead>
+      <tbody id="dp-tbody"><tr><td colspan="23" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+    </table>
+  </div>
+  <div id="dp-detail" style="margin-top:16px"></div>
+</div>
+
+<!-- PAGE: CANDLE ALERT TABLE — full tabular, all columns sortable -->
+<div class="page" id="page-calert">
+  <div class="sh">📋 Candle Alerts — Full Table <small>all today candle alerts with every data point · click any header to sort</small></div>
+  <div class="pill-row" id="cat-pills"></div>
+  <div class="fbar">
+    <input class="si" id="cat-q" placeholder="Symbol…" style="width:120px" oninput="renderCAT()">
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="cats-min" onclick="catSort('nd_min',this)">Min Return</button>
+    <button class="fb" id="cats-avg" onclick="catSort('nd_avg',this)">Avg Return</button>
+    <button class="fb" id="cats-occ" onclick="catSort('occurrences',this)">Occ</button>
+    <button class="fb" id="cats-gap" onclick="catSort('avg_gap_pct',this)">Gap</button>
+  </div>
+  <div class="twrap">
+    <table class="tbl" id="cat-tbl" style="min-width:1200px">
+      <thead><tr>
+        <th onclick="catTh('sym')">Stock<span class="arr"></span></th>
+        <th onclick="catTh('today_date')">Signal Date<span class="arr"></span></th>
+        <th onclick="catTh('candle_desc')">Candle Shape<span class="arr"></span></th>
+        <th onclick="catTh('today_close')">Close Rs<span class="arr"></span></th>
+        <th onclick="catTh('today_vol')">Volume<span class="arr"></span></th>
+        <th onclick="catTh('nd_wr')">ND Win%<span class="arr"></span></th>
+        <th onclick="catTh('nd_min')">ND Min%<span class="arr"></span></th>
+        <th onclick="catTh('nd_avg')">ND Avg%<span class="arr"></span></th>
+        <th onclick="catTh('nd_max')">ND Max%<span class="arr"></span></th>
+        <th onclick="catTh('gap_up_rate')">Gap Up%<span class="arr"></span></th>
+        <th onclick="catTh('occurrences')">Occ<span class="arr"></span></th>
+        <th onclick="catTh('_5d_avg')">5d Avg%<span class="arr"></span></th>
+        <th onclick="catTh('_10d_avg')">10d Avg%<span class="arr"></span></th>
+        <th onclick="catTh('_20d_avg')">20d Avg%<span class="arr"></span></th>
+        <th onclick="catTh('_years_str')">Years<span class="arr"></span></th>
+        <th onclick="catTh('last_date')">Last Seen<span class="arr"></span></th>
+      </tr></thead>
+      <tbody id="cat-tbody"><tr><td colspan="16" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
 <!-- ═══ PAGE 6: HOW IT WORKS ═════════════════════════════════ -->
 <div class="page" id="page-howto">
   <div class="sh">📖 System Rules &amp; Signal Reference</div>
@@ -471,7 +564,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 <script>
 // ─── Data ──────────────────────────────────────────────────────────
 const REPO = 'https://raw.githubusercontent.com/animesh2007asansol/itis/main/pattern_signals';
-let DATA = { alerts:[], patterns:[], profiles:{}, allResults:[], heatmap:{}, meta:{}, candleBest:[], candleToday:[], candleYesterday:[], hwProfiles:{}, hwAlerts:[], hwMeta:{}, hwAlertMeta:{} };
+let DATA = { alerts:[], patterns:[], profiles:{}, allResults:[], heatmap:{}, meta:{}, candleBest:[], candleToday:[], candleYesterday:[], enriched:null, top5:null, hwProfiles:{}, hwAlerts:[], hwMeta:{}, hwAlertMeta:{} };
 let alrtPeriod='ALL', alrtGrade='ALL', alrtZone='ALL', alrtSortKey='score';
 let patGrade='ALL', spSortKey='score', spGradeF='ALL', repMinYrs=4, repSortKey='ret';
 let hmColorKey='avg', hmShowKey='pct';
@@ -537,12 +630,17 @@ async function loadData() {
     const [cbR,ctR]=await Promise.all([fetch(REPO+'/candle_best_patterns.json'),fetch(REPO+'/candle_today.json')]);
     if(cbR.ok){const d=await cbR.json();DATA.candleBest=d.patterns||[];}
     if(ctR.ok){const d=await ctR.json();DATA.candleToday=d.alerts||[];}
-    renderCA();renderCB();
-    // Load yesterday results
+    renderCA();renderCB();renderCAT();
     try{
       const cyR=await fetch(REPO+'/candle_yesterday.json');
       if(cyR.ok){const d=await cyR.json();DATA.candleYesterday=d;renderCP();}
     }catch(e){console.log('Yesterday:',e.message);}
+    // Enriched deep analysis
+    try{
+      const [enR,t5R]=await Promise.all([fetch(REPO+'/candle_enriched.json'),fetch(REPO+'/candle_top5.json')]);
+      if(enR.ok){const d=await enR.json();DATA.enriched=d;renderDP();}
+      if(t5R.ok){const d=await t5R.json();DATA.top5=d;renderTop5();}
+    }catch(e){console.log('Enriched:',e.message);}
   }catch(e){console.log('Candle:',e.message);}
   try {
     const [hwpR,hwaR]=await Promise.all([fetch(REPO+'/heavyweight_profiles.json'),fetch(REPO+'/heavyweight_alerts.json')]);
@@ -1306,6 +1404,194 @@ function renderCP(){
   } else {
     document.getElementById('cp-broken').innerHTML='';
   }
+}
+
+// ═══ TOP 5 STOCKS ═══════════════════════════════════════════════════════════
+function renderTop5(){
+  var d=DATA.top5||{}; var top=(d.top5||[]);
+  if(!top.length){
+    document.getElementById('t5-body').innerHTML='<div class="empty">No enriched data. Run candle_enriched_analysis workflow.</div>';
+    return;
+  }
+  document.getElementById('t5-body').innerHTML=top.map(function(r,i){
+    var medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
+    var dipNote=r.pct_entry_dip>50
+      ?'<span class="amber">'+r.pct_entry_dip+'% of times price dips below signal close — best entry opportunity!</span>'
+      :'Gap-up open in '+r.pct_gap_up+'% of cases — buy at open.';
+    var occ=r.occurrences||[];
+    var occHtml=occ.length?'<div class="twrap" style="margin-top:10px"><table class="tbl" style="min-width:1100px"><thead><tr>'
+      +'<th>Date</th><th>Sig Close</th><th>Volume</th><th>Vol Ratio</th><th>Gap%</th>'
+      +'<th>Entry Dip?</th><th>Dip%</th><th>Best Entry</th><th>ND Return%</th><th>ND High%</th>'
+      +'<th>Pre-5d%</th><th>Pre-20d%</th><th>Pre-60d%</th></tr></thead><tbody>'
+      +occ.map(function(o){
+        return '<tr><td class="mono">'+o.date+'</td>'
+          +'<td class="mono">&#8377;'+o.sig_close+'</td>'
+          +'<td class="mono muted">'+fmtI(o.sig_volume)+'</td>'
+          +'<td class="mono '+(o.vol_ratio_vs_20d>=1.5?'green':'')+'">'+( o.vol_ratio_vs_20d!=null?o.vol_ratio_vs_20d+'x':'—')+'</td>'
+          +'<td class="mono '+(o.gap_pct>0?'green':'red')+'">'+(o.gap_pct>0?'+':'')+o.gap_pct+'%</td>'
+          +'<td>'+(o.entry_dip?'<span class="amber">Yes -'+o.entry_dip_pct+'%</span>':'<span class="muted">No</span>')+'</td>'
+          +'<td class="mono amber">'+(o.entry_dip_pct>0?o.entry_dip_pct+'%':'—')+'</td>'
+          +'<td class="mono">&#8377;'+o.best_entry_px+' ('+(o.best_entry_vs_close>0?'+':'')+o.best_entry_vs_close+'%)</td>'
+          +'<td>'+rc(o.nd_return)+'</td>'
+          +'<td>'+rc(o.nd_max_gain)+'</td>'
+          +'<td>'+(o.trend_5d_before!=null?rc(o.trend_5d_before):'<span class="muted">—</span>')+'</td>'
+          +'<td>'+(o.trend_20d_before!=null?rc(o.trend_20d_before):'<span class="muted">—</span>')+'</td>'
+          +'<td>'+(o.trend_60d_before!=null?rc(o.trend_60d_before):'<span class="muted">—</span>')+'</td>'
+          +'</tr>';
+      }).join('')+'</tbody></table></div>':'<div class="empty">No occurrence data</div>';
+    return '<div class="spcard" style="margin-bottom:16px">'
+      +'<div class="sp-head" onclick="this.nextElementSibling.classList.toggle(\'open\')">'
+      +'<span class="sp-sym">'+medals[i]+' '+r.sym+'</span>'
+      +'<span class="sp-meta">Score: '+r.score+' | '+r.n_occurrences+' occurrences | '+(r.years||[]).join(', ')+'</span>'
+      +'<span style="margin-left:auto;font-size:11px;color:var(--green)">ND Avg: +'+r.nd_avg_return+'% | Min: +'+r.nd_min_return+'%</span>'
+      +'</div>'
+      +'<div class="sp-body open">'
+      +'<div class="pill-row">'
+      +[['Candle',r.desc||r.candle_key,'b'],
+        ['ND Min%','+'+r.nd_min_return+'%','g'],
+        ['ND Avg%','+'+r.nd_avg_return+'%','g'],
+        ['ND Max%','+'+r.nd_max_return+'%','g'],
+        ['Gap Up',''+r.pct_gap_up+'%','b'],
+        ['Dip Opp',''+r.pct_entry_dip+'% times','y'],
+        ['Liquidity',r.liquidity_ok?'Rs2L OK':'Low liq',r.liquidity_ok?'g':'r'],
+      ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('')
+      +'</div>'
+      +'<div class="mrow" style="margin-top:10px">'
+      +'<div class="pill" style="grid-column:1/-1;background:var(--s);border-color:var(--g2)">'
+      +'<div class="pl">Pattern Strength</div><div class="pv" style="font-size:12px;color:var(--text)">'+r.pattern_strength_note+'</div></div>'
+      +'<div class="pill ok"><div class="pl">Best Buy Strategy</div><div class="pv" style="font-size:11px">'+dipNote+'</div></div>'
+      +'<div class="pill ok"><div class="pl">Target Conservative</div><div class="pv">+'+r.target_conservative+'%</div></div>'
+      +'<div class="pill ok"><div class="pl">Target Realistic</div><div class="pv">+'+r.target_realistic+'%</div></div>'
+      +'<div class="pill ok"><div class="pl">Target Optimistic</div><div class="pv">+'+r.target_optimistic+'%</div></div>'
+      +'<div class="pill '+(r.sl_needed?'warn':'ok')+'"><div class="pl">Stop Loss</div><div class="pv">'+( r.sl_needed?(r.suggested_sl_pct+'%'):'Not needed')+'</div><div class="ps">'+r.sl_note+'</div></div>'
+      +'<div class="pill '+(r.liquidity_ok?'ok':'warn')+'"><div class="pl">Liquidity (Rs2L)</div><div class="pv">'+(r.liquidity_ok?'✓ OK':'⚠ Low')+'</div><div class="ps">'+r.liquidity_note+'</div></div>'
+      +'<div class="pill b"><div class="pl">Pre-Signal Trend</div><div class="pv">'+(r.avg_trend_20d_before!=null?(r.avg_trend_20d_before>0?'+':'')+r.avg_trend_20d_before+'%':'—')+'</div><div class="ps">20d before signal avg</div></div>'
+      +'<div class="pill b"><div class="pl">Avg Volume Ratio</div><div class="pv">'+(r.avg_vol_ratio_on_signal!=null?r.avg_vol_ratio_on_signal+'x':'—')+'</div><div class="ps">vs 20d avg</div></div>'
+      +'</div>'
+      + occHtml
+      +'</div></div>';
+  }).join('');
+}
+
+// ═══ DEEP ANALYSIS TABLE ═══════════════════════════════════════════════════
+var _dpSK='score', _dpSD='desc';
+function dpSort(k,btn){_dpSK=k;setOn('#dps-score,#dps-avg,#dps-min,#dps-gap,#dps-liq',btn);renderDP();}
+function dpTh(k){if(_dpSK===k)_dpSD=_dpSD==='desc'?'asc':'desc';else{_dpSK=k;_dpSD='desc';}renderDP();}
+function renderDP(){
+  var d=DATA.enriched;
+  if(!d){document.getElementById('dp-tbody').innerHTML='<tr><td colspan="23" class="empty">No enriched data. Run candle_enriched_analysis workflow.</td></tr>';return;}
+  var q=(document.getElementById('dp-q')?.value||'').toUpperCase().trim();
+  var rows=[...(d.patterns||[])].map(function(p){return Object.assign({},p,{_years_str:(p.years||[]).join(',')});});
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  rows.sort(function(a,b){var v=(b[_dpSK]??0)-(a[_dpSK]??0);return _dpSD==='asc'?-v:v;});
+  document.getElementById('dp-pills').innerHTML=[
+    ['Stocks',rows.length,'b',''],
+    ['Avg Score',rows.length?Math.round(rows.reduce(function(s,r){return s+r.score;},0)/rows.length):'—','g','confidence score'],
+    ['Liquid (Rs2L)',rows.filter(function(r){return r.liquidity_ok;}).length,'g','can deploy Rs2L'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>';}).join('');
+  document.getElementById('dp-tbody').innerHTML=rows.map(function(r){
+    var liqCls=r.liquidity_ok?'green':'amber';
+    return '<tr onclick="showDPDetail(\''+r.sym+'\',\''+r.candle_key+'\')" style="cursor:pointer" data-sym="'+r.sym+'">'
+      +'<td class="mono gold" style="font-weight:600">'+r.sym+'</td>'
+      +'<td style="font-size:9px;color:var(--t2);max-width:130px">'+r.desc+'</td>'
+      +'<td class="mono">'+r.n_occurrences+'</td>'
+      +'<td class="mono amber" style="font-weight:700">'+r.score+'</td>'
+      +'<td class="mono green" style="font-weight:700">+'+(r.nd_min_return||0).toFixed(1)+'%</td>'
+      +'<td>'+rc(r.nd_avg_return)+'</td>'
+      +'<td>'+rc(r.nd_max_return)+'</td>'
+      +'<td class="mono">'+r.pct_gap_up+'%</td>'
+      +'<td>'+rc(r.avg_gap_pct)+'</td>'
+      +'<td class="mono amber">'+r.pct_entry_dip+'%</td>'
+      +'<td class="mono">'+r.avg_dip_pct+'%</td>'
+      +'<td class="mono green">'+r.best_entry_vs_close+'%</td>'
+      +'<td>'+rc(r.nd_avg_high)+'</td>'
+      +'<td class="mono green">+'+r.max_gain_from_best_entry.toFixed(1)+'%</td>'
+      +'<td class="mono">'+( r.avg_vol_ratio_on_signal!=null?r.avg_vol_ratio_on_signal+'x':'—')+'</td>'
+      +'<td>'+(r.avg_trend_20d_before!=null?rc(r.avg_trend_20d_before):'<span class="muted">—</span>')+'</td>'
+      +'<td class="mono '+liqCls+'">Rs '+fmtI(r.avg_turnover_rs||0)+'</td>'
+      +'<td><span class="mono '+(r.liquidity_ok?'green':'amber')+'">'+(r.liquidity_ok?'✓':'⚠')+'</span></td>'
+      +'<td class="mono '+(r.max_adverse_excursion>1?'amber':'green')+'">'+r.max_adverse_excursion+'%</td>'
+      +'<td class="mono '+(r.sl_needed?'amber':'green')+'">'+(r.sl_needed?'Yes':'No')+'</td>'
+      +'<td class="mono">+'+r.target_conservative+'%</td>'
+      +'<td class="mono green">+'+r.target_realistic+'%</td>'
+      +'<td class="mono muted" style="font-size:9px">'+((r.years||[]).join(', '))+'</td>'
+      +'</tr>';
+  }).join('');
+}
+function showDPDetail(sym,key){
+  var d=DATA.enriched; if(!d) return;
+  var pat=(d.patterns||[]).find(function(p){return p.sym===sym&&p.candle_key===key;});
+  if(!pat) return;
+  var occ=pat.occurrences||[];
+  document.getElementById('dp-detail').innerHTML='<div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:12px">'
+    +'<div class="sh" style="margin-bottom:10px">'+sym+' — All '+occ.length+' Occurrences</div>'
+    +'<div class="twrap" style="margin:0"><table class="tbl" style="min-width:1100px"><thead><tr>'
+    +'<th>Date</th><th>Sig Close</th><th>Volume</th><th>Vol Ratio</th><th>Gap Open%</th>'
+    +'<th>Entry Dip?</th><th>Dip%</th><th>Best Entry</th><th>ND Close%</th><th>ND High%</th>'
+    +'<th>Max Gain%</th><th>Pre-5d%</th><th>Pre-20d%</th><th>Pre-60d%</th></tr></thead><tbody>'
+    +occ.map(function(o){
+      return '<tr><td class="mono">'+o.date+'</td>'
+        +'<td class="mono">&#8377;'+o.sig_close+'</td>'
+        +'<td class="mono muted">'+fmtI(o.sig_volume)+'</td>'
+        +'<td class="mono '+(o.vol_ratio_vs_20d>=1.5?'green':'')+'">'+( o.vol_ratio_vs_20d!=null?o.vol_ratio_vs_20d+'x':'—')+'</td>'
+        +'<td class="mono '+(o.gap_pct>0?'green':'red')+'">'+(o.gap_pct>0?'+':'')+o.gap_pct+'%</td>'
+        +'<td>'+(o.entry_dip?'<span class="amber" style="font-weight:600">Yes</span>':'<span class="muted">No</span>')+'</td>'
+        +'<td class="mono amber">'+(o.entry_dip_pct>0?'-'+o.entry_dip_pct+'%':'—')+'</td>'
+        +'<td class="mono">&#8377;'+o.best_entry_px+'<span style="font-size:9px;color:var(--t3)">('+o.best_entry_vs_close+'%)</span></td>'
+        +'<td>'+rc(o.nd_return)+'</td>'
+        +'<td>'+rc(o.nd_max_gain)+'</td>'
+        +'<td>'+rc(o.max_gain_from_entry)+'</td>'
+        +'<td>'+(o.trend_5d_before!=null?rc(o.trend_5d_before):'<span class="muted">—</span>')+'</td>'
+        +'<td>'+(o.trend_20d_before!=null?rc(o.trend_20d_before):'<span class="muted">—</span>')+'</td>'
+        +'<td>'+(o.trend_60d_before!=null?rc(o.trend_60d_before):'<span class="muted">—</span>')+'</td>'
+        +'</tr>';
+    }).join('')+'</tbody></table></div></div>';
+}
+
+// ═══ CANDLE ALERT TABLE ══════════════════════════════════════════════════════
+var _catSK='nd_min', _catSD='desc';
+function catSort(k,btn){_catSK=k;setOn('#cats-min,#cats-avg,#cats-occ,#cats-gap',btn);renderCAT();}
+function catTh(k){if(_catSK===k)_catSD=_catSD==='desc'?'asc':'desc';else{_catSK=k;_catSD='desc';}renderCAT();}
+function renderCAT(){
+  var q=(document.getElementById('cat-q')?.value||'').toUpperCase().trim();
+  var rows=[...DATA.candleToday].map(function(a){return Object.assign({},a,{
+    _5d_avg:a.win_5d?.avg??-999,
+    _10d_avg:a.win_10d?.avg??-999,
+    _20d_avg:a.win_20d?.avg??-999,
+    _years_str:(a.years||[]).join(','),
+  });});
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  rows.sort(function(a,b){var v=(b[_catSK]??-999)-(a[_catSK]??-999);return _catSD==='asc'?-v:v;});
+  document.getElementById('cat-pills').innerHTML=[
+    ['Alerts',rows.length,'g','today 100%-win candle alerts'],
+    ['Signal Date',rows[0]?.today_date||'—','b',''],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>';}).join('');
+  if(!rows.length){
+    document.getElementById('cat-tbody').innerHTML='<tr><td colspan="16" class="empty">No candle alerts today. Run candle_patterns workflow.</td></tr>';
+    return;
+  }
+  document.getElementById('cat-tbody').innerHTML=rows.map(function(a){
+    var b5=a.win_5d?.avg,b10=a.win_10d?.avg,b20=a.win_20d?.avg;
+    var yrs=(a.years||[]).join(', ');
+    return '<tr>'
+      +'<td class="mono gold" style="font-weight:600">'+a.sym+'</td>'
+      +'<td class="mono muted">'+a.today_date+'</td>'
+      +'<td style="font-size:10px;color:var(--t2);max-width:160px">'+a.candle_desc+'</td>'
+      +'<td class="mono">&#8377;'+fmt(a.today_close)+'</td>'
+      +'<td class="mono muted">'+fmtI(a.today_vol||0)+'</td>'
+      +'<td class="mono green" style="font-weight:700">100%</td>'
+      +'<td class="mono green" style="font-weight:700">+'+(a.nd_min||0).toFixed(2)+'%</td>'
+      +'<td>'+rc(a.nd_avg)+'</td>'
+      +'<td>'+rc(a.nd_max)+'</td>'
+      +'<td class="mono">'+(a.gap_up_rate||0)+'%</td>'
+      +'<td class="mono">'+a.occurrences+'</td>'
+      +'<td>'+(b5!=null?rc(b5):'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(b10!=null?rc(b10):'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(b20!=null?rc(b20):'<span class="muted">—</span>')+'</td>'
+      +'<td class="mono muted" style="font-size:9px">'+yrs+'</td>'
+      +'<td class="mono muted">'+a.last_date+'</td>'
+      +'</tr>';
+  }).join('');
 }
 
 loadData();
