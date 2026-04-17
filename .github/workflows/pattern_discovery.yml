@@ -58,6 +58,16 @@ jobs:
       - name: Run heavyweight dip-recover analysis
         run: python scripts/heavyweight_dip_recover.py
 
+      - name: Clear stale candle checkpoint (force fresh run on version change)
+        run: |
+          if [ -f pattern_signals/candle_checkpoint.json ]; then
+            ver=$(python3 -c "import json; d=json.load(open('pattern_signals/candle_checkpoint.json')); print(d.get('script_version',''))" 2>/dev/null || echo "")
+            if [ "$ver" != "v3.1" ]; then
+              echo "Old version ($ver) detected — removing checkpoint to force fresh run"
+              rm -f pattern_signals/candle_checkpoint.json
+            fi
+          fi
+
       - name: Run candle pattern tracker
         run: python scripts/candle_patterns.py
         timeout-minutes: 60
