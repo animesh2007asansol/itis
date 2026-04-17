@@ -214,15 +214,15 @@ ALL_SYMS = {t["sym"] for t in TRADE_DEFS} | {
 #                               OpnPric, HghPric, LwPric, ClsPric, LastPric, ...
 # ---------------------------------------------------------------------------
 
-# All known aliases for the SYMBOL column
-SYMBOL_ALIASES = ["SYMBOL", "TCKRSYMB"]
-
-# All known aliases for the SERIES column
-SERIES_ALIASES = ["SERIES", "SCTYSRS"]
-
-# All known aliases for the CLOSE price column (prefer official close over last)
+# NSE column aliases — covers pre-mid-2024 and post-mid-2024 formats
+# Old format:  SYMBOL, SERIES, OPEN, HIGH, LOW, CLOSE, TOTTRDQTY, ...
+# New format:  TckrSymb, SctySrs, OpnPric, HghPric, LwPric, ClsPric, TtlTradgVol, ...
+SYMBOL_ALIASES = ["SYMBOL",   "TCKRSYMB"]
+SERIES_ALIASES = ["SERIES",   "SCTYSRS"]
+# CLOSE: prefer official closing price (ClsPric/CLOSE) over last traded (LASTPRIC)
 CLOSE_ALIASES  = ["CLOSE", "CLSPRIC", "CLOSE PRICE", "CLOSE_PRICE",
-                  "CLOSEPRICE", "LASTPRIC", "LAST PRICE", "LAST_PRICE"]
+                  "CLOSEPRICE", "LASTPRIC", "LAST PRICE", "LAST_PRICE",
+                  "ADJSTD CLS PRIC"]  # adjusted close as last resort
 
 
 def find_col(hdr, aliases):
@@ -234,8 +234,10 @@ def find_col(hdr, aliases):
 
 
 def parse_hdr(raw_line):
-    """Parse CSV header line — strip whitespace and quotes, uppercase."""
-    return [h.strip().strip('"').strip("'").upper()
+    """Parse CSV header line — strip BOM, whitespace and quotes, uppercase."""
+    # Remove UTF-8 BOM if present at start of file
+    raw_line = raw_line.lstrip("﻿ï»¿")
+    return [h.strip().strip('"').strip("'").strip().upper()
             for h in raw_line.split(",")]
 
 
@@ -252,7 +254,7 @@ def parse_csv_file(path, syms_wanted, label=""):
     diag    = []
 
     try:
-        with open(path, encoding="utf-8", errors="replace") as f:
+        with open(path, encoding="utf-8-sig", errors="replace") as f:  # utf-8-sig strips BOM
             lines = f.readlines()
 
         if not lines:
@@ -377,12 +379,15 @@ class PriceDB:
         if not path.exists():
             self._miss.add(date_str)
             return
-        prices, fmt, _ = parse_csv_file(path, ALL_SYMS, date_str)
+        prices, fmt, diag = parse_csv_file(path, ALL_SYMS, date_str)
         self._fmts[date_str] = fmt
         if prices:
             self._cache[date_str] = prices
         else:
-            # Even if 0 seasonal symbols found, cache empty dict so we don't reload
+            # Log when a file loads but finds 0 of our symbols — helps diagnose issues
+            if fmt not in ("bad-header", "error", "empty"):
+                print(f"  WARN: {date_str} ({fmt}) — 0 seasonal symbols found. "
+                      f"Diag: {diag[:120]}")
             self._cache[date_str] = {}
 
 
@@ -618,7 +623,11 @@ def main():
     latest_raw, latest_fmt, latest_diag = parse_csv_file(latest_path, ALL_SYMS, "latest")
     print(f"  Format: {latest_fmt}")
     print(f"  Diag:   {latest_diag}")
-    print(f"  Symbols found: {len(latest_raw)} -> {sorted(latest_raw.keys())}")
+    found_syms = sorted(latest_raw.keys())
+    missing_syms = sorted(ALL_SYMS - set(latest_raw.keys()))
+    print(f"  Symbols found ({len(found_syms)}): {found_syms}")
+    if missing_syms:
+        print(f"  Symbols MISSING from latest CSV ({len(missing_syms)}): {missing_syms}")
 
     prev_raw = {}
     if prev_date:

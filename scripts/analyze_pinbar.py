@@ -69,19 +69,66 @@ log = logging.getLogger("optimizer")
 def load_equity() -> pd.DataFrame:
     log.info("Loading equity data...")
     frames = []
+
+    # Maps every known NSE column alias → standard name
+    # Old format (pre mid-2024): SYMBOL, SERIES, OPEN, HIGH, LOW, CLOSE, TOTTRDQTY
+    # New format (mid-2024+):    TckrSymb, SctySrs, OpnPric, HghPric, LwPric,
+    #                             ClsPric, TtlTradgVol  (uppercased by pandas)
+    COL_ALIASES = {
+        # Symbol
+        "SYMBOL":       "SYMBOL",
+        "TCKRSYMB":     "SYMBOL",
+        # Series
+        "SERIES":       "SERIES",
+        "SCTYSRS":      "SERIES",
+        # Open
+        "OPEN":         "OPEN",
+        "OPNPRIC":      "OPEN",
+        "OPEN PRICE":   "OPEN",
+        # High
+        "HIGH":         "HIGH",
+        "HGHPRIC":      "HIGH",
+        "HIGH PRICE":   "HIGH",
+        # Low
+        "LOW":          "LOW",
+        "LWPRIC":       "LOW",
+        "LOW PRICE":    "LOW",
+        # Close — prefer official close over last traded price
+        "CLOSE":        "CLOSE",
+        "CLSPRIC":      "CLOSE",
+        "CLOSE PRICE":  "CLOSE",
+        "CLOSEPRICE":   "CLOSE",
+        "CLOSE_PRICE":  "CLOSE",
+        "LASTPRIC":     "CLOSE",  # fallback only
+        "LAST PRICE":   "CLOSE",
+        # Volume
+        "TOTTRDQTY":    "VOLUME",
+        "TTLTRADGVOL":  "VOLUME",
+        # Date
+        "TIMESTAMP":    "DATE",
+        "DATE":         "DATE",
+        "DATE1":        "DATE",
+        "DATE2":        "DATE",
+        "BIZDT":        "DATE",
+        "TRADDT":       "DATE",
+    }
+
     for csv_path in sorted((DATA_DIR / "equity").rglob("*.csv")):
         try:
-            df = pd.read_csv(csv_path)
-            df.columns = df.columns.str.strip()
-            col_map = {}
-            for c in df.columns:
-                cu = c.upper().strip()
-                if cu in ("TIMESTAMP","DATE","DATE2"): col_map[c]="DATE"
-                elif cu == "TOTTRDQTY":               col_map[c]="VOLUME"
-            df = df.rename(columns=col_map)
+            df = pd.read_csv(csv_path, low_memory=False)
+            # Strip whitespace and quotes, uppercase ALL column names
+            df.columns = (df.columns
+                          .str.strip()
+                          .str.strip('"')
+                          .str.strip("'")
+                          .str.upper())
+            # Rename every recognised alias to its standard name
+            df = df.rename(columns={c: COL_ALIASES[c]
+                                     for c in df.columns if c in COL_ALIASES})
             needed = ["SYMBOL","OPEN","HIGH","LOW","CLOSE"]
             if not all(c in df.columns for c in needed): continue
             if "DATE" not in df.columns:
+                # Reliable fallback: filename is always YYYY-MM-DD.csv
                 df["DATE"] = csv_path.stem[:10]
             keep = needed + ["DATE"]
             if "VOLUME" in df.columns: keep.append("VOLUME")
