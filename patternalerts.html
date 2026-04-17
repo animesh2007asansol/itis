@@ -1486,23 +1486,41 @@ function renderTop5InAlerts(){
     el.innerHTML='<div style="font-size:11px;color:var(--t3);margin-bottom:6px">Top 5 data loading… run candle_enriched_analysis workflow.</div>';
     return;
   }
+  // Cross-reference: is this top5 stock also in today's candle alerts?
+  var todaySyms={};
+  (DATA.candleToday||[]).forEach(function(a){ todaySyms[a.sym]=a; });
   var inv=getInvParams();
+  // Count how many top5 fired today
+  var firedToday=top.filter(function(r){return !!todaySyms[r.sym];}).length;
   el.innerHTML='<div style="background:var(--s);border:1px solid var(--g2);border-radius:var(--r);padding:12px;margin-bottom:4px">'
-    +'<div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:10px">🏆 Top 5 Highest-Confidence Stocks (Enriched Analysis)</div>'
+    +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">'
+    +'<span style="font-size:11px;font-weight:600;color:var(--gold)">🏆 Top 5 Highest-Confidence Stocks</span>'
+    +(firedToday>0
+      ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:5px;padding:2px 9px;font-size:10px;font-weight:700">🔔 '+firedToday+' fired TODAY — BUY SIGNAL</span>'
+      :'<span style="background:var(--s);color:var(--t3);border:1px solid var(--b);border-radius:5px;padding:2px 9px;font-size:10px">Watchlist — pattern not fired today</span>')
+    +'<span style="font-size:9px;color:var(--t3)">Green border = pattern fired today = next-day buy. Grey = historical watchlist only.</span>'
+    +'</div>'
     +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px">'
     +top.map(function(r,i){
       var medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
       var al=allocCard(r.occurrences&&r.occurrences[r.occurrences.length-1]?r.occurrences[r.occurrences.length-1].sig_close:0,
                        r.nd_min_return,r.nd_avg_return,inv);
-      var buyPx=r.occurrences&&r.occurrences.length?r.occurrences[r.occurrences.length-1].sig_close:null;
-      var entryNote=r.pct_entry_dip>50
-        ?'Wait for dip below close (happens '+r.pct_entry_dip+'% of times)'
-        :'Buy at open (gap-up '+r.pct_gap_up+'% of times)';
-      return '<div style="background:var(--card);border:1px solid var(--b);border-radius:9px;padding:11px">'
+      var todayAlert=todaySyms[r.sym]||null;
+      var isFiredToday=!!todayAlert;
+      // Use today's close if fired, else last historical occurrence price
+      var buyPx=isFiredToday?todayAlert.today_close
+        :(r.occurrences&&r.occurrences.length?r.occurrences[r.occurrences.length-1].sig_close:null);
+      var entryNote=isFiredToday
+        ?('TODAY SIGNAL — buy at tomorrow open. '+(r.pct_entry_dip>50?'Dip opp: '+r.pct_entry_dip+'% chance below close.':'Gap-up expected '+r.pct_gap_up+'% of times.'))
+        :(r.pct_entry_dip>50?'Watchlist. When pattern fires: wait for dip ('+r.pct_entry_dip+'% of times)':'Watchlist. When pattern fires: buy at gap-open ('+r.pct_gap_up+'% of times)');
+      var cardBorder=isFiredToday?'var(--gr2)':'var(--b)';
+      var cardBg=isFiredToday?'rgba(34,197,94,.04)':'var(--card)';
+      return '<div style="background:'+cardBg+';border:1px solid '+cardBorder+';border-radius:9px;padding:11px">'
         +'<div style="display:flex;align-items:center;gap:7px;margin-bottom:8px">'
         +'<span style="font-size:16px">'+medals[i]+'</span>'
         +'<span class="mono gold" style="font-weight:700;font-size:14px">'+r.sym+'</span>'
-        +'<span style="margin-left:auto;background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:4px;padding:2px 6px;font-size:9px;font-weight:700">Score '+r.score+'</span>'
+        +(isFiredToday?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:4px;padding:2px 7px;font-size:9px;font-weight:700">🔔 BUY TODAY</span>':'<span style="background:var(--s);color:var(--t3);border:1px solid var(--b);border-radius:4px;padding:2px 7px;font-size:9px">WATCHLIST</span>')
+        +'<span style="margin-left:auto;background:var(--gbg);color:var(--gold);border:1px solid var(--g2);border-radius:4px;padding:2px 6px;font-size:9px;font-weight:700">Score '+r.score+'</span>'
         +'</div>'
         +'<div style="font-size:9px;color:var(--t3);margin-bottom:7px">'+r.desc+'</div>'
         +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-bottom:8px">'
