@@ -70,6 +70,13 @@ jobs:
 
       - name: Run candle pattern tracker
         run: python scripts/candle_patterns.py
+
+      - name: Run candle enriched analysis
+        run: python scripts/candle_enriched_analysis.py
+        timeout-minutes: 60
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          PYTHONUNBUFFERED: '1'
         timeout-minutes: 60
         env:
           PYTHONPATH: ${{ github.workspace }}
