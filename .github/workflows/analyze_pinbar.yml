@@ -38,6 +38,19 @@ jobs:
       - name: Install dependencies
         run: pip install -r scripts/requirements.txt
 
+      - name: Show data range before analysis
+        run: |
+          python3 -c "
+          from pathlib import Path
+          csvs = sorted(Path('data/equity').rglob('*.csv'))
+          if csvs:
+              print(f'Total equity CSVs: {len(csvs)}')
+              print(f'Oldest: {csvs[0].stem}')
+              print(f'Latest: {csvs[-1].stem}')
+          else:
+              print('ERROR: No equity CSVs found!')
+          "
+
       - name: Run pin bar analysis
         run: python scripts/analyze_pinbar.py
         env:

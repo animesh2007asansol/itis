@@ -47,19 +47,16 @@ jobs:
         run: |
           LATEST=$(find data/equity -name "*.csv" | sort -r | head -1)
           echo "Inspecting: $LATEST"
-          echo ""
-          echo "=== First line (header) ==="
+          echo "=== Header ==="
           head -1 "$LATEST"
-          echo ""
-          echo "=== Second line (first data row) ==="
+          echo "=== First data row ==="
           sed -n '2p' "$LATEST"
-          echo ""
-          echo "=== Lines containing VOLTAS or TITAN ==="
-          grep -m3 "VOLTAS\|TITAN\|AMBER\|COALINDIA\|KALYANKJIL" "$LATEST" | head -5 || echo "(none found with grep)"
-          echo ""
-          echo "=== Total rows ==="
+          echo "=== Symbol search (EQ rows) ==="
+          grep -i "VOLTAS\|TITAN\|AMBER\|COALINDIA\|KALYANKJIL\|BLUESTARCO\|RVNL" "$LATEST" | head -8 || echo "(none found)"
+          echo "=== Row count ==="
           wc -l "$LATEST"
-
+          echo "=== Column count ==="
+          head -1 "$LATEST" | tr ',' '\n' | wc -l
       - name: Run seasonal signals script
         run: |
           python scripts/prepare_seasonal_signals.py
