@@ -212,6 +212,12 @@ def deep_analyse(sym, candle_key, alert, df):
     if len(occurrences) < MIN_OCC_TO_ANALYSE:
         return None
 
+    # Year spread check: pattern must have fired in 2+ years to be trusted
+    occ_years = set(o['date'][:4] for o in occurrences)
+    if len(occ_years) < 2:
+        return None   # single-year pattern — may be regime-specific anomaly
+
+
     n = len(occurrences)
 
     # Aggregate
@@ -282,14 +288,21 @@ def deep_analyse(sym, candle_key, alert, df):
     w5d    = alert.get("win_5d") or {}
     avg_5d = w5d.get("avg") or 0
 
-    score = 30  # base: 100% ND win rate
-    score += min(20, n*2)
-    score += min(15, len(set(o["date"][:4] for o in occurrences))*4)
-    if avg_vol_ratio and avg_vol_ratio>=1.5: score+=10
-    if pct_gap_up>=80: score+=10
-    if not sl_needed: score+=10
-    if liquidity_ok: score+=5
-    if avg_5d >= 3: score+=10   # strong 5d performance is a big confidence booster
+    # Confidence score — occurrences and year spread have highest weight
+    # With MIN_OCC=6 and MIN_YEARS=2 already enforced upstream,
+    # we differentiate further: 8+ occ and 3+ years = much higher trust
+    score = 20  # base: passed all upstream filters
+    n_years_here = len(set(o['date'][:4] for o in occurrences))
+    # Occurrences: 6=+0, 8=+10, 10=+16, 15=+20 (capped)
+    score += min(20, max(0, n-5) * 2)
+    # Year spread: 2yr=+8, 3yr=+16, 4yr=+20 (most important factor)
+    score += min(20, n_years_here * 5)
+    if avg_vol_ratio and avg_vol_ratio>=1.5: score+=10  # volume confirms signal
+    if avg_vol_ratio and avg_vol_ratio>=2.0: score+=5   # extra for very high volume
+    if not sl_needed: score+=10  # never went negative — cleanest signal
+    if liquidity_ok: score+=5    # can actually deploy Rs2L
+    if avg_5d >= 5: score+=10    # strong 5d: pattern stays strong beyond next day
+    elif avg_5d >= 3: score+=5
     score = min(100, score)
 
     notes = []

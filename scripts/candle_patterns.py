@@ -43,7 +43,8 @@ MANIFEST   = DATA_DIR / "manifest.json"
 CHECKPOINT = OUT_DIR / "candle_checkpoint.json"
 
 MIN_VOLUME        = 50_000   # minimum volume on BOTH signal day AND today's candle
-MIN_OCC           = 3        # minimum occurrences to compute stats
+MIN_OCC           = 6        # minimum occurrences — below 6 is statistically unreliable
+MIN_YEARS         = 2        # pattern must appear in 2+ different calendar years
 MIN_TRADING_DAYS  = 100      # minimum history per stock
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -267,6 +268,8 @@ def analyse_stock(g, sym, latest_str, prev_str):
                 }
 
         years = sorted(int(y) for y in grp["date"].dt.year.unique().tolist())
+        if len(years) < MIN_YEARS:
+            continue   # must appear in 2+ different calendar years to be trusted
         last_occ = str(grp["date"].max().date())
 
         pattern_stats.append({
@@ -377,6 +380,7 @@ def main():
     print(f"\n[3] Analysing candle patterns...")
     print(f"  TODAY alerts only for stocks with latest data = {latest_str}")
     print(f"  AND volume >= {MIN_VOLUME:,} on today's candle")
+    print(f"  Filters: MIN_OCC={MIN_OCC}, MIN_YEARS={MIN_YEARS}, nd_avg>=1%")
 
     sym_grps     = {s:g.copy() for s,g in df.groupby("sym")}
     all_profiles = {}
