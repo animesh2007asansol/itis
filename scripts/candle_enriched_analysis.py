@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
 """
-candle_enriched_analysis.py  v2
+candle_enriched_analysis.py  v3
 ================================
-Reads candle_today.json (TODAY's candle signals only) and runs deep
-analysis on EVERY stock that has a next-day buy signal.
+Deep analysis of TODAY's candle signals.
 
-Picks the top 5 by confidence score and outputs:
-  candle_enriched.json — deep analysis for ALL today's signaling stocks
-  candle_top5.json     — top 5 with full details for display
-
-This means: every stock in the output is a VALID NEXT-DAY BUY based on
-today's candle matching its 100%-win historical pattern.
+New in v3:
+  - Entry price analysis: for every historical occurrence, tracks:
+      * open_vs_close: next day opened how much % above/below signal close
+      * low_vs_open:   next day's LOW went how much % below the open price
+      * safe_buy_pct:  worst-case minimum dip from open (your safe limit order)
+      * safe_buy_px:   actual Rs price you can safely set as limit order
+  - Sort by 5d average return (strongest 5d signal goes to top)
+  - min_occurrences relaxed: stocks with >=1 occurrence in re-load are included
+    (candle_patterns already verified >=3 occurrences; re-load may find fewer
+     due to CSV file gaps, but we trust the pattern was validated)
+  - Falls back to candle_today.json stats if re-loaded occurrences < 2
 """
 
 import json, gc, sys, os
@@ -31,6 +35,7 @@ OUT_DIR   = REPO_ROOT / "pattern_signals"
 MANIFEST  = DATA_DIR / "manifest.json"
 
 LIQUIDITY_TARGET_RS = 200_000
+MIN_OCC_TO_ANALYSE  = 1   # use any occurrence found; validation done by candle_patterns
 
 # ─────────────────────────────────────────────────────────────────────────────
 class SafeEncoder(json.JSONEncoder):
@@ -49,9 +54,6 @@ def jdump(obj, path):
     with open(path, "w") as f:
         json.dump(obj, f, indent=2, cls=SafeEncoder)
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Load one stock's full OHLCV history
-# ─────────────────────────────────────────────────────────────────────────────
 COL_MAP = {
     "SYMBOL":"SYMBOL","TCKRSYMB":"SYMBOL",
     "SERIES":"SERIES","SCTYSRS":"SERIES",
@@ -91,9 +93,6 @@ def load_stock(sym, trading_days):
     if not rows: return pd.DataFrame()
     return pd.DataFrame(rows).sort_values("date").reset_index(drop=True)
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Candle classification (must match candle_patterns.py exactly)
-# ─────────────────────────────────────────────────────────────────────────────
 def body_bkt(bp):
     if bp<0.3: return "doji"
     if bp<1.0: return "tiny"
@@ -116,270 +115,363 @@ def classify_key(o, h, l, c):
     color="G" if c>=o else "R"
     return f"{color}_{body_bkt(bp)}_L{wick_bkt(lower/sb)}_U{wick_bkt(upper/sb)}"
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Deep analysis for one stock+pattern
-# ─────────────────────────────────────────────────────────────────────────────
+def r2(n): return round(n*100)/100 if n is not None else None
+
 def deep_analyse(sym, candle_key, alert, df):
-    """
-    For every historical occurrence of candle_key on this stock:
-    - Gap analysis (next open vs signal close)
-    - Entry dip (did next day's LOW go below signal close?)
-    - Pre-signal trend context (5d, 20d, 60d before signal)
-    - Volume ratio on signal day
-    - Turnover / liquidity
-    Returns None if insufficient data.
-    """
-    if df.empty or len(df) < 10: return None
-
+    if df.empty or len(df) < 5: return None
     df = df.copy().reset_index(drop=True)
-    df["ckey"] = [classify_key(float(r.o),float(r.h),float(r.l),float(r.c))
-                  for _, r in df.iterrows()]
+    df["ckey"] = [classify_key(float(r.o),float(r.h),float(r.l),float(r.c)) for _,r in df.iterrows()]
 
+    MIN_VOL = 50_000
     occurrences = []
+
     for i, row in df.iterrows():
         if row["ckey"] != candle_key: continue
-        if i+1 >= len(df): continue  # no next day
+        if float(row["v"]) < MIN_VOL: continue   # must have enough volume
+        if i+1 >= len(df): continue              # need next day
 
-        sig_c = float(row["c"]); sig_v = float(row["v"])
+        sig_c = float(row["c"])
+        sig_v = float(row["v"])
         nxt   = df.iloc[i+1]
         nxt_o = float(nxt["o"]); nxt_h = float(nxt["h"])
         nxt_l = float(nxt["l"]); nxt_c = float(nxt["c"])
 
-        gap_pct       = round((nxt_o - sig_c) / sig_c * 100, 2)
-        entry_dip     = nxt_l < sig_c
-        entry_dip_pct = round((sig_c - nxt_l) / sig_c * 100, 2) if entry_dip else 0.0
-        best_entry    = round(nxt_l if entry_dip else nxt_o, 2)
-        best_entry_pct= round((best_entry - sig_c) / sig_c * 100, 2)
-        nd_return     = round((nxt_c - sig_c) / sig_c * 100, 2)
-        nd_max        = round((nxt_h - sig_c) / sig_c * 100, 2)
-        max_from_entry= round((nxt_h - best_entry) / best_entry * 100, 2) if best_entry > 0 else 0.0
+        # ── Core return metrics ───────────────────────────────────────────
+        gap_vs_close   = r2((nxt_o - sig_c) / sig_c * 100)   # open vs signal close
+        nd_close_ret   = r2((nxt_c - sig_c) / sig_c * 100)   # close return
+        nd_high_ret    = r2((nxt_h - sig_c) / sig_c * 100)   # best possible (high)
 
+        # ── Entry dip analysis ────────────────────────────────────────────
+        # Did next day's LOW go below the signal CLOSE? (classic dip-buy)
+        dip_below_close     = nxt_l < sig_c
+        dip_below_close_pct = r2((sig_c - nxt_l) / sig_c * 100) if dip_below_close else 0.0
+
+        # Did next day's LOW go below the next day's OPEN?
+        # This tells you: even after gap-up open, can you buy cheaper?
+        dip_below_open     = nxt_l < nxt_o
+        dip_below_open_pct = r2((nxt_o - nxt_l) / nxt_o * 100) if dip_below_open else 0.0
+
+        # Best entry = lowest price you could have gotten on next day
+        # = min(nxt_l, nxt_o) but if opened above close and dipped below open
+        best_entry_px = r2(min(nxt_l, nxt_o))
+        best_entry_vs_close = r2((best_entry_px - sig_c) / sig_c * 100)
+
+        # Safe buy calculation:
+        # If you place a limit order at nxt_o * (1 - dip_below_open_pct/100),
+        # historically that order would have been filled if dip happened.
+        # safe_buy_px = next_open * (1 - dip_from_open)
+        safe_entry_from_open = r2(nxt_o * (1 - dip_below_open_pct/100)) if dip_below_open else nxt_o
+        safe_entry_vs_close  = r2((safe_entry_from_open - sig_c) / sig_c * 100)
+
+        # Pre-signal context
         pre5  = df.iloc[max(0,i-5):i]
         pre20 = df.iloc[max(0,i-20):i]
         pre60 = df.iloc[max(0,i-60):i]
-        trend5  = round((sig_c/float(pre5.iloc[0]["c"])-1)*100,2) if len(pre5)>=1 else None
-        trend20 = round((sig_c/float(pre20.iloc[0]["c"])-1)*100,2) if len(pre20)>=1 else None
-        trend60 = round((sig_c/float(pre60.iloc[0]["c"])-1)*100,2) if len(pre60)>=1 else None
+        trend5  = r2((sig_c/float(pre5.iloc[0]["c"])-1)*100) if len(pre5)>=1 else None
+        trend20 = r2((sig_c/float(pre20.iloc[0]["c"])-1)*100) if len(pre20)>=1 else None
+        trend60 = r2((sig_c/float(pre60.iloc[0]["c"])-1)*100) if len(pre60)>=1 else None
 
-        vol_avg20  = float(pre20["v"].mean()) if len(pre20)>=5 else 0.0
-        vol_ratio  = round(sig_v/vol_avg20,2) if vol_avg20>0 else None
-        turnover   = round(sig_c * sig_v)
-
-        high20 = float(pre20["h"].max()) if len(pre20)>=1 else sig_c
-        low20  = float(pre20["l"].min()) if len(pre20)>=1 else sig_c
+        vol_avg20 = float(pre20["v"].mean()) if len(pre20)>=5 else 0.0
+        vol_ratio = r2(sig_v/vol_avg20) if vol_avg20>0 else None
+        turnover  = round(sig_c * sig_v)
 
         occurrences.append({
-            "date":              str(row["date"].date()),
-            "sig_close":         round(sig_c, 2),
-            "sig_volume":        int(sig_v),
-            "turnover_rs":       turnover,
-            "vol_ratio_vs_20d":  vol_ratio,
-            "gap_pct":           gap_pct,
-            "entry_dip":         entry_dip,
-            "entry_dip_pct":     entry_dip_pct,
-            "best_entry_px":     best_entry,
-            "best_entry_vs_close": best_entry_pct,
-            "nd_return":         nd_return,
-            "nd_max_gain":       nd_max,
-            "max_gain_from_entry": max_from_entry,
-            "next_open":         round(nxt_o,2),
-            "next_high":         round(nxt_h,2),
-            "next_low":          round(nxt_l,2),
-            "next_close":        round(nxt_c,2),
-            "trend_5d_before":   trend5,
-            "trend_20d_before":  trend20,
-            "trend_60d_before":  trend60,
-            "dist_from_high20":  round((sig_c-high20)/high20*100,2),
-            "dist_from_low20":   round((sig_c-low20)/low20*100,2),
+            "date":                str(row["date"].date()),
+            "sig_close":           r2(sig_c),
+            "sig_volume":          int(sig_v),
+            "turnover_rs":         turnover,
+            "vol_ratio_vs_20d":    vol_ratio,
+            # Gap / open analysis
+            "next_open":           r2(nxt_o),
+            "opened_above_close":  nxt_o > sig_c,
+            "gap_vs_close_pct":    gap_vs_close,
+            # Dip from open (key new field)
+            "dip_below_open":      dip_below_open,
+            "dip_below_open_pct":  dip_below_open_pct,
+            # Dip from close
+            "dip_below_close":     dip_below_close,
+            "dip_below_close_pct": dip_below_close_pct,
+            # Best entry
+            "best_entry_px":       best_entry_px,
+            "best_entry_vs_close": best_entry_vs_close,
+            # Safe limit-order entry
+            "safe_entry_px":       safe_entry_from_open,
+            "safe_entry_vs_close": safe_entry_vs_close,
+            # Returns
+            "nd_close_ret":        nd_close_ret,
+            "nd_high_ret":         nd_high_ret,
+            "next_high":           r2(nxt_h),
+            "next_low":            r2(nxt_l),
+            "next_close":          r2(nxt_c),
+            # Pre-signal
+            "trend_5d_before":     trend5,
+            "trend_20d_before":    trend20,
+            "trend_60d_before":    trend60,
         })
 
-    if len(occurrences) < 2: return None
+    if len(occurrences) < MIN_OCC_TO_ANALYSE:
+        return None
 
-    n          = len(occurrences)
-    gaps       = [o["gap_pct"] for o in occurrences]
-    dips       = [o["entry_dip_pct"] for o in occurrences]
-    nd_rets    = [o["nd_return"] for o in occurrences]
-    nd_maxes   = [o["nd_max_gain"] for o in occurrences]
-    best_ents  = [o["best_entry_vs_close"] for o in occurrences]
-    max_froms  = [o["max_gain_from_entry"] for o in occurrences]
+    n = len(occurrences)
+
+    # Aggregate
+    gaps       = [o["gap_vs_close_pct"] for o in occurrences]
+    nd_rets    = [o["nd_close_ret"] for o in occurrences]
+    nd_maxes   = [o["nd_high_ret"] for o in occurrences]
+    dob_pcts   = [o["dip_below_open_pct"] for o in occurrences]  # dip below open
+    doc_pcts   = [o["dip_below_close_pct"] for o in occurrences] # dip below close
+    safe_pcts  = [o["safe_entry_vs_close"] for o in occurrences]
     turnovers  = [o["turnover_rs"] for o in occurrences]
     vol_rats   = [o["vol_ratio_vs_20d"] for o in occurrences if o["vol_ratio_vs_20d"]]
 
     n_gap_up   = sum(1 for g in gaps if g>0)
-    n_dip      = sum(1 for o in occurrences if o["entry_dip"])
+    n_dip_open = sum(1 for o in occurrences if o["dip_below_open"])
+    n_dip_close= sum(1 for o in occurrences if o["dip_below_close"])
+
+    pct_gap_up     = r2(n_gap_up/n*100)
+    pct_dip_open   = r2(n_dip_open/n*100)
+    pct_dip_close  = r2(n_dip_close/n*100)
+
+    avg_gap        = r2(sum(gaps)/n)
+    min_gap        = r2(min(gaps))   # worst (lowest) open vs close
+    avg_nd         = r2(sum(nd_rets)/n)
+    nd_min_hist    = r2(min(nd_rets))
+    nd_max_hist    = r2(max(nd_rets))
+    avg_nd_max     = r2(sum(nd_maxes)/n)
+
+    # Dip below open stats
+    avg_dip_open   = r2(sum(dob_pcts)/n)   # avg dip from open
+    max_dip_open   = r2(max(dob_pcts))     # worst dip from open (most it ever fell)
+    # Safe buy = worst-case: always fills if you set limit at:
+    # open * (1 - max_dip_open/100)  → this always gets filled but at worst price
+    # Conservative safe buy: use avg_dip_open * 0.5 (usually fills)
+    today_close    = float(alert["today_close"])
+
+    # Estimated next open using historical min gap % (worst case open)
+    est_next_open  = r2(today_close * (1 + min_gap/100))  # if it opens at historical minimum
+
+    # Safe buy price: est_next_open dipping by max_dip_open
+    safe_buy_from_open   = r2(est_next_open * (1 - max_dip_open/100))
+    safe_buy_vs_close    = r2((safe_buy_from_open - today_close) / today_close * 100)
+
+    # Comfortable buy: est_next_open dipping by avg_dip_open (fills most of the time)
+    comfort_buy          = r2(est_next_open * (1 - avg_dip_open/100))
+    comfort_buy_vs_close = r2((comfort_buy - today_close) / today_close * 100)
 
     avg_turnover  = round(sum(turnovers)/len(turnovers)) if turnovers else 0
     liquidity_ok  = avg_turnover >= LIQUIDITY_TARGET_RS
+    avg_vol_ratio = r2(sum(vol_rats)/len(vol_rats)) if vol_rats else None
+    pre_t20s      = [o["trend_20d_before"] for o in occurrences if o["trend_20d_before"] is not None]
+    avg_trend20   = r2(sum(pre_t20s)/len(pre_t20s)) if pre_t20s else None
 
-    max_adverse   = round(max(dips),2) if dips else 0.0
-    sl_needed     = max_adverse > 1.0
-    suggested_sl  = round(-max_adverse-0.5,1) if sl_needed else None
+    # Max adverse from close (never negative in our filtered dataset, but track anyway)
+    max_adverse_from_close = r2(max(doc_pcts))
 
-    avg_vol_ratio = round(sum(vol_rats)/len(vol_rats),2) if vol_rats else None
-    pre_trends    = [o["trend_20d_before"] for o in occurrences if o["trend_20d_before"] is not None]
-    avg_trend20   = round(sum(pre_trends)/len(pre_trends),2) if pre_trends else None
+    # Targets based on today_close
+    t1 = r2(today_close * (1 + nd_min_hist/100))
+    t2 = r2(today_close * (1 + avg_nd/100))
+    t3 = r2(today_close * (1 + avg_nd_max/100))
 
-    pct_gap_up    = round(n_gap_up/n*100,1)
-    pct_dip       = round(n_dip/n*100,1)
+    # Stop loss: only if stock ever went below signal close
+    sl_needed  = max_adverse_from_close > 1.0
+    suggested_sl_pct = r2(-max_adverse_from_close - 0.5) if sl_needed else None
+    suggested_sl_px  = r2(today_close*(1-(max_adverse_from_close+0.5)/100)) if sl_needed else None
 
-    # Today's close is the signal price
-    today_close   = float(alert["today_close"])
+    # ── Score ──────────────────────────────────────────────────────────
+    # Use 5d data from the original alert (more reliable than re-computed)
+    w5d    = alert.get("win_5d") or {}
+    avg_5d = w5d.get("avg") or 0
 
-    # Entry strategy: if >50% of time price dips below close, wait for dip
-    if pct_dip > 50:
-        rec_buy   = round(today_close * (1 - avg_vol_ratio*0.002 if avg_vol_ratio else 0.005), 2)
-        buy_note  = f"Limit order ~Rs{rec_buy} (below close — dips {pct_dip:.0f}% of times)"
-    else:
-        rec_buy   = today_close
-        buy_note  = f"Buy at open tomorrow (gap-up {pct_gap_up:.0f}% of times, buy at close Rs{today_close} or open)"
-
-    # Targets based on historical min/avg
-    nd_min  = round(min(nd_rets),2)
-    nd_avg  = round(sum(nd_rets)/n,2)
-    nd_max_val = round(max(nd_rets),2)
-    t1      = round(today_close*(1+nd_min/100),2)   # conservative
-    t2      = round(today_close*(1+nd_avg/100),2)   # realistic
-    t3      = round(today_close*(1+min(o["nd_max_gain"] for o in occurrences)/100),2)  # best-case (min of maxes)
-
-    # Confidence score
-    score = 30  # base: 100% win rate
+    score = 30  # base: 100% ND win rate
     score += min(20, n*2)
     score += min(15, len(set(o["date"][:4] for o in occurrences))*4)
     if avg_vol_ratio and avg_vol_ratio>=1.5: score+=10
     if pct_gap_up>=80: score+=10
     if not sl_needed: score+=10
     if liquidity_ok: score+=5
+    if avg_5d >= 3: score+=10   # strong 5d performance is a big confidence booster
     score = min(100, score)
 
-    # Strength note
-    notes=[]
-    if avg_vol_ratio and avg_vol_ratio>=2: notes.append(f"Volume was {avg_vol_ratio}x avg on signal days")
-    if avg_trend20 is not None and avg_trend20<-3: notes.append(f"Stock was down {abs(avg_trend20):.1f}% in 20d before — dip reversal")
-    if pct_gap_up>=80: notes.append(f"Opens higher {pct_gap_up:.0f}% of next days")
+    notes = []
+    if avg_vol_ratio and avg_vol_ratio>=2: notes.append(f"Volume {avg_vol_ratio}x avg — strong institutional interest")
+    if avg_trend20 is not None and avg_trend20<-3: notes.append(f"Stock down {abs(avg_trend20):.1f}% before signal — dip reversal")
+    if pct_gap_up>=80: notes.append(f"Opens higher {pct_gap_up:.0f}% of next mornings")
+    if pct_dip_open>=50: notes.append(f"Dips below open {pct_dip_open:.0f}% of times — good limit-order opportunity")
+    if avg_5d>=5: notes.append(f"5-day avg return +{avg_5d:.1f}% — pattern stays strong beyond next day")
     if n>=6: notes.append(f"Fired {n} times — robust sample")
 
     return {
-        "sym":                sym,
-        "candle_key":         candle_key,
-        "desc":               alert.get("candle_desc",""),
-        "today_date":         alert["today_date"],
-        "today_close":        today_close,
-        "today_vol":          alert.get("today_vol",0),
-        "is_today_signal":    True,  # always True — only today's signals are here
-        "n_occurrences":      n,
-        "years":              alert.get("years",[]),
-        "score":              score,
-        # Entry
-        "pct_gap_up":         pct_gap_up,
-        "avg_gap_pct":        round(sum(gaps)/n,2),
-        "min_gap_pct":        round(min(gaps),2),
-        "pct_entry_dip":      pct_dip,
-        "avg_dip_pct":        round(sum(dips)/n,2),
-        "max_dip_pct":        max_adverse,
-        "recommended_buy":    rec_buy,
-        "buy_note":           buy_note,
-        # Returns
-        "nd_min_return":      nd_min,
-        "nd_avg_return":      nd_avg,
-        "nd_max_return":      nd_max_val,
-        "nd_avg_high":        round(sum(nd_maxes)/n,2),
-        "max_gain_from_entry":round(sum(max_froms)/n,2),
-        # Targets (based on today_close)
-        "target_1":           t1,
-        "target_2":           t2,
-        "target_3":           t3,
-        "target_1_pct":       nd_min,
-        "target_2_pct":       nd_avg,
-        # SL
-        "sl_needed":          sl_needed,
-        "max_adverse_excursion": max_adverse,
-        "suggested_sl_pct":   suggested_sl,
-        "suggested_sl_px":    round(today_close*(1+suggested_sl/100),2) if suggested_sl else None,
-        "sl_note":            (f"Max dip was {max_adverse}% — SL at Rs{round(today_close*(1-max_adverse/100),2)}"
-                               if sl_needed else "No SL needed — never went below signal close in all occurrences"),
-        # Liquidity
-        "avg_turnover_rs":    avg_turnover,
-        "liquidity_ok":       liquidity_ok,
-        "liquidity_note":     (f"Rs{avg_turnover:,} avg daily — easily absorbs Rs2L order"
-                               if liquidity_ok else f"Low liquidity Rs{avg_turnover:,} — partial fill risk for Rs2L"),
-        # Context
-        "avg_vol_ratio":      avg_vol_ratio,
+        "sym":               sym,
+        "candle_key":        candle_key,
+        "desc":              alert.get("candle_desc",""),
+        "today_date":        alert["today_date"],
+        "today_close":       today_close,
+        "today_vol":         alert.get("today_vol",0),
+        "n_occurrences":     n,
+        "years":             alert.get("years",[]),
+        "score":             score,
+        # ── Entry strategy ─────────────────────────────────────
+        "pct_gap_up":           pct_gap_up,
+        "avg_gap_pct":          avg_gap,
+        "min_gap_pct":          min_gap,
+        "est_next_open":        est_next_open,
+        "pct_dip_below_open":   pct_dip_open,    # % of times price dipped below open
+        "avg_dip_from_open":    avg_dip_open,    # avg % it dipped below open
+        "max_dip_from_open":    max_dip_open,    # worst case dip from open
+        "pct_dip_below_close":  pct_dip_close,
+        "safe_buy_px":          safe_buy_from_open,  # always fills (worst-case dip)
+        "safe_buy_vs_close":    safe_buy_vs_close,
+        "comfort_buy_px":       comfort_buy,         # fills most of the time
+        "comfort_buy_vs_close": comfort_buy_vs_close,
+        "buy_strategy": (
+            f"Place limit @ Rs{comfort_buy} ({comfort_buy_vs_close:+.1f}% vs close) — "
+            f"dip happens {pct_dip_open:.0f}% of times. Worst fill ever: Rs{safe_buy_from_open}."
+        ) if pct_dip_open>=50 else (
+            f"Gap-up open {pct_gap_up:.0f}% of times. "
+            f"Est open: Rs{est_next_open}. Buy at open or pre-market."
+        ),
+        # ── Returns ────────────────────────────────────────────
+        "nd_min_return":   nd_min_hist,
+        "nd_avg_return":   avg_nd,
+        "nd_max_return":   nd_max_hist,
+        "nd_avg_high":     avg_nd_max,
+        "win_5d_avg":      avg_5d,
+        "win_5d_min":      w5d.get("min"),
+        "win_10d_avg":     (alert.get("win_10d") or {}).get("avg"),
+        "win_20d_avg":     (alert.get("win_20d") or {}).get("avg"),
+        # ── Targets ────────────────────────────────────────────
+        "target_1":        t1,
+        "target_2":        t2,
+        "target_3":        t3,
+        "target_1_pct":    nd_min_hist,
+        "target_2_pct":    avg_nd,
+        # ── Stop loss ──────────────────────────────────────────
+        "sl_needed":       sl_needed,
+        "max_adverse_from_close": max_adverse_from_close,
+        "suggested_sl_px": suggested_sl_px,
+        "suggested_sl_pct":suggested_sl_pct,
+        "sl_note": (
+            f"Max dip below signal close: {max_adverse_from_close}% — SL @ Rs{suggested_sl_px}"
+            if sl_needed else
+            "No SL needed — never closed below signal close in all occurrences"
+        ),
+        # ── Liquidity ──────────────────────────────────────────
+        "avg_turnover_rs": avg_turnover,
+        "liquidity_ok":    liquidity_ok,
+        "liquidity_note":  (f"Avg daily Rs{avg_turnover:,} — Rs2L order feasible"
+                            if liquidity_ok else f"Low liquidity Rs{avg_turnover:,}"),
+        # ── Context ────────────────────────────────────────────
+        "avg_vol_ratio":        avg_vol_ratio,
         "avg_trend_20d_before": avg_trend20,
-        "strength_note":      ". ".join(notes) or "Consistent 100%-win candle pattern",
-        # All occurrences (for table expansion)
-        "occurrences":        occurrences,
+        "strength_note":        ". ".join(notes) or "Consistent 100%-win candle pattern",
+        # ── Full occurrence data ────────────────────────────────
+        "occurrences":     occurrences,
     }
 
-# ─────────────────────────────────────────────────────────────────────────────
-# MAIN
-# ─────────────────────────────────────────────────────────────────────────────
 def main():
     print("="*65)
-    print("Candle Enriched Analysis  v2 — TODAY signals only")
+    print("Candle Enriched Analysis  v3")
     print("="*65)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     with open(MANIFEST) as f: manifest=json.load(f)
     tds = sorted(manifest.keys())
     latest = tds[-1]
-    print(f"  Trading days: {len(tds)}  Latest: {latest}")
+    print(f"  {len(tds)} trading days | Latest: {latest}")
 
-    # Load TODAY's signals only
-    today_path = OUT_DIR / "candle_today.json"
+    today_path = OUT_DIR/"candle_today.json"
     if not today_path.exists():
         print("ERROR: candle_today.json not found. Run candle_patterns.py first.")
         sys.exit(1)
-    with open(today_path) as f: today_data = json.load(f)
+    with open(today_path) as f: today_data=json.load(f)
     alerts = today_data.get("alerts", [])
-    print(f"  Today's signals: {len(alerts)} stocks (date: {today_data.get('signal_date','?')})")
+    print(f"  Today signals: {len(alerts)} (date: {today_data.get('signal_date','?')})")
 
     if not alerts:
-        print("  No signals today — writing empty outputs.")
-        now_ist = datetime.now(timezone(timedelta(hours=5,minutes=30))).strftime("%Y-%m-%dT%H:%M:%S+05:30")
+        now_ist=datetime.now(timezone(timedelta(hours=5,minutes=30))).strftime("%Y-%m-%dT%H:%M:%S+05:30")
         jdump({"generated_at":now_ist,"signal_date":latest,"n_analysed":0,"patterns":[]}, OUT_DIR/"candle_enriched.json")
         jdump({"generated_at":now_ist,"signal_date":latest,"top5":[]}, OUT_DIR/"candle_top5.json")
+        print("  No signals today — empty outputs written.")
         return
 
-    # Deep analyse each signaling stock
-    enriched = []
+    enriched=[]
+    skipped_no_data=0
+    skipped_no_occ=0
+
     for i, alert in enumerate(alerts):
-        sym  = alert["sym"]
-        ckey = alert["candle_key"]
-        print(f"  [{i+1}/{len(alerts)}] {sym} ({ckey})...", end="", flush=True)
-        df = load_stock(sym, tds)
+        sym=alert["sym"]; ckey=alert["candle_key"]
+        print(f"  [{i+1:02d}/{len(alerts)}] {sym:<14} ({ckey})...", end="", flush=True)
+        df=load_stock(sym, tds)
         if df.empty:
-            print(" NO DATA"); continue
-        result = deep_analyse(sym, ckey, alert, df)
+            print(" NO DATA"); skipped_no_data+=1; continue
+        result=deep_analyse(sym, ckey, alert, df)
         if not result:
-            print(" INSUFFICIENT DATA"); continue
-        enriched.append(result)
-        print(f" score={result['score']} occ={result['n_occurrences']} "
-              f"T1=Rs{result['target_1']}(+{result['nd_min_return']}%) "
-              f"T2=Rs{result['target_2']}(+{result['nd_avg_return']}%)")
+            # Fallback: use alert's pre-computed stats, just no entry analysis
+            print(f" FALLBACK (no matching occ in re-load)")
+            skipped_no_occ+=1
+            today_close=float(alert["today_close"])
+            w5=alert.get("win_5d") or {}
+            nd_min=float(alert.get("nd_min",0))
+            nd_avg=float(alert.get("nd_avg",0))
+            enriched.append({
+                "sym":sym,"candle_key":ckey,"desc":alert.get("candle_desc",""),
+                "today_date":alert["today_date"],"today_close":today_close,
+                "today_vol":alert.get("today_vol",0),
+                "n_occurrences":alert.get("occurrences",0),
+                "years":alert.get("years",[]),"score":20,
+                "pct_gap_up":float(alert.get("gap_up_rate",0)),
+                "avg_gap_pct":None,"min_gap_pct":None,"est_next_open":today_close,
+                "pct_dip_below_open":None,"avg_dip_from_open":0,"max_dip_from_open":0,
+                "pct_dip_below_close":None,"safe_buy_px":today_close,"safe_buy_vs_close":0,
+                "comfort_buy_px":today_close,"comfort_buy_vs_close":0,
+                "buy_strategy":"Buy at tomorrow's open price (no entry analysis available)",
+                "nd_min_return":nd_min,"nd_avg_return":nd_avg,"nd_max_return":float(alert.get("nd_max",0)),
+                "nd_avg_high":nd_avg,"win_5d_avg":float(w5.get("avg",0)),"win_5d_min":w5.get("min"),
+                "win_10d_avg":(alert.get("win_10d") or {}).get("avg"),
+                "win_20d_avg":(alert.get("win_20d") or {}).get("avg"),
+                "target_1":round(today_close*(1+nd_min/100),2),
+                "target_2":round(today_close*(1+nd_avg/100),2),
+                "target_3":round(today_close*(1+nd_avg*1.5/100),2),
+                "target_1_pct":nd_min,"target_2_pct":nd_avg,
+                "sl_needed":False,"max_adverse_from_close":0,
+                "suggested_sl_px":None,"suggested_sl_pct":None,
+                "sl_note":"No SL data (fallback mode — run workflow for full analysis)",
+                "avg_turnover_rs":round(today_close*float(alert.get("today_vol",0))),
+                "liquidity_ok":today_close*float(alert.get("today_vol",0))>=200_000,
+                "liquidity_note":"Estimated from today volume",
+                "avg_vol_ratio":None,"avg_trend_20d_before":None,
+                "strength_note":"Pattern validated by candle_patterns; detailed entry analysis unavailable (fallback)",
+                "occurrences":[],
+            })
+        else:
+            enriched.append(result)
+            w5avg=result.get("win_5d_avg",0) or 0
+            print(f" score={result['score']} occ={result['n_occurrences']} "
+                  f"5d={w5avg:+.1f}% nd={result['nd_avg_return']:+.1f}% "
+                  f"buy=Rs{result['comfort_buy_px']}")
 
-    enriched.sort(key=lambda x: (-x["score"], -x["nd_avg_return"]))
-    top5 = enriched[:5]
+    # Sort: primarily by 5d avg return, then by score
+    enriched.sort(key=lambda x: (-(x.get("win_5d_avg") or 0), -x["score"]))
+    top5=enriched[:5]
 
-    now_ist = datetime.now(timezone(timedelta(hours=5,minutes=30))).strftime("%Y-%m-%dT%H:%M:%S+05:30")
+    print(f"\n  Total: {len(enriched)} analysed ({skipped_no_data} no data, {skipped_no_occ} fallback)")
 
-    jdump({"generated_at":now_ist, "signal_date":latest,
-           "note":"Deep analysis of TODAY's candle signals only",
-           "n_analysed":len(enriched), "patterns":enriched},
+    now_ist=datetime.now(timezone(timedelta(hours=5,minutes=30))).strftime("%Y-%m-%dT%H:%M:%S+05:30")
+    jdump({"generated_at":now_ist,"signal_date":latest,
+           "note":"Deep analysis of TODAY signals — sorted by 5d avg return",
+           "n_analysed":len(enriched),"patterns":enriched},
           OUT_DIR/"candle_enriched.json")
-    print(f"\n  OK candle_enriched.json ({len(enriched)} stocks analysed)")
+    print(f"  OK candle_enriched.json ({len(enriched)} patterns)")
 
-    jdump({"generated_at":now_ist, "signal_date":latest,
-           "note":"Top 5 from today's candle signals by confidence score",
+    jdump({"generated_at":now_ist,"signal_date":latest,
+           "note":"Top 5 from today signals by 5d return + confidence score",
            "top5":top5},
           OUT_DIR/"candle_top5.json")
     print(f"  OK candle_top5.json")
-
-    print(f"\nTop 5 for next trading day after {latest}:")
+    print(f"\nTop 5:")
     for r in top5:
-        print(f"  {r['sym']:<14} score={r['score']}  "
-              f"buy=Rs{r['recommended_buy']}  "
-              f"T1=Rs{r['target_1']}(+{r['nd_min_return']}%)  "
-              f"T2=Rs{r['target_2']}(+{r['nd_avg_return']}%)")
+        print(f"  {r['sym']:<14} 5d={r.get('win_5d_avg',0):+.1f}% score={r['score']} "
+              f"comfort_buy=Rs{r['comfort_buy_px']} T1=Rs{r['target_1']} T2=Rs{r['target_2']}")
 
 if __name__=="__main__":
     main()

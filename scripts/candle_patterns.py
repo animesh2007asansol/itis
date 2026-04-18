@@ -416,6 +416,9 @@ def main():
                 res["today_hist"] is not None):
 
                 th = res["today_hist"]
+                # Skip weak signals: avg next-day return < 1%
+                if (th.get("nd_avg") or 0) < 1.0:
+                    continue
                 today_alerts.append({
                     "sym":          sym,
                     "today_date":   res["today_date"],
@@ -471,7 +474,11 @@ def main():
 
     # Sort
     best_pats.sort(key=lambda x: -x["nd_min"])
-    today_alerts.sort(key=lambda x: -x["nd_min"])
+    # Sort by 5d avg return (best 5-day performance first), then nd_min
+    def alert_sort_key(a):
+        w5 = a.get("win_5d") or {}
+        return (-(w5.get("avg") or 0), -a.get("nd_min", 0))
+    today_alerts.sort(key=alert_sort_key)
     perf_track.sort(key=lambda x: x["actual_return"])  # worst first
 
     # Stats
