@@ -191,12 +191,12 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <button class="tab" onclick="showPage('stocks',this)">📈 Stock Profiles</button>
     <button class="tab" onclick="showPage('repeating',this)">🏆 Most Reliable</button>
     <button class="tab" onclick="showPage('candle-alert',this)">🕯 Candle Alerts</button>
-    <button class="tab" onclick="showPage('candle-perf',this)">📈 Yesterday Results</button>
+    <button class="tab" onclick="showPage('candle-perf',this)">📈 Yesterday</button>
     <button class="tab" onclick="showPage('candle-best',this)">⭐ Best Candles</button>
     <button class="tab" onclick="showPage('candle-search',this)">🔍 Candle Search</button>
     <button class="tab" onclick="showPage('hw-dip',this)">🏦 HW Dip</button>
     <button class="tab" onclick="showPage('hw-alerts',this)">🔔 HW Alerts</button>
-    <button class="tab" onclick="showPage('top5',this)">🏆 Top 5 Stocks</button>
+    <button class="tab" onclick="showPage('top5',this)">🏆 Top 5</button>
     <button class="tab" onclick="showPage('deep',this)">🔬 Deep Analysis</button>
     <button class="tab" onclick="showPage('calert',this)">📋 Candle Table</button>
     <button class="tab" onclick="showPage('howto',this)">📖 How It Works</button>
@@ -290,11 +290,9 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 
 <!-- PAGE: CANDLE ALERTS -->
 <div class="page" id="page-candle-alert">
-  <div class="sh">🕯 Candle Alerts <small id="ca-date-note">next-day predictions · only stocks with today's data</small></div>
-
-  <!-- INVESTMENT CALCULATOR -->
+  <div class="sh">🕯 Candle Alerts <small id="ca-date-note">next-day buy signals · only today's data</small></div>
   <div style="background:var(--card);border:1px solid var(--g2);border-radius:var(--r);padding:12px 16px;margin-bottom:14px">
-    <div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:9px">💰 Investment Calculator — enter capital to get allocation for each stock</div>
+    <div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:9px">💰 Investment Calculator</div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
       <div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Total Capital (Rs)</div>
         <input class="si" id="inv-capital" type="number" placeholder="e.g. 500000" style="width:160px" oninput="renderCA()"></div>
@@ -303,11 +301,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
       <div id="inv-summary" style="font-size:11px;color:var(--t2);padding:5px 0"></div>
     </div>
   </div>
-
-  <!-- TOP 5 TODAY SIGNALS (from enriched analysis) -->
   <div id="ca-top5-section" style="margin-bottom:18px"></div>
-
-  <!-- DAILY CANDLE ALERTS -->
   <div class="pill-row" id="ca-pills"></div>
   <div class="fbar">
     <input class="si" id="ca-q" placeholder="Symbol…" style="width:120px" oninput="renderCA()">
@@ -320,42 +314,38 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
   <div class="alert-grid" id="ca-grid"><div class="empty"><div class="spinner"></div>Loading…</div></div>
 </div>
 
-<!-- PAGE: CANDLE PERFORMANCE
-
-<!-- PAGE: CANDLE PERFORMANCE — yesterday's alerts + actual results -->
+<!-- PAGE: YESTERDAY RESULTS -->
 <div class="page" id="page-candle-perf">
-  <div class="sh">📈 Yesterday Results <small>candle alerts from previous trading day vs actual next-day return</small></div>
+  <div class="sh">📈 Yesterday Results <small>previous trading day candle alerts vs actual next-day return</small></div>
   <div class="pill-row" id="cp-pills"></div>
   <div class="fbar">
     <button class="fb on" id="cpf-all" onclick="cpFilter('all',this)">All</button>
     <button class="fb" id="cpf-pat" onclick="cpFilter('pattern',this)">Had Pattern</button>
-    <button class="fb" id="cpf-brk" onclick="cpFilter('broken',this)">Broken Patterns</button>
+    <button class="fb" id="cpf-brk" onclick="cpFilter('broken',this)">Broken</button>
     <span class="fsep">|</span>
     <input class="si" id="cp-q" placeholder="Symbol…" style="width:100px" oninput="renderCP()">
   </div>
-  <div class="twrap">
-    <table class="tbl" id="cp-tbl">
-      <thead><tr>
-        <th onclick="cpTh('sym')">Stock<span class="arr"></span></th>
-        <th onclick="cpTh('signal_date')">Signal Date<span class="arr"></span></th>
-        <th onclick="cpTh('candle_desc')">Candle Shape<span class="arr"></span></th>
-        <th onclick="cpTh('close_signal')">Signal Close<span class="arr"></span></th>
-        <th onclick="cpTh('close_next')">Next Close<span class="arr"></span></th>
-        <th onclick="cpTh('actual_return')">Actual Return<span class="arr"></span></th>
-        <th onclick="cpTh('was_positive')">Result<span class="arr"></span></th>
-        <th onclick="cpTh('had_pattern')">Had Pattern<span class="arr"></span></th>
-        <th onclick="cpTh('pattern_pred_min')">Predicted Min%<span class="arr"></span></th>
-        <th onclick="cpTh('pattern_broken')">Pattern Broken?<span class="arr"></span></th>
-      </tr></thead>
-      <tbody id="cp-tbody"><tr><td colspan="10" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
-    </table>
-  </div>
-  <div id="cp-broken" style="margin-top:10px"></div>
+  <div class="twrap"><table class="tbl" id="cp-tbl">
+    <thead><tr>
+      <th onclick="cpTh('sym')">Stock<span class="arr"></span></th>
+      <th onclick="cpTh('signal_date')">Signal Date<span class="arr"></span></th>
+      <th onclick="cpTh('candle_desc')">Candle<span class="arr"></span></th>
+      <th onclick="cpTh('close_signal')">Signal Close<span class="arr"></span></th>
+      <th onclick="cpTh('close_next')">Next Close<span class="arr"></span></th>
+      <th onclick="cpTh('actual_return')">Actual Return<span class="arr"></span></th>
+      <th onclick="cpTh('was_positive')">Result<span class="arr"></span></th>
+      <th onclick="cpTh('had_pattern')">Had Pattern<span class="arr"></span></th>
+      <th onclick="cpTh('pattern_pred_min')">Predicted Min%<span class="arr"></span></th>
+      <th onclick="cpTh('pattern_broken')">Broken?<span class="arr"></span></th>
+    </tr></thead>
+    <tbody id="cp-tbody"><tr><td colspan="10" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+  </table></div>
+  <div id="cp-broken"></div>
 </div>
 
 <!-- PAGE: BEST CANDLES -->
 <div class="page" id="page-candle-best">
-  <div class="sh">⭐ Best Candle Patterns <small>100% next-day positive in ALL occurrences · ranked by minimum return</small></div>
+  <div class="sh">⭐ Best Candle Patterns <small>100% next-day positive · ranked by minimum return</small></div>
   <div class="pill-row" id="cb-pills"></div>
   <div class="fbar">
     <input class="si" id="cb-q" placeholder="Symbol…" style="width:120px" oninput="renderCB()">
@@ -365,43 +355,38 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <button class="fb" id="cbs-max" onclick="cbSort('nd_max',this)">Max Return</button>
     <button class="fb" id="cbs-occ" onclick="cbSort('occurrences',this)">Occurrences</button>
   </div>
-  <div class="twrap">
-    <table class="tbl" id="cb-tbl">
-      <thead><tr>
-        <th onclick="cbTh('sym')">Stock<span class="arr"></span></th>
-        <th onclick="cbTh('desc')">Candle<span class="arr"></span></th>
-        <th onclick="cbTh('occurrences')">Occ<span class="arr"></span></th>
-        <th onclick="cbTh('nd_min')">ND Min%<span class="arr"></span></th>
-        <th onclick="cbTh('nd_avg')">ND Avg%<span class="arr"></span></th>
-        <th onclick="cbTh('nd_max')">ND Max%<span class="arr"></span></th>
-        <th onclick="cbTh('gap_up_rate')">Gap Up%<span class="arr"></span></th>
-        <th onclick="cbTh('_5d_avg')">5d Avg%<span class="arr"></span></th>
-        <th onclick="cbTh('_10d_avg')">10d Avg%<span class="arr"></span></th>
-        <th onclick="cbTh('_20d_avg')">20d Avg%<span class="arr"></span></th>
-        <th onclick="cbTh('_years_str')">Years<span class="arr"></span></th>
-        <th onclick="cbTh('last_date')">Last Seen<span class="arr"></span></th>
-      </tr></thead>
-      <tbody id="cb-tbody"><tr><td colspan="12" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
-    </table>
-  </div>
+  <div class="twrap"><table class="tbl" id="cb-tbl">
+    <thead><tr>
+      <th onclick="cbTh('sym')">Stock<span class="arr"></span></th>
+      <th onclick="cbTh('desc')">Candle<span class="arr"></span></th>
+      <th onclick="cbTh('occurrences')">Occ<span class="arr"></span></th>
+      <th onclick="cbTh('nd_min')">ND Min%<span class="arr"></span></th>
+      <th onclick="cbTh('nd_avg')">ND Avg%<span class="arr"></span></th>
+      <th onclick="cbTh('nd_max')">ND Max%<span class="arr"></span></th>
+      <th onclick="cbTh('gap_up_rate')">Gap Up%<span class="arr"></span></th>
+      <th onclick="cbTh('_5d_avg')">5d Avg%<span class="arr"></span></th>
+      <th onclick="cbTh('_10d_avg')">10d Avg%<span class="arr"></span></th>
+      <th onclick="cbTh('_20d_avg')">20d Avg%<span class="arr"></span></th>
+      <th onclick="cbTh('_years_str')">Years<span class="arr"></span></th>
+      <th onclick="cbTh('last_date')">Last Seen<span class="arr"></span></th>
+    </tr></thead>
+    <tbody id="cb-tbody"><tr><td colspan="12" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+  </table></div>
 </div>
 
 <!-- PAGE: CANDLE SEARCH -->
 <div class="page" id="page-candle-search">
   <div class="sh">🔍 Candle Search <small>search any stock symbol</small></div>
   <div class="fbar">
-    <input class="si" id="cs-sym" placeholder="Symbol e.g. RELIANCE, TCS…" style="width:220px"
-      onkeydown="if(event.key==='Enter')doCS()">
+    <input class="si" id="cs-sym" placeholder="Symbol e.g. RELIANCE, TCS…" style="width:220px" onkeydown="if(event.key==='Enter')doCS()">
     <button class="fb on" onclick="doCS()">Search</button>
   </div>
-  <div id="cs-result" style="margin-top:12px">
-    <div class="empty" style="color:var(--t3)">Enter a symbol above.</div>
-  </div>
+  <div id="cs-result" style="margin-top:12px"><div class="empty" style="color:var(--t3)">Enter a symbol above.</div></div>
 </div>
 
 <!-- PAGE: HW DIP -->
 <div class="page" id="page-hw-dip">
-  <div class="sh">🏦 Heavyweight Dip-Recover <small>large-cap stocks (avg turnover &gt;= Rs 2Cr, 4+ yrs) with repeating floor+recover pattern</small></div>
+  <div class="sh">🏦 Heavyweight Dip-Recover <small>avg turnover &gt;= Rs 2Cr, 4+ yrs · click row to expand</small></div>
   <div class="pill-row" id="hw-pills"></div>
   <div class="fbar">
     <button class="fb on" id="hwg-all" onclick="hwGrd('ALL',this)">All</button>
@@ -413,26 +398,21 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <span class="fsep">Sort:</span>
     <button class="fb on" id="hws-min" onclick="hwSort('best_min_return',this)">Min Recovery</button>
     <button class="fb" id="hws-b15" onclick="hwSort('best_beats15_rate',this)">Beats 15%</button>
-    <button class="fb" id="hws-evt" onclick="hwSort('n_events',this)">Events</button>
   </div>
-  <div class="twrap">
-    <table class="tbl" id="hw-tbl">
-      <thead><tr>
-        <th onclick="hwTh('_rank')">#<span class="arr"></span></th>
-        <th onclick="hwTh('sym')">Stock<span class="arr"></span></th>
-        <th onclick="hwTh('grade')">Grade<span class="arr"></span></th>
-        <th onclick="hwTh('best_window_days')">Best Window<span class="arr"></span></th>
-        <th onclick="hwTh('best_min_return')">Min Recovery%<span class="arr"></span></th>
-        <th onclick="hwTh('best_beats15_rate')">Beats 15%<span class="arr"></span></th>
-        <th onclick="hwTh('_avg_r')">Avg Recovery%<span class="arr"></span></th>
-        <th onclick="hwTh('n_events')">Events<span class="arr"></span></th>
-        <th onclick="hwTh('n_years')">Yrs Count<span class="arr"></span></th>
-        <th onclick="hwTh('_years_str')">Years<span class="arr"></span></th>
-      </tr></thead>
-      <tbody id="hw-tbody"><tr><td colspan="10" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
-    </table>
-  </div>
-  <div id="hw-detail"></div>
+  <div class="twrap"><table class="tbl" id="hw-tbl">
+    <thead><tr>
+      <th></th>
+      <th onclick="hwTh('sym')">Stock<span class="arr"></span></th>
+      <th onclick="hwTh('grade')">Grade<span class="arr"></span></th>
+      <th onclick="hwTh('best_window_days')">Best Window<span class="arr"></span></th>
+      <th onclick="hwTh('best_min_return')">Min Recovery%<span class="arr"></span></th>
+      <th onclick="hwTh('best_beats15_rate')">Beats 15%<span class="arr"></span></th>
+      <th onclick="hwTh('_avg_r')">Avg Recovery%<span class="arr"></span></th>
+      <th onclick="hwTh('n_events')">Events<span class="arr"></span></th>
+      <th onclick="hwTh('n_years')">Years<span class="arr"></span></th>
+    </tr></thead>
+    <tbody id="hw-tbody"><tr><td colspan="9" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+  </table></div>
 </div>
 
 <!-- PAGE: HW ALERTS -->
@@ -442,86 +422,94 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
   <div class="alert-grid" id="hwa-grid"><div class="empty"><div class="spinner"></div>Loading…</div></div>
 </div>
 
-
-<!-- PAGE: TOP 5 STOCKS -->
+<!-- PAGE: TOP 5 -->
 <div class="page" id="page-top5">
-  <div class="sh">🏆 Top 5 Guaranteed Stocks <small>100%-win candle pattern · deepest analysis · ranked by confidence score</small></div>
-  <div id="t5-body"><div class="empty"><div class="spinner"></div>Loading deep analysis…</div></div>
+  <div class="sh">🏆 Top 5 Next-Day Buy Stocks <small>deep analysis of today's candle signals · best 5 by confidence score</small></div>
+  <div style="background:var(--card);border:1px solid var(--g2);border-radius:var(--r);padding:12px 16px;margin-bottom:14px">
+    <div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:9px">💰 Investment Calculator</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+      <div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Total Capital (Rs)</div>
+        <input class="si" id="t5-capital" type="number" placeholder="e.g. 500000" style="width:160px" oninput="renderTop5()"></div>
+      <div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Max per Stock %</div>
+        <input class="si" id="t5-max-pct" type="number" placeholder="20" value="20" style="width:80px" oninput="renderTop5()"></div>
+    </div>
+  </div>
+  <div id="t5-body"><div class="empty"><div class="spinner"></div>Loading…</div></div>
 </div>
 
-<!-- PAGE: DEEP ANALYSIS — all today's signaling stocks -->
+<!-- PAGE: DEEP ANALYSIS -->
 <div class="page" id="page-deep">
-  <div class="sh">🔬 Deep Analysis — Today's Signals <small>full analysis of every stock with a next-day buy signal today · click row to expand in-place</small></div>
+  <div class="sh">🔬 Deep Analysis — Today's Signals <small>click row to expand in-place · all today's candle signals with full details</small></div>
   <div class="pill-row" id="dp-pills"></div>
   <div class="fbar">
     <input class="si" id="dp-q" placeholder="Symbol…" style="width:120px" oninput="renderDP()">
     <span class="fsep">Sort:</span>
-    <button class="fb on" id="dps-score" onclick="dpSort('score',this)">Score</button>
-    <button class="fb" id="dps-avg" onclick="dpSort('nd_avg_return',this)">Avg Return</button>
-    <button class="fb" id="dps-min" onclick="dpSort('nd_min_return',this)">Min Return</button>
-    <button class="fb" id="dps-gap" onclick="dpSort('pct_gap_up',this)">Gap%</button>
+    <button class="fb" id="dps-score" onclick="dpSort('score',this)">Score</button>
+    <button class="fb on" id="dps-5d" onclick="dpSort('win_5d_avg',this)">5d Avg</button>
+    <button class="fb" id="dps-avg" onclick="dpSort('nd_avg_return',this)">Avg Ret</button>
+    <button class="fb" id="dps-min" onclick="dpSort('nd_min_return',this)">Min Ret</button>
     <button class="fb" id="dps-liq" onclick="dpSort('avg_turnover_rs',this)">Liquidity</button>
   </div>
-  <div class="twrap">
-    <table class="tbl" id="dp-tbl" style="min-width:1200px">
-      <thead><tr>
-        <th></th>
-        <th onclick="dpTh('sym')">Stock<span class="arr"></span></th>
-        <th onclick="dpTh('desc')">Candle<span class="arr"></span></th>
-        <th onclick="dpTh('n_occurrences')">Occ<span class="arr"></span></th>
-        <th onclick="dpTh('score')">Score<span class="arr"></span></th>
-        <th onclick="dpTh('recommended_buy')">Buy Price<span class="arr"></span></th>
-        <th onclick="dpTh('target_1')">Target 1<span class="arr"></span></th>
-        <th onclick="dpTh('target_2')">Target 2<span class="arr"></span></th>
-        <th onclick="dpTh('nd_min_return')">Min%<span class="arr"></span></th>
-        <th onclick="dpTh('nd_avg_return')">Avg%<span class="arr"></span></th>
-        <th onclick="dpTh('pct_gap_up')">Gap Up%<span class="arr"></span></th>
-        <th onclick="dpTh('pct_entry_dip')">Dip Opp%<span class="arr"></span></th>
-        <th onclick="dpTh('avg_vol_ratio')">Vol Ratio<span class="arr"></span></th>
-        <th onclick="dpTh('avg_turnover_rs')">Turnover Rs<span class="arr"></span></th>
-        <th onclick="dpTh('sl_needed')">SL Needed<span class="arr"></span></th>
-        <th onclick="dpTh('liquidity_ok')">Rs2L Liq<span class="arr"></span></th>
-      </tr></thead>
-      <tbody id="dp-tbody"><tr><td colspan="16" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
-    </table>
-  </div>
+  <div class="twrap"><table class="tbl" id="dp-tbl" style="min-width:1100px">
+    <thead><tr>
+      <th style="width:20px"></th>
+      <th onclick="dpTh('sym')">Stock<span class="arr"></span></th>
+      <th onclick="dpTh('desc')">Candle<span class="arr"></span></th>
+      <th onclick="dpTh('score')">Score<span class="arr"></span></th>
+      <th onclick="dpTh('today_close')">Close Rs<span class="arr"></span></th>
+      <th onclick="dpTh('recommended_buy')">Buy Rs<span class="arr"></span></th>
+      <th onclick="dpTh('target_1')">Target 1<span class="arr"></span></th>
+      <th onclick="dpTh('target_2')">Target 2<span class="arr"></span></th>
+      <th onclick="dpTh('nd_min_return')">Min%<span class="arr"></span></th>
+      <th onclick="dpTh('nd_avg_return')">Avg%<span class="arr"></span></th>
+      <th onclick="dpTh('pct_gap_up')">Gap Up%<span class="arr"></span></th>
+      <th onclick="dpTh('pct_entry_dip')">Dip Opp%<span class="arr"></span></th>
+      <th onclick="dpTh('n_occurrences')">Occ<span class="arr"></span></th>
+      <th onclick="dpTh('avg_vol_ratio')">Vol Ratio<span class="arr"></span></th>
+      <th onclick="dpTh('win_5d_avg')">5d Avg%<span class="arr"></span></th>
+      <th onclick="dpTh('est_next_open')">Est Open Rs<span class="arr"></span></th>
+      <th onclick="dpTh('pct_dip_below_open')">Dip/Open%<span class="arr"></span></th>
+      <th onclick="dpTh('comfort_buy_px')">Comfort Buy<span class="arr"></span></th>
+      <th onclick="dpTh('safe_buy_px')">Safe Buy<span class="arr"></span></th>
+      <th onclick="dpTh('avg_turnover_rs')">Turnover Rs<span class="arr"></span></th>
+      <th onclick="dpTh('sl_needed')">SL?<span class="arr"></span></th>
+      <th onclick="dpTh('liquidity_ok')">Rs2L?<span class="arr"></span></th>
+    </tr></thead>
+    <tbody id="dp-tbody"><tr><td colspan="17" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+  </table></div>
 </div>
 
-<!-- PAGE: CANDLE ALERT TABLE — full tabular, all columns sortable -->
+<!-- PAGE: CANDLE TABLE -->
 <div class="page" id="page-calert">
-  <div class="sh">📋 Candle Alerts — Full Table <small>all today candle alerts with every data point · click any header to sort</small></div>
+  <div class="sh">📋 Candle Alerts — Full Table <small>all today's candle alerts · click header to sort</small></div>
   <div class="pill-row" id="cat-pills"></div>
   <div class="fbar">
     <input class="si" id="cat-q" placeholder="Symbol…" style="width:120px" oninput="renderCAT()">
-    <span class="fsep">Sort:</span>
     <button class="fb on" id="cats-min" onclick="catSort('nd_min',this)">Min Return</button>
     <button class="fb" id="cats-avg" onclick="catSort('nd_avg',this)">Avg Return</button>
-    <button class="fb" id="cats-occ" onclick="catSort('occurrences',this)">Occ</button>
-    <button class="fb" id="cats-gap" onclick="catSort('avg_gap_pct',this)">Gap</button>
+    <button class="fb" id="cats-occ" onclick="catSort('occurrences',this)">Occurrences</button>
   </div>
-  <div class="twrap">
-    <table class="tbl" id="cat-tbl" style="min-width:1200px">
-      <thead><tr>
-        <th onclick="catTh('sym')">Stock<span class="arr"></span></th>
-        <th onclick="catTh('today_date')">Signal Date<span class="arr"></span></th>
-        <th onclick="catTh('candle_desc')">Candle Shape<span class="arr"></span></th>
-        <th onclick="catTh('today_close')">Close Rs<span class="arr"></span></th>
-        <th onclick="catTh('today_vol')">Volume<span class="arr"></span></th>
-        <th onclick="catTh('nd_wr')">ND Win%<span class="arr"></span></th>
-        <th onclick="catTh('nd_min')">ND Min%<span class="arr"></span></th>
-        <th onclick="catTh('nd_avg')">ND Avg%<span class="arr"></span></th>
-        <th onclick="catTh('nd_max')">ND Max%<span class="arr"></span></th>
-        <th onclick="catTh('gap_up_rate')">Gap Up%<span class="arr"></span></th>
-        <th onclick="catTh('occurrences')">Occ<span class="arr"></span></th>
-        <th onclick="catTh('_5d_avg')">5d Avg%<span class="arr"></span></th>
-        <th onclick="catTh('_10d_avg')">10d Avg%<span class="arr"></span></th>
-        <th onclick="catTh('_20d_avg')">20d Avg%<span class="arr"></span></th>
-        <th onclick="catTh('_years_str')">Years<span class="arr"></span></th>
-        <th onclick="catTh('last_date')">Last Seen<span class="arr"></span></th>
-      </tr></thead>
-      <tbody id="cat-tbody"><tr><td colspan="16" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
-    </table>
-  </div>
+  <div class="twrap"><table class="tbl" id="cat-tbl" style="min-width:1000px">
+    <thead><tr>
+      <th onclick="catTh('sym')">Stock<span class="arr"></span></th>
+      <th onclick="catTh('today_date')">Date<span class="arr"></span></th>
+      <th onclick="catTh('candle_desc')">Candle<span class="arr"></span></th>
+      <th onclick="catTh('today_close')">Close Rs<span class="arr"></span></th>
+      <th onclick="catTh('today_vol')">Volume<span class="arr"></span></th>
+      <th onclick="catTh('nd_wr')">ND Win%<span class="arr"></span></th>
+      <th onclick="catTh('nd_min')">ND Min%<span class="arr"></span></th>
+      <th onclick="catTh('nd_avg')">ND Avg%<span class="arr"></span></th>
+      <th onclick="catTh('nd_max')">ND Max%<span class="arr"></span></th>
+      <th onclick="catTh('gap_up_rate')">Gap Up%<span class="arr"></span></th>
+      <th onclick="catTh('occurrences')">Occ<span class="arr"></span></th>
+      <th onclick="catTh('_5d_avg')">5d Avg%<span class="arr"></span></th>
+      <th onclick="catTh('_10d_avg')">10d Avg%<span class="arr"></span></th>
+      <th onclick="catTh('_20d_avg')">20d Avg%<span class="arr"></span></th>
+      <th onclick="catTh('_years_str')">Years<span class="arr"></span></th>
+      <th onclick="catTh('last_date')">Last Seen<span class="arr"></span></th>
+    </tr></thead>
+    <tbody id="cat-tbody"><tr><td colspan="15" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+  </table></div>
 </div>
 
 <!-- ═══ PAGE 6: HOW IT WORKS ═════════════════════════════════ -->
@@ -576,7 +564,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 <script>
 // ─── Data ──────────────────────────────────────────────────────────
 const REPO = 'https://raw.githubusercontent.com/animesh2007asansol/itis/main/pattern_signals';
-let DATA = { alerts:[], patterns:[], profiles:{}, allResults:[], heatmap:{}, meta:{}, candleBest:[], candleToday:[], candleYesterday:[], enriched:null, top5:null, hwProfiles:{}, hwAlerts:[], hwMeta:{}, hwAlertMeta:{} };
+let DATA = { alerts:[], patterns:[], profiles:{}, allResults:[], heatmap:{}, meta:{}, candleBest:[], candleToday:[], candleYesterday:null, enriched:null, top5:null, hwProfiles:{}, hwAlerts:[], hwMeta:{}, hwAlertMeta:{} };
 let alrtPeriod='ALL', alrtGrade='ALL', alrtZone='ALL', alrtSortKey='score';
 let patGrade='ALL', spSortKey='score', spGradeF='ALL', repMinYrs=4, repSortKey='ret';
 let hmColorKey='avg', hmShowKey='pct';
@@ -613,53 +601,69 @@ const SIG_INFO = {
 
 // ─── Fetch ─────────────────────────────────────────────────────────
 async function loadData() {
+  // ── Core pattern data ─────────────────────────────────────────────────────
   try {
     const [aR,pR,sR] = await Promise.all([
       fetch(REPO+'/alerts.json'),
       fetch(REPO+'/patterns.json'),
       fetch(REPO+'/stock_profiles.json'),
     ]);
-    const [aD,pD,sD] = await Promise.all([aR.json(),pR.json(),sR.json()]);
-    DATA.alerts     = aD.alerts || [];
-    DATA.patterns   = pD.patterns || [];
-    DATA.profiles   = sD.profiles || {};
-    DATA.allResults = sD.all_results || [];
-    DATA.heatmap    = {};
-    DATA.meta = {
-      latestDate: aD.latest_date||aD.alert_date, gen: aD.generated_at,
-      todayCount: aD.today_count || 0, total: aD.total_alerts || 0,
-      stocks: pD.stocks_analyzed || 0, range: pD.data_range || '',
-      grades: pD.grade_counts || {},
-      nAplus: sD.n_aplus || 0, nA: sD.n_a || 0,
-      thr: pD.thresholds || {},
-    };
-    renderAll();
+    if(aR.ok&&pR.ok&&sR.ok){
+      const [aD,pD,sD] = await Promise.all([aR.json(),pR.json(),sR.json()]);
+      DATA.alerts     = aD.alerts || [];
+      DATA.patterns   = pD.patterns || [];
+      DATA.profiles   = sD.profiles || {};
+      DATA.allResults = sD.all_results || [];
+      DATA.meta = {
+        latestDate: aD.latest_date||aD.alert_date, gen: aD.generated_at,
+        todayCount: aD.today_count||0, total: aD.total_alerts||0,
+        stocks: pD.stocks_analyzed||0, range: pD.data_range||'',
+        grades: pD.grade_counts||{}, nAplus: sD.n_aplus||0, nA: sD.n_a||0,
+        thr: pD.thresholds||{},
+      };
+      renderAll();
+    } else {
+      err('Pattern data not ready. Run the pattern_discovery workflow first.');
+    }
   } catch(e) {
-    err('Could not load pattern data. Run the pattern_discovery workflow first.<br>'
-      + '<span style="color:var(--t3);font-size:10px">'+e.message+'</span>');
+    err('Could not load pattern data: '+e.message);
   }
+  // ── Candle patterns (separate, fail-safe) ─────────────────────────────────
   try {
-    const [cbR,ctR]=await Promise.all([fetch(REPO+'/candle_best_patterns.json'),fetch(REPO+'/candle_today.json')]);
-    if(cbR.ok){const d=await cbR.json();DATA.candleBest=d.patterns||[];}
-    if(ctR.ok){const d=await ctR.json();DATA.candleToday=d.alerts||[];}
-    renderCA();renderCB();renderCAT();
-    try{
-      const cyR=await fetch(REPO+'/candle_yesterday.json');
-      if(cyR.ok){const d=await cyR.json();DATA.candleYesterday=d;renderCP();}
-    }catch(e){console.log('Yesterday:',e.message);}
-    // Enriched deep analysis
-    try{
-      const [enR,t5R]=await Promise.all([fetch(REPO+'/candle_enriched.json'),fetch(REPO+'/candle_top5.json')]);
-      if(enR.ok){const d=await enR.json();DATA.enriched=d;renderDP();}
-      if(t5R.ok){const d=await t5R.json();DATA.top5=d;renderTop5();renderTop5InAlerts();}
-    }catch(e){console.log('Enriched:',e.message);}
-  }catch(e){console.log('Candle:',e.message);}
+    const [cbR,ctR] = await Promise.all([
+      fetch(REPO+'/candle_best_patterns.json'),
+      fetch(REPO+'/candle_today.json'),
+    ]);
+    if(cbR.ok){ const d=await cbR.json(); DATA.candleBest=d.patterns||[]; }
+    if(ctR.ok){ const d=await ctR.json(); DATA.candleToday=d.alerts||[]; }
+  } catch(e){ console.log('Candle patterns:',e.message); }
+  // ── Yesterday results ────────────────────────────────────────────────────
   try {
-    const [hwpR,hwaR]=await Promise.all([fetch(REPO+'/heavyweight_profiles.json'),fetch(REPO+'/heavyweight_alerts.json')]);
-    if(hwpR.ok){const d=await hwpR.json();DATA.hwProfiles=d.profiles||{};DATA.hwMeta=d;}
-    if(hwaR.ok){const d=await hwaR.json();DATA.hwAlerts=d.alerts||[];DATA.hwAlertMeta=d;}
-    renderHW();renderHWA();
-  }catch(e){console.log('HW:',e.message);}
+    const cyR=await fetch(REPO+'/candle_yesterday.json');
+    if(cyR.ok){ DATA.candleYesterday=await cyR.json(); }
+  } catch(e){ console.log('Yesterday:',e.message); }
+  // ── Enriched / Top5 (from today's signals) ───────────────────────────────
+  try {
+    const [enR,t5R] = await Promise.all([
+      fetch(REPO+'/candle_enriched.json'),
+      fetch(REPO+'/candle_top5.json'),
+    ]);
+    if(enR.ok){ DATA.enriched=await enR.json(); }
+    if(t5R.ok){ DATA.top5=await t5R.json(); }
+  } catch(e){ console.log('Enriched:',e.message); }
+  // ── Heavyweight ──────────────────────────────────────────────────────────
+  try {
+    const [hwpR,hwaR] = await Promise.all([
+      fetch(REPO+'/heavyweight_profiles.json'),
+      fetch(REPO+'/heavyweight_alerts.json'),
+    ]);
+    if(hwpR.ok){ const d=await hwpR.json(); DATA.hwProfiles=d.profiles||{}; DATA.hwMeta=d; }
+    if(hwaR.ok){ const d=await hwaR.json(); DATA.hwAlerts=d.alerts||[]; DATA.hwAlertMeta=d; }
+  } catch(e){ console.log('HW:',e.message); }
+  // ── Render all tabs now that data is loaded ───────────────────────────────
+  renderCA(); renderCB(); renderCAT();
+  renderCP(); renderTop5(); renderTop5InAlerts(); renderDP();
+  renderHW(); renderHWA();
 }
 
 function err(msg) {
@@ -855,7 +859,7 @@ function renderPatHeader(){
 }
 function patF(f,btn){ patGrade=f; setOn('#pf-all,#pf-ap,#pf-ab',btn); renderPat(); }
 function renderPat(){
-  if(!document.getElementById('pat-body')) return; // page removed
+  if(!document.getElementById('pat-body')) return;
   const q = (document.getElementById('pat-q')?.value||'').toLowerCase();
   let rows = DATA.patterns.filter(p=>{
     if(patGrade==='A+' && p.grade!=='A+') return false;
@@ -904,10 +908,9 @@ const SP_COLS=[
   {key:'n_years', lbl:'# Yrs'},
   {key:'occ_20d', lbl:'Occ'},
   {key:'avg_vol', lbl:'Avg Vol'},
-  {key:'avg_5d',  lbl:'Avg 5d %'},{key:'min_5d', lbl:'Min 5d %'},
-  {key:'avg_10d', lbl:'Avg 10d %'},{key:'min_10d', lbl:'Min 10d %'},
-  {key:'avg_20d', lbl:'Avg 20d %'},{key:'min_20d', lbl:'Min 20d %'},{key:'max_20d', lbl:'Max 20d %'},
-  {key:'best_window_min',lbl:'Best Win Min%'},
+  {key:'avg_5d',lbl:'Avg 5d %'},{key:'min_5d',lbl:'Min 5d %'},
+  {key:'avg_10d',lbl:'Avg 10d %'},{key:'min_10d',lbl:'Min 10d %'},
+  {key:'avg_20d',lbl:'Avg 20d %'},{key:'min_20d',lbl:'Min 20d %'},{key:'max_20d',lbl:'Max 20d %'},
   {key:'score',   lbl:'Score'},
   {key:'_yrs',    lbl:'All Years (hover for detail)'},
 ];
@@ -975,10 +978,9 @@ const REP_COLS=[
   {key:'name',    lbl:'Pattern Name'},
   {key:'n_years', lbl:'# Years'},
   {key:'occ_20d', lbl:'Total Occ'},
-  {key:'avg_5d',  lbl:'Avg 5d %'},{key:'min_5d', lbl:'Min 5d %'},
-  {key:'avg_10d', lbl:'Avg 10d %'},{key:'min_10d', lbl:'Min 10d %'},
-  {key:'avg_20d', lbl:'Avg 20d %'},{key:'min_20d', lbl:'Min 20d %'},{key:'max_20d', lbl:'Max 20d %'},
-  {key:'best_window_min',lbl:'Best Win Min%'},
+  {key:'avg_5d',lbl:'Avg 5d %'},{key:'min_5d',lbl:'Min 5d %'},
+  {key:'avg_10d',lbl:'Avg 10d %'},{key:'min_10d',lbl:'Min 10d %'},
+  {key:'avg_20d',lbl:'Avg 20d %'},{key:'min_20d',lbl:'Min 20d %'},{key:'max_20d',lbl:'Max 20d %'},
   {key:'score',   lbl:'Score'},
   {key:'_yrs',    lbl:'All Years + Returns'},
 ];
@@ -1114,264 +1116,142 @@ function showPage(id,btn){
   btn.classList.add('active');
 }
 
-
 // ═══ HELPERS ════════════════════════════════════════════════════════════════
-function getInvParams(){
-  var cap=parseFloat(document.getElementById('inv-capital')?.value||0)||0;
-  var maxPct=parseFloat(document.getElementById('inv-max-pct')?.value||20)||20;
-  return{cap,maxPct};
-}
-function allocPlan(closePx,ndMin,ndAvg,inv){
-  if(!inv.cap||!closePx) return null;
-  var invest=Math.min(inv.cap*inv.maxPct/100,inv.cap);
-  var units=Math.floor(invest/closePx);
-  if(units<1) return null;
-  var actual=units*closePx;
-  return{units,invest:r2(actual),pct:r2(actual/inv.cap*100),
-         t1:r2(closePx*(1+ndMin/100)),t2:r2(closePx*(1+ndAvg/100)),
-         p1:r2((closePx*(1+ndMin/100)-closePx)*units),
-         p2:r2((closePx*(1+ndAvg/100)-closePx)*units)};
+function getInv(capId,pctId){ var cap=parseFloat(document.getElementById(capId)?.value||0)||0; var pct=parseFloat(document.getElementById(pctId)?.value||20)||20; return{cap,pct}; }
+function allocPlan(px,ndMin,ndAvg,inv){
+  if(!inv.cap||!px) return null;
+  var invest=Math.min(inv.cap*inv.pct/100,inv.cap);
+  var units=Math.floor(invest/px); if(units<1) return null;
+  var actual=units*px;
+  return{units,invest:r2(actual),pctOfCap:r2(actual/inv.cap*100),
+    t1:r2(px*(1+ndMin/100)),t2:r2(px*(1+ndAvg/100)),
+    p1:r2((px*(1+ndMin/100)-px)*units),p2:r2((px*(1+ndAvg/100)-px)*units)};
 }
 function r2(n){return Math.round(n*100)/100;}
 
-// ═══ CANDLE ALERTS ═══════════════════════════════════════════════════════════
+// ═══ CANDLE ALERTS PAGE ══════════════════════════════════════════════════════
 var _caSortKey='nd_min';
 function caSort(k,btn){_caSortKey=k;setOn('#cas-min,#cas-avg,#cas-occ',btn);renderCA();}
 function renderCA(){
+  var inv=getInv('inv-capital','inv-max-pct');
   var q=(document.getElementById('ca-q')?.value||'').toUpperCase().trim();
   var rows=[...DATA.candleToday];
   if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
   rows.sort(function(a,b){return (b[_caSortKey]??0)-(a[_caSortKey]??0);});
   var sigDate=rows[0]?.today_date||'—';
-  var noteEl=document.getElementById('ca-date-note');
-  if(noteEl) noteEl.textContent='Signals from '+sigDate+' — buy next trading day · '+rows.length+' stocks';
-  var inv=getInvParams();
-  var summEl=document.getElementById('inv-summary');
-  if(summEl&&inv.cap>0){
-    summEl.innerHTML='<strong style="color:var(--green)">Rs '+fmtI(Math.round(inv.cap))+'</strong> total | '
-      +'max Rs '+fmtI(Math.round(inv.cap*inv.maxPct/100))+' per stock';
-  } else if(summEl){
-    summEl.textContent='Enter capital above for investment plan';
-  }
-  document.getElementById('ca-pills').innerHTML=[
-    ['Signal Date',sigDate,'b',''],['Alerts',rows.length,'g','100%-win today'],
-  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
+  var n=document.getElementById('ca-date-note'); if(n) n.textContent='Signals from '+sigDate+' — buy next trading day';
+  var s=document.getElementById('inv-summary');
+  if(s) s.innerHTML=inv.cap>0?('<strong style="color:var(--green)">Rs '+fmtI(Math.round(inv.cap))+'</strong> | max Rs '+fmtI(Math.round(inv.cap*inv.pct/100))+' per stock'):'Enter capital above';
+  document.getElementById('ca-pills').innerHTML=[['Signal Date',sigDate,'b'],['Alerts',rows.length,'g']].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
   renderTop5InAlerts();
-  if(!rows.length){
-    document.getElementById('ca-grid').innerHTML='<div class="empty" style="grid-column:1/-1">No candle alerts. Run candle_patterns workflow.</div>';
-    return;
-  }
+  if(!rows.length){document.getElementById('ca-grid').innerHTML='<div class="empty" style="grid-column:1/-1">No candle alerts today. Run candle_patterns workflow then candle_enriched_analysis.</div>';return;}
   document.getElementById('ca-grid').innerHTML=rows.map(function(a){
-    var al=inv.cap>0?allocPlan(a.today_close,a.nd_min,a.nd_avg,inv):null;
-    var b5=a.win_5d?.avg,b10=a.win_10d?.avg,b20=a.win_20d?.avg;
+    var al=allocPlan(a.today_close,a.nd_min,a.nd_avg,inv);
     var yrs=(a.years||[]).map(function(y){return '<span class="yr-tag yr-win">'+y+'</span>';}).join('');
-    var allocHtml=al?('<div style="background:rgba(201,168,76,.07);border-top:1px solid var(--b);margin-top:8px;padding:8px 0 2px;display:grid;grid-template-columns:1fr 1fr;gap:4px">'
-      +'<div class="ac-mini"><div class="ac-ml">Qty</div><div class="ac-mv">'+al.units+' shares</div></div>'
+    var allocHtml=al?('<div style="background:rgba(201,168,76,.07);border-top:1px solid var(--b);margin-top:8px;padding:8px 0 2px;display:grid;grid-template-columns:1fr 1fr;gap:3px">'
+      +'<div class="ac-mini"><div class="ac-ml">Qty</div><div class="ac-mv">'+al.units+' sh</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">Invest</div><div class="ac-mv amber">Rs '+fmtI(Math.round(al.invest))+'</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">Buy @ Rs</div><div class="ac-mv">'+a.today_close+'</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">% of Capital</div><div class="ac-mv muted">'+al.pct+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">% Capital</div><div class="ac-mv muted">'+al.pctOfCap+'%</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">Target 1 (min)</div><div class="ac-mv green">Rs '+al.t1+' (+'+a.nd_min.toFixed(1)+'%)</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">Target 2 (avg)</div><div class="ac-mv green">Rs '+al.t2+' (+'+a.nd_avg.toFixed(1)+'%)</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">Profit T1</div><div class="ac-mv green">+Rs '+fmtI(Math.round(al.p1))+'</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">Profit T2</div><div class="ac-mv green">+Rs '+fmtI(Math.round(al.p2))+'</div></div>'
       +'</div>'):'';
-    return '<div class="ac ac-Ap">'
-      +'<div class="ac-head"><div>'
+    return '<div class="ac ac-Ap"><div class="ac-head"><div>'
       +'<div style="display:flex;align-items:center;gap:5px"><span class="g gAp">100%</span><span class="ac-sym">'+a.sym+'</span></div>'
-      +'<div class="ac-sig">'+a.candle_desc+'</div>'
-      +'<div style="margin-top:3px">'+yrs+'</div>'
-      +'</div>'
-      +'<div class="ac-wr"><div class="ac-pct">+'+(a.nd_min||0).toFixed(1)+'%</div><div class="ac-lbl">min next-day</div></div>'
-      +'</div>'
-      +'<div class="ac-row3">'
-      +'<div class="ac-mini"><div class="ac-ml">ND Avg</div><div class="ac-mv green">+'+(a.nd_avg||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-sig">'+a.candle_desc+'</div><div style="margin-top:3px">'+yrs+'</div>'
+      +'</div><div class="ac-wr"><div class="ac-pct">+'+(a.nd_min||0).toFixed(1)+'%</div><div class="ac-lbl">min next-day</div></div></div>'
+      +'<div class="ac-row3"><div class="ac-mini"><div class="ac-ml">ND Avg</div><div class="ac-mv green">+'+(a.nd_avg||0).toFixed(1)+'%</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">ND Max</div><div class="ac-mv green">+'+(a.nd_max||0).toFixed(1)+'%</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Gap Up</div><div class="ac-mv">'+(a.gap_up_rate||0)+'%</div></div>'
-      +'</div>'
-      +'<div class="zones">'
-      +'<div class="zr"><span class="zl">Close</span><span class="zv">&#8377;'+fmt(a.today_close)+'</span></div>'
-      +'<div class="zr"><span class="zl">Occ / 5d / 10d / 20d avg</span><span class="zv">'+a.occurrences+'x | '
-        +(b5!=null?rc(b5):'—')+' / '+(b10!=null?rc(b10):'—')+' / '+(b20!=null?rc(b20):'—')+'</span></div>'
-      +'</div>'
+      +'<div class="ac-mini"><div class="ac-ml">Occ</div><div class="ac-mv">'+a.occurrences+'x</div></div></div>'
+      +'<div class="zones"><div class="zr"><span class="zl">Close Rs</span><span class="zv">'+fmt(a.today_close)+'</span></div>'
+      +'<div class="zr"><span class="zl">Gap Up Rate</span><span class="zv">'+(a.gap_up_rate||0)+'%</span></div></div>'
       +allocHtml
-      +'<div class="zone-banner zone-buy">BUY tomorrow — 100% win in all '+a.occurrences+' past occurrences</div>'
-      +'</div>';
+      +'<div class="zone-banner zone-buy">BUY tomorrow — 100% positive in all '+a.occurrences+' occurrences</div></div>';
   }).join('');
 }
 
-// ═══ TOP 5 INLINE (on candle alerts page) ════════════════════════════════════
+// ═══ TOP 5 INLINE STRIP ══════════════════════════════════════════════════════
 function renderTop5InAlerts(){
   var el=document.getElementById('ca-top5-section'); if(!el) return;
-  var d=DATA.top5||{}; var top=d.top5||[];
+  var d=DATA.top5; var top=d?.top5||[];
+  var inv=getInv('inv-capital','inv-max-pct');
   if(!top.length){
-    el.innerHTML='<div style="font-size:11px;color:var(--t3);margin-bottom:4px">Top 5: run candle_enriched_analysis workflow first.</div>';
+    el.innerHTML='<div style="background:var(--s);border:1px solid var(--b);border-radius:var(--r);padding:10px;margin-bottom:4px;font-size:11px;color:var(--t3)">🏆 Top 5: '+(DATA.enriched===null?'Run candle_enriched_analysis workflow after candle_patterns.':'No signals today for enriched analysis.')+'</div>';
     return;
   }
-  var inv=getInvParams();
-  var sigDate=d.signal_date||'—';
+  var medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
   el.innerHTML='<div style="background:var(--s);border:1px solid var(--g2);border-radius:var(--r);padding:12px;margin-bottom:4px">'
-    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">'
-    +'<span style="font-size:12px;font-weight:600;color:var(--gold)">🏆 Top 5 — Best Next-Day Buy Signals</span>'
-    +'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:5px;padding:2px 8px;font-size:10px">All '+top.length+' are TODAY signals — valid for next trading day</span>'
-    +'<span style="font-size:9px;color:var(--t3)">Signal date: '+sigDate+'</span>'
-    +'</div>'
-    +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px">'
+    +'<div style="font-size:12px;font-weight:600;color:var(--gold);margin-bottom:10px">🏆 Top 5 Next-Day Buy Stocks (Enriched Analysis) — Signal date: '+(d.signal_date||'—')+'</div>'
+    +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px">'
     +top.map(function(r,i){
-      var medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
-      var al=inv.cap>0?allocPlan(r.today_close,r.nd_min_return,r.nd_avg_return,inv):null;
-      var entryNote=r.pct_entry_dip>50
-        ?('Dip opp '+r.pct_entry_dip+'% of times — place limit @ Rs'+r.recommended_buy)
-        :('Buy at open — gap-up '+r.pct_gap_up+'% of times');
+      var al=allocPlan(r.today_close,r.nd_min_return,r.nd_avg_return,inv);
+      var entryNote=r.pct_dip_below_open!=null&&r.pct_dip_below_open>50?'Limit @ Rs'+r.recommended_buy+' (dip '+r.pct_entry_dip+'% of times)':'Buy at open (gap-up '+r.pct_gap_up+'% of times)';
       return '<div style="background:var(--card);border:1px solid var(--gr2);border-radius:9px;padding:11px">'
-        +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:7px">'
-        +'<span style="font-size:15px">'+medals[i]+'</span>'
+        +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:7px"><span style="font-size:15px">'+medals[i]+'</span>'
         +'<span class="mono gold" style="font-weight:700;font-size:14px">'+r.sym+'</span>'
-        +'<span style="margin-left:auto;font-size:9px;background:var(--gbg);color:var(--gold);border:1px solid var(--g2);border-radius:4px;padding:2px 6px;font-weight:700">Score '+r.score+'</span>'
-        +'</div>'
+        +'<span style="margin-left:auto;font-size:9px;background:var(--gbg);color:var(--gold);border:1px solid var(--g2);border-radius:4px;padding:2px 6px;font-weight:700">Score '+r.score+'</span></div>'
         +'<div style="font-size:9px;color:var(--t3);margin-bottom:7px">'+r.desc+'</div>'
         +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:7px">'
         +'<div class="ac-mini"><div class="ac-ml">Close Rs</div><div class="ac-mv">'+r.today_close+'</div></div>'
-        +'<div class="ac-mini"><div class="ac-ml">Min Ret%</div><div class="ac-mv green">+'+r.nd_min_return+'%</div></div>'
-        +'<div class="ac-mini"><div class="ac-ml">Avg Ret%</div><div class="ac-mv green">+'+r.nd_avg_return+'%</div></div>'
+        +'<div class="ac-mini"><div class="ac-ml">Min Ret</div><div class="ac-mv green">+'+r.nd_min_return+'%</div></div>'
+        +'<div class="ac-mini"><div class="ac-ml">Avg Ret</div><div class="ac-mv green">+'+r.nd_avg_return+'%</div></div>'
         +'<div class="ac-mini"><div class="ac-ml">Buy @ Rs</div><div class="ac-mv amber">'+r.recommended_buy+'</div></div>'
         +'<div class="ac-mini"><div class="ac-ml">Target 1</div><div class="ac-mv green">Rs '+r.target_1+'</div></div>'
         +'<div class="ac-mini"><div class="ac-ml">Target 2</div><div class="ac-mv green">Rs '+r.target_2+'</div></div>'
         +'</div>'
-        +'<div style="font-size:9px;color:var(--amber);margin-bottom:6px">📍 '+entryNote+'</div>'
-        +(r.sl_needed
-          ?'<div style="font-size:9px;color:var(--red);margin-bottom:6px">⚠ SL: Rs'+r.suggested_sl_px+' ('+r.suggested_sl_pct+'%)</div>'
-          :'<div style="font-size:9px;color:var(--green);margin-bottom:6px">✓ No stop loss needed in history</div>')
-        +(al?'<div style="background:rgba(201,168,76,.07);border-radius:5px;padding:7px;display:grid;grid-template-columns:1fr 1fr;gap:3px">'
+        +'<div style="font-size:9px;color:var(--amber);margin-bottom:5px">📍 '+entryNote+'</div>'
+        +(r.sl_needed?'<div style="font-size:9px;color:var(--red);margin-bottom:5px">⚠ SL: Rs'+r.suggested_sl_px+'</div>':'<div style="font-size:9px;color:var(--green);margin-bottom:5px">✓ No SL needed in history</div>')
+        +(al?'<div style="background:rgba(201,168,76,.07);border-radius:5px;padding:6px;display:grid;grid-template-columns:1fr 1fr;gap:3px">'
           +'<div class="ac-mini"><div class="ac-ml">Qty</div><div class="ac-mv">'+al.units+' sh</div></div>'
           +'<div class="ac-mini"><div class="ac-ml">Invest</div><div class="ac-mv amber">Rs '+fmtI(Math.round(al.invest))+'</div></div>'
           +'<div class="ac-mini"><div class="ac-ml">Profit T1</div><div class="ac-mv green">+Rs '+fmtI(Math.round(al.p1))+'</div></div>'
-          +'<div class="ac-mini"><div class="ac-ml">Profit T2</div><div class="ac-mv green">+Rs '+fmtI(Math.round(al.p2))+'</div></div>'
-          +'</div>'
-          :'<div style="font-size:9px;color:var(--t3)">Enter capital above for investment plan</div>')
+          +'<div class="ac-mini"><div class="ac-ml">Profit T2</div><div class="ac-mv green">+Rs '+fmtI(Math.round(al.p2))+'</div></div></div>'
+          :'<div style="font-size:9px;color:var(--t3)">Enter capital above</div>')
         +'</div>';
-    }).join('')
-    +'</div></div>';
+    }).join('')+'</div></div>';
 }
 
 // ═══ TOP 5 FULL PAGE ═════════════════════════════════════════════════════════
 function renderTop5(){
-  var d=DATA.top5||{}; var top=d.top5||[];
   var el=document.getElementById('t5-body'); if(!el) return;
+  var d=DATA.top5; var top=d?.top5||[];
   if(!top.length){
-    el.innerHTML='<div class="empty">No data — run candle_enriched_analysis workflow.</div>';
+    el.innerHTML='<div class="empty">No data yet. Run the workflow: candle_patterns → candle_enriched_analysis.<br><span style="color:var(--t3);font-size:11px">These tabs show data only when today\'s candle signals exist AND enriched analysis has run.</span></div>';
     return;
   }
-  var inv=getInvParams();
+  var inv=getInv('t5-capital','t5-max-pct');
   var medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
   el.innerHTML=top.map(function(r,i){
-    var al=inv.cap>0?allocPlan(r.today_close,r.nd_min_return,r.nd_avg_return,inv):null;
+    var al=allocPlan(r.today_close,r.nd_min_return,r.nd_avg_return,inv);
     var occ=r.occurrences||[];
-    var occRows=occ.map(function(o){
-      return '<tr><td class="mono">'+o.date+'</td>'
-        +'<td class="mono">&#8377;'+o.sig_close+'</td>'
-        +'<td class="mono muted">'+fmtI(o.sig_volume)+'</td>'
-        +'<td class="mono '+(o.vol_ratio_vs_20d>=1.5?'green':'')+'">'+(o.vol_ratio_vs_20d!=null?o.vol_ratio_vs_20d+'x':'—')+'</td>'
-        +'<td class="mono '+(o.gap_pct>0?'green':'red')+'">'+(o.gap_pct>0?'+':'')+o.gap_pct+'%</td>'
-        +'<td>'+(o.entry_dip?'<span class="amber">Yes -'+o.entry_dip_pct+'%</span>':'<span class="muted">No</span>')+'</td>'
-        +'<td class="mono">&#8377;'+o.best_entry_px+'<span style="font-size:9px;color:var(--t3)">('+o.best_entry_vs_close+'%)</span></td>'
-        +'<td>'+rc(o.nd_return)+'</td><td>'+rc(o.nd_max_gain)+'</td>'
-        +'<td>'+(o.trend_5d_before!=null?rc(o.trend_5d_before):'<span class="muted">—</span>')+'</td>'
-        +'<td>'+(o.trend_20d_before!=null?rc(o.trend_20d_before):'<span class="muted">—</span>')+'</td>'
-        +'<td>'+(o.trend_60d_before!=null?rc(o.trend_60d_before):'<span class="muted">—</span>')+'</td>'
-        +'</tr>';
-    }).join('');
     return '<div class="spcard" style="margin-bottom:14px">'
       +'<div class="sp-head" onclick="this.nextElementSibling.classList.toggle(\'open\')">'
-      +'<span style="font-size:16px">'+medals[i]+'</span>'
-      +'<span class="sp-sym">'+r.sym+'</span>'
+      +'<span style="font-size:16px">'+medals[i]+'</span><span class="sp-sym">'+r.sym+'</span>'
       +'<span class="sp-meta">Score '+r.score+' | '+r.n_occurrences+' occ | '+(r.years||[]).join(', ')+'</span>'
-      +'<span style="margin-left:auto;font-size:11px;color:var(--green)">Buy Rs'+r.recommended_buy+' | T1 Rs'+r.target_1+' | T2 Rs'+r.target_2+'</span>'
+      +'<span style="margin-left:auto;font-size:11px;color:var(--green)">Buy Rs'+r.recommended_buy+' → T1 Rs'+r.target_1+' → T2 Rs'+r.target_2+'</span>'
       +'</div>'
-      +'<div class="sp-body open">'
-      +'<div class="mrow" style="margin-top:10px">'
+      +'<div class="sp-body open"><div class="mrow" style="margin-top:10px">'
       +[['Signal Date',r.today_date,'b'],['Close Rs',r.today_close,'b'],
-        ['Recommended Buy','Rs'+r.recommended_buy,'y'],
-        ['Target 1 (min)','Rs'+r.target_1+' +'+r.nd_min_return+'%','g'],
-        ['Target 2 (avg)','Rs'+r.target_2+' +'+r.nd_avg_return+'%','g'],
-        ['Target 3 (best)','Rs'+r.target_3,'g'],
-        ['Stop Loss',r.sl_needed?('Rs'+r.suggested_sl_px+' '+r.suggested_sl_pct+'%'):'Not needed',r.sl_needed?'warn':'ok'],
-        ['Occurrences',r.n_occurrences,'b'],['Gap Up',r.pct_gap_up+'%','b'],
-        ['Dip Opp',r.pct_entry_dip+'%','y'],['Vol Ratio',r.avg_vol_ratio!=null?r.avg_vol_ratio+'x':'—','b'],
-        ['Liquidity',r.liquidity_ok?'Rs2L OK':'Low',r.liquidity_ok?'ok':'warn'],
-      ].map(function(x){return '<div class="pill '+x[2]+'"><div class="pl">'+x[0]+'</div><div class="pv">'+x[1]+'</div></div>';}).join('')
+        ['Comfort Buy','Rs'+r.comfort_buy_px+(r.pct_dip_below_open!=null?' (dip '+r.pct_dip_below_open+'% of times)':''),'y'],['Target 1','Rs'+r.target_1+' +'+r.nd_min_return+'%','g'],
+        ['Target 2','Rs'+r.target_2+' +'+r.nd_avg_return+'%','g'],['Target 3','Rs'+r.target_3,'g'],
+        ['Stop Loss',r.sl_needed?'Rs'+r.suggested_sl_px+' ('+r.suggested_sl_pct+'%)':'Not needed in history',r.sl_needed?'warn':'ok'],
+        ['Gap Up',r.pct_gap_up+'% of times','b'],['Dip Opp',r.pct_entry_dip+'% of times','y'],
+        ['Vol Ratio',r.avg_vol_ratio!=null?r.avg_vol_ratio+'x':'—','b'],
+        ['Liquidity',r.liquidity_ok?'Rs2L OK':'Low liq',r.liquidity_ok?'ok':'warn'],
+       ].map(function(x){return '<div class="pill '+x[2]+'"><div class="pl">'+x[0]+'</div><div class="pv">'+x[1]+'</div></div>';}).join('')
       +(al?'<div class="pill ok"><div class="pl">Invest</div><div class="pv">Rs'+fmtI(Math.round(al.invest))+'</div><div class="ps">'+al.units+' shares</div></div>'
-           +'<div class="pill ok"><div class="pl">Profit T1</div><div class="pv">+Rs'+fmtI(Math.round(al.p1))+'</div></div>'
-           +'<div class="pill ok"><div class="pl">Profit T2</div><div class="pv">+Rs'+fmtI(Math.round(al.p2))+'</div></div>':'')
-      +'</div>'
-      +'<div style="font-size:11px;color:var(--t2);padding:7px 0;border-top:1px solid var(--b);margin-top:8px">📍 '+r.buy_note+'</div>'
+          +'<div class="pill ok"><div class="pl">Profit T1</div><div class="pv">+Rs'+fmtI(Math.round(al.p1))+'</div></div>'
+          +'<div class="pill ok"><div class="pl">Profit T2</div><div class="pv">+Rs'+fmtI(Math.round(al.p2))+'</div></div>':'')
+      +'</div><div style="font-size:11px;color:var(--t2);padding:7px 0;border-top:1px solid var(--b);margin-top:8px">📍 '+r.buy_note+'</div>'
       +'<div style="font-size:11px;color:var(--t2);padding-bottom:8px">💡 '+r.strength_note+'</div>'
-      +'<div class="twrap" style="margin:0"><table class="tbl" style="min-width:1000px"><thead><tr>'
-      +'<th>Date</th><th>Sig Close</th><th>Volume</th><th>Vol Ratio</th><th>Gap%</th>'
-      +'<th>Entry Dip?</th><th>Best Entry</th><th>ND Return%</th><th>ND High%</th>'
-      +'<th>Pre-5d%</th><th>Pre-20d%</th><th>Pre-60d%</th></tr></thead>'
-      +'<tbody>'+occRows+'</tbody></table></div>'
-      +'</div></div>';
-  }).join('');
-}
-
-// ═══ DEEP ANALYSIS TABLE — today's signals ═══════════════════════════════════
-var _dpSK='score',_dpSD='desc';
-function dpSort(k,btn){_dpSK=k;setOn('#dps-score,#dps-avg,#dps-min,#dps-gap,#dps-liq',btn);renderDP();}
-function dpTh(k){if(_dpSK===k)_dpSD=_dpSD==='desc'?'asc':'desc';else{_dpSK=k;_dpSD='desc';}renderDP();}
-function renderDP(){
-  var d=DATA.enriched;
-  var dpEl=document.getElementById('dp-tbody'); if(!dpEl) return;
-  if(!d||!d.patterns){
-    dpEl.innerHTML='<tr><td colspan="16" class="empty">No enriched data. Run candle_enriched_analysis workflow.</td></tr>';
-    return;
-  }
-  var q=(document.getElementById('dp-q')?.value||'').toUpperCase().trim();
-  var rows=[...(d.patterns||[])];
-  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
-  rows.sort(function(a,b){var v=(b[_dpSK]??0)-(a[_dpSK]??0);return _dpSD==='asc'?-v:v;});
-  document.getElementById('dp-pills').innerHTML=[
-    ['Signal Date',d.signal_date||'—','b',''],
-    ['Stocks Analysed',rows.length,'g','all have today candle signal'],
-    ['Liquid (Rs2L)',rows.filter(function(r){return r.liquidity_ok;}).length,'g',''],
-  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>';}).join('');
-  // Build rows with accordion expand
-  var html='';
-  rows.forEach(function(r,idx){
-    var detailId='dpd-'+idx;
-    html+='<tr class="dp-main-row" onclick="toggleDPRow(\''+detailId+'\')" style="cursor:pointer">'
-      +'<td><span id="dpx-'+detailId+'" style="font-size:10px;color:var(--t3)">▶</span></td>'
-      +'<td class="mono gold" style="font-weight:600">'+r.sym+'</td>'
-      +'<td style="font-size:9px;color:var(--t2);max-width:130px">'+r.desc+'</td>'
-      +'<td class="mono">'+r.n_occurrences+'</td>'
-      +'<td class="mono amber" style="font-weight:700">'+r.score+'</td>'
-      +'<td class="mono amber" style="font-weight:700">&#8377;'+r.recommended_buy+'</td>'
-      +'<td class="mono green">&#8377;'+r.target_1+'</td>'
-      +'<td class="mono green" style="font-weight:700">&#8377;'+r.target_2+'</td>'
-      +'<td class="mono green" style="font-weight:700">+'+r.nd_min_return+'%</td>'
-      +'<td>'+rc(r.nd_avg_return)+'</td>'
-      +'<td class="mono">'+r.pct_gap_up+'%</td>'
-      +'<td class="mono amber">'+r.pct_entry_dip+'%</td>'
-      +'<td class="mono">'+(r.avg_vol_ratio!=null?r.avg_vol_ratio+'x':'—')+'</td>'
-      +'<td class="mono '+(r.liquidity_ok?'green':'amber')+'">Rs '+fmtI(r.avg_turnover_rs||0)+'</td>'
-      +'<td class="mono '+(r.sl_needed?'amber':'green')+'">'+(r.sl_needed?'Yes':'No')+'</td>'
-      +'<td><span class="mono '+(r.liquidity_ok?'green':'amber')+'">'+(r.liquidity_ok?'✓':'⚠')+'</span></td>'
-      +'</tr>'
-      // Expanded detail row (hidden by default)
-      +'<tr id="'+detailId+'" style="display:none"><td colspan="16" style="padding:0">'
-      +'<div style="background:rgba(0,0,0,.3);padding:12px;border-bottom:1px solid var(--b)">'
-      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px;margin-bottom:10px">'
-      +[['Buy Note',r.buy_note,'y'],['Strength',r.strength_note,'b'],
-        ['SL',r.sl_needed?r.sl_note:'No SL needed in all '+r.n_occurrences+' occurrences',r.sl_needed?'warn':'ok'],
-        ['Liquidity',r.liquidity_note,'b'],
-       ].map(function(x){return '<div class="pill '+x[2]+'" style="min-width:0"><div class="pl">'+x[0]+'</div><div class="pv" style="font-size:10px;font-family:var(--font)">'+x[1]+'</div></div>';}).join('')
-      +'</div>'
-      +'<div style="overflow-x:auto"><table class="tbl" style="min-width:900px"><thead><tr>'
-      +'<th>Date</th><th>Sig Close</th><th>Vol Ratio</th><th>Gap%</th><th>Entry Dip?</th>'
-      +'<th>Best Entry</th><th>ND Return%</th><th>ND High%</th><th>Pre-5d%</th><th>Pre-20d%</th><th>Pre-60d%</th>'
-      +'</tr></thead><tbody>'
-      +(r.occurrences||[]).map(function(o){
-        return '<tr><td class="mono">'+o.date+'</td>'
-          +'<td class="mono">&#8377;'+o.sig_close+'</td>'
+      +(occ.length?'<div class="twrap" style="margin:0"><table class="tbl" style="min-width:950px"><thead><tr>'
+        +'<th>Date</th><th>Sig Close</th><th>Volume</th><th>Vol Ratio</th><th>Gap%</th>'
+        +'<th>Entry Dip?</th><th>Best Entry</th><th>ND Return%</th><th>ND High%</th>'
+        +'<th>Pre-5d%</th><th>Pre-20d%</th><th>Pre-60d%</th></tr></thead><tbody>'
+        +occ.map(function(o){return '<tr><td class="mono">'+o.date+'</td><td class="mono">&#8377;'+o.sig_close+'</td>'
+          +'<td class="mono muted">'+fmtI(o.sig_volume)+'</td>'
           +'<td class="mono '+(o.vol_ratio_vs_20d>=1.5?'green':'')+'">'+(o.vol_ratio_vs_20d!=null?o.vol_ratio_vs_20d+'x':'—')+'</td>'
           +'<td class="mono '+(o.gap_pct>0?'green':'red')+'">'+(o.gap_pct>0?'+':'')+o.gap_pct+'%</td>'
           +'<td>'+(o.entry_dip?'<span class="amber">Yes -'+o.entry_dip_pct+'%</span>':'<span class="muted">No</span>')+'</td>'
@@ -1380,100 +1260,263 @@ function renderDP(){
           +'<td>'+(o.trend_5d_before!=null?rc(o.trend_5d_before):'<span class="muted">—</span>')+'</td>'
           +'<td>'+(o.trend_20d_before!=null?rc(o.trend_20d_before):'<span class="muted">—</span>')+'</td>'
           +'<td>'+(o.trend_60d_before!=null?rc(o.trend_60d_before):'<span class="muted">—</span>')+'</td>'
-          +'</tr>';
-      }).join('')
-      +'</tbody></table></div></div>'
-      +'</td></tr>';
-  });
-  dpEl.innerHTML=html;
-}
-function toggleDPRow(id){
-  var row=document.getElementById(id); if(!row) return;
-  var icon=document.getElementById('dpx-'+id);
-  if(row.style.display==='none'){
-    row.style.display=''; if(icon) icon.textContent='▼';
-  } else {
-    row.style.display='none'; if(icon) icon.textContent='▶';
-  }
+          +'</tr>';}).join('')+'</tbody></table></div>':'')
+      +'</div></div>';
+  }).join('');
 }
 
-// ═══ CANDLE SEARCH ═══════════════════════════════════════════════════
+// ═══ DEEP ANALYSIS TABLE ═════════════════════════════════════════════════════
+var _dpSK='win_5d_avg',_dpSD='desc';
+function dpSort(k,btn){_dpSK=k;setOn('#dps-score,#dps-5d,#dps-avg,#dps-min,#dps-liq',btn);renderDP();}
+function dpTh(k){if(_dpSK===k)_dpSD=_dpSD==='desc'?'asc':'desc';else{_dpSK=k;_dpSD='desc';}renderDP();}
+function renderDP(){
+  var tbody=document.getElementById('dp-tbody'); if(!tbody) return;
+  var d=DATA.enriched;
+  if(!d){tbody.innerHTML='<tr><td colspan="17" class="empty">No enriched data. Run candle_patterns then candle_enriched_analysis workflow.</td></tr>';return;}
+  var q=(document.getElementById('dp-q')?.value||'').toUpperCase().trim();
+  var rows=[...(d.patterns||[])];
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  rows.sort(function(a,b){var v=(b[_dpSK]??0)-(a[_dpSK]??0);return _dpSD==='asc'?-v:v;});
+  var pills=document.getElementById('dp-pills');
+  if(pills) pills.innerHTML=[['Signal Date',d.signal_date||'—','b'],['Analysed',rows.length,'g'],
+    ['Liquid',rows.filter(function(r){return r.liquidity_ok;}).length,'g']
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
+  var html='';
+  rows.forEach(function(r,idx){
+    var did='dpd'+idx;
+    var occRows=(r.occurrences||[]).map(function(o){
+      return '<tr><td class="mono">'+o.date+'</td><td class="mono">&#8377;'+o.sig_close+'</td>'
+        +'<td class="mono '+(o.vol_ratio_vs_20d>=1.5?'green':'')+'">'+(o.vol_ratio_vs_20d!=null?o.vol_ratio_vs_20d+'x':'—')+'</td>'
+        +'<td class="mono '+(o.gap_vs_close_pct>0?'green':'red')+'">'+(o.gap_vs_close_pct>0?'+':'')+o.gap_vs_close_pct+'%</td>'
+        +'<td class="mono amber">&#8377;'+(o.next_open||'—')+'</td>'
+        +'<td>'+(o.dip_below_open?'<span class="amber">Yes -'+o.dip_below_open_pct+'%</span>':'<span class="muted">No</span>')+'</td>'
+        +'<td class="mono red">'+(o.dip_below_open_pct>0?'-'+o.dip_below_open_pct+'%':'—')+'</td>'
+        +'<td class="mono green">&#8377;'+(o.comfort_buy_px||'—')+'</td>'
+        +'<td class="mono amber">&#8377;'+(o.safe_entry_px||'—')+'</td>'
+        +'<td>'+rc(o.nd_close_ret)+'</td><td>'+rc(o.nd_high_ret)+'</td>'
+        +'<td>'+(o.trend_5d_before!=null?rc(o.trend_5d_before):'<span class="muted">—</span>')+'</td>'
+        +'<td>'+(o.trend_20d_before!=null?rc(o.trend_20d_before):'<span class="muted">—</span>')+'</td>'
+        +'</tr>';
+    }).join('');
+    html+='<tr onclick="dpToggle(\''+did+'\')" style="cursor:pointer">'
+      +'<td><span id="dpx'+did+'" style="font-size:10px;color:var(--t3)">▶</span></td>'
+      +'<td class="mono gold" style="font-weight:600">'+r.sym+'</td>'
+      +'<td style="font-size:9px;color:var(--t2);max-width:130px">'+r.desc+'</td>'
+      +'<td class="mono amber" style="font-weight:700">'+r.score+'</td>'
+      +'<td class="mono">&#8377;'+r.today_close+'</td>'
+      +'<td class="mono amber" style="font-weight:700">&#8377;'+r.recommended_buy+'</td>'
+      +'<td class="mono green">&#8377;'+r.target_1+'</td>'
+      +'<td class="mono green" style="font-weight:700">&#8377;'+r.target_2+'</td>'
+      +'<td class="mono green" style="font-weight:700">+'+r.nd_min_return+'%</td>'
+      +'<td>'+rc(r.nd_avg_return)+'</td>'
+      +'<td class="mono">'+r.pct_gap_up+'%</td>'
+      +'<td class="mono amber">'+r.pct_entry_dip+'%</td>'
+      +'<td class="mono">'+r.n_occurrences+'</td>'
+      +'<td class="mono">'+(r.avg_vol_ratio!=null?r.avg_vol_ratio+'x':'—')+'</td>'
+      +'<td class="mono '+(r.win_5d_avg>=3?'green':r.win_5d_avg>0?'amber':'muted')+'">'+(r.win_5d_avg!=null?(r.win_5d_avg>0?'+':'')+r.win_5d_avg.toFixed(1)+'%':'—')+'</td>'
+      +'<td class="mono amber">Rs '+(r.est_next_open||'—')+'</td>'
+      +'<td class="mono">'+(r.pct_dip_below_open!=null?r.pct_dip_below_open+'% times':'—')+'</td>'
+      +'<td class="mono green" style="font-weight:700">Rs '+(r.comfort_buy_px||'—')+'</td>'
+      +'<td class="mono amber">Rs '+(r.safe_buy_px||'—')+'</td>'
+      +'<td class="mono '+(r.avg_turnover_rs>=200000?'green':'amber')+'">Rs '+fmtI(r.avg_turnover_rs||0)+'</td>'
+      +'<td class="mono '+(r.sl_needed?'amber':'green')+'">'+(r.sl_needed?'Yes':'No')+'</td>'
+      +'<td><span class="'+(r.liquidity_ok?'green':'amber')+'">'+(r.liquidity_ok?'✓':'⚠')+'</span></td>'
+      +'</tr>'
+      +'<tr id="'+did+'" style="display:none"><td colspan="17" style="padding:0;background:rgba(0,0,0,.3)">'
+      +'<div style="padding:12px">'
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;margin-bottom:10px">'
+      +[['Buy Strategy',r.buy_note,'y'],['Strength',r.strength_note,'b'],
+        ['Stop Loss',r.sl_needed?r.sl_note:'No SL needed in all '+r.n_occurrences+' occurrences',r.sl_needed?'warn':'ok'],
+        ['Liquidity',r.liquidity_note,'b'],
+      ].map(function(x){return '<div class="pill '+x[2]+'" style="min-width:0"><div class="pl">'+x[0]+'</div><div class="pv" style="font-size:10px;font-family:var(--font)">'+x[1]+'</div></div>';}).join('')
+      +'</div>'
+      +(occRows?'<div style="overflow-x:auto"><table class="tbl" style="min-width:800px"><thead><tr>'
+        +'<th>Date</th><th>Sig Close</th><th>Vol Ratio</th><th>Gap vs Close%</th>'
+        +'<th>Next Open</th><th>Dip below Open?</th><th>Dip from Open%</th>'
+        +'<th>Comfort Buy</th><th>Safe Buy</th>'
+        +'<th>ND Close%</th><th>ND High%</th><th>Pre-5d%</th><th>Pre-20d%</th>'
+        +'</tr></thead><tbody>'+occRows+'</tbody></table></div>':'')
+      +'</div></td></tr>';
+  });
+  tbody.innerHTML=html;
+}
+function dpToggle(id){
+  var r=document.getElementById(id); if(!r) return;
+  var x=document.getElementById('dpx'+id);
+  r.style.display=r.style.display==='none'?'':'none';
+  if(x) x.textContent=r.style.display===''?'▼':'▶';
+}
+
+// ═══ CANDLE TABLE ════════════════════════════════════════════════════════════
+var _catSK='nd_min',_catSD='desc';
+function catSort(k,btn){_catSK=k;setOn('#cats-min,#cats-avg,#cats-occ',btn);renderCAT();}
+function catTh(k){if(_catSK===k)_catSD=_catSD==='desc'?'asc':'desc';else{_catSK=k;_catSD='desc';}renderCAT();}
+function renderCAT(){
+  var tbody=document.getElementById('cat-tbody'); if(!tbody) return;
+  var q=(document.getElementById('cat-q')?.value||'').toUpperCase().trim();
+  var rows=[...DATA.candleToday].map(function(a){return Object.assign({},a,{
+    _5d_avg:a.win_5d?.avg??-999,_10d_avg:a.win_10d?.avg??-999,_20d_avg:a.win_20d?.avg??-999,
+    _years_str:(a.years||[]).join(','),
+  });});
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  rows.sort(function(a,b){var v=(b[_catSK]??-999)-(a[_catSK]??-999);return _catSD==='asc'?-v:v;});
+  var pills=document.getElementById('cat-pills');
+  if(pills) pills.innerHTML=[['Alerts',rows.length,'g'],['Date',rows[0]?.today_date||'—','b']].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
+  if(!rows.length){tbody.innerHTML='<tr><td colspan="15" class="empty">No candle alerts. Run candle_patterns workflow.</td></tr>';return;}
+  tbody.innerHTML=rows.map(function(a){
+    var b5=a.win_5d?.avg,b10=a.win_10d?.avg,b20=a.win_20d?.avg;
+    return '<tr><td class="mono gold" style="font-weight:600">'+a.sym+'</td>'
+      +'<td class="mono muted">'+a.today_date+'</td>'
+      +'<td style="font-size:10px;color:var(--t2);max-width:160px">'+a.candle_desc+'</td>'
+      +'<td class="mono">&#8377;'+fmt(a.today_close)+'</td>'
+      +'<td class="mono muted">'+fmtI(a.today_vol||0)+'</td>'
+      +'<td class="mono green" style="font-weight:700">100%</td>'
+      +'<td class="mono green" style="font-weight:700">+'+(a.nd_min||0).toFixed(2)+'%</td>'
+      +'<td>'+rc(a.nd_avg)+'</td><td>'+rc(a.nd_max)+'</td>'
+      +'<td class="mono">'+(a.gap_up_rate||0)+'%</td>'
+      +'<td class="mono">'+a.occurrences+'</td>'
+      +'<td>'+(b5!=null?rc(b5):'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(b10!=null?rc(b10):'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(b20!=null?rc(b20):'<span class="muted">—</span>')+'</td>'
+      +'<td class="mono muted" style="font-size:9px">'+((a.years||[]).join(', '))+'</td>'
+      +'<td class="mono muted">'+a.last_date+'</td>'
+      +'</tr>';
+  }).join('');
+}
+
+// ═══ YESTERDAY RESULTS ═══════════════════════════════════════════════════════
+var _cpFilter='all',_cpSK='actual_return',_cpSD='asc';
+function cpFilter(f,btn){_cpFilter=f;setOn('#cpf-all,#cpf-pat,#cpf-brk',btn);renderCP();}
+function cpTh(k){if(_cpSK===k)_cpSD=_cpSD==='desc'?'asc':'desc';else{_cpSK=k;_cpSD='desc';}renderCP();}
+function renderCP(){
+  var tbody=document.getElementById('cp-tbody'); if(!tbody) return;
+  var d=DATA.candleYesterday;
+  if(!d){tbody.innerHTML='<tr><td colspan="10" class="empty">No yesterday data yet. Run candle_patterns workflow for two consecutive days.</td></tr>';document.getElementById('cp-pills').innerHTML='';document.getElementById('cp-broken').innerHTML='';return;}
+  var rows=(d.results||[]).slice();
+  var q=(document.getElementById('cp-q')?.value||'').toUpperCase().trim();
+  if(_cpFilter==='pattern') rows=rows.filter(function(r){return r.had_pattern;});
+  else if(_cpFilter==='broken') rows=rows.filter(function(r){return r.pattern_broken;});
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  rows.sort(function(a,b){var av=a[_cpSK]??-9999,bv=b[_cpSK]??-9999;if(typeof av==='boolean')av=av?1:0;if(typeof bv==='boolean')bv=bv?1:0;var v=av-bv;return _cpSD==='asc'?v:-v;});
+  var nPat=d.with_pattern||0,nPatPos=d.pattern_positive||0,nBroken=(d.broken_patterns||[]).length,acc=d.pattern_accuracy_pct;
+  var pills=document.getElementById('cp-pills');
+  if(pills) pills.innerHTML=[
+    ['Signal Date',d.signal_date||'—','b'],['Result Date',d.result_date||'—','b'],
+    ['With Pattern',nPat,'g'],['Pattern Correct',nPatPos+(acc!=null?' ('+acc+'%)':''),'g'],
+    ['Broken',nBroken,'r'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
+  if(!rows.length){tbody.innerHTML='<tr><td colspan="10" class="empty">No results match filter.</td></tr>';}
+  else tbody.innerHTML=rows.map(function(r){
+    var rCls=r.actual_return>0?'green':'red';
+    return '<tr style="'+(r.pattern_broken?'background:rgba(239,68,68,.06)':r.was_positive&&r.had_pattern?'background:rgba(34,197,94,.04)':'')+'"><td class="mono gold" style="font-weight:600">'+r.sym+'</td>'
+      +'<td class="mono muted">'+r.signal_date+'</td>'
+      +'<td style="font-size:10px;color:var(--t2);max-width:160px">'+r.candle_desc+'</td>'
+      +'<td class="mono">&#8377;'+fmt(r.close_signal)+'</td><td class="mono">&#8377;'+fmt(r.close_next)+'</td>'
+      +'<td class="mono '+rCls+'" style="font-weight:700">'+(r.actual_return>0?'+':'')+r.actual_return.toFixed(2)+'%</td>'
+      +'<td>'+(r.was_positive?'<span class="green">✓</span>':'<span class="red">✗</span>')+'</td>'
+      +'<td>'+(r.had_pattern?'<span class="gold">Yes</span>':'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(r.pattern_pred_min!=null?'<span class="green">+'+r.pattern_pred_min.toFixed(1)+'%</span>':'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(r.pattern_broken?'<span class="red" style="font-weight:700">⚠ BROKEN</span>':'<span class="muted">—</span>')+'</td></tr>';
+  }).join('');
+  var bp=d.broken_patterns||[];
+  var bEl=document.getElementById('cp-broken');
+  if(bEl) bEl.innerHTML=bp.length?'<div style="background:var(--rb);border:1px solid var(--r2);border-radius:var(--r);padding:12px;margin-top:10px"><div style="font-weight:700;color:#FCA5A5;margin-bottom:8px">⚠ '+bp.length+' Pattern(s) Broken — removed from future alerts</div>'+bp.map(function(b){return '<div style="background:rgba(0,0,0,.2);border-radius:6px;padding:7px 10px;margin-bottom:5px;display:flex;justify-content:space-between"><div><span class="mono gold" style="font-weight:600">'+b.sym+'</span> <span style="font-size:10px;color:var(--t2)">'+b.candle_desc+'</span></div><div><span class="red" style="font-weight:700">'+b.actual_return.toFixed(2)+'%</span> <span style="font-size:10px;color:var(--t3)">predicted +'+b.pred_min.toFixed(1)+'%</span></div></div>';}).join('')+'</div>':'';
+}
+
+// ═══ BEST CANDLES ════════════════════════════════════════════════════════════
+var _cbSortKey='nd_min',_cbDir='desc';
+function cbSort(k,btn){_cbSortKey=k;setOn('#cbs-min,#cbs-avg,#cbs-max,#cbs-occ',btn);renderCB();}
+function cbTh(k){if(_cbSortKey===k)_cbDir=_cbDir==='desc'?'asc':'desc';else{_cbSortKey=k;_cbDir='desc';}renderCB();}
+function renderCB(){
+  var tbody=document.getElementById('cb-tbody'); if(!tbody) return;
+  var q=(document.getElementById('cb-q')?.value||'').toUpperCase().trim();
+  var rows=[...DATA.candleBest].map(function(p){return Object.assign({},p,{_5d_avg:p.win_5d?.avg??-999,_10d_avg:p.win_10d?.avg??-999,_20d_avg:p.win_20d?.avg??-999,_years_str:(p.years||[]).join(',')});});
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  rows.sort(function(a,b){var v=(b[_cbSortKey]??0)-(a[_cbSortKey]??0);return _cbDir==='asc'?-v:v;});
+  var pills=document.getElementById('cb-pills');
+  if(pills) pills.innerHTML=[['Total',rows.length,'g'],['Unique Stocks',[...new Set(rows.map(function(r){return r.sym;}))].length,'b']].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
+  if(!rows.length){tbody.innerHTML='<tr><td colspan="12" class="empty">No data. Run candle_patterns workflow.</td></tr>';return;}
+  tbody.innerHTML=rows.map(function(p){
+    var b5=p.win_5d?.avg,b10=p.win_10d?.avg,b20=p.win_20d?.avg;
+    return '<tr onclick="csGo(\''+p.sym+'\')" style="cursor:pointer"><td class="mono gold" style="font-weight:600">'+p.sym+'</td>'
+      +'<td style="font-size:10px;color:var(--t2);max-width:170px">'+p.desc+'</td>'
+      +'<td class="mono">'+p.occurrences+'</td>'
+      +'<td class="mono green" style="font-weight:700">+'+(p.nd_min||0).toFixed(1)+'%</td>'
+      +'<td>'+rc(p.nd_avg)+'</td><td>'+rc(p.nd_max)+'</td>'
+      +'<td class="mono">'+(p.gap_up_rate||0)+'%</td>'
+      +'<td>'+(b5!=null?rc(b5):'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(b10!=null?rc(b10):'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(b20!=null?rc(b20):'<span class="muted">—</span>')+'</td>'
+      +'<td class="mono muted" style="font-size:9px">'+((p.years||[]).join(', '))+'</td>'
+      +'<td class="mono muted">'+p.last_date+'</td>'
+      +'</tr>';
+  }).join('');
+}
+function csGo(sym){var el=document.getElementById('cs-sym');if(el)el.value=sym;showPage('candle-search',Array.from(document.querySelectorAll('.tab')).find(function(t){return t.textContent.includes('Search');}));doCS();}
+
+// ═══ CANDLE SEARCH ═══════════════════════════════════════════════════════════
 var _csP={},_csL=false;
 async function doCS(){
   var sym=(document.getElementById('cs-sym')?.value||'').trim().toUpperCase();
-  var res=document.getElementById('cs-result');
+  var res=document.getElementById('cs-result'); if(!res) return;
   if(!sym){res.innerHTML='<div class="empty">Enter a symbol.</div>';return;}
   res.innerHTML='<div class="empty"><div class="spinner"></div>Loading '+sym+'…</div>';
   try{
     if(!_csL){
       var r=await fetch(REPO+'/candle_stock_patterns.json');
-      if(!r.ok) throw new Error('candle_stock_patterns.json not found');
+      if(!r.ok) throw new Error('candle_stock_patterns.json not found — run candle_patterns workflow');
       var d=await r.json(); _csP=d.profiles||{}; _csL=true;
     }
     var prof=_csP[sym];
     if(!prof){res.innerHTML='<div class="empty">'+sym+' not found.</div>';return;}
     var pats=prof.patterns||[],today=prof.today_candle,todayH=prof.today_hist,todayKey=prof.today_key||'';
-    var tBadge=todayH
-      ?'<span style="background:rgba(34,197,94,.15);border:1px solid var(--gr2);color:var(--green);padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600">100% win — min:+'+(todayH.nd_min||0).toFixed(1)+'% avg:+'+(todayH.nd_avg||0).toFixed(1)+'%</span>'
-      :'<span style="background:var(--s);border:1px solid var(--b);border-radius:5px;padding:2px 8px;font-size:11px;color:var(--t3)">No 100%-win history for today candle</span>';
+    var tBadge=todayH?'<span style="background:rgba(34,197,94,.15);border:1px solid var(--gr2);color:var(--green);padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600">100% win — min:+'+(todayH.nd_min||0).toFixed(1)+'% avg:+'+(todayH.nd_avg||0).toFixed(1)+'%</span>':'<span style="background:var(--s);border:1px solid var(--b);border-radius:5px;padding:2px 8px;font-size:11px;color:var(--t3)">No 100%-win pattern for today candle</span>';
     var tDesc=today?'<span style="font-size:11px;background:var(--s);border:1px solid var(--b);border-radius:5px;padding:2px 8px;color:var(--t2)">Today: '+today.desc+'</span>':'';
-    var rHtml=pats.map(function(p){
-      var isT=p.candle_key===todayKey,bg=isT?'background:rgba(201,168,76,.07);':'';
-      var mark=isT?'<strong style="color:var(--gold)"> TODAY</strong>':'';
-      var b5=p.win_5d?.avg,b10=p.win_10d?.avg,b20=p.win_20d?.avg;
-      return '<tr style="'+bg+'">'
-        +'<td style="font-size:10px;max-width:200px;color:var(--t2)">'+p.desc+mark+'</td>'
-        +'<td class="mono">'+p.occurrences+'</td>'
-        +'<td class="mono green" style="font-weight:700">100%</td>'
-        +'<td class="mono green" style="font-weight:700">+'+(p.nd_min||0).toFixed(1)+'%</td>'
-        +'<td>'+rc(p.nd_avg)+'</td><td>'+rc(p.nd_max)+'</td>'
-        +'<td class="mono">'+(p.gap_up_rate||0)+'%</td>'
-        +'<td>'+(b5!=null?rc(b5):'<span class="muted">—</span>')+'</td>'
-        +'<td>'+(b10!=null?rc(b10):'<span class="muted">—</span>')+'</td>'
-        +'<td>'+(b20!=null?rc(b20):'<span class="muted">—</span>')+'</td>'
-        +'<td class="mono muted" style="font-size:10px">'+((p.years||[]).join(', '))+'</td>'
-        +'<td class="mono muted">'+(p.last_date||'—')+'</td>'
-        +'</tr>';
-    }).join('');
     res.innerHTML='<div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:12px;margin-bottom:10px">'
       +'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">'
       +'<span class="mono gold" style="font-size:18px;font-weight:700">'+sym+'</span>'
-      +'<span style="font-size:11px;color:var(--t2)">'+prof.today_date+' · &#8377;'+prof.today_close+'</span>'
+      +'<span style="font-size:11px;color:var(--t2)">'+(prof.today_date||'')+' · &#8377;'+(prof.today_close||'—')+'</span>'
       +tDesc+tBadge+'</div>'
-      +'<div class="pill-row" style="margin:0">'
-      +'<div class="kp g"><div class="kl">100%-Win Patterns</div><div class="kv">'+pats.length+'</div></div>'
-      +'</div></div>'
-      +'<div class="twrap"><table class="tbl">'
-      +'<thead><tr><th>Candle</th><th>Occ</th><th>ND Win%</th><th>ND Min%</th><th>ND Avg%</th><th>ND Max%</th>'
-      +'<th>Gap Up%</th><th>5d Avg%</th><th>10d Avg%</th><th>20d Avg%</th><th>Years</th><th>Last</th></tr></thead>'
-      +'<tbody>'+rHtml+'</tbody></table></div>';
+      +'<div class="pill-row" style="margin:0"><div class="kp g"><div class="kl">100%-Win Patterns</div><div class="kv">'+pats.length+'</div></div></div></div>'
+      +'<div class="twrap"><table class="tbl"><thead><tr><th>Candle</th><th>Occ</th><th>ND Win%</th><th>ND Min%</th><th>ND Avg%</th><th>ND Max%</th><th>Gap Up%</th><th>5d Avg%</th><th>10d Avg%</th><th>20d Avg%</th><th>Years</th><th>Last</th></tr></thead><tbody>'
+      +pats.map(function(p){
+        var isT=p.candle_key===todayKey;
+        var b5=p.win_5d?.avg,b10=p.win_10d?.avg,b20=p.win_20d?.avg;
+        return '<tr style="'+(isT?'background:rgba(201,168,76,.07)':'')+'"><td style="font-size:10px;max-width:200px;color:var(--t2)">'+p.desc+(isT?'<strong style="color:var(--gold)"> TODAY</strong>':'')+'</td>'
+          +'<td class="mono">'+p.occurrences+'</td><td class="mono green" style="font-weight:700">100%</td>'
+          +'<td class="mono green" style="font-weight:700">+'+(p.nd_min||0).toFixed(1)+'%</td>'
+          +'<td>'+rc(p.nd_avg)+'</td><td>'+rc(p.nd_max)+'</td>'
+          +'<td class="mono">'+(p.gap_up_rate||0)+'%</td>'
+          +'<td>'+(b5!=null?rc(b5):'<span class="muted">—</span>')+'</td>'
+          +'<td>'+(b10!=null?rc(b10):'<span class="muted">—</span>')+'</td>'
+          +'<td>'+(b20!=null?rc(b20):'<span class="muted">—</span>')+'</td>'
+          +'<td class="mono muted" style="font-size:9px">'+((p.years||[]).join(', '))+'</td>'
+          +'<td class="mono muted">'+(p.last_date||'—')+'</td></tr>';
+      }).join('')+'</tbody></table></div>';
   }catch(e){res.innerHTML='<div class="empty">Error: '+e.message+'</div>';}
 }
 
-// ═══ HEAVYWEIGHT DIP ═════════════════════════════════════════════════
+// ═══ HEAVYWEIGHT DIP ═════════════════════════════════════════════════════════
 var _hwGrd='ALL',_hwSK='best_min_return',_hwSD='desc';
 function hwGrd(g,btn){_hwGrd=g;setOn('#hwg-all,#hwg-ap,#hwg-a,#hwg-b',btn);renderHW();}
-function hwSort(k,btn){_hwSK=k;setOn('#hws-min,#hws-b15,#hws-evt',btn);renderHW();}
+function hwSort(k,btn){_hwSK=k;setOn('#hws-min,#hws-b15',btn);renderHW();}
 function hwTh(k){if(_hwSK===k)_hwSD=_hwSD==='desc'?'asc':'desc';else{_hwSK=k;_hwSD='desc';}renderHW();}
 function renderHW(){
-  var q=(document.getElementById('hw-q')?.value||'').toUpperCase().trim();
+  var tbody=document.getElementById('hw-tbody'); if(!tbody) return;
   var meta=DATA.hwMeta||{};
-  document.getElementById('hw-pills').innerHTML=[
-    ['Stocks',Object.keys(DATA.hwProfiles).length,'b',''],
-    ['A+',meta.n_aplus||0,'g',''],['A',meta.n_a||0,'g',''],
-  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
-  var rows=Object.entries(DATA.hwProfiles).map(function(e,i){
-    var sym=e[0],p=e[1],ws=p.win_stats&&p.win_stats[p.best_window_days]?p.win_stats[p.best_window_days]:{};
-    return Object.assign({},p,{sym:sym,_rank:i+1,_avg_r:ws.avg_return||0,_years_str:(p.years||[]).join(',')});
-  });
+  var pills=document.getElementById('hw-pills');
+  if(pills) pills.innerHTML=[['Stocks',Object.keys(DATA.hwProfiles).length,'b'],['A+',meta.n_aplus||0,'g'],['A',meta.n_a||0,'g']].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
+  var rows=Object.entries(DATA.hwProfiles).map(function(e,i){var sym=e[0],p=e[1],ws=p.win_stats&&p.win_stats[p.best_window_days]?p.win_stats[p.best_window_days]:{};return Object.assign({},p,{sym:sym,_avg_r:ws.avg_return||0});});
   if(_hwGrd!=='ALL') rows=rows.filter(function(r){return r.grade===_hwGrd;});
+  var q=(document.getElementById('hw-q')?.value||'').toUpperCase().trim();
   if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
   rows.sort(function(a,b){var v=(b[_hwSK]??0)-(a[_hwSK]??0);return _hwSD==='asc'?-v:v;});
-  if(!rows.length){document.getElementById('hw-tbody').innerHTML='<tr><td colspan="10" class="empty">No data. Run pattern_discovery workflow.</td></tr>';return;}
-  var tbody=document.getElementById('hw-tbody');
-  tbody.innerHTML=rows.map(function(p,i){
-    return '<tr class="hw-row" data-sym="'+p.sym+'" style="cursor:pointer">'
-      +'<td class="mono muted">'+(i+1)+'</td>'
+  if(!rows.length){tbody.innerHTML='<tr><td colspan="9" class="empty">No data. Run pattern_discovery workflow.</td></tr>';return;}
+  var html='';
+  rows.forEach(function(p,i){
+    var did='hwd'+i;
+    html+='<tr onclick="hwToggle(\''+did+'\',\''+p.sym+'\')" style="cursor:pointer">'
+      +'<td><span id="hwx'+did+'" style="font-size:10px;color:var(--t3)">▶</span></td>'
       +'<td class="mono gold" style="font-weight:600">'+p.sym+'</td>'
       +'<td>'+gradeBadge(p.grade||'C')+'</td>'
       +'<td class="mono">'+p.best_window_days+'d</td>'
@@ -1482,408 +1525,60 @@ function renderHW(){
       +'<td>'+rc(p._avg_r)+'</td>'
       +'<td class="mono">'+p.n_events+'</td>'
       +'<td class="mono">'+p.n_years+'</td>'
-      +'<td class="mono muted" style="font-size:10px">'+((p.years||[]).join(', '))+'</td>'
-      +'</tr>';
-  }).join('');
-  tbody.onclick=function(ev){var r=ev.target.closest('tr');if(r&&r.dataset.sym)showHWD(r.dataset.sym);};
+      +'</tr>'
+      +'<tr id="'+did+'" data-sym="'+p.sym+'" style="display:none"><td colspan="9" style="padding:0"></td></tr>';
+  });
+  tbody.innerHTML=html;
 }
-function showHWD(sym){
-  // Toggle detail row immediately after the clicked row
-  var tbody=document.getElementById('hw-tbody');
-  // Remove any existing expanded detail
-  var existing=tbody.querySelector('.hw-detail-row');
-  var existingSym=existing?existing.dataset.sym:'';
-  if(existing) existing.remove();
-  if(existingSym===sym) return; // clicked same row = collapse
-  // Find the clicked row
-  var clickedRow=Array.from(tbody.querySelectorAll('tr.hw-row')).find(function(r){return r.dataset.sym===sym;});
-  if(!clickedRow) return;
-  var p=DATA.hwProfiles[sym];if(!p)return;
-  var evts=(p.events||[]).slice(-30).reverse();
-  function fmtW(e,w){
-    var r=e.recovery&&e.recovery[String(w)];if(!r)return '<td class="muted">—</td>';
-    var v=r.return_pct;
-    return '<td class="mono '+(v>=15?'green':v>=0?'amber':'red')+'" style="'+(v>=15?'font-weight:700':'')+'">'+( v>0?'+':'')+v.toFixed(1)+'%</td>';
+function hwToggle(id,sym){
+  var row=document.getElementById(id); if(!row) return;
+  var x=document.getElementById('hwx'+id);
+  if(row.style.display==='none'){
+    row.style.display='';
+    if(x) x.textContent='▼';
+    // Populate detail
+    var p=DATA.hwProfiles[sym]; if(!p) return;
+    var evts=(p.events||[]).slice(-30).reverse();
+    function fw(e,w){var r=e.recovery&&e.recovery[String(w)];if(!r)return'<td class="muted">—</td>';var v=r.return_pct;return'<td class="mono '+(v>=15?'green':v>=0?'amber':'red')+'" style="'+(v>=15?'font-weight:700':'')+'">'+( v>0?'+':'')+v.toFixed(1)+'%</td>';}
+    row.cells[0].innerHTML='<div style="padding:12px;background:rgba(0,0,0,.3)">'
+      +'<div style="font-size:11px;color:var(--gold);font-weight:600;margin-bottom:8px">'+sym+' — floor events (last '+evts.length+' of '+(p.events||[]).length+')</div>'
+      +'<div style="overflow-x:auto"><table class="tbl" style="min-width:700px"><thead><tr>'
+      +'<th>Floor Date</th><th>Close</th><th>Floor Depth</th><th>+5d</th><th>+10d</th><th>+20d</th><th>+30d</th></tr></thead><tbody>'
+      +evts.map(function(e){return'<tr><td class="mono">'+e.date+'</td><td class="mono">&#8377;'+e.close+'</td><td class="mono amber">'+e.pos_in_range+'%</td>'+fw(e,5)+fw(e,10)+fw(e,20)+fw(e,30)+'</tr>';}).join('')
+      +'</tbody></table></div></div>';
+    row.cells[0].colSpan=9;
+  } else {
+    row.style.display='none';
+    if(x) x.textContent='▶';
   }
-  // Insert detail row after clicked row
-  var detailTr=document.createElement('tr');
-  detailTr.className='hw-detail-row'; detailTr.dataset.sym=sym;
-  var detailTd=document.createElement('td'); detailTd.colSpan=10; detailTd.style.padding='0';
-  detailTr.appendChild(detailTd);
-  clickedRow.parentNode.insertBefore(detailTr, clickedRow.nextSibling);
-  detailTd.innerHTML='<div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);margin-top:10px;overflow:hidden">'
-    +'<div style="padding:9px 12px;background:var(--s);font-size:12px;color:var(--gold);font-weight:600">'+sym+' — floor events (last '+evts.length+' of '+(p.events||[]).length+')</div>'
-    +'<div class="twrap" style="margin:0;border:none;border-radius:0"><table class="tbl">'
-    +'<thead><tr><th>Floor Date</th><th>Close</th><th>Floor Depth</th><th>+5d</th><th>+10d</th><th>+20d</th><th>+30d</th></tr></thead><tbody>'
-    +evts.map(function(e){return '<tr><td class="mono">'+e.date+'</td><td class="mono">&#8377;'+e.close+'</td><td class="mono amber">'+e.pos_in_range+'%</td>'+fmtW(e,5)+fmtW(e,10)+fmtW(e,20)+fmtW(e,30)+'</tr>';}).join('')
-    +'</tbody></table></div></div>';
-  clickedRow.classList.add('hw-expanded');
-  }
-function _noop(){}
+}
 
-// ═══ HW ALERTS ═══════════════════════════════════════════════════════
+// ═══ HW ALERTS ═══════════════════════════════════════════════════════════════
 function renderHWA(){
+  var el=document.getElementById('hwa-grid'); if(!el) return;
   var meta=DATA.hwAlertMeta||{};
-  document.getElementById('hwa-pills').innerHTML=[
-    ['Alerts',meta.total_alerts||0,'b',''],['Today',meta.today_count||0,'g',''],['A+/A',meta.grade_a||0,'g',''],
-  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
+  var pills=document.getElementById('hwa-pills');
+  if(pills) pills.innerHTML=[['Alerts',meta.total_alerts||0,'b'],['Today',meta.today_count||0,'g'],['A+/A',meta.grade_a||0,'g']].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
   var rows=DATA.hwAlerts||[];
-  if(!rows.length){document.getElementById('hwa-grid').innerHTML='<div class="empty" style="grid-column:1/-1">No heavyweight floor alerts in last 20 trading days.</div>';return;}
-  document.getElementById('hwa-grid').innerHTML=rows.map(function(a){
+  if(!rows.length){el.innerHTML='<div class="empty" style="grid-column:1/-1">No heavyweight floor alerts in last 20 trading days.</div>';return;}
+  el.innerHTML=rows.map(function(a){
     var chgC=a.pct_since>=0?'var(--green)':'var(--red)';
     var db=a.is_today?'<span class="days-ago today-badge">TODAY</span>':'<span class="days-ago">'+a.days_ago+'d ago</span>';
     var zCls=a.zone==='BUY ZONE'?'zone-buy':a.zone==='RUNNING'?'zone-run':'zone-sell';
     var g=a.grade||'B';
     var yrs=(a.years||[]).map(function(y){return '<span class="yr-tag yr-win">'+y+'</span>';}).join('');
     return '<div class="ac ac-'+g.replace('+','p')+'">'+db
-      +'<div class="ac-head"><div>'
-      +'<div style="display:flex;align-items:center;gap:5px">'+gradeBadge(g)+'<span class="ac-sym">'+a.sym+'</span></div>'
-      +'<div class="ac-sig">'+a.best_window_days+'d window</div>'
-      +'<div style="margin-top:3px">'+yrs+'</div>'
-      +'</div>'
-      +'<div class="ac-wr"><div class="ac-pct">+'+(a.min_return||0).toFixed(1)+'%</div><div class="ac-lbl">min recovery</div></div>'
-      +'</div>'
-      +'<div class="ac-row3">'
-      +'<div class="ac-mini"><div class="ac-ml">Floor depth</div><div class="ac-mv amber">'+a.floor_depth_pct+'%</div></div>'
+      +'<div class="ac-head"><div><div style="display:flex;align-items:center;gap:5px">'+gradeBadge(g)+'<span class="ac-sym">'+a.sym+'</span></div>'
+      +'<div class="ac-sig">'+a.best_window_days+'d window</div><div style="margin-top:3px">'+yrs+'</div></div>'
+      +'<div class="ac-wr"><div class="ac-pct">+'+(a.min_return||0).toFixed(1)+'%</div><div class="ac-lbl">min recovery</div></div></div>'
+      +'<div class="ac-row3"><div class="ac-mini"><div class="ac-ml">Floor depth</div><div class="ac-mv amber">'+a.floor_depth_pct+'%</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">Beats 15%</div><div class="ac-mv green">'+(a.beats15_rate||0).toFixed(0)+'%</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Since signal</div><div class="ac-mv" style="color:'+chgC+'">'+(a.pct_since>0?'+':'')+a.pct_since+'%</div></div>'
-      +'</div>'
-      +'<div class="zones">'
-      +'<div class="zr"><span class="zl">Signal close</span><span class="zv">&#8377;'+fmt(a.sig_close)+'</span></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Since signal</div><div class="ac-mv" style="color:'+chgC+'">'+(a.pct_since>0?'+':'')+a.pct_since+'%</div></div></div>'
+      +'<div class="zones"><div class="zr"><span class="zl">Signal close</span><span class="zv">&#8377;'+fmt(a.sig_close)+'</span></div>'
       +'<div class="zr"><span class="zl">Current</span><span class="zv" style="color:'+chgC+'">&#8377;'+fmt(a.cur_price)+'</span></div>'
-      +'<div class="zr"><span class="zl">Conservative target</span><span class="zv zt1">&#8377;'+fmt(a.target_conservative)+'</span></div>'
-      +'<div class="zr"><span class="zl">Realistic target</span><span class="zv zt2">&#8377;'+fmt(a.target_realistic)+'</span></div>'
-      +'</div>'
-      +'<div class="zone-banner '+zCls+'">'+a.zone+'</div>'
-      +'</div>';
-  }).join('');
-}
-
-// ═══ CANDLE PERFORMANCE (YESTERDAY RESULTS) ══════════════════════════
-var _cpFilter='all', _cpSortKey='actual_return', _cpDir='asc';
-function cpFilter(f,btn){_cpFilter=f;setOn('#cpf-all,#cpf-pat,#cpf-brk',btn);renderCP();}
-function cpTh(k){if(_cpSortKey===k)_cpDir=_cpDir==='desc'?'asc':'desc';else{_cpSortKey=k;_cpDir='desc';}renderCP();}
-function renderCP(){
-  var d=DATA.candleYesterday||{};
-  var rows=(d.results||[]).slice();
-  // Filter
-  var q=(document.getElementById('cp-q')?.value||'').toUpperCase().trim();
-  if(_cpFilter==='pattern') rows=rows.filter(function(r){return r.had_pattern;});
-  else if(_cpFilter==='broken') rows=rows.filter(function(r){return r.pattern_broken;});
-  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
-  // Sort
-  rows.sort(function(a,b){
-    var av=a[_cpSortKey],bv=b[_cpSortKey];
-    if(typeof av==='boolean') av=av?1:0;
-    if(typeof bv==='boolean') bv=bv?1:0;
-    var v=(av??-9999)-(bv??-9999);
-    return _cpDir==='asc'?v:-v;
-  });
-  // Pills
-  var nPat=d.with_pattern||0, nPatPos=d.pattern_positive||0, nBroken=(d.broken_patterns||[]).length;
-  var acc=d.pattern_accuracy_pct;
-  document.getElementById('cp-pills').innerHTML=[
-    ['Signal Date',d.signal_date||'—','b',''],
-    ['Result Date',d.result_date||'—','b',''],
-    ['With Pattern',nPat,'g','had 100%-win candle yesterday'],
-    ['Pattern Correct',nPatPos,'g',acc!=null?acc+'% accuracy':''],
-    ['Patterns Broken',nBroken,'r','pattern had neg result — removed'],
-  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>';}).join('');
-  if(!rows.length){
-    document.getElementById('cp-tbody').innerHTML='<tr><td colspan="10" class="empty">No performance data. Run candle_patterns workflow for two consecutive days.</td></tr>';
-    document.getElementById('cp-broken').innerHTML='';
-    return;
-  }
-  document.getElementById('cp-tbody').innerHTML=rows.map(function(r){
-    var retCls=r.actual_return>0?'green':'red';
-    var resSym=r.was_positive?'<span class="green">✓ Positive</span>':'<span class="red">✗ Negative</span>';
-    var patSym=r.had_pattern?'<span class="gold">Yes</span>':'<span class="muted">—</span>';
-    var brokenSym=r.pattern_broken?'<span class="red" style="font-weight:700">⚠ BROKEN</span>':'<span class="muted">—</span>';
-    var predMin=r.pattern_pred_min!=null?'<span class="green">+'+(r.pattern_pred_min||0).toFixed(1)+'%</span>':'<span class="muted">—</span>';
-    return '<tr style="'+(r.pattern_broken?'background:rgba(239,68,68,.06)':r.was_positive&&r.had_pattern?'background:rgba(34,197,94,.04)':'')+'">'+
-      '<td class="mono gold" style="font-weight:600">'+r.sym+'</td>'+
-      '<td class="mono muted">'+r.signal_date+'</td>'+
-      '<td style="font-size:10px;color:var(--t2);max-width:160px">'+r.candle_desc+'</td>'+
-      '<td class="mono">&#8377;'+fmt(r.close_signal)+'</td>'+
-      '<td class="mono">&#8377;'+fmt(r.close_next)+'</td>'+
-      '<td class="mono '+retCls+'" style="font-weight:700">'+(r.actual_return>0?'+':'')+r.actual_return.toFixed(2)+'%</td>'+
-      '<td>'+resSym+'</td>'+
-      '<td>'+patSym+'</td>'+
-      '<td>'+predMin+'</td>'+
-      '<td>'+brokenSym+'</td>'+
-      '</tr>';
-  }).join('');
-  // Broken patterns summary
-  var bp=d.broken_patterns||[];
-  if(bp.length){
-    document.getElementById('cp-broken').innerHTML='<div style="background:var(--rb);border:1px solid var(--r2);border-radius:var(--r);padding:12px;margin-top:10px">'
-      +'<div style="font-weight:700;color:#FCA5A5;margin-bottom:8px;font-size:13px">⚠ '+bp.length+' Pattern(s) Broken — Auto-removed from future alerts</div>'
-      +'<div style="font-size:11px;color:var(--t2);margin-bottom:8px">These candle patterns predicted 100% positive next-day returns but failed. They have been removed from the analysis and will not appear in today candle alerts.</div>'
-      +bp.map(function(b){
-        return '<div style="background:rgba(0,0,0,.2);border-radius:6px;padding:8px 10px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center">'
-          +'<div><span class="mono gold" style="font-weight:600">'+b.sym+'</span>'
-          +' <span style="font-size:10px;color:var(--t2);margin-left:6px">'+b.candle_desc+'</span></div>'
-          +'<div style="text-align:right"><span class="red" style="font-weight:700">'+b.actual_return.toFixed(2)+'%</span>'
-          +' <span style="font-size:10px;color:var(--t3);margin-left:6px">was predicted +'+b.pred_min.toFixed(1)+'%</span></div>'
-          +'</div>';
-      }).join('')
-      +'</div>';
-  } else {
-    document.getElementById('cp-broken').innerHTML='';
-  }
-}
-
-// ═══ TOP 5 INLINE (shown on candle alerts page above daily alerts) ═══════════
-function renderTop5InAlerts(){
-  var el=document.getElementById('ca-top5-section'); if(!el) return;
-  var d=DATA.top5||{}; var top=(d.top5||[]);
-  if(!top.length){
-    el.innerHTML='<div style="font-size:11px;color:var(--t3);margin-bottom:6px">Top 5 data loading… run candle_enriched_analysis workflow.</div>';
-    return;
-  }
-  // Cross-reference: is this top5 stock also in today's candle alerts?
-  var todaySyms={};
-  (DATA.candleToday||[]).forEach(function(a){ todaySyms[a.sym]=a; });
-  var inv=getInvParams();
-  // Count how many top5 fired today
-  var firedToday=top.filter(function(r){return !!todaySyms[r.sym];}).length;
-  el.innerHTML='<div style="background:var(--s);border:1px solid var(--g2);border-radius:var(--r);padding:12px;margin-bottom:4px">'
-    +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">'
-    +'<span style="font-size:11px;font-weight:600;color:var(--gold)">🏆 Top 5 Highest-Confidence Stocks</span>'
-    +(firedToday>0
-      ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:5px;padding:2px 9px;font-size:10px;font-weight:700">🔔 '+firedToday+' fired TODAY — BUY SIGNAL</span>'
-      :'<span style="background:var(--s);color:var(--t3);border:1px solid var(--b);border-radius:5px;padding:2px 9px;font-size:10px">Watchlist — pattern not fired today</span>')
-    +'<span style="font-size:9px;color:var(--t3)">Green border = pattern fired today = next-day buy. Grey = historical watchlist only.</span>'
-    +'</div>'
-    +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px">'
-    +top.map(function(r,i){
-      var medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
-      var al=allocCard(r.occurrences&&r.occurrences[r.occurrences.length-1]?r.occurrences[r.occurrences.length-1].sig_close:0,
-                       r.nd_min_return,r.nd_avg_return,inv);
-      var todayAlert=todaySyms[r.sym]||null;
-      var isFiredToday=!!todayAlert;
-      // Use today's close if fired, else last historical occurrence price
-      var buyPx=isFiredToday?todayAlert.today_close
-        :(r.occurrences&&r.occurrences.length?r.occurrences[r.occurrences.length-1].sig_close:null);
-      var entryNote=isFiredToday
-        ?('TODAY SIGNAL — buy at tomorrow open. '+(r.pct_entry_dip>50?'Dip opp: '+r.pct_entry_dip+'% chance below close.':'Gap-up expected '+r.pct_gap_up+'% of times.'))
-        :(r.pct_entry_dip>50?'Watchlist. When pattern fires: wait for dip ('+r.pct_entry_dip+'% of times)':'Watchlist. When pattern fires: buy at gap-open ('+r.pct_gap_up+'% of times)');
-      var cardBorder=isFiredToday?'var(--gr2)':'var(--b)';
-      var cardBg=isFiredToday?'rgba(34,197,94,.04)':'var(--card)';
-      return '<div style="background:'+cardBg+';border:1px solid '+cardBorder+';border-radius:9px;padding:11px">'
-        +'<div style="display:flex;align-items:center;gap:7px;margin-bottom:8px">'
-        +'<span style="font-size:16px">'+medals[i]+'</span>'
-        +'<span class="mono gold" style="font-weight:700;font-size:14px">'+r.sym+'</span>'
-        +(isFiredToday?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:4px;padding:2px 7px;font-size:9px;font-weight:700">🔔 BUY TODAY</span>':'<span style="background:var(--s);color:var(--t3);border:1px solid var(--b);border-radius:4px;padding:2px 7px;font-size:9px">WATCHLIST</span>')
-        +'<span style="margin-left:auto;background:var(--gbg);color:var(--gold);border:1px solid var(--g2);border-radius:4px;padding:2px 6px;font-size:9px;font-weight:700">Score '+r.score+'</span>'
-        +'</div>'
-        +'<div style="font-size:9px;color:var(--t3);margin-bottom:7px">'+r.desc+'</div>'
-        +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-bottom:8px">'
-        +'<div class="ac-mini"><div class="ac-ml">ND Min%</div><div class="ac-mv green">+'+r.nd_min_return+'%</div></div>'
-        +'<div class="ac-mini"><div class="ac-ml">ND Avg%</div><div class="ac-mv green">+'+r.nd_avg_return+'%</div></div>'
-        +'<div class="ac-mini"><div class="ac-ml">Occurrences</div><div class="ac-mv">'+r.n_occurrences+'x</div></div>'
-        +'</div>'
-        +(buyPx?'<div style="font-size:10px;color:var(--t2);margin-bottom:6px">Last signal close: <strong style="color:var(--text)">&#8377;'+buyPx+'</strong></div>':'')
-        +'<div style="font-size:9px;color:var(--amber);margin-bottom:7px">📍 '+entryNote+'</div>'
-        +(al?'<div style="background:rgba(201,168,76,.07);border-radius:6px;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:3px">'
-          +'<div class="ac-mini"><div class="ac-ml">Invest Rs</div><div class="ac-mv amber">'+fmtI(Math.round(al.invest))+'</div></div>'
-          +'<div class="ac-mini"><div class="ac-ml">Qty</div><div class="ac-mv">'+al.units+' shares</div></div>'
-          +'<div class="ac-mini"><div class="ac-ml">Target 1</div><div class="ac-mv green">&#8377;'+al.tgt1+'</div></div>'
-          +'<div class="ac-mini"><div class="ac-ml">Target 2</div><div class="ac-mv green">&#8377;'+al.tgt2+'</div></div>'
-          +'<div class="ac-mini"><div class="ac-ml">Profit T1</div><div class="ac-mv green">+Rs'+fmtI(Math.round(al.profit1))+'</div></div>'
-          +'<div class="ac-mini"><div class="ac-ml">Profit T2</div><div class="ac-mv green">+Rs'+fmtI(Math.round(al.profit2))+'</div></div>'
-          +'</div>'
-          :'<div style="font-size:9px;color:var(--t3)">Enter capital above to see investment plan</div>')
-        +'</div>';
-    }).join('')
-    +'</div></div>';
-}
-
-// ═══ TOP 5 STOCKS ═══════════════════════════════════════════════════════════
-function renderTop5(){
-  var d=DATA.top5||{}; var top=(d.top5||[]);
-  if(!top.length){
-    document.getElementById('t5-body').innerHTML='<div class="empty">No enriched data. Run candle_enriched_analysis workflow.</div>';
-    return;
-  }
-  document.getElementById('t5-body').innerHTML=top.map(function(r,i){
-    var medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
-    var dipNote=r.pct_entry_dip>50
-      ?'<span class="amber">'+r.pct_entry_dip+'% of times price dips below signal close — best entry opportunity!</span>'
-      :'Gap-up open in '+r.pct_gap_up+'% of cases — buy at open.';
-    var occ=r.occurrences||[];
-    var occHtml=occ.length?'<div class="twrap" style="margin-top:10px"><table class="tbl" style="min-width:1100px"><thead><tr>'
-      +'<th>Date</th><th>Sig Close</th><th>Volume</th><th>Vol Ratio</th><th>Gap%</th>'
-      +'<th>Entry Dip?</th><th>Dip%</th><th>Best Entry</th><th>ND Return%</th><th>ND High%</th>'
-      +'<th>Pre-5d%</th><th>Pre-20d%</th><th>Pre-60d%</th></tr></thead><tbody>'
-      +occ.map(function(o){
-        return '<tr><td class="mono">'+o.date+'</td>'
-          +'<td class="mono">&#8377;'+o.sig_close+'</td>'
-          +'<td class="mono muted">'+fmtI(o.sig_volume)+'</td>'
-          +'<td class="mono '+(o.vol_ratio_vs_20d>=1.5?'green':'')+'">'+( o.vol_ratio_vs_20d!=null?o.vol_ratio_vs_20d+'x':'—')+'</td>'
-          +'<td class="mono '+(o.gap_pct>0?'green':'red')+'">'+(o.gap_pct>0?'+':'')+o.gap_pct+'%</td>'
-          +'<td>'+(o.entry_dip?'<span class="amber">Yes -'+o.entry_dip_pct+'%</span>':'<span class="muted">No</span>')+'</td>'
-          +'<td class="mono amber">'+(o.entry_dip_pct>0?o.entry_dip_pct+'%':'—')+'</td>'
-          +'<td class="mono">&#8377;'+o.best_entry_px+' ('+(o.best_entry_vs_close>0?'+':'')+o.best_entry_vs_close+'%)</td>'
-          +'<td>'+rc(o.nd_return)+'</td>'
-          +'<td>'+rc(o.nd_max_gain)+'</td>'
-          +'<td>'+(o.trend_5d_before!=null?rc(o.trend_5d_before):'<span class="muted">—</span>')+'</td>'
-          +'<td>'+(o.trend_20d_before!=null?rc(o.trend_20d_before):'<span class="muted">—</span>')+'</td>'
-          +'<td>'+(o.trend_60d_before!=null?rc(o.trend_60d_before):'<span class="muted">—</span>')+'</td>'
-          +'</tr>';
-      }).join('')+'</tbody></table></div>':'<div class="empty">No occurrence data</div>';
-    return '<div class="spcard" style="margin-bottom:16px">'
-      +'<div class="sp-head" onclick="this.nextElementSibling.classList.toggle(\'open\')">'
-      +'<span class="sp-sym">'+medals[i]+' '+r.sym+'</span>'
-      +'<span class="sp-meta">Score: '+r.score+' | '+r.n_occurrences+' occurrences | '+(r.years||[]).join(', ')+'</span>'
-      +'<span style="margin-left:auto;font-size:11px;color:var(--green)">ND Avg: +'+r.nd_avg_return+'% | Min: +'+r.nd_min_return+'%</span>'
-      +'</div>'
-      +'<div class="sp-body open">'
-      +'<div class="pill-row">'
-      +[['Candle',r.desc||r.candle_key,'b'],
-        ['ND Min%','+'+r.nd_min_return+'%','g'],
-        ['ND Avg%','+'+r.nd_avg_return+'%','g'],
-        ['ND Max%','+'+r.nd_max_return+'%','g'],
-        ['Gap Up',''+r.pct_gap_up+'%','b'],
-        ['Dip Opp',''+r.pct_entry_dip+'% times','y'],
-        ['Liquidity',r.liquidity_ok?'Rs2L OK':'Low liq',r.liquidity_ok?'g':'r'],
-      ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('')
-      +'</div>'
-      +'<div class="mrow" style="margin-top:10px">'
-      +'<div class="pill" style="grid-column:1/-1;background:var(--s);border-color:var(--g2)">'
-      +'<div class="pl">Pattern Strength</div><div class="pv" style="font-size:12px;color:var(--text)">'+r.pattern_strength_note+'</div></div>'
-      +'<div class="pill ok"><div class="pl">Best Buy Strategy</div><div class="pv" style="font-size:11px">'+dipNote+'</div></div>'
-      +'<div class="pill ok"><div class="pl">Target Conservative</div><div class="pv">+'+r.target_conservative+'%</div></div>'
-      +'<div class="pill ok"><div class="pl">Target Realistic</div><div class="pv">+'+r.target_realistic+'%</div></div>'
-      +'<div class="pill ok"><div class="pl">Target Optimistic</div><div class="pv">+'+r.target_optimistic+'%</div></div>'
-      +'<div class="pill '+(r.sl_needed?'warn':'ok')+'"><div class="pl">Stop Loss</div><div class="pv">'+( r.sl_needed?(r.suggested_sl_pct+'%'):'Not needed')+'</div><div class="ps">'+r.sl_note+'</div></div>'
-      +'<div class="pill '+(r.liquidity_ok?'ok':'warn')+'"><div class="pl">Liquidity (Rs2L)</div><div class="pv">'+(r.liquidity_ok?'✓ OK':'⚠ Low')+'</div><div class="ps">'+r.liquidity_note+'</div></div>'
-      +'<div class="pill b"><div class="pl">Pre-Signal Trend</div><div class="pv">'+(r.avg_trend_20d_before!=null?(r.avg_trend_20d_before>0?'+':'')+r.avg_trend_20d_before+'%':'—')+'</div><div class="ps">20d before signal avg</div></div>'
-      +'<div class="pill b"><div class="pl">Avg Volume Ratio</div><div class="pv">'+(r.avg_vol_ratio_on_signal!=null?r.avg_vol_ratio_on_signal+'x':'—')+'</div><div class="ps">vs 20d avg</div></div>'
-      +'</div>'
-      + occHtml
-      +'</div></div>';
-  }).join('');
-}
-
-// ═══ DEEP ANALYSIS TABLE ═══════════════════════════════════════════════════
-var _dpSK='score', _dpSD='desc';
-function dpSort(k,btn){_dpSK=k;setOn('#dps-score,#dps-avg,#dps-min,#dps-gap,#dps-liq',btn);renderDP();}
-function dpTh(k){if(_dpSK===k)_dpSD=_dpSD==='desc'?'asc':'desc';else{_dpSK=k;_dpSD='desc';}renderDP();}
-function renderDP(){
-  var d=DATA.enriched;
-  if(!d){document.getElementById('dp-tbody').innerHTML='<tr><td colspan="23" class="empty">No enriched data. Run candle_enriched_analysis workflow.</td></tr>';return;}
-  var q=(document.getElementById('dp-q')?.value||'').toUpperCase().trim();
-  var rows=[...(d.patterns||[])].map(function(p){return Object.assign({},p,{_years_str:(p.years||[]).join(',')});});
-  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
-  rows.sort(function(a,b){var v=(b[_dpSK]??0)-(a[_dpSK]??0);return _dpSD==='asc'?-v:v;});
-  document.getElementById('dp-pills').innerHTML=[
-    ['Stocks',rows.length,'b',''],
-    ['Avg Score',rows.length?Math.round(rows.reduce(function(s,r){return s+r.score;},0)/rows.length):'—','g','confidence score'],
-    ['Liquid (Rs2L)',rows.filter(function(r){return r.liquidity_ok;}).length,'g','can deploy Rs2L'],
-  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>';}).join('');
-  document.getElementById('dp-tbody').innerHTML=rows.map(function(r){
-    var liqCls=r.liquidity_ok?'green':'amber';
-    return '<tr onclick="showDPDetail(\''+r.sym+'\',\''+r.candle_key+'\')" style="cursor:pointer" data-sym="'+r.sym+'">'
-      +'<td class="mono gold" style="font-weight:600">'+r.sym+'</td>'
-      +'<td style="font-size:9px;color:var(--t2);max-width:130px">'+r.desc+'</td>'
-      +'<td class="mono">'+r.n_occurrences+'</td>'
-      +'<td class="mono amber" style="font-weight:700">'+r.score+'</td>'
-      +'<td class="mono green" style="font-weight:700">+'+(r.nd_min_return||0).toFixed(1)+'%</td>'
-      +'<td>'+rc(r.nd_avg_return)+'</td>'
-      +'<td>'+rc(r.nd_max_return)+'</td>'
-      +'<td class="mono">'+r.pct_gap_up+'%</td>'
-      +'<td>'+rc(r.avg_gap_pct)+'</td>'
-      +'<td class="mono amber">'+r.pct_entry_dip+'%</td>'
-      +'<td class="mono">'+r.avg_dip_pct+'%</td>'
-      +'<td class="mono green">'+r.best_entry_vs_close+'%</td>'
-      +'<td>'+rc(r.nd_avg_high)+'</td>'
-      +'<td class="mono green">+'+r.max_gain_from_best_entry.toFixed(1)+'%</td>'
-      +'<td class="mono">'+( r.avg_vol_ratio_on_signal!=null?r.avg_vol_ratio_on_signal+'x':'—')+'</td>'
-      +'<td>'+(r.avg_trend_20d_before!=null?rc(r.avg_trend_20d_before):'<span class="muted">—</span>')+'</td>'
-      +'<td class="mono '+liqCls+'">Rs '+fmtI(r.avg_turnover_rs||0)+'</td>'
-      +'<td><span class="mono '+(r.liquidity_ok?'green':'amber')+'">'+(r.liquidity_ok?'✓':'⚠')+'</span></td>'
-      +'<td class="mono '+(r.max_adverse_excursion>1?'amber':'green')+'">'+r.max_adverse_excursion+'%</td>'
-      +'<td class="mono '+(r.sl_needed?'amber':'green')+'">'+(r.sl_needed?'Yes':'No')+'</td>'
-      +'<td class="mono">+'+r.target_conservative+'%</td>'
-      +'<td class="mono green">+'+r.target_realistic+'%</td>'
-      +'<td class="mono muted" style="font-size:9px">'+((r.years||[]).join(', '))+'</td>'
-      +'</tr>';
-  }).join('');
-}
-function showDPDetail(sym,key){
-  var d=DATA.enriched; if(!d) return;
-  var pat=(d.patterns||[]).find(function(p){return p.sym===sym&&p.candle_key===key;});
-  if(!pat) return;
-  var occ=pat.occurrences||[];
-  document.getElementById('dp-detail').innerHTML='<div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:12px">'
-    +'<div class="sh" style="margin-bottom:10px">'+sym+' — All '+occ.length+' Occurrences</div>'
-    +'<div class="twrap" style="margin:0"><table class="tbl" style="min-width:1100px"><thead><tr>'
-    +'<th>Date</th><th>Sig Close</th><th>Volume</th><th>Vol Ratio</th><th>Gap Open%</th>'
-    +'<th>Entry Dip?</th><th>Dip%</th><th>Best Entry</th><th>ND Close%</th><th>ND High%</th>'
-    +'<th>Max Gain%</th><th>Pre-5d%</th><th>Pre-20d%</th><th>Pre-60d%</th></tr></thead><tbody>'
-    +occ.map(function(o){
-      return '<tr><td class="mono">'+o.date+'</td>'
-        +'<td class="mono">&#8377;'+o.sig_close+'</td>'
-        +'<td class="mono muted">'+fmtI(o.sig_volume)+'</td>'
-        +'<td class="mono '+(o.vol_ratio_vs_20d>=1.5?'green':'')+'">'+( o.vol_ratio_vs_20d!=null?o.vol_ratio_vs_20d+'x':'—')+'</td>'
-        +'<td class="mono '+(o.gap_pct>0?'green':'red')+'">'+(o.gap_pct>0?'+':'')+o.gap_pct+'%</td>'
-        +'<td>'+(o.entry_dip?'<span class="amber" style="font-weight:600">Yes</span>':'<span class="muted">No</span>')+'</td>'
-        +'<td class="mono amber">'+(o.entry_dip_pct>0?'-'+o.entry_dip_pct+'%':'—')+'</td>'
-        +'<td class="mono">&#8377;'+o.best_entry_px+'<span style="font-size:9px;color:var(--t3)">('+o.best_entry_vs_close+'%)</span></td>'
-        +'<td>'+rc(o.nd_return)+'</td>'
-        +'<td>'+rc(o.nd_max_gain)+'</td>'
-        +'<td>'+rc(o.max_gain_from_entry)+'</td>'
-        +'<td>'+(o.trend_5d_before!=null?rc(o.trend_5d_before):'<span class="muted">—</span>')+'</td>'
-        +'<td>'+(o.trend_20d_before!=null?rc(o.trend_20d_before):'<span class="muted">—</span>')+'</td>'
-        +'<td>'+(o.trend_60d_before!=null?rc(o.trend_60d_before):'<span class="muted">—</span>')+'</td>'
-        +'</tr>';
-    }).join('')+'</tbody></table></div></div>';
-}
-
-// ═══ CANDLE ALERT TABLE ══════════════════════════════════════════════════════
-var _catSK='nd_min', _catSD='desc';
-function catSort(k,btn){_catSK=k;setOn('#cats-min,#cats-avg,#cats-occ,#cats-gap',btn);renderCAT();}
-function catTh(k){if(_catSK===k)_catSD=_catSD==='desc'?'asc':'desc';else{_catSK=k;_catSD='desc';}renderCAT();}
-function renderCAT(){
-  var q=(document.getElementById('cat-q')?.value||'').toUpperCase().trim();
-  var rows=[...DATA.candleToday].map(function(a){return Object.assign({},a,{
-    _5d_avg:a.win_5d?.avg??-999,
-    _10d_avg:a.win_10d?.avg??-999,
-    _20d_avg:a.win_20d?.avg??-999,
-    _years_str:(a.years||[]).join(','),
-  });});
-  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
-  rows.sort(function(a,b){var v=(b[_catSK]??-999)-(a[_catSK]??-999);return _catSD==='asc'?-v:v;});
-  document.getElementById('cat-pills').innerHTML=[
-    ['Alerts',rows.length,'g','today 100%-win candle alerts'],
-    ['Signal Date',rows[0]?.today_date||'—','b',''],
-  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>';}).join('');
-  if(!rows.length){
-    document.getElementById('cat-tbody').innerHTML='<tr><td colspan="16" class="empty">No candle alerts today. Run candle_patterns workflow.</td></tr>';
-    return;
-  }
-  document.getElementById('cat-tbody').innerHTML=rows.map(function(a){
-    var b5=a.win_5d?.avg,b10=a.win_10d?.avg,b20=a.win_20d?.avg;
-    var yrs=(a.years||[]).join(', ');
-    return '<tr>'
-      +'<td class="mono gold" style="font-weight:600">'+a.sym+'</td>'
-      +'<td class="mono muted">'+a.today_date+'</td>'
-      +'<td style="font-size:10px;color:var(--t2);max-width:160px">'+a.candle_desc+'</td>'
-      +'<td class="mono">&#8377;'+fmt(a.today_close)+'</td>'
-      +'<td class="mono muted">'+fmtI(a.today_vol||0)+'</td>'
-      +'<td class="mono green" style="font-weight:700">100%</td>'
-      +'<td class="mono green" style="font-weight:700">+'+(a.nd_min||0).toFixed(2)+'%</td>'
-      +'<td>'+rc(a.nd_avg)+'</td>'
-      +'<td>'+rc(a.nd_max)+'</td>'
-      +'<td class="mono">'+(a.gap_up_rate||0)+'%</td>'
-      +'<td class="mono">'+a.occurrences+'</td>'
-      +'<td>'+(b5!=null?rc(b5):'<span class="muted">—</span>')+'</td>'
-      +'<td>'+(b10!=null?rc(b10):'<span class="muted">—</span>')+'</td>'
-      +'<td>'+(b20!=null?rc(b20):'<span class="muted">—</span>')+'</td>'
-      +'<td class="mono muted" style="font-size:9px">'+yrs+'</td>'
-      +'<td class="mono muted">'+a.last_date+'</td>'
-      +'</tr>';
+      +'<div class="zr"><span class="zl">Target consv</span><span class="zv zt1">&#8377;'+fmt(a.target_conservative)+'</span></div>'
+      +'<div class="zr"><span class="zl">Target real</span><span class="zv zt2">&#8377;'+fmt(a.target_realistic)+'</span></div></div>'
+      +'<div class="zone-banner '+zCls+'">'+a.zone+'</div></div>';
   }).join('');
 }
 
