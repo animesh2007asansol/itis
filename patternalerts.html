@@ -290,7 +290,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 
 <!-- PAGE: CANDLE ALERTS -->
 <div class="page" id="page-candle-alert">
-  <div class="sh">🕯 Candle Alerts <small id="ca-date-note">next-day buy signals · only today's data</small></div>
+  <div class="sh">🕯 Candle Alerts <small id="ca-date-note">next-day buy signals · min 6 occurrences · 2+ years · avg &gt;1% · only today's data</small></div>
   <div style="background:var(--card);border:1px solid var(--g2);border-radius:var(--r);padding:12px 16px;margin-bottom:14px">
     <div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:9px">💰 Investment Calculator</div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
@@ -424,7 +424,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 
 <!-- PAGE: TOP 5 -->
 <div class="page" id="page-top5">
-  <div class="sh">🏆 Top 5 Next-Day Buy Stocks <small>deep analysis of today's candle signals · best 5 by confidence score</small></div>
+  <div class="sh">🏆 Top 5 Next-Day Buy Stocks <small>from today's signals · min 6 occ · 2+ years · ranked by 5d return + confidence score</small></div>
   <div style="background:var(--card);border:1px solid var(--g2);border-radius:var(--r);padding:12px 16px;margin-bottom:14px">
     <div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:9px">💰 Investment Calculator</div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
@@ -439,7 +439,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 
 <!-- PAGE: DEEP ANALYSIS -->
 <div class="page" id="page-deep">
-  <div class="sh">🔬 Deep Analysis — Today's Signals <small>click row to expand in-place · all today's candle signals with full details</small></div>
+  <div class="sh">🔬 Deep Analysis — Today's Signals <small>min 6 occ · 2+ years · sorted by 5d avg return · click row to expand in-place</small></div>
   <div class="pill-row" id="dp-pills"></div>
   <div class="fbar">
     <input class="si" id="dp-q" placeholder="Symbol…" style="width:120px" oninput="renderDP()">
@@ -1148,6 +1148,8 @@ function renderCA(){
   document.getElementById('ca-grid').innerHTML=rows.map(function(a){
     var al=allocPlan(a.today_close,a.nd_min,a.nd_avg,inv);
     var yrs=(a.years||[]).map(function(y){return '<span class="yr-tag yr-win">'+y+'</span>';}).join('');
+    var nOcc=a.occurrences||0;
+    var trustBadge=nOcc>=13?'<span style="font-size:9px;background:rgba(34,197,94,.2);color:var(--green);border:1px solid var(--gr2);border-radius:3px;padding:1px 5px;margin-left:4px">'+nOcc+'× STRONG</span>':nOcc>=8?'<span style="font-size:9px;background:var(--gbg);color:var(--gold);border:1px solid var(--g2);border-radius:3px;padding:1px 5px;margin-left:4px">'+nOcc+'× GOOD</span>':'<span style="font-size:9px;background:var(--s);color:var(--t3);border:1px solid var(--b);border-radius:3px;padding:1px 5px;margin-left:4px">'+nOcc+'× OK</span>';
     var allocHtml=al?('<div style="background:rgba(201,168,76,.07);border-top:1px solid var(--b);margin-top:8px;padding:8px 0 2px;display:grid;grid-template-columns:1fr 1fr;gap:3px">'
       +'<div class="ac-mini"><div class="ac-ml">Qty</div><div class="ac-mv">'+al.units+' sh</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">Invest</div><div class="ac-mv amber">Rs '+fmtI(Math.round(al.invest))+'</div></div>'
@@ -1160,7 +1162,7 @@ function renderCA(){
       +'</div>'):'';
     return '<div class="ac ac-Ap"><div class="ac-head"><div>'
       +'<div style="display:flex;align-items:center;gap:5px"><span class="g gAp">100%</span><span class="ac-sym">'+a.sym+'</span></div>'
-      +'<div class="ac-sig">'+a.candle_desc+'</div><div style="margin-top:3px">'+yrs+'</div>'
+      +'<div class="ac-sig">'+a.candle_desc+trustBadge+'</div><div style="margin-top:3px">'+yrs+'</div>'
       +'</div><div class="ac-wr"><div class="ac-pct">+'+(a.nd_min||0).toFixed(1)+'%</div><div class="ac-lbl">min next-day</div></div></div>'
       +'<div class="ac-row3"><div class="ac-mini"><div class="ac-ml">ND Avg</div><div class="ac-mv green">+'+(a.nd_avg||0).toFixed(1)+'%</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">ND Max</div><div class="ac-mv green">+'+(a.nd_max||0).toFixed(1)+'%</div></div>'
@@ -1278,8 +1280,9 @@ function renderDP(){
   if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
   rows.sort(function(a,b){var v=(b[_dpSK]??0)-(a[_dpSK]??0);return _dpSD==='asc'?-v:v;});
   var pills=document.getElementById('dp-pills');
-  if(pills) pills.innerHTML=[['Signal Date',d.signal_date||'—','b'],['Analysed',rows.length,'g'],
-    ['Liquid',rows.filter(function(r){return r.liquidity_ok;}).length,'g']
+  if(pills) pills.innerHTML=[['Signal Date',d.signal_date||'—','b'],['Analysed',rows.length,'g','min 6 occ, 2+ yrs, nd_avg≥1%'],
+    ['4+ Year Patterns',rows.filter(function(r){return r.years&&r.years.length>=4;}).length,'g','highest trust'],
+    ['Liquid (Rs2L)',rows.filter(function(r){return r.liquidity_ok;}).length,'g','can deploy Rs2L']
   ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
   var html='';
   rows.forEach(function(r,idx){
@@ -1302,7 +1305,7 @@ function renderDP(){
       +'<td><span id="dpx'+did+'" style="font-size:10px;color:var(--t3)">▶</span></td>'
       +'<td class="mono gold" style="font-weight:600">'+r.sym+'</td>'
       +'<td style="font-size:9px;color:var(--t2);max-width:130px">'+r.desc+'</td>'
-      +'<td class="mono amber" style="font-weight:700">'+r.score+'</td>'
+      +'<td class="mono '+(r.score>=80?'green':r.score>=60?'amber':'muted')+'" style="font-weight:700">'+r.score+'/100</td>'
       +'<td class="mono">&#8377;'+r.today_close+'</td>'
       +'<td class="mono amber" style="font-weight:700">&#8377;'+r.recommended_buy+'</td>'
       +'<td class="mono green">&#8377;'+r.target_1+'</td>'
@@ -1567,6 +1570,8 @@ function renderHWA(){
     var zCls=a.zone==='BUY ZONE'?'zone-buy':a.zone==='RUNNING'?'zone-run':'zone-sell';
     var g=a.grade||'B';
     var yrs=(a.years||[]).map(function(y){return '<span class="yr-tag yr-win">'+y+'</span>';}).join('');
+    var nOcc=a.occurrences||0;
+    var trustBadge=nOcc>=13?'<span style="font-size:9px;background:rgba(34,197,94,.2);color:var(--green);border:1px solid var(--gr2);border-radius:3px;padding:1px 5px;margin-left:4px">'+nOcc+'× STRONG</span>':nOcc>=8?'<span style="font-size:9px;background:var(--gbg);color:var(--gold);border:1px solid var(--g2);border-radius:3px;padding:1px 5px;margin-left:4px">'+nOcc+'× GOOD</span>':'<span style="font-size:9px;background:var(--s);color:var(--t3);border:1px solid var(--b);border-radius:3px;padding:1px 5px;margin-left:4px">'+nOcc+'× OK</span>';
     return '<div class="ac ac-'+g.replace('+','p')+'">'+db
       +'<div class="ac-head"><div><div style="display:flex;align-items:center;gap:5px">'+gradeBadge(g)+'<span class="ac-sym">'+a.sym+'</span></div>'
       +'<div class="ac-sig">'+a.best_window_days+'d window</div><div style="margin-top:3px">'+yrs+'</div></div>'
