@@ -290,29 +290,21 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 
 <!-- PAGE: CANDLE ALERTS -->
 <div class="page" id="page-candle-alert">
-  <div class="sh">🕯 Candle Alerts <small id="ca-date-note">next-day predictions · only stocks with latest date data</small></div>
+  <div class="sh">🕯 Candle Alerts <small id="ca-date-note">next-day predictions · only stocks with today's data</small></div>
 
   <!-- INVESTMENT CALCULATOR -->
-  <div style="background:var(--card);border:1px solid var(--g2);border-radius:var(--r);padding:13px 16px;margin-bottom:14px">
-    <div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:7px">
-      💰 Investment Calculator <small style="color:var(--t3);font-weight:400">Enter your total capital — get allocation per stock</small>
-    </div>
+  <div style="background:var(--card);border:1px solid var(--g2);border-radius:var(--r);padding:12px 16px;margin-bottom:14px">
+    <div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:9px">💰 Investment Calculator — enter capital to get allocation for each stock</div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
-      <div>
-        <div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Total Capital (Rs)</div>
-        <input class="si" id="inv-capital" type="number" placeholder="e.g. 500000" style="width:160px"
-          oninput="renderCA()" value="">
-      </div>
-      <div>
-        <div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Max per Stock %</div>
-        <input class="si" id="inv-max-pct" type="number" placeholder="20" value="20" style="width:80px"
-          oninput="renderCA()">
-      </div>
+      <div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Total Capital (Rs)</div>
+        <input class="si" id="inv-capital" type="number" placeholder="e.g. 500000" style="width:160px" oninput="renderCA()"></div>
+      <div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Max per Stock %</div>
+        <input class="si" id="inv-max-pct" type="number" placeholder="20" value="20" style="width:80px" oninput="renderCA()"></div>
       <div id="inv-summary" style="font-size:11px;color:var(--t2);padding:5px 0"></div>
     </div>
   </div>
 
-  <!-- TOP 5 FROM ENRICHED ANALYSIS (shown above daily alerts) -->
+  <!-- TOP 5 TODAY SIGNALS (from enriched analysis) -->
   <div id="ca-top5-section" style="margin-bottom:18px"></div>
 
   <!-- DAILY CANDLE ALERTS -->
@@ -324,9 +316,11 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <button class="fb" id="cas-avg" onclick="caSort('nd_avg',this)">Avg Return</button>
     <button class="fb" id="cas-occ" onclick="caSort('occurrences',this)">Occurrences</button>
   </div>
-  <div class="sh" style="margin:8px 0 6px">📅 Today's Candle Alerts</div>
+  <div class="sh" style="margin:8px 0 6px">📅 All Today's Candle Alerts</div>
   <div class="alert-grid" id="ca-grid"><div class="empty"><div class="spinner"></div>Loading…</div></div>
 </div>
+
+<!-- PAGE: CANDLE PERFORMANCE
 
 <!-- PAGE: CANDLE PERFORMANCE — yesterday's alerts + actual results -->
 <div class="page" id="page-candle-perf">
@@ -455,50 +449,42 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
   <div id="t5-body"><div class="empty"><div class="spinner"></div>Loading deep analysis…</div></div>
 </div>
 
-<!-- PAGE: DEEP ANALYSIS — all enriched patterns, fully sortable -->
+<!-- PAGE: DEEP ANALYSIS — all today's signaling stocks -->
 <div class="page" id="page-deep">
-  <div class="sh">🔬 Deep Pattern Analysis <small>all top patterns with entry/gap/liquidity/context · click header to sort</small></div>
+  <div class="sh">🔬 Deep Analysis — Today's Signals <small>full analysis of every stock with a next-day buy signal today · click row to expand in-place</small></div>
   <div class="pill-row" id="dp-pills"></div>
   <div class="fbar">
     <input class="si" id="dp-q" placeholder="Symbol…" style="width:120px" oninput="renderDP()">
-    <span class="fsep">|</span>
+    <span class="fsep">Sort:</span>
     <button class="fb on" id="dps-score" onclick="dpSort('score',this)">Score</button>
     <button class="fb" id="dps-avg" onclick="dpSort('nd_avg_return',this)">Avg Return</button>
     <button class="fb" id="dps-min" onclick="dpSort('nd_min_return',this)">Min Return</button>
-    <button class="fb" id="dps-gap" onclick="dpSort('avg_gap_pct',this)">Gap%</button>
+    <button class="fb" id="dps-gap" onclick="dpSort('pct_gap_up',this)">Gap%</button>
     <button class="fb" id="dps-liq" onclick="dpSort('avg_turnover_rs',this)">Liquidity</button>
   </div>
   <div class="twrap">
-    <table class="tbl" id="dp-tbl" style="min-width:1400px">
+    <table class="tbl" id="dp-tbl" style="min-width:1200px">
       <thead><tr>
+        <th></th>
         <th onclick="dpTh('sym')">Stock<span class="arr"></span></th>
-        <th onclick="dpTh('candle_key')">Candle<span class="arr"></span></th>
+        <th onclick="dpTh('desc')">Candle<span class="arr"></span></th>
         <th onclick="dpTh('n_occurrences')">Occ<span class="arr"></span></th>
         <th onclick="dpTh('score')">Score<span class="arr"></span></th>
-        <th onclick="dpTh('nd_min_return')">ND Min%<span class="arr"></span></th>
-        <th onclick="dpTh('nd_avg_return')">ND Avg%<span class="arr"></span></th>
-        <th onclick="dpTh('nd_max_return')">ND Max%<span class="arr"></span></th>
+        <th onclick="dpTh('recommended_buy')">Buy Price<span class="arr"></span></th>
+        <th onclick="dpTh('target_1')">Target 1<span class="arr"></span></th>
+        <th onclick="dpTh('target_2')">Target 2<span class="arr"></span></th>
+        <th onclick="dpTh('nd_min_return')">Min%<span class="arr"></span></th>
+        <th onclick="dpTh('nd_avg_return')">Avg%<span class="arr"></span></th>
         <th onclick="dpTh('pct_gap_up')">Gap Up%<span class="arr"></span></th>
-        <th onclick="dpTh('avg_gap_pct')">Avg Gap%<span class="arr"></span></th>
         <th onclick="dpTh('pct_entry_dip')">Dip Opp%<span class="arr"></span></th>
-        <th onclick="dpTh('avg_dip_pct')">Avg Dip%<span class="arr"></span></th>
-        <th onclick="dpTh('best_entry_vs_close')">Best Entry%<span class="arr"></span></th>
-        <th onclick="dpTh('nd_avg_high')">Avg Day High%<span class="arr"></span></th>
-        <th onclick="dpTh('max_gain_from_best_entry')">Max Gain%<span class="arr"></span></th>
-        <th onclick="dpTh('avg_vol_ratio_on_signal')">Vol Ratio<span class="arr"></span></th>
-        <th onclick="dpTh('avg_trend_20d_before')">Pre-20d Trend%<span class="arr"></span></th>
-        <th onclick="dpTh('avg_turnover_rs')">Avg Turnover Rs<span class="arr"></span></th>
-        <th onclick="dpTh('liquidity_ok')">Rs2L Liq<span class="arr"></span></th>
-        <th onclick="dpTh('max_adverse_excursion')">Max Adverse%<span class="arr"></span></th>
+        <th onclick="dpTh('avg_vol_ratio')">Vol Ratio<span class="arr"></span></th>
+        <th onclick="dpTh('avg_turnover_rs')">Turnover Rs<span class="arr"></span></th>
         <th onclick="dpTh('sl_needed')">SL Needed<span class="arr"></span></th>
-        <th onclick="dpTh('target_conservative')">Target Consv%<span class="arr"></span></th>
-        <th onclick="dpTh('target_realistic')">Target Real%<span class="arr"></span></th>
-        <th onclick="dpTh('_years_str')">Years<span class="arr"></span></th>
+        <th onclick="dpTh('liquidity_ok')">Rs2L Liq<span class="arr"></span></th>
       </tr></thead>
-      <tbody id="dp-tbody"><tr><td colspan="23" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+      <tbody id="dp-tbody"><tr><td colspan="16" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
     </table>
   </div>
-  <div id="dp-detail" style="margin-top:16px"></div>
 </div>
 
 <!-- PAGE: CANDLE ALERT TABLE — full tabular, all columns sortable -->
@@ -1128,29 +1114,29 @@ function showPage(id,btn){
   btn.classList.add('active');
 }
 
-// ═══ CANDLE ALERTS ═══════════════════════════════════════════════════
+
+// ═══ HELPERS ════════════════════════════════════════════════════════════════
+function getInvParams(){
+  var cap=parseFloat(document.getElementById('inv-capital')?.value||0)||0;
+  var maxPct=parseFloat(document.getElementById('inv-max-pct')?.value||20)||20;
+  return{cap,maxPct};
+}
+function allocPlan(closePx,ndMin,ndAvg,inv){
+  if(!inv.cap||!closePx) return null;
+  var invest=Math.min(inv.cap*inv.maxPct/100,inv.cap);
+  var units=Math.floor(invest/closePx);
+  if(units<1) return null;
+  var actual=units*closePx;
+  return{units,invest:r2(actual),pct:r2(actual/inv.cap*100),
+         t1:r2(closePx*(1+ndMin/100)),t2:r2(closePx*(1+ndAvg/100)),
+         p1:r2((closePx*(1+ndMin/100)-closePx)*units),
+         p2:r2((closePx*(1+ndAvg/100)-closePx)*units)};
+}
+function r2(n){return Math.round(n*100)/100;}
+
+// ═══ CANDLE ALERTS ═══════════════════════════════════════════════════════════
 var _caSortKey='nd_min';
 function caSort(k,btn){_caSortKey=k;setOn('#cas-min,#cas-avg,#cas-occ',btn);renderCA();}
-function getInvParams(){
-  var cap=parseFloat(document.getElementById('inv-capital')?.value||0);
-  var maxPct=parseFloat(document.getElementById('inv-max-pct')?.value||20);
-  return {cap:cap||0, maxPct:maxPct||20};
-}
-function allocCard(close, ndMin, ndAvg, inv){
-  // Returns invest amount, units, buy price, target prices
-  if(!inv.cap||!close) return null;
-  var perStock=Math.min(inv.cap*inv.maxPct/100, inv.cap);
-  var units=Math.floor(perStock/close);
-  if(units<1) return null;
-  var invest=units*close;
-  var tgt1=round2(close*(1+ndMin/100));
-  var tgt2=round2(close*(1+ndAvg/100));
-  var profit1=round2((tgt1-close)*units);
-  var profit2=round2((tgt2-close)*units);
-  return{units,invest:round2(invest),tgt1,tgt2,profit1,profit2,
-         pct_of_cap:round2(invest/inv.cap*100)};
-}
-function round2(n){return Math.round(n*100)/100;}
 function renderCA(){
   var q=(document.getElementById('ca-q')?.value||'').toUpperCase().trim();
   var rows=[...DATA.candleToday];
@@ -1158,46 +1144,37 @@ function renderCA(){
   rows.sort(function(a,b){return (b[_caSortKey]??0)-(a[_caSortKey]??0);});
   var sigDate=rows[0]?.today_date||'—';
   var noteEl=document.getElementById('ca-date-note');
-  if(noteEl) noteEl.textContent='Signals from '+sigDate+' — valid for next trading day only';
-  // Investment summary
+  if(noteEl) noteEl.textContent='Signals from '+sigDate+' — buy next trading day · '+rows.length+' stocks';
   var inv=getInvParams();
   var summEl=document.getElementById('inv-summary');
-  if(summEl && inv.cap>0){
-    var perSt=Math.min(inv.cap*inv.maxPct/100, inv.cap);
-    summEl.innerHTML='<strong style="color:var(--green)">Rs '+fmtI(Math.round(inv.cap))+'</strong> total &nbsp;|&nbsp;'
-      +'Max Rs '+fmtI(Math.round(perSt))+' per stock ('+inv.maxPct+'%) &nbsp;|&nbsp;'
-      +rows.length+' stocks today';
+  if(summEl&&inv.cap>0){
+    summEl.innerHTML='<strong style="color:var(--green)">Rs '+fmtI(Math.round(inv.cap))+'</strong> total | '
+      +'max Rs '+fmtI(Math.round(inv.cap*inv.maxPct/100))+' per stock';
   } else if(summEl){
-    summEl.textContent='Enter capital above to see investment allocation per stock';
+    summEl.textContent='Enter capital above for investment plan';
   }
   document.getElementById('ca-pills').innerHTML=[
-    ['Signal Date',sigDate,'b',''],
-    ['Valid For','Next day after '+sigDate,'g',''],
-    ['Alerts',rows.length,'g','100%-win candle'],
-  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>';}).join('');
-  // Render top5 section inline (above daily alerts)
+    ['Signal Date',sigDate,'b',''],['Alerts',rows.length,'g','100%-win today'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
   renderTop5InAlerts();
   if(!rows.length){
     document.getElementById('ca-grid').innerHTML='<div class="empty" style="grid-column:1/-1">No candle alerts. Run candle_patterns workflow.</div>';
     return;
   }
-  var inv2=getInvParams();
   document.getElementById('ca-grid').innerHTML=rows.map(function(a){
-    var al=allocCard(a.today_close,a.nd_min,a.nd_avg,inv2);
-    var alloc=al?('<div style="background:rgba(201,168,76,.07);border-top:1px solid var(--b);margin-top:8px;padding:8px 0 2px;font-size:11px">'
-      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">'
-      +'<div class="ac-mini"><div class="ac-ml">Buy Qty</div><div class="ac-mv">'+al.units+' shares</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Invest Rs</div><div class="ac-mv amber">'+fmtI(Math.round(al.invest))+'</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Buy Price</div><div class="ac-mv">&#8377;'+a.today_close+'</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">% of Capital</div><div class="ac-mv muted">'+al.pct_of_cap+'%</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Target 1 (min)</div><div class="ac-mv green">&#8377;'+al.tgt1+' (+'+a.nd_min.toFixed(1)+'%)</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Target 2 (avg)</div><div class="ac-mv green">&#8377;'+al.tgt2+' (+'+a.nd_avg.toFixed(1)+'%)</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Profit T1</div><div class="ac-mv green">+Rs'+fmtI(Math.round(al.profit1))+'</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Profit T2</div><div class="ac-mv green">+Rs'+fmtI(Math.round(al.profit2))+'</div></div>'
-      +'</div></div>') : '';
-
-    var b5=a.win_5d,b10=a.win_10d,b20=a.win_20d;
+    var al=inv.cap>0?allocPlan(a.today_close,a.nd_min,a.nd_avg,inv):null;
+    var b5=a.win_5d?.avg,b10=a.win_10d?.avg,b20=a.win_20d?.avg;
     var yrs=(a.years||[]).map(function(y){return '<span class="yr-tag yr-win">'+y+'</span>';}).join('');
+    var allocHtml=al?('<div style="background:rgba(201,168,76,.07);border-top:1px solid var(--b);margin-top:8px;padding:8px 0 2px;display:grid;grid-template-columns:1fr 1fr;gap:4px">'
+      +'<div class="ac-mini"><div class="ac-ml">Qty</div><div class="ac-mv">'+al.units+' shares</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Invest</div><div class="ac-mv amber">Rs '+fmtI(Math.round(al.invest))+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Buy @ Rs</div><div class="ac-mv">'+a.today_close+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">% of Capital</div><div class="ac-mv muted">'+al.pct+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Target 1 (min)</div><div class="ac-mv green">Rs '+al.t1+' (+'+a.nd_min.toFixed(1)+'%)</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Target 2 (avg)</div><div class="ac-mv green">Rs '+al.t2+' (+'+a.nd_avg.toFixed(1)+'%)</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Profit T1</div><div class="ac-mv green">+Rs '+fmtI(Math.round(al.p1))+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Profit T2</div><div class="ac-mv green">+Rs '+fmtI(Math.round(al.p2))+'</div></div>'
+      +'</div>'):'';
     return '<div class="ac ac-Ap">'
       +'<div class="ac-head"><div>'
       +'<div style="display:flex;align-items:center;gap:5px"><span class="g gAp">100%</span><span class="ac-sym">'+a.sym+'</span></div>'
@@ -1207,58 +1184,218 @@ function renderCA(){
       +'<div class="ac-wr"><div class="ac-pct">+'+(a.nd_min||0).toFixed(1)+'%</div><div class="ac-lbl">min next-day</div></div>'
       +'</div>'
       +'<div class="ac-row3">'
-      +'<div class="ac-mini"><div class="ac-ml">ND Average</div><div class="ac-mv green">+'+(a.nd_avg||0).toFixed(1)+'%</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">ND Maximum</div><div class="ac-mv green">+'+(a.nd_max||0).toFixed(1)+'%</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Gap Up Rate</div><div class="ac-mv">'+(a.gap_up_rate||0)+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">ND Avg</div><div class="ac-mv green">+'+(a.nd_avg||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">ND Max</div><div class="ac-mv green">+'+(a.nd_max||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Gap Up</div><div class="ac-mv">'+(a.gap_up_rate||0)+'%</div></div>'
       +'</div>'
       +'<div class="zones">'
       +'<div class="zr"><span class="zl">Close</span><span class="zv">&#8377;'+fmt(a.today_close)+'</span></div>'
-      +'<div class="zr"><span class="zl">Occurrences</span><span class="zv">'+a.occurrences+'</span></div>'
-      +'<div class="zr"><span class="zl">5d / 10d / 20d avg</span><span class="zv">'
-      +(b5?rc(b5.avg):'—')+' / '+(b10?rc(b10.avg):'—')+' / '+(b20?rc(b20.avg):'—')+'</span></div>'
+      +'<div class="zr"><span class="zl">Occ / 5d / 10d / 20d avg</span><span class="zv">'+a.occurrences+'x | '
+        +(b5!=null?rc(b5):'—')+' / '+(b10!=null?rc(b10):'—')+' / '+(b20!=null?rc(b20):'—')+'</span></div>'
       +'</div>'
-      +'<div class="zone-banner zone-buy">BUY — 100% win in all '+a.occurrences+' occurrences</div>'
+      +allocHtml
+      +'<div class="zone-banner zone-buy">BUY tomorrow — 100% win in all '+a.occurrences+' past occurrences</div>'
       +'</div>';
   }).join('');
 }
 
-// ═══ BEST CANDLES ════════════════════════════════════════════════════
-var _cbSortKey='nd_min',_cbDir='desc';
-function cbSort(k,btn){_cbSortKey=k;setOn('#cbs-min,#cbs-avg,#cbs-max,#cbs-occ',btn);renderCB();}
-function cbTh(k){if(_cbSortKey===k)_cbDir=_cbDir==='desc'?'asc':'desc';else{_cbSortKey=k;_cbDir='desc';}renderCB();}
-function renderCB(){
-  var q=(document.getElementById('cb-q')?.value||'').toUpperCase().trim();
-  var rows=[...DATA.candleBest].map(function(p){
-    return Object.assign({},p,{_5d_avg:p.win_5d?.avg??-999,_10d_avg:p.win_10d?.avg??-999,_20d_avg:p.win_20d?.avg??-999,_years_str:(p.years||[]).join(',')});
-  });
-  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
-  rows.sort(function(a,b){var v=(b[_cbSortKey]??0)-(a[_cbSortKey]??0);return _cbDir==='asc'?-v:v;});
-  document.getElementById('cb-pills').innerHTML=[
-    ['100%-Win Patterns',rows.length,'g',''],
-    ['Unique Stocks',[...new Set(rows.map(function(r){return r.sym;}))].length,'b',''],
-  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
-  if(!rows.length){
-    document.getElementById('cb-tbody').innerHTML='<tr><td colspan="12" class="empty">No data. Run candle_patterns workflow.</td></tr>';return;
+// ═══ TOP 5 INLINE (on candle alerts page) ════════════════════════════════════
+function renderTop5InAlerts(){
+  var el=document.getElementById('ca-top5-section'); if(!el) return;
+  var d=DATA.top5||{}; var top=d.top5||[];
+  if(!top.length){
+    el.innerHTML='<div style="font-size:11px;color:var(--t3);margin-bottom:4px">Top 5: run candle_enriched_analysis workflow first.</div>';
+    return;
   }
-  document.getElementById('cb-tbody').innerHTML=rows.map(function(p){
-    var b5=p.win_5d?.avg,b10=p.win_10d?.avg,b20=p.win_20d?.avg;
-    return '<tr onclick="csGo(\''+p.sym+'\')" style="cursor:pointer">'
-      +'<td class="mono gold" style="font-weight:600">'+p.sym+'</td>'
-      +'<td style="font-size:10px;color:var(--t2);max-width:170px">'+p.desc+'</td>'
-      +'<td class="mono">'+p.occurrences+'</td>'
-      +'<td class="mono green" style="font-weight:700">+'+(p.nd_min||0).toFixed(1)+'%</td>'
-      +'<td>'+rc(p.nd_avg)+'</td>'
-      +'<td>'+rc(p.nd_max)+'</td>'
-      +'<td class="mono">'+(p.gap_up_rate||0)+'%</td>'
-      +'<td>'+(b5!=null?rc(b5):'<span class="muted">—</span>')+'</td>'
-      +'<td>'+(b10!=null?rc(b10):'<span class="muted">—</span>')+'</td>'
-      +'<td>'+(b20!=null?rc(b20):'<span class="muted">—</span>')+'</td>'
-      +'<td class="mono muted" style="font-size:10px">'+((p.years||[]).join(', '))+'</td>'
-      +'<td class="mono muted">'+(p.last_date||'—')+'</td>'
-      +'</tr>';
+  var inv=getInvParams();
+  var sigDate=d.signal_date||'—';
+  el.innerHTML='<div style="background:var(--s);border:1px solid var(--g2);border-radius:var(--r);padding:12px;margin-bottom:4px">'
+    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">'
+    +'<span style="font-size:12px;font-weight:600;color:var(--gold)">🏆 Top 5 — Best Next-Day Buy Signals</span>'
+    +'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:5px;padding:2px 8px;font-size:10px">All '+top.length+' are TODAY signals — valid for next trading day</span>'
+    +'<span style="font-size:9px;color:var(--t3)">Signal date: '+sigDate+'</span>'
+    +'</div>'
+    +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px">'
+    +top.map(function(r,i){
+      var medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
+      var al=inv.cap>0?allocPlan(r.today_close,r.nd_min_return,r.nd_avg_return,inv):null;
+      var entryNote=r.pct_entry_dip>50
+        ?('Dip opp '+r.pct_entry_dip+'% of times — place limit @ Rs'+r.recommended_buy)
+        :('Buy at open — gap-up '+r.pct_gap_up+'% of times');
+      return '<div style="background:var(--card);border:1px solid var(--gr2);border-radius:9px;padding:11px">'
+        +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:7px">'
+        +'<span style="font-size:15px">'+medals[i]+'</span>'
+        +'<span class="mono gold" style="font-weight:700;font-size:14px">'+r.sym+'</span>'
+        +'<span style="margin-left:auto;font-size:9px;background:var(--gbg);color:var(--gold);border:1px solid var(--g2);border-radius:4px;padding:2px 6px;font-weight:700">Score '+r.score+'</span>'
+        +'</div>'
+        +'<div style="font-size:9px;color:var(--t3);margin-bottom:7px">'+r.desc+'</div>'
+        +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:7px">'
+        +'<div class="ac-mini"><div class="ac-ml">Close Rs</div><div class="ac-mv">'+r.today_close+'</div></div>'
+        +'<div class="ac-mini"><div class="ac-ml">Min Ret%</div><div class="ac-mv green">+'+r.nd_min_return+'%</div></div>'
+        +'<div class="ac-mini"><div class="ac-ml">Avg Ret%</div><div class="ac-mv green">+'+r.nd_avg_return+'%</div></div>'
+        +'<div class="ac-mini"><div class="ac-ml">Buy @ Rs</div><div class="ac-mv amber">'+r.recommended_buy+'</div></div>'
+        +'<div class="ac-mini"><div class="ac-ml">Target 1</div><div class="ac-mv green">Rs '+r.target_1+'</div></div>'
+        +'<div class="ac-mini"><div class="ac-ml">Target 2</div><div class="ac-mv green">Rs '+r.target_2+'</div></div>'
+        +'</div>'
+        +'<div style="font-size:9px;color:var(--amber);margin-bottom:6px">📍 '+entryNote+'</div>'
+        +(r.sl_needed
+          ?'<div style="font-size:9px;color:var(--red);margin-bottom:6px">⚠ SL: Rs'+r.suggested_sl_px+' ('+r.suggested_sl_pct+'%)</div>'
+          :'<div style="font-size:9px;color:var(--green);margin-bottom:6px">✓ No stop loss needed in history</div>')
+        +(al?'<div style="background:rgba(201,168,76,.07);border-radius:5px;padding:7px;display:grid;grid-template-columns:1fr 1fr;gap:3px">'
+          +'<div class="ac-mini"><div class="ac-ml">Qty</div><div class="ac-mv">'+al.units+' sh</div></div>'
+          +'<div class="ac-mini"><div class="ac-ml">Invest</div><div class="ac-mv amber">Rs '+fmtI(Math.round(al.invest))+'</div></div>'
+          +'<div class="ac-mini"><div class="ac-ml">Profit T1</div><div class="ac-mv green">+Rs '+fmtI(Math.round(al.p1))+'</div></div>'
+          +'<div class="ac-mini"><div class="ac-ml">Profit T2</div><div class="ac-mv green">+Rs '+fmtI(Math.round(al.p2))+'</div></div>'
+          +'</div>'
+          :'<div style="font-size:9px;color:var(--t3)">Enter capital above for investment plan</div>')
+        +'</div>';
+    }).join('')
+    +'</div></div>';
+}
+
+// ═══ TOP 5 FULL PAGE ═════════════════════════════════════════════════════════
+function renderTop5(){
+  var d=DATA.top5||{}; var top=d.top5||[];
+  var el=document.getElementById('t5-body'); if(!el) return;
+  if(!top.length){
+    el.innerHTML='<div class="empty">No data — run candle_enriched_analysis workflow.</div>';
+    return;
+  }
+  var inv=getInvParams();
+  var medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
+  el.innerHTML=top.map(function(r,i){
+    var al=inv.cap>0?allocPlan(r.today_close,r.nd_min_return,r.nd_avg_return,inv):null;
+    var occ=r.occurrences||[];
+    var occRows=occ.map(function(o){
+      return '<tr><td class="mono">'+o.date+'</td>'
+        +'<td class="mono">&#8377;'+o.sig_close+'</td>'
+        +'<td class="mono muted">'+fmtI(o.sig_volume)+'</td>'
+        +'<td class="mono '+(o.vol_ratio_vs_20d>=1.5?'green':'')+'">'+(o.vol_ratio_vs_20d!=null?o.vol_ratio_vs_20d+'x':'—')+'</td>'
+        +'<td class="mono '+(o.gap_pct>0?'green':'red')+'">'+(o.gap_pct>0?'+':'')+o.gap_pct+'%</td>'
+        +'<td>'+(o.entry_dip?'<span class="amber">Yes -'+o.entry_dip_pct+'%</span>':'<span class="muted">No</span>')+'</td>'
+        +'<td class="mono">&#8377;'+o.best_entry_px+'<span style="font-size:9px;color:var(--t3)">('+o.best_entry_vs_close+'%)</span></td>'
+        +'<td>'+rc(o.nd_return)+'</td><td>'+rc(o.nd_max_gain)+'</td>'
+        +'<td>'+(o.trend_5d_before!=null?rc(o.trend_5d_before):'<span class="muted">—</span>')+'</td>'
+        +'<td>'+(o.trend_20d_before!=null?rc(o.trend_20d_before):'<span class="muted">—</span>')+'</td>'
+        +'<td>'+(o.trend_60d_before!=null?rc(o.trend_60d_before):'<span class="muted">—</span>')+'</td>'
+        +'</tr>';
+    }).join('');
+    return '<div class="spcard" style="margin-bottom:14px">'
+      +'<div class="sp-head" onclick="this.nextElementSibling.classList.toggle(\'open\')">'
+      +'<span style="font-size:16px">'+medals[i]+'</span>'
+      +'<span class="sp-sym">'+r.sym+'</span>'
+      +'<span class="sp-meta">Score '+r.score+' | '+r.n_occurrences+' occ | '+(r.years||[]).join(', ')+'</span>'
+      +'<span style="margin-left:auto;font-size:11px;color:var(--green)">Buy Rs'+r.recommended_buy+' | T1 Rs'+r.target_1+' | T2 Rs'+r.target_2+'</span>'
+      +'</div>'
+      +'<div class="sp-body open">'
+      +'<div class="mrow" style="margin-top:10px">'
+      +[['Signal Date',r.today_date,'b'],['Close Rs',r.today_close,'b'],
+        ['Recommended Buy','Rs'+r.recommended_buy,'y'],
+        ['Target 1 (min)','Rs'+r.target_1+' +'+r.nd_min_return+'%','g'],
+        ['Target 2 (avg)','Rs'+r.target_2+' +'+r.nd_avg_return+'%','g'],
+        ['Target 3 (best)','Rs'+r.target_3,'g'],
+        ['Stop Loss',r.sl_needed?('Rs'+r.suggested_sl_px+' '+r.suggested_sl_pct+'%'):'Not needed',r.sl_needed?'warn':'ok'],
+        ['Occurrences',r.n_occurrences,'b'],['Gap Up',r.pct_gap_up+'%','b'],
+        ['Dip Opp',r.pct_entry_dip+'%','y'],['Vol Ratio',r.avg_vol_ratio!=null?r.avg_vol_ratio+'x':'—','b'],
+        ['Liquidity',r.liquidity_ok?'Rs2L OK':'Low',r.liquidity_ok?'ok':'warn'],
+      ].map(function(x){return '<div class="pill '+x[2]+'"><div class="pl">'+x[0]+'</div><div class="pv">'+x[1]+'</div></div>';}).join('')
+      +(al?'<div class="pill ok"><div class="pl">Invest</div><div class="pv">Rs'+fmtI(Math.round(al.invest))+'</div><div class="ps">'+al.units+' shares</div></div>'
+           +'<div class="pill ok"><div class="pl">Profit T1</div><div class="pv">+Rs'+fmtI(Math.round(al.p1))+'</div></div>'
+           +'<div class="pill ok"><div class="pl">Profit T2</div><div class="pv">+Rs'+fmtI(Math.round(al.p2))+'</div></div>':'')
+      +'</div>'
+      +'<div style="font-size:11px;color:var(--t2);padding:7px 0;border-top:1px solid var(--b);margin-top:8px">📍 '+r.buy_note+'</div>'
+      +'<div style="font-size:11px;color:var(--t2);padding-bottom:8px">💡 '+r.strength_note+'</div>'
+      +'<div class="twrap" style="margin:0"><table class="tbl" style="min-width:1000px"><thead><tr>'
+      +'<th>Date</th><th>Sig Close</th><th>Volume</th><th>Vol Ratio</th><th>Gap%</th>'
+      +'<th>Entry Dip?</th><th>Best Entry</th><th>ND Return%</th><th>ND High%</th>'
+      +'<th>Pre-5d%</th><th>Pre-20d%</th><th>Pre-60d%</th></tr></thead>'
+      +'<tbody>'+occRows+'</tbody></table></div>'
+      +'</div></div>';
   }).join('');
 }
-function csGo(sym){document.getElementById('cs-sym').value=sym;showPage('candle-search',Array.from(document.querySelectorAll('.tab')).find(function(t){return t.textContent.includes('Search');}));doCS();}
+
+// ═══ DEEP ANALYSIS TABLE — today's signals ═══════════════════════════════════
+var _dpSK='score',_dpSD='desc';
+function dpSort(k,btn){_dpSK=k;setOn('#dps-score,#dps-avg,#dps-min,#dps-gap,#dps-liq',btn);renderDP();}
+function dpTh(k){if(_dpSK===k)_dpSD=_dpSD==='desc'?'asc':'desc';else{_dpSK=k;_dpSD='desc';}renderDP();}
+function renderDP(){
+  var d=DATA.enriched;
+  var dpEl=document.getElementById('dp-tbody'); if(!dpEl) return;
+  if(!d||!d.patterns){
+    dpEl.innerHTML='<tr><td colspan="16" class="empty">No enriched data. Run candle_enriched_analysis workflow.</td></tr>';
+    return;
+  }
+  var q=(document.getElementById('dp-q')?.value||'').toUpperCase().trim();
+  var rows=[...(d.patterns||[])];
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  rows.sort(function(a,b){var v=(b[_dpSK]??0)-(a[_dpSK]??0);return _dpSD==='asc'?-v:v;});
+  document.getElementById('dp-pills').innerHTML=[
+    ['Signal Date',d.signal_date||'—','b',''],
+    ['Stocks Analysed',rows.length,'g','all have today candle signal'],
+    ['Liquid (Rs2L)',rows.filter(function(r){return r.liquidity_ok;}).length,'g',''],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+x[3]+'</div></div>';}).join('');
+  // Build rows with accordion expand
+  var html='';
+  rows.forEach(function(r,idx){
+    var detailId='dpd-'+idx;
+    html+='<tr class="dp-main-row" onclick="toggleDPRow(\''+detailId+'\')" style="cursor:pointer">'
+      +'<td><span id="dpx-'+detailId+'" style="font-size:10px;color:var(--t3)">▶</span></td>'
+      +'<td class="mono gold" style="font-weight:600">'+r.sym+'</td>'
+      +'<td style="font-size:9px;color:var(--t2);max-width:130px">'+r.desc+'</td>'
+      +'<td class="mono">'+r.n_occurrences+'</td>'
+      +'<td class="mono amber" style="font-weight:700">'+r.score+'</td>'
+      +'<td class="mono amber" style="font-weight:700">&#8377;'+r.recommended_buy+'</td>'
+      +'<td class="mono green">&#8377;'+r.target_1+'</td>'
+      +'<td class="mono green" style="font-weight:700">&#8377;'+r.target_2+'</td>'
+      +'<td class="mono green" style="font-weight:700">+'+r.nd_min_return+'%</td>'
+      +'<td>'+rc(r.nd_avg_return)+'</td>'
+      +'<td class="mono">'+r.pct_gap_up+'%</td>'
+      +'<td class="mono amber">'+r.pct_entry_dip+'%</td>'
+      +'<td class="mono">'+(r.avg_vol_ratio!=null?r.avg_vol_ratio+'x':'—')+'</td>'
+      +'<td class="mono '+(r.liquidity_ok?'green':'amber')+'">Rs '+fmtI(r.avg_turnover_rs||0)+'</td>'
+      +'<td class="mono '+(r.sl_needed?'amber':'green')+'">'+(r.sl_needed?'Yes':'No')+'</td>'
+      +'<td><span class="mono '+(r.liquidity_ok?'green':'amber')+'">'+(r.liquidity_ok?'✓':'⚠')+'</span></td>'
+      +'</tr>'
+      // Expanded detail row (hidden by default)
+      +'<tr id="'+detailId+'" style="display:none"><td colspan="16" style="padding:0">'
+      +'<div style="background:rgba(0,0,0,.3);padding:12px;border-bottom:1px solid var(--b)">'
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px;margin-bottom:10px">'
+      +[['Buy Note',r.buy_note,'y'],['Strength',r.strength_note,'b'],
+        ['SL',r.sl_needed?r.sl_note:'No SL needed in all '+r.n_occurrences+' occurrences',r.sl_needed?'warn':'ok'],
+        ['Liquidity',r.liquidity_note,'b'],
+       ].map(function(x){return '<div class="pill '+x[2]+'" style="min-width:0"><div class="pl">'+x[0]+'</div><div class="pv" style="font-size:10px;font-family:var(--font)">'+x[1]+'</div></div>';}).join('')
+      +'</div>'
+      +'<div style="overflow-x:auto"><table class="tbl" style="min-width:900px"><thead><tr>'
+      +'<th>Date</th><th>Sig Close</th><th>Vol Ratio</th><th>Gap%</th><th>Entry Dip?</th>'
+      +'<th>Best Entry</th><th>ND Return%</th><th>ND High%</th><th>Pre-5d%</th><th>Pre-20d%</th><th>Pre-60d%</th>'
+      +'</tr></thead><tbody>'
+      +(r.occurrences||[]).map(function(o){
+        return '<tr><td class="mono">'+o.date+'</td>'
+          +'<td class="mono">&#8377;'+o.sig_close+'</td>'
+          +'<td class="mono '+(o.vol_ratio_vs_20d>=1.5?'green':'')+'">'+(o.vol_ratio_vs_20d!=null?o.vol_ratio_vs_20d+'x':'—')+'</td>'
+          +'<td class="mono '+(o.gap_pct>0?'green':'red')+'">'+(o.gap_pct>0?'+':'')+o.gap_pct+'%</td>'
+          +'<td>'+(o.entry_dip?'<span class="amber">Yes -'+o.entry_dip_pct+'%</span>':'<span class="muted">No</span>')+'</td>'
+          +'<td class="mono">&#8377;'+o.best_entry_px+'('+o.best_entry_vs_close+'%)</td>'
+          +'<td>'+rc(o.nd_return)+'</td><td>'+rc(o.nd_max_gain)+'</td>'
+          +'<td>'+(o.trend_5d_before!=null?rc(o.trend_5d_before):'<span class="muted">—</span>')+'</td>'
+          +'<td>'+(o.trend_20d_before!=null?rc(o.trend_20d_before):'<span class="muted">—</span>')+'</td>'
+          +'<td>'+(o.trend_60d_before!=null?rc(o.trend_60d_before):'<span class="muted">—</span>')+'</td>'
+          +'</tr>';
+      }).join('')
+      +'</tbody></table></div></div>'
+      +'</td></tr>';
+  });
+  dpEl.innerHTML=html;
+}
+function toggleDPRow(id){
+  var row=document.getElementById(id); if(!row) return;
+  var icon=document.getElementById('dpx-'+id);
+  if(row.style.display==='none'){
+    row.style.display=''; if(icon) icon.textContent='▼';
+  } else {
+    row.style.display='none'; if(icon) icon.textContent='▶';
+  }
+}
 
 // ═══ CANDLE SEARCH ═══════════════════════════════════════════════════
 var _csP={},_csL=false;
@@ -1351,6 +1488,16 @@ function renderHW(){
   tbody.onclick=function(ev){var r=ev.target.closest('tr');if(r&&r.dataset.sym)showHWD(r.dataset.sym);};
 }
 function showHWD(sym){
+  // Toggle detail row immediately after the clicked row
+  var tbody=document.getElementById('hw-tbody');
+  // Remove any existing expanded detail
+  var existing=tbody.querySelector('.hw-detail-row');
+  var existingSym=existing?existing.dataset.sym:'';
+  if(existing) existing.remove();
+  if(existingSym===sym) return; // clicked same row = collapse
+  // Find the clicked row
+  var clickedRow=Array.from(tbody.querySelectorAll('tr.hw-row')).find(function(r){return r.dataset.sym===sym;});
+  if(!clickedRow) return;
   var p=DATA.hwProfiles[sym];if(!p)return;
   var evts=(p.events||[]).slice(-30).reverse();
   function fmtW(e,w){
@@ -1358,13 +1505,21 @@ function showHWD(sym){
     var v=r.return_pct;
     return '<td class="mono '+(v>=15?'green':v>=0?'amber':'red')+'" style="'+(v>=15?'font-weight:700':'')+'">'+( v>0?'+':'')+v.toFixed(1)+'%</td>';
   }
-  document.getElementById('hw-detail').innerHTML='<div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);margin-top:10px;overflow:hidden">'
+  // Insert detail row after clicked row
+  var detailTr=document.createElement('tr');
+  detailTr.className='hw-detail-row'; detailTr.dataset.sym=sym;
+  var detailTd=document.createElement('td'); detailTd.colSpan=10; detailTd.style.padding='0';
+  detailTr.appendChild(detailTd);
+  clickedRow.parentNode.insertBefore(detailTr, clickedRow.nextSibling);
+  detailTd.innerHTML='<div style="background:var(--card);border:1px solid var(--b);border-radius:var(--r);margin-top:10px;overflow:hidden">'
     +'<div style="padding:9px 12px;background:var(--s);font-size:12px;color:var(--gold);font-weight:600">'+sym+' — floor events (last '+evts.length+' of '+(p.events||[]).length+')</div>'
     +'<div class="twrap" style="margin:0;border:none;border-radius:0"><table class="tbl">'
     +'<thead><tr><th>Floor Date</th><th>Close</th><th>Floor Depth</th><th>+5d</th><th>+10d</th><th>+20d</th><th>+30d</th></tr></thead><tbody>'
     +evts.map(function(e){return '<tr><td class="mono">'+e.date+'</td><td class="mono">&#8377;'+e.close+'</td><td class="mono amber">'+e.pos_in_range+'%</td>'+fmtW(e,5)+fmtW(e,10)+fmtW(e,20)+fmtW(e,30)+'</tr>';}).join('')
     +'</tbody></table></div></div>';
-}
+  clickedRow.classList.add('hw-expanded');
+  }
+function _noop(){}
 
 // ═══ HW ALERTS ═══════════════════════════════════════════════════════
 function renderHWA(){
