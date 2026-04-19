@@ -42,10 +42,25 @@ OUT_DIR    = REPO_ROOT / "pattern_signals"
 MANIFEST   = DATA_DIR / "manifest.json"
 CHECKPOINT = OUT_DIR / "candle_checkpoint.json"
 
-MIN_VOLUME        = 50_000   # minimum volume on BOTH signal day AND today's candle
-MIN_OCC           = 6        # minimum occurrences — below 6 is statistically unreliable
-MIN_YEARS         = 2        # pattern must appear in 2+ different calendar years
-MIN_TRADING_DAYS  = 100      # minimum history per stock
+MIN_VOLUME        = 50_000     # minimum shares traded on signal day AND today
+MIN_TURNOVER_DAY  = 1_000_000  # minimum Rs turnover on signal day (Rs 10L = proxy for liquidity)
+MIN_AVG_TURNOVER  = 2_000_000  # minimum avg daily turnover over 60d (Rs 20L = proxy for >200Cr mcap)
+MIN_OCC           = 6          # minimum occurrences — below 6 is statistically unreliable
+MIN_YEARS         = 2          # pattern must appear in 2+ different calendar years
+MIN_TRADING_DAYS  = 100        # minimum history per stock
+
+# ── Exclusion filters ──────────────────────────────────────────────────────────
+# Stocks to always exclude: liquid ETFs, gilt ETFs, debt ETFs that can't move
+EXCLUDED_EXACT = {
+    "LIQUIDIETF","LIQUIDBEES","LIQUIDCASE","LIQUISETF",
+    "NIFTYBEES","JUNIORBEES","BANKBEES","GOLDBEES","SILVERBEES",
+    "PSUBNKBEES","ITBEES","INFRABEES","PHARMABEES","MAFANG",
+    "CPSEETF","NIFTYIETF","SETFNIF50","ICICIB22","GSEC10YEAR",
+}
+# Suffix patterns for ETFs — any symbol ending in these is excluded
+EXCLUDED_SUFFIX = ("ETF","BEES","CASE","SETF","GILT","LIQUIDETF")
+# Price too low = likely penny stock with manipulation risk
+MIN_PRICE = 20.0   # below Rs 20 = penny stock, exclude
 
 # ─────────────────────────────────────────────────────────────────────────────
 class SafeEncoder(json.JSONEncoder):
@@ -174,9 +189,24 @@ def classify(o,h,l,c):
 #     for all training rows, and today's prediction is truly forward-looking
 # ─────────────────────────────────────────────────────────────────────────────
 def analyse_stock(g, sym, latest_str, prev_str):
+    # ── Exclusion filter ────────────────────────────────────────────────────
+    if sym in EXCLUDED_EXACT:
+        return None   # liquid/gilt ETF — price doesn't move meaningfully
+    if any(sym.upper().endswith(s) for s in EXCLUDED_SUFFIX):
+        return None   # ETF suffix detected
+
     g = g.copy().sort_values("date").reset_index(drop=True)
     n = len(g)
     if n < MIN_TRADING_DAYS: return None
+
+    # ── Micro-cap proxy filter: avg daily turnover < Rs 20L → skip ──────────
+    # We don't have market cap data, but avg daily turnover is a reliable proxy.
+    # A stock with 200Cr+ market cap typically trades Rs 20L+ daily.
+    c_last60 = g["c"].iloc[-60:] if len(g)>=60 else g["c"]
+    v_last60  = g["v"].iloc[-60:] if len(g)>=60 else g["v"]
+    avg_turnover_60d = float((c_last60 * v_last60).mean())
+    if avg_turnover_60d < MIN_AVG_TURNOVER:
+        return None   # likely micro-cap — too risky
 
     c,o,h,l,v = g["c"],g["o"],g["h"],g["l"],g["v"]
     stock_latest = str(g["date"].max().date())
@@ -185,9 +215,16 @@ def analyse_stock(g, sym, latest_str, prev_str):
     # stock_latest is the last date THIS stock appeared in ANY equity CSV
     # latest_str is what the manifest says is the most recent trading day globally
     # If stock_latest != latest_str → stock didn't trade recently → NOT in today alerts
-    is_current  = (stock_latest == latest_str)
-    today_vol   = float(v.iloc[-1]) if is_current else 0.0
-    today_vol_ok = (today_vol >= MIN_VOLUME)
+    is_current      = (stock_latest == latest_str)
+    today_close_px  = float(c.iloc[-1]) if is_current else 0.0
+    today_vol       = float(v.iloc[-1]) if is_current else 0.0
+    today_turnover  = today_vol * today_close_px
+    # Must meet BOTH volume AND turnover AND minimum price threshold
+    today_vol_ok    = (
+        today_vol >= MIN_VOLUME and
+        today_turnover >= MIN_TURNOVER_DAY and
+        today_close_px >= MIN_PRICE
+    )
 
     # Forward returns (vectorised) — shift(-1) uses next row's close
     g["fwd1"]  = c.shift(-1)/c - 1
@@ -212,7 +249,13 @@ def analyse_stock(g, sym, latest_str, prev_str):
         training = g.iloc[:-1].copy()   # exclude today — fwd1 unknown
     else:
         training = g.copy()
-    training = training[training["v"] >= MIN_VOLUME].copy()
+    # Volume AND turnover filter on each training row
+    training["turnover"] = training["v"] * training["c"]
+    training = training[
+        (training["v"] >= MIN_VOLUME) &
+        (training["turnover"] >= MIN_TURNOVER_DAY) &
+        (training["c"] >= MIN_PRICE)
+    ].copy()
     if len(training) < 5: return None
 
     # Get today's candle (last row)
@@ -424,10 +467,11 @@ def main():
                 if (th.get("nd_avg") or 0) < 1.0:
                     continue
                 today_alerts.append({
-                    "sym":          sym,
-                    "today_date":   res["today_date"],
-                    "today_close":  res["today_close"],
-                    "today_vol":    res["today_vol"],
+                    "sym":              sym,
+                    "today_date":       res["today_date"],
+                    "today_close":      res["today_close"],
+                    "today_vol":        res["today_vol"],
+                    "avg_turnover_60d": round(avg_turnover_60d),
                     "candle_key":   res["today_key"],
                     "candle_desc":  res["today_candle"]["desc"],
                     "nd_wr":        100.0,
@@ -545,4 +589,3 @@ def main():
 
 if __name__=="__main__":
     main()
-  
