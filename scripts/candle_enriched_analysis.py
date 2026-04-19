@@ -464,6 +464,8 @@ def main():
                   f"buy=Rs{result['comfort_buy_px']}")
 
     # Sort: primarily by 5d avg return, then by score
+    # Remove stocks with avg next-day return < 0.5%
+    enriched = [r for r in enriched if (r.get('nd_avg_return') or 0) >= 0.5]
     enriched.sort(key=lambda x: (-(x.get("win_5d_avg") or 0), -x["score"]))
     top5=enriched[:5]
 
