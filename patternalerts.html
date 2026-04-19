@@ -21,15 +21,15 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;min-height:100vh}
 nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--b);display:flex;align-items:center;padding:0 12px;height:50px;gap:8px}
-.brand{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);
-  display:flex;align-items:center;gap:6px;flex-shrink:0}
+  border-bottom:1px solid var(--b);padding:6px 10px 4px;display:block}
+.nav-top{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);
+  display:flex;align-items:center;gap:5px;flex-shrink:0}
 .brand small{font-size:9px;color:var(--t3);font-family:var(--font);font-weight:400}
-.ldot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 5px transparent}}
-.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1}
-.tabs::-webkit-scrollbar{display:none}
-.tab{padding:4px 10px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:500;
+.tabs{display:flex;flex-wrap:wrap;gap:3px}
+.tab{padding:4px 9px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:500;
   color:var(--t3);border:none;background:none;white-space:nowrap;flex-shrink:0;transition:.2s}
 .tab:hover{color:var(--text);background:var(--s)}
 .tab.active{color:var(--gold);background:var(--gbg);border:1px solid var(--g2)}
@@ -185,20 +185,24 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 <body>
 
 <nav>
-  <div class="brand"><div class="ldot"></div>📡 Pattern Alerts <small>NSE 100% Win-Rate · Strict Filters</small></div>
+  <div class="nav-top">
+    <div class="ldot"></div>
+    <div class="brand">📡 Pattern Alerts <small>NSE 100% Win-Rate · Min 6 occ · 2yr · Rs20L+ liquidity</small></div>
+  </div>
   <div class="tabs">
     <button class="tab active" onclick="showPage('alerts',this)">🚨 Alerts</button>
-    <button class="tab" onclick="showPage('stocks',this)">📈 Stock Profiles</button>
-    <button class="tab" onclick="showPage('repeating',this)">🏆 Most Reliable</button>
+    <button class="tab" onclick="showPage('stocks',this)">📈 Profiles</button>
+    <button class="tab" onclick="showPage('repeating',this)">🏆 Reliable</button>
     <button class="tab" onclick="showPage('candle-alert',this)">🕯 Candle Alerts</button>
+    <button class="tab" onclick="showPage('top5',this)">🏆 Top 5</button>
+    <button class="tab" onclick="showPage('deep',this)">🔬 Deep Analysis</button>
+    <button class="tab" onclick="showPage('signal-quality',this)">📊 Signal Quality</button>
     <button class="tab" onclick="showPage('candle-perf',this)">📈 Yesterday</button>
     <button class="tab" onclick="showPage('candle-best',this)">⭐ Best Candles</button>
     <button class="tab" onclick="showPage('candle-search',this)">🔍 Candle Search</button>
+    <button class="tab" onclick="showPage('calert',this)">📋 Candle Table</button>
     <button class="tab" onclick="showPage('hw-dip',this)">🏦 HW Dip</button>
     <button class="tab" onclick="showPage('hw-alerts',this)">🔔 HW Alerts</button>
-    <button class="tab" onclick="showPage('top5',this)">🏆 Top 5</button>
-    <button class="tab" onclick="showPage('deep',this)">🔬 Deep Analysis</button>
-    <button class="tab" onclick="showPage('calert',this)">📋 Candle Table</button>
     <button class="tab" onclick="showPage('howto',this)">📖 How It Works</button>
   </div>
 </nav>
@@ -512,6 +516,57 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
   </table></div>
 </div>
 
+<!-- PAGE: SIGNAL QUALITY ANALYSIS -->
+<div class="page" id="page-signal-quality">
+  <div class="sh">📊 Signal Quality Analysis <small>best and worst signals based on historical data · all filters applied</small></div>
+  <div class="pill-row" id="sq-pills"></div>
+
+  <!-- FILTER ROW -->
+  <div class="fbar">
+    <button class="fb on" id="sqv-all" onclick="sqView('all',this)">All Signals</button>
+    <button class="fb" id="sqv-best" onclick="sqView('best',this)">🏆 Best Only</button>
+    <button class="fb" id="sqv-worst" onclick="sqView('worst',this)">⚠ Worst Only</button>
+    <span class="fsep">|</span>
+    <button class="fb on" id="sqs-5d" onclick="sqSort('win_5d_avg',this)">5d Return</button>
+    <button class="fb" id="sqs-min" onclick="sqSort('nd_min',this)">Min ND</button>
+    <button class="fb" id="sqs-avg" onclick="sqSort('nd_avg',this)">Avg ND</button>
+    <button class="fb" id="sqs-occ" onclick="sqSort('occurrences',this)">Occurrences</button>
+    <button class="fb" id="sqs-liq" onclick="sqSort('avg_turnover_60d',this)">Liquidity</button>
+    <span class="fsep">|</span>
+    <input class="si" id="sq-q" placeholder="Symbol…" style="width:110px" oninput="renderSQ()">
+  </div>
+
+  <div class="sh" style="margin-top:14px;color:var(--green)">🏆 Best Signals — Highest Confidence</div>
+  <div id="sq-best-grid" class="alert-grid" style="margin-bottom:20px"></div>
+
+  <div class="sh" style="color:var(--amber)">⚠ Worst Signals — Lowest Confidence / Highest Risk</div>
+  <div id="sq-worst-grid" class="alert-grid"></div>
+
+  <div class="sh" style="margin-top:20px">📋 All Today's Signals — Ranked</div>
+  <div class="twrap">
+    <table class="tbl" id="sq-tbl" style="min-width:900px">
+      <thead><tr>
+        <th onclick="sqTh('rank')">#<span class="arr"></span></th>
+        <th onclick="sqTh('sym')">Stock<span class="arr"></span></th>
+        <th onclick="sqTh('nd_min')">ND Min%<span class="arr"></span></th>
+        <th onclick="sqTh('nd_avg')">ND Avg%<span class="arr"></span></th>
+        <th onclick="sqTh('win_5d_avg')">5d Avg%<span class="arr"></span></th>
+        <th onclick="sqTh('occurrences')">Occ<span class="arr"></span></th>
+        <th onclick="sqTh('n_years')">Years<span class="arr"></span></th>
+        <th onclick="sqTh('score')">Score<span class="arr"></span></th>
+        <th onclick="sqTh('avg_turnover_60d')">Avg Turnover Rs<span class="arr"></span></th>
+        <th onclick="sqTh('today_close')">Close Rs<span class="arr"></span></th>
+        <th onclick="sqTh('comfort_buy_px')">Comfort Buy<span class="arr"></span></th>
+        <th onclick="sqTh('target_1')">Target 1<span class="arr"></span></th>
+        <th onclick="sqTh('target_2')">Target 2<span class="arr"></span></th>
+        <th onclick="sqTh('sl_needed')">SL?<span class="arr"></span></th>
+        <th onclick="sqTh('risk_grade')">Risk Grade<span class="arr"></span></th>
+      </tr></thead>
+      <tbody id="sq-tbody"><tr><td colspan="15" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
 <!-- ═══ PAGE 6: HOW IT WORKS ═════════════════════════════════ -->
 <div class="page" id="page-howto">
   <div class="sh">📖 System Rules &amp; Signal Reference</div>
@@ -650,6 +705,7 @@ async function loadData() {
     ]);
     if(enR.ok){ DATA.enriched=await enR.json(); }
     if(t5R.ok){ DATA.top5=await t5R.json(); }
+    renderSQ();
   } catch(e){ console.log('Enriched:',e.message); }
   // ── Heavyweight ──────────────────────────────────────────────────────────
   try {
@@ -661,7 +717,7 @@ async function loadData() {
     if(hwaR.ok){ const d=await hwaR.json(); DATA.hwAlerts=d.alerts||[]; DATA.hwAlertMeta=d; }
   } catch(e){ console.log('HW:',e.message); }
   // ── Render all tabs now that data is loaded ───────────────────────────────
-  renderCA(); renderCB(); renderCAT();
+  renderCA(); renderCB(); renderCAT(); renderSQ();
   renderCP(); renderTop5(); renderTop5InAlerts(); renderDP();
   renderHW(); renderHWA();
 }
@@ -1624,6 +1680,192 @@ function renderHWA(){
       +'<div class="zr"><span class="zl">Target real</span><span class="zv zt2">&#8377;'+fmt(a.target_realistic)+'</span></div></div>'
       +'<div class="zone-banner '+zCls+'">'+a.zone+'</div></div>';
   }).join('');
+}
+
+// ═══ SIGNAL QUALITY ANALYSIS ════════════════════════════════════════════════
+var _sqView='all', _sqSortKey='win_5d_avg', _sqSD='desc';
+function sqView(v,btn){_sqView=v;setOn('#sqv-all,#sqv-best,#sqv-worst',btn);renderSQ();}
+function sqSort(k,btn){_sqSortKey=k;setOn('#sqs-5d,#sqs-min,#sqs-avg,#sqs-occ,#sqs-liq',btn);renderSQ();}
+function sqTh(k){if(_sqSortKey===k)_sqSD=_sqSD==='desc'?'asc':'desc';else{_sqSortKey=k;_sqSD='desc';}renderSQ();}
+
+function enrichedToAll(){
+  // Merge today alerts with enriched data for full picture
+  var enrichedMap={};
+  ((DATA.enriched&&DATA.enriched.patterns)||[]).forEach(function(e){
+    enrichedMap[e.sym]=e;
+  });
+  return DATA.candleToday.map(function(a,i){
+    var e=enrichedMap[a.sym]||{};
+    var nYears=(a.years||[]).length;
+    var nOcc=a.occurrences||0;
+    var w5avg=e.win_5d_avg!=null?e.win_5d_avg:((a.win_5d&&a.win_5d.avg)||0);
+    var avgTo=e.avg_turnover_rs||a.avg_turnover_60d||0;
+    var ndMin=e.nd_min_return||a.nd_min||0;
+    var ndAvg=e.nd_avg_return||a.nd_avg||0;
+    var score=e.score||0;
+
+    // Risk grade based on multiple factors
+    var risk='MEDIUM';
+    var riskColor='amber';
+    var riskReasons=[];
+    if(nOcc>=13&&nYears>=4&&w5avg>=5&&avgTo>=5000000){risk='LOW';riskColor='green';}
+    else if(nOcc<8||nYears<3){risk='HIGH';riskColor='red';}
+    if(avgTo<2000000){riskReasons.push('Low liquidity Rs'+fmtI(Math.round(avgTo)));}
+    if(nOcc<8){riskReasons.push('Only '+nOcc+' occurrences');}
+    if(nYears<3){riskReasons.push('Only '+nYears+' years');}
+    if(e.sl_needed){riskReasons.push('Adverse excursion '+e.max_adverse_from_close+'%');}
+    if(w5avg<1){riskReasons.push('Weak 5d avg '+w5avg+'%');}
+
+    return{
+      sym:a.sym, rank:i+1,
+      candle_desc:a.candle_desc,
+      today_date:a.today_date,
+      today_close:a.today_close,
+      today_vol:a.today_vol||0,
+      nd_min:ndMin, nd_avg:ndAvg, nd_max:a.nd_max||0,
+      win_5d_avg:w5avg,
+      win_10d_avg:(a.win_10d&&a.win_10d.avg)||0,
+      occurrences:nOcc,
+      n_years:nYears,
+      years:a.years||[],
+      gap_up_rate:a.gap_up_rate||0,
+      score:score,
+      avg_turnover_60d:avgTo,
+      comfort_buy_px:e.comfort_buy_px||a.today_close,
+      safe_buy_px:e.safe_buy_px||a.today_close,
+      target_1:e.target_1||r2(a.today_close*(1+ndMin/100)),
+      target_2:e.target_2||r2(a.today_close*(1+ndAvg/100)),
+      sl_needed:e.sl_needed||false,
+      max_adverse:e.max_adverse_from_close||0,
+      strength_note:e.strength_note||'',
+      buy_strategy:e.buy_strategy||'Buy at open',
+      risk_grade:risk, risk_color:riskColor,
+      risk_reasons:riskReasons,
+      pct_gap_up:e.pct_gap_up||a.gap_up_rate||0,
+      pct_dip_below_open:e.pct_dip_below_open||null,
+    };
+  });
+}
+
+function renderSQ(){
+  var q=(document.getElementById('sq-q')?.value||'').toUpperCase().trim();
+  var all=enrichedToAll();
+  if(q) all=all.filter(function(r){return r.sym.includes(q);});
+
+  // Pills
+  var nLow=all.filter(function(r){return r.risk_grade==='LOW';}).length;
+  var nHigh=all.filter(function(r){return r.risk_grade==='HIGH';}).length;
+  var sqPills=document.getElementById('sq-pills');
+  if(sqPills) sqPills.innerHTML=[
+    ['Total Signals',all.length,'b'],
+    ['LOW Risk',nLow,'g','highest confidence'],
+    ['MEDIUM Risk',all.length-nLow-nHigh,'y',''],
+    ['HIGH Risk',nHigh,'r','avoid or reduce size'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';}).join('');
+
+  // Sort
+  var sorted=[...all].sort(function(a,b){
+    var v=(b[_sqSortKey]??0)-(a[_sqSortKey]??0);
+    return _sqSD==='asc'?-v:v;
+  });
+
+  // Best 3 = LOW risk, highest score
+  var best=all.filter(function(r){return r.risk_grade==='LOW';})
+    .sort(function(a,b){return (b.win_5d_avg||0)-(a.win_5d_avg||0);})
+    .slice(0,3);
+  // Worst 3 = HIGH risk OR lowest score
+  var worst=[...all].sort(function(a,b){
+    var aScore=(a.score||0)+(a.risk_grade==='HIGH'?0:30);
+    var bScore=(b.score||0)+(b.risk_grade==='HIGH'?0:30);
+    return aScore-bScore;
+  }).slice(0,3);
+
+  // Render best cards
+  var bestEl=document.getElementById('sq-best-grid');
+  if(bestEl){
+    if(!best.length){
+      bestEl.innerHTML='<div class="empty" style="grid-column:1/-1">No LOW risk signals today. Run enriched analysis.</div>';
+    } else {
+      bestEl.innerHTML=best.map(function(r){return sqCard(r,'green');}).join('');
+    }
+  }
+
+  // Render worst cards
+  var worstEl=document.getElementById('sq-worst-grid');
+  if(worstEl){
+    if(!worst.length){
+      worstEl.innerHTML='<div class="empty" style="grid-column:1/-1">No signals today.</div>';
+    } else {
+      worstEl.innerHTML=worst.map(function(r){return sqCard(r,'red');}).join('');
+    }
+  }
+
+  // Table
+  var tbody=document.getElementById('sq-tbody');
+  if(!tbody) return;
+  var tableRows=_sqView==='best'?sorted.filter(function(r){return r.risk_grade==='LOW';})
+    :_sqView==='worst'?sorted.filter(function(r){return r.risk_grade==='HIGH';})
+    :sorted;
+  if(!tableRows.length){tbody.innerHTML='<tr><td colspan="15" class="empty">No signals match.</td></tr>';return;}
+  tbody.innerHTML=tableRows.map(function(r,i){
+    var rCls=r.risk_grade==='LOW'?'green':r.risk_grade==='HIGH'?'red':'amber';
+    return '<tr>'
+      +'<td class="mono muted">'+(i+1)+'</td>'
+      +'<td class="mono gold" style="font-weight:600">'+r.sym+'</td>'
+      +'<td class="mono green" style="font-weight:700">+'+(r.nd_min||0).toFixed(1)+'%</td>'
+      +'<td>'+rc(r.nd_avg)+'</td>'
+      +'<td class="mono '+(r.win_5d_avg>=3?'green':'amber')+'">'+(r.win_5d_avg!=null&&typeof r.win_5d_avg==='number'?(r.win_5d_avg>0?'+':'')+r.win_5d_avg.toFixed(1)+'%':'—')+'</td>'
+      +'<td class="mono">'+r.occurrences+'</td>'
+      +'<td class="mono">'+r.n_years+'</td>'
+      +'<td class="mono '+(r.score>=80?'green':r.score>=60?'amber':'muted')+'">'+(r.score||'—')+'/100</td>'
+      +'<td class="mono '+(r.avg_turnover_60d>=5000000?'green':'amber')+'">Rs '+fmtI(Math.round(r.avg_turnover_60d||0))+'</td>'
+      +'<td class="mono">&#8377;'+(r.today_close||'—')+'</td>'
+      +'<td class="mono green">&#8377;'+(r.comfort_buy_px||'—')+'</td>'
+      +'<td class="mono green">&#8377;'+(r.target_1||'—')+'</td>'
+      +'<td class="mono green" style="font-weight:700">&#8377;'+(r.target_2||'—')+'</td>'
+      +'<td class="mono '+(r.sl_needed?'amber':'green')+'">'+(r.sl_needed?'Yes':'No')+'</td>'
+      +'<td><span class="mono '+rCls+'" style="font-weight:700">'+r.risk_grade+'</span></td>'
+      +'</tr>';
+  }).join('');
+}
+
+function sqCard(r, borderColor){
+  var acClass='ac-'+(r.risk_grade==='LOW'?'Ap':'B');
+  var yrs=(r.years||[]).map(function(y){return '<span class="yr-tag yr-win">'+y+'</span>';}).join('');
+  var inv=getInv('inv-capital','inv-max-pct');
+  var al=inv.cap>0?allocPlan(r.today_close,r.nd_min,r.nd_avg,inv):null;
+  var reasons=r.risk_reasons||[];
+  return '<div class="ac '+acClass+'" style="border-left:3px solid var(--'+borderColor+')">'
+    +'<div class="ac-head"><div>'
+    +'<div style="display:flex;align-items:center;gap:5px">'
+    +'<span class="g g'+(r.risk_grade==='LOW'?'Ap':r.risk_grade==='HIGH'?'D':'B')+'">'+r.risk_grade+'</span>'
+    +'<span class="ac-sym">'+r.sym+'</span></div>'
+    +'<div class="ac-sig">'+r.candle_desc+'</div>'
+    +'<div style="margin-top:3px">'+yrs+'</div>'
+    +(reasons.length?'<div style="margin-top:4px;font-size:9px;color:var(--red)">⚠ '+reasons.join(' · ')+'</div>':'')
+    +'</div>'
+    +'<div class="ac-wr"><div class="ac-pct">+'+(r.nd_min||0).toFixed(1)+'%</div><div class="ac-lbl">min ND</div></div>'
+    +'</div>'
+    +'<div class="ac-row3">'
+    +'<div class="ac-mini"><div class="ac-ml">5d Avg</div><div class="ac-mv '+(r.win_5d_avg>=3?'green':'amber')+'">'+(r.win_5d_avg!=null&&typeof r.win_5d_avg==='number'?(r.win_5d_avg>0?'+':'')+r.win_5d_avg.toFixed(1)+'%':'—')+'</div></div>'
+    +'<div class="ac-mini"><div class="ac-ml">Occ / Yrs</div><div class="ac-mv">'+r.occurrences+'x / '+r.n_years+'yr</div></div>'
+    +'<div class="ac-mini"><div class="ac-ml">Score</div><div class="ac-mv '+(r.score>=80?'green':r.score>=60?'amber':'muted')+'">'+(r.score||'—')+'/100</div></div>'
+    +'</div>'
+    +'<div class="zones">'
+    +'<div class="zr"><span class="zl">Close Rs</span><span class="zv">'+r.today_close+'</span></div>'
+    +'<div class="zr"><span class="zl">Comfort Buy Rs</span><span class="zv green" style="font-weight:700">'+r.comfort_buy_px+'</span></div>'
+    +'<div class="zr"><span class="zl">Target 1 (min)</span><span class="zv zt1">Rs '+r.target_1+'</span></div>'
+    +'<div class="zr"><span class="zl">Target 2 (avg)</span><span class="zv zt2">Rs '+r.target_2+'</span></div>'
+    +'<div class="zr"><span class="zl">Avg Turnover</span><span class="zv '+(r.avg_turnover_60d>=5000000?'green':'amber')+'">Rs '+fmtI(Math.round(r.avg_turnover_60d||0))+'</span></div>'
+    +'</div>'
+    +(al?'<div style="background:rgba(201,168,76,.07);border-top:1px solid var(--b);margin-top:8px;padding:8px 0 2px;display:grid;grid-template-columns:1fr 1fr;gap:3px">'
+      +'<div class="ac-mini"><div class="ac-ml">Qty</div><div class="ac-mv">'+al.units+' sh</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Invest</div><div class="ac-mv amber">Rs '+fmtI(Math.round(al.invest))+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Profit T1</div><div class="ac-mv green">+Rs '+fmtI(Math.round(al.p1))+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Profit T2</div><div class="ac-mv green">+Rs '+fmtI(Math.round(al.p2))+'</div></div>'
+      +'</div>':'')
+    +'<div class="zone-banner zone-'+(r.risk_grade==='LOW'?'buy':r.risk_grade==='HIGH'?'sell':'run')+'">'+r.risk_grade+' RISK — '+(r.risk_grade==='LOW'?'Strong signal':'Review carefully before buying')+'</div>'
+    +'</div>';
 }
 
 loadData();
