@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>NSE Pin Bar Optimizer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#080c10;--surface:#0f1620;--card:#141e2a;--border:#1e2d3d;--accent:#00d4aa;--accent2:#3b82f6;--gold:#f59e0b;--text:#e2e8f0;--muted:#64748b;--green:#22c55e;--red:#ef4444;--green-bg:rgba(34,197,94,.1);--red-bg:rgba(239,68,68,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:"Space Grotesk",sans-serif;font-size:14px;min-height:100vh}
+a{color:var(--accent2)}
+header{background:linear-gradient(135deg,#0a1628,#0f2040);border-bottom:1px solid var(--border);padding:18px 28px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100}
+.logo{font-size:20px;font-weight:700;color:#fff}.logo span{color:var(--accent)}
+.tagline{color:var(--muted);font-size:12px;margin-left:auto}
+.ldot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(34,197,94,0)}}
+.tabs{display:flex;border-bottom:1px solid var(--border);background:var(--surface);padding:0 28px;overflow-x:auto}
+.tab{padding:13px 20px;cursor:pointer;font-weight:600;font-size:13px;color:var(--muted);border-bottom:2px solid transparent;transition:.2s;white-space:nowrap}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}.tab:hover:not(.active){color:var(--text)}
+.pane{display:none;padding:24px 28px}.pane.active{display:block}
+.sr{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:24px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px}
+.sv{font-size:28px;font-weight:700;color:#fff;font-family:"JetBrains Mono",monospace;line-height:1}
+.sv.g{color:var(--green)}.sv.r{color:var(--red)}.sv.go{color:var(--gold)}
+.sl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-top:5px}
+.sh{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sh h2{font-size:14px;font-weight:700;color:#fff}
+.cnt{background:var(--accent);color:#000;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+.ml{color:var(--muted);font-size:12px;margin-left:auto}
+.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;margin-bottom:24px}
+.ac{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;position:relative;overflow:hidden;transition:.2s}
+.ac:hover{border-color:var(--accent);transform:translateY(-1px)}
+.ac::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.ac.rc::before{background:linear-gradient(90deg,var(--red),#f97316)}
+.ach{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.asy{font-size:15px;font-weight:700;color:#fff}
+.ab{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600}
+.bg{background:var(--green-bg);color:var(--green)}.br{background:var(--red-bg);color:var(--red)}
+.og{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px}
+.oi{background:rgba(255,255,255,.03);border-radius:5px;padding:5px 7px}
+.ol{font-size:10px;color:var(--muted);text-transform:uppercase}
+.ov{font-size:12px;font-weight:600;font-family:"JetBrains Mono",monospace;color:#fff}
+.wr{font-size:12px;color:var(--accent);font-weight:700;margin-top:6px;font-family:"JetBrains Mono",monospace}
+.tw{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:24px}
+table{width:100%;border-collapse:collapse}
+th{background:#0a1220;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:9px 12px;text-align:left;border-bottom:1px solid var(--border)}
+td{padding:8px 12px;border-bottom:1px solid rgba(30,45,61,.5);font-family:"JetBrains Mono",monospace;font-size:12px}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)}
+.pos{color:var(--green)}.neg{color:var(--red)}.sc2{color:#fff;font-weight:600;font-family:"Space Grotesk",sans-serif}
+.yg{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:24px}
+.yc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px}
+.yt{font-size:20px;font-weight:700;color:#fff;margin-bottom:3px;font-family:"JetBrains Mono",monospace}
+.ys{font-size:11px;color:var(--muted);margin-bottom:8px}
+.wt{height:7px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:5px}
+.wf{height:100%;background:linear-gradient(90deg,var(--green),var(--accent));border-radius:4px}
+.pb{background:var(--card);border:1px solid var(--accent);border-radius:10px;padding:20px;margin-bottom:24px}
+.pb-title{font-size:14px;font-weight:700;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.pb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.pb-item{background:rgba(0,212,170,.05);border:1px solid rgba(0,212,170,.2);border-radius:7px;padding:10px}
+.pb-k{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.pb-v{font-size:14px;font-weight:700;color:var(--accent);font-family:"JetBrains Mono",monospace}
+.opt-table .win-cell{font-weight:700}
+.rank-1{background:rgba(245,158,11,.08)!important}
+.rank-2{background:rgba(34,197,94,.05)!important}
+.rank-3{background:rgba(59,130,246,.05)!important}
+.note{padding:12px 16px;background:rgba(0,212,170,.05);border-left:3px solid var(--accent);border-radius:0 7px 7px 0;font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:20px}
+.load{display:flex;align-items:center;justify-content:center;gap:10px;padding:60px;color:var(--muted)}
+.sp{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ns{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:28px;text-align:center;color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:14px 28px;text-align:center;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <div class="ldot"></div>
+  <div class="logo">NSE <span>Pin Bar</span> Optimizer</div>
+  <div class="tagline">Finds highest win-rate parameter combination · Auto-updated daily</div>
+</header>
+<div class="tabs">
+  <div class="tab active" onclick="T('a')">🔔 Alerts</div>
+  <div class="tab" onclick="T('o')">🎯 Optimizer</div>
+  <div class="tab" onclick="T('b')">📊 Backtest</div>
+  <div class="tab" onclick="T('h')">📋 History</div>
+  <div class="tab" onclick="T('p')">📖 Pattern</div>
+  <div class="tab" onclick="T('d')">🗂️ Data</div>
+  <div class="tab" onclick="T('w')">🏦 Heavyweight Dip</div>
+  <div class="tab" onclick="T('wa')">🔔 HW Alerts</div>
+</div>
+
+<!-- ALERTS -->
+<div id="pa" class="pane active">
+  <div id="al" class="load"><div class="sp"></div>Loading…</div>
+  <div id="ab" style="display:none">
+    <div class="sr" id="as"></div>
+    <div id="bp-box"></div>
+    <div class="sh"><h2>Today's Signals</h2><span class="cnt" id="ac">0</span><span class="ml" id="ad"></span></div>
+    <div id="ag2" class="ag"></div>
+    <div class="note">⚡ These stocks passed ALL filters of the optimizer's best parameter set. Check the Optimizer tab to see exactly which filters are active and why they were chosen. Always use stop-loss — even a 90%+ win rate has losses.</div>
+  </div>
+</div>
+
+<!-- OPTIMIZER -->
+<div id="po" class="pane">
+  <div id="ol2" class="load"><div class="sp"></div>Loading optimizer results…</div>
+  <div id="ob" style="display:none">
+    <div class="note">🎯 The optimizer tested every combination of wick ratio, trend filter, volume, delivery %, prior red days, and minimum price. Below are the top combinations ranked by win rate (minimum 20 historical signals required).</div>
+    <div class="sh"><h2>Top Parameter Combinations</h2><span class="cnt" id="oc">–</span></div>
+    <div class="tw"><table class="opt-table">
+      <thead><tr><th>#</th><th>Win Rate</th><th>Signals</th><th>Avg Return</th><th>Wick Ratio</th><th>Upper Wick%</th><th>Prev Reds</th><th>Trend SMA</th><th>Vol Ratio</th><th>Delivery%</th><th>Min Price</th></tr></thead>
+      <tbody id="ot"></tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- BACKTEST -->
+<div id="pb2" class="pane">
+  <div id="bl" class="load"><div class="sp"></div>Loading…</div>
+  <div id="bb" style="display:none">
+    <div class="sr" id="bs"></div>
+    <div id="bp2"></div>
+    <div class="sh"><h2>Win Rate by Year</h2></div>
+    <div class="yg" id="yg"></div>
+    <div class="sh"><h2>Top 10 Best Next-Day Moves</h2></div>
+    <div class="tw"><table><thead><tr><th>Symbol</th><th>Date</th><th>Next Return</th><th>Wick Ratio</th></tr></thead><tbody id="tg"></tbody></table></div>
+    <div class="sh"><h2>Top 10 Worst Next-Day Moves</h2></div>
+    <div class="tw"><table><thead><tr><th>Symbol</th><th>Date</th><th>Next Return</th><th>Wick Ratio</th></tr></thead><tbody id="tl"></tbody></table></div>
+  </div>
+</div>
+
+<!-- HISTORY -->
+<div id="ph" class="pane">
+  <div id="hl" class="load"><div class="sp"></div>Loading…</div>
+  <div id="hb" style="display:none">
+    <div class="sh"><h2>All Signals (Best Params)</h2><span class="cnt" id="hc">0</span>
+      <input id="hs" placeholder="Filter symbol…" style="margin-left:auto;background:var(--card);border:1px solid var(--border);color:var(--text);padding:5px 10px;border-radius:6px;font-size:12px;font-family:inherit"/>
+    </div>
+    <div class="tw"><table><thead><tr><th>Date</th><th>Symbol</th><th>Close</th><th>Body</th><th>Lower Wick</th><th>Ratio</th><th>Next Return</th><th>Result</th></tr></thead><tbody id="ht"></tbody></table></div>
+    <div id="hp" style="display:flex;gap:6px;justify-content:center;margin-top:14px;flex-wrap:wrap"></div>
+  </div>
+</div>
+
+<!-- PATTERN -->
+<div id="pp" class="pane">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:20px;display:grid;grid-template-columns:140px 1fr;gap:24px">
+    <div style="text-align:center">
+      <svg viewBox="0 0 70 200" width="70" height="200">
+        <line x1="35" y1="6" x2="35" y2="34" stroke="#64748b" stroke-width="2"/>
+        <rect x="20" y="34" width="30" height="40" fill="#22c55e" rx="2"/>
+        <line x1="35" y1="74" x2="35" y2="190" stroke="#00d4aa" stroke-width="3"/>
+        <text x="46" y="22" fill="#64748b" font-size="9" font-family="monospace">≤25%</text>
+        <text x="46" y="57" fill="#fff" font-size="9" font-family="monospace">BODY</text>
+        <text x="46" y="130" fill="#00d4aa" font-size="9" font-family="monospace">≥2×body</text>
+      </svg>
+    </div>
+    <div>
+      <div style="font-size:18px;font-weight:700;color:#fff;margin-bottom:10px">Hammer / Pin Bar — Base Pattern</div>
+      <div style="color:var(--muted);font-size:13px;margin-bottom:14px;line-height:1.6">Strong intraday rejection of lower prices. Sellers pushed the price down far but buyers took control back before close.</div>
+      <div style="display:flex;flex-direction:column;gap:7px;font-size:13px">
+        <div><span style="color:var(--accent)">✅</span> <strong>Lower wick ≥ 2× body</strong> (configurable in optimizer)</div>
+        <div><span style="color:var(--accent)">✅</span> <strong>Upper wick ≤ 25% of body</strong> (configurable)</div>
+        <div><span style="color:var(--accent)">✅</span> <strong>Stock in downtrend</strong> (below 10 or 20-day SMA)</div>
+        <div><span style="color:var(--accent)">✅</span> <strong>Previous 1–3 days red</strong> (selling exhaustion)</div>
+        <div><span style="color:var(--accent)">✅</span> <strong>Volume spike</strong> (1.5–2.5× average = institutional buying)</div>
+        <div><span style="color:var(--accent)">✅</span> <strong>High delivery %</strong> (40–60% = genuine buying, not speculation)</div>
+        <div><span style="color:var(--accent)">✅</span> <strong>Min price ₹50–₹100</strong> (removes penny/illiquid stocks)</div>
+      </div>
+      <div class="note" style="margin-top:14px">
+        <strong>Why the optimizer matters:</strong> The base pin bar alone gives ~49–55% win rate because it fires on everything. Adding filters narrows it to high-quality setups only. The optimizer finds which combination of filters gives the highest win rate on YOUR data (2020–2026). The best combo is automatically used for live alerts.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DATA -->
+<div id="pd" class="pane">
+  <div id="dl" class="load"><div class="sp"></div>Loading…</div>
+  <div id="db" style="display:none">
+    <div class="sr" id="ds"></div>
+    <div class="sh"><h2>Recent Trading Days</h2></div>
+    <div class="tw"><table><thead><tr><th>Date</th><th>Equity</th><th>F&amp;O</th><th>Index</th><th>Delivery</th><th>Corp</th><th>SME</th></tr></thead><tbody id="dt"></tbody></table></div>
+    <div class="sh"><h2>Analysis API Endpoints</h2></div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2.2" id="du"></div>
+  </div>
+</div>
+
+
+<!-- HEAVYWEIGHT DIP-RECOVER -->
+<div id="pw" class="pane">
+  <div id="wl" class="load"><div class="sp"></div>Loading heavyweight analysis…</div>
+  <div id="wb" style="display:none">
+    <div class="note">🏦 Large-cap stocks (avg daily turnover ≥ Rs 5 Cr, 4+ years listed) that historically hit a price floor and recover by minimum 15% in 5/10/20/30 trading days. Ranked by minimum guaranteed recovery %.</div>
+    <div class="sr" id="ws"></div>
+    <div class="sh"><h2>Heavyweight Dip-Recover Stocks</h2><span class="cnt" id="wc">0</span></div>
+    <div class="tw"><table><thead><tr>
+      <th>#</th><th>Stock</th><th>Grade</th><th>Best Window</th>
+      <th>Min Recovery</th><th>Beats 15% Rate</th><th>Avg Recovery</th>
+      <th>Occurrences</th><th>Years</th>
+    </tr></thead><tbody id="wt"></tbody></table></div>
+    <div id="wdetail" style="margin-top:20px"></div>
+  </div>
+</div>
+
+<!-- HEAVYWEIGHT ALERTS -->
+<div id="pwa" class="pane">
+  <div id="wal" class="load"><div class="sp"></div>Loading heavyweight alerts…</div>
+  <div id="wab" style="display:none">
+    <div class="sr" id="was"></div>
+    <div class="sh"><h2>Heavyweight Floor Alerts</h2>
+      <span class="cnt" id="wac">0</span>
+      <span class="ml" id="wad"></span>
+    </div>
+    <div class="note">Stocks from the heavyweight list that hit their historical price floor in the last 20 TRADING days. Based on history, these have recovered by minimum <strong id="wamin">15</strong>% within the indicated timeframe.</div>
+    <div id="wag" class="ag"></div>
+  </div>
+</div>
+
+<footer>NSE Pin Bar Optimizer · Data from NSE India · <a href="https://github.com/animesh2007asansol/itis">GitHub</a></footer>
+
+<script>
+const R="https://raw.githubusercontent.com/animesh2007asansol/itis/main";
+function T(id){
+  const ids=["a","o","b","h","p","d","w","wa"];
+  document.querySelectorAll(".tab").forEach((t,i)=>t.classList.toggle("active",ids[i]===id));
+  document.querySelectorAll(".pane").forEach(p=>p.classList.remove("active"));
+  document.getElementById("p"+id).classList.add("active");
+}
+const f2=n=>typeof n==="number"?n.toFixed(2):n;
+const pill=ok=>ok
+  ?'<span style="background:rgba(34,197,94,.12);color:#22c55e;padding:2px 7px;border-radius:4px;font-size:11px">✓</span>'
+  :'<span style="background:rgba(239,68,68,.12);color:#ef4444;padding:2px 7px;border-radius:4px;font-size:11px">✗</span>';
+
+function csvg(o,h,l,c){
+  const range=h-l||1,H=64,W=36,sc=v=>H-((v-l)/range*H);
+  const bT=sc(Math.max(o,c)),bB=sc(Math.min(o,c)),bH=Math.max(bB-bT,2),col=c>=o?"#22c55e":"#ef4444";
+  return`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" style="display:block">
+    <line x1="${W/2}" y1="${sc(h)}" x2="${W/2}" y2="${bT}" stroke="${col}" stroke-width="1.5"/>
+    <rect x="${W/2-6}" y="${bT}" width="12" height="${bH}" fill="${col}" rx="1"/>
+    <line x1="${W/2}" y1="${bB}" x2="${W/2}" y2="${sc(l)}" stroke="#00d4aa" stroke-width="2.5"/>
+  </svg>`;
+}
+
+function bpBox(params,id){
+  if(!params)return"";
+  const entries=Object.entries(params).map(([k,v])=>`
+    <div class="pb-item"><div class="pb-k">${k.replace(/_/g," ")}</div><div class="pb-v">${v===false?"OFF":v}</div></div>`).join("");
+  return`<div class="pb"><div class="pb-title">🎯 Active Filter Set (Best Parameters)</div><div class="pb-grid">${entries}</div></div>`;
+}
+
+// ALERTS
+async function loadAlerts(){
+  try{
+    const[sr,br]=await Promise.all([fetch(`${R}/data/analysis/pinbar_signals.json`),fetch(`${R}/data/analysis/pinbar_backtest.json`)]);
+    const sig=sr.ok?await sr.json():{count:0,alerts:[],signal_date:"–"};
+    const bt=br.ok?await br.json():{};
+    document.getElementById("al").style.display="none";
+    document.getElementById("ab").style.display="block";
+    const wr=bt.win_rate_pct??"–";
+    document.getElementById("as").innerHTML=`
+      <div class="sc"><div class="sv go">${sig.count}</div><div class="sl">Signals Today</div></div>
+      <div class="sc"><div class="sv g">${wr}%</div><div class="sl">Optimized Win Rate</div></div>
+      <div class="sc"><div class="sv">${bt.avg_next_return??"–"}%</div><div class="sl">Avg Next-Day Return</div></div>
+      <div class="sc"><div class="sv">${bt.total_signals??"–"}</div><div class="sl">Historical Signals</div></div>`;
+    document.getElementById("bp-box").innerHTML=bpBox(bt.best_params,"alerts");
+    document.getElementById("ac").textContent=sig.count;
+    document.getElementById("ad").textContent=sig.signal_date?"Latest date: "+sig.signal_date:"";
+    const grid=document.getElementById("ag2");
+    if(!sig.alerts||!sig.alerts.length){
+      grid.innerHTML='<div class="ns" style="grid-column:1/-1"><div style="font-size:36px;margin-bottom:10px">🔍</div><div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px">No signals today</div><div>No stocks passed all filters on the latest trading day.</div></div>';
+      return;
+    }
+    grid.innerHTML=sig.alerts.map(a=>`
+      <div class="ac ${a.color==="red"?"rc":""}">
+        <div class="ach">
+          ${csvg(a.open,a.high,a.low,a.close)}
+          <div><div class="asy">${a.symbol}</div><span class="ab ${a.color==="green"?"bg":"br"}">${a.color==="green"?"Bullish":"Bearish"} Hammer</span></div>
+          <div style="margin-left:auto;text-align:right"><div style="font-size:17px;font-weight:700;color:#fff;font-family:'JetBrains Mono',monospace">&#8377;${a.close}</div><div style="font-size:10px;color:var(--muted)">${a.date}</div></div>
+        </div>
+        <div class="og">
+          <div class="oi"><div class="ol">Open</div><div class="ov">&#8377;${a.open}</div></div>
+          <div class="oi"><div class="ol">High</div><div class="ov">&#8377;${a.high}</div></div>
+          <div class="oi"><div class="ol">Low</div><div class="ov">&#8377;${a.low}</div></div>
+          <div class="oi"><div class="ol">Body</div><div class="ov">&#8377;${a.body}</div></div>
+        </div>
+        <div class="wr">&#8595; ${a.lower_wick} lower wick = ${a.wick_ratio}x body${a.vol_ratio?" | Vol: "+a.vol_ratio+"x":""}${a.deliv_pct?" | Del: "+a.deliv_pct+"%":""}</div>
+      </div>`).join("");
+  }catch(e){document.getElementById("al").innerHTML='<span style="color:var(--red)">Run the analysis workflow first.</span>';}
+}
+
+// OPTIMIZER
+async function loadOptimizer(){
+  try{
+    const r=await fetch(`${R}/data/analysis/optimizer_results.json`);
+    if(!r.ok)throw new Error();
+    const data=await r.json();
+    document.getElementById("ol2").style.display="none";
+    document.getElementById("ob").style.display="block";
+    document.getElementById("oc").textContent=data.length+" combos tested";
+    const rows=data.slice(0,50).map((d,i)=>{
+      const cls=i===0?"rank-1":i===1?"rank-2":i===2?"rank-3":"";
+      const trend=d.trend_filter===false?"OFF":d.trend_filter+"d SMA";
+      const vol=d.volume_filter===false?"OFF":d.volume_filter+"x";
+      const deliv=d.delivery_filter===false?"OFF":d.delivery_filter+"%";
+      return`<tr class="${cls}"><td style="color:var(--gold);font-weight:700">${i===0?"🥇":i===1?"🥈":i===2?"🥉":i+1}</td>
+        <td class="win-cell ${d.win_rate>=70?"pos":d.win_rate>=60?"":"neg"}">${d.win_rate}%</td>
+        <td>${d.total_signals}</td>
+        <td class="${d.avg_return>=0?"pos":"neg"}">${d.avg_return>0?"+":""}${d.avg_return}%</td>
+        <td>${d.wick_ratio}x</td>
+        <td>${(d.upper_wick_pct*100).toFixed(0)}%</td>
+        <td>${d.min_prev_red}</td>
+        <td>${trend}</td>
+        <td>${vol}</td>
+        <td>${deliv}</td>
+        <td>&#8377;${d.min_price}</td>
+      </tr>`;
+    }).join("");
+    document.getElementById("ot").innerHTML=rows;
+  }catch(e){document.getElementById("ol2").innerHTML='<span style="color:var(--red)">Run analysis workflow first. Actions → 🕯️ Pin Bar Analysis → Run workflow</span>';}
+}
+
+// BACKTEST
+async function loadBacktest(){
+  try{
+    const r=await fetch(`${R}/data/analysis/pinbar_backtest.json`);
+    if(!r.ok)throw new Error();
+    const bt=await r.json();
+    document.getElementById("bl").style.display="none";
+    document.getElementById("bb").style.display="block";
+    document.getElementById("bs").innerHTML=`
+      <div class="sc"><div class="sv g">${bt.win_rate_pct}%</div><div class="sl">Win Rate</div></div>
+      <div class="sc"><div class="sv">${bt.total_signals}</div><div class="sl">Total Signals</div></div>
+      <div class="sc"><div class="sv ${bt.avg_next_return>=0?"g":"r"}">${bt.avg_next_return}%</div><div class="sl">Avg Return</div></div>
+      <div class="sc"><div class="sv g">${bt.avg_win_return}%</div><div class="sl">Avg Win</div></div>
+      <div class="sc"><div class="sv r">${bt.avg_loss_return}%</div><div class="sl">Avg Loss</div></div>
+      <div class="sc"><div class="sv g">+${bt.max_gain_pct}%</div><div class="sl">Best Signal</div></div>
+      <div class="sc"><div class="sv r">${bt.max_loss_pct}%</div><div class="sl">Worst Signal</div></div>`;
+    document.getElementById("bp2").innerHTML=bpBox(bt.best_params);
+    document.getElementById("yg").innerHTML=(bt.by_year||[]).map(y=>`
+      <div class="yc"><div class="yt">${y.year}</div><div class="ys">${y.total} signals · ${y.wins} wins</div>
+        <div class="wt"><div class="wf" style="width:${y.win_rate}%"></div></div>
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-weight:700;color:var(--green)">${y.win_rate}%</span>
+          <span style="font-size:12px;color:${y.avg_return>=0?"var(--green)":"var(--red)"}">${y.avg_return>0?"+":""}${y.avg_return}%</span>
+        </div>
+      </div>`).join("");
+    const mkR=s=>`<tr><td class="sc2">${s.symbol}</td><td>${s.date}</td><td class="${(s.next_return||0)>=0?"pos":"neg"}">${(s.next_return||0)>0?"+":""}${f2(s.next_return)}%</td><td>${f2(s.wick_ratio)}x</td></tr>`;
+    document.getElementById("tg").innerHTML=(bt.top_gains||[]).map(mkR).join("");
+    document.getElementById("tl").innerHTML=(bt.top_losses||[]).map(mkR).join("");
+  }catch(e){document.getElementById("bl").innerHTML='<span style="color:var(--red)">Run analysis workflow first.</span>';}
+}
+
+// HISTORY
+let hd=[],hp2=0,hper=50;
+async function loadHistory(){
+  try{
+    const r=await fetch(`${R}/data/analysis/pinbar_history.json`);
+    if(!r.ok)throw new Error();
+    hd=await r.json();hd.sort((a,b)=>b.date.localeCompare(a.date));
+    document.getElementById("hl").style.display="none";
+    document.getElementById("hb").style.display="block";
+    renderH();
+    document.getElementById("hs").addEventListener("input",e=>{
+      hp2=0;const q=e.target.value.trim().toUpperCase();
+      renderH(q?hd.filter(s=>s.symbol.includes(q)):hd);
+    });
+  }catch(e){document.getElementById("hl").innerHTML='<span style="color:var(--red)">Run analysis workflow first.</span>';}
+}
+function renderH(data=hd){
+  document.getElementById("hc").textContent=data.length;
+  const page=data.slice(hp2*hper,(hp2+1)*hper);
+  document.getElementById("ht").innerHTML=page.map(s=>`<tr>
+    <td>${s.date}</td><td class="sc2">${s.symbol}</td>
+    <td>&#8377;${f2(s.close)}</td><td>&#8377;${f2(s.body)}</td>
+    <td style="color:var(--accent)">&#8377;${f2(s.lower_wick)}</td>
+    <td style="color:var(--accent)">${f2(s.wick_ratio)}x</td>
+    <td class="${s.next_return>=0?"pos":"neg"}">${s.next_return>0?"+":""}${f2(s.next_return)}%</td>
+    <td>${s.positive?'<span style="color:var(--green)">✓ Win</span>':'<span style="color:var(--red)">✗ Loss</span>'}</td>
+  </tr>`).join("");
+  const pages=Math.ceil(data.length/hper);
+  const pag=document.getElementById("hp");pag.innerHTML="";
+  for(let i=0;i<Math.min(pages,15);i++){
+    const b=document.createElement("button");b.textContent=i+1;
+    b.style.cssText=`padding:4px 9px;border-radius:4px;border:1px solid var(--border);background:${i===hp2?"var(--accent)":"var(--card)"};color:${i===hp2?"#000":"var(--text)"};cursor:pointer;font-family:inherit;font-size:12px`;
+    b.onclick=()=>{hp2=i;renderH(data)};pag.appendChild(b);
+  }
+}
+
+// DATA
+async function loadData(){
+  try{
+    const[mr,sr]=await Promise.all([fetch(`${R}/data/manifest.json`),fetch(`${R}/data/summary.json`)]);
+    const m=mr.ok?await mr.json():{},s=sr.ok?await sr.json():{};
+    document.getElementById("dl").style.display="none";
+    document.getElementById("db").style.display="block";
+    document.getElementById("ds").innerHTML=`
+      <div class="sc"><div class="sv">${s.total_trading_days||"–"}</div><div class="sl">Trading Days</div></div>
+      <div class="sc"><div class="sv g">${s.successful_fetches||"–"}</div><div class="sl">Fetched</div></div>
+      <div class="sc"><div class="sv">${s.latest_date||"–"}</div><div class="sl">Latest Date</div></div>
+      <div class="sc"><div class="sv">${(s.categories_available||[]).length}</div><div class="sl">Categories</div></div>`;
+    const dates=Object.keys(m).sort().reverse().slice(0,30);
+    document.getElementById("dt").innerHTML=dates.map(d=>{const v=m[d],r=v.results||{};return`<tr><td style="color:#fff;font-weight:600">${d}</td><td>${pill(r.equity)}</td><td>${pill(r.fo)}</td><td>${pill(r.index)}</td><td>${pill(r.delivery)}</td><td>${pill(r.corporate_actions)}</td><td>${pill(r.sme)}</td></tr>`;}).join("");
+    document.getElementById("du").innerHTML=[
+      `<span style="color:var(--muted)"># Live Alerts (today)</span>`,
+      `${R}/data/analysis/pinbar_signals.json`,
+      `<span style="color:var(--muted)"># Backtest (best params)</span>`,
+      `${R}/data/analysis/pinbar_backtest.json`,
+      `<span style="color:var(--muted)"># Optimizer Rankings</span>`,
+      `${R}/data/analysis/optimizer_results.json`,
+      `<span style="color:var(--muted)"># Full Signal History</span>`,
+      `${R}/data/analysis/pinbar_history.json`,
+      `<span style="color:var(--muted)"># Raw Equity Data</span>`,
+      `${R}/data/equity/{YYYY}/{MM}/{YYYY-MM-DD}.csv`,
+    ].map(l=>l.startsWith("<")?l:`<a href="${l}" target="_blank" style="color:var(--accent)">${l}</a>`).join("<br/>");
+  }catch(e){document.getElementById("dl").innerHTML='<span style="color:var(--red)">Failed to load.</span>';}
+}
+
+loadAlerts();loadOptimizer();loadBacktest();loadHistory();loadData();
+
+// ── HEAVYWEIGHT ────────────────────────────────────────────────────────────
+async function loadHeavyweight(){
+  try{
+    const r=await fetch(`${R}/data/analysis/heavyweight_profiles.json`);
+    if(!r.ok){
+      // Try pattern_signals folder
+      const r2=await fetch(`${R}/pattern_signals/heavyweight_profiles.json`);
+      if(!r2.ok) throw new Error();
+      var d=await r2.json();
+    } else {
+      var d=await r.json();
+    }
+    document.getElementById("wl").style.display="none";
+    document.getElementById("wb").style.display="block";
+    const profs=d.profiles||{};
+    const keys=Object.keys(profs);
+    document.getElementById("wc").textContent=keys.length;
+    document.getElementById("ws").innerHTML=`
+      <div class="sc"><div class="sv">${keys.length}</div><div class="sl">Qualifying Stocks</div></div>
+      <div class="sc"><div class="sv go">${d.n_aplus||0}</div><div class="sl">Grade A+</div></div>
+      <div class="sc"><div class="sv g">${d.n_a||0}</div><div class="sl">Grade A</div></div>
+      <div class="sc"><div class="sv">${d.n_b||0}</div><div class="sl">Grade B</div></div>`;
+    const rows=keys.map((sym,i)=>{
+      const p=profs[sym];
+      const bw=p.best_window_days;
+      const ws=p.win_stats&&p.win_stats[bw]?p.win_stats[bw]:{};
+      const gc=p.grade==="A+"?"go":p.grade==="A"?"g":"";
+      return`<tr onclick="showHWDetail('${sym}')" style="cursor:pointer">
+        <td style="color:var(--muted)">${i+1}</td>
+        <td class="sc2">${sym}</td>
+        <td><span class="ac-badge ${p.grade==="A+"||p.grade==="A"?"bg":"br"}">${p.grade}</span></td>
+        <td>${bw} days</td>
+        <td class="pos" style="font-weight:700">${p.best_min_return>0?"+":""}${f2(p.best_min_return)}%</td>
+        <td>${p.best_beats15_rate}%</td>
+        <td class="pos">${f2(ws.avg_return||0)}%</td>
+        <td>${p.n_events}</td>
+        <td>${(p.years||[]).join(", ")}</td>
+      </tr>`;
+    }).join("");
+    document.getElementById("wt").innerHTML=rows;
+    window._hwData=profs;
+  }catch(e){
+    document.getElementById("wl").innerHTML='<span style="color:var(--red)">Run pattern_discovery workflow first.</span>';
+  }
+}
+
+function showHWDetail(sym){
+  const p=window._hwData&&window._hwData[sym];
+  if(!p) return;
+  const evts=p.events||[];
+  const rows=evts.slice(-30).reverse().map(e=>{
+    const r20=e.recovery&&e.recovery["20"]?e.recovery["20"].return_pct:null;
+    const r5 =e.recovery&&e.recovery["5"] ?e.recovery["5"].return_pct:null;
+    const r10=e.recovery&&e.recovery["10"]?e.recovery["10"].return_pct:null;
+    const r30=e.recovery&&e.recovery["30"]?e.recovery["30"].return_pct:null;
+    const fmt=v=>v==null?"—":`<span class="${v>=0?"pos":"neg"}">${v>0?"+":""}${f2(v)}%</span>`;
+    return`<tr><td>${e.date}</td><td>&#8377;${e.close}</td>
+      <td style="color:var(--accent)">${e.pos_in_range}%</td>
+      <td>${fmt(r5)}</td><td>${fmt(r10)}</td><td>${fmt(r20)}</td><td>${fmt(r30)}</td>
+    </tr>`;
+  }).join("");
+  document.getElementById("wdetail").innerHTML=`
+    <div class="tw">
+      <div style="padding:12px 16px;background:#0a1220;font-weight:700;color:#fff">
+        ${sym} — Historical Floor Events (${evts.length} total, showing last 30)
+      </div>
+      <table><thead><tr>
+        <th>Floor Date</th><th>Close</th><th>Floor Depth</th>
+        <th>+5d Return</th><th>+10d Return</th><th>+20d Return</th><th>+30d Return</th>
+      </tr></thead><tbody>${rows}</tbody></table>
+    </div>`;
+}
+
+async function loadHWAlerts(){
+  try{
+    const[ar,pr]=await Promise.all([
+      fetch(`${R}/pattern_signals/heavyweight_alerts.json`),
+      fetch(`${R}/pattern_signals/heavyweight_profiles.json`),
+    ]);
+    const alD=ar.ok?await ar.json():{alerts:[],total_alerts:0};
+    document.getElementById("wal").style.display="none";
+    document.getElementById("wab").style.display="block";
+    const als=alD.alerts||[];
+    document.getElementById("wac").textContent=als.length;
+    document.getElementById("wad").textContent=alD.alert_date?"Floor date: "+alD.alert_date:"";
+    document.getElementById("was").innerHTML=`
+      <div class="sc"><div class="sv go">${als.length}</div><div class="sl">Floor Alerts</div></div>
+      <div class="sc"><div class="sv g">${alD.today_count||0}</div><div class="sl">Today</div></div>
+      <div class="sc"><div class="sv">${alD.grade_a||0}</div><div class="sl">Grade A+/A</div></div>`;
+    if(!als.length){
+      document.getElementById("wag").innerHTML='<div class="ns" style="grid-column:1/-1"><div style="font-size:36px;margin-bottom:10px">📈</div><div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px">No floor alerts in last 20 trading days</div><div>No heavyweight stock hit its historical floor recently.</div></div>';
+      return;
+    }
+    document.getElementById("wag").innerHTML=als.map(a=>`
+      <div class="ac">
+        <div class="ach">
+          <div>
+            <div class="asy">${a.sym}</div>
+            <span class="ac-badge ${a.grade==="A+"||a.grade==="A"?"bg":"br"}">${a.grade} · ${a.best_window_days||"?"}d window</span>
+          </div>
+          <div style="margin-left:auto;text-align:right">
+            <div style="font-size:17px;font-weight:700;color:#fff;font-family:'JetBrains Mono',monospace">&#8377;${a.sig_close}</div>
+            <div style="font-size:10px;color:var(--muted)">${a.sig_date}</div>
+          </div>
+        </div>
+        <div class="og">
+          <div class="oi"><div class="ol">Floor Depth</div><div class="ov" style="color:var(--accent)">${a.floor_depth_pct}% of range</div></div>
+          <div class="oi"><div class="ol">Min Recovery</div><div class="ov pos">+${f2(a.min_return)}%</div></div>
+          <div class="oi"><div class="ol">Beats 15%</div><div class="ov">${a.beats15_rate}% of times</div></div>
+          <div class="oi"><div class="ol">Current Price</div><div class="ov">&#8377;${a.cur_price} <span class="${a.pct_since>=0?"pos":"neg"}">(${a.pct_since>0?"+":""}${a.pct_since}%)</span></div></div>
+        </div>
+        <div class="wr">Target: &#8377;${a.target_conservative} – &#8377;${a.target_realistic} · ${a.zone}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px">
+          ${a.n_events} floor events over ${a.n_years} years (${(a.years||[]).join(", ")})
+        </div>
+      </div>`).join("");
+  }catch(e){
+    document.getElementById("wal").innerHTML='<span style="color:var(--red)">Run pattern_discovery workflow first.</span>';
+  }
+}
+loadHeavyweight();loadHWAlerts();
+</script>
+</body>
+</html>
