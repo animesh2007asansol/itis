@@ -78,6 +78,13 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
           PYTHONUNBUFFERED: '1'
 
+      - name: Run momentum surge analysis
+        run: python scripts/momentum_surge_analysis.py
+        timeout-minutes: 90
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          PYTHONUNBUFFERED: '1'
+
       # ── Summary ─────────────────────────────────────────────────────────
       - name: Show summary
         if: always()
