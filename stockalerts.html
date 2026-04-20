@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NSE Stock Intelligence — Master Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090F;--s:#0D1119;--card:#101520;--card2:#161E2C;
+  --b:#1A2B42;--b2:#213554;
+  --gold:#C9A84C;--g2:#9A6F28;--gbg:rgba(201,168,76,.08);
+  --green:#22C55E;--gr2:#166534;--grb:rgba(34,197,94,.08);
+  --red:#EF4444;--r2:#7F1D1D;--rb:rgba(239,68,68,.09);
+  --blue:#60A5FA;--bl2:#1E3A5F;--blb:rgba(96,165,250,.09);
+  --amber:#F59E0B;--amb:#78350F;--ab:rgba(245,158,11,.09);
+  --purple:#A855F7;--pb:rgba(168,85,247,.09);
+  --text:#DCE8F5;--t2:#94A3B8;--t3:#5A7090;--r:10px;
+  --font:'IBM Plex Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;min-height:100vh}
+nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--b);padding:6px 10px 4px;display:block}
+.nav-top{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.brand{font-size:13px;font-weight:700;color:var(--gold);display:flex;align-items:center;gap:5px}
+.brand small{font-size:9px;color:var(--t3);font-weight:400}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--green);
+      animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 5px transparent}}
+.tabs{display:flex;flex-wrap:wrap;gap:3px}
+.tab{padding:4px 9px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:500;
+     color:var(--t3);border:none;background:none;white-space:nowrap;transition:.2s}
+.tab:hover{color:var(--text);background:var(--s)}
+.tab.active{color:var(--gold);background:var(--gbg);border:1px solid var(--g2)}
+
+.page{display:none;max-width:1600px;margin:0 auto;padding:12px 10px 60px}
+.page.active{display:block}
+.sh{font-size:14px;font-weight:600;color:var(--gold);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--b)}
+.sh small{font-size:10px;color:var(--t3);font-weight:400;margin-left:6px}
+.pill-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.kp{background:var(--card);border:1px solid var(--b);border-radius:7px;padding:7px 10px;min-width:80px}
+.kp.g{border-color:var(--gr2);background:var(--grb)}
+.kp.b{border-color:var(--bl2);background:var(--blb)}
+.kp.y{border-color:var(--amb);background:var(--ab)}
+.kp.r{border-color:var(--r2);background:var(--rb)}
+.kl{font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:2px}
+.kv{font-size:16px;font-weight:700;color:var(--text)}
+.ks{font-size:9px;color:var(--t3);margin-top:2px}
+.fbar{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;align-items:center;padding:8px;
+      background:var(--s);border-radius:8px;border:1px solid var(--b)}
+.fb{padding:4px 9px;border-radius:5px;border:1px solid var(--b);background:var(--card);
+    color:var(--t2);font-size:11px;cursor:pointer;transition:.2s;white-space:nowrap}
+.fb:hover{color:var(--text);border-color:var(--b2)}
+.fb.on{background:var(--gbg);color:var(--green);border-color:var(--gr2)}
+.fsep{color:var(--t3);font-size:10px}
+.si{background:var(--card);border:1px solid var(--b);border-radius:6px;color:var(--text);
+    padding:4px 8px;font-size:12px;outline:none}
+.si:focus{border-color:var(--gold)}
+.twrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;border:1px solid var(--b)}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{background:var(--s);padding:7px 9px;text-align:left;font-weight:600;color:var(--t2);
+        font-size:10px;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;
+        position:sticky;top:0;white-space:nowrap;border-bottom:1px solid var(--b);user-select:none}
+.tbl th:hover{color:var(--text)}
+.tbl td{padding:7px 9px;border-bottom:1px solid rgba(26,43,66,.5);vertical-align:top;white-space:nowrap}
+.tbl tr:hover td{background:rgba(255,255,255,.02)}
+.arr{font-size:8px;margin-left:3px;color:var(--t3)}
+.mono{font-family:'DM Mono',monospace}
+.green{color:var(--green)}
+.red{color:var(--red)}
+.amber{color:var(--amber)}
+.gold{color:var(--gold)}
+.muted{color:var(--t3)}
+.empty{text-align:center;padding:32px;color:var(--t3);font-size:12px;grid-column:1/-1}
+.spinner{width:20px;height:20px;border:2px solid var(--b);border-top-color:var(--gold);
+         border-radius:50%;animation:spin .7s linear infinite;display:inline-block;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Alert cards */
+.ac{background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:12px;margin-bottom:8px}
+.ac-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.ac-sym{font-size:16px;font-weight:700;color:var(--gold)}
+.ac-price{font-family:'DM Mono',monospace;font-size:12px;color:var(--t2)}
+.grade-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;border:1px solid}
+.gAp{background:var(--grb);color:var(--green);border-color:var(--gr2)}
+.gA{background:var(--blb);color:var(--blue);border-color:var(--bl2)}
+.ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:5px;margin-bottom:8px}
+.ac-mini{background:var(--s);border-radius:5px;padding:5px 7px;border:1px solid var(--b)}
+.ac-ml{font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.ac-mv{font-size:12px;font-weight:600;color:var(--text)}
+.ac-explain{font-size:10px;color:var(--t2);line-height:1.5;padding:7px;background:var(--s);
+            border-radius:6px;border-left:2px solid var(--gold)}
+.ac-trades{margin-top:8px;overflow-x:auto}
+.strategy-tag{display:inline-block;font-size:9px;padding:1px 6px;border-radius:3px;
+              background:var(--gbg);color:var(--green);border:1px solid var(--gr2);margin:1px}
+
+/* Grade colors */
+.grade-A\+{color:var(--green);font-weight:700}
+.grade-A{color:var(--blue);font-weight:700}
+.grade-B{color:var(--amber)}
+.risk-LOW{color:var(--green)}
+.risk-MEDIUM{color:var(--amber)}
+.risk-HIGH{color:var(--red)}
+
+/* Alert grid */
+.alert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-bottom:16px}
+
+/* LT card */
+.lt-card{background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:12px;
+         border-left:3px solid var(--gold)}
+.lt-card.aplus{border-left-color:var(--green)}
+
+/* Strategy bar */
+.strat-bar{height:4px;border-radius:2px;background:var(--grb);margin:2px 0}
+.strat-bar-fill{height:100%;border-radius:2px;background:var(--green)}
+
+/* Expand */
+.expand-detail{display:none;padding:10px;background:rgba(0,0,0,.3);border-top:1px solid var(--b)}
+.expand-detail.open{display:block}
+
+@media(max-width:600px){
+  .tbl{font-size:11px}
+  .tbl td,.tbl th{padding:5px 6px}
+  .ac-grid{grid-template-columns:repeat(2,1fr)}
+  .alert-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-top">
+    <div class="ldot"></div>
+    <div class="brand">🧠 NSE Stock Intelligence <small>Multi-Strategy · Backtested · OOS Verified</small></div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="showPage('alerts',this)">🔔 Today's Alerts</button>
+    <button class="tab" onclick="showPage('longterm',this)">📅 Long-Term Picks</button>
+    <button class="tab" onclick="showPage('allstocks',this)">📊 All Stocks</button>
+    <button class="tab" onclick="showPage('strategies',this)">🔬 Strategy Breakdown</button>
+    <button class="tab" onclick="showPage('howto',this)">📖 How It Works</button>
+  </div>
+</nav>
+
+<!-- ═══ PAGE: TODAY'S ALERTS ═════════════════════════════════════════════════ -->
+<div class="page active" id="page-alerts">
+  <div class="sh">🔔 Today's Buy Signals <small id="alert-date">loading…</small></div>
+  <div class="pill-row" id="alert-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Grade:</span>
+    <button class="fb on" id="ag-all" onclick="alertGrd('ALL',this)">All</button>
+    <button class="fb" id="ag-ap" onclick="alertGrd('A+',this)">A+ Only</button>
+    <button class="fb" id="ag-a" onclick="alertGrd('A',this)">A+/A</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="as-ret" onclick="alertSort('avg_ret',this)">Avg Return</button>
+    <button class="fb" id="as-wr" onclick="alertSort('win_rate',this)">Win Rate</button>
+    <button class="fb" id="as-sh" onclick="alertSort('sharpe',this)">Sharpe</button>
+    <span class="fsep">|</span>
+    <input class="si" id="alert-q" placeholder="Symbol…" style="width:100px" oninput="renderAlerts()">
+  </div>
+  <div id="alert-count" style="font-size:11px;color:var(--t3);margin-bottom:8px"></div>
+  <div id="alert-grid" class="alert-grid"><div class="empty"><div class="spinner"></div>Loading…</div></div>
+</div>
+
+<!-- ═══ PAGE: LONG-TERM PICKS ════════════════════════════════════════════════ -->
+<div class="page" id="page-longterm">
+  <div class="sh">📅 Long-Term Investment Picks <small>A/A+ grade · OOS verified · score ≥50 · sorted by LT score</small></div>
+  <div class="pill-row" id="lt-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="lts-score" onclick="ltSort('longterm_score',this)">LT Score</button>
+    <button class="fb" id="lts-ret" onclick="ltSort('avg_ret',this)">Avg Return</button>
+    <button class="fb" id="lts-wr" onclick="ltSort('win_rate',this)">Win Rate</button>
+    <button class="fb" id="lts-oos" onclick="ltSort('oos_avg_ret',this)">OOS Return</button>
+    <span class="fsep">|</span>
+    <input class="si" id="lt-q" placeholder="Symbol…" style="width:100px" oninput="renderLT()">
+  </div>
+  <div id="lt-grid"><div class="empty"><div class="spinner"></div>Loading…</div></div>
+</div>
+
+<!-- ═══ PAGE: ALL STOCKS ═════════════════════════════════════════════════════ -->
+<div class="page" id="page-allstocks">
+  <div class="sh">📊 All Analysed Stocks <small>click row to expand · min Rs 5Cr daily turnover · price >Rs 10</small></div>
+  <div class="pill-row" id="all-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Filter:</span>
+    <button class="fb on" id="af-all" onclick="allFilter('ALL',this)">All</button>
+    <button class="fb" id="af-ap" onclick="allFilter('A+',this)">A+ Only</button>
+    <button class="fb" id="af-sig" onclick="allFilter('SIGNAL',this)">Signal Today</button>
+    <button class="fb" id="af-lt" onclick="allFilter('LT',this)">LT Score ≥60</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="allsk" onclick="allSort('longterm_score',this)">LT Score</button>
+    <button class="fb" id="allsa" onclick="allSort('best_avg_ret',this)">Avg Return</button>
+    <button class="fb" id="allsw" onclick="allSort('best_win_rate',this)">Win Rate</button>
+    <span class="fsep">|</span>
+    <input class="si" id="all-q" placeholder="Symbol…" style="width:100px" oninput="renderAll()">
+  </div>
+  <div class="twrap">
+    <table class="tbl" id="all-tbl" style="min-width:900px">
+      <thead><tr>
+        <th style="width:20px"></th>
+        <th onclick="allTh('sym')">Stock<span class="arr"></span></th>
+        <th onclick="allTh('price')">Price Rs<span class="arr"></span></th>
+        <th onclick="allTh('best_grade')">Grade<span class="arr"></span></th>
+        <th onclick="allTh('longterm_score')">LT Score<span class="arr"></span></th>
+        <th onclick="allTh('best_strategy')">Best Strategy<span class="arr"></span></th>
+        <th onclick="allTh('best_win_rate')">Win Rate<span class="arr"></span></th>
+        <th onclick="allTh('best_avg_ret')">Avg Ret%<span class="arr"></span></th>
+        <th onclick="allTh('best_hold_days')">Hold Days<span class="arr"></span></th>
+        <th onclick="allTh('best_max_gain')">Avg Max Gain%<span class="arr"></span></th>
+        <th onclick="allTh('best_sharpe')">Sharpe<span class="arr"></span></th>
+        <th onclick="allTh('oos_win_rate')">OOS Win%<span class="arr"></span></th>
+        <th onclick="allTh('oos_avg_ret')">OOS Ret%<span class="arr"></span></th>
+        <th onclick="allTh('n_strategies')">Strategies<span class="arr"></span></th>
+        <th onclick="allTh('rsi')">RSI<span class="arr"></span></th>
+        <th onclick="allTh('vol_ratio')">Vol Ratio<span class="arr"></span></th>
+        <th onclick="allTh('avg_turnover_cr')">Turnover Cr<span class="arr"></span></th>
+        <th onclick="allTh('signal_today')">Alert<span class="arr"></span></th>
+      </tr></thead>
+      <tbody id="all-tbody"><tr><td colspan="18" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ PAGE: STRATEGY BREAKDOWN ═════════════════════════════════════════════ -->
+<div class="page" id="page-strategies">
+  <div class="sh">🔬 Strategy Performance Breakdown <small>which strategies work best across all stocks</small></div>
+  <div id="strat-pills" class="pill-row"></div>
+  <div id="strat-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px"></div>
+</div>
+
+<!-- ═══ PAGE: HOW IT WORKS ═══════════════════════════════════════════════════ -->
+<div class="page" id="page-howto">
+  <div class="sh">📖 How This System Works</div>
+  <div style="max-width:720px;line-height:1.7;color:var(--t2);font-size:13px">
+    <p style="margin-bottom:14px">This system runs a <strong style="color:var(--gold)">4-stage quantitative analysis</strong> on every NSE stock with daily turnover &gt;Rs 5 Cr and price &gt;Rs 10, using 5 years of historical data.</p>
+    <div style="background:var(--card);border:1px solid var(--b);border-radius:9px;padding:12px;margin-bottom:12px">
+      <div style="color:var(--green);font-weight:600;margin-bottom:6px">Stage 1 — Discovery</div>
+      12 technical strategies are computed on every stock using vectorised pandas: SMA Cross, EMA Bounce, RSI Oversold, MACD Cross, Bollinger Band Bounce, Volume Breakout, Consecutive Reversal, Floor Bounce, Momentum Gap, Range Expand, Trend Pullback, 52-Week High Break.
+    </div>
+    <div style="background:var(--card);border:1px solid var(--b);border-radius:9px;padding:12px;margin-bottom:12px">
+      <div style="color:var(--amber);font-weight:600;margin-bottom:6px">Stage 2 — Backtest</div>
+      Every strategy is backtested on the full 5-year history. Entry = next-day open after signal. Exit = close after 5 or 20 days. Only strategies with ≥60% win rate AND ≥1% avg return AND ≥5 trades are kept. Win rate, avg return, max drawdown, Sharpe ratio, profit factor all computed.
+    </div>
+    <div style="background:var(--card);border:1px solid var(--b);border-radius:9px;padding:12px;margin-bottom:12px">
+      <div style="color:var(--blue);font-weight:600;margin-bottom:6px">Stage 3 — Challenge (Out-of-Sample Verification)</div>
+      Data is split into two halves. Best strategies are re-tested on EACH half separately. <strong style="color:var(--green)">A+ grade</strong> = passes both halves. <strong style="color:var(--blue)">A grade</strong> = passes one half. B grade = discarded. This prevents curve-fitting — you only see strategies that work on unseen data.
+    </div>
+    <div style="background:var(--card);border:1px solid var(--b);border-radius:9px;padding:12px;margin-bottom:12px">
+      <div style="color:var(--purple);font-weight:600;margin-bottom:6px">Stage 4 — Daily Alerts + Long-Term Picks</div>
+      Each morning after data update: stocks where a verified strategy signals today appear as alerts. Long-term picks are A/A+ stocks with strong uptrend and score ≥50. Checkpoint system ensures only new data is re-analysed — the system gets faster over time.
+    </div>
+    <div style="background:var(--card);border:1px solid var(--g2);border-radius:9px;padding:12px">
+      <div style="color:var(--gold);font-weight:600;margin-bottom:6px">Important Notes</div>
+      <p>All analysis is based purely on price and volume data. Entry is always next-day open (never today's close). Hold periods are 5 days (short-term) or 20 days (medium-term). Past performance does not guarantee future results — but A+ grade means the pattern survived on data the model never trained on.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const REPO = 'https://raw.githubusercontent.com/animesh2007asansol/itis/main/stock_analysis';
+
+const DATA = { alerts: null, longterm: null, master: null };
+
+// ── Routing ────────────────────────────────────────────────────────────────
+function showPage(id, btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+id)?.classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+function setOn(sel, btn){
+  document.querySelectorAll(sel).forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+}
+
+// ── Formatters ────────────────────────────────────────────────────────────
+function fmt(n){ return n!=null?Number(n).toLocaleString('en-IN',{maximumFractionDigits:2}):'—'; }
+function fmtI(n){ return n!=null?Math.round(n).toLocaleString('en-IN'):'—'; }
+function r2(n){ return n!=null?Math.round(n*100)/100:null; }
+function rc(v,pos,neg){
+  if(v==null) return '<span class="muted">—</span>';
+  var cls=v>0?(pos||'green'):v<0?(neg||'red'):'muted';
+  return '<span class="'+cls+'">'+(v>0?'+':'')+Number(v).toFixed(1)+'%</span>';
+}
+function gradeHtml(g){
+  if(g==='A+') return '<span class="grade-badge gAp">A+</span>';
+  if(g==='A')  return '<span class="grade-badge gA">A</span>';
+  return '<span style="font-size:9px;color:var(--amber)">B</span>';
+}
+function ltScoreBar(s){
+  var pct=Math.min(100,s||0);
+  var col=pct>=80?'var(--green)':pct>=60?'var(--amber)':'var(--red)';
+  return '<div style="display:flex;align-items:center;gap:5px"><div style="flex:1;height:4px;background:var(--b);border-radius:2px"><div style="width:'+pct+'%;height:100%;border-radius:2px;background:'+col+'"></div></div><span style="font-size:10px;color:'+col+';font-weight:700">'+pct+'</span></div>';
+}
+function stratLabel(s){
+  var map={SMA_CROSS:'SMA Cross',EMA_BOUNCE:'EMA Bounce',RSI_OVERSOLD:'RSI Oversold',
+    MACD_CROSS:'MACD Cross',BB_BOUNCE:'BB Bounce',VOL_BREAKOUT:'Vol Breakout',
+    CONSEC_REVERSAL:'Consec Reversal',FLOOR_BOUNCE:'Floor Bounce',
+    MOMENTUM_GAP:'Momentum Gap',RANGE_EXPAND:'Range Expand',
+    TREND_PULLBACK:'Trend Pullback',HIGHBREAK_52W:'52W Breakout'};
+  return map[s]||s;
+}
+
+// ── Load Data ──────────────────────────────────────────────────────────────
+async function loadData(){
+  const [aR,ltR,mR] = await Promise.all([
+    fetch(REPO+'/daily_alerts.json'),
+    fetch(REPO+'/longterm_picks.json'),
+    fetch(REPO+'/master_results.json'),
+  ]).catch(()=>[]);
+
+  try{ if(aR?.ok){  DATA.alerts   = await aR.json();  } } catch(e){}
+  try{ if(ltR?.ok){ DATA.longterm = await ltR.json(); } } catch(e){}
+  try{ if(mR?.ok){  DATA.master   = await mR.json();  } } catch(e){}
+
+  renderAlerts();
+  renderLT();
+  renderAll();
+  renderStratBreakdown();
+}
+
+// ══ TODAY'S ALERTS ════════════════════════════════════════════════════════
+var _alertGrd='ALL', _alertSortK='avg_ret';
+function alertGrd(g,btn){_alertGrd=g;setOn('#ag-all,#ag-ap,#ag-a',btn);renderAlerts();}
+function alertSort(k,btn){_alertSortK=k;setOn('#as-ret,#as-wr,#as-sh',btn);renderAlerts();}
+
+function renderAlerts(){
+  var d=DATA.alerts;
+  var dateEl=document.getElementById('alert-date');
+  if(!d){
+    document.getElementById('alert-grid').innerHTML='<div class="empty">No alerts data. Run master_stock_analyzer workflow.</div>';
+    if(dateEl) dateEl.textContent='No data';
+    return;
+  }
+  if(dateEl) dateEl.textContent='Signal date: '+d.signal_date;
+
+  var rows=[...(d.alerts||[])];
+  var q=(document.getElementById('alert-q')?.value||'').toUpperCase().trim();
+  if(q) rows=rows.filter(r=>r.sym.includes(q));
+  if(_alertGrd==='A+') rows=rows.filter(r=>r.best_grade==='A+');
+  if(_alertGrd==='A')  rows=rows.filter(r=>['A+','A'].includes(r.best_grade));
+  rows.sort((a,b)=>(b[_alertSortK]??0)-(a[_alertSortK]??0));
+
+  // Pills
+  var nAp=rows.filter(r=>r.best_grade==='A+').length;
+  document.getElementById('alert-pills').innerHTML=[
+    ['Total Alerts',d.n_alerts,'b'],
+    ['A+ Grade',nAp,'g','OOS verified both halves'],
+    ['A Grade',(d.n_alerts-nAp),'b','OOS verified'],
+    ['Signal Date',d.signal_date||'—','b'],
+  ].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>').join('');
+
+  document.getElementById('alert-count').textContent=
+    rows.length+' signals showing. Entry: next trading day open.';
+
+  if(!rows.length){
+    document.getElementById('alert-grid').innerHTML='<div class="empty">No alerts match the current filter.</div>';
+    return;
+  }
+
+  document.getElementById('alert-grid').innerHTML=rows.map(a=>{
+    var strats=(a.signal_strategies||[]).map(s=>'<span class="strategy-tag">'+stratLabel(s)+'</span>').join('');
+    var trades=(a.recent_trades||[]).map(t=>
+      '<tr><td class="mono muted">'+t.sig_date+'</td>'
+      +'<td class="mono">&#8377;'+t.entry_px+'</td>'
+      +'<td class="mono">&#8377;'+t.exit_px+'</td>'
+      +'<td class="mono '+(t.ret>0?'green':'red')+'">'+(t.ret>0?'+':'')+t.ret.toFixed(1)+'%</td>'
+      +'<td class="mono green">'+t.max_gain.toFixed(1)+'%</td>'
+      +'<td class="mono '+(t.max_dd<-1?'amber':'muted')+'">'+t.max_dd.toFixed(1)+'%</td></tr>'
+    ).join('');
+    var tradesHtml=trades?'<div class="ac-trades"><div style="font-size:9px;color:var(--t3);margin-bottom:4px">Recent trades:</div><div style="overflow-x:auto"><table class="tbl" style="font-size:10px"><thead><tr><th>Signal</th><th>Entry Rs</th><th>Exit Rs</th><th>Return</th><th>Max Gain</th><th>Max DD</th></tr></thead><tbody>'+trades+'</tbody></table></div></div>':'';
+
+    return '<div class="ac">'
+      +'<div class="ac-header">'
+      +'<div><span class="ac-sym">'+a.sym+'</span> '
+      +gradeHtml(a.best_grade||'A')
+      +'<div class="ac-price" style="margin-top:3px">&#8377;'+fmt(a.price)+'</div>'
+      +'<div style="margin-top:4px">'+strats+'</div></div>'
+      +'<div style="text-align:right">'
+      +'<div class="green" style="font-size:18px;font-weight:700">+'+Number(a.avg_ret||0).toFixed(1)+'%</div>'
+      +'<div style="font-size:9px;color:var(--t3)">avg return over '+a.hold_days+'d</div>'
+      +'<div style="font-size:10px;color:var(--t2);margin-top:2px">WR: '+(a.win_rate||0)+'% | Sharpe: '+(a.sharpe||0)+'</div>'
+      +'</div></div>'
+      +'<div class="ac-grid">'
+      +'<div class="ac-mini"><div class="ac-ml">Strategy</div><div class="ac-mv" style="font-size:10px">'+stratLabel(a.best_strategy||'')+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Hold Days</div><div class="ac-mv">'+(a.hold_days||'—')+'d</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Win Rate</div><div class="ac-mv green">'+(a.win_rate||0)+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Avg Max Gain</div><div class="ac-mv green">+'+(a.max_gain||0)+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">RSI</div><div class="ac-mv '+(a.rsi<30?'green':a.rsi>70?'red':'muted')+'">'+(a.rsi||'—')+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Vol Ratio</div><div class="ac-mv '+(a.vol_ratio>=2?'green':a.vol_ratio>=1.5?'amber':'muted')+'">'+(a.vol_ratio||'—')+'x</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">5d Return</div>'+rc(a.ret5)+'</div>'
+      +'<div class="ac-mini"><div class="ac-ml">Avg Turnover</div><div class="ac-mv muted">'+(a.avg_turnover_cr||'—')+' Cr</div></div>'
+      +'</div>'
+      +'<div class="ac-explain">'+a.explanation+'</div>'
+      +tradesHtml
+      +'</div>';
+  }).join('');
+}
+
+// ══ LONG-TERM PICKS ═══════════════════════════════════════════════════════
+var _ltSortK='longterm_score';
+function ltSort(k,btn){_ltSortK=k;setOn('#lts-score,#lts-ret,#lts-wr,#lts-oos',btn);renderLT();}
+
+function renderLT(){
+  var d=DATA.longterm;
+  if(!d){
+    document.getElementById('lt-grid').innerHTML='<div class="empty">No long-term data. Run master_stock_analyzer workflow.</div>';
+    return;
+  }
+  var rows=[...(d.picks||[])];
+  var q=(document.getElementById('lt-q')?.value||'').toUpperCase().trim();
+  if(q) rows=rows.filter(r=>r.sym.includes(q));
+  rows.sort((a,b)=>(b[_ltSortK]??0)-(a[_ltSortK]??0));
+
+  document.getElementById('lt-pills').innerHTML=[
+    ['Total Picks',rows.length,'g'],
+    ['A+ Grade',rows.filter(r=>r.best_grade==='A+').length,'g','double OOS verified'],
+    ['Latest',d.latest_date||'—','b'],
+  ].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>').join('');
+
+  if(!rows.length){
+    document.getElementById('lt-grid').innerHTML='<div class="empty">No picks match filter.</div>';
+    return;
+  }
+
+  document.getElementById('lt-grid').innerHTML=rows.map((r,i)=>{
+    var strats=(r.all_strategies||[]).slice(0,4).map(s=>
+      '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--b);font-size:10px">'
+      +'<span style="color:var(--t2)">'+stratLabel(s.strategy||'')+'</span>'
+      +'<span class="green" style="font-weight:600">'+s.win_rate+'% · +'+s.avg_ret+'%</span>'
+      +'</div>'
+    ).join('');
+
+    return '<div class="lt-card '+(r.best_grade==='A+'?'aplus':'')+'" style="margin-bottom:10px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">'
+      +'<div><span style="font-size:16px;font-weight:700;color:var(--gold)">'+(i+1)+'. '+r.sym+'</span> '
+      +gradeHtml(r.best_grade)
+      +'<div style="font-size:11px;color:var(--t2);margin-top:3px">&#8377;'+fmt(r.price)+' · '+r.avg_turnover_cr+' Cr daily</div></div>'
+      +'<div style="text-align:right">'
+      +'<div style="font-size:9px;color:var(--t3)">LT Score</div>'
+      +ltScoreBar(r.longterm_score)+'</div></div>'
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:4px;margin-bottom:8px">'
+      +'<div class="ac-mini"><div class="ac-ml">Best Strategy</div><div class="ac-mv" style="font-size:10px">'+stratLabel(r.best_strategy)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Win Rate</div><div class="ac-mv green">'+r.win_rate+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Avg Return</div><div class="ac-mv green">+'+r.avg_ret+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Hold Days</div><div class="ac-mv">'+r.hold_days+'d</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">OOS Win Rate</div><div class="ac-mv '+(r.oos_win_rate>=60?'green':'amber')+'">'+(r.oos_win_rate||'—')+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">OOS Avg Ret</div>'+rc(r.oos_avg_ret)+'</div>'
+      +'<div class="ac-mini"><div class="ac-ml">20d Return</div>'+rc(r.ret20)+'</div>'
+      +'<div class="ac-mini"><div class="ac-ml">Strategies</div><div class="ac-mv">'+r.n_strategies+'</div></div>'
+      +'</div>'
+      +'<div class="ac-explain" style="margin-bottom:8px">'+r.explanation+'</div>'
+      +(strats?'<div style="font-size:9px;color:var(--t3);margin-bottom:4px;font-weight:600">ALL VERIFIED STRATEGIES:</div>'+strats:'')
+      +'</div>';
+  }).join('');
+}
+
+// ══ ALL STOCKS TABLE ═══════════════════════════════════════════════════════
+var _allFilter='ALL', _allSortK='longterm_score', _allSD='desc';
+function allFilter(f,btn){_allFilter=f;setOn('#af-all,#af-ap,#af-sig,#af-lt',btn);renderAll();}
+function allSort(k,btn){_allSortK=k;setOn('#allsk,#allsa,#allsw',btn);renderAll();}
+function allTh(k){if(_allSortK===k)_allSD=_allSD==='desc'?'asc':'desc';else{_allSortK=k;_allSD='desc';}renderAll();}
+
+function renderAll(){
+  var tbody=document.getElementById('all-tbody'); if(!tbody) return;
+  var d=DATA.master;
+  if(!d){tbody.innerHTML='<tr><td colspan="18" class="empty">No master data. Run workflow.</td></tr>';return;}
+
+  var rows=[...(d.stocks||[])];
+  var q=(document.getElementById('all-q')?.value||'').toUpperCase().trim();
+  if(q) rows=rows.filter(r=>r.sym.includes(q));
+  if(_allFilter==='A+')     rows=rows.filter(r=>r.best_grade==='A+');
+  if(_allFilter==='SIGNAL') rows=rows.filter(r=>r.signal_today);
+  if(_allFilter==='LT')     rows=rows.filter(r=>(r.longterm_score||0)>=60);
+  rows.sort((a,b)=>{var v=(b[_allSortK]??0)-(a[_allSortK]??0);return _allSD==='asc'?-v:v;});
+
+  document.getElementById('all-pills').innerHTML=[
+    ['Total',rows.length,'b'],
+    ['A+ Grade',rows.filter(r=>r.best_grade==='A+').length,'g'],
+    ['Signal Today',rows.filter(r=>r.signal_today).length,'y'],
+  ].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>').join('');
+
+  if(!rows.length){tbody.innerHTML='<tr><td colspan="18" class="empty">No stocks match filter.</td></tr>';return;}
+
+  var html='';
+  rows.forEach((r,i)=>{
+    var did='atd'+i;
+    var strats=(r.all_strategies||[]).map(s=>
+      '<tr><td class="mono" style="font-size:10px">'+stratLabel(s.strategy)+'</td>'
+      +'<td class="mono">'+gradeHtml(s.grade)+'</td>'
+      +'<td class="mono green">'+s.win_rate+'%</td>'
+      +'<td>'+rc(s.avg_ret)+'</td>'
+      +'<td class="mono muted">'+s.hold_days+'d</td>'
+      +'<td class="mono">'+s.sharpe+'</td>'
+      +'<td class="mono '+(s.oos_win_rate>=60?'green':'amber')+'">'+(s.oos_win_rate||'—')+'%</td>'
+      +'</tr>'
+    ).join('');
+    var detailHtml=strats?
+      '<div style="padding:10px;background:rgba(0,0,0,.25)">'
+      +'<div style="font-size:10px;color:var(--gold);font-weight:600;margin-bottom:6px">'+r.sym+' — All Verified Strategies</div>'
+      +'<table class="tbl" style="min-width:500px"><thead><tr>'
+      +'<th>Strategy</th><th>Grade</th><th>Win Rate</th><th>Avg Ret%</th><th>Hold</th><th>Sharpe</th><th>OOS Win%</th>'
+      +'</tr></thead><tbody>'+strats+'</tbody></table>'
+      +'<div class="ac-explain" style="margin-top:8px">'+r.explanation+'</div></div>':'';
+
+    html+='<tr onclick="atToggle(\''+did+'\')" style="cursor:pointer;'+(r.signal_today?'background:rgba(34,197,94,.03)':'')+'">'
+      +'<td><span id="ax'+did+'" style="font-size:10px;color:var(--t3)">▶</span></td>'
+      +'<td class="mono gold" style="font-weight:600">'+r.sym+(r.signal_today?' <span style="font-size:8px;background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;padding:1px 4px">ALERT</span>':'')+'</td>'
+      +'<td class="mono">&#8377;'+fmt(r.price)+'</td>'
+      +'<td>'+gradeHtml(r.best_grade)+'</td>'
+      +'<td>'+ltScoreBar(r.longterm_score)+'</td>'
+      +'<td style="font-size:10px;color:var(--t2)">'+stratLabel(r.best_strategy||'')+'</td>'
+      +'<td class="mono green">'+r.best_win_rate+'%</td>'
+      +'<td>'+rc(r.best_avg_ret)+'</td>'
+      +'<td class="mono muted">'+r.best_hold_days+'d</td>'
+      +'<td class="mono green">+'+r.best_max_gain+'%</td>'
+      +'<td class="mono">'+r.best_sharpe+'</td>'
+      +'<td class="mono '+(r.oos_win_rate>=60?'green':'amber')+'">'+(r.oos_win_rate||'—')+'%</td>'
+      +'<td>'+rc(r.oos_avg_ret)+'</td>'
+      +'<td class="mono">'+r.n_strategies+'</td>'
+      +'<td class="mono '+(r.rsi<30?'green':r.rsi>70?'red':'muted')+'">'+(r.rsi||'—')+'</td>'
+      +'<td class="mono '+(r.vol_ratio>=2?'green':r.vol_ratio>=1.5?'amber':'muted')+'">'+(r.vol_ratio||'—')+'x</td>'
+      +'<td class="mono muted">'+(r.avg_turnover_cr||'—')+' Cr</td>'
+      +'<td>'+(r.signal_today?'<span class="green" style="font-size:10px;font-weight:700">🔔 YES</span>':'<span class="muted" style="font-size:10px">—</span>')+'</td>'
+      +'</tr>'
+      +'<tr id="'+did+'" style="display:none"><td colspan="18" style="padding:0">'+detailHtml+'</td></tr>';
+  });
+  tbody.innerHTML=html;
+}
+function atToggle(id){
+  var r=document.getElementById(id); if(!r) return;
+  var x=document.getElementById('ax'+id);
+  r.style.display=r.style.display==='none'?'':'none';
+  if(x) x.textContent=r.style.display===''?'▼':'▶';
+}
+
+// ══ STRATEGY BREAKDOWN ═════════════════════════════════════════════════════
+function renderStratBreakdown(){
+  var d=DATA.master;
+  var el=document.getElementById('strat-grid'); if(!el) return;
+  if(!d){ el.innerHTML='<div class="empty">No data yet.</div>'; return; }
+
+  // Aggregate per strategy
+  var stratMap={};
+  (d.stocks||[]).forEach(s=>{
+    (s.all_strategies||[]).forEach(st=>{
+      var nm=st.strategy;
+      if(!stratMap[nm]) stratMap[nm]={name:nm,count:0,wr:[],ret:[],grade_ap:0,grade_a:0};
+      stratMap[nm].count++;
+      stratMap[nm].wr.push(st.win_rate||0);
+      stratMap[nm].ret.push(st.avg_ret||0);
+      if(st.grade==='A+') stratMap[nm].grade_ap++;
+      else if(st.grade==='A') stratMap[nm].grade_a++;
+    });
+  });
+
+  var strats=Object.values(stratMap).sort((a,b)=>b.count-a.count);
+  var maxCount=strats[0]?.count||1;
+
+  document.getElementById('strat-pills').innerHTML=[
+    ['Strategies Found',strats.length,'b'],
+    ['Best by Count',stratLabel(strats[0]?.name||''),'g'],
+  ].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>').join('');
+
+  el.innerHTML=strats.map(s=>{
+    var avgWr=s.wr.length?Math.round(s.wr.reduce((a,b)=>a+b)/s.wr.length):0;
+    var avgRet=s.ret.length?Math.round(s.ret.reduce((a,b)=>a+b)/s.ret.length*10)/10:0;
+    var barW=Math.round(s.count/maxCount*100);
+    return '<div class="lt-card" style="margin-bottom:0">'
+      +'<div style="display:flex;justify-content:space-between;margin-bottom:6px">'
+      +'<span style="font-weight:600;font-size:13px">'+stratLabel(s.name)+'</span>'
+      +'<span style="font-size:10px;color:var(--t3)">'+s.count+' stocks</span></div>'
+      +'<div style="height:4px;background:var(--b);border-radius:2px;margin-bottom:8px">'
+      +'<div style="width:'+barW+'%;height:100%;background:var(--green);border-radius:2px"></div></div>'
+      +'<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px">'
+      +'<div class="ac-mini"><div class="ac-ml">Avg Win Rate</div><div class="ac-mv green">'+avgWr+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Avg Return</div><div class="ac-mv green">+'+avgRet+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">A+ Stocks</div><div class="ac-mv green">'+s.grade_ap+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">A Stocks</div><div class="ac-mv blue">'+s.grade_a+'</div></div>'
+      +'</div></div>';
+  }).join('');
+}
+
+loadData();
+</script>
+</body>
+</html>
