@@ -1,0 +1,90 @@
+name: 🧠 Master Stock Analysis
+
+on:
+  schedule:
+    - cron: '30 17 * * 1-5'   # 11 PM IST Mon-Fri (after daily data fetch)
+  workflow_dispatch:
+    inputs:
+      force_rerun:
+        description: 'Force full rerun (true/false)'
+        required: false
+        default: 'false'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+permissions:
+  contents: write
+
+jobs:
+  analyse:
+    name: Master Stock Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pandas numpy --quiet
+
+      - name: Show info
+        run: |
+          echo "UTC  : $(date -u)"
+          echo "IST  : $(TZ='Asia/Kolkata' date)"
+          echo "CSVs : $(find data/equity -name '*.csv' 2>/dev/null | wc -l)"
+          echo "Force: ${{ github.event.inputs.force_rerun }}"
+          if [ -f stock_analysis/master_checkpoint.json ]; then
+            python3 -c "import json; d=json.load(open('stock_analysis/master_checkpoint.json')); print('Checkpoint:', d.get('processed_date','none'))"
+          else
+            echo "No checkpoint yet"
+          fi
+
+      - name: Run master stock analyzer
+        run: python scripts/master_stock_analyzer.py
+        env:
+          FORCE_RERUN: ${{ github.event.inputs.force_rerun || 'false' }}
+          PYTHONUNBUFFERED: '1'
+
+      - name: Show results
+        if: always()
+        run: |
+          echo "=== Output files ==="
+          ls -lh stock_analysis/ 2>/dev/null || echo "No output dir"
+          if [ -f stock_analysis/daily_alerts.json ]; then
+            python3 - << 'EOF'
+          import json
+          d = json.load(open('stock_analysis/daily_alerts.json'))
+          print(f"Signal date : {d.get('signal_date')}")
+          print(f"Alerts      : {d.get('n_alerts')}")
+          alerts = d.get('alerts',[])
+          for a in alerts[:5]:
+              print(f"  {a.get('sym',''):<14} {a.get('best_strategy',''):<20} WR={a.get('win_rate')}% ret=+{a.get('avg_ret')}%")
+          EOF
+          fi
+          if [ -f stock_analysis/longterm_picks.json ]; then
+            python3 - << 'EOF'
+          import json
+          d = json.load(open('stock_analysis/longterm_picks.json'))
+          print(f"\nLong-term picks: {len(d.get('picks',[]))}")
+          for p in d.get('picks',[])[:5]:
+              print(f"  {p.get('sym',''):<14} score={p.get('longterm_score')} grade={p.get('best_grade')}")
+          EOF
+          fi
+
+      - name: Commit results
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add stock_analysis/
+          git add stockalerts.html 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Nothing to commit"
+          else
+            git commit -m "📊 Master analysis: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M IST')"
+            git push
+          fi
