@@ -203,6 +203,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <button class="tab" onclick="showPage('calert',this)">📋 Candle Table</button>
     <button class="tab" onclick="showPage('hw-dip',this)">🏦 HW Dip</button>
     <button class="tab" onclick="showPage('hw-alerts',this)">🔔 HW Alerts</button>
+    <button class="tab" onclick="showPage('momentum',this)">🚀 Momentum Surge</button>
     <button class="tab" onclick="showPage('howto',this)">📖 How It Works</button>
   </div>
 </nav>
@@ -567,6 +568,52 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
   </div>
 </div>
 
+<!-- PAGE: MOMENTUM SURGE -->
+<div class="page" id="page-momentum">
+  <div class="sh">🚀 Momentum Surge Tracker <small>>6% single-day surge → 3+ consecutive up days → D3 100% positive from D2-close entry · sorted by occurrences</small></div>
+  <div class="pill-row" id="ms-pills"></div>
+
+  <div class="fbar">
+    <button class="fb on" id="mss-occ" onclick="msSort('n_occ_3yr',this)">Occurrences</button>
+    <button class="fb" id="mss-d3" onclick="msSort('avg_d3_ret',this)">D3 Avg Return</button>
+    <button class="fb" id="mss-min" onclick="msSort('min_d3_ret',this)">D3 Min Return</button>
+    <button class="fb" id="mss-d4" onclick="msSort('avg_d4_ret',this)">D4 Avg Return</button>
+    <button class="fb" id="mss-turn" onclick="msSort('avg_turnover_60d_cr',this)">Liquidity</button>
+    <span class="fsep">|</span>
+    <input class="si" id="ms-q" placeholder="Symbol…" style="width:110px" oninput="renderMS()">
+  </div>
+
+  <!-- Params banner -->
+  <div id="ms-params" style="font-size:10px;color:var(--t3);margin-bottom:10px;padding:6px 10px;background:var(--s);border-radius:6px;border:1px solid var(--b)"></div>
+
+  <!-- Main table -->
+  <div class="twrap">
+    <table class="tbl" id="ms-tbl" style="min-width:1000px">
+      <thead><tr>
+        <th style="width:20px"></th>
+        <th onclick="msTh('sym')">Stock<span class="arr"></span></th>
+        <th onclick="msTh('n_occ_3yr')">Occ (3yr)<span class="arr"></span></th>
+        <th onclick="msTh('n_years')">Years<span class="arr"></span></th>
+        <th onclick="msTh('avg_surge_pct')">Avg Surge%<span class="arr"></span></th>
+        <th onclick="msTh('avg_d1_open_vs_d0')">D1 Gap Open%<span class="arr"></span></th>
+        <th onclick="msTh('avg_d1_close_ret')">D1 Close Ret%<span class="arr"></span></th>
+        <th onclick="msTh('pct_d1_dip_below_d0')">D1 Dip Opp%<span class="arr"></span></th>
+        <th onclick="msTh('avg_d2_cum_from_d0')">D2 Cum Ret%<span class="arr"></span></th>
+        <th onclick="msTh('pct_d2_intra_dip')">D2 Dip Opp%<span class="arr"></span></th>
+        <th onclick="msTh('avg_d3_ret')" style="background:rgba(34,197,94,.08)">D3 Avg%<span class="arr"></span></th>
+        <th onclick="msTh('min_d3_ret')" style="background:rgba(34,197,94,.08)">D3 Min%<span class="arr"></span></th>
+        <th onclick="msTh('max_d3_ret')" style="background:rgba(34,197,94,.08)">D3 Max%<span class="arr"></span></th>
+        <th onclick="msTh('avg_d4_ret')">D4 Avg%<span class="arr"></span></th>
+        <th onclick="msTh('wr_d4_positive')">D4 Win%<span class="arr"></span></th>
+        <th onclick="msTh('best_sell_day')">Best Exit<span class="arr"></span></th>
+        <th onclick="msTh('avg_turnover_60d_cr')">Turnover Cr<span class="arr"></span></th>
+        <th onclick="msTh('latest_date')">Last Surge<span class="arr"></span></th>
+      </tr></thead>
+      <tbody id="ms-tbody"><tr><td colspan="18" class="empty"><div class="spinner"></div>Loading…</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
 <!-- ═══ PAGE 6: HOW IT WORKS ═════════════════════════════════ -->
 <div class="page" id="page-howto">
   <div class="sh">📖 System Rules &amp; Signal Reference</div>
@@ -619,7 +666,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 <script>
 // ─── Data ──────────────────────────────────────────────────────────
 const REPO = 'https://raw.githubusercontent.com/animesh2007asansol/itis/main/pattern_signals';
-let DATA = { alerts:[], patterns:[], profiles:{}, allResults:[], heatmap:{}, meta:{}, candleBest:[], candleToday:[], candleYesterday:null, enriched:null, top5:null, hwProfiles:{}, hwAlerts:[], hwMeta:{}, hwAlertMeta:{} };
+let DATA = { alerts:[], patterns:[], profiles:{}, allResults:[], heatmap:{}, meta:{}, candleBest:[], candleToday:[], candleYesterday:null, enriched:null, top5:null, momentumSurge:null, hwProfiles:{}, hwAlerts:[], hwMeta:{}, hwAlertMeta:{} };
 let alrtPeriod='ALL', alrtGrade='ALL', alrtZone='ALL', alrtSortKey='score';
 let patGrade='ALL', spSortKey='score', spGradeF='ALL', repMinYrs=4, repSortKey='ret';
 let hmColorKey='avg', hmShowKey='pct';
@@ -716,6 +763,11 @@ async function loadData() {
     if(hwpR.ok){ const d=await hwpR.json(); DATA.hwProfiles=d.profiles||{}; DATA.hwMeta=d; }
     if(hwaR.ok){ const d=await hwaR.json(); DATA.hwAlerts=d.alerts||[]; DATA.hwAlertMeta=d; }
   } catch(e){ console.log('HW:',e.message); }
+  // Momentum surge
+  try {
+    const msR=await fetch(REPO+'/momentum_surge.json');
+    if(msR.ok){ DATA.momentumSurge=await msR.json(); renderMS(); }
+  } catch(e){ console.log('Momentum:',e.message); }
   // ── Render all tabs now that data is loaded ───────────────────────────────
   renderCA(); renderCB(); renderCAT(); renderSQ();
   renderCP(); renderTop5(); renderTop5InAlerts(); renderDP();
@@ -1866,6 +1918,124 @@ function sqCard(r, borderColor){
       +'</div>':'')
     +'<div class="zone-banner zone-'+(r.risk_grade==='LOW'?'buy':r.risk_grade==='HIGH'?'sell':'run')+'">'+r.risk_grade+' RISK — '+(r.risk_grade==='LOW'?'Strong signal':'Review carefully before buying')+'</div>'
     +'</div>';
+}
+
+// ═══ MOMENTUM SURGE ══════════════════════════════════════════════════════════
+var _msSortKey='n_occ_3yr', _msSD='desc';
+function msSort(k,btn){_msSortKey=k;setOn('#mss-occ,#mss-d3,#mss-min,#mss-d4,#mss-turn',btn);renderMS();}
+function msTh(k){if(_msSortKey===k)_msSD=_msSD==='desc'?'asc':'desc';else{_msSortKey=k;_msSD='desc';}renderMS();}
+
+function renderMS(){
+  var tbody=document.getElementById('ms-tbody'); if(!tbody) return;
+  var d=DATA.momentumSurge;
+  if(!d){
+    tbody.innerHTML='<tr><td colspan="18" class="empty">No momentum surge data. Run momentum_surge_analysis workflow.</td></tr>';
+    return;
+  }
+
+  // Pills
+  var p=d.params||{};
+  var pillEl=document.getElementById('ms-pills');
+  if(pillEl) pillEl.innerHTML=[
+    ['Qualified Stocks',d.n_qualified,'g','meet all criteria'],
+    ['Min Occurrences',p.min_occ_3yr||8,'b','in last 3 years'],
+    ['Trigger Surge','>'+p.min_surge_pct+'%','b','single day'],
+    ['Min Trade Value','Rs '+p.min_value_cr+'Cr','b','on signal day'],
+    ['Avg Liquidity','>Rs '+p.min_avg_turnover_cr+'Cr','b','60d avg proxy'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';}).join('');
+
+  var parEl=document.getElementById('ms-params');
+  if(parEl) parEl.textContent='Strategy: Buy at close of DAY 2 (after the surge day + 1 confirmation day). '
+    +'Sell at DAY 3 close (100% positive in history). D3 is highlighted green. '
+    +'D1 and D2 dip% columns show if you can get a cheaper entry before close.';
+
+  var q=(document.getElementById('ms-q')?.value||'').toUpperCase().trim();
+  var rows=[...(d.results||[])];
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  rows.sort(function(a,b){var v=(b[_msSortKey]??0)-(a[_msSortKey]??0);return _msSD==='asc'?-v:v;});
+
+  if(!rows.length){tbody.innerHTML='<tr><td colspan="18" class="empty">No results.</td></tr>';return;}
+
+  var html='';
+  rows.forEach(function(r,idx){
+    var did='msd'+idx;
+    var yrs=(r.years_3yr||[]).join(', ');
+    var occRows=(r.occurrences||[]).map(function(o){
+      return '<tr>'
+        +'<td class="mono">'+o.date_d0+'</td>'
+        // D0
+        +'<td class="mono">&#8377;'+o.d0_prev_close+'</td>'
+        +'<td class="mono green" style="font-weight:700">&#8377;'+o.d0_close+'</td>'
+        +'<td class="mono green" style="font-weight:700">+'+o.d0_surge_pct.toFixed(1)+'%</td>'
+        +'<td class="mono">'+o.d0_turnover_cr.toFixed(1)+' Cr</td>'
+        // D1
+        +'<td class="mono '+(o.d1_open_vs_d0>0?'green':'red')+'">'+(o.d1_open_vs_d0>0?'+':'')+o.d1_open_vs_d0+'%</td>'
+        +'<td class="mono '+(o.d1_close_ret>0?'green':'red')+'">'+(o.d1_close_ret>0?'+':'')+o.d1_close_ret+'%</td>'
+        +'<td class="mono '+(o.d1_low_dip<0?'amber':'muted')+'">'+(o.d1_low_dip<0?o.d1_low_dip+'%':'—')+'</td>'
+        // D2 — entry
+        +'<td class="mono '+(o.d2_cum_from_d0>0?'green':'red')+'">'+(o.d2_cum_from_d0>0?'+':'')+o.d2_cum_from_d0+'%</td>'
+        +'<td class="mono amber" style="font-weight:700">&#8377;'+o.entry_px+'</td>'
+        +'<td class="mono '+(o.d2_low_vs_open<0?'amber':'muted')+'">'+(o.d2_low_vs_open<0?o.d2_low_vs_open+'%':'No dip')+'</td>'
+        // D3 — result
+        +'<td class="mono green" style="font-weight:700;background:rgba(34,197,94,.07)">+'+o.d3_ret_from_entry+'%</td>'
+        +'<td class="mono green" style="background:rgba(34,197,94,.07)">'+o.d3_high_from_entry+'%</td>'
+        // D4
+        +'<td class="mono '+(o.d4_ret_from_entry>0?'green':'red')+'">'+(o.d4_ret_from_entry>0?'+':'')+o.d4_ret_from_entry+'%</td>'
+        +'</tr>';
+    }).join('');
+
+    html+='<tr onclick="msToggle(\''+did+'\')" style="cursor:pointer">'
+      +'<td><span id="msx'+did+'" style="font-size:10px;color:var(--t3)">▶</span></td>'
+      +'<td class="mono gold" style="font-weight:700">'+r.sym+'</td>'
+      +'<td class="mono amber" style="font-weight:700">'+r.n_occ_3yr+'</td>'
+      +'<td class="mono muted">'+r.n_years+' ('+yrs+')</td>'
+      +'<td class="mono green">+'+r.avg_surge_pct+'%</td>'
+      +'<td class="mono '+(r.avg_d1_open_vs_d0>0?'green':'red')+'">'+(r.avg_d1_open_vs_d0>0?'+':'')+r.avg_d1_open_vs_d0+'%</td>'
+      +'<td class="mono '+(r.avg_d1_close_ret>0?'green':'red')+'">'+(r.avg_d1_close_ret>0?'+':'')+r.avg_d1_close_ret+'%</td>'
+      +'<td class="mono amber">'+r.pct_d1_dip_below_d0+'% of times</td>'
+      +'<td class="mono '+(r.avg_d2_cum_from_d0>0?'green':'red')+'">'+(r.avg_d2_cum_from_d0>0?'+':'')+r.avg_d2_cum_from_d0+'%</td>'
+      +'<td class="mono amber">'+r.pct_d2_intra_dip+'% of times</td>'
+      // D3 highlighted
+      +'<td class="mono green" style="font-weight:700;background:rgba(34,197,94,.08)">+'+r.avg_d3_ret+'%</td>'
+      +'<td class="mono green" style="background:rgba(34,197,94,.08)">+'+r.min_d3_ret+'%</td>'
+      +'<td class="mono green" style="background:rgba(34,197,94,.08)">+'+r.max_d3_ret+'%</td>'
+      // D4
+      +'<td class="mono '+(r.avg_d4_ret>0?'green':'amber')+'">'+(r.avg_d4_ret>0?'+':'')+r.avg_d4_ret+'%</td>'
+      +'<td class="mono">'+r.wr_d4_positive+'%</td>'
+      +'<td class="mono '+(r.best_sell_day==='D3 close'?'green':'amber')+'">'+r.best_sell_day+'</td>'
+      +'<td class="mono">'+r.avg_turnover_60d_cr+' Cr</td>'
+      +'<td class="mono muted">'+r.latest_date+'</td>'
+      +'</tr>'
+      // Expanded occurrence rows
+      +'<tr id="'+did+'" style="display:none"><td colspan="18" style="padding:0;background:rgba(0,0,0,.3)">'
+      +'<div style="padding:12px">'
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px;margin-bottom:10px">'
+      +[
+        ['Strategy','Buy at D2 close &#8377;'+r.latest_entry_px+' (based on latest)','y'],
+        ['D3 Exit (100% wins)','Avg +'+r.avg_d3_ret+'% | Min +'+r.min_d3_ret+'%','g'],
+        ['D4 Exit ('+r.wr_d4_positive+'% wins)','Avg '+(r.avg_d4_ret>0?'+':'')+r.avg_d4_ret+'%','b'],
+        ['D1 Buy Cheaper?',r.pct_d1_dip_below_d0+'% of times D1 dips below D0 close. Avg dip: -'+r.avg_d1_dip_pct+'%','y'],
+        ['D2 Intraday Dip',r.pct_d2_intra_dip+'% of times D2 LOW < D2 OPEN. Avg dip: -'+r.avg_d2_intra_dip+'%','y'],
+        ['60d Avg Turnover','Rs '+r.avg_turnover_60d_cr+' Cr','b'],
+       ].map(function(x){return '<div class="pill '+x[2]+'" style="min-width:0"><div class="pl">'+x[0]+'</div><div class="pv" style="font-size:10px;font-family:var(--font)">'+x[1]+'</div></div>';}).join('')
+      +'</div>'
+      +'<div style="overflow-x:auto"><table class="tbl" style="min-width:1100px"><thead><tr>'
+      +'<th>D0 Date</th><th>D0 Prev Close</th><th>D0 Close</th><th>D0 Surge%</th><th>D0 Turnover</th>'
+      +'<th>D1 Gap Open%</th><th>D1 Close Ret%</th><th>D1 Dip below D0?</th>'
+      +'<th>D2 Cum Ret%</th><th style="background:rgba(245,158,11,.1)">Entry (D2 close)</th><th>D2 Intra Dip%</th>'
+      +'<th style="background:rgba(34,197,94,.1)">D3 Ret from Entry</th><th style="background:rgba(34,197,94,.1)">D3 High from Entry</th>'
+      +'<th>D4 Ret from Entry</th>'
+      +'</tr></thead><tbody>'+occRows+'</tbody></table></div>'
+      +'</div></td></tr>';
+  });
+  tbody.innerHTML=html;
+}
+
+function msToggle(id){
+  var r=document.getElementById(id); if(!r) return;
+  var x=document.getElementById('msx'+id);
+  r.style.display=r.style.display==='none'?'':'none';
+  if(x) x.textContent=r.style.display===''?'▼':'▶';
 }
 
 loadData();
