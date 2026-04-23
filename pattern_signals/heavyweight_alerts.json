@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-23T01:15:52+05:30",
-  "latest_date": "2026-04-22",
-  "alert_date": "2026-04-22",
+  "generated_at": "2026-04-24T01:18:38+05:30",
+  "latest_date": "2026-04-23",
+  "alert_date": "2026-04-23",
   "window_days": 20,
   "total_alerts": 1,
   "today_count": 0,
@@ -11,12 +11,12 @@
       "sym": "BDL",
       "sig_date": "2026-03-23",
       "is_today": false,
-      "days_ago": 30,
+      "days_ago": 31,
       "grade": "B",
       "score": 75.2,
       "sig_close": 1158.5,
-      "cur_price": 1380.2,
-      "pct_since": 19.14,
+      "cur_price": 1423.3,
+      "pct_since": 22.86,
       "floor_depth_pct": 7.0,
       "best_window_days": 30,
       "beats15_rate": 100.0,
@@ -63,7 +63,7 @@
           "med_return": 21.03
         }
       },
-      "zone": "RUNNING"
+      "zone": "TARGET MET"
     }
   ]
 }
