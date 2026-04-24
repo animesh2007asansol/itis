@@ -308,7 +308,7 @@ def backtest(df, signal_series, hold_days, label):
             "sig_date":  str(pd.Timestamp(dates[i]).date()),
             "entry_date":str(pd.Timestamp(dates[ei]).date()),
             "exit_date": str(pd.Timestamp(dates[xi]).date()),
-            "is_open":   xi < (entry_idx + hold_days),
+            "is_open":   xi < (ei + hold_days),
             "entry_px":  r2(ep), "exit_px":r2(xp),
             "ret":r2(ret), "ret_3d":r3, "ret_10d":r10,
             "max_gain":r2(mg), "max_dd":r2(dd),
