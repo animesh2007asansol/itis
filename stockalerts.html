@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NSE Stock Intelligence v2</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<title>NSE Intelligence v3</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#07090F;--s:#0D1119;--card:#101520;--b:#1A2B42;--b2:#213554;
   --gold:#C9A84C;--g2:#9A6F28;--gbg:rgba(201,168,76,.08);
@@ -12,305 +12,382 @@
   --red:#EF4444;--r2:#7F1D1D;--rb:rgba(239,68,68,.09);
   --blue:#60A5FA;--bl2:#1E3A5F;--blb:rgba(96,165,250,.09);
   --amber:#F59E0B;--amb:#78350F;--ab:rgba(245,158,11,.09);
-  --purple:#A855F7;
+  --purple:#A855F7;--pb:rgba(168,85,247,.09);
   --text:#DCE8F5;--t2:#94A3B8;--t3:#5A7090;--r:10px;
   --font:'IBM Plex Sans',sans-serif;}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px}
-nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filter:blur(18px);
-    border-bottom:1px solid var(--b);padding:6px 10px 4px}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:13px;min-height:100vh}
+nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--b);padding:6px 10px 4px}
 .nav-top{display:flex;align-items:center;gap:8px;margin-bottom:5px}
 .brand{font-size:13px;font-weight:700;color:var(--gold);display:flex;align-items:center;gap:5px}
 .brand small{font-size:9px;color:var(--t3);font-weight:400}
 .ldot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 5px transparent}}
 .tabs{display:flex;flex-wrap:wrap;gap:3px}
-.tab{padding:4px 9px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:500;
-     color:var(--t3);border:none;background:none;white-space:nowrap;transition:.2s}
+.tab{padding:4px 9px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:500;color:var(--t3);border:none;background:none;white-space:nowrap;transition:.2s}
 .tab:hover{color:var(--text);background:var(--s)}
 .tab.active{color:var(--gold);background:var(--gbg);border:1px solid var(--g2)}
 .page{display:none;max-width:1600px;margin:0 auto;padding:12px 10px 60px}
 .page.active{display:block}
-.sh{font-size:14px;font-weight:600;color:var(--gold);margin-bottom:10px;
-    padding-bottom:6px;border-bottom:1px solid var(--b);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sh{font-size:14px;font-weight:600;color:var(--gold);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--b);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .sh small{font-size:10px;color:var(--t3);font-weight:400}
 .pill-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
 .kp{background:var(--card);border:1px solid var(--b);border-radius:7px;padding:7px 10px;min-width:80px}
-.kp.g{border-color:var(--gr2);background:var(--grb)}
-.kp.b{border-color:var(--bl2);background:var(--blb)}
-.kp.y{border-color:var(--amb);background:var(--ab)}
+.kp.g{border-color:var(--gr2);background:var(--grb)}.kp.b{border-color:var(--bl2);background:var(--blb)}
+.kp.y{border-color:var(--amb);background:var(--ab)}.kp.r{border-color:var(--r2);background:var(--rb)}
 .kl{font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:2px}
-.kv{font-size:16px;font-weight:700;color:var(--text)}
-.ks{font-size:9px;color:var(--t3);margin-top:2px}
-.fbar{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;align-items:center;
-      padding:8px;background:var(--s);border-radius:8px;border:1px solid var(--b)}
-.fb{padding:4px 9px;border-radius:5px;border:1px solid var(--b);background:var(--card);
-    color:var(--t2);font-size:11px;cursor:pointer;transition:.2s;white-space:nowrap;user-select:none}
-.fb:hover{color:var(--text);border-color:var(--b2)}
-.fb.on{background:var(--gbg);color:var(--green);border-color:var(--gr2);font-weight:600}
+.kv{font-size:15px;font-weight:700;color:var(--text)} .ks{font-size:9px;color:var(--t3);margin-top:2px}
+.fbar{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;align-items:center;padding:8px;background:var(--s);border-radius:8px;border:1px solid var(--b)}
+.fb{padding:4px 9px;border-radius:5px;border:1px solid var(--b);background:var(--card);color:var(--t2);font-size:11px;cursor:pointer;transition:.2s;white-space:nowrap;user-select:none}
+.fb:hover{color:var(--text)}.fb.on{background:var(--gbg);color:var(--green);border-color:var(--gr2);font-weight:600}
 .fsep{color:var(--t3);font-size:10px;white-space:nowrap}
-.si{background:var(--card);border:1px solid var(--b);border-radius:6px;
-    color:var(--text);padding:4px 8px;font-size:12px;outline:none}
+.si{background:var(--card);border:1px solid var(--b);border-radius:6px;color:var(--text);padding:4px 8px;font-size:12px;outline:none}
 .si:focus{border-color:var(--gold)}
 .twrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;border:1px solid var(--b)}
 .tbl{width:100%;border-collapse:collapse;font-size:12px}
-.tbl th{background:var(--s);padding:7px 9px;text-align:left;font-weight:600;color:var(--t2);
-        font-size:10px;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;
-        position:sticky;top:0;white-space:nowrap;border-bottom:1px solid var(--b);user-select:none}
-.tbl th:hover{color:var(--text)}
+.tbl th{background:var(--s);padding:7px 9px;text-align:left;font-weight:600;color:var(--t2);font-size:10px;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;position:sticky;top:0;white-space:nowrap;border-bottom:1px solid var(--b);user-select:none}
+.tbl th:hover{color:var(--text)}.arr{font-size:8px;margin-left:3px;color:var(--t3)}
 .tbl td{padding:7px 9px;border-bottom:1px solid rgba(26,43,66,.5);vertical-align:top;white-space:nowrap}
 .tbl tr:hover td{background:rgba(255,255,255,.02)}
-.arr{font-size:8px;margin-left:3px;color:var(--t3)}
 .mono{font-family:'DM Mono',monospace}
-.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}
-.gold{color:var(--gold)}.muted{color:var(--t3)}.blue{color:var(--blue)}
+.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}.gold{color:var(--gold)}.muted{color:var(--t3)}.blue{color:var(--blue)}
 .empty{text-align:center;padding:32px;color:var(--t3);font-size:12px;grid-column:1/-1}
-.spinner{width:20px;height:20px;border:2px solid var(--b);border-top-color:var(--gold);
-         border-radius:50%;animation:spin .7s linear infinite;display:inline-block;margin-right:8px}
+.spinner{width:20px;height:20px;border:2px solid var(--b);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;margin-right:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .ac{background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:12px;margin-bottom:10px}
 .ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:5px;margin:8px 0}
 .ac-mini{background:var(--s);border-radius:5px;padding:5px 7px;border:1px solid var(--b)}
 .ac-ml{font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
 .ac-mv{font-size:12px;font-weight:600;color:var(--text)}
-.ac-explain{font-size:10px;color:var(--t2);line-height:1.5;padding:8px;background:var(--s);
-            border-radius:6px;border-left:2px solid var(--gold);margin-top:8px}
-.grade-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;border:1px solid}
-.gAp{background:var(--grb);color:var(--green);border-color:var(--gr2)}
-.gA{background:var(--blb);color:var(--blue);border-color:var(--bl2)}
-.stag{display:inline-block;font-size:9px;padding:1px 6px;border-radius:3px;
-      background:var(--gbg);color:var(--green);border:1px solid var(--gr2);margin:1px}
+.ac-explain{font-size:10px;color:var(--t2);line-height:1.5;padding:8px;background:var(--s);border-radius:6px;border-left:2px solid var(--gold);margin-top:8px}
+.gb{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;border:1px solid}
+.gAp{background:var(--grb);color:var(--green);border-color:var(--gr2)}.gA{background:var(--blb);color:var(--blue);border-color:var(--bl2)}
 .alert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
 .ctx-box{background:var(--s);border:1px solid var(--b);border-radius:7px;padding:8px;margin-top:8px}
-.ctx-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0;
-         border-bottom:1px solid rgba(26,43,66,.4);font-size:10px;gap:6px}
+.ctx-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px solid rgba(26,43,66,.4);font-size:10px;gap:6px}
 .ctx-row:last-child{border-bottom:none}
-.ctx-lbl{color:var(--t3);white-space:nowrap}
-.ctx-rng{color:var(--amber);font-family:'DM Mono',monospace}
-.lt-card{background:var(--card);border:1px solid var(--b);border-radius:var(--r);
-         padding:12px;margin-bottom:10px;border-left:3px solid var(--gold)}
+.ctx-lbl{color:var(--t3);white-space:nowrap;min-width:90px}.ctx-rng{color:var(--amber);font-family:'DM Mono',monospace}
+.lt-card{background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:12px;margin-bottom:10px;border-left:3px solid var(--gold)}
 .lt-card.ap{border-left-color:var(--green)}
-.sbar-wrap{display:flex;align-items:center;gap:6px}
-.sbar{flex:1;height:5px;background:var(--b);border-radius:3px;overflow:hidden}
-.sbar-fill{height:100%;border-radius:3px}
-.gloss-section{background:var(--card);border:1px solid var(--b);border-radius:9px;
-               padding:12px;margin-bottom:12px}
-.gloss-title{font-weight:600;font-size:13px;margin-bottom:8px}
-@media(max-width:600px){
-  .tbl{font-size:11px}.tbl td,.tbl th{padding:5px 6px}
-  .ac-grid{grid-template-columns:repeat(2,1fr)}.alert-grid{grid-template-columns:1fr}}
+.sbar-wrap{display:flex;align-items:center;gap:6px}.sbar{flex:1;height:5px;background:var(--b);border-radius:3px;overflow:hidden}.sbar-fill{height:100%;border-radius:3px}
+.uc-badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;margin-right:3px}
+.uc1{background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.3)}
+.uc2{background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.3)}
+.uc3{background:rgba(34,197,94,.1);color:var(--green);border:1px solid var(--gr2)}
+.uc4{background:var(--blb);color:var(--blue);border:1px solid var(--bl2)}
+.conf-bar{height:4px;border-radius:2px;margin-top:3px}
+@media(max-width:600px){.tbl{font-size:11px}.tbl td,.tbl th{padding:5px 6px}.alert-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <nav>
-  <div class="nav-top">
-    <div class="ldot"></div>
-    <div class="brand">&#x1F9E0; NSE Stock Intelligence <small>100% Win Rate &middot; Backtested &middot; OOS Verified &middot; Traded Today Only</small></div>
-  </div>
+  <div class="nav-top"><div class="ldot"></div><div class="brand">&#x1F9E0; NSE Intelligence v3 <small>4 Use Cases &#x00B7; 25+ Strategies &#x00B7; Multi-Year Validation &#x00B7; &#x2265;95% Win Rate &#x00B7; &#x2265;10% Return</small></div></div>
   <div class="tabs">
-    <button class="tab active" onclick="showPage('alerts',this)">&#x1F514; Today's Signals</button>
+    <button class="tab active" onclick="showPage('alerts',this)">&#x1F514; Today's Alerts</button>
     <button class="tab" onclick="showPage('history',this)">&#x1F4C5; Signal History</button>
-    <button class="tab" onclick="showPage('longterm',this)">&#x1F331; Long-Term Picks</button>
+    <button class="tab" onclick="showPage('uc1',this)">&#x1F4C8; UC1 Surge</button>
+    <button class="tab" onclick="showPage('uc2',this)">&#x1F4C5; UC2 Seasonal</button>
+    <button class="tab" onclick="showPage('uc3',this)">&#x1F9EC; UC3 Combined</button>
+    <button class="tab" onclick="showPage('uc4',this)">&#x1F50C; UC4 Technical</button>
+    <button class="tab" onclick="showPage('longterm',this)">&#x1F331; Long-Term</button>
     <button class="tab" onclick="showPage('allstocks',this)">&#x1F4CA; All Stocks</button>
-    <button class="tab" onclick="showPage('strategies',this)">&#x1F52C; Strategy Stats</button>
-    <button class="tab" onclick="showPage('glossary',this)">&#x1F4D6; Field Guide</button>
+    <button class="tab" onclick="showPage('guide',this)">&#x1F4D6; Guide</button>
   </div>
 </nav>
 
-<!-- PAGE: TODAY'S SIGNALS -->
 <div class="page active" id="page-alerts">
-  <div class="sh">&#x1F514; Today's Buy Signals <small id="alert-date">loading&hellip;</small></div>
+  <div class="sh">&#x1F514; Today's Buy Signals <small id="alert-date">loading&#x2026;</small></div>
   <div style="background:var(--grb);border:1px solid var(--gr2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--green)">
-    &#x2713; Every stock here traded on the signal date. Every historical occurrence of this signal was profitable. 100% win rate &mdash; no exceptions.
+    &#x2713; Stocks confirmed traded today &#x00B7; &#x2265;95% win rate &#x00B7; &#x2265;10% min return every occurrence &#x00B7; Multi-year OOS validated &#x00B7; Ranked by return%/day
   </div>
   <div class="pill-row" id="alert-pills"></div>
   <div class="fbar">
     <span class="fsep">Grade:</span>
-    <button class="fb on" id="ag-Ap" onclick="toggleGrd('A+',this)">A+</button>
-    <button class="fb on" id="ag-A"  onclick="toggleGrd('A',this)">A</button>
+    <button class="fb on" id="ag-Ap" onclick="tg('alertGrds','A+',this);renderAlerts()">A+</button>
+    <button class="fb on" id="ag-A"  onclick="tg('alertGrds','A',this);renderAlerts()">A</button>
     <span class="fsep">|</span>
-    <span class="fsep">Strategy (multi-select):</span>
-    <button class="fb on" id="as-ALL"             onclick="toggleStrat('ALL',this)">All</button>
-    <button class="fb" id="as-SMA_CROSS"          onclick="toggleStrat('SMA_CROSS',this)">SMA</button>
-    <button class="fb" id="as-EMA_BOUNCE"         onclick="toggleStrat('EMA_BOUNCE',this)">EMA</button>
-    <button class="fb" id="as-RSI_OVERSOLD"       onclick="toggleStrat('RSI_OVERSOLD',this)">RSI</button>
-    <button class="fb" id="as-MACD_CROSS"         onclick="toggleStrat('MACD_CROSS',this)">MACD</button>
-    <button class="fb" id="as-BB_BOUNCE"          onclick="toggleStrat('BB_BOUNCE',this)">BB</button>
-    <button class="fb" id="as-VOL_BREAKOUT"       onclick="toggleStrat('VOL_BREAKOUT',this)">Vol</button>
-    <button class="fb" id="as-CONSEC_REVERSAL"    onclick="toggleStrat('CONSEC_REVERSAL',this)">Consec</button>
-    <button class="fb" id="as-FLOOR_BOUNCE"       onclick="toggleStrat('FLOOR_BOUNCE',this)">Floor</button>
-    <button class="fb" id="as-MOMENTUM_GAP"       onclick="toggleStrat('MOMENTUM_GAP',this)">Gap</button>
-    <button class="fb" id="as-RANGE_EXPAND"       onclick="toggleStrat('RANGE_EXPAND',this)">Range</button>
-    <button class="fb" id="as-TREND_PULLBACK"     onclick="toggleStrat('TREND_PULLBACK',this)">Trend</button>
-    <button class="fb" id="as-HIGHBREAK_52W"      onclick="toggleStrat('HIGHBREAK_52W',this)">52W</button>
+    <span class="fsep">UC:</span>
+    <button class="fb on" id="auc-UC1" onclick="tg('alertUCs','UC1',this);renderAlerts()">UC1</button>
+    <button class="fb on" id="auc-UC2" onclick="tg('alertUCs','UC2',this);renderAlerts()">UC2</button>
+    <button class="fb on" id="auc-UC3" onclick="tg('alertUCs','UC3',this);renderAlerts()">UC3</button>
+    <button class="fb on" id="auc-UC4" onclick="tg('alertUCs','UC4',this);renderAlerts()">UC4</button>
     <span class="fsep">|</span>
-    <button class="fb on" id="aort-ret" onclick="alertSort('avg_ret',this)">Avg Ret</button>
-    <button class="fb" id="aort-min"    onclick="alertSort('min_ret',this)">Min Ret</button>
-    <button class="fb" id="aort-sh"     onclick="alertSort('sharpe',this)">Sharpe</button>
+    <button class="fb on" id="aort-rr"  onclick="aSrt('ret_rate',this)">&#x1F3AF; Ret%/Day</button>
+    <button class="fb" id="aort-avg"    onclick="aSrt('avg_ret',this)">Avg Ret%</button>
+    <button class="fb" id="aort-min"    onclick="aSrt('min_ret',this)">Min Ret%</button>
+    <button class="fb" id="aort-conf"   onclick="aSrt('confidence',this)">Confidence</button>
     <span class="fsep">|</span>
-    <input class="si" id="alert-q" placeholder="Symbol&hellip;" style="width:100px" oninput="renderAlerts()">
+    <input class="si" id="alert-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderAlerts()">
   </div>
-  <div id="alert-grid" class="alert-grid"><div class="empty"><div class="spinner"></div>Loading&hellip;</div></div>
+  <div id="alert-grid" class="alert-grid"><div class="empty"><div class="spinner"></div>Loading&#x2026;</div></div>
 </div>
 
-<!-- PAGE: SIGNAL HISTORY -->
 <div class="page" id="page-history">
-  <div class="sh">&#x1F4C5; Signal History <small>every past signal with actual return &mdash; all green (100% win rate enforced)</small></div>
+  <div class="sh">&#x1F4C5; Signal History <small>all past signals with actual returns &#x00B7; every row &#x2265;10% positive</small></div>
   <div class="pill-row" id="hist-pills"></div>
   <div class="fbar">
-    <input class="si" id="hist-q" placeholder="Symbol&hellip;" style="width:100px" oninput="renderHistory()">
-    <input class="si" id="hist-strat" placeholder="Strategy&hellip;" style="width:120px" oninput="renderHistory()">
+    <input class="si" id="hq" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderHist()">
+    <input class="si" id="huc" placeholder="UC1/UC2/UC3/UC4&#x2026;" style="width:130px" oninput="renderHist()">
     <span class="fsep">Sort:</span>
-    <button class="fb on" id="hort-date" onclick="histSort('sig_date',this)">Date</button>
-    <button class="fb" id="hort-ret"     onclick="histSort('ret',this)">Return</button>
-    <button class="fb" id="hort-sym"     onclick="histSort('sym',this)">Symbol</button>
+    <button class="fb on" id="hsrt-dt"  onclick="hSrt('sig_date',this)">Date</button>
+    <button class="fb" id="hsrt-ret"    onclick="hSrt('ret',this)">Return%</button>
+    <button class="fb" id="hsrt-sym"    onclick="hSrt('sym',this)">Symbol</button>
+    <button class="fb" id="hsrt-conf"   onclick="hSrt('confidence',this)">Confidence</button>
   </div>
-  <div class="twrap">
-    <table class="tbl" id="hist-tbl" style="min-width:1000px">
-      <thead><tr>
-        <th onclick="histTh('sym')">Stock<span class="arr"></span></th>
-        <th onclick="histTh('sig_date')">Signal Date<span class="arr"></span></th>
-        <th onclick="histTh('strategy')">Strategy<span class="arr"></span></th>
-        <th onclick="histTh('grade')">Grade<span class="arr"></span></th>
-        <th onclick="histTh('entry_date')">Entry Date<span class="arr"></span></th>
-        <th onclick="histTh('entry_px')">Entry Rs<span class="arr"></span></th>
-        <th onclick="histTh('exit_date')">Exit Date<span class="arr"></span></th>
-        <th onclick="histTh('exit_px')">Exit Rs<span class="arr"></span></th>
-        <th onclick="histTh('ret')">Return%<span class="arr"></span></th>
-        <th onclick="histTh('ret_3d')">3d Ret%<span class="arr"></span></th>
-        <th onclick="histTh('ret_10d')">10d Ret%<span class="arr"></span></th>
-        <th onclick="histTh('max_gain')">Max Gain%<span class="arr"></span></th>
-        <th onclick="histTh('max_dd')">Max DD%<span class="arr"></span></th>
-        <th onclick="histTh('ctx_rsi')">RSI at Signal<span class="arr"></span></th>
-        <th onclick="histTh('ctx_vol_ratio')">Vol Ratio<span class="arr"></span></th>
-        <th onclick="histTh('ctx_ret5')">5d Before<span class="arr"></span></th>
-        <th onclick="histTh('ctx_ret20')">20d Before<span class="arr"></span></th>
-        <th onclick="histTh('hold_days')">Hold<span class="arr"></span></th>
-      </tr></thead>
-      <tbody id="hist-tbody"><tr><td colspan="18" class="empty"><div class="spinner"></div>Loading&hellip;</td></tr></tbody>
-    </table>
-  </div>
+  <div class="twrap"><table class="tbl" id="hist-tbl" style="min-width:1100px">
+    <thead><tr>
+      <th onclick="hTh('sym')">Stock<span class="arr"></span></th>
+      <th onclick="hTh('sig_date')">Signal Date<span class="arr"></span></th>
+      <th onclick="hTh('uc')">UC<span class="arr"></span></th>
+      <th onclick="hTh('grade')">Grade<span class="arr"></span></th>
+      <th onclick="hTh('confidence')">Confidence<span class="arr"></span></th>
+      <th onclick="hTh('entry_date')">Entry Date<span class="arr"></span></th>
+      <th onclick="hTh('entry_px')">Entry Rs<span class="arr"></span></th>
+      <th onclick="hTh('exit_date')">Exit Date<span class="arr"></span></th>
+      <th onclick="hTh('exit_px')">Exit Rs<span class="arr"></span></th>
+      <th onclick="hTh('ret')">Return%<span class="arr"></span></th>
+      <th onclick="hTh('ret_3d')">3d Ret%<span class="arr"></span></th>
+      <th onclick="hTh('ret_10d')">10d Ret%<span class="arr"></span></th>
+      <th onclick="hTh('max_gain')">Max Gain%<span class="arr"></span></th>
+      <th onclick="hTh('max_dd')">Max DD%<span class="arr"></span></th>
+      <th onclick="hTh('ctx_rsi')">RSI at Sig<span class="arr"></span></th>
+      <th onclick="hTh('ctx_vol_r')">Vol Ratio<span class="arr"></span></th>
+      <th onclick="hTh('ctx_ret5')">5d Before%<span class="arr"></span></th>
+      <th onclick="hTh('ctx_ret20')">20d Before%<span class="arr"></span></th>
+      <th onclick="hTh('hold_days')">Hold<span class="arr"></span></th>
+    </tr></thead>
+    <tbody id="hist-tbody"><tr><td colspan="19" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+  </table></div>
 </div>
 
-<!-- PAGE: LONG-TERM PICKS -->
+<div class="page" id="page-uc1">
+  <div class="sh">&#x1F4C8; UC1: Surge Momentum <small>stock rises X% in N days &#x2192; always positive for M days &#x00B7; &#x2265;95% win &#x00B7; &#x2265;10% return</small></div>
+  <div class="pill-row" id="uc1-pills"></div>
+  <div class="fbar">
+    <button class="fb on" id="u1g-Ap" onclick="tg('uc1Grds','A+',this);renderUC('uc1')">A+</button>
+    <button class="fb on" id="u1g-A"  onclick="tg('uc1Grds','A',this);renderUC('uc1')">A</button>
+    <span class="fsep">|</span>
+    <button class="fb on" id="u1s-rr"  onclick="ucSrt('uc1','ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="u1s-avg"    onclick="ucSrt('uc1','avg_ret',this)">Avg Ret</button>
+    <button class="fb" id="u1s-min"    onclick="ucSrt('uc1','min_ret',this)">Min Ret</button>
+    <button class="fb" id="u1s-n"      onclick="ucSrt('uc1','n_trades',this)">Occurrences</button>
+    <span class="fsep">|</span>
+    <input class="si" id="u1q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderUC('uc1')">
+  </div>
+  <div class="twrap"><table class="tbl" style="min-width:900px" id="uc1-tbl">
+    <thead><tr>
+      <th style="width:20px"></th>
+      <th onclick="ucTh('uc1','sym')">Stock<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','price')">Price<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','grade')">Grade<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','confidence')">Conf%<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','ret_rate')">Ret%/Day&#x1F3AF;<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','avg_ret')">Avg Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','min_ret')">Min Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','hold_days')">Hold Days<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','win_rate')">Win Rate<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','n_trades')">Occurrences<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','sharpe')">Sharpe<span class="arr"></span></th>
+      <th>Description</th>
+    </tr></thead>
+    <tbody id="uc1-tbody"><tr><td colspan="13" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="page" id="page-uc2">
+  <div class="sh">&#x1F4C5; UC2: Seasonal Patterns <small>stock reliably up in certain months/quarters &#x00B7; &#x2265;95% win &#x00B7; &#x2265;10% return</small></div>
+  <div class="pill-row" id="uc2-pills"></div>
+  <div class="fbar">
+    <button class="fb on" id="u2g-Ap" onclick="tg('uc2Grds','A+',this);renderUC('uc2')">A+</button>
+    <button class="fb on" id="u2g-A"  onclick="tg('uc2Grds','A',this);renderUC('uc2')">A</button>
+    <span class="fsep">|</span>
+    <button class="fb on" id="u2s-rr"  onclick="ucSrt('uc2','ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="u2s-avg"    onclick="ucSrt('uc2','avg_ret',this)">Avg Ret</button>
+    <button class="fb" id="u2s-min"    onclick="ucSrt('uc2','min_ret',this)">Min Ret</button>
+    <span class="fsep">|</span>
+    <input class="si" id="u2q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderUC('uc2')">
+  </div>
+  <div class="twrap"><table class="tbl" style="min-width:900px" id="uc2-tbl">
+    <thead><tr>
+      <th style="width:20px"></th>
+      <th onclick="ucTh('uc2','sym')">Stock<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','price')">Price<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','grade')">Grade<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','confidence')">Conf%<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','ret_rate')">Ret%/Day&#x1F3AF;<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','avg_ret')">Avg Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','min_ret')">Min Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','hold_days')">Hold Days<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','win_rate')">Win Rate<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','n_trades')">Occurrences<span class="arr"></span></th>
+      <th>Season</th>
+    </tr></thead>
+    <tbody id="uc2-tbody"><tr><td colspan="12" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="page" id="page-uc3">
+  <div class="sh">&#x1F9EC; UC3: Combined Signals <small>surge momentum + strong season = double confirmed &#x00B7; highest quality</small></div>
+  <div class="pill-row" id="uc3-pills"></div>
+  <div class="fbar">
+    <button class="fb on" id="u3g-Ap" onclick="tg('uc3Grds','A+',this);renderUC('uc3')">A+</button>
+    <button class="fb on" id="u3g-A"  onclick="tg('uc3Grds','A',this);renderUC('uc3')">A</button>
+    <span class="fsep">|</span>
+    <button class="fb on" id="u3s-rr"  onclick="ucSrt('uc3','ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="u3s-avg"    onclick="ucSrt('uc3','avg_ret',this)">Avg Ret</button>
+    <span class="fsep">|</span>
+    <input class="si" id="u3q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderUC('uc3')">
+  </div>
+  <div class="twrap"><table class="tbl" style="min-width:900px" id="uc3-tbl">
+    <thead><tr>
+      <th style="width:20px"></th>
+      <th onclick="ucTh('uc3','sym')">Stock<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','price')">Price<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','grade')">Grade<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','confidence')">Conf%<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','ret_rate')">Ret%/Day&#x1F3AF;<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','avg_ret')">Avg Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','min_ret')">Min Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','hold_days')">Hold Days<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','win_rate')">Win Rate<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','n_trades')">Occurrences<span class="arr"></span></th>
+    </tr></thead>
+    <tbody id="uc3-tbody"><tr><td colspan="11" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="page" id="page-uc4">
+  <div class="sh">&#x1F50C; UC4: Technical Patterns <small>25 strategies &#x00B7; 300+ parameter combos &#x00B7; best per stock</small></div>
+  <div class="pill-row" id="uc4-pills"></div>
+  <div class="fbar">
+    <button class="fb on" id="u4g-Ap" onclick="tg('uc4Grds','A+',this);renderUC('uc4')">A+</button>
+    <button class="fb on" id="u4g-A"  onclick="tg('uc4Grds','A',this);renderUC('uc4')">A</button>
+    <span class="fsep">|</span>
+    <button class="fb on" id="u4s-rr"  onclick="ucSrt('uc4','ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="u4s-avg"    onclick="ucSrt('uc4','avg_ret',this)">Avg Ret</button>
+    <button class="fb" id="u4s-min"    onclick="ucSrt('uc4','min_ret',this)">Min Ret</button>
+    <button class="fb" id="u4s-sh"     onclick="ucSrt('uc4','sharpe',this)">Sharpe</button>
+    <span class="fsep">|</span>
+    <input class="si" id="u4q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderUC('uc4')">
+  </div>
+  <div class="twrap"><table class="tbl" style="min-width:1000px" id="uc4-tbl">
+    <thead><tr>
+      <th style="width:20px"></th>
+      <th onclick="ucTh('uc4','sym')">Stock<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','price')">Price<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','grade')">Grade<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','confidence')">Conf%<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','ret_rate')">Ret%/Day&#x1F3AF;<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','avg_ret')">Avg Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','min_ret')">Min Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','hold_days')">Hold Days<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','win_rate')">Win Rate<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','n_trades')">Occ<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','sharpe')">Sharpe<span class="arr"></span></th>
+      <th>Strategy</th>
+    </tr></thead>
+    <tbody id="uc4-tbody"><tr><td colspan="13" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+  </table></div>
+</div>
+
 <div class="page" id="page-longterm">
-  <div class="sh">&#x1F331; Long-Term Investment Picks <small>A/A+ grade &middot; OOS verified &middot; LT score &ge;50 &middot; 100% win rate</small></div>
+  <div class="sh">&#x1F331; Long-Term Investment Picks <small>confidence &#x2265;70% &#x00B7; A/A+ grade &#x00B7; holds across multiple years</small></div>
   <div class="pill-row" id="lt-pills"></div>
   <div class="fbar">
-    <span class="fsep">Grade:</span>
-    <button class="fb on" id="ltg-Ap" onclick="toggleLTGrd('A+',this)">A+</button>
-    <button class="fb on" id="ltg-A"  onclick="toggleLTGrd('A',this)">A</button>
+    <button class="fb on" id="ltg-Ap" onclick="tg('ltGrds','A+',this);renderLT()">A+</button>
+    <button class="fb on" id="ltg-A"  onclick="tg('ltGrds','A',this);renderLT()">A</button>
     <span class="fsep">|</span>
-    <button class="fb on" id="lts-score" onclick="ltSort('longterm_score',this)">LT Score</button>
-    <button class="fb" id="lts-ret"      onclick="ltSort('avg_ret',this)">Avg Return</button>
-    <button class="fb" id="lts-min"      onclick="ltSort('min_ret',this)">Min Return</button>
+    <button class="fb on" id="lts-sc"  onclick="ltSrt('longterm_score',this)">LT Score</button>
+    <button class="fb" id="lts-rr"     onclick="ltSrt('ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="lts-avg"    onclick="ltSrt('avg_ret',this)">Avg Ret</button>
     <span class="fsep">|</span>
-    <input class="si" id="lt-q" placeholder="Symbol&hellip;" style="width:100px" oninput="renderLT()">
+    <input class="si" id="ltq" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderLT()">
   </div>
-  <div id="lt-grid"><div class="empty"><div class="spinner"></div>Loading&hellip;</div></div>
+  <div id="lt-grid"><div class="empty"><div class="spinner"></div>Loading&#x2026;</div></div>
 </div>
 
-<!-- PAGE: ALL STOCKS -->
 <div class="page" id="page-allstocks">
-  <div class="sh">&#x1F4CA; All Analysed Stocks <small>click row to expand &middot; Rs 5Cr+ turnover &middot; price &gt;Rs10 &middot; 100% win rate</small></div>
+  <div class="sh">&#x1F4CA; All Stocks <small>click row to expand &#x00B7; sorted by Ret%/Day by default</small></div>
   <div class="pill-row" id="all-pills"></div>
   <div class="fbar">
-    <span class="fsep">Filter (multi):</span>
-    <button class="fb on" id="af-ALL"    onclick="toggleAF('ALL',this)">All</button>
-    <button class="fb" id="af-Ap"        onclick="toggleAF('A+',this)">A+</button>
-    <button class="fb" id="af-SIGNAL"    onclick="toggleAF('SIGNAL',this)">Signal Today</button>
-    <button class="fb" id="af-LT"        onclick="toggleAF('LT',this)">LT&ge;60</button>
+    <span class="fsep">Filter:</span>
+    <button class="fb on" id="af-ALL"    onclick="togAF('ALL',this)">All</button>
+    <button class="fb" id="af-Ap"        onclick="togAF('A+',this)">A+</button>
+    <button class="fb" id="af-SIGNAL"    onclick="togAF('SIGNAL',this)">Signal Today</button>
+    <button class="fb" id="af-LT"        onclick="togAF('LT',this)">LT&#x2265;60</button>
+    <button class="fb" id="af-UC1"       onclick="togAF('UC1',this)">Has UC1</button>
+    <button class="fb" id="af-UC2"       onclick="togAF('UC2',this)">Has UC2</button>
     <span class="fsep">|</span>
-    <button class="fb on" id="allsk" onclick="allSort('longterm_score',this)">LT Score</button>
-    <button class="fb" id="allsa"    onclick="allSort('best_avg_ret',this)">Avg Ret</button>
-    <button class="fb" id="allsm"    onclick="allSort('best_min_ret',this)">Min Ret</button>
+    <button class="fb on" id="allsrr" onclick="allSrt('best_ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="allsav"    onclick="allSrt('best_avg_ret',this)">Avg Ret</button>
+    <button class="fb" id="allsmn"    onclick="allSrt('best_min_ret',this)">Min Ret</button>
+    <button class="fb" id="allsco"    onclick="allSrt('confidence',this)">Confidence</button>
     <span class="fsep">|</span>
-    <input class="si" id="all-q" placeholder="Symbol&hellip;" style="width:100px" oninput="renderAll()">
+    <input class="si" id="allq" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderAll()">
   </div>
-  <div class="twrap">
-    <table class="tbl" id="all-tbl" style="min-width:1000px">
-      <thead><tr>
-        <th style="width:20px"></th>
-        <th onclick="allTh('sym')">Stock<span class="arr"></span></th>
-        <th onclick="allTh('price')">Price<span class="arr"></span></th>
-        <th onclick="allTh('best_grade')">Grade<span class="arr"></span></th>
-        <th onclick="allTh('longterm_score')">LT Score<span class="arr"></span></th>
-        <th onclick="allTh('best_strategy')">Strategy<span class="arr"></span></th>
-        <th onclick="allTh('best_avg_ret')">Avg Ret%<span class="arr"></span></th>
-        <th onclick="allTh('best_min_ret')">Min Ret%<span class="arr"></span></th>
-        <th onclick="allTh('best_max_ret')">Max Ret%<span class="arr"></span></th>
-        <th onclick="allTh('best_hold_days')">Hold<span class="arr"></span></th>
-        <th onclick="allTh('best_max_gain')">MaxGain<span class="arr"></span></th>
-        <th onclick="allTh('best_max_dd')">MaxDD<span class="arr"></span></th>
-        <th onclick="allTh('best_sharpe')">Sharpe<span class="arr"></span></th>
-        <th onclick="allTh('oos_avg_ret')">OOS Ret%<span class="arr"></span></th>
-        <th onclick="allTh('n_strategies')">Strats<span class="arr"></span></th>
-        <th onclick="allTh('rsi')">RSI<span class="arr"></span></th>
-        <th onclick="allTh('vol_ratio')">Vol Ratio<span class="arr"></span></th>
-        <th onclick="allTh('ret1w')">1W%<span class="arr"></span></th>
-        <th onclick="allTh('ret1m')">1M%<span class="arr"></span></th>
-        <th onclick="allTh('avg_turnover_cr')">Turnover<span class="arr"></span></th>
-        <th onclick="allTh('signal_today')">Alert<span class="arr"></span></th>
-      </tr></thead>
-      <tbody id="all-tbody"><tr><td colspan="21" class="empty"><div class="spinner"></div>Loading&hellip;</td></tr></tbody>
-    </table>
-  </div>
+  <div class="twrap"><table class="tbl" style="min-width:1100px">
+    <thead><tr>
+      <th style="width:20px"></th>
+      <th onclick="allTh('sym')">Stock<span class="arr"></span></th>
+      <th onclick="allTh('price')">Price<span class="arr"></span></th>
+      <th onclick="allTh('best_grade')">Grade<span class="arr"></span></th>
+      <th onclick="allTh('confidence')">Conf%<span class="arr"></span></th>
+      <th onclick="allTh('longterm_score')">LT Score<span class="arr"></span></th>
+      <th onclick="allTh('best_uc')">Best UC<span class="arr"></span></th>
+      <th onclick="allTh('best_ret_rate')" style="background:rgba(34,197,94,.06)">Ret%/Day&#x1F3AF;<span class="arr"></span></th>
+      <th onclick="allTh('best_avg_ret')">Avg Ret%<span class="arr"></span></th>
+      <th onclick="allTh('best_min_ret')">Min Ret%<span class="arr"></span></th>
+      <th onclick="allTh('best_hold_days')">Hold<span class="arr"></span></th>
+      <th onclick="allTh('best_wr')">Win%<span class="arr"></span></th>
+      <th onclick="allTh('best_n_trades')">Occ<span class="arr"></span></th>
+      <th onclick="allTh('best_sharpe')">Sharpe<span class="arr"></span></th>
+      <th onclick="allTh('rsi')">RSI<span class="arr"></span></th>
+      <th onclick="allTh('vol_r')">Vol Ratio<span class="arr"></span></th>
+      <th onclick="allTh('adx')">ADX<span class="arr"></span></th>
+      <th onclick="allTh('ret5')">5d Ret%<span class="arr"></span></th>
+      <th onclick="allTh('ret20')">20d Ret%<span class="arr"></span></th>
+      <th onclick="allTh('avg_turnover_cr')">Turnover Cr<span class="arr"></span></th>
+      <th onclick="allTh('signal_today')">Alert<span class="arr"></span></th>
+    </tr></thead>
+    <tbody id="all-tbody"><tr><td colspan="21" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+  </table></div>
 </div>
 
-<!-- PAGE: STRATEGY STATS -->
-<div class="page" id="page-strategies">
-  <div class="sh">&#x1F52C; Strategy Stats <small>which strategies found 100%-win patterns on most stocks</small></div>
-  <div id="strat-pills" class="pill-row"></div>
-  <div id="strat-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px"></div>
-</div>
-
-<!-- PAGE: FIELD GUIDE -->
-<div class="page" id="page-glossary">
-  <div class="sh">&#x1F4D6; Field &amp; Column Guide</div>
-  <div style="max-width:780px">
-    <div class="gloss-section"><div class="gloss-title green">&#x1F3F7; Grade System</div>
-      <div class="ctx-row"><span class="ctx-lbl"><strong class="green">A+</strong> Double OOS Verified</span><span style="font-size:11px;color:var(--t2)">Passes 100% win rate on BOTH halves of 5-year data independently. Highest confidence. The pattern works on data the model never trained on.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl"><strong class="blue">A</strong> Single OOS Verified</span><span style="font-size:11px;color:var(--t2)">Passes one half out-of-sample. Good but less robust than A+.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl"><strong class="muted">B</strong> Not shown</span><span style="font-size:11px;color:var(--t2)">Failed OOS verification. Discarded.</span></div>
+<div class="page" id="page-guide">
+  <div class="sh">&#x1F4D6; Field Guide</div>
+  <div style="max-width:780px;display:grid;gap:12px">
+    <div class="lt-card"><div style="color:var(--gold);font-weight:600;margin-bottom:8px">&#x1F4CA; The 4 Use Cases</div>
+      <div class="ctx-row"><span class="ctx-lbl"><span class="uc-badge uc1">UC1</span> Surge Momentum</span><span style="font-size:11px;color:var(--t2)">When stock rises &#x2265;X% over N days, it reliably continues positively. Searches X=[3,5,7,10,15,20]%, N=[1-20]d, fwd=[5-60]d. Best combo per stock.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl"><span class="uc-badge uc2">UC2</span> Seasonal</span><span style="font-size:11px;color:var(--t2)">Stock goes up reliably in specific months or quarters every year. Checks all 12 months and 4 quarters with 10/20/30d hold periods.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl"><span class="uc-badge uc3">UC3</span> Combined</span><span style="font-size:11px;color:var(--t2)">Surge signal firing during a strong seasonal window = double confirmation. Highest quality signal.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl"><span class="uc-badge uc4">UC4</span> Technical</span><span style="font-size:11px;color:var(--t2)">25 strategies × 300+ parameter combos: SMA/EMA cross, RSI, MACD, Bollinger, ADX, Stochastic, Williams %R, OBV, Supertrend, Double Bottom, Bull Flag, Pivot Points, ATR, Gap, Volume Breakout, Consecutive Reversal, Floor Bounce, Mean Reversion, 52W Break, Multi-Confirm, and more.</span></div>
     </div>
-    <div class="gloss-section"><div class="gloss-title amber">&#x1F4C8; Return Columns</div>
-      <div class="ctx-row"><span class="ctx-lbl">Avg Ret%</span><span style="font-size:11px;color:var(--t2)">Average return across ALL historical trades. Entry = next-day open after signal. Exit = close after Hold Days.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">Min Ret%</span><span style="font-size:11px;color:var(--t2)">The LOWEST return ever in history — still positive (100% rule). This is your guaranteed worst-case profit floor.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">Max Ret%</span><span style="font-size:11px;color:var(--t2)">Highest single-trade return ever seen. Shows the ceiling.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">Max Gain%</span><span style="font-size:11px;color:var(--t2)">Average highest intraday close during hold period vs entry. If you sell at the intraday peak, this is what you could get.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">Max DD%</span><span style="font-size:11px;color:var(--t2)">Worst intraday dip below entry during hold window. Shows max pain before recovery. Even if negative here, the final exit return is always positive.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">OOS Ret%</span><span style="font-size:11px;color:var(--t2)">Average return on the unseen out-of-sample half. The most important verification number.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">Hold Days</span><span style="font-size:11px;color:var(--t2)">Trading days to hold. 5 = short-term (~1 week). 20 = medium-term (~1 month). System picks whichever gives the better result.</span></div>
+    <div class="lt-card"><div style="color:var(--amber);font-weight:600;margin-bottom:8px">&#x1F3AF; Ret%/Day — Primary Ranking Metric</div>
+      <p style="font-size:11px;color:var(--t2);line-height:1.7">A stock giving 11% in 5 days (Ret%/Day = 2.2) ranks higher than one giving 15% in 9 days (Ret%/Day = 1.67). This metric fairly compares strategies across different hold periods. Higher is always better.</p>
     </div>
-    <div class="gloss-section"><div class="gloss-title blue">&#x1F4E1; Signal Context Columns (historical range when signal fires)</div>
-      <div class="ctx-row"><span class="ctx-lbl">RSI at Signal</span><span style="font-size:11px;color:var(--t2)">RSI range when this signal historically triggered. If today's RSI is inside this range, the signal is in its confirmed zone. Below 30 = oversold. Above 70 = overbought.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">Vol Ratio at Signal</span><span style="font-size:11px;color:var(--t2)">Volume &#247; 20-day average when signal fired. 2x = double normal volume. Shows how much institutional activity was present when the pattern triggered.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">5d Before%</span><span style="font-size:11px;color:var(--t2)">The 5-day return BEFORE the signal. Negative = stock was falling before reversal. Positive = continuation signal. Tells you what trend preceded the pattern.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">20d Before%</span><span style="font-size:11px;color:var(--t2)">20-day return before signal. Shows macro context — was it a downtrend reversal or uptrend continuation?</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">RSI now / Vol Ratio now</span><span style="font-size:11px;color:var(--t2)">Current values. Compare with the historical range — if they match the range, today's signal is in the same zone as all past wins.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">1W% / 1M%</span><span style="font-size:11px;color:var(--t2)">Actual return in last 1 week and 1 month as of today. Compare with ctx_ret5 and ctx_ret20 range to see if context matches historical triggers.</span></div>
+    <div class="lt-card"><div style="color:var(--green);font-weight:600;margin-bottom:8px">&#x1F3F7; Grade & Confidence System</div>
+      <div class="ctx-row"><span class="ctx-lbl"><span class="gb gAp">A+</span> 100% confidence</span><span style="font-size:11px;color:var(--t2)">Pattern passes &#x2265;95% win rate in ALL validation periods: Train (2020-22), OOS-2023, OOS-2024, OOS-2025. Never broke.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl"><span class="gb gA">A</span> 75%+ confidence</span><span style="font-size:11px;color:var(--t2)">Passes 3 of 4 validation periods. Slight softening in one year but overall robust.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Confidence %</span><span style="font-size:11px;color:var(--t2)">% of validation periods where the pattern held &#x2265;95% win rate. 100% = never failed in any year.</span></div>
     </div>
-    <div class="gloss-section"><div class="gloss-title gold">&#x1F3C5; Other Fields</div>
-      <div class="ctx-row"><span class="ctx-lbl">LT Score (0-100)</span><span style="font-size:11px;color:var(--t2)">Long-term suitability score. Above EMA50 (+15), 60d positive (+10-20), A+ strategies (+up to 20), best avg return (+up to 15).</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">Sharpe</span><span style="font-size:11px;color:var(--t2)">Risk-adjusted return. Higher = better return per unit of variability. Above 1.0 is good, above 2.0 is excellent.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">n_strategies</span><span style="font-size:11px;color:var(--t2)">Number of independent strategies that passed 100% win rate on this stock. More = higher confidence the stock has multiple reliable entry patterns.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">Turnover Cr</span><span style="font-size:11px;color:var(--t2)">Average daily trading value in crores. Proxy for market cap. Rs 5Cr+ daily = typically 500Cr+ market cap.</span></div>
-      <div class="ctx-row"><span class="ctx-lbl">Signal History tab</span><span style="font-size:11px;color:var(--t2)">Every historical occurrence of every qualifying signal, with: signal date, entry date, exit date, actual return, 3d/10d intermediate returns, and the exact RSI/vol/trend conditions when it fired.</span></div>
+    <div class="lt-card"><div style="color:var(--blue);font-weight:600;margin-bottom:8px">&#x1F4E1; Key Columns Explained</div>
+      <div class="ctx-row"><span class="ctx-lbl">Min Ret%</span><span style="font-size:11px;color:var(--t2)">The LOWEST return ever seen in history. Your guaranteed floor. Every occurrence gave at least this much.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Max DD%</span><span style="font-size:11px;color:var(--t2)">Worst intraday dip below entry during hold. Even when negative, the final exit return is always positive (&#x2265;10% required).</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">RSI at Signal</span><span style="font-size:11px;color:var(--t2)">RSI range historically when this signal fired. Compare with current RSI — if in range, signal is in confirmed zone.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">5d Before% / 20d Before%</span><span style="font-size:11px;color:var(--t2)">What the stock was doing BEFORE the signal. Negative = reversal signal. Positive = continuation signal.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">ADX</span><span style="font-size:11px;color:var(--t2)">Trend strength. Above 25 = strong trend. Above 40 = very strong. Helps confirm breakout signals.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Sharpe</span><span style="font-size:11px;color:var(--t2)">Risk-adjusted return. Above 1.0 good, above 2.0 excellent. Higher = more consistent returns relative to variability.</span></div>
     </div>
-    <div class="gloss-section"><div class="gloss-title" style="color:var(--purple)">&#x1F52C; The 12 Strategies</div>
-      <div id="strat-explain" style="font-size:11px;color:var(--t2);line-height:1.8"></div>
-    </div>
-    <div class="gloss-section"><div class="gloss-title red">&#x26A0; Important</div>
-      <p style="font-size:12px;color:var(--t2);line-height:1.7;margin-bottom:6px"><strong style="color:var(--text)">Min Ret% is your guaranteed floor.</strong> Every single historical trade returned at least Min Ret%. There was never a loss.</p>
-      <p style="font-size:12px;color:var(--t2);line-height:1.7;margin-bottom:6px"><strong style="color:var(--text)">Max DD% can be negative.</strong> The stock may dip intraday before recovering above entry by exit day. This is the max interim pain before the guaranteed positive close.</p>
-      <p style="font-size:12px;color:var(--t2);line-height:1.7"><strong style="color:var(--text)">5 occurrences at 100% = 3.1% chance of luck.</strong> 10 occurrences = 0.1%. Prefer stocks with more historical trades. The OOS challenge further validates it.</p>
+    <div class="lt-card"><div style="color:var(--red);font-weight:600;margin-bottom:8px">&#x26A0; Rules &amp; Caveats</div>
+      <p style="font-size:11px;color:var(--t2);line-height:1.7;margin-bottom:6px">Any occurrence with &#x2264;0% return immediately invalidates the strategy for that stock. No averaging of positives and negatives. Minimum 10% return required per occurrence. 95% win rate required overall.</p>
+      <p style="font-size:11px;color:var(--t2);line-height:1.7">Entry is always next-day open after signal. Minimum 4 occurrences spanning 2+ different calendar years required before a pattern is trusted. 5 occurrences at 95% still has ~3% chance of luck — 10+ occurrences is much more reliable.</p>
     </div>
   </div>
 </div>
 
 <script>
-const REPO='https://raw.githubusercontent.com/animesh2007asansol/itis/main/stock_analysis';
-const DATA={alerts:null,longterm:null,master:null,history:null};
+const BASE='https://raw.githubusercontent.com/animesh2007asansol/itis/main/stock_analysis';
+const D={alerts:null,history:null,master:null,lt:null,uc1:null,uc2:null,uc3:null,uc4:null};
 
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -318,338 +395,314 @@ function showPage(id,btn){
   document.getElementById('page-'+id)?.classList.add('active');
   if(btn)btn.classList.add('active');
 }
+
+// Formatters
 function fmt(n){return n!=null?Number(n).toLocaleString('en-IN',{maximumFractionDigits:2}):'—';}
-function rc(v,d){
-  if(v==null)return '<span class="muted">—</span>';
-  var cls=v>0?'green':v<0?'red':'muted';
-  return '<span class="'+cls+'">'+(v>0?'+':'')+Number(v).toFixed(d||1)+'%</span>';
-}
-function gBadge(g){
-  if(g==='A+')return '<span class="grade-badge gAp">A+</span>';
-  if(g==='A') return '<span class="grade-badge gA">A</span>';
-  return '';
-}
-function sLabel(s){
-  return {SMA_CROSS:'SMA Cross',EMA_BOUNCE:'EMA Bounce',RSI_OVERSOLD:'RSI Oversold',
-    MACD_CROSS:'MACD Cross',BB_BOUNCE:'BB Bounce',VOL_BREAKOUT:'Vol Breakout',
-    CONSEC_REVERSAL:'Consec Reversal',FLOOR_BOUNCE:'Floor Bounce',
-    MOMENTUM_GAP:'Momentum Gap',RANGE_EXPAND:'Range Expand',
-    TREND_PULLBACK:'Trend Pullback',HIGHBREAK_52W:'52W Break'}[s]||s;
-}
-function sBar(s){
-  var p=Math.min(100,s||0);
-  var c=p>=80?'var(--green)':p>=60?'var(--amber)':'var(--red)';
-  return '<div class="sbar-wrap"><div class="sbar"><div class="sbar-fill" style="width:'+p+'%;background:'+c+'"></div></div>'
-    +'<span style="font-size:11px;color:'+c+';font-weight:700;min-width:24px;text-align:right">'+p+'</span></div>';
-}
-function ctxRow(label,obj,cur,unit){
+function fmtI(n){return n!=null?Math.round(n).toLocaleString('en-IN'):'—';}
+function rc(v,d){if(v==null)return '<span class="muted">—</span>';var cls=v>=10?'green':v>0?'amber':'red';return '<span class="'+cls+'">'+(v>0?'+':'')+Number(v).toFixed(d||1)+'%</span>';}
+function gB(g){if(g==='A+')return '<span class="gb gAp">A+</span>';if(g==='A')return '<span class="gb gA">A</span>';return '';}
+function ucB(uc){return '<span class="uc-badge uc'+(uc||'').replace('UC','').toLowerCase()+'">'+(uc||'')+'</span>';}
+function sBar(s){var p=Math.min(100,s||0);var c=p>=80?'var(--green)':p>=60?'var(--amber)':'var(--red)';return '<div class="sbar-wrap"><div class="sbar"><div class="sbar-fill" style="width:'+p+'%;background:'+c+'"></div></div><span style="font-size:10px;color:'+c+';font-weight:700;min-width:24px;text-align:right">'+p+'</span></div>';}
+function confBar(c){var col=c>=75?'var(--green)':c>=50?'var(--amber)':'var(--red)';return '<div style="height:3px;background:var(--b);border-radius:2px;margin-top:3px"><div style="width:'+c+'%;height:100%;background:'+col+';border-radius:2px"></div></div><span class="muted" style="font-size:9px">'+c+'%</span>';}
+function ctxRow(lbl,obj,cur,unit){
   if(!obj)return '';
-  var u=unit||''; var inRange=cur!=null&&cur>=obj.min&&cur<=obj.max;
-  var curSpan=cur!=null?'<span class="'+(inRange?'green':'amber')+'" style="font-family:\'DM Mono\',monospace">'+(cur>0?'+':'')+Number(cur).toFixed(1)+u+'</span>':'';
-  return '<div class="ctx-row"><span class="ctx-lbl">'+label+'</span>'
-    +'<span class="ctx-rng">'+obj.min+u+'&rarr;'+obj.max+u+' (avg '+obj.avg+u+')</span>'
-    +(curSpan?'<span style="font-size:9px;color:var(--t3)">now:</span>'+curSpan:'')+'</div>';
+  var u=unit||''; var inR=cur!=null&&cur>=obj.min&&cur<=obj.max;
+  var cSpan=cur!=null?'<span style="font-family:\'DM Mono\',monospace;color:'+(inR?'var(--green)':'var(--amber)');+";">'+Number(cur).toFixed(1)+u+'</span>':'';
+  return '<div class="ctx-row"><span class="ctx-lbl">'+lbl+'</span><span class="ctx-rng">'+obj.min+u+'&#x2192;'+obj.max+u+' (avg '+obj.avg+u+')</span>'+(cSpan?cSpan:'')+'</div>';
 }
 
 // Multi-select state
-var alertGrds=new Set(['A+','A']), alertStrats=new Set(['ALL']), alertSortK='avg_ret';
-var ltGrds=new Set(['A+','A']), ltSortK='longterm_score';
-var allFilters=new Set(['ALL']), allSortK='longterm_score', allSD='desc';
-var histSortK='sig_date', histSD='desc';
+var alertGrds=new Set(['A+','A']),alertUCs=new Set(['UC1','UC2','UC3','UC4']),alertSK='ret_rate';
+var uc1Grds=new Set(['A+','A']),uc1SK='ret_rate',uc1SD='desc';
+var uc2Grds=new Set(['A+','A']),uc2SK='ret_rate',uc2SD='desc';
+var uc3Grds=new Set(['A+','A']),uc3SK='ret_rate',uc3SD='desc';
+var uc4Grds=new Set(['A+','A']),uc4SK='ret_rate',uc4SD='desc';
+var ltGrds=new Set(['A+','A']),ltSK='longterm_score';
+var allFilters=new Set(['ALL']),allSK='best_ret_rate',allSD='desc';
+var histSK='sig_date',histSD='desc';
 
-function toggleGrd(g,btn){
-  alertGrds.has(g)?alertGrds.delete(g):alertGrds.add(g);
-  if(!alertGrds.size)alertGrds.add(g);
-  btn.classList.toggle('on',alertGrds.has(g)); renderAlerts();
+function tg(stateVar,val,btn){
+  var s=eval(stateVar);
+  s.has(val)?s.delete(val):s.add(val);
+  if(!s.size)s.add(val);
+  btn.classList.toggle('on',s.has(val));
 }
-function toggleStrat(s,btn){
-  if(s==='ALL'){alertStrats=new Set(['ALL']);document.querySelectorAll('[id^="as-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');}
-  else{alertStrats.delete('ALL');document.getElementById('as-ALL')?.classList.remove('on');
-    alertStrats.has(s)?alertStrats.delete(s):alertStrats.add(s);
-    if(!alertStrats.size){alertStrats.add('ALL');document.getElementById('as-ALL')?.classList.add('on');}
-    btn.classList.toggle('on',alertStrats.has(s));}
-  renderAlerts();
-}
-function alertSort(k,btn){alertSortK=k;document.querySelectorAll('[id^="aort-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderAlerts();}
-function toggleLTGrd(g,btn){ltGrds.has(g)?ltGrds.delete(g):ltGrds.add(g);if(!ltGrds.size)ltGrds.add(g);btn.classList.toggle('on',ltGrds.has(g));renderLT();}
-function ltSort(k,btn){ltSortK=k;document.querySelectorAll('[id^="lts-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderLT();}
-function toggleAF(f,btn){
+function aSrt(k,btn){alertSK=k;document.querySelectorAll('[id^="aort-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderAlerts();}
+function ucSrt(uc,k,btn){eval(uc+'SK=k');document.querySelectorAll('[id^="u'+uc.slice(-1)+'s-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderUC(uc);}
+function ucTh(uc,k){var cur=eval(uc+'SK'),sd=eval(uc+'SD');if(cur===k)eval(uc+'SD="'+( sd==='desc'?'asc':'desc')+'"');else{eval(uc+'SK=k');eval(uc+'SD="desc"');}renderUC(uc);}
+function ltSrt(k,btn){ltSK=k;document.querySelectorAll('[id^="lts-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderLT();}
+function togAF(f,btn){
   if(f==='ALL'){allFilters=new Set(['ALL']);document.querySelectorAll('[id^="af-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');}
-  else{allFilters.delete('ALL');document.getElementById('af-ALL')?.classList.remove('on');
-    allFilters.has(f)?allFilters.delete(f):allFilters.add(f);
-    if(!allFilters.size){allFilters.add('ALL');document.getElementById('af-ALL')?.classList.add('on');}
-    btn.classList.toggle('on',allFilters.has(f));}
+  else{allFilters.delete('ALL');document.getElementById('af-ALL')?.classList.remove('on');allFilters.has(f)?allFilters.delete(f):allFilters.add(f);if(!allFilters.size){allFilters.add('ALL');document.getElementById('af-ALL')?.classList.add('on');}btn.classList.toggle('on',allFilters.has(f));}
   renderAll();
 }
-function allSort(k,btn){allSortK=k;document.querySelectorAll('[id^="alls"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderAll();}
-function allTh(k){if(allSortK===k)allSD=allSD==='desc'?'asc':'desc';else{allSortK=k;allSD='desc';}renderAll();}
-function histSort(k,btn){histSortK=k;document.querySelectorAll('[id^="hort-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderHistory();}
-function histTh(k){if(histSortK===k)histSD=histSD==='desc'?'asc':'desc';else{histSortK=k;histSD='desc';}renderHistory();}
+function allSrt(k,btn){allSK=k;document.querySelectorAll('[id^="alls"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderAll();}
+function allTh(k){if(allSK===k)allSD=allSD==='desc'?'asc':'desc';else{allSK=k;allSD='desc';}renderAll();}
+function hSrt(k,btn){histSK=k;document.querySelectorAll('[id^="hsrt-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderHist();}
+function hTh(k){if(histSK===k)histSD=histSD==='desc'?'asc':'desc';else{histSK=k;histSD='desc';}renderHist();}
 
 async function loadData(){
-  const fs=await Promise.allSettled([
-    fetch(REPO+'/daily_alerts.json'),fetch(REPO+'/longterm_picks.json'),
-    fetch(REPO+'/master_results.json'),fetch(REPO+'/signal_history.json'),
+  const r=await Promise.allSettled([
+    fetch(BASE+'/daily_alerts.json'),fetch(BASE+'/signal_history.json'),
+    fetch(BASE+'/master_results.json'),fetch(BASE+'/longterm_picks.json'),
+    fetch(BASE+'/uc1_surge.json'),fetch(BASE+'/uc2_seasonal.json'),
+    fetch(BASE+'/uc3_combined.json'),fetch(BASE+'/uc4_technical.json'),
   ]);
-  try{if(fs[0].value?.ok)DATA.alerts  =await fs[0].value.json();}catch(e){}
-  try{if(fs[1].value?.ok)DATA.longterm=await fs[1].value.json();}catch(e){}
-  try{if(fs[2].value?.ok)DATA.master  =await fs[2].value.json();}catch(e){}
-  try{if(fs[3].value?.ok)DATA.history =await fs[3].value.json();}catch(e){}
-  renderAlerts();renderLT();renderAll();renderStratStats();renderHistory();buildStratExplain();
+  const keys=['alerts','history','master','lt','uc1','uc2','uc3','uc4'];
+  for(let i=0;i<r.length;i++){
+    try{if(r[i].value?.ok)D[keys[i]]=await r[i].value.json();}catch(e){}
+  }
+  renderAlerts();renderHist();renderLT();renderAll();
+  ['uc1','uc2','uc3','uc4'].forEach(u=>renderUC(u));
 }
 
 function renderAlerts(){
-  var d=DATA.alerts; var el=document.getElementById('alert-grid');
+  var d=D.alerts; var el=document.getElementById('alert-grid');
   var dEl=document.getElementById('alert-date');
-  if(!d){el.innerHTML='<div class="empty">No alerts. Run master_stock_analyzer workflow.</div>';if(dEl)dEl.textContent='No data';return;}
-  if(dEl)dEl.textContent='Signal date: '+d.signal_date+' · Confirmed traded on this date';
+  if(!d){el.innerHTML='<div class="empty">No alerts. Run master_stock_analyzer_v3 workflow.</div>';if(dEl)dEl.textContent='No data';return;}
+  if(dEl)dEl.textContent='Signal date: '+d.signal_date+' &#x00B7; All stocks traded today &#x00B7; Ranked by Return%/Day';
   var rows=[...(d.alerts||[])];
   var q=(document.getElementById('alert-q')?.value||'').toUpperCase().trim();
   if(q)rows=rows.filter(r=>r.sym.includes(q));
-  if(!alertGrds.has('A+'))rows=rows.filter(r=>r.best_grade!=='A+');
-  if(!alertGrds.has('A')) rows=rows.filter(r=>r.best_grade!=='A');
-  if(!alertStrats.has('ALL'))rows=rows.filter(r=>(r.signal_strategies||[]).some(s=>alertStrats.has(s))||alertStrats.has(r.best_strategy));
-  rows.sort((a,b)=>(b[alertSortK]??0)-(a[alertSortK]??0));
-  var nAp=rows.filter(r=>r.best_grade==='A+').length;
+  if(!alertGrds.has('A+'))rows=rows.filter(r=>r.grade!=='A+');
+  if(!alertGrds.has('A')) rows=rows.filter(r=>r.grade!=='A');
+  rows=rows.filter(r=>(r.signal_from||[]).some(u=>alertUCs.has(u))||alertUCs.has(r.best_uc));
+  rows.sort((a,b)=>(b[alertSK]??0)-(a[alertSK]??0));
+  var nAp=rows.filter(r=>r.grade==='A+').length;
   document.getElementById('alert-pills').innerHTML=[
-    ['Alerts',d.n_alerts,'b'],['A+',nAp,'g','both OOS halves 100%'],
-    ['A',rows.length-nAp,'b'],['Win Rate','100%','g'],
-  ].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>').join('');
+    ['Total Alerts',d.n_alerts,'b'],['A+',nAp,'g','all years validated'],
+    ['A',rows.length-nAp,'b'],['Min Return','&#x2265;10%','g'],
+  ].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>').join('');
   if(!rows.length){el.innerHTML='<div class="empty">No alerts match filters.</div>';return;}
   el.innerHTML=rows.map(a=>{
-    var stgs=(a.signal_strategies||[]).map(s=>'<span class="stag">'+sLabel(s)+'</span>').join('');
-    var tr=(a.recent_trades||[]).map(t=>'<tr>'
-      +'<td class="mono muted">'+t.sig_date+'</td><td class="mono">&#8377;'+t.entry_px+'</td>'
-      +'<td class="mono">&#8377;'+t.exit_px+'</td>'
+    var frm=(a.signal_from||[]).map(u=>ucB(u)).join('');
+    var tr=(a.recent_trades||[]).map(t=>'<tr><td class="mono muted">'+t.sig_date+'</td><td class="mono">&#8377;'+t.entry_px+'</td><td class="mono">&#8377;'+t.exit_px+'</td>'
       +'<td class="mono green">+'+Number(t.ret||0).toFixed(1)+'%</td>'
       +'<td class="mono green">+'+Number(t.max_gain||0).toFixed(1)+'%</td>'
-      +'<td class="mono '+(t.max_dd<-1?'amber':'muted')+'">'+Number(t.max_dd||0).toFixed(1)+'%</td>'
-      +'</tr>').join('');
+      +'<td class="mono '+(t.max_dd<-2?'amber':'muted')+'">'+Number(t.max_dd||0).toFixed(1)+'%</td></tr>').join('');
+    var uc1s=a.uc1?'<div style="font-size:9px;color:var(--t3);margin-top:6px">&#x1F4C8; UC1: '+a.uc1.desc+'</div>':'';
+    var uc2s=a.uc2?'<div style="font-size:9px;color:var(--t3);margin-top:2px">&#x1F4C5; UC2: '+a.uc2.desc+'</div>':'';
     return '<div class="ac">'
       +'<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:8px">'
-      +'<div><div style="display:flex;align-items:center;gap:6px">'
-      +'<span style="font-size:17px;font-weight:700;color:var(--gold)">'+a.sym+'</span>'+gBadge(a.best_grade)+'</div>'
-      +'<div style="font-size:11px;color:var(--t2);margin-top:2px">&#8377;'+fmt(a.price)+' &middot; '+a.avg_turnover_cr+' Cr</div>'
-      +'<div style="margin-top:4px">'+stgs+'</div></div>'
-      +'<div style="text-align:right"><div class="green" style="font-size:20px;font-weight:700">+'+Number(a.avg_ret||0).toFixed(1)+'%</div>'
-      +'<div style="font-size:9px;color:var(--t3)">avg over '+a.hold_days+'d</div>'
-      +'<div class="amber" style="font-size:10px;margin-top:2px">Min ever: +'+Number(a.min_ret||0).toFixed(1)+'%</div></div></div>'
+      +'<div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:17px;font-weight:700;color:var(--gold)">'+a.sym+'</span>'+gB(a.grade)+'</div>'
+      +'<div style="font-size:11px;color:var(--t2);margin-top:2px">&#8377;'+fmt(a.price)+' &#x00B7; '+a.avg_turnover_cr+' Cr daily</div>'
+      +'<div style="margin-top:4px">'+frm+'</div></div>'
+      +'<div style="text-align:right">'
+      +'<div class="green" style="font-size:20px;font-weight:700">'+Number(a.ret_rate||0).toFixed(2)+'%/day</div>'
+      +'<div style="font-size:9px;color:var(--t3)">return rate (ret&#xF7;days)</div>'
+      +'<div class="amber" style="font-size:11px;margin-top:2px">avg +'+Number(a.avg_ret||0).toFixed(1)+'% | min +'+Number(a.min_ret||0).toFixed(1)+'%</div>'
+      +'<div style="font-size:10px;color:var(--t3)">hold '+a.hold_days+'d | '+a.win_rate+'% win | conf '+a.confidence+'%</div>'
+      +'</div></div>'
       +'<div class="ac-grid">'
-      +'<div class="ac-mini"><div class="ac-ml">Strategy</div><div class="ac-mv" style="font-size:10px">'+sLabel(a.best_strategy)+'</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Hold Days</div><div class="ac-mv">'+a.hold_days+'d</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Strategy</div><div class="ac-mv" style="font-size:10px">'+ucB(a.best_uc)+a.best_desc.slice(0,40)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Ret%/Day</div><div class="ac-mv green" style="font-size:16px;font-weight:700">'+Number(a.ret_rate||0).toFixed(2)+'</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">Min Return</div><div class="ac-mv green">+'+Number(a.min_ret||0).toFixed(1)+'%</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Avg Max Gain</div><div class="ac-mv green">+'+Number(a.max_gain||0).toFixed(1)+'%</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">Sharpe</div><div class="ac-mv">'+Number(a.sharpe||0).toFixed(1)+'</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Max DD%</div><div class="ac-mv '+(a.max_dd<-2?'amber':'muted')+'">'+Number(a.max_dd||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Occurrences</div><div class="ac-mv">'+a.n_trades+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Confidence</div><div class="ac-mv '+(a.confidence>=75?'green':'amber')+'">'+a.confidence+'%</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">RSI now</div><div class="ac-mv '+(a.rsi<30?'green':a.rsi>70?'red':'muted')+'">'+Number(a.rsi||0).toFixed(0)+'</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Vol Ratio now</div><div class="ac-mv '+(a.vol_ratio>=2?'green':a.vol_ratio>=1.5?'amber':'muted')+'">'+Number(a.vol_ratio||0).toFixed(1)+'x</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">1W Return</div>'+rc(a.ret1w)+'</div>'
-      +'<div class="ac-mini"><div class="ac-ml">1M Return</div>'+rc(a.ret1m)+'</div>'
+      +'<div class="ac-mini"><div class="ac-ml">ADX</div><div class="ac-mv '+(a.adx>25?'green':'muted')+'">'+Number(a.adx||0).toFixed(0)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Vol Ratio</div><div class="ac-mv '+(a.vol_r>=2?'green':a.vol_r>=1.5?'amber':'muted')+'">'+Number(a.vol_r||0).toFixed(1)+'x</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">5d Return</div>'+rc(a.ret5)+'</div>'
+      +'<div class="ac-mini"><div class="ac-ml">20d Return</div>'+rc(a.ret20)+'</div>'
+      +'<div class="ac-mini"><div class="ac-ml">Hold Days</div><div class="ac-mv">'+a.hold_days+'d</div></div>'
       +'</div>'
-      +'<div class="ac-explain">'+a.explanation+'</div>'
-      +(a.ctx_rsi||a.ctx_vol_ratio?'<div class="ctx-box">'
-        +'<div style="font-size:9px;color:var(--gold);font-weight:600;margin-bottom:4px">SIGNAL CONDITIONS: historical range when this fired &rarr; current value (green=in-range, amber=outside)</div>'
-        +ctxRow('RSI',a.ctx_rsi,a.rsi,'')+ctxRow('Vol Ratio',a.ctx_vol_ratio,a.vol_ratio,'x')
-        +ctxRow('5d before%',a.ctx_ret5,a.ret1w,'%')+ctxRow('20d before%',a.ctx_ret20,a.ret1m,'%')
+      +(a.best_desc?'<div class="ac-explain">'+a.best_desc+(uc1s+uc2s)+'</div>':'')
+      +(a.ctx_rsi||a.ctx_vol_r?'<div class="ctx-box"><div style="font-size:9px;color:var(--gold);font-weight:600;margin-bottom:4px">SIGNAL CONDITIONS (historical range &#x2192; current)</div>'
+        +ctxRow('RSI',a.ctx_rsi,a.rsi,'')+ctxRow('Vol Ratio',a.ctx_vol_r,a.vol_r,'x')
+        +ctxRow('5d Before%',a.ctx_ret5,a.ret5,'%')+ctxRow('20d Before%',a.ctx_ret20,a.ret20,'%')
         +'</div>':'')
-      +(tr?'<div style="margin-top:8px"><div style="font-size:9px;color:var(--t3);font-weight:600;margin-bottom:4px">RECENT TRADE HISTORY (all positive):</div>'
-        +'<div style="overflow-x:auto"><table class="tbl" style="font-size:10px"><thead><tr>'
-        +'<th>Signal Date</th><th>Entry Rs</th><th>Exit Rs</th><th>Return%</th><th>Max Gain%</th><th>Max DD%</th>'
-        +'</tr></thead><tbody>'+tr+'</tbody></table></div></div>':'')
+      +(tr?'<div style="margin-top:8px"><div style="font-size:9px;color:var(--t3);font-weight:600;margin-bottom:3px">RECENT TRADE HISTORY:</div><div style="overflow-x:auto"><table class="tbl" style="font-size:10px"><thead><tr><th>Signal</th><th>Entry</th><th>Exit</th><th>Return%</th><th>Max Gain%</th><th>Max DD%</th></tr></thead><tbody>'+tr+'</tbody></table></div></div>':'')
       +'</div>';
   }).join('');
 }
 
-function renderHistory(){
+function renderHist(){
   var tbody=document.getElementById('hist-tbody'); if(!tbody)return;
-  var d=DATA.history;
-  if(!d){tbody.innerHTML='<tr><td colspan="18" class="empty">No signal history. Run workflow.</td></tr>';return;}
+  var d=D.history;
+  if(!d){tbody.innerHTML='<tr><td colspan="19" class="empty">No history. Run workflow.</td></tr>';return;}
   var rows=[...(d.signals||[])];
-  var q=(document.getElementById('hist-q')?.value||'').toUpperCase().trim();
-  var sq=(document.getElementById('hist-strat')?.value||'').toUpperCase().trim();
+  var q=(document.getElementById('hq')?.value||'').toUpperCase().trim();
+  var sq=(document.getElementById('huc')?.value||'').toUpperCase().trim();
   if(q)rows=rows.filter(r=>r.sym.includes(q));
-  if(sq)rows=rows.filter(r=>(r.strategy||'').toUpperCase().includes(sq));
-  rows.sort((a,b)=>{var av=a[histSortK]??'',bv=b[histSortK]??'';
+  if(sq)rows=rows.filter(r=>(r.uc||'').toUpperCase().includes(sq)||(r.desc||'').toUpperCase().includes(sq));
+  rows.sort((a,b)=>{var av=a[histSK]??'',bv=b[histSK]??'';
     if(typeof av==='number')return histSD==='desc'?bv-av:av-bv;
     return histSD==='desc'?String(bv).localeCompare(String(av)):String(av).localeCompare(String(bv));});
-  document.getElementById('hist-pills').innerHTML=[
-    ['Total Signals',d.n_signals,'g'],['Showing',rows.length,'b'],['All Returns','100% positive','g'],
-  ].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>').join('');
-  if(!rows.length){tbody.innerHTML='<tr><td colspan="18" class="empty">No signals match filter.</td></tr>';return;}
+  document.getElementById('hist-pills').innerHTML=[['Total',d.n_signals,'g'],['Showing',rows.length,'b'],['All &#x2265;10%','&#x2713;','g']].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>').join('');
+  if(!rows.length){tbody.innerHTML='<tr><td colspan="19" class="empty">No signals match filter.</td></tr>';return;}
   tbody.innerHTML=rows.map(t=>'<tr>'
     +'<td class="mono gold" style="font-weight:600">'+t.sym+'</td>'
     +'<td class="mono">'+t.sig_date+'</td>'
-    +'<td style="font-size:10px">'+sLabel(t.strategy||'')+'</td>'
-    +'<td>'+gBadge(t.grade)+'</td>'
+    +'<td>'+ucB(t.uc)+'</td>'
+    +'<td>'+gB(t.grade)+'</td>'
+    +'<td>'+confBar(t.confidence||0)+'</td>'
     +'<td class="mono muted">'+t.entry_date+'</td>'
     +'<td class="mono">&#8377;'+(t.entry_px||'—')+'</td>'
     +'<td class="mono muted">'+t.exit_date+'</td>'
     +'<td class="mono">&#8377;'+(t.exit_px||'—')+'</td>'
-    +'<td class="mono green" style="font-weight:700">+'+(t.ret||0).toFixed(1)+'%</td>'
+    +'<td class="mono green" style="font-weight:700">+'+Number(t.ret||0).toFixed(1)+'%</td>'
     +'<td>'+(t.ret_3d!=null?rc(t.ret_3d):'<span class="muted">—</span>')+'</td>'
     +'<td>'+(t.ret_10d!=null?rc(t.ret_10d):'<span class="muted">—</span>')+'</td>'
-    +'<td class="mono green">+'+(t.max_gain||0).toFixed(1)+'%</td>'
-    +'<td class="mono '+(t.max_dd<-2?'amber':'muted')+'">'+(t.max_dd||0).toFixed(1)+'%</td>'
+    +'<td class="mono green">+'+Number(t.max_gain||0).toFixed(1)+'%</td>'
+    +'<td class="mono '+(t.max_dd<-2?'amber':'muted')+'">'+Number(t.max_dd||0).toFixed(1)+'%</td>'
     +'<td class="mono '+(t.ctx_rsi<30?'green':t.ctx_rsi>70?'red':'muted')+'">'+(t.ctx_rsi!=null?Number(t.ctx_rsi).toFixed(0):'—')+'</td>'
-    +'<td class="mono '+(t.ctx_vol_ratio>=2?'green':t.ctx_vol_ratio>=1.5?'amber':'muted')+'">'+(t.ctx_vol_ratio!=null?Number(t.ctx_vol_ratio).toFixed(1)+'x':'—')+'</td>'
+    +'<td class="mono '+(t.ctx_vol_r>=2?'green':t.ctx_vol_r>=1.5?'amber':'muted')+'">'+(t.ctx_vol_r!=null?Number(t.ctx_vol_r).toFixed(1)+'x':'—')+'</td>'
     +'<td>'+(t.ctx_ret5!=null?rc(t.ctx_ret5):'<span class="muted">—</span>')+'</td>'
     +'<td>'+(t.ctx_ret20!=null?rc(t.ctx_ret20):'<span class="muted">—</span>')+'</td>'
     +'<td class="mono muted">'+(t.hold_days||'—')+'d</td>'
     +'</tr>').join('');
 }
 
+// Generic UC table renderer
+var ucState={
+  uc1:{grds:'uc1Grds',sk:'uc1SK',sd:'uc1SD',q:'u1q',tbody:'uc1-tbody',pills:'uc1-pills',cols:13},
+  uc2:{grds:'uc2Grds',sk:'uc2SK',sd:'uc2SD',q:'u2q',tbody:'uc2-tbody',pills:'uc2-pills',cols:12},
+  uc3:{grds:'uc3Grds',sk:'uc3SK',sd:'uc3SD',q:'u3q',tbody:'uc3-tbody',pills:'uc3-pills',cols:11},
+  uc4:{grds:'uc4Grds',sk:'uc4SK',sd:'uc4SD',q:'u4q',tbody:'uc4-tbody',pills:'uc4-pills',cols:13},
+};
+function renderUC(uc){
+  var st=ucState[uc]; if(!st) return;
+  var tbody=document.getElementById(st.tbody); if(!tbody) return;
+  var d=D[uc];
+  if(!d){tbody.innerHTML='<tr><td colspan="'+st.cols+'" class="empty">No data. Run workflow.</td></tr>';return;}
+  var rows=[...(d.stocks||[])];
+  var q=(document.getElementById(st.q)?.value||'').toUpperCase().trim();
+  if(q)rows=rows.filter(r=>r.sym.includes(q));
+  var grds=eval(st.grds);
+  if(!grds.has('A+'))rows=rows.filter(r=>r.grade!=='A+');
+  if(!grds.has('A')) rows=rows.filter(r=>r.grade!=='A');
+  var sk=eval(st.sk),sd=eval(st.sd);
+  rows.sort((a,b)=>{var v=(b[sk]??0)-(a[sk]??0);return sd==='asc'?-v:v;});
+  var pillEl=document.getElementById(st.pills);
+  if(pillEl)pillEl.innerHTML=[['Stocks',rows.length,'g'],['A+',rows.filter(r=>r.grade==='A+').length,'g']].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>').join('');
+  if(!rows.length){tbody.innerHTML='<tr><td colspan="'+st.cols+'" class="empty">No results match filter.</td></tr>';return;}
+  var html='';
+  rows.forEach((r,i)=>{
+    var did=uc+'d'+i;
+    var descField=r.desc||r.uc2?.desc||'';
+    var detail='<div style="padding:10px;background:rgba(0,0,0,.25)">'
+      +(r.ctx_rsi||r.ctx_vol_r?'<div class="ctx-box"><div style="font-size:9px;color:var(--gold);font-weight:600;margin-bottom:3px">SIGNAL CONDITIONS</div>'
+        +ctxRow('RSI',r.ctx_rsi,null,'')+ctxRow('Vol Ratio',r.ctx_vol_r,null,'x')
+        +ctxRow('5d Before%',r.ctx_ret5,null,'%')
+        +'</div>':'')
+      +'<div class="ac-explain" style="margin-top:8px">'+(r.desc||descField||'')+'</div>'
+      +'<div style="font-size:10px;color:var(--t3);margin-top:6px">Years: '+(r.years||[]).join(', ')+'</div>'
+      +'<div style="font-size:10px;margin-top:4px">Validation: '
+      +Object.entries(r.val_results||{}).map(([p,v])=>'<span style="margin-right:8px;color:'+(v?'var(--green)':'var(--red)')+'">'
+        +p+':'+(v?v.wr+'%wr':'FAIL')+'</span>').join('')
+      +'</div></div>';
+    html+='<tr onclick="ucToggle(\''+did+'\')" style="cursor:pointer">'
+      +'<td><span id="x'+did+'" style="font-size:10px;color:var(--t3)">&#x25B6;</span></td>'
+      +'<td class="mono gold" style="font-weight:600">'+r.sym+'</td>'
+      +'<td class="mono">&#8377;'+fmt(r.price)+'</td>'
+      +'<td>'+gB(r.grade)+'</td>'
+      +'<td>'+confBar(r.confidence||0)+'</td>'
+      +'<td class="mono green" style="font-weight:700;background:rgba(34,197,94,.06)">'+Number(r.ret_rate||0).toFixed(2)+'</td>'
+      +'<td>'+rc(r.avg_ret)+'</td>'
+      +'<td class="mono green">+'+Number(r.min_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono muted">'+r.hold_days+'d</td>'
+      +'<td class="mono green">'+r.win_rate+'%</td>'
+      +'<td class="mono">'+r.n_trades+'</td>'
+      +(uc!=='uc2'&&uc!=='uc3'?'<td class="mono">'+Number(r.sharpe||0).toFixed(1)+'</td>':'')
+      +'<td style="font-size:10px;color:var(--t2);max-width:200px">'+descField.slice(0,60)+'</td>'
+      +'</tr>'
+      +'<tr id="'+did+'" style="display:none"><td colspan="'+st.cols+'" style="padding:0">'+detail+'</td></tr>';
+  });
+  tbody.innerHTML=html;
+}
+function ucToggle(id){var r=document.getElementById(id);if(!r)return;var x=document.getElementById('x'+id);r.style.display=r.style.display==='none'?'':'none';if(x)x.textContent=r.style.display===''?'&#x25BC;':'&#x25B6;';}
+
 function renderLT(){
-  var d=DATA.longterm; var el=document.getElementById('lt-grid');
+  var d=D.lt; var el=document.getElementById('lt-grid');
   if(!d){el.innerHTML='<div class="empty">No long-term data. Run workflow.</div>';return;}
   var rows=[...(d.picks||[])];
-  var q=(document.getElementById('lt-q')?.value||'').toUpperCase().trim();
+  var q=(document.getElementById('ltq')?.value||'').toUpperCase().trim();
   if(q)rows=rows.filter(r=>r.sym.includes(q));
-  if(!ltGrds.has('A+'))rows=rows.filter(r=>r.best_grade!=='A+');
-  if(!ltGrds.has('A')) rows=rows.filter(r=>r.best_grade!=='A');
-  rows.sort((a,b)=>(b[ltSortK]??0)-(a[ltSortK]??0));
-  document.getElementById('lt-pills').innerHTML=[
-    ['Total Picks',rows.length,'g'],['A+',rows.filter(r=>r.best_grade==='A+').length,'g'],
-    ['Latest',d.latest_date||'—','b'],
-  ].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>').join('');
+  if(!ltGrds.has('A+'))rows=rows.filter(r=>r.grade!=='A+');
+  if(!ltGrds.has('A')) rows=rows.filter(r=>r.grade!=='A');
+  rows.sort((a,b)=>(b[ltSK]??0)-(a[ltSK]??0));
+  document.getElementById('lt-pills').innerHTML=[['Picks',rows.length,'g'],['A+',rows.filter(r=>r.grade==='A+').length,'g'],['Latest',d.latest||'—','b']].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>').join('');
   if(!rows.length){el.innerHTML='<div class="empty">No picks match filter.</div>';return;}
   el.innerHTML=rows.map((r,i)=>{
-    var strats=(r.all_strategies||[]).slice(0,5).map(s=>'<div style="display:flex;justify-content:space-between;font-size:10px;padding:3px 0;border-bottom:1px solid var(--b)">'
-      +'<span style="color:var(--t2)">'+sLabel(s.strategy)+'</span>'
-      +'<span class="green">avg +'+s.avg_ret+'% &middot; min +'+s.min_ret+'%</span></div>').join('');
-    return '<div class="lt-card '+(r.best_grade==='A+'?'ap':'')+'">'
+    var ucs=['uc1','uc2','uc3','uc4'].filter(u=>r[u]).map(u=>'<div style="font-size:10px;padding:3px 0;border-bottom:1px solid var(--b);display:flex;justify-content:space-between">'
+      +'<span>'+ucB(u)+' '+r[u].desc.slice(0,50)+'</span>'
+      +'<span class="green">'+Number(r[u].ret_rate||0).toFixed(2)+'%/d &#x00B7; avg +'+r[u].avg_ret+'% &#x00B7; min +'+r[u].min_ret+'%</span></div>').join('');
+    return '<div class="lt-card '+(r.grade==='A+'?'ap':'')+'">'
       +'<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:8px">'
-      +'<div><span style="font-size:16px;font-weight:700;color:var(--gold)">'+(i+1)+'. '+r.sym+'</span> '+gBadge(r.best_grade)
-      +'<div style="font-size:11px;color:var(--t2);margin-top:2px">&#8377;'+fmt(r.price)+' &middot; '+r.avg_turnover_cr+' Cr &middot; RSI: '+Number(r.rsi||0).toFixed(0)+'</div></div>'
-      +'<div>'+sBar(r.longterm_score)+'</div></div>'
+      +'<div><span style="font-size:16px;font-weight:700;color:var(--gold)">'+(i+1)+'. '+r.sym+'</span> '+gB(r.grade)
+      +'<div style="font-size:11px;color:var(--t2);margin-top:2px">&#8377;'+fmt(r.price)+' &#x00B7; '+r.avg_turnover_cr+' Cr &#x00B7; RSI '+Number(r.rsi||0).toFixed(0)+'</div></div>'
+      +'<div>'+sBar(r.longterm_score)+'<div style="font-size:9px;color:var(--t3);margin-top:2px">Confidence: '+confBar(r.confidence||0)+'</div></div></div>'
       +'<div class="ac-grid" style="margin-bottom:8px">'
-      +'<div class="ac-mini"><div class="ac-ml">Strategy</div><div class="ac-mv" style="font-size:10px">'+sLabel(r.best_strategy)+'</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Win Rate</div><div class="ac-mv green">100%</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Avg Ret</div><div class="ac-mv green">+'+r.avg_ret+'%</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Min Ret</div><div class="ac-mv green">+'+r.min_ret+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Ret%/Day</div><div class="ac-mv green" style="font-size:16px;font-weight:700">'+Number(r.ret_rate||0).toFixed(2)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Avg Return</div><div class="ac-mv green">+'+r.avg_ret+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Return</div><div class="ac-mv green">+'+r.min_ret+'%</div></div>'
       +'<div class="ac-mini"><div class="ac-ml">Hold Days</div><div class="ac-mv">'+r.hold_days+'d</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">OOS Ret</div>'+rc(r.oos_avg_ret)+'</div>'
-      +'<div class="ac-mini"><div class="ac-ml">1M Return</div>'+rc(r.ret1m)+'</div>'
-      +'<div class="ac-mini"><div class="ac-ml">Strategies</div><div class="ac-mv">'+r.n_strategies+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Win Rate</div><div class="ac-mv green">'+r.win_rate+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Occurrences</div><div class="ac-mv">'+r.n_trades+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">20d Return</div>'+rc(r.ret20)+'</div>'
+      +'<div class="ac-mini"><div class="ac-ml">LT Score</div><div class="ac-mv">'+r.longterm_score+'/100</div></div>'
       +'</div>'
-      +'<div class="ac-explain" style="margin-bottom:8px">'+r.explanation+'</div>'
-      +(r.ctx_rsi||r.ctx_vol_ratio?'<div class="ctx-box" style="margin-bottom:8px">'
-        +'<div style="font-size:9px;color:var(--gold);font-weight:600;margin-bottom:3px">SIGNAL CONDITIONS RANGE</div>'
-        +ctxRow('RSI',r.ctx_rsi,r.rsi,'')+ctxRow('Vol Ratio',r.ctx_vol_ratio,null,'x')
-        +'</div>':'')
-      +(strats?'<div style="font-size:9px;color:var(--t3);font-weight:600;margin-bottom:3px">ALL VERIFIED STRATEGIES:</div>'+strats:'')
+      +(ucs?'<div style="font-size:9px;color:var(--t3);font-weight:600;margin-bottom:4px">ALL QUALIFYING STRATEGIES:</div>'+ucs:'')
       +'</div>';
   }).join('');
 }
 
 function renderAll(){
   var tbody=document.getElementById('all-tbody'); if(!tbody)return;
-  var d=DATA.master;
+  var d=D.master;
   if(!d){tbody.innerHTML='<tr><td colspan="21" class="empty">No master data. Run workflow.</td></tr>';return;}
   var rows=[...(d.stocks||[])];
-  var q=(document.getElementById('all-q')?.value||'').toUpperCase().trim();
+  var q=(document.getElementById('allq')?.value||'').toUpperCase().trim();
   if(q)rows=rows.filter(r=>r.sym.includes(q));
   if(!allFilters.has('ALL')){
-    if(allFilters.has('A+'))     rows=rows.filter(r=>r.best_grade==='A+');
-    if(allFilters.has('SIGNAL')) rows=rows.filter(r=>r.signal_today);
-    if(allFilters.has('LT'))     rows=rows.filter(r=>(r.longterm_score||0)>=60);
+    if(allFilters.has('A+'))    rows=rows.filter(r=>r.best_grade==='A+');
+    if(allFilters.has('SIGNAL'))rows=rows.filter(r=>r.signal_today);
+    if(allFilters.has('LT'))    rows=rows.filter(r=>(r.longterm_score||0)>=60);
+    if(allFilters.has('UC1'))   rows=rows.filter(r=>r.uc1);
+    if(allFilters.has('UC2'))   rows=rows.filter(r=>r.uc2);
   }
-  rows.sort((a,b)=>{var v=(b[allSortK]??0)-(a[allSortK]??0);return allSD==='asc'?-v:v;});
-  document.getElementById('all-pills').innerHTML=[
-    ['Total',rows.length,'b'],['A+',rows.filter(r=>r.best_grade==='A+').length,'g'],
-    ['Signal Today',rows.filter(r=>r.signal_today).length,'y'],
-  ].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>').join('');
+  rows.sort((a,b)=>{var v=(b[allSK]??0)-(a[allSK]??0);return allSD==='asc'?-v:v;});
+  document.getElementById('all-pills').innerHTML=[['Total',rows.length,'b'],['A+',rows.filter(r=>r.best_grade==='A+').length,'g'],['Alerts',rows.filter(r=>r.signal_today).length,'y']].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>').join('');
   if(!rows.length){tbody.innerHTML='<tr><td colspan="21" class="empty">No stocks match filter.</td></tr>';return;}
   var html='';
   rows.forEach((r,i)=>{
     var did='atd'+i;
-    var strats=(r.all_strategies||[]).map(s=>'<tr>'
-      +'<td style="font-size:10px">'+sLabel(s.strategy)+'</td><td>'+gBadge(s.grade)+'</td>'
-      +'<td class="mono green">100%</td><td class="mono green">+'+s.avg_ret+'%</td>'
-      +'<td class="mono green">+'+s.min_ret+'%</td><td class="mono muted">'+s.hold_days+'d</td>'
-      +'<td class="mono">'+s.sharpe+'</td></tr>').join('');
+    var ucs=['uc1','uc2','uc3','uc4'].filter(u=>r[u]).map(u=>ucB(u)).join('');
     var detail='<div style="padding:10px;background:rgba(0,0,0,.25)">'
-      +(strats?'<table class="tbl" style="min-width:400px"><thead><tr>'
-        +'<th>Strategy</th><th>Grade</th><th>Win%</th><th>Avg Ret%</th><th>Min Ret%</th><th>Hold</th><th>Sharpe</th>'
-        +'</tr></thead><tbody>'+strats+'</tbody></table>':'')
-      +'<div class="ac-explain" style="margin-top:8px">'+r.explanation+'</div>'
-      +(r.ctx_rsi?'<div class="ctx-box">'
-        +'<div style="font-size:9px;color:var(--gold);font-weight:600;margin-bottom:3px">SIGNAL CONDITIONS</div>'
-        +ctxRow('RSI',r.ctx_rsi,r.rsi,'')+ctxRow('Vol Ratio',r.ctx_vol_ratio,r.vol_ratio,'x')
-        +ctxRow('5d Before%',r.ctx_ret5,r.ret1w,'%')
+      +['uc1','uc2','uc3','uc4'].filter(u=>r[u]).map(u=>'<div style="margin-bottom:6px"><div style="font-size:10px;font-weight:600;margin-bottom:2px">'+ucB(u)+' '+r[u].desc+'</div>'
+        +'<span class="green" style="font-size:10px">Ret%/Day: '+Number(r[u].ret_rate||0).toFixed(2)+' &#x00B7; Avg: +'+r[u].avg_ret+'% &#x00B7; Min: +'+r[u].min_ret+'% &#x00B7; Hold: '+r[u].hold_days+'d</span></div>').join('')
+      +(r.ctx_rsi?'<div class="ctx-box"><div style="font-size:9px;color:var(--gold);font-weight:600;margin-bottom:3px">SIGNAL CONDITIONS</div>'
+        +ctxRow('RSI',r.ctx_rsi,r.rsi,'')+ctxRow('Vol Ratio',r.ctx_vol_r,r.vol_r,'x')+ctxRow('5d Before%',r.ctx_ret5,r.ret5,'%')
         +'</div>':'')
       +'</div>';
     html+='<tr onclick="atToggle(\''+did+'\')" style="cursor:pointer;'+(r.signal_today?'background:rgba(34,197,94,.03)':'')+'">'
-      +'<td><span id="ax'+did+'" style="font-size:10px;color:var(--t3)">&#9654;</span></td>'
+      +'<td><span id="ax'+did+'" style="font-size:10px;color:var(--t3)">&#x25B6;</span></td>'
       +'<td class="mono gold" style="font-weight:600">'+r.sym+(r.signal_today?' <span class="green" style="font-size:8px;border:1px solid var(--gr2);padding:1px 4px;border-radius:2px;background:var(--grb)">ALERT</span>':'')+'</td>'
       +'<td class="mono">&#8377;'+fmt(r.price)+'</td>'
-      +'<td>'+gBadge(r.best_grade)+'</td>'
+      +'<td>'+gB(r.best_grade)+'</td>'
+      +'<td>'+confBar(r.confidence||0)+'</td>'
       +'<td>'+sBar(r.longterm_score)+'</td>'
-      +'<td style="font-size:10px;color:var(--t2)">'+sLabel(r.best_strategy||'')+'</td>'
-      +'<td class="mono green">+'+Number(r.best_avg_ret||0).toFixed(1)+'%</td>'
+      +'<td>'+ucB(r.best_uc)+'</td>'
+      +'<td class="mono green" style="font-weight:700;background:rgba(34,197,94,.06)">'+Number(r.best_ret_rate||0).toFixed(2)+'</td>'
+      +'<td>'+rc(r.best_avg_ret)+'</td>'
       +'<td class="mono green">+'+Number(r.best_min_ret||0).toFixed(1)+'%</td>'
-      +'<td class="mono green">+'+Number(r.best_max_ret||0).toFixed(1)+'%</td>'
       +'<td class="mono muted">'+r.best_hold_days+'d</td>'
-      +'<td class="mono green">+'+Number(r.best_max_gain||0).toFixed(1)+'%</td>'
-      +'<td class="mono '+(r.best_max_dd<-2?'amber':'muted')+'">'+Number(r.best_max_dd||0).toFixed(1)+'%</td>'
+      +'<td class="mono green">'+Number(r.best_wr||0).toFixed(0)+'%</td>'
+      +'<td class="mono">'+r.best_n_trades+'</td>'
       +'<td class="mono">'+Number(r.best_sharpe||0).toFixed(1)+'</td>'
-      +'<td>'+rc(r.oos_avg_ret)+'</td>'
-      +'<td class="mono">'+r.n_strategies+'</td>'
       +'<td class="mono '+(r.rsi<30?'green':r.rsi>70?'red':'muted')+'">'+Number(r.rsi||0).toFixed(0)+'</td>'
-      +'<td class="mono '+(r.vol_ratio>=2?'green':r.vol_ratio>=1.5?'amber':'muted')+'">'+Number(r.vol_ratio||0).toFixed(1)+'x</td>'
-      +'<td>'+rc(r.ret1w)+'</td><td>'+rc(r.ret1m)+'</td>'
+      +'<td class="mono '+(r.vol_r>=2?'green':r.vol_r>=1.5?'amber':'muted')+'">'+Number(r.vol_r||0).toFixed(1)+'x</td>'
+      +'<td class="mono '+(r.adx>25?'green':'muted')+'">'+Number(r.adx||0).toFixed(0)+'</td>'
+      +'<td>'+rc(r.ret5)+'</td><td>'+rc(r.ret20)+'</td>'
       +'<td class="mono muted">'+(r.avg_turnover_cr||'—')+' Cr</td>'
       +'<td>'+(r.signal_today?'<span class="green" style="font-weight:700">&#x1F514;</span>':'<span class="muted">—</span>')+'</td>'
-      +'</tr><tr id="'+did+'" style="display:none"><td colspan="21" style="padding:0">'+detail+'</td></tr>';
+      +'</tr>'
+      +'<tr id="'+did+'" style="display:none"><td colspan="21" style="padding:0">'+detail+'</td></tr>';
   });
   tbody.innerHTML=html;
 }
-function atToggle(id){var r=document.getElementById(id);if(!r)return;var x=document.getElementById('ax'+id);r.style.display=r.style.display==='none'?'':'none';if(x)x.textContent=r.style.display===''?'&#9660;':'&#9654;';}
-
-function renderStratStats(){
-  var d=DATA.master; var el=document.getElementById('strat-grid'); if(!el)return;
-  if(!d){el.innerHTML='<div class="empty">No data.</div>';return;}
-  var sm={};
-  (d.stocks||[]).forEach(s=>(s.all_strategies||[]).forEach(st=>{
-    if(!sm[st.strategy])sm[st.strategy]={name:st.strategy,cnt:0,ret:[],ap:0,a:0};
-    sm[st.strategy].cnt++;sm[st.strategy].ret.push(st.avg_ret||0);
-    if(st.grade==='A+')sm[st.strategy].ap++;else if(st.grade==='A')sm[st.strategy].a++;
-  }));
-  var strats=Object.values(sm).sort((a,b)=>b.cnt-a.cnt);
-  var maxC=strats[0]?.cnt||1;
-  document.getElementById('strat-pills').innerHTML='<div class="kp b"><div class="kl">Strategies</div><div class="kv">'+strats.length+'</div></div>';
-  el.innerHTML=strats.map(s=>{
-    var avg=s.ret.length?Math.round(s.ret.reduce((a,b)=>a+b)/s.ret.length*10)/10:0;
-    return '<div class="lt-card"><div style="display:flex;justify-content:space-between;margin-bottom:5px">'
-      +'<span style="font-weight:600">'+sLabel(s.name)+'</span>'
-      +'<span class="muted" style="font-size:10px">'+s.cnt+' stocks</span></div>'
-      +'<div style="height:4px;background:var(--b);border-radius:2px;margin-bottom:8px">'
-      +'<div style="width:'+Math.round(s.cnt/maxC*100)+'%;height:100%;background:var(--green);border-radius:2px"></div></div>'
-      +'<div class="ac-grid">'
-      +'<div class="ac-mini"><div class="ac-ml">Avg Ret</div><div class="ac-mv green">+'+avg+'%</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">A+</div><div class="ac-mv green">'+s.ap+'</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">A</div><div class="ac-mv blue">'+s.a+'</div></div>'
-      +'<div class="ac-mini"><div class="ac-ml">Win Rate</div><div class="ac-mv green">100%</div></div>'
-      +'</div></div>';
-  }).join('');
-}
-
-function buildStratExplain(){
-  var el=document.getElementById('strat-explain'); if(!el)return;
-  el.innerHTML=[
-    ['SMA Cross','10-day SMA crosses above 30-day SMA with rising volume. Marks institutional accumulation and momentum shift.'],
-    ['EMA Bounce','Price dips to 20-day EMA then closes above it with volume surge. Key support level defended by buyers.'],
-    ['RSI Oversold','RSI drops below 30 then recovers above 35. Sellers exhausted, short-covering drives recovery.'],
-    ['MACD Cross','MACD line crosses above signal line. Momentum inflection — trend shifting upward.'],
-    ['BB Bounce','Price touches lower Bollinger Band then recovers inside. Mean-reversion after extreme stretch.'],
-    ['Vol Breakout','Price breaks 20-day high with 2&times; average volume. Institutional conviction behind the breakout.'],
-    ['Consec Reversal','After 3+ consecutive down days, closes higher with volume. Selling exhaustion = reliable reversal.'],
-    ['Floor Bounce','Price touches 20-day low, RSI below 50, then closes higher. Predictable institutional support level.'],
-    ['Momentum Gap','Gap-up &gt;2% closing in top 25% of day range. Genuine demand driving continuation.'],
-    ['Range Expand','Day range &gt;2&times; ATR closing bullish. Exceptional energy day with momentum follow-through.'],
-    ['Trend Pullback','In strong uptrend (20d return &gt;8%), stock pulls back then resumes. Dips reliably bought.'],
-    ['52W Break','Breaks 52-week high with 2&times; volume. No sellers left above — price discovery drives further gains.'],
-  ].map(x=>'<div style="margin-bottom:8px"><strong style="color:var(--text)">'+x[0]+':</strong> '+x[1]+'</div>').join('');
-}
+function atToggle(id){var r=document.getElementById(id);if(!r)return;var x=document.getElementById('ax'+id);r.style.display=r.style.display==='none'?'':'none';if(x)x.textContent=r.style.display===''?'&#x25BC;':'&#x25B6;';}
 
 loadData();
 </script>
