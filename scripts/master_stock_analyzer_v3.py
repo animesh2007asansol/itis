@@ -308,6 +308,7 @@ def backtest(df, signal_series, hold_days, label):
             "sig_date":  str(pd.Timestamp(dates[i]).date()),
             "entry_date":str(pd.Timestamp(dates[ei]).date()),
             "exit_date": str(pd.Timestamp(dates[xi]).date()),
+            "is_open":   xi < (entry_idx + hold_days),
             "entry_px":  r2(ep), "exit_px":r2(xp),
             "ret":r2(ret), "ret_3d":r3, "ret_10d":r10,
             "max_gain":r2(mg), "max_dd":r2(dd),
@@ -867,6 +868,85 @@ def _lt_score(df,results,confidence):
     return min(100,s)
 
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
+
+def _write_still_valid(stocks, latest, now):
+    """
+    Find past signals still within hold tenure with >=5% gap to min return target.
+    These are still good to invest in now.
+    """
+    try:
+        from datetime import datetime as DT
+        latest_dt = DT.strptime(latest, "%Y-%m-%d")
+        positions = []
+        for s in stocks:
+            current_px = s.get("price") or 0
+            if current_px <= 0: continue
+            min_ret    = s.get("best_min_ret") or 0
+            avg_ret    = s.get("best_avg_ret") or 0
+            max_ret    = s.get("best_max_ret") or 0
+            hold_days  = s.get("best_hold_days") or 5
+            hold_cal   = int(hold_days * 1.5)  # convert trading days to ~calendar days
+
+            for t in (s.get("_all_trades") or []):
+                entry_date_str = t.get("entry_date")
+                entry_px = t.get("entry_px") or 0
+                if not entry_date_str or entry_px <= 0: continue
+                try:
+                    entry_dt = DT.strptime(entry_date_str, "%Y-%m-%d")
+                except: continue
+
+                days_elapsed = (latest_dt - entry_dt).days
+                if days_elapsed < 0 or days_elapsed >= hold_cal: continue  # expired
+
+                min_target = entry_px * (1 + min_ret / 100)
+                cur_ret    = (current_px - entry_px) / entry_px * 100
+                gap        = (min_target - current_px) / current_px * 100
+
+                if gap < 5.0: continue  # already at or past min target — skip
+
+                days_remaining = max(0, hold_cal - days_elapsed)
+
+                positions.append({
+                    "sym":                    s["sym"],
+                    "sig_date":               t.get("sig_date"),
+                    "entry_date":             entry_date_str,
+                    "entry_px":               r2(entry_px),
+                    "current_price":          r2(current_px),
+                    "uc":                     s.get("best_uc"),
+                    "desc":                   s.get("best_desc",""),
+                    "grade":                  s.get("grade"),
+                    "confidence":             s.get("confidence"),
+                    "hold_days":              hold_days,
+                    "min_ret":                r2(min_ret),
+                    "avg_ret":                r2(avg_ret),
+                    "max_ret":                r2(max_ret),
+                    "min_target_price":       r2(min_target),
+                    "avg_target_price":       r2(entry_px * (1 + avg_ret / 100)),
+                    "current_return_pct":     r2(cur_ret),
+                    "gap_to_min_target_pct":  r2(gap),
+                    "days_elapsed":           days_elapsed,
+                    "days_remaining":         days_remaining,
+                    "avg_turnover_cr":        s.get("avg_turnover_cr"),
+                    "rsi":                    s.get("rsi"),
+                    "vol_r":                  s.get("vol_r"),
+                })
+
+        # Deduplicate: keep best gap per stock
+        seen = {}
+        for p in positions:
+            sym = p["sym"]
+            if sym not in seen or p["gap_to_min_target_pct"] > seen[sym]["gap_to_min_target_pct"]:
+                seen[sym] = p
+        positions = sorted(seen.values(), key=lambda x: -(x.get("gap_to_min_target_pct") or 0))
+
+        jdump({"generated_at": now, "latest_date": latest,
+               "n": len(positions), "positions": positions},
+              OUT / "still_valid.json")
+        print(f"  OK still_valid.json ({len(positions)} positions with >=5% gap remaining)")
+    except Exception as e:
+        print(f"  WARN still_valid: {e}")
+
+
 def main():
     force=os.getenv("FORCE_RERUN","false").lower()=="true"
     print("="*70); print("NSE Master Stock Analyzer v3")
@@ -972,7 +1052,11 @@ def _write_all(results, latest):
                 "sym":s["sym"],"uc":s["best_uc"],"desc":s["best_desc"],
                 "grade":s["grade"],"confidence":s["confidence"],
                 "hold_days":s["best_hold_days"],
-                **{k:t.get(k) for k in ["sig_date","entry_date","exit_date",
+                "min_ret_strategy":s.get("best_min_ret"),
+                "avg_ret_strategy":s.get("best_avg_ret"),
+                "max_ret_strategy":s.get("best_max_ret"),
+                "current_price":s.get("price"),
+                **{k:t.get(k) for k in ["sig_date","entry_date","exit_date","is_open",
                    "entry_px","exit_px","ret","ret_3d","ret_10d",
                    "max_gain","max_dd","ctx_rsi","ctx_vol_r","ctx_ret5","ctx_ret20","ctx_adx"]},
             })
@@ -1005,6 +1089,9 @@ def _write_all(results, latest):
             **{k:v for k,v in (s.get(uc_key) or {}).items()},
         } for s in uc_stocks[:200]]}, OUT/fname)
     print(f"  OK UC-specific JSONs")
+
+    # Still valid positions (past signals still in tenure with >=5% gap)
+    _write_still_valid(stocks, latest, now)
 
     # Summary
     aplus=[a for a in alert_out if a.get("grade")=="A+"]
