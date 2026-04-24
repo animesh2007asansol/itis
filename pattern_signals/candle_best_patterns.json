@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-24T01:20:28+05:30",
-  "latest_date": "2026-04-23",
+  "generated_at": "2026-04-25T00:51:51+05:30",
+  "latest_date": "2026-04-24",
   "n_patterns": 350,
   "description": "100% next-day positive. Ranked by minimum return (highest first).",
   "patterns": [
@@ -2441,9 +2441,9 @@
         "max": 33.67
       },
       "win_20d": {
-        "n": 7,
-        "wr": 71.4,
-        "avg": 15.02,
+        "n": 8,
+        "wr": 75.0,
+        "avg": 15.7,
         "min": -6.44,
         "max": 46.73
       },
@@ -6663,7 +6663,13 @@
         "min": -2.81,
         "max": 12.91
       },
-      "win_10d": null,
+      "win_10d": {
+        "n": 6,
+        "wr": 83.3,
+        "avg": 7.77,
+        "min": -6.28,
+        "max": 22.74
+      },
       "win_20d": null,
       "years": [
         2020,
@@ -8450,13 +8456,13 @@
       "sym": "CELLO",
       "candle_key": "R_tiny_Lmedium_Ulong",
       "desc": "Red tiny body | lower:medium | upper:long",
-      "occurrences": 6,
+      "occurrences": 7,
       "nd_wr": 100.0,
-      "nd_avg": 1.07,
+      "nd_avg": 1.08,
       "nd_min": 0.11,
       "nd_max": 2.51,
-      "gap_up_rate": 83.3,
-      "avg_gap_pct": 0.41,
+      "gap_up_rate": 85.7,
+      "avg_gap_pct": 0.35,
       "win_5d": {
         "n": 6,
         "wr": 50.0,
@@ -8484,7 +8490,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-02-10"
+      "last_date": "2026-04-23"
     },
     {
       "sym": "HEROMOTOCO",
@@ -8551,7 +8557,13 @@
         "min": -0.32,
         "max": 1.21
       },
-      "win_20d": null,
+      "win_20d": {
+        "n": 6,
+        "wr": 83.3,
+        "avg": 0.63,
+        "min": -0.42,
+        "max": 1.6
+      },
       "years": [
         2025,
         2026
@@ -10546,9 +10558,9 @@
         "max": 4.22
       },
       "win_10d": {
-        "n": 8,
-        "wr": 50.0,
-        "avg": 0.26,
+        "n": 9,
+        "wr": 55.6,
+        "avg": 0.91,
         "min": -2.8,
         "max": 6.4
       },
@@ -11011,7 +11023,7 @@
         "max": 0.18
       },
       "win_10d": {
-        "n": 11,
+        "n": 12,
         "wr": 100.0,
         "avg": 0.21,
         "min": 0.18,
@@ -11056,11 +11068,11 @@
         "max": 0.24
       },
       "win_20d": {
-        "n": 6,
+        "n": 7,
         "wr": 100.0,
-        "avg": 0.4,
+        "avg": 0.41,
         "min": 0.38,
-        "max": 0.42
+        "max": 0.46
       },
       "years": [
         2025,
@@ -11232,7 +11244,7 @@
         "max": 0.18
       },
       "win_10d": {
-        "n": 77,
+        "n": 78,
         "wr": 100.0,
         "avg": 0.2,
         "min": 0.14,
@@ -11309,7 +11321,7 @@
         "max": 0.14
       },
       "win_10d": {
-        "n": 15,
+        "n": 16,
         "wr": 100.0,
         "avg": 0.23,
         "min": 0.2,
@@ -11535,7 +11547,7 @@
       "gap_up_rate": 92.9,
       "avg_gap_pct": 0.02,
       "win_5d": {
-        "n": 12,
+        "n": 13,
         "wr": 100.0,
         "avg": 0.11,
         "min": 0.09,
@@ -11780,7 +11792,7 @@
         "max": 0.29
       },
       "win_20d": {
-        "n": 42,
+        "n": 43,
         "wr": 100.0,
         "avg": 0.43,
         "min": 0.34,
@@ -12226,12 +12238,12 @@
       "sym": "GROWWLIQID",
       "candle_key": "G_doji_Lnone_Uvery_long",
       "desc": "Green doji body | lower:none | upper:very_long",
-      "occurrences": 77,
+      "occurrences": 78,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.06,
-      "gap_up_rate": 75.3,
+      "gap_up_rate": 75.6,
       "avg_gap_pct": 0.01,
       "win_5d": {
         "n": 76,
@@ -12248,7 +12260,7 @@
         "max": 0.3
       },
       "win_20d": {
-        "n": 69,
+        "n": 70,
         "wr": 100.0,
         "avg": 0.4,
         "min": 0.32,
@@ -12259,7 +12271,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-04-21"
+      "last_date": "2026-04-23"
     },
     {
       "sym": "GROWWLIQID",
@@ -12404,9 +12416,9 @@
         "max": 19.96
       },
       "win_20d": {
-        "n": 6,
-        "wr": 50.0,
-        "avg": 5.41,
+        "n": 7,
+        "wr": 57.1,
+        "avg": 7.3,
         "min": -8.61,
         "max": 26.04
       },
@@ -12635,7 +12647,13 @@
         "min": 0.35,
         "max": 4.8
       },
-      "win_10d": null,
+      "win_10d": {
+        "n": 6,
+        "wr": 66.7,
+        "avg": 1.94,
+        "min": -5.05,
+        "max": 15.3
+      },
       "win_20d": null,
       "years": [
         2020,
@@ -12730,15 +12748,15 @@
       "sym": "LIQUID",
       "candle_key": "R_doji_Lnone_Unone",
       "desc": "Red doji body | lower:none | upper:none",
-      "occurrences": 177,
+      "occurrences": 178,
       "nd_wr": 100.0,
       "nd_avg": 0.0,
       "nd_min": 0.0,
       "nd_max": 0.0,
-      "gap_up_rate": 34.5,
+      "gap_up_rate": 34.3,
       "avg_gap_pct": -0.0,
       "win_5d": {
-        "n": 176,
+        "n": 177,
         "wr": 2.3,
         "avg": 0.0,
         "min": 0.0,
@@ -12764,7 +12782,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-04-17"
+      "last_date": "2026-04-23"
     },
     {
       "sym": "LIQUID1",
@@ -12909,7 +12927,7 @@
         "max": 0.31
       },
       "win_20d": {
-        "n": 35,
+        "n": 36,
         "wr": 100.0,
         "avg": 0.41,
         "min": 0.0,
@@ -12941,7 +12959,7 @@
         "max": 0.16
       },
       "win_10d": {
-        "n": 79,
+        "n": 80,
         "wr": 100.0,
         "avg": 0.23,
         "min": 0.16,
@@ -13004,12 +13022,12 @@
       "sym": "LIQUIDADD",
       "candle_key": "G_doji_Lnone_Uvery_long",
       "desc": "Green doji body | lower:none | upper:very_long",
-      "occurrences": 57,
+      "occurrences": 58,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.07,
-      "gap_up_rate": 80.7,
+      "gap_up_rate": 81.0,
       "avg_gap_pct": 0.1,
       "win_5d": {
         "n": 57,
@@ -13037,7 +13055,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-03-24"
+      "last_date": "2026-04-23"
     },
     {
       "sym": "LIQUIDADD",
