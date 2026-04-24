@@ -1,8 +1,8 @@
-name: 🧠 Master Stock Analysis
+name: 🧠 Master Stock Analysis v3
 
 on:
   schedule:
-    - cron: '30 17 * * 1-5'   # 11 PM IST Mon-Fri (after daily data fetch)
+    - cron: '30 17 * * 1-5'   # 11 PM IST Mon-Fri
   workflow_dispatch:
     inputs:
       force_rerun:
@@ -18,34 +18,32 @@ permissions:
 
 jobs:
   analyse:
-    name: Master Stock Analysis
+    name: Master Analysis v3
     runs-on: ubuntu-latest
     timeout-minutes: 360
 
     steps:
       - uses: actions/checkout@v5
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
-      - name: Install dependencies
+      - name: Install deps
         run: pip install pandas numpy --quiet
 
-      - name: Show info
+      - name: Info
         run: |
           echo "UTC  : $(date -u)"
           echo "IST  : $(TZ='Asia/Kolkata' date)"
           echo "CSVs : $(find data/equity -name '*.csv' 2>/dev/null | wc -l)"
           echo "Force: ${{ github.event.inputs.force_rerun }}"
-          if [ -f stock_analysis/master_checkpoint.json ]; then
-            python3 -c "import json; d=json.load(open('stock_analysis/master_checkpoint.json')); print('Checkpoint:', d.get('processed_date','none'))"
+          if [ -f stock_analysis/checkpoint_v3.json ]; then
+            python3 -c "import json; d=json.load(open('stock_analysis/checkpoint_v3.json')); print('Checkpoint:', d.get('processed_date','none'), '| Stocks:', len(d.get('results',{})))"
           else
-            echo "No checkpoint yet"
+            echo "No checkpoint yet — first run will take ~60-90 minutes"
           fi
 
-      - name: Run master stock analyzer
-        run: python scripts/master_stock_analyzer.py
+      - name: Run master analyzer v3
+        run: python scripts/master_stock_analyzer_v3.py
         env:
           FORCE_RERUN: ${{ github.event.inputs.force_rerun || 'false' }}
           PYTHONUNBUFFERED: '1'
@@ -53,38 +51,23 @@ jobs:
       - name: Show results
         if: always()
         run: |
-          echo "=== Output files ==="
-          ls -lh stock_analysis/ 2>/dev/null || echo "No output dir"
-          if [ -f stock_analysis/daily_alerts.json ]; then
-            python3 - << 'EOF'
+          ls -lh stock_analysis/ 2>/dev/null || echo "No output"
+          python3 - << 'EOF' 2>/dev/null || true
           import json
-          d = json.load(open('stock_analysis/daily_alerts.json'))
-          print(f"Signal date : {d.get('signal_date')}")
-          print(f"Alerts      : {d.get('n_alerts')}")
-          alerts = d.get('alerts',[])
-          for a in alerts[:5]:
-              print(f"  {a.get('sym',''):<14} {a.get('best_strategy',''):<20} WR={a.get('win_rate')}% ret=+{a.get('avg_ret')}%")
+          d=json.load(open('stock_analysis/daily_alerts.json'))
+          print(f"Signal date: {d.get('signal_date')} | Alerts: {d.get('n_alerts')}")
+          for a in (d.get('alerts') or [])[:5]:
+              print(f"  {a['sym']:<14} {a['best_uc']:<5} rate={a.get('ret_rate',0):.2f}%/d avg={a.get('avg_ret',0):.1f}%")
           EOF
-          fi
-          if [ -f stock_analysis/longterm_picks.json ]; then
-            python3 - << 'EOF'
-          import json
-          d = json.load(open('stock_analysis/longterm_picks.json'))
-          print(f"\nLong-term picks: {len(d.get('picks',[]))}")
-          for p in d.get('picks',[])[:5]:
-              print(f"  {p.get('sym',''):<14} score={p.get('longterm_score')} grade={p.get('best_grade')}")
-          EOF
-          fi
 
-      - name: Commit results
+      - name: Commit
         run: |
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add stock_analysis/
-          git add stockalerts.html 2>/dev/null || true
+          git add stock_analysis/ stockalerts.html 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Nothing to commit"
           else
-            git commit -m "📊 Master analysis: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M IST')"
+            git commit -m "🧠 Master analysis v3: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M IST')"
             git push
           fi
