@@ -915,6 +915,7 @@ def analyse_stock(sym, df, latest_date):
         "ctx_vol_r": best.get("ctx_vol_r"),
         "ctx_ret5":  best.get("ctx_ret5"),
         "ctx_ret20": best.get("ctx_ret20"),
+        "buy_stats": best.get("buy_stats"),
         # Scoring
         "longterm_score": lt_score,
         "signal_today": signal_today and traded_today,
