@@ -257,6 +257,68 @@ def indicators(df):
     return df
 
 # ─── CORE BACKTEST (95% win, 10% min return) ──────────────────────────────────
+
+def _buy_stats(trades):
+    """
+    Aggregate Day1 buying statistics across all trades.
+    Returns a dict with gap, dip, close stats for the buying strategy tab.
+    """
+    if not trades: return {}
+
+    def vals(key): return [t[key] for t in trades if t.get(key) is not None]
+
+    gaps     = vals("d1_gap_pct")
+    dips     = vals("d1_dip_pct")
+    crets    = vals("d1_close_ret")
+    intras   = vals("d1_intra_ret")
+
+    def avg(lst):  return r2(sum(lst)/len(lst)) if lst else None
+    def mn(lst):   return r2(min(lst)) if lst else None
+    def mx(lst):   return r2(max(lst)) if lst else None
+    def pct_pos(lst): return r2(sum(1 for x in lst if x > 0)/len(lst)*100) if lst else None
+    def pct_neg(lst): return r2(sum(1 for x in lst if x < 0)/len(lst)*100) if lst else None
+
+    # Optimal buy: if price dips below open, wait for dip else buy at open
+    avg_dip      = avg(dips) or 0
+    pct_dips     = pct_neg(dips)  # % of times price went below open on D1
+    avg_dip_abs  = avg([abs(d) for d in dips if d < 0])
+
+    # Recommend: if dip happens >60% of time with avg dip > 0.5%, wait for dip
+    if (pct_dips or 0) > 60 and (avg_dip_abs or 0) > 0.5:
+        buy_strategy = f"Wait for {avg_dip_abs:.1f}% dip from open ({pct_dips:.0f}% of signals dip below open)"
+        buy_at       = "Open - dip"
+    else:
+        buy_strategy = "Buy at open (price rarely dips below open on signal day)"
+        buy_at       = "Open"
+
+    return {
+        "n_trades":         len(trades),
+        # Gap stats (D1 open vs D0 close)
+        "avg_gap_pct":      avg(gaps),
+        "min_gap_pct":      mn(gaps),
+        "max_gap_pct":      mx(gaps),
+        "pct_gap_up":       pct_pos(gaps),
+        "pct_gap_down":     pct_neg(gaps),
+        # D1 intraday dip from open (always <= 0 means it went below open)
+        "avg_dip_pct":      avg(dips),
+        "worst_dip_pct":    mn(dips),
+        "pct_dips_below_open": pct_neg(dips),
+        "avg_dip_when_dips":avg([abs(d) for d in dips if d < 0]),
+        # D1 close stats
+        "avg_d1_close_ret": avg(crets),
+        "min_d1_close_ret": mn(crets),
+        "max_d1_close_ret": mx(crets),
+        "pct_d1_close_pos": pct_pos(crets),
+        "pct_d1_close_neg": pct_neg(crets),
+        # D1 intraday (open to close)
+        "avg_d1_intra_ret": avg(intras),
+        "pct_d1_intra_pos": pct_pos(intras),
+        # Recommendation
+        "buy_strategy":     buy_strategy,
+        "buy_at":           buy_at,
+    }
+
+
 def backtest(df, signal_series, hold_days, label):
     """
     95% win rate required, 10% minimum return per trade.
@@ -266,6 +328,7 @@ def backtest(df, signal_series, hold_days, label):
     """
     signals=signal_series.fillna(False)
     c=df["c"].values; o=df["o"].values; n=len(df)
+    h=df["h"].values; l=df["l"].values
     dates=df["date"].values
 
     rsi=df["rsi"].values if "rsi" in df else np.full(n,np.nan)
@@ -304,6 +367,21 @@ def backtest(df, signal_series, hold_days, label):
         prev1 = r2(r1[i]) if not math.isnan(safe(r1[i],float('nan'))) else None
         prev5 = r2(r5[i]) if not math.isnan(safe(r5[i],float('nan'))) else None
 
+        # Day0 (signal day) and Day1 (entry day = next day after signal)
+        d0_close  = float(c[i])
+        d1_open   = float(o[ei])           # = ep (entry price)
+        d1_high   = float(h[ei])
+        d1_low    = float(l[ei])
+        d1_close  = float(c[ei])
+        # Gap: Day1 open vs Day0 close
+        d1_gap_pct    = r2((d1_open  - d0_close) / d0_close * 100) if d0_close else None
+        # Dip: how far below D1 open did price fall intraday (always <=0 or 0)
+        d1_dip_pct    = r2((d1_low   - d1_open)  / d1_open  * 100) if d1_open  else None
+        # D1 close vs D0 close
+        d1_close_ret  = r2((d1_close - d0_close) / d0_close * 100) if d0_close else None
+        # D1 close vs D1 open (intraday direction)
+        d1_intra_ret  = r2((d1_close - d1_open)  / d1_open  * 100) if d1_open  else None
+
         trades.append({
             "sig_date":  str(pd.Timestamp(dates[i]).date()),
             "entry_date":str(pd.Timestamp(dates[ei]).date()),
@@ -312,6 +390,16 @@ def backtest(df, signal_series, hold_days, label):
             "entry_px":  r2(ep), "exit_px":r2(xp),
             "ret":r2(ret), "ret_3d":r3, "ret_10d":r10,
             "max_gain":r2(mg), "max_dd":r2(dd),
+            # Day1 buying stats
+            "d0_close":     r2(d0_close),
+            "d1_open":      r2(d1_open),
+            "d1_high":      r2(d1_high),
+            "d1_low":       r2(d1_low),
+            "d1_close":     r2(d1_close),
+            "d1_gap_pct":   d1_gap_pct,
+            "d1_dip_pct":   d1_dip_pct,
+            "d1_close_ret": d1_close_ret,
+            "d1_intra_ret": d1_intra_ret,
             # Pre-signal context
             "ctx_rsi":   r2(rsi[i]),
             "ctx_vol_r": r2(volr[i]),
@@ -360,6 +448,8 @@ def backtest(df, signal_series, hold_days, label):
         "ctx_rsi":cstats("ctx_rsi"), "ctx_vol_r":cstats("ctx_vol_r"),
         "ctx_ret5":cstats("ctx_ret5"), "ctx_ret20":cstats("ctx_ret20"),
         "ctx_adx":cstats("ctx_adx"),
+        # Buying strategy aggregates (Day1 stats across all trades)
+        "buy_stats": _buy_stats(trades),
         "trades":trades,
     }
 
@@ -1038,6 +1128,7 @@ def _write_all(results, latest):
         "rsi":a.get("rsi"),"vol_r":a.get("vol_r"),"adx":a.get("adx"),
         "ret5":a.get("ret5"),"ret20":a.get("ret20"),
         "avg_turnover_cr":a.get("avg_turnover_cr"),
+        "buy_stats":a.get("buy_stats"),
         "recent_trades":a.get("recent_trades",[]),
         "uc1":a.get("uc1"),"uc2":a.get("uc2"),"uc3":a.get("uc3"),"uc4":a.get("uc4"),
     } for a in alerts]
@@ -1058,7 +1149,9 @@ def _write_all(results, latest):
                 "current_price":s.get("price"),
                 **{k:t.get(k) for k in ["sig_date","entry_date","exit_date","is_open",
                    "entry_px","exit_px","ret","ret_3d","ret_10d",
-                   "max_gain","max_dd","ctx_rsi","ctx_vol_r","ctx_ret5","ctx_ret20","ctx_adx"]},
+                   "max_gain","max_dd","ctx_rsi","ctx_vol_r","ctx_ret5","ctx_ret20","ctx_adx",
+                   "d0_close","d1_open","d1_high","d1_low","d1_close",
+                   "d1_gap_pct","d1_dip_pct","d1_close_ret","d1_intra_ret"]},
             })
     hist.sort(key=lambda x:(x.get("sig_date") or ""),reverse=True)
     jdump({"generated_at":now,"n_signals":len(hist),"signals":hist[:3000]}, OUT/"signal_history.json")
