@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-27T21:00:40+05:30",
+  "generated_at": "2026-04-27T22:11:22+05:30",
   "latest": "2026-04-27",
   "picks": [
     {
@@ -68,39 +68,38 @@
       "confidence": 100,
       "best_uc": "UC1",
       "best_desc": "Stock rises \u226520% over 5d \u2192 hold 60d",
-      "ret_rate": 1.09,
-      "avg_ret": 65.39,
+      "ret_rate": 1.23,
+      "avg_ret": 73.9,
       "min_ret": 22.5,
       "hold_days": 60,
       "win_rate": 100.0,
-      "n_trades": 6,
+      "n_trades": 5,
       "rsi": 81.76,
       "ret20": 22.93,
       "avg_turnover_cr": 242.28,
       "uc1": {
         "uc": "UC1",
         "desc": "Stock rises \u226520% over 5d \u2192 hold 60d",
-        "ret_rate": 1.09,
-        "avg_ret": 65.39,
+        "ret_rate": 1.23,
+        "avg_ret": 73.9,
         "min_ret": 22.5,
         "hold_days": 60,
         "win_rate": 100.0,
-        "n_trades": 6,
-        "sharpe": 2.51,
+        "n_trades": 5,
+        "sharpe": 2.78,
         "years": [
           "2020",
-          "2021",
-          "2026"
+          "2021"
         ],
         "ctx_rsi": {
           "min": 56.9,
           "max": 87.38,
-          "avg": 74.97
+          "avg": 77.03
         },
         "ctx_vol_r": {
           "min": 0.11,
           "max": 3.66,
-          "avg": 1.91
+          "avg": 1.84
         }
       },
       "uc2": null,
@@ -340,6 +339,64 @@
         "train": {
           "wr": 100.0,
           "avg_ret": 20.97,
+          "n": 4
+        },
+        "oos_23": null,
+        "oos_24": null,
+        "oos_25": null,
+        "recent": null
+      }
+    },
+    {
+      "sym": "JMCPROJECT",
+      "price": 118.85,
+      "longterm_score": 45,
+      "grade": "A",
+      "confidence": 100,
+      "best_uc": "UC1",
+      "best_desc": "Stock rises \u226515% over 5d \u2192 hold 60d",
+      "ret_rate": 0.34,
+      "avg_ret": 20.26,
+      "min_ret": 12.55,
+      "hold_days": 60,
+      "win_rate": 100.0,
+      "n_trades": 4,
+      "rsi": 34.83,
+      "ret20": -11.44,
+      "avg_turnover_cr": 4.9,
+      "uc1": {
+        "uc": "UC1",
+        "desc": "Stock rises \u226515% over 5d \u2192 hold 60d",
+        "ret_rate": 0.34,
+        "avg_ret": 20.26,
+        "min_ret": 12.55,
+        "hold_days": 60,
+        "win_rate": 100.0,
+        "n_trades": 4,
+        "sharpe": 5.8,
+        "years": [
+          "2020",
+          "2021",
+          "2022"
+        ],
+        "ctx_rsi": {
+          "min": 42.52,
+          "max": 90.28,
+          "avg": 67.72
+        },
+        "ctx_vol_r": {
+          "min": 1.29,
+          "max": 5.1,
+          "avg": 3.76
+        }
+      },
+      "uc2": null,
+      "uc3": null,
+      "uc4": null,
+      "val_results": {
+        "train": {
+          "wr": 100.0,
+          "avg_ret": 20.26,
           "n": 4
         },
         "oos_23": null,
@@ -740,6 +797,63 @@
         "train": {
           "wr": 100.0,
           "avg_ret": 20.59,
+          "n": 4
+        },
+        "oos_23": null,
+        "oos_24": null,
+        "oos_25": null,
+        "recent": null
+      }
+    },
+    {
+      "sym": "CADILAHC",
+      "price": 345.95,
+      "longterm_score": 25,
+      "grade": "A",
+      "confidence": 100,
+      "best_uc": "UC1",
+      "best_desc": "Stock rises \u22655% over 2d \u2192 hold 60d",
+      "ret_rate": 0.33,
+      "avg_ret": 19.91,
+      "min_ret": 14.88,
+      "hold_days": 60,
+      "win_rate": 100.0,
+      "n_trades": 4,
+      "rsi": 26.16,
+      "ret20": -15.15,
+      "avg_turnover_cr": 90.18,
+      "uc1": {
+        "uc": "UC1",
+        "desc": "Stock rises \u22655% over 2d \u2192 hold 60d",
+        "ret_rate": 0.33,
+        "avg_ret": 19.91,
+        "min_ret": 14.88,
+        "hold_days": 60,
+        "win_rate": 100.0,
+        "n_trades": 4,
+        "sharpe": 13.32,
+        "years": [
+          "2020",
+          "2021"
+        ],
+        "ctx_rsi": {
+          "min": 49.64,
+          "max": 89.04,
+          "avg": 69.76
+        },
+        "ctx_vol_r": {
+          "min": 1.56,
+          "max": 7.37,
+          "avg": 3.37
+        }
+      },
+      "uc2": null,
+      "uc3": null,
+      "uc4": null,
+      "val_results": {
+        "train": {
+          "wr": 100.0,
+          "avg_ret": 19.91,
           "n": 4
         },
         "oos_23": null,

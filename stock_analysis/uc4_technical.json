@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-27T21:00:40+05:30",
-  "n": 9,
+  "generated_at": "2026-04-27T22:11:22+05:30",
+  "n": 10,
   "stocks": [
     {
       "sym": "TTML",
@@ -29,6 +29,37 @@
         "min": 2.16,
         "max": 7.26,
         "avg": 3.56
+      }
+    },
+    {
+      "sym": "RAMKY",
+      "price": 509.5,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC4",
+      "desc": "",
+      "ret_rate": 1.53,
+      "avg_ret": 30.66,
+      "min_ret": 12.95,
+      "hold_days": 20,
+      "win_rate": 100.0,
+      "n_trades": 5,
+      "sharpe": 5.91,
+      "years": [
+        "2020",
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "ctx_rsi": {
+        "min": 56.38,
+        "max": 91.88,
+        "avg": 74.83
+      },
+      "ctx_vol_r": {
+        "min": 1.71,
+        "max": 4.24,
+        "avg": 3.1
       }
     },
     {
