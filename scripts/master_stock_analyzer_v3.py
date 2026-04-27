@@ -871,17 +871,122 @@ def analyse_stock(sym, df, latest_date):
     # Long-term score
     lt_score=_lt_score(df, all_results, confidence)
 
-    # Today's signal — check each UC
+    # Today's signal — re-evaluate signal conditions on today's row directly
+    # Bug fix: do NOT rely on last backtest trade's sig_date.
+    # Backtest skips overlapping trades, so a signal that fired today may not
+    # appear as the last trade if a previous trade's hold period is still running.
+    # Solution: rebuild each UC's signal series and check the LAST ROW directly.
     signal_today=False
     signal_from=[]
-    for uc_name,r in results.items():
-        if r is None: continue
-        # Recheck today's signal from the last row's context
-        last_trade=r.get("trades",[])
-        if last_trade:
-            latest_sig=last_trade[-1]["sig_date"]
-            if latest_sig==latest_date and traded_today:
-                signal_today=True; signal_from.append(uc_name.upper())
+
+    if traded_today:
+        last_idx = len(df) - 1  # today is the last row
+
+        # UC1: check if today meets the best surge condition
+        r1 = results.get("uc1")
+        if r1 is not None:
+            try:
+                roll = df["c"].pct_change(r1["surge_days"]) * 100
+                if bool(roll.iloc[last_idx] >= r1["surge_pct"]):
+                    signal_today = True
+                    signal_from.append("UC1")
+            except: pass
+
+        # UC2: check if today is the first trading day of the best season month/quarter
+        r2_ = results.get("uc2")
+        if r2_ is not None:
+            try:
+                df2 = df.copy()
+                df2["month"]   = df2["date"].dt.month
+                df2["quarter"] = df2["date"].dt.quarter
+                if r2_["season_type"] == "MONTH":
+                    sig2 = (df2["month"] == r2_["season_val"]) &                            (df2["month"] != df2["month"].shift(1))
+                else:
+                    sig2 = (df2["quarter"] == r2_["season_val"]) &                            (df2["quarter"] != df2["quarter"].shift(1))
+                if bool(sig2.iloc[last_idx]):
+                    signal_today = True
+                    signal_from.append("UC2")
+            except: pass
+
+        # UC4: re-run all technical signals on today's row
+        # We check every signal batch against today (last row) directly
+        r4 = results.get("uc4")
+        if r4 is not None:
+            try:
+                # Rebuild the specific UC4 signal that won (from label)
+                label = r4.get("label", "")
+                # Re-run all UC4 signals and find which ones fire today
+                c = df["c"]; v = df["v"]; n = len(df)
+
+                def fires_today(sig_series):
+                    try: return bool(sig_series.fillna(False).iloc[last_idx])
+                    except: return False
+
+                uc4_fired = False
+                # SMA crossovers
+                for fast,slow in [(10,30),(20,50),(50,200)]:
+                    fn,sn = f"sma{fast}",f"sma{slow}"
+                    if fn in df.columns and sn in df.columns:
+                        s=(df[fn]>df[sn])&(df[fn].shift(1)<=df[sn].shift(1))&(df["vol_r"]>=1.2)
+                        if fires_today(s): uc4_fired=True; break
+                if not uc4_fired and "ema12" in df.columns and "ema26" in df.columns:
+                    s=(df["ema12"]>df["ema26"])&(df["ema12"].shift(1)<=df["ema26"].shift(1))
+                    if fires_today(s): uc4_fired=True
+                if not uc4_fired and "rsi" in df.columns:
+                    rsi=df["rsi"]
+                    for lo,hi in [(30,35),(25,30),(20,25)]:
+                        s=(rsi>hi)&(rsi.shift(1)<=lo)&(c>c.shift(1))
+                        if fires_today(s): uc4_fired=True; break
+                if not uc4_fired and "macd" in df.columns and "macd_sig" in df.columns:
+                    s=(df["macd"]>df["macd_sig"])&(df["macd"].shift(1)<=df["macd_sig"].shift(1))
+                    if fires_today(s): uc4_fired=True
+                if not uc4_fired and "bb_lo" in df.columns:
+                    s=(df["l"]<=df["bb_lo"])&(c>df["bb_lo"])&(df["vol_r"]>=1.2)
+                    if fires_today(s): uc4_fired=True
+                if not uc4_fired and "hi20" in df.columns:
+                    s=(c>=df["hi20"].shift(1))&(df["vol_r"]>=2.0)&(df["ret1"]>1.0)
+                    if fires_today(s): uc4_fired=True
+                if not uc4_fired and "consec_dn" in df.columns:
+                    s=(df["consec_dn"].shift(1)>=3)&(c>c.shift(1))&(df["vol_r"]>=1.2)
+                    if fires_today(s): uc4_fired=True
+                if not uc4_fired and "lo20" in df.columns:
+                    s=(df["l"].shift(1)<=df["lo20"].shift(2))&(c>c.shift(1))&(df["rsi"]<50)
+                    if fires_today(s): uc4_fired=True
+                if not uc4_fired and "gap" in df.columns:
+                    dr=(df["h"]-df["l"]).replace(0,0.0001)
+                    cp=(c-df["l"])/dr
+                    s=(df["gap"]>2.0)&(cp>0.75)&(df["vol_r"]>=1.5)
+                    if fires_today(s): uc4_fired=True
+                if not uc4_fired and "atr" in df.columns:
+                    dr2=df["h"]-df["l"]
+                    s=(dr2>2*df["atr"])&(c>df["o"])&(df["ret1"]>1.0)&(df["vol_r"]>=1.3)
+                    if fires_today(s): uc4_fired=True
+                if not uc4_fired:
+                    s=(df["ret20"]>8.0)&(df["ret5"]<-2.0)&(c>c.shift(1))&(df["vol_r"]>=1.2)&(df["rsi"]<60)
+                    if fires_today(s): uc4_fired=True
+                if not uc4_fired and "hi52" in df.columns:
+                    s=(c>=df["hi52"].shift(1)*0.98)&(df["vol_r"]>=2.0)&(df["ret1"]>1.0)&(df["rsi"]>60)
+                    if fires_today(s): uc4_fired=True
+                if not uc4_fired and "adx" in df.columns and "plus_di" in df.columns:
+                    s=(df["adx"]>20)&(df["plus_di"]>df["minus_di"])&(df["plus_di"]>df["plus_di"].shift(1))&(df["vol_r"]>=1.2)
+                    if fires_today(s): uc4_fired=True
+                # 60d momentum
+                if not uc4_fired:
+                    s=(df["ret60"]>20)&(df["ret20"]>5)&(df["ret5"]>2)&(df["vol_r"]>=1.5)&(df["rsi"]>55)
+                    if fires_today(s): uc4_fired=True
+                # Multi-confirm
+                if not uc4_fired and "macd" in df.columns and "adx" in df.columns:
+                    s=(df["rsi"]>50)&(df["vol_r"]>=1.5)&(df["ret20"]>5)&(df["macd"]>df["macd_sig"])&(df["adx"]>20)
+                    if fires_today(s): uc4_fired=True
+
+                if uc4_fired:
+                    signal_today = True
+                    signal_from.append("UC4")
+            except: pass
+
+        # UC3: combined = UC1 AND UC2 both fire today
+        if "UC1" in signal_from and "UC2" in signal_from:
+            signal_from.append("UC3")
 
     return {
         "sym": sym,
