@@ -1170,6 +1170,16 @@ def _write_all(results, latest):
     hist=[]
     for s in stocks:
         for t in (s.get("_all_trades") or s.get("recent_trades") or []):
+            # Adjust entry_px for splits/bonuses that happened after signal
+            raw_entry = t.get("entry_px") or 0
+            adj_entry = raw_entry
+            if raw_entry > 0 and s.get("price") and t.get("entry_date"):
+                # If current_price is less than half of entry_px → likely split
+                # Mark as possibly adjusted so UI can flag it
+                ratio = s["price"] / raw_entry if raw_entry else 1
+                if ratio < 0.5:   # price dropped >50% vs entry = likely split/bonus
+                    pass  # flag below
+
             hist.append({
                 "sym":s["sym"],"uc":s["best_uc"],"desc":s["best_desc"],
                 "grade":s["grade"],"confidence":s["confidence"],
@@ -1178,6 +1188,7 @@ def _write_all(results, latest):
                 "avg_ret_strategy":s.get("best_avg_ret"),
                 "max_ret_strategy":s.get("best_max_ret"),
                 "current_price":s.get("price"),
+                "possible_split": (s.get("price") or 0) < (t.get("entry_px") or 0) * 0.5,
                 **{k:t.get(k) for k in ["sig_date","entry_date","exit_date","is_open",
                    "entry_px","exit_px","ret","ret_3d","ret_10d",
                    "max_gain","max_dd","ctx_rsi","ctx_vol_r","ctx_ret5","ctx_ret20","ctx_adx",
