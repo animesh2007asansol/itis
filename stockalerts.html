@@ -164,7 +164,13 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 </div>
 
 <div class="page" id="page-history">
-  <div class="sh">&#x1F4C5; Signal History <small>all past signals with actual returns &#x00B7; every row &#x2265;10% positive</small></div>
+  <div class="sh">&#x1F4C5; Signal History <small>all past signals &#x00B7; sort &#x00B7; filter open/closed</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:7px 12px;margin-bottom:8px;font-size:11px;color:var(--blue);line-height:1.7">
+    <strong>Hold td</strong> = trading days (market days only). <strong>Days Past/Left</strong> = calendar days. So 60td hold &#x2248; 90 calendar days &mdash; seeing 84cal past with 60td hold is correct. &nbsp;&#x00B7;&nbsp;
+    <strong>~ prefix</strong> = partial/open trade return (today's price used as exit). &nbsp;&#x00B7;&nbsp;
+    Negative Gap% = stock already exceeded min target (good). &nbsp;&#x00B7;&nbsp;
+    <strong>&#x26A0; Split?</strong> = likely corporate action after entry &mdash; gap% unreliable for that row.
+  </div>
   <div class="pill-row" id="hist-pills"></div>
   <div class="fbar">
     <span class="fsep">Show:</span>
@@ -205,9 +211,9 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
       <th onclick="hTh('avg_ret_strategy')">Strat Avg%<span class="arr"></span></th>
       <th onclick="hTh('current_price')">Current Rs<span class="arr"></span></th>
       <th onclick="hTh('gap')">Gap to Target%<span class="arr"></span></th>
-      <th onclick="hTh('days_elapsed')">Days Past<span class="arr"></span></th>
-      <th onclick="hTh('days_remaining')">Days Left<span class="arr"></span></th>
-      <th onclick="hTh('hold_days')">Hold<span class="arr"></span></th>
+      <th onclick="hTh('days_elapsed')" title="Calendar days elapsed since entry. Hold(td) × 1.5 = calendar tenure. 20td hold → 30cal tenure.">Days Past<span class="arr" title=""></span></th>
+      <th onclick="hTh('days_remaining')" title="Calendar days remaining. When 0 → trade closed. Can exceed Hold(td) number because td ≠ cal days.">Days Left<span class="arr"></span></th>
+      <th onclick="hTh('hold_days')" title="Hold Trading Days (td). 20td ≈ 30 calendar days">Hold td<span class="arr"></span></th>
     </tr></thead>
     <tbody id="hist-tbody"><tr><td colspan="26" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
   </table></div>
@@ -966,7 +972,13 @@ function renderHist(){
       var ex=new Date(t.entry_date); ex.setDate(ex.getDate()+Math.round(t.hold_days*1.5));
       isOpen=ex>_latestDt;
     }
-    var statusCell=isOpen
+    var _isPending = t._note && t._note.indexOf('tomorrow')>=0;
+    var _isSplit = t.possible_split===true;
+    var statusCell=_isPending
+      ?'<td><span style="font-size:9px;font-weight:700;border:1px solid var(--gr2);background:var(--grb);color:var(--green);padding:1px 5px;border-radius:3px">NEW &#x23F3; Enter Tomorrow</span></td>'
+      :_isSplit
+      ?'<td><span style="font-size:9px;font-weight:700;border:1px solid var(--red);background:rgba(239,68,68,.1);color:var(--red);padding:1px 5px;border-radius:3px" title="Possible split/bonus after entry — gap% unreliable">&#x26A0; Split?</span></td>'
+      :isOpen
       ?'<td><span class="amber" style="font-size:9px;font-weight:700;border:1px solid var(--amb);padding:1px 5px;border-radius:3px">OPEN</span></td>'
       :'<td><span class="muted" style="font-size:9px">CLOSED</span></td>';
 
@@ -979,7 +991,7 @@ function renderHist(){
       +'<td class="mono">&#8377;'+(t.entry_px||'—')+'</td>'
       +'<td class="mono muted">'+t.exit_date+'</td>'
       +'<td class="mono">&#8377;'+(t.exit_px||'—')+'</td>'
-      +'<td class="mono '+(isOpen?'amber':'green')+'" style="font-weight:700">'+(isOpen?'~':'+')+(t.ret||0).toFixed(1)+'%'+(isOpen?' <small>(partial)</small>':'')+'</td>'
+      +'<td class="mono '+((_isPending)?'green':isOpen?'amber':'green')+'" style="font-weight:700">'+((_isPending)?'SIGNAL — buy at tomorrow open':(isOpen?'~':'+')+(t.ret||0).toFixed(1)+'%'+(isOpen?' <small>(partial)</small>':''))+'</td>'
       +'<td>'+(t.ret_3d!=null?rc(t.ret_3d):'<span class="muted">—</span>')+'</td>'
       +'<td>'+(t.ret_10d!=null?rc(t.ret_10d):'<span class="muted">—</span>')+'</td>'
       +'<td class="mono green">+'+(t.max_gain||0).toFixed(1)+'%</td>'
