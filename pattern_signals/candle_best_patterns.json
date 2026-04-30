@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-30T01:31:03+05:30",
-  "latest_date": "2026-04-29",
-  "n_patterns": 350,
+  "generated_at": "2026-05-01T01:26:25+05:30",
+  "latest_date": "2026-04-30",
+  "n_patterns": 349,
   "description": "100% next-day positive. Ranked by minimum return (highest first).",
   "patterns": [
     {
@@ -3177,47 +3177,6 @@
       "last_date": "2026-04-28"
     },
     {
-      "sym": "CLSEL",
-      "candle_key": "G_tiny_Lmedium_Uvery_long",
-      "desc": "Green tiny body | lower:medium | upper:very_long",
-      "occurrences": 7,
-      "nd_wr": 100.0,
-      "nd_avg": 2.19,
-      "nd_min": 0.58,
-      "nd_max": 6.96,
-      "gap_up_rate": 85.7,
-      "avg_gap_pct": 0.86,
-      "win_5d": {
-        "n": 7,
-        "wr": 57.1,
-        "avg": 1.78,
-        "min": -3.18,
-        "max": 7.02
-      },
-      "win_10d": {
-        "n": 7,
-        "wr": 57.1,
-        "avg": 0.31,
-        "min": -3.18,
-        "max": 6.37
-      },
-      "win_20d": {
-        "n": 7,
-        "wr": 42.9,
-        "avg": -2.93,
-        "min": -10.7,
-        "max": 4.46
-      },
-      "years": [
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "last_date": "2025-12-17"
-    },
-    {
       "sym": "COSMOFIRST",
       "candle_key": "R_tiny_Llong_Uvery_long",
       "desc": "Red tiny body | lower:long | upper:very_long",
@@ -5434,6 +5393,27 @@
         2024
       ],
       "last_date": "2024-06-04"
+    },
+    {
+      "sym": "FOCUS",
+      "candle_key": "R_medium_Lsmall_Utiny",
+      "desc": "Red medium body | lower:small | upper:tiny",
+      "occurrences": 6,
+      "nd_wr": 100.0,
+      "nd_avg": 2.95,
+      "nd_min": 0.32,
+      "nd_max": 8.29,
+      "gap_up_rate": 83.3,
+      "avg_gap_pct": 1.04,
+      "win_5d": null,
+      "win_10d": null,
+      "win_20d": null,
+      "years": [
+        2022,
+        2023,
+        2026
+      ],
+      "last_date": "2026-04-29"
     },
     {
       "sym": "PATANJALI",
@@ -8449,9 +8429,9 @@
       "gap_up_rate": 85.7,
       "avg_gap_pct": 0.35,
       "win_5d": {
-        "n": 6,
-        "wr": 50.0,
-        "avg": 0.87,
+        "n": 7,
+        "wr": 42.9,
+        "avg": 0.57,
         "min": -8.32,
         "max": 12.5
       },
@@ -9551,13 +9531,13 @@
       "sym": "VENUSREM",
       "candle_key": "G_small_Lsmall_Umedium",
       "desc": "Green small body | lower:small | upper:medium",
-      "occurrences": 6,
+      "occurrences": 7,
       "nd_wr": 100.0,
-      "nd_avg": 2.37,
+      "nd_avg": 2.55,
       "nd_min": 0.08,
       "nd_max": 9.99,
-      "gap_up_rate": 66.7,
-      "avg_gap_pct": 0.49,
+      "gap_up_rate": 71.4,
+      "avg_gap_pct": 0.42,
       "win_5d": {
         "n": 6,
         "wr": 66.7,
@@ -9587,7 +9567,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-03-10"
+      "last_date": "2026-04-29"
     },
     {
       "sym": "BALAJITELE",
@@ -9834,13 +9814,13 @@
       "sym": "ADANIPOWER",
       "candle_key": "R_medium_Lsmall_Utiny",
       "desc": "Red medium body | lower:small | upper:tiny",
-      "occurrences": 7,
+      "occurrences": 8,
       "nd_wr": 100.0,
-      "nd_avg": 1.68,
+      "nd_avg": 1.61,
       "nd_min": 0.06,
       "nd_max": 4.78,
-      "gap_up_rate": 28.6,
-      "avg_gap_pct": -0.56,
+      "gap_up_rate": 25.0,
+      "avg_gap_pct": -0.63,
       "win_5d": {
         "n": 7,
         "wr": 85.7,
@@ -9866,9 +9846,10 @@
         2020,
         2021,
         2022,
-        2024
+        2024,
+        2026
       ],
-      "last_date": "2024-10-07"
+      "last_date": "2026-04-29"
     },
     {
       "sym": "BAJAJCON",
@@ -10188,46 +10169,6 @@
       "last_date": "2022-08-24"
     },
     {
-      "sym": "DIXON",
-      "candle_key": "R_tiny_Lmedium_Ulong",
-      "desc": "Red tiny body | lower:medium | upper:long",
-      "occurrences": 6,
-      "nd_wr": 100.0,
-      "nd_avg": 0.89,
-      "nd_min": 0.05,
-      "nd_max": 2.76,
-      "gap_up_rate": 83.3,
-      "avg_gap_pct": 0.56,
-      "win_5d": {
-        "n": 6,
-        "wr": 50.0,
-        "avg": 4.02,
-        "min": -3.04,
-        "max": 13.1
-      },
-      "win_10d": {
-        "n": 6,
-        "wr": 66.7,
-        "avg": 5.31,
-        "min": -10.9,
-        "max": 15.95
-      },
-      "win_20d": {
-        "n": 6,
-        "wr": 66.7,
-        "avg": 2.78,
-        "min": -15.24,
-        "max": 15.14
-      },
-      "years": [
-        2021,
-        2022,
-        2024,
-        2025
-      ],
-      "last_date": "2025-11-13"
-    },
-    {
       "sym": "RPOWER",
       "candle_key": "G_medium_Lnone_Unone",
       "desc": "Green medium body | lower:none | upper:none",
@@ -10269,13 +10210,13 @@
       "sym": "MAANALU",
       "candle_key": "R_small_Ltiny_Umedium",
       "desc": "Red small body | lower:tiny | upper:medium",
-      "occurrences": 9,
+      "occurrences": 10,
       "nd_wr": 100.0,
-      "nd_avg": 2.42,
+      "nd_avg": 2.29,
       "nd_min": 0.04,
       "nd_max": 6.78,
-      "gap_up_rate": 77.8,
-      "avg_gap_pct": 0.5,
+      "gap_up_rate": 70.0,
+      "avg_gap_pct": 0.41,
       "win_5d": {
         "n": 9,
         "wr": 77.8,
@@ -10304,7 +10245,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-01-23"
+      "last_date": "2026-04-29"
     },
     {
       "sym": "OILCOUNTUB",
@@ -11020,7 +10961,7 @@
         "max": 0.18
       },
       "win_10d": {
-        "n": 13,
+        "n": 14,
         "wr": 100.0,
         "avg": 0.21,
         "min": 0.18,
@@ -11247,7 +11188,7 @@
         "max": 0.18
       },
       "win_10d": {
-        "n": 80,
+        "n": 81,
         "wr": 100.0,
         "avg": 0.2,
         "min": 0.14,
@@ -12249,7 +12190,7 @@
       "gap_up_rate": 74.1,
       "avg_gap_pct": 0.0,
       "win_5d": {
-        "n": 77,
+        "n": 78,
         "wr": 100.0,
         "avg": 0.1,
         "min": 0.06,
@@ -12302,9 +12243,9 @@
         "max": 0.28
       },
       "win_20d": {
-        "n": 9,
+        "n": 10,
         "wr": 100.0,
-        "avg": 0.48,
+        "avg": 0.47,
         "min": 0.37,
         "max": 0.53
       },
@@ -12759,8 +12700,8 @@
       "gap_up_rate": 34.3,
       "avg_gap_pct": -0.0,
       "win_5d": {
-        "n": 177,
-        "wr": 2.3,
+        "n": 178,
+        "wr": 2.2,
         "avg": 0.0,
         "min": 0.0,
         "max": 0.0
@@ -12852,9 +12793,9 @@
         "max": 0.31
       },
       "win_20d": {
-        "n": 81,
+        "n": 82,
         "wr": 100.0,
-        "avg": 0.46,
+        "avg": 0.45,
         "min": 0.35,
         "max": 0.55
       },
@@ -12923,7 +12864,7 @@
         "max": 0.17
       },
       "win_10d": {
-        "n": 41,
+        "n": 42,
         "wr": 97.6,
         "avg": 0.2,
         "min": 0.0,
@@ -12947,12 +12888,12 @@
       "sym": "LIQUIDADD",
       "candle_key": "G_doji_Lnone_Umedium",
       "desc": "Green doji body | lower:none | upper:medium",
-      "occurrences": 81,
+      "occurrences": 82,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.07,
-      "gap_up_rate": 90.1,
+      "gap_up_rate": 90.2,
       "avg_gap_pct": 0.01,
       "win_5d": {
         "n": 81,
@@ -12980,7 +12921,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-04-20"
+      "last_date": "2026-04-29"
     },
     {
       "sym": "LIQUIDADD",
@@ -13033,9 +12974,9 @@
       "gap_up_rate": 81.0,
       "avg_gap_pct": 0.1,
       "win_5d": {
-        "n": 57,
+        "n": 58,
         "wr": 100.0,
-        "avg": 0.11,
+        "avg": 0.12,
         "min": 0.09,
         "max": 0.17
       },
@@ -13196,7 +13137,7 @@
         "max": 0.15
       },
       "win_10d": {
-        "n": 23,
+        "n": 24,
         "wr": 100.0,
         "avg": 0.22,
         "min": 0.18,
