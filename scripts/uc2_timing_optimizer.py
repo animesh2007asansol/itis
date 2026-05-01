@@ -41,7 +41,7 @@ MIN_OCC         = 3              # minimum 3 historical years with signal
 WIN_RATE        = 95.0           # % of years must be profitable
 MIN_RETURN      = 10.0           # minimum 10% profit
 ENTRY_WINDOW    = range(-5, 6)   # test entry from -5 days before to +5 days after 1st
-EXIT_WINDOW     = range(1, 91)   # test exit from day 1 to day 90 after entry
+EXIT_WINDOW     = range(1, 31)   # test exit from day 1 to day 30 after entry (30 trading days max)
 MAX_DRAWDOWN_WARN = -5.0         # warn if peak-to-current drawdown exceeds -5%
 
 # Month names
