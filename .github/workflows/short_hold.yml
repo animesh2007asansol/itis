@@ -1,0 +1,28 @@
+name: Short Hold Analyzer (5-10 Day 10%+ Stocks)
+
+on:
+  workflow_dispatch: {}
+  workflow_run:
+    workflows: ["Master Stock Analysis v3"]
+    types: [completed]
+
+jobs:
+  short-hold:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas numpy --quiet
+      - name: Run Short Hold Analyzer
+        run: python scripts/short_hold_analyzer.py
+      - name: Commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add stock_analysis/short_hold.json
+          git diff --staged --quiet && echo "No changes" || \
+            git commit -m "Short hold: 5-10d stocks with 10%+ every time [$(date '+%Y-%m-%d')]"
+          git push
