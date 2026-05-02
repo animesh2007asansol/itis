@@ -35,8 +35,9 @@ OUT.mkdir(exist_ok=True)
 # ── CONFIG ───────────────────────────────────────────────────────────────────
 MIN_PRICE     = 10.0
 MIN_TURNOVER  = 5_000_000   # Rs 5 Cr
-MIN_OCC       = 3
+MIN_OCC       = 4   # must have signal in at least 4 years
 WIN_RATE      = 95.0
+LAST_N_YEARS  = 4    # stock must have fired the signal in ALL of the last 4 calendar years
 MIN_RETURN    = 10.0
 ENTRY_WINDOW  = range(-5, 6)   # -5 to +5 days from signal
 EXIT_WINDOW   = range(1, 31)   # 1 to 30 trading days after entry
@@ -267,6 +268,15 @@ def analyze_uc2(df, sym):
 
         if best_hold is None: continue
 
+        # Enforce: must have fired in ALL of the last 4 calendar years
+        import datetime as _dt
+        cur_yr = _dt.datetime.now().year
+        required_yrs = set(range(cur_yr - LAST_N_YEARS + 1, cur_yr + 1))  # e.g. 2023,2024,2025,2026
+        observed_yrs = set(int(y) for y in base_yrs)
+        # Allow current year to be missing (may not have happened yet this year)
+        required_check = required_yrs - {cur_yr}
+        if not required_check.issubset(observed_yrs): continue
+
         # Entry window: find best offset
         best_offset = 0; best_offset_ret = best_ret
         for offset in ENTRY_WINDOW:
@@ -435,8 +445,15 @@ def analyze_uc1(df, sym):
         month_signals.setdefault(mo, []).append(si)
 
     results = []
+    import datetime as _dt2
+    cur_yr2 = _dt2.datetime.now().year
     for mo, sigs in month_signals.items():
-        if len(sigs) < 2: continue
+        if len(sigs) < MIN_OCC: continue
+
+        # Enforce: signal must have fired in ALL last 4 years in this month
+        sig_years = set(int(pd.Timestamp(df['date'].iloc[si]).year) for si in sigs)
+        req_yrs = set(range(cur_yr2 - LAST_N_YEARS + 1, cur_yr2 + 1)) - {cur_yr2}
+        if not req_yrs.issubset(sig_years): continue
 
         # Build exit curve (entry offset = 0 for UC1, signal = buy next day)
         curve, avg_ep = build_exit_curve(df, sigs, 0)
