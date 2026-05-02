@@ -45,8 +45,10 @@ EXCL_SFX = ("ETF","BEES","CASE","SETF","GILT","LIQUID")
 
 now    = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
 cur_yr = datetime.now().year
-# Last 4 completed years
-REQUIRED_YEARS = set(range(cur_yr - LAST_N_YEARS, cur_yr))   # e.g. 2022,2023,2024,2025
+cur_mo = datetime.now().month
+cur_wk = (datetime.now().day - 1) // 7 + 1
+# Last 4 completed years (base set — current year added per-slot below)
+BASE_REQUIRED_YEARS = set(range(cur_yr - LAST_N_YEARS, cur_yr))   # e.g. 2022,2023,2024,2025
 
 MON = ["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
 MON_FULL = ["","January","February","March","April","May","June",
@@ -141,7 +143,15 @@ def analyze_stock(sym, df):
 
             slot_years = set(day_info[i]["year"] for i in slot_days)
             if len(slot_years) < MIN_OCC: continue
-            if not REQUIRED_YEARS.issubset(slot_years): continue
+            # Determine required years for this slot:
+            # If this month+week has already passed in the current year,
+            # then current year is REQUIRED too — no misses allowed.
+            slot_has_passed = (
+                month < cur_mo or
+                (month == cur_mo and week < cur_wk)
+            )
+            req_years = BASE_REQUIRED_YEARS | ({cur_yr} if slot_has_passed else set())
+            if not req_years.issubset(slot_years): continue
 
             for hold in HOLD_DAYS_LIST:
                 # For each day in this slot: can we enter next day and get 10% within hold days?
@@ -197,7 +207,7 @@ def analyze_stock(sym, df):
                 if not all(occ["max_ret"] >= MIN_RETURN for occ in occurrences): continue
 
                 occ_years = set(occ["year"] for occ in occurrences)
-                if not REQUIRED_YEARS.issubset(occ_years): continue
+                if not req_years.issubset(occ_years): continue
 
                 max_rets  = [occ["max_ret"] for occ in occurrences]
                 exit_rets = [occ["ret_on_exit"] for occ in occurrences if occ["ret_on_exit"] is not None]
@@ -227,6 +237,8 @@ def analyze_stock(sym, df):
                     "n_occurrences":    len(occurrences),
                     "n_years":          len(occ_years),
                     "years":            sorted(occ_years),
+                    "required_years":   sorted(req_years),
+                    "slot_passed_2026": slot_has_passed,
                     "avg_max_ret":      avg_max,
                     "min_max_ret":      min_max,
                     "avg_exit_ret":     avg_exit,
