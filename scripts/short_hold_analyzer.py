@@ -260,9 +260,44 @@ def main():
     # Sort: highest avg_max_ret descending (best performers first)
     results.sort(key=lambda x: -(x.get("avg_max_ret") or 0))
 
+    # Build alert lists
+    import datetime as _dt_alert
+    alerts_today    = [r for r in results if r.get("alert_today")]
+    alerts_tomorrow = [r for r in results if r.get("alert_tomorrow")]
+    alerts_window   = [r for r in results if r.get("window_matches")]
+
+    # Build full year calendar: for each month, which stocks fire
+    year_calendar = {}
+    for r in results:
+        for item in (r.get("calendar_mmdd") or []):
+            mo = item["mmdd"][:2]   # "04" from "04-10"
+            if mo not in year_calendar:
+                year_calendar[mo] = []
+            # Avoid duplicates per stock per month
+            if not any(e["sym"] == r["sym"] for e in year_calendar[mo]):
+                year_calendar[mo].append({
+                    "sym":         r["sym"],
+                    "avg_max_ret": r["avg_max_ret"],
+                    "min_max_ret": r["min_max_ret"],
+                    "hold_days":   r["hold_days"],
+                    "n_occ":       r["n_occurrences"],
+                    "mmdd":        item["mmdd"],
+                })
+    # Sort each month's list by avg_max_ret desc
+    for mo in year_calendar:
+        year_calendar[mo].sort(key=lambda x: -(x.get("avg_max_ret") or 0))
+
+    import datetime as _dt_out
+    _today_str = _dt_out.datetime.now().strftime("%Y-%m-%d")
     output = {
         "generated_at":     now,
+        "today_date":       _today_str,
         "required_years":   sorted(REQUIRED_YEARS),
+        "n_alerts_today":   len(alerts_today),
+        "n_alerts_tomorrow":len(alerts_tomorrow),
+        "alerts_today":     alerts_today,
+        "alerts_tomorrow":  alerts_tomorrow,
+        "year_calendar":    year_calendar,
         "n_stocks":         len(results),
         "n_excluded":       excluded,
         "n_skipped":        skipped,
@@ -280,8 +315,8 @@ def main():
     print(f"  Qualifying stocks : {len(results)}")
     print(f"  Excluded (ETF etc): {excluded}")
     print(f"  Skipped (data)    : {skipped}")
-    print(f"\nTop 10 by avg return:")
-    for r in results[:10]:
+    print(f"\nAll {len(results)} qualifying stocks (sorted by avg return):")
+    for r in results:
         alert_tag = " *** ALERT TODAY ***" if r.get("alert_today") else (" ** ALERT TOMORROW **" if r.get("alert_tomorrow") else "")
         print(f"  {r['sym']:<14} hold={r['hold_days']}d  avg={r['avg_max_ret']}%  min={r['min_max_ret']}%  n={r['n_occurrences']}  years={r['years']}{alert_tag}")
 
