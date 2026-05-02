@@ -261,7 +261,7 @@ def analyze_stock(sym, df):
 
 def main():
     print(f"\n{'='*60}\nShort Hold Analyzer (Consistent Monthly Week Pattern)")
-    print(f"Required years: {sorted(REQUIRED_YEARS)}\nStarted: {now}\n{'='*60}")
+    print(f"Required years (base): {sorted(BASE_REQUIRED_YEARS)}\nCurrent year ({cur_yr}) added for past slots\nStarted: {now}\n{'='*60}")
 
     all_data = load_all()
     grouped  = all_data.groupby("sym")
@@ -323,7 +323,7 @@ def main():
         "generated_at":      now,
         "today_date":        datetime.now().strftime("%Y-%m-%d"),
         "today_week_label":  f"Week {week_of_month(datetime.now())} of {MON_FULL[datetime.now().month]}",
-        "required_years":    sorted(REQUIRED_YEARS),
+        "required_years":    sorted(BASE_REQUIRED_YEARS | {cur_yr}),
         "n_patterns":        len(results),
         "n_stocks":          len(set(r["sym"] for r in results)),
         "n_alerts_today":    len(alerts_today),
