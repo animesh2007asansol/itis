@@ -1,0 +1,28 @@
+name: Seasonal Timing Optimizer (UC1 + UC2)
+
+on:
+  workflow_dispatch: {}
+  workflow_run:
+    workflows: ["Master Stock Analysis v3"]
+    types: [completed]
+
+jobs:
+  timing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas numpy --quiet
+      - name: Run Seasonal Timing Optimizer
+        run: python scripts/seasonal_timing_optimizer.py
+      - name: Commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add stock_analysis/timing_uc1.json stock_analysis/timing_uc2.json stock_analysis/timing_all.json
+          git diff --staged --quiet && echo "No changes" || \
+            git commit -m "Timing optimizer: UC1+UC2 entry/exit windows [$(date '+%Y-%m-%d')]"
+          git push
