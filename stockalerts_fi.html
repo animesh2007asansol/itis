@@ -1,0 +1,2454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NSE Intelligence v3</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090F;--s:#0D1119;--card:#101520;--b:#1A2B42;--b2:#213554;
+  --gold:#C9A84C;--g2:#9A6F28;--gbg:rgba(201,168,76,.08);
+  --green:#22C55E;--gr2:#166534;--grb:rgba(34,197,94,.08);
+  --red:#EF4444;--r2:#7F1D1D;--rb:rgba(239,68,68,.09);
+  --blue:#60A5FA;--bl2:#1E3A5F;--blb:rgba(96,165,250,.09);
+  --amber:#F59E0B;--amb:#78350F;--ab:rgba(245,158,11,.09);
+  --purple:#A855F7;--pb:rgba(168,85,247,.09);
+  --text:#DCE8F5;--t2:#94A3B8;--t3:#5A7090;--r:10px;
+  --font:'IBM Plex Sans',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:13px;min-height:100vh}
+nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--b);padding:6px 10px 4px}
+.nav-top{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.brand{font-size:13px;font-weight:700;color:var(--gold);display:flex;align-items:center;gap:5px}
+.brand small{font-size:9px;color:var(--t3);font-weight:400}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 5px transparent}}
+.tabs{display:flex;flex-wrap:wrap;gap:3px}
+.tab{padding:4px 9px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:500;color:var(--t3);border:none;background:none;white-space:nowrap;transition:.2s}
+.tab:hover{color:var(--text);background:var(--s)}
+.tab.active{color:var(--gold);background:var(--gbg);border:1px solid var(--g2)}
+.page{display:none;max-width:1600px;margin:0 auto;padding:12px 10px 60px}
+.page.active{display:block}
+.sh{font-size:14px;font-weight:600;color:var(--gold);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--b);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sh small{font-size:10px;color:var(--t3);font-weight:400}
+.pill-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.kp{background:var(--card);border:1px solid var(--b);border-radius:7px;padding:7px 10px;min-width:80px}
+.kp.g{border-color:var(--gr2);background:var(--grb)}.kp.b{border-color:var(--bl2);background:var(--blb)}
+.kp.y{border-color:var(--amb);background:var(--ab)}.kp.r{border-color:var(--r2);background:var(--rb)}
+.kl{font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:2px}
+.kv{font-size:15px;font-weight:700;color:var(--text)} .ks{font-size:9px;color:var(--t3);margin-top:2px}
+.fbar{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;align-items:center;padding:8px;background:var(--s);border-radius:8px;border:1px solid var(--b)}
+.fb{padding:4px 9px;border-radius:5px;border:1px solid var(--b);background:var(--card);color:var(--t2);font-size:11px;cursor:pointer;transition:.2s;white-space:nowrap;user-select:none}
+.fb:hover{color:var(--text)}.fb.on{background:var(--gbg);color:var(--green);border-color:var(--gr2);font-weight:600}
+.fsep{color:var(--t3);font-size:10px;white-space:nowrap}
+.si{background:var(--card);border:1px solid var(--b);border-radius:6px;color:var(--text);padding:4px 8px;font-size:12px;outline:none}
+.si:focus{border-color:var(--gold)}
+.twrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;border:1px solid var(--b)}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{background:var(--s);padding:7px 9px;text-align:left;font-weight:600;color:var(--t2);font-size:10px;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;position:sticky;top:0;white-space:nowrap;border-bottom:1px solid var(--b);user-select:none}
+.tbl th:hover{color:var(--text)}.arr{font-size:8px;margin-left:3px;color:var(--t3)}
+.tbl td{padding:7px 9px;border-bottom:1px solid rgba(26,43,66,.5);vertical-align:top;white-space:nowrap}
+.tbl tr:hover td{background:rgba(255,255,255,.02)}
+.mono{font-family:'DM Mono',monospace}
+.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}.gold{color:var(--gold)}.muted{color:var(--t3)}.blue{color:var(--blue)}
+.empty{text-align:center;padding:32px;color:var(--t3);font-size:12px;grid-column:1/-1}
+.spinner{width:20px;height:20px;border:2px solid var(--b);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ac{background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:12px;margin-bottom:10px}
+.ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:5px;margin:8px 0}
+.ac-mini{background:var(--s);border-radius:5px;padding:5px 7px;border:1px solid var(--b)}
+.ac-ml{font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.ac-mv{font-size:12px;font-weight:600;color:var(--text)}
+.ac-explain{font-size:10px;color:var(--t2);line-height:1.5;padding:8px;background:var(--s);border-radius:6px;border-left:2px solid var(--gold);margin-top:8px}
+.gb{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;border:1px solid}
+.gAp{background:var(--grb);color:var(--green);border-color:var(--gr2)}.gA{background:var(--blb);color:var(--blue);border-color:var(--bl2)}
+.alert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+.ctx-box{background:var(--s);border:1px solid var(--b);border-radius:7px;padding:8px;margin-top:8px}
+.ctx-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px solid rgba(26,43,66,.4);font-size:10px;gap:6px}
+.ctx-row:last-child{border-bottom:none}
+.ctx-lbl{color:var(--t3);white-space:nowrap;min-width:90px}.ctx-rng{color:var(--amber);font-family:'DM Mono',monospace}
+.lt-card{background:var(--card);border:1px solid var(--b);border-radius:var(--r);padding:12px;margin-bottom:10px;border-left:3px solid var(--gold)}
+.lt-card.ap{border-left-color:var(--green)}
+.sbar-wrap{display:flex;align-items:center;gap:6px}.sbar{flex:1;height:5px;background:var(--b);border-radius:3px;overflow:hidden}.sbar-fill{height:100%;border-radius:3px}
+.uc-badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;margin-right:3px}
+.uc1{background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.3)}
+.uc2{background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.3)}
+.uc3{background:rgba(34,197,94,.1);color:var(--green);border:1px solid var(--gr2)}
+.uc4{background:var(--blb);color:var(--blue);border:1px solid var(--bl2)}
+.conf-bar{height:4px;border-radius:2px;margin-top:3px}
+@media(max-width:600px){.tbl{font-size:11px}.tbl td,.tbl th{padding:5px 6px}.alert-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-top"><div class="ldot"></div><div class="brand">&#x1F9E0; NSE Intelligence v3 <small>4 Use Cases &#x00B7; 25+ Strategies &#x00B7; Multi-Year Validation &#x00B7; &#x2265;95% Win Rate &#x00B7; &#x2265;10% Return</small></div></div>
+  <div class="tabs">
+    <button class="tab active" onclick="showPage('alerts',this)">&#x1F514; Today's Alerts</button>
+    <button class="tab" onclick="showPage('history',this)">&#x1F4C5; Signal History</button>
+    <button class="tab" onclick="showPage('stillvalid',this)">&#x23F3; Still Valid</button>
+    <button class="tab" onclick="showPage('uc1',this)">&#x1F4C8; UC1 Surge</button>
+    <button class="tab" onclick="showPage('uc2',this)">&#x1F4C5; UC2 Seasonal</button>
+    <button class="tab" onclick="showPage('uc3',this)">&#x1F9EC; UC3 Combined</button>
+    <button class="tab" onclick="showPage('uc4',this)">&#x1F50C; UC4 Technical</button>
+    <button class="tab" onclick="showPage('longterm',this)">&#x1F331; Long-Term</button>
+    <button class="tab" onclick="showPage('allstocks',this)">&#x1F4CA; All Stocks</button>
+    <button class="tab" onclick="showPage('calendar',this)">&#x1F4C6; Trading Calendar</button>
+    <button class="tab" onclick="showPage('uc2timing',this)">&#x23F1; UC2 Timing</button>
+    <button class="tab" onclick="showPage('monthlypicks',this)">&#x1F4C6; Monthly Picks</button>
+    <button class="tab" onclick="showPage('shorthold',this)">&#x26A1; Short Hold (5-10d)</button>
+    <button class="tab" onclick="showPage('buying',this)">&#x1F4B0; Buying Strategy</button>
+    <button class="tab" onclick="showPage('guide',this)">&#x1F4D6; Guide</button>
+  </div>
+</nav>
+
+<div class="page active" id="page-alerts">
+  <div class="sh">&#x1F514; Today's Buy Signals <small id="alert-date">loading&#x2026;</small> <span id="today-badge" style="display:inline-block;font-size:11px;border-radius:4px;padding:2px 8px;font-weight:600;border:1px solid transparent"></span></div>
+  <div style="background:var(--grb);border:1px solid var(--gr2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--green)">
+    &#x2713; Stocks confirmed traded today &#x00B7; &#x2265;95% win rate &#x00B7; &#x2265;10% min return every occurrence &#x00B7; Multi-year OOS validated &#x00B7; Ranked by return%/day
+  </div>
+  <div class="pill-row" id="alert-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Grade:</span>
+    <button class="fb on" id="ag-Ap" onclick="tg('alertGrds','A+',this);renderAlerts()">A+</button>
+    <button class="fb on" id="ag-A"  onclick="tg('alertGrds','A',this);renderAlerts()">A</button>
+    <span class="fsep">|</span>
+    <span class="fsep">UC:</span>
+    <button class="fb on" id="auc-UC1" onclick="tg('alertUCs','UC1',this);renderAlerts()">UC1</button>
+    <button class="fb on" id="auc-UC2" onclick="tg('alertUCs','UC2',this);renderAlerts()">UC2</button>
+    <button class="fb on" id="auc-UC3" onclick="tg('alertUCs','UC3',this);renderAlerts()">UC3</button>
+    <button class="fb on" id="auc-UC4" onclick="tg('alertUCs','UC4',this);renderAlerts()">UC4</button>
+    <span class="fsep">|</span>
+    <button class="fb on" id="aort-rr"  onclick="aSrt('ret_rate',this)">&#x1F3AF; Ret%/Day</button>
+    <button class="fb" id="aort-avg"    onclick="aSrt('avg_ret',this)">Avg Ret%</button>
+    <button class="fb" id="aort-min"    onclick="aSrt('min_ret',this)">Min Ret%</button>
+    <button class="fb" id="aort-conf"   onclick="aSrt('confidence',this)">Confidence</button>
+    <span class="fsep">|</span>
+    <input class="si" id="alert-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderAlerts()">
+  </div>
+  <div id="alert-grid" class="alert-grid"><div class="empty"><div class="spinner"></div>Loading&#x2026;</div></div>
+</div>
+
+<div class="page" id="page-stillvalid">
+  <div class="sh">&#x23F3; Still Valid — Past Signals Still Within Tenure <small>within hold period &#x00B7; &#x2265;5% gap to minimum return target &#x00B7; sorted by gap remaining</small></div>
+  <div style="background:var(--ab);border:1px solid var(--amb);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--amber)">
+    &#x23F3; These signals fired in the past but are still within their hold period. Current price is still &#x2265;5% below the minimum return target. Still good to enter — minimum return not yet achieved.
+  </div>
+  <div class="pill-row" id="sv-pills"></div>
+  <div class="fbar">
+    <button class="fb on" id="svs-gap"  onclick="svSrt('gap_to_min_target_pct',this)">Gap Remaining%</button>
+    <button class="fb" id="svs-min"     onclick="svSrt('min_ret',this)">Min Return%</button>
+    <button class="fb" id="svs-rem"     onclick="svSrt('days_remaining',this)">Days Remaining</button>
+    <button class="fb" id="svs-conf"    onclick="svSrt('confidence',this)">Confidence</button>
+    <span class="fsep">|</span>
+    <input class="si" id="sv-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderSV()">
+  </div>
+  <div class="twrap"><table class="tbl" id="sv-tbl" style="min-width:1000px">
+    <thead><tr>
+      <th onclick="svTh('sym')">Stock<span class="arr"></span></th>
+      <th onclick="svTh('uc')">UC<span class="arr"></span></th>
+      <th onclick="svTh('grade')">Grade<span class="arr"></span></th>
+      <th onclick="svTh('confidence')">Conf%<span class="arr"></span></th>
+      <th onclick="svTh('sig_date')">Signal Date<span class="arr"></span></th>
+      <th onclick="svTh('entry_date')">Entry Date<span class="arr"></span></th>
+      <th onclick="svTh('entry_px')">Entry Rs<span class="arr"></span></th>
+      <th onclick="svTh('current_price')">Current Rs<span class="arr"></span></th>
+      <th onclick="svTh('current_return_pct')">Cur Ret%<span class="arr"></span></th>
+      <th onclick="svTh('min_ret')">Min Ret%&#x1F4D6;<span class="arr"></span></th>
+      <th onclick="svTh('avg_ret')">Avg Ret%<span class="arr"></span></th>
+      <th onclick="svTh('max_ret')">Max Ret%<span class="arr"></span></th>
+      <th onclick="svTh('min_target_price')">Min Target Rs<span class="arr"></span></th>
+      <th onclick="svTh('gap_to_min_target_pct')">Gap to Target%&#x1F3AF;<span class="arr"></span></th>
+      <th onclick="svTh('hold_days')">Hold Days<span class="arr"></span></th>
+      <th onclick="svTh('days_elapsed')">Days Past<span class="arr"></span></th>
+      <th onclick="svTh('days_remaining')">Days Left<span class="arr"></span></th>
+    </tr></thead>
+    <tbody id="sv-tbody"><tr><td colspan="17" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="page" id="page-history">
+  <div class="sh">&#x1F4C5; Signal History <small>all past signals &#x00B7; sort &#x00B7; filter open/closed</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:7px 12px;margin-bottom:8px;font-size:11px;color:var(--blue);line-height:1.7">
+    <strong>Hold td</strong> = trading days (market days only). <strong>Days Past/Left</strong> = calendar days. So 60td hold &#x2248; 90 calendar days &mdash; seeing 84cal past with 60td hold is correct. &nbsp;&#x00B7;&nbsp;
+    <strong>~ prefix</strong> = partial/open trade return (today's price used as exit). &nbsp;&#x00B7;&nbsp;
+    Negative Gap% = stock already exceeded min target (good). &nbsp;&#x00B7;&nbsp;
+    <strong>&#x26A0; Split?</strong> = likely corporate action after entry &mdash; gap% unreliable for that row.
+  </div>
+  <div class="pill-row" id="hist-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Show:</span>
+    <button class="fb on" id="hv-all"   onclick="histViewFn('all',this)">All</button>
+    <button class="fb" id="hv-open"      onclick="histViewFn('open',this)">&#x23F3; Open</button>
+    <button class="fb" id="hv-valid"     onclick="histViewFn('valid',this)">&#x2705; Open+&#x2265;5%Gap</button>
+    <span class="fsep">|</span>
+    <input class="si" id="hq" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderHist()">
+    <input class="si" id="huc" placeholder="UC1/UC2/UC3/UC4&#x2026;" style="width:130px" oninput="renderHist()">
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="hsrt-dt"  onclick="hSrt('sig_date',this)">Date</button>
+    <button class="fb" id="hsrt-ret"    onclick="hSrt('ret',this)">Return%</button>
+    <button class="fb" id="hsrt-sym"    onclick="hSrt('sym',this)">Symbol</button>
+    <button class="fb" id="hsrt-conf"   onclick="hSrt('confidence',this)">Confidence</button>
+  </div>
+  <div class="twrap"><table class="tbl" id="hist-tbl" style="min-width:1100px">
+    <thead><tr style="font-size:9px">
+      <th onclick="hTh('sym')">Stock<span class="arr"></span></th>
+      <th onclick="hTh('sig_date')">Signal Date<span class="arr"></span></th>
+      <th onclick="hTh('uc')">UC<span class="arr"></span></th>
+      <th onclick="hTh('grade')">Grade<span class="arr"></span></th>
+      <th onclick="hTh('confidence')">Confidence<span class="arr"></span></th>
+      <th onclick="hTh('entry_date')">Entry Date<span class="arr"></span></th>
+      <th onclick="hTh('entry_px')">Entry Rs<span class="arr"></span></th>
+      <th onclick="hTh('exit_date')">Exit Date<span class="arr"></span></th>
+      <th onclick="hTh('exit_px')">Exit Rs<span class="arr"></span></th>
+      <th onclick="hTh('ret')">Return%<span class="arr"></span></th>
+      <th onclick="hTh('ret_3d')">3d Ret%<span class="arr"></span></th>
+      <th onclick="hTh('ret_10d')">10d Ret%<span class="arr"></span></th>
+      <th onclick="hTh('max_gain')">Max Gain%<span class="arr"></span></th>
+      <th onclick="hTh('max_dd')">Max DD%<span class="arr"></span></th>
+      <th onclick="hTh('ctx_rsi')">RSI at Sig<span class="arr"></span></th>
+      <th onclick="hTh('ctx_vol_r')">Vol Ratio<span class="arr"></span></th>
+      <th onclick="hTh('ctx_ret5')">5d Before%<span class="arr"></span></th>
+      <th onclick="hTh('ctx_ret20')">20d Before%<span class="arr"></span></th>
+      <th onclick="hTh('is_open')">Status<span class="arr"></span></th>
+      <th onclick="hTh('min_ret_strategy')">Strat Min%<span class="arr"></span></th>
+      <th onclick="hTh('avg_ret_strategy')">Strat Avg%<span class="arr"></span></th>
+      <th onclick="hTh('current_price')">Current Rs<span class="arr"></span></th>
+      <th onclick="hTh('gap')">Gap to Target%<span class="arr"></span></th>
+      <th onclick="hTh('days_elapsed')" title="Calendar days elapsed since entry. Hold(td) × 1.5 = calendar tenure. 20td hold → 30cal tenure.">Days Past<span class="arr" title=""></span></th>
+      <th onclick="hTh('days_remaining')" title="Calendar days remaining. When 0 → trade closed. Can exceed Hold(td) number because td ≠ cal days.">Days Left<span class="arr"></span></th>
+      <th onclick="hTh('hold_days')" title="Hold Trading Days (td). 20td ≈ 30 calendar days">Hold td<span class="arr"></span></th>
+    </tr></thead>
+    <tbody id="hist-tbody"><tr><td colspan="26" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="page" id="page-uc1">
+  <div class="sh">&#x1F4C8; UC1: Surge Momentum <small>stock rises X% in N days &#x2192; always positive for M days &#x00B7; &#x2265;95% win &#x00B7; &#x2265;10% return</small></div>
+  <div class="pill-row" id="uc1-pills"></div>
+  <div class="fbar">
+    <button clas<span class="fsep">View:</span>
+    <button class="fb on" id="u1v-all" onclick="ucViews['uc1']='all';document.querySelectorAll('[id^=u1v]').forEach(function(b){b.classList.remove('on')});this.classList.add('on');renderUC('uc1')">&#x1F4CB; All</button>
+    <button class="fb" id="u1v-today" onclick="ucViews['uc1']='today';document.querySelectorAll('[id^=u1v]').forEach(function(b){b.classList.remove('on')});this.classList.add('on');renderUC('uc1')">&#x1F514; Today</button>
+    <button class="fb" id="u1v-active" onclick="ucViews['uc1']='active';document.querySelectorAll('[id^=u1v]').forEach(function(b){b.classList.remove('on')});this.classList.add('on');renderUC('uc1')">&#x23F3; Active</button>
+    <span class="fsep">|</span>
+    s="fb on" id="u1g-Ap" onclick="tg('uc1','A+',this);renderUC('uc1')">A+</button>
+    <button class="fb on" id="u1g-A"  onclick="tg('uc1','A',this);renderUC('uc1')">A</button>
+    <button class="fb on" id="u1g-B"  onclick="tg('uc1','B',this);renderUC('uc1')">B</button>
+    <span class="fsep">|</span>
+    <button class="fb on" id="u1s-rr"  onclick="ucSrt('uc1','ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="u1s-avg"    onclick="ucSrt('uc1','avg_ret',this)">Avg Ret</button>
+    <button class="fb" id="u1s-min"    onclick="ucSrt('uc1','min_ret',this)">Min Ret</button>
+    <button class="fb" id="u1s-n"      onclick="ucSrt('uc1','n_trades',this)">Occurrences</button>
+    <span class="fsep">|</span>
+    <input class="si" id="u1q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderUC('uc1')">
+  </div>
+  <div class="twrap"><table class="tbl" style="min-width:900px" id="uc1-tbl">
+    <thead><tr>
+      <th style="width:20px"></th>
+      <th onclick="ucTh('uc1','sym')">Stock<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','price')">Price<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','grade')">Grade<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','confidence')">Conf%<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','ret_rate')">Ret%/Day&#x1F3AF;<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','avg_ret')">Avg Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','min_ret')">Min Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','hold_days')">Hold Days<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','win_rate')">Win Rate<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','n_trades')">Occurrences<span class="arr"></span></th>
+      <th onclick="ucTh('uc1','sharpe')">Sharpe<span class="arr"></span></th>
+      <th>Description</th>
+    </tr></thead>
+    <tbody id="uc1-tbody"><tr><td colspan="13" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="page" id="page-uc2">
+  <div class="sh">&#x1F4C5; UC2: Seasonal Patterns <small>stock reliably up in certain months/quarters &#x00B7; &#x2265;95% win &#x00B7; &#x2265;10% return</small></div>
+  <div class="pill-row" id="uc2-pills"></div>
+  <div class="fbar">
+    <button clas<span class="fsep">View:</span>
+    <button class="fb on" id="u2v-all" onclick="ucViews['uc2']='all';document.querySelectorAll('[id^=u2v]').forEach(function(b){b.classList.remove('on')});this.classList.add('on');renderUC('uc2')">&#x1F4CB; All</button>
+    <button class="fb" id="u2v-today" onclick="ucViews['uc2']='today';document.querySelectorAll('[id^=u2v]').forEach(function(b){b.classList.remove('on')});this.classList.add('on');renderUC('uc2')">&#x1F514; Today</button>
+    <button class="fb" id="u2v-active" onclick="ucViews['uc2']='active';document.querySelectorAll('[id^=u2v]').forEach(function(b){b.classList.remove('on')});this.classList.add('on');renderUC('uc2')">&#x23F3; Active</button>
+    <span class="fsep">|</span>
+    s="fb on" id="u2g-Ap" onclick="tg('uc2','A+',this);renderUC('uc2')">A+</button>
+    <button class="fb on" id="u2g-A"  onclick="tg('uc2','A',this);renderUC('uc2')">A</button>
+    <button class="fb on" id="u2g-B"  onclick="tg('uc2','B',this);renderUC('uc2')">B</button>
+    <span class="fsep">|</span>
+    <button class="fb on" id="u2s-rr"  onclick="ucSrt('uc2','ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="u2s-avg"    onclick="ucSrt('uc2','avg_ret',this)">Avg Ret</button>
+    <button class="fb" id="u2s-min"    onclick="ucSrt('uc2','min_ret',this)">Min Ret</button>
+    <span class="fsep">|</span>
+    <input class="si" id="u2q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderUC('uc2')">
+  </div>
+  <div class="twrap"><table class="tbl" style="min-width:900px" id="uc2-tbl">
+    <thead><tr>
+      <th style="width:20px"></th>
+      <th onclick="ucTh('uc2','sym')">Stock<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','price')">Price<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','grade')">Grade<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','confidence')">Conf%<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','ret_rate')">Ret%/Day&#x1F3AF;<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','avg_ret')">Avg Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','min_ret')">Min Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','hold_days')">Hold Days<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','win_rate')">Win Rate<span class="arr"></span></th>
+      <th onclick="ucTh('uc2','n_trades')">Occurrences<span class="arr"></span></th>
+      <th>Season</th>
+    </tr></thead>
+    <tbody id="uc2-tbody"><tr><td colspan="12" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="page" id="page-uc3">
+  <div class="sh">&#x1F9EC; UC3: Combined Signals <small>surge momentum + strong season = double confirmed &#x00B7; highest quality</small></div>
+  <div class="pill-row" id="uc3-pills"></div>
+  <div class="fbar">
+    <button clas<span class="fsep">View:</span>
+    <button class="fb on" id="u3v-all" onclick="ucViews['uc3']='all';document.querySelectorAll('[id^=u3v]').forEach(function(b){b.classList.remove('on')});this.classList.add('on');renderUC('uc3')">&#x1F4CB; All</button>
+    <button class="fb" id="u3v-today" onclick="ucViews['uc3']='today';document.querySelectorAll('[id^=u3v]').forEach(function(b){b.classList.remove('on')});this.classList.add('on');renderUC('uc3')">&#x1F514; Today</button>
+    <button class="fb" id="u3v-active" onclick="ucViews['uc3']='active';document.querySelectorAll('[id^=u3v]').forEach(function(b){b.classList.remove('on')});this.classList.add('on');renderUC('uc3')">&#x23F3; Active</button>
+    <span class="fsep">|</span>
+    s="fb on" id="u3g-Ap" onclick="tg('uc3','A+',this);renderUC('uc3')">A+</button>
+    <button class="fb on" id="u3g-A"  onclick="tg('uc3','A',this);renderUC('uc3')">A</button>
+    <button class="fb on" id="u3g-B"  onclick="tg('uc3','B',this);renderUC('uc3')">B</button>
+    <span class="fsep">|</span>
+    <button class="fb on" id="u3s-rr"  onclick="ucSrt('uc3','ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="u3s-avg"    onclick="ucSrt('uc3','avg_ret',this)">Avg Ret</button>
+    <span class="fsep">|</span>
+    <input class="si" id="u3q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderUC('uc3')">
+  </div>
+  <div class="twrap"><table class="tbl" style="min-width:900px" id="uc3-tbl">
+    <thead><tr>
+      <th style="width:20px"></th>
+      <th onclick="ucTh('uc3','sym')">Stock<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','price')">Price<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','grade')">Grade<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','confidence')">Conf%<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','ret_rate')">Ret%/Day&#x1F3AF;<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','avg_ret')">Avg Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','min_ret')">Min Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','hold_days')">Hold Days<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','win_rate')">Win Rate<span class="arr"></span></th>
+      <th onclick="ucTh('uc3','n_trades')">Occurrences<span class="arr"></span></th>
+    </tr></thead>
+    <tbody id="uc3-tbody"><tr><td colspan="11" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="page" id="page-uc4">
+  <div class="sh">&#x1F50C; UC4: Technical Patterns <small>25 strategies &#x00B7; 300+ parameter combos &#x00B7; best per stock</small></div>
+  <div class="pill-row" id="uc4-pills"></div>
+  <div class="fbar">
+    <button clas<span class="fsep">View:</span>
+    <button class="fb on" id="u4v-all" onclick="ucViews['uc4']='all';document.querySelectorAll('[id^=u4v]').forEach(function(b){b.classList.remove('on')});this.classList.add('on');renderUC('uc4')">&#x1F4CB; All</button>
+    <button class="fb" id="u4v-today" onclick="ucViews['uc4']='today';document.querySelectorAll('[id^=u4v]').forEach(function(b){b.classList.remove('on')});this.classList.add('on');renderUC('uc4')">&#x1F514; Today</button>
+    <button class="fb" id="u4v-active" onclick="ucViews['uc4']='active';document.querySelectorAll('[id^=u4v]').forEach(function(b){b.classList.remove('on')});this.classList.add('on');renderUC('uc4')">&#x23F3; Active</button>
+    <span class="fsep">|</span>
+    s="fb on" id="u4g-Ap" onclick="tg('uc4','A+',this);renderUC('uc4')">A+</button>
+    <button class="fb on" id="u4g-A"  onclick="tg('uc4','A',this);renderUC('uc4')">A</button>
+    <button class="fb on" id="u4g-B"  onclick="tg('uc4','B',this);renderUC('uc4')">B</button>
+    <span class="fsep">|</span>
+    <button class="fb on" id="u4s-rr"  onclick="ucSrt('uc4','ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="u4s-avg"    onclick="ucSrt('uc4','avg_ret',this)">Avg Ret</button>
+    <button class="fb" id="u4s-min"    onclick="ucSrt('uc4','min_ret',this)">Min Ret</button>
+    <button class="fb" id="u4s-sh"     onclick="ucSrt('uc4','sharpe',this)">Sharpe</button>
+    <span class="fsep">|</span>
+    <input class="si" id="u4q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderUC('uc4')">
+  </div>
+  <div class="twrap"><table class="tbl" style="min-width:1000px" id="uc4-tbl">
+    <thead><tr>
+      <th style="width:20px"></th>
+      <th onclick="ucTh('uc4','sym')">Stock<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','price')">Price<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','grade')">Grade<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','confidence')">Conf%<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','ret_rate')">Ret%/Day&#x1F3AF;<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','avg_ret')">Avg Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','min_ret')">Min Ret%<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','hold_days')">Hold Days<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','win_rate')">Win Rate<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','n_trades')">Occ<span class="arr"></span></th>
+      <th onclick="ucTh('uc4','sharpe')">Sharpe<span class="arr"></span></th>
+      <th>Strategy</th>
+    </tr></thead>
+    <tbody id="uc4-tbody"><tr><td colspan="13" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="page" id="page-longterm">
+  <div class="sh">&#x1F331; Long-Term Investment Picks <small>confidence &#x2265;70% &#x00B7; A/A+ grade &#x00B7; holds across multiple years</small></div>
+  <div class="pill-row" id="lt-pills"></div>
+  <div class="fbar">
+    <button class="fb on" id="ltg-Ap" onclick="tg('ltGrds','A+',this);renderLT()">A+</button>
+    <button class="fb on" id="ltg-A"  onclick="tg('ltGrds','A',this);renderLT()">A</button>
+    <span class="fsep">|</span>
+    <button class="fb on" id="lts-sc"  onclick="ltSrt('longterm_score',this)">LT Score</button>
+    <button class="fb" id="lts-rr"     onclick="ltSrt('ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="lts-avg"    onclick="ltSrt('avg_ret',this)">Avg Ret</button>
+    <span class="fsep">|</span>
+    <input class="si" id="ltq" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderLT()">
+  </div>
+  <div id="lt-grid"><div class="empty"><div class="spinner"></div>Loading&#x2026;</div></div>
+</div>
+
+<div class="page" id="page-allstocks">
+  <div class="sh">&#x1F4CA; All Stocks <small>click row to expand &#x00B7; sorted by Ret%/Day by default</small></div>
+  <div class="pill-row" id="all-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Filter:</span>
+    <button class="fb on" id="af-ALL"    onclick="togAF('ALL',this)">All</button>
+    <button class="fb" id="af-Ap"        onclick="togAF('A+',this)">A+</button>
+    <button class="fb" id="af-SIGNAL"    onclick="togAF('SIGNAL',this)">Signal Today</button>
+    <button class="fb" id="af-LT"        onclick="togAF('LT',this)">LT&#x2265;60</button>
+    <button class="fb" id="af-UC1"       onclick="togAF('UC1',this)">Has UC1</button>
+    <button class="fb" id="af-UC2"       onclick="togAF('UC2',this)">Has UC2</button>
+    <span class="fsep">|</span>
+    <button class="fb on" id="allsrr" onclick="allSrt('best_ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="allsav"    onclick="allSrt('best_avg_ret',this)">Avg Ret</button>
+    <button class="fb" id="allsmn"    onclick="allSrt('best_min_ret',this)">Min Ret</button>
+    <button class="fb" id="allsco"    onclick="allSrt('confidence',this)">Confidence</button>
+    <span class="fsep">|</span>
+    <input class="si" id="allq" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderAll()">
+  </div>
+  <div class="twrap"><table class="tbl" style="min-width:1100px">
+    <thead><tr>
+      <th style="width:20px"></th>
+      <th onclick="allTh('sym')">Stock<span class="arr"></span></th>
+      <th onclick="allTh('price')">Price<span class="arr"></span></th>
+      <th onclick="allTh('best_grade')">Grade<span class="arr"></span></th>
+      <th onclick="allTh('confidence')">Conf%<span class="arr"></span></th>
+      <th onclick="allTh('longterm_score')">LT Score<span class="arr"></span></th>
+      <th onclick="allTh('best_uc')">Best UC<span class="arr"></span></th>
+      <th onclick="allTh('best_ret_rate')" style="background:rgba(34,197,94,.06)">Ret%/Day&#x1F3AF;<span class="arr"></span></th>
+      <th onclick="allTh('best_avg_ret')">Avg Ret%<span class="arr"></span></th>
+      <th onclick="allTh('best_min_ret')">Min Ret%<span class="arr"></span></th>
+      <th onclick="allTh('best_hold_days')">Hold<span class="arr"></span></th>
+      <th onclick="allTh('best_wr')">Win%<span class="arr"></span></th>
+      <th onclick="allTh('best_n_trades')">Occ<span class="arr"></span></th>
+      <th onclick="allTh('best_sharpe')">Sharpe<span class="arr"></span></th>
+      <th onclick="allTh('rsi')">RSI<span class="arr"></span></th>
+      <th onclick="allTh('vol_r')">Vol Ratio<span class="arr"></span></th>
+      <th onclick="allTh('adx')">ADX<span class="arr"></span></th>
+      <th onclick="allTh('ret5')">5d Ret%<span class="arr"></span></th>
+      <th onclick="allTh('ret20')">20d Ret%<span class="arr"></span></th>
+      <th onclick="allTh('avg_turnover_cr')">Turnover Cr<span class="arr"></span></th>
+      <th onclick="allTh('signal_today')">Alert<span class="arr"></span></th>
+    </tr></thead>
+    <tbody id="all-tbody"><tr><td colspan="21" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+  </table></div>
+</div>
+
+<!-- PAGE: BUYING STRATEGY -->
+<div class="page" id="page-buying">
+  <div class="sh">&#x1F4B0; Buying Strategy <small>for every qualifying stock: when to buy, what price, gap stats, dip stats — based on all historical occurrences</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue)">
+    &#x1F9E0; This tab shows exactly what happened on the trading day AFTER the signal fired — gap up or down, how much the price dipped below open, whether Day1 closed above or below the signal day's close. Use this to decide your exact buy price.
+  </div>
+  <div class="pill-row" id="buy-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Filter:</span>
+    <button class="fb on" id="bv-all"      onclick="buySrt('ret_rate',this,'all')">All Stocks</button>
+    <button class="fb" id="bv-alert"       onclick="buySrt('ret_rate',this,'alert')">&#x1F514; Today's Alerts</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="bsrt-rr"     onclick="buySrt('ret_rate',this,'')">Ret%/Day</button>
+    <button class="fb" id="bsrt-gap"       onclick="buySrt('avg_gap_pct',this,'')">Avg Gap%</button>
+    <button class="fb" id="bsrt-dip"       onclick="buySrt('pct_dips_below_open',this,'')">Dip Frequency</button>
+    <button class="fb" id="bsrt-d1pos"     onclick="buySrt('pct_d1_close_pos',this,'')">D1 Close Positive%</button>
+    <span class="fsep">|</span>
+    <input class="si" id="buy-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderBuying()">
+  </div>
+  <div class="twrap">
+    <table class="tbl" id="buy-tbl" style="min-width:1200px">
+      <thead>
+        <tr style="background:var(--card2)">
+          <th colspan="4" style="text-align:center;color:var(--gold);border-right:2px solid var(--b)">STOCK</th>
+          <th colspan="4" style="text-align:center;color:var(--purple);border-right:2px solid var(--b)">GAP (D1 Open vs D0 Close)</th>
+          <th colspan="4" style="text-align:center;color:var(--amber);border-right:2px solid var(--b)">DIP (How far below D1 Open)</th>
+          <th colspan="5" style="text-align:center;color:var(--green);border-right:2px solid var(--b)">D1 CLOSE (vs D0 Close)</th>
+          <th colspan="2" style="text-align:center;color:var(--blue)">RECOMMENDATION</th>
+        </tr>
+        <tr>
+          <th style="width:20px"></th>
+          <th onclick="buyTh('sym')">Stock<span class="arr"></span></th>
+          <th onclick="buyTh('grade')">Grade<span class="arr"></span></th>
+          <th onclick="buyTh('ret_rate')" style="border-right:2px solid var(--b)">Ret%/Day<span class="arr"></span></th>
+          <th onclick="buyTh('avg_gap_pct')" style="background:var(--pb)">Avg Gap%<span class="arr"></span></th>
+          <th onclick="buyTh('min_gap_pct')" style="background:var(--pb)">Min Gap%<span class="arr"></span></th>
+          <th onclick="buyTh('max_gap_pct')" style="background:var(--pb)">Max Gap%<span class="arr"></span></th>
+          <th onclick="buyTh('pct_gap_up')" style="background:var(--pb);border-right:2px solid var(--b)">Gap Up%<span class="arr"></span></th>
+          <th onclick="buyTh('avg_dip_pct')" style="background:var(--ab)">Avg Dip%<span class="arr"></span></th>
+          <th onclick="buyTh('worst_dip_pct')" style="background:var(--ab)">Worst Dip%<span class="arr"></span></th>
+          <th onclick="buyTh('pct_dips_below_open')" style="background:var(--ab)">Dips &lt;Open%<span class="arr"></span></th>
+          <th onclick="buyTh('avg_dip_when_dips')" style="background:var(--ab);border-right:2px solid var(--b)">Avg Dip Size<span class="arr"></span></th>
+          <th onclick="buyTh('avg_d1_close_ret')" style="background:var(--grb)">Avg D1 Close%<span class="arr"></span></th>
+          <th onclick="buyTh('min_d1_close_ret')" style="background:var(--grb)">Min D1 Close%<span class="arr"></span></th>
+          <th onclick="buyTh('max_d1_close_ret')" style="background:var(--grb)">Max D1 Close%<span class="arr"></span></th>
+          <th onclick="buyTh('pct_d1_close_pos')" style="background:var(--grb)">D1 Close Pos%<span class="arr"></span></th>
+          <th onclick="buyTh('avg_d1_intra_ret')" style="background:var(--grb);border-right:2px solid var(--b)">D1 Open→Close<span class="arr"></span></th>
+          <th onclick="buyTh('buy_at')">Buy At<span class="arr"></span></th>
+          <th>Strategy</th>
+        </tr>
+      </thead>
+      <tbody id="buy-tbody"><tr><td colspan="19" class="empty"><div class="spinner"></div>Loading&#x2026;</td></tr></tbody>
+    </table>
+  </div>
+
+  <!-- Expanded detail: per-occurrence Day1 table -->
+</div>
+
+
+<!-- PAGE: TRADING CALENDAR -->
+<div class="page" id="page-calendar">
+  <div class="sh">&#x1F4C6; Trading Calendar <small>when to enter which stock &#x00B7; UC2 seasonal by month &#x00B7; signal conditions tracker for all UCs</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue)">
+    &#x1F9E0; Two views below: <strong>Monthly Calendar</strong> = seasonal stocks grouped by the month you should buy them &#x00B7; <strong>Conditions Tracker</strong> = stocks where today's RSI/Volume/momentum is inside the historical signal zone (warming up, not yet fired)
+  </div>
+  <div class="pill-row" id="cal-pills"></div>
+
+  <!-- View toggle -->
+  <div class="fbar">
+    <span class="fsep">View:</span>
+    <button class="fb on" id="calv-month"  onclick="calView('month',this)">&#x1F4C5; Monthly Calendar</button>
+    <button class="fb"    id="calv-track"  onclick="calView('track',this)">&#x1F4E1; Conditions Tracker</button>
+    <span class="fsep">|</span>
+    <span id="cal-month-filter" style="display:flex;gap:4px;flex-wrap:wrap;align-items:center">
+      <span class="fsep">Month:</span>
+      <button class="fb on" id="cmf-all" onclick="calMonthFilter(0,this)">All</button>
+      <button class="fb" id="cmf-1"  onclick="calMonthFilter(1,this)">Jan</button>
+      <button class="fb" id="cmf-2"  onclick="calMonthFilter(2,this)">Feb</button>
+      <button class="fb" id="cmf-3"  onclick="calMonthFilter(3,this)">Mar</button>
+      <button class="fb" id="cmf-4"  onclick="calMonthFilter(4,this)">Apr</button>
+      <button class="fb" id="cmf-5"  onclick="calMonthFilter(5,this)">May</button>
+      <button class="fb" id="cmf-6"  onclick="calMonthFilter(6,this)">Jun</button>
+      <button class="fb" id="cmf-7"  onclick="calMonthFilter(7,this)">Jul</button>
+      <button class="fb" id="cmf-8"  onclick="calMonthFilter(8,this)">Aug</button>
+      <button class="fb" id="cmf-9"  onclick="calMonthFilter(9,this)">Sep</button>
+      <button class="fb" id="cmf-10" onclick="calMonthFilter(10,this)">Oct</button>
+      <button class="fb" id="cmf-11" onclick="calMonthFilter(11,this)">Nov</button>
+      <button class="fb" id="cmf-12" onclick="calMonthFilter(12,this)">Dec</button>
+    </span>
+    <span id="cal-track-filter" style="display:none;gap:4px;flex-wrap:wrap;align-items:center">
+      <span class="fsep">UC:</span>
+      <button class="fb on" id="ctf-all" onclick="calTrackFilter('all',this)">All UCs</button>
+      <button class="fb" id="ctf-uc1" onclick="calTrackFilter('UC1',this)">UC1</button>
+      <button class="fb" id="ctf-uc2" onclick="calTrackFilter('UC2',this)">UC2</button>
+      <button class="fb" id="ctf-uc4" onclick="calTrackFilter('UC4',this)">UC4</button>
+    </span>
+    <span class="fsep">|</span>
+    <input class="si" id="cal-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderCalendar()">
+  </div>
+
+  <!-- Monthly Calendar view -->
+  <div id="cal-monthly-view"></div>
+
+  <!-- Conditions Tracker view -->
+  <div id="cal-tracker-view" style="display:none">
+    <div class="twrap">
+      <table class="tbl" id="cal-track-tbl" style="min-width:900px">
+        <thead><tr>
+          <th onclick="calTrackTh('sym')">Stock<span class="arr"></span></th>
+          <th onclick="calTrackTh('best_uc')">UC<span class="arr"></span></th>
+          <th onclick="calTrackTh('match_score')">Match Score<span class="arr"></span></th>
+          <th onclick="calTrackTh('price')">Price<span class="arr"></span></th>
+          <th onclick="calTrackTh('grade')">Grade<span class="arr"></span></th>
+          <th onclick="calTrackTh('best_avg_ret')">Avg Ret%<span class="arr"></span></th>
+          <th onclick="calTrackTh('best_min_ret')">Min Ret%<span class="arr"></span></th>
+          <th onclick="calTrackTh('best_hold_days')">Hold<span class="arr"></span></th>
+          <th>RSI now vs Signal Range</th>
+          <th>Vol Ratio now vs Signal Range</th>
+          <th>5d Ret% vs Signal Range</th>
+          <th onclick="calTrackTh('best_desc')">Strategy<span class="arr"></span></th>
+        </tr></thead>
+        <tbody id="cal-track-tbody"><tr><td colspan="12" class="empty">Loading&#x2026;</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- PAGE: UC2 TIMING OPTIMIZER -->
+<!-- PAGE: MONTHLY PICKS — LIVE TRACKER -->
+<div class="page" id="page-monthlypicks">
+  <div class="sh">&#x1F4C6; Monthly Picks <small>this month&#x2019;s seasonal stocks &#x00B7; live entry tracking &#x00B7; UC1+UC2</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue);line-height:1.7">
+    &#x1F4A1; <strong>How to use:</strong> Each card shows the optimal entry window and peak return day for the current month. The <strong>Live Tracking</strong> section tells you: if you enter TODAY at current price, how much upside remains to the avg/min return target. If the stock dipped since the best entry day &mdash; you have MORE remaining upside. Updated every time you open the page.
+  </div>
+  <div class="pill-row" id="mp-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Show:</span>
+    <button class="fb on" id="mpf-all"  onclick="mpFilter('all',this)">All UCs</button>
+    <button class="fb"    id="mpf-uc2"  onclick="mpFilter('UC2',this)">UC2 Seasonal</button>
+    <button class="fb"    id="mpf-uc1"  onclick="mpFilter('UC1',this)">UC1 Surge</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="mps-peak" onclick="mpSort('peak',this)">Peak Return</button>
+    <button class="fb"    id="mps-rem"  onclick="mpSort('remaining',this)">Remaining Upside</button>
+    <button class="fb"    id="mps-min"  onclick="mpSort('min',this)">Min Return</button>
+    <span class="fsep">|</span>
+    <input class="si" id="mp-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderMonthlyPicks()">
+  </div>
+  <div id="mp-grid"><div class="empty"><div class="spinner"></div>Loading&#x2026; Run Seasonal Timing Optimizer workflow first.</div></div>
+</div>
+
+
+<!-- PAGE: SHORT HOLD -->
+<div class="page" id="page-shorthold">
+  <div class="sh">&#x26A1; Short Hold Stocks <small>5&#x2013;10 trading days &#x00B7; 10%+ every single time &#x00B7; all last 4 years</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue);line-height:1.7">
+    &#x1F9E0; Only stocks where <strong>every single historical occurrence</strong> gave at least 10% within 5&#x2013;10 trading days AND the signal fired in all of the last 4 years. Zero exceptions. Sorted highest average return first. Click any row to see every past occurrence.
+  </div>
+  <div class="pill-row" id="sh-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Hold:</span>
+    <button class="fb on" id="shh-all" onclick="shHold(0,this)">All</button>
+    <button class="fb" id="shh-5"   onclick="shHold(5,this)">5d</button>
+    <button class="fb" id="shh-6"   onclick="shHold(6,this)">6d</button>
+    <button class="fb" id="shh-7"   onclick="shHold(7,this)">7d</button>
+    <button class="fb" id="shh-8"   onclick="shHold(8,this)">8d</button>
+    <button class="fb" id="shh-9"   onclick="shHold(9,this)">9d</button>
+    <button class="fb" id="shh-10"  onclick="shHold(10,this)">10d</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="shs-avg"  onclick="shSort('avg_max_ret',this)">Avg Return%</button>
+    <button class="fb" id="shs-min"    onclick="shSort('min_max_ret',this)">Min Return%</button>
+    <button class="fb" id="shs-rate"   onclick="shSort('ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="shs-n"      onclick="shSort('n_occurrences',this)">Occurrences</button>
+    <button class="fb" id="shs-days"   onclick="shSort('avg_days_to_10',this)">Days to 10%</button>
+    <span class="fsep">|</span>
+    <span class="fsep">|</span>
+    <span class="fsep">View:</span>
+    <button class="fb on" id="shv-list"  onclick="shView('list',this)">&#x1F4CB; Stock List</button>
+    <button class="fb"    id="shv-alerts" onclick="shView('alerts',this)">&#x1F514; Today's Alerts</button>
+    <button class="fb"    id="shv-cal"    onclick="shView('cal',this)">&#x1F4C5; Year Calendar</button>
+    <span class="fsep">|</span>
+    <input class="si" id="sh-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderShortHold()">
+  </div>
+  <div class="twrap">
+    <table class="tbl" id="sh-tbl" style="min-width:900px">
+      <thead><tr>
+        <th style="width:22px"></th>
+        <th onclick="shTh('sym')">Stock<span class="arr"></span></th>
+        <th onclick="shTh('price')">Price<span class="arr"></span></th>
+        <th onclick="shTh('week_label')" title="Sort by calendar week to group all stocks by month+week">Month &amp; Week<span class="arr"></span></th>
+        <th onclick="shTh('hold_days')">Hold<span class="arr"></span></th>
+        <th onclick="shTh('avg_max_ret')">Avg Return%<span class="arr"></span></th>
+        <th onclick="shTh('min_max_ret')">Min Return%<span class="arr"></span></th>
+        <th onclick="shTh('avg_exit_ret')">Avg Exit Ret%<span class="arr"></span></th>
+        <th onclick="shTh('ret_rate')">Ret%/Day<span class="arr"></span></th>
+        <th onclick="shTh('avg_days_to_10')">Avg Days to 10%<span class="arr"></span></th>
+        <th onclick="shTh('n_occurrences')">Occurrences<span class="arr"></span></th>
+        <th onclick="shTh('n_years')">Years<span class="arr"></span></th>
+        <th>Years Seen</th>
+      </tr></thead>
+      <tbody id="sh-tbody"><tr><td colspan="13" class="empty"><div class="spinner"></div>Loading&#x2026; Run Short Hold Analyzer workflow first.</td></tr></tbody>
+    </table>
+  </div>
+  <!-- Alerts view -->
+  <div id="sh-alerts-view" style="display:none"></div>
+  <!-- Year calendar view -->
+  <div id="sh-cal-view" style="display:none"></div>
+</div>
+
+
+<div class="page" id="page-uc2timing">
+  <div class="sh">&#x23F1; UC2 Seasonal Timing Optimizer <small>optimal entry &amp; exit windows for seasonal stocks</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue);line-height:1.7">
+    &#x1F9E0; For each UC2 seasonal stock: this tab shows <strong>when exactly to enter</strong> (up to 5 days before or after the 1st of month) and <strong>when exactly to exit</strong> (which day gives peak profit before the stock starts pulling back). Run the UC2 Timing Optimizer workflow to populate this tab.
+  </div>
+  <div class="pill-row" id="uc2t-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Month:</span>
+    <button class="fb on" id="uc2t-m0"  onclick="uc2tFilter(0,this)">All</button>
+    <button class="fb" id="uc2t-m1"  onclick="uc2tFilter(1,this)">Jan</button>
+    <button class="fb" id="uc2t-m2"  onclick="uc2tFilter(2,this)">Feb</button>
+    <button class="fb" id="uc2t-m3"  onclick="uc2tFilter(3,this)">Mar</button>
+    <button class="fb" id="uc2t-m4"  onclick="uc2tFilter(4,this)">Apr</button>
+    <button class="fb" id="uc2t-m5"  onclick="uc2tFilter(5,this)">May</button>
+    <button class="fb" id="uc2t-m6"  onclick="uc2tFilter(6,this)">Jun</button>
+    <button class="fb" id="uc2t-m7"  onclick="uc2tFilter(7,this)">Jul</button>
+    <button class="fb" id="uc2t-m8"  onclick="uc2tFilter(8,this)">Aug</button>
+    <button class="fb" id="uc2t-m9"  onclick="uc2tFilter(9,this)">Sep</button>
+    <button class="fb" id="uc2t-m10" onclick="uc2tFilter(10,this)">Oct</button>
+    <button class="fb" id="uc2t-m11" onclick="uc2tFilter(11,this)">Nov</button>
+    <button class="fb" id="uc2t-m12" onclick="uc2tFilter(12,this)">Dec</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="uc2t-sp" onclick="uc2tSort('peak',this)">Peak Return</button>
+    <button class="fb" id="uc2t-ss"   onclick="uc2tSort('sweet',this)">Sweet Spot Width</button>
+    <button class="fb" id="uc2t-sn"   onclick="uc2tSort('n',this)">Most Occurrences</button>
+    <span class="fsep">|</span>
+    <input class="si" id="uc2t-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderUC2Timing()">
+  </div>
+
+  <div id="uc2t-grid"><div class="empty"><div class="spinner"></div>Loading&#x2026; Run the UC2 Timing Optimizer workflow if this stays empty.</div></div>
+</div>
+
+
+<div class="page" id="page-guide">
+  <div class="sh">&#x1F4D6; Guide <small>tabs &#xB7; columns &#xB7; abbreviations</small></div>
+  <div style="max-width:820px;display:grid;gap:12px">
+    <div class="lt-card" style="border-left-color:var(--green)"><div style="color:var(--green);font-weight:600;margin-bottom:10px">Tab Guide</div>
+      <div class="ctx-row"><span class="ctx-lbl">Today Alerts</span><span style="font-size:11px;color:var(--t2)"><b>Green badge=today. Amber=older (run workflow).</b> Strategy fired on latest date. Empty=no signal, check Still Valid.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Still Valid</span><span style="font-size:11px;color:var(--t2)">Past signals in tenure, price ge5% below min target. Still good to buy. Min Target=entry*(1+min_ret%). Sorted biggest gap first.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Signal History</span><span style="font-size:11px;color:var(--t2)">All historical trades. OPEN=tenure not expired. <b>~ prefix</b>=partial return (today price, not final). Days in cal (calendar days). hold_days in td (trading days). 20td approx 30cal.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">UC1 Surge</span><span style="font-size:11px;color:var(--t2)"><b>Use Case 1: Surge Momentum.</b> Large rise over N days then further gains. Views: All/Today/Active.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">UC2 Seasonal</span><span style="font-size:11px;color:var(--t2)"><b>Use Case 2: Seasonal.</b> Rises in specific month every year. <b>If signal says June: wait for June 1st!</b> See Trading Calendar.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">UC3 Combined</span><span style="font-size:11px;color:var(--t2)"><b>Use Case 3: Combined.</b> UC1 and UC2 same day = double confirmation. Highest quality.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">UC4 Technical</span><span style="font-size:11px;color:var(--t2)"><b>Use Case 4: Technical.</b> 25 strategies: SMA Cross, RSI Oversold, MACD, Bollinger, Volume Breakout, ATR Expansion, Double Bottom, Bull Flag, Pivot Bounce, Supertrend, ADX, Williams %R, OBV, Stochastic, and more. 300+ parameter combos.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Long-Term (LT)</span><span style="font-size:11px;color:var(--t2)">Top 40 for multi-week holds. Grade A/A+, Confidence ge70%. Green=today signal. Amber=active (days+gap shown). Grey=watch.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Trading Calendar</span><span style="font-size:11px;color:var(--t2)"><b>Monthly view:</b> UC2 stocks by buy month, current month first (green). <b>Conditions Tracker:</b> stocks by conditions in range. 3 dots=all 3=signal imminent.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Buying Strategy</span><span style="font-size:11px;color:var(--t2)">Entry day stats. Gap%=open vs prev close. Dip%=intraday drop from open. D1 Close%=entry close vs signal close. Recommendation=buy at Open or wait for dip.</span></div>
+    </div>
+    <div class="lt-card" style="border-left-color:var(--amber)"><div style="color:var(--amber);font-weight:600;margin-bottom:10px">Metrics - Full Names</div>
+      <div class="ctx-row"><span class="ctx-lbl">Ret%/Day</span><span style="font-size:11px;color:var(--t2)"><b>Return Percent Per Day</b> = Avg Ret% divided by Hold td. Primary ranking. 11%/5td=2.2/day beats 15%/9td=1.67/day.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Min/Avg/Max Ret%</span><span style="font-size:11px;color:var(--t2)"><b>Min/Average/Max Return Percent.</b> Min=floor (always ge10%). Avg=typical. Max=best ever.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Hold td</span><span style="font-size:11px;color:var(--t2)"><b>Hold Trading Days.</b> 5td=approx 1 week, 20td=approx 1 month, 60td=approx 3 months. NOT calendar days.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Win%</span><span style="font-size:11px;color:var(--t2)"><b>Win Rate Percent.</b> Trades returning ge10% / total. Must be ge95%. Any negative return makes strategy rejected.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Conf%</span><span style="font-size:11px;color:var(--t2)"><b>Confidence Percent.</b> Out-of-sample years (2023/2024/2025) with ge95% win rate. 100%=A+, 75%=A, 50%=B.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Grade A+/A/B</span><span style="font-size:11px;color:var(--t2)"><b>A Plus</b>=passed all OOS years. <b>A</b>=passed 75%+. <b>B</b>=passed 50% (use with caution).</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Sharpe</span><span style="font-size:11px;color:var(--t2)"><b>Sharpe Ratio.</b> Risk-adjusted return. Above 1.0 good, above 2.0 excellent.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Max DD%</span><span style="font-size:11px;color:var(--t2)"><b>Maximum Drawdown Percent.</b> Worst intraday dip below entry. Still exited profitable despite dip.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">LT Score</span><span style="font-size:11px;color:var(--t2)"><b>Long-Term Score 0-100.</b> Trend above EMA50, 60d return, A+ strategies, return rate.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">OOS Ret%</span><span style="font-size:11px;color:var(--t2)"><b>Out-of-Sample Return Percent.</b> On 2023-2025 data NOT used for training. Proves pattern is real.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">RSI</span><span style="font-size:11px;color:var(--t2)"><b>Relative Strength Index (14d).</b> Below 30=oversold. Above 70=overbought. At Signal=range when pattern fired.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Vol Ratio</span><span style="font-size:11px;color:var(--t2)"><b>Volume Ratio</b> = today vol divided by 20d avg. 2x=double normal activity.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">ADX</span><span style="font-size:11px;color:var(--t2)"><b>Average Directional Index.</b> Trend strength only (not direction). Above 25 strong, above 40 very strong.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">EMA/SMA</span><span style="font-size:11px;color:var(--t2)"><b>Exponential/Simple Moving Average.</b> EMA weights recent prices more. Fast cross above slow = bullish.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">MACD</span><span style="font-size:11px;color:var(--t2)"><b>Moving Average Convergence Divergence</b> = EMA12 minus EMA26. Cross above 9d signal line = buy signal.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">BB (Bollinger Bands)</span><span style="font-size:11px;color:var(--t2)"><b>Bollinger Bands</b> = 20d mean plus/minus 2 StdDev. Lower touch=oversold. Narrow width=squeeze before breakout.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">ATR</span><span style="font-size:11px;color:var(--t2)"><b>Average True Range (14d).</b> Avg daily volatility. Range above 2x ATR = breakout.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">5d/20d Before%</span><span style="font-size:11px;color:var(--t2)"><b>5-Day/20-Day Before Percent.</b> Return in 5 or 20 trading days BEFORE signal. Negative=was falling before reversal.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">cal / td</span><span style="font-size:11px;color:var(--t2)"><b>cal = calendar days</b> (all days including weekends). <b>td = trading days</b> (market open only). 20td is approximately 30cal. Signal History shows cal days for elapsed and remaining.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">~ (tilde) prefix</span><span style="font-size:11px;color:var(--t2)"><b>Partial/open trade return.</b> Today price used as exit. Hold period not over. Final return may differ.</span></div>
+      <div class="ctx-row"><span class="ctx-lbl">Gap% / Dip% / D1 Close%</span><span style="font-size:11px;color:var(--t2)">Buying Strategy tab. <b>Gap%</b>=(Day1 Open - Signal Day Close)/Signal Day Close. <b>Dip%</b>=(Day1 Low - Day1 Open)/Day1 Open. <b>D1 Close%</b>=(Day1 Close - Signal Day Close)/Signal Day Close.</span></div>
+    </div>
+    <div class="lt-card" style="border-left-color:var(--red)"><div style="color:var(--red);font-weight:600;margin-bottom:8px">Key Rules</div>
+      <p style="font-size:11px;color:var(--t2);line-height:1.8;margin:0 0 6px"><b>td vs cal:</b> Hold Days are in td (trading days). Calendar days elapsed will always be larger than td value. 20td hold = approx 30cal tenure. Days Past capped at tenure so never exceeds it. Correct behavior.</p>
+      <p style="font-size:11px;color:var(--t2);line-height:1.8;margin:0 0 6px"><b>~ prefix = partial return:</b> Open trade return uses today price as exit. Trade still running.</p>
+      <p style="font-size:11px;color:var(--t2);line-height:1.8;margin:0"><b>UC2 Seasonal:</b> If signal says Buy June 1st, do nothing today in April. Mark calendar for June and check Trading Calendar tab.</p>
+    </div>
+  </div>
+</div></div>
+
+<script>
+const BASE='https://raw.githubusercontent.com/animesh2007asansol/itis/main/stock_analysis';
+const D={alerts:null,history:null,master:null,lt:null,uc1:null,uc2:null,uc3:null,uc4:null,stillvalid:null,uc2timing:null,timingAll:null,shorthold:null};
+
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+id)?.classList.add('active');
+  if(btn)btn.classList.add('active');
+}
+
+// Formatters
+function fmt(n){return n!=null?Number(n).toLocaleString('en-IN',{maximumFractionDigits:2}):'—';}
+function fmtI(n){return n!=null?Math.round(n).toLocaleString('en-IN'):'—';}
+function rc(v,d){if(v==null)return '<span class="muted">—</span>';var cls=v>=10?'green':v>0?'amber':'red';return '<span class="'+cls+'">'+(v>0?'+':'')+Number(v).toFixed(d||1)+'%</span>';}
+function gB(g){if(g==='A+')return '<span class="gb gAp">A+</span>';if(g==='A')return '<span class="gb gA">A</span>';return '';}
+function ucB(uc){return '<span class="uc-badge uc'+(uc||'').replace('UC','').toLowerCase()+'">'+(uc||'')+'</span>';}
+function sBar(s){var p=Math.min(100,s||0);var c=p>=80?'var(--green)':p>=60?'var(--amber)':'var(--red)';return '<div class="sbar-wrap"><div class="sbar"><div class="sbar-fill" style="width:'+p+'%;background:'+c+'"></div></div><span style="font-size:10px;color:'+c+';font-weight:700;min-width:24px;text-align:right">'+p+'</span></div>';}
+function confBar(c){var col=c>=75?'var(--green)':c>=50?'var(--amber)':'var(--red)';return '<div style="height:3px;background:var(--b);border-radius:2px;margin-top:3px"><div style="width:'+c+'%;height:100%;background:'+col+';border-radius:2px"></div></div><span class="muted" style="font-size:9px">'+c+'%</span>';}
+function ctxRow(lbl,obj,cur,unit){
+  if(!obj) return '';
+  var u=unit||'';
+  var inR=cur!=null&&cur>=obj.min&&cur<=obj.max;
+  var col=inR?'var(--green)':'var(--amber)';
+  var cSpan=cur!=null?('<span style="font-family:DM Mono,monospace;color:'+col+'">'+Number(cur).toFixed(1)+u+'</span>'):'';
+  return '<div class="ctx-row"><span class="ctx-lbl">'+lbl+'</span><span class="ctx-rng">'+obj.min+u+'&rarr;'+obj.max+u+' (avg '+obj.avg+u+')</span>'+cSpan+'</div>';
+}
+
+
+// ── State ─────────────────────────────────────────────────────────────────────
+var alertGrds=new Set(['A+','A']), alertUCs=new Set(['UC1','UC2','UC3','UC4']), alertSK='ret_rate';
+var ltGrds=new Set(['A+','A']), ltSK='longterm_score';
+var allFilters=new Set(['ALL']), allSK='best_ret_rate', allSD='desc';
+var histSK='sig_date', histSD='desc';
+var histView='all';
+
+// Per-UC state stored in object (avoids eval)
+var ucS={
+  uc1:{grds:new Set(['A+','A','B']),sk:'ret_rate',sd:'desc',qid:'u1q',tbody:'uc1-tbody',pills:'uc1-pills',cols:13},
+  uc2:{grds:new Set(['A+','A','B']),sk:'ret_rate',sd:'desc',qid:'u2q',tbody:'uc2-tbody',pills:'uc2-pills',cols:12},
+  uc3:{grds:new Set(['A+','A','B']),sk:'ret_rate',sd:'desc',qid:'u3q',tbody:'uc3-tbody',pills:'uc3-pills',cols:11},
+  uc4:{grds:new Set(['A+','A','B']),sk:'ret_rate',sd:'desc',qid:'u4q',tbody:'uc4-tbody',pills:'uc4-pills',cols:13},
+};
+
+function tg(stateVar, val, btn){
+  var s;
+  if(stateVar==='alertGrds') s=alertGrds;
+  else if(stateVar==='ltGrds') s=ltGrds;
+  else if(stateVar.startsWith('uc')&&ucS[stateVar]) s=ucS[stateVar].grds;
+  else return;
+  s.has(val)?s.delete(val):s.add(val);
+  if(!s.size) s.add(val);
+  btn.classList.toggle('on', s.has(val));
+}
+
+function aSrt(k,btn){alertSK=k;document.querySelectorAll('[id^="aort-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderAlerts();}
+
+function ucSrt(uc,k,btn){
+  if(!ucS[uc])return;
+  ucS[uc].sk=k;
+  var pfx='u'+uc.slice(-1)+'s-';
+  document.querySelectorAll('[id^="'+pfx+'"]').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderUC(uc);
+}
+function ucTh(uc,k){
+  if(!ucS[uc])return;
+  if(ucS[uc].sk===k) ucS[uc].sd=ucS[uc].sd==='desc'?'asc':'desc';
+  else{ucS[uc].sk=k; ucS[uc].sd='desc';}
+  renderUC(uc);
+}
+function ltSrt(k,btn){ltSK=k;document.querySelectorAll('[id^="lts-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderLT();}
+function togAF(f,btn){
+  if(f==='ALL'){allFilters=new Set(['ALL']);document.querySelectorAll('[id^="af-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');}
+  else{
+    allFilters.delete('ALL');document.getElementById('af-ALL')?.classList.remove('on');
+    allFilters.has(f)?allFilters.delete(f):allFilters.add(f);
+    if(!allFilters.size){allFilters.add('ALL');document.getElementById('af-ALL')?.classList.add('on');}
+    btn.classList.toggle('on',allFilters.has(f));
+  }
+  renderAll();
+}
+function allSrt(k,btn){allSK=k;document.querySelectorAll('[id^="alls"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderAll();}
+function allTh(k){if(allSK===k)allSD=allSD==='desc'?'asc':'desc';else{allSK=k;allSD='desc';}renderAll();}
+function histViewFn(v,btn){histView=v;document.querySelectorAll('[id^="hv-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderHist();}
+function hSrt(k,btn){histSK=k;document.querySelectorAll('[id^="hsrt-"]').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderHist();}
+function hTh(k){if(histSK===k)histSD=histSD==='desc'?'asc':'desc';else{histSK=k;histSD='desc';}renderHist();}
+
+// ── UC table renderer (no eval) ───────────────────────────────────────────────
+var ucState=ucS; // alias used in renderUC
+// Short Hold global state
+var shHoldFilter=0, shSortKey='avg_max_ret', shSortDir='desc', shCurrentView='list';
+// Monthly Picks global state
+// (declared globally)
+// UC2 Timing global state
+// (declared globally)
+
+var ucViews={uc1:'all',uc2:'all',uc3:'all',uc4:'all'};
+var buySD='desc'; var buyFilter='all'; var svSD='desc'; var histSD='desc';
+
+
+// ── STILL VALID ────────────────────────────────────────────────────────────────
+var svSK='gap_to_min_target_pct', svSD='desc';
+function svSrt(k,btn){svSK=k;document.querySelectorAll('[id^="svs-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderSV();}
+function svTh(k){if(svSK===k)svSD=svSD==='desc'?'asc':'desc';else{svSK=k;svSD='desc';}renderSV();}
+
+function computeStillValid(){
+  // Compute from D.stillvalid (if loaded) OR from D.history + D.master
+  if(D.stillvalid) return D.stillvalid.positions||[];
+
+  var d=D.history; var master=D.master;
+  if(!d||!master) return [];
+
+  // Build current price lookup from master
+  var priceMap={};
+  (master.stocks||[]).forEach(function(s){
+    priceMap[s.sym]={
+      price:s.price, min_ret:s.best_min_ret||10,
+      avg_ret:s.best_avg_ret||10, max_ret:s.best_max_ret||10,
+      hold_days:s.best_hold_days||5
+    };
+  });
+
+  var latestDate=master.latest||'';
+  if(!latestDate) return [];
+  var latestDt=new Date(latestDate);
+
+  var valid=[];
+  (d.signals||[]).forEach(function(t){
+    if(!t.entry_date||!t.entry_px) return;
+    var stock=priceMap[t.sym]; if(!stock) return;
+    var holdDays=t.hold_days||stock.hold_days||5;
+    var holdCal=Math.round(holdDays*1.4);
+    var entryDt=new Date(t.entry_date);
+    var daysElapsed=Math.round((latestDt-entryDt)/(86400000));
+    if(daysElapsed<0||daysElapsed>=holdCal) return;
+    var entryPx=t.entry_px;
+    var curPx=stock.price;
+    var minRet=t.min_ret_strategy||stock.min_ret||10;
+    var avgRet=t.avg_ret_strategy||stock.avg_ret||10;
+    var maxRet=t.max_ret_strategy||stock.max_ret||10;
+    var minTarget=entryPx*(1+minRet/100);
+    var curRet=(curPx-entryPx)/entryPx*100;
+    var gap=(minTarget-curPx)/curPx*100;
+    if(gap<5.0) return;
+    var daysLeft=Math.max(0,holdCal-daysElapsed);
+    valid.push({
+      sym:t.sym, sig_date:t.sig_date, entry_date:t.entry_date,
+      entry_px:r2(entryPx), current_price:r2(curPx),
+      uc:t.uc, desc:t.desc||'', grade:t.grade, confidence:t.confidence,
+      hold_days:holdDays, min_ret:r2(minRet), avg_ret:r2(avgRet), max_ret:r2(maxRet),
+      min_target_price:r2(minTarget), avg_target_price:r2(entryPx*(1+avgRet/100)),
+      current_return_pct:r2(curRet), gap_to_min_target_pct:r2(gap),
+      days_elapsed:daysElapsed, days_remaining:daysLeft,
+    });
+  });
+  valid.sort(function(a,b){return b.gap_to_min_target_pct-a.gap_to_min_target_pct;});
+  return valid;
+}
+
+function renderSV(){
+  var tbody=document.getElementById('sv-tbody'); if(!tbody) return;
+  var rows=[...computeStillValid()];
+  var q=(document.getElementById('sv-q')?.value||'').toUpperCase().trim();
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  rows.sort(function(a,b){var v=(b[svSK]??0)-(a[svSK]??0);return svSD==='asc'?-v:v;});
+  var pillEl=document.getElementById('sv-pills');
+  if(pillEl) pillEl.innerHTML=[
+    ['Still Valid Positions',rows.length,'y','within tenure, ≥5% gap'],
+    ['Avg Gap to Min Target',rows.length?r2(rows.reduce(function(s,r){return s+(r.gap_to_min_target_pct||0);},0)/rows.length)+'%':'—','g'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';}).join('');
+  if(!rows.length){
+    tbody.innerHTML='<tr><td colspan="17" class="empty">No still-valid positions found. Either no past signals, all have expired, or all are within 5% of their minimum target (good news - targets nearly reached!).</td></tr>';
+    return;
+  }
+  tbody.innerHTML=rows.map(function(r){
+    var gapCol=r.gap_to_min_target_pct>=15?'green':r.gap_to_min_target_pct>=10?'amber':'muted';
+    var curRetCol=r.current_return_pct>=0?'green':'red';
+    return '<tr>'
+      +'<td class="mono gold" style="font-weight:600">'+r.sym+'</td>'
+      +'<td>'+ucB(r.uc)+'</td>'
+      +'<td>'+gB(r.grade||'B')+'</td>'
+      +'<td>'+confBar(r.confidence||0)+'</td>'
+      +'<td class="mono muted">'+r.sig_date+'</td>'
+      +'<td class="mono muted">'+r.entry_date+'</td>'
+      +'<td class="mono">&#8377;'+r.entry_px+'</td>'
+      +'<td class="mono">&#8377;'+r.current_price+'</td>'
+      +'<td class="mono '+curRetCol+'">'+(r.current_return_pct>0?'+':'')+Number(r.current_return_pct||0).toFixed(1)+'%</td>'
+      +'<td class="mono green" style="font-weight:700">+'+Number(r.min_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono">+'+Number(r.avg_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono">+'+Number(r.max_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono amber" style="font-weight:700">&#8377;'+r.min_target_price+'</td>'
+      +'<td class="mono '+gapCol+'" style="font-weight:700">+'+Number(r.gap_to_min_target_pct||0).toFixed(1)+'%</td>'
+      +'<td class="mono muted">'+r.hold_days+'d</td>'
+      +'<td class="mono muted">'+r.days_elapsed+'d elapsed</td>'
+      +'<td class="mono '+(r.days_remaining>10?'green':'amber')+'">'+r.days_remaining+'d left</td>'
+      +'</tr>';
+  }).join('');
+}
+
+async function loadData(){
+  const r=await Promise.allSettled([
+    fetch(BASE+'/daily_alerts.json'),fetch(BASE+'/signal_history.json'),
+    fetch(BASE+'/master_results.json'),fetch(BASE+'/longterm_picks.json'),
+    fetch(BASE+'/uc1_surge.json'),fetch(BASE+'/uc2_seasonal.json'),
+    fetch(BASE+'/uc3_combined.json'),fetch(BASE+'/uc4_technical.json'),
+    fetch(BASE+'/still_valid.json'),
+    fetch(BASE+'/uc2_timing.json'),
+    fetch(BASE+'/timing_all.json'),
+    fetch(BASE+'/short_hold.json'),
+  ]);
+  const keys=['alerts','history','master','lt','uc1','uc2','uc3','uc4','stillvalid','uc2timing','timingAll','shorthold'];
+  for(let i=0;i<r.length;i++){
+    try{
+      if(r[i].status==='fulfilled'&&r[i].value?.ok)
+        D[keys[i]]=await r[i].value.json();
+    }catch(e){ console.log(keys[i]+':',e.message); }
+  }
+  renderAlerts();renderHist();renderLT();renderAll();renderSV();renderBuying();renderCalendar();renderUC2Timing();renderMonthlyPicks();renderShortHold();renderUC2Timing();
+  ['uc1','uc2','uc3','uc4'].forEach(function(u){renderUC(u);});
+}
+
+function renderAlerts(){
+  var d=D.alerts; var el=document.getElementById('alert-grid');
+  var dEl=document.getElementById('alert-date');
+  if(!d){el.innerHTML='<div class="empty">No alerts. Run master_stock_analyzer_v3 workflow.</div>';if(dEl)dEl.textContent='No data';return;}
+  if(dEl)dEl.textContent='Signal date: '+d.signal_date;
+  var _ts=new Date().toISOString().slice(0,10),_it=(d.signal_date===_ts);
+  var _tb=document.getElementById('today-badge');
+  if(_tb){_tb.textContent=_it?'\u2705 TODAY '+_ts:'\u26a0 Latest: '+d.signal_date+' (not today)';
+    _tb.style.background=_it?'var(--grb)':'var(--ab)';
+    _tb.style.borderColor=_it?'var(--gr2)':'var(--amb)';
+    _tb.style.color=_it?'var(--green)':'var(--amber)';}
+  var rows=[...(d.alerts||[])];
+  var q=(document.getElementById('alert-q')?.value||'').toUpperCase().trim();
+  if(q)rows=rows.filter(r=>r.sym.includes(q));
+  if(!alertGrds.has('A+'))rows=rows.filter(r=>r.grade!=='A+');
+  if(!alertGrds.has('A')) rows=rows.filter(r=>r.grade!=='A');
+  rows=rows.filter(r=>(r.signal_from||[]).some(u=>alertUCs.has(u))||alertUCs.has(r.best_uc));
+  rows.sort((a,b)=>(b[alertSK]??0)-(a[alertSK]??0));
+  var nAp=rows.filter(r=>r.grade==='A+').length;
+  document.getElementById('alert-pills').innerHTML=[
+    ['Total Alerts',d.n_alerts,'b'],['A+',nAp,'g','all years validated'],
+    ['A',rows.length-nAp,'b'],['Min Return','&#x2265;10%','g'],
+  ].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>').join('');
+  if(!rows.length){el.innerHTML='<div class="empty">No alerts match filters.</div>';return;}
+  el.innerHTML=rows.map(a=>{
+    var frm=(a.signal_from||[]).map(u=>ucB(u)).join('');
+    var tr=(a.recent_trades||[]).map(t=>'<tr><td class="mono muted">'+t.sig_date+'</td><td class="mono">&#8377;'+t.entry_px+'</td><td class="mono">&#8377;'+t.exit_px+'</td>'
+      +'<td class="mono green">+'+Number(t.ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono green">+'+Number(t.max_gain||0).toFixed(1)+'%</td>'
+      +'<td class="mono '+(t.max_dd<-2?'amber':'muted')+'">'+Number(t.max_dd||0).toFixed(1)+'%</td></tr>').join('');
+    var uc1s=a.uc1?'<div style="font-size:9px;color:var(--t3);margin-top:6px">&#x1F4C8; UC1: '+a.uc1.desc+'</div>':'';
+    var uc2s=a.uc2?'<div style="font-size:9px;color:var(--t3);margin-top:2px">&#x1F4C5; UC2: '+a.uc2.desc+'</div>':'';
+    return '<div class="ac">'
+      +'<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:8px">'
+      +'<div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:17px;font-weight:700;color:var(--gold)">'+a.sym+'</span>'+gB(a.grade)+'</div>'
+      +'<div style="font-size:11px;color:var(--t2);margin-top:2px">&#8377;'+fmt(a.price)+' &#x00B7; '+a.avg_turnover_cr+' Cr daily</div>'
+      +'<div style="font-size:10px;margin-top:2px;color:var(--t3)">&#x1F4C5; Last signal: <span class="mono amber">'+(a.recent_trades&&a.recent_trades.length?a.recent_trades[a.recent_trades.length-1].sig_date:(d.signal_date||'--'))+'</span></div>'
+      +'<div style="margin-top:4px">'+frm+'</div></div>'
+      +'<div style="text-align:right">'
+      +'<div class="green" style="font-size:20px;font-weight:700">'+Number(a.ret_rate||0).toFixed(2)+'%/day</div>'
+      +'<div style="font-size:9px;color:var(--t3)">return rate (ret&#xF7;days)</div>'
+      +'<div class="amber" style="font-size:11px;margin-top:2px">avg +'+Number(a.avg_ret||0).toFixed(1)+'% | min +'+Number(a.min_ret||0).toFixed(1)+'%</div>'
+      +'<div style="font-size:10px;color:var(--t3)">hold '+a.hold_days+'d | '+a.win_rate+'% win | conf '+a.confidence+'%</div>'
+      +'</div></div>'
+      +'<div class="ac-grid">'
+      +'<div class="ac-mini"><div class="ac-ml">Strategy</div><div class="ac-mv" style="font-size:10px">'+ucB(a.best_uc)+a.best_desc.slice(0,40)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Ret%/Day</div><div class="ac-mv green" style="font-size:16px;font-weight:700">'+Number(a.ret_rate||0).toFixed(2)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Return</div><div class="ac-mv green">+'+Number(a.min_ret||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Sharpe</div><div class="ac-mv">'+Number(a.sharpe||0).toFixed(1)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Occurrences</div><div class="ac-mv">'+a.n_trades+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Confidence</div><div class="ac-mv '+(a.confidence>=75?'green':'amber')+'">'+a.confidence+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">RSI now</div><div class="ac-mv '+(a.rsi<30?'green':a.rsi>70?'red':'muted')+'">'+Number(a.rsi||0).toFixed(0)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">ADX</div><div class="ac-mv '+(a.adx>25?'green':'muted')+'">'+Number(a.adx||0).toFixed(0)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Vol Ratio</div><div class="ac-mv '+(a.vol_r>=2?'green':a.vol_r>=1.5?'amber':'muted')+'">'+Number(a.vol_r||0).toFixed(1)+'x</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">5d Return</div>'+rc(a.ret5)+'</div>'
+      +'<div class="ac-mini"><div class="ac-ml">20d Return</div>'+rc(a.ret20)+'</div>'
+      +'<div class="ac-mini"><div class="ac-ml">Hold Days</div><div class="ac-mv">'+a.hold_days+'d</div></div>'
+      +'</div>'
+      +(a.best_desc?'<div class="ac-explain">'+a.best_desc+(uc1s+uc2s)+'</div>':'')
+      +(a.ctx_rsi||a.ctx_vol_r?'<div class="ctx-box"><div style="font-size:9px;color:var(--gold);font-weight:600;margin-bottom:4px">SIGNAL CONDITIONS (historical range &#x2192; current)</div>'
+        +ctxRow('RSI',a.ctx_rsi,a.rsi,'')+ctxRow('Vol Ratio',a.ctx_vol_r,a.vol_r,'x')
+        +ctxRow('5d Before%',a.ctx_ret5,a.ret5,'%')+ctxRow('20d Before%',a.ctx_ret20,a.ret20,'%')
+        +'</div>':'')
+      +(tr?'<div style="margin-top:8px"><div style="font-size:9px;color:var(--t3);font-weight:600;margin-bottom:3px">RECENT TRADE HISTORY:</div><div style="overflow-x:auto"><table class="tbl" style="font-size:10px"><thead><tr><th>Signal</th><th>Entry</th><th>Exit</th><th>Return%</th><th>Max Gain%</th><th>Max DD%</th></tr></thead><tbody>'+tr+'</tbody></table></div></div>':'')
+      +'</div>';
+  }).join('');
+}
+
+function renderHist(){
+  var tbody=document.getElementById('hist-tbody'); if(!tbody) return;
+  var d=D.history;
+  if(!d){tbody.innerHTML='<tr><td colspan="26" class="empty">No signal history. Run master_stock_analyzer_v3 workflow.</td></tr>';return;}
+  var rows=[...(d.signals||[])];
+  var q=(document.getElementById('hq')?.value||'').toUpperCase().trim();
+  var sq=(document.getElementById('huc')?.value||'').toUpperCase().trim();
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  if(sq) rows=rows.filter(function(r){return (r.uc||'').toUpperCase().includes(sq)||(r.desc||'').toUpperCase().includes(sq);});
+
+  // Date-based open filter using latest date from master
+  var _latestDate=(D.master&&D.master.latest)||'';
+  var _latestDt=_latestDate?new Date(_latestDate):new Date();
+
+  if(histView==='open'){
+    rows=rows.filter(function(r){
+      if(!r.entry_date||!r.hold_days) return false;
+      var expiry=new Date(r.entry_date);
+      expiry.setDate(expiry.getDate()+Math.round(r.hold_days*1.5));
+      return expiry>_latestDt;
+    });
+  } else if(histView==='valid'){
+    rows=rows.filter(function(r){
+      if(!r.entry_date||!r.hold_days) return false;
+      var expiry=new Date(r.entry_date);
+      expiry.setDate(expiry.getDate()+Math.round(r.hold_days*1.5));
+      if(expiry<=_latestDt) return false;
+      if(!r.entry_px||!r.min_ret_strategy||!r.current_price) return false;
+      var mTgt=r.entry_px*(1+r.min_ret_strategy/100);
+      return (mTgt-r.current_price)/r.current_price*100>=5;
+    });
+  }
+
+  rows.sort(function(a,b){
+    var av=a[histSK]!=null?a[histSK]:'';
+    var bv=b[histSK]!=null?b[histSK]:'';
+    if(typeof av==='number') return histSD==='desc'?bv-av:av-bv;
+    return histSD==='desc'?String(bv).localeCompare(String(av)):String(av).localeCompare(String(bv));
+  });
+
+  document.getElementById('hist-pills').innerHTML=[
+    ['Total',d.n_signals,'g'],
+    ['Showing',rows.length,'b'],
+    ['Open',rows.filter(function(r){
+      if(!r.entry_date||!r.hold_days) return false;
+      var e=new Date(r.entry_date); e.setDate(e.getDate()+Math.round(r.hold_days*1.5));
+      return e>_latestDt;
+    }).length,'y','within hold tenure'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';}).join('');
+
+  if(!rows.length){
+    tbody.innerHTML='<tr><td colspan="26" class="empty">No signals match filter.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML=rows.map(function(t){
+    // Gap to min target
+    var gapCell='<td class="muted">—</td>';
+    if(t.entry_px&&t.min_ret_strategy&&t.current_price){
+      var mTgt=t.entry_px*(1+t.min_ret_strategy/100);
+      var gap=(mTgt-t.current_price)/t.current_price*100;
+      var gcol=gap>=5?'green':gap>=0?'amber':'red';
+      gapCell='<td class="mono '+gcol+'">'+(gap>0?'+':'')+Number(gap).toFixed(1)+'%</td>';
+    }
+    // Days elapsed / remaining
+    var daysElCell='<td class="muted">—</td>';
+    var daysRemCell='<td class="muted">—</td>';
+    if(t.entry_date&&t.hold_days){
+      var holdCal=Math.round(t.hold_days*1.5);
+      var elapsed=Math.round((_latestDt-new Date(t.entry_date))/86400000);
+      var elCapped=Math.min(Math.max(0,elapsed),holdCal);
+      var remaining=Math.max(0,holdCal-elapsed);
+      daysElCell='<td class="mono muted" title="'+t.hold_days+'td='+holdCal+'cal">'+elCapped+'cal</td>';
+      daysRemCell='<td class="mono '+(remaining>5?'green':'amber')+'">'+remaining+'cal</td>';
+    }
+    // OPEN/CLOSED status based on date
+    var isOpen=false;
+    if(t.entry_date&&t.hold_days){
+      var ex=new Date(t.entry_date); ex.setDate(ex.getDate()+Math.round(t.hold_days*1.5));
+      isOpen=ex>_latestDt;
+    }
+    var _isPending = t._note && t._note.indexOf('tomorrow')>=0;
+    var _isSplit = t.possible_split===true;
+    var statusCell=_isPending
+      ?'<td><span style="font-size:9px;font-weight:700;border:1px solid var(--gr2);background:var(--grb);color:var(--green);padding:1px 5px;border-radius:3px">NEW &#x23F3; Enter Tomorrow</span></td>'
+      :_isSplit
+      ?'<td><span style="font-size:9px;font-weight:700;border:1px solid var(--red);background:rgba(239,68,68,.1);color:var(--red);padding:1px 5px;border-radius:3px" title="Possible split/bonus after entry — gap% unreliable">&#x26A0; Split?</span></td>'
+      :isOpen
+      ?'<td><span class="amber" style="font-size:9px;font-weight:700;border:1px solid var(--amb);padding:1px 5px;border-radius:3px">OPEN</span></td>'
+      :'<td><span class="muted" style="font-size:9px">CLOSED</span></td>';
+
+    return '<tr style="'+(isOpen?'background:rgba(245,158,11,.03)':'')+'"><td class="mono gold" style="font-weight:600">'+t.sym+'</td>'
+      +'<td class="mono">'+t.sig_date+'</td>'
+      +'<td>'+ucB(t.uc)+'</td>'
+      +'<td>'+gB(t.grade)+'</td>'
+      +'<td>'+confBar(t.confidence||0)+'</td>'
+      +'<td class="mono muted">'+t.entry_date+'</td>'
+      +'<td class="mono">&#8377;'+(t.entry_px||'—')+'</td>'
+      +'<td class="mono muted">'+t.exit_date+'</td>'
+      +'<td class="mono">&#8377;'+(t.exit_px||'—')+'</td>'
+      +'<td class="mono '+((_isPending)?'green':isOpen?'amber':'green')+'" style="font-weight:700">'+((_isPending)?'SIGNAL — buy at tomorrow open':(isOpen?'~':'+')+(t.ret||0).toFixed(1)+'%'+(isOpen?' <small>(partial)</small>':''))+'</td>'
+      +'<td>'+(t.ret_3d!=null?rc(t.ret_3d):'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(t.ret_10d!=null?rc(t.ret_10d):'<span class="muted">—</span>')+'</td>'
+      +'<td class="mono green">+'+(t.max_gain||0).toFixed(1)+'%</td>'
+      +'<td class="mono '+(t.max_dd<-2?'amber':'muted')+'">'+(t.max_dd||0).toFixed(1)+'%</td>'
+      +'<td class="mono '+(t.ctx_rsi<30?'green':t.ctx_rsi>70?'red':'muted')+'">'+(t.ctx_rsi!=null?Number(t.ctx_rsi).toFixed(0):'—')+'</td>'
+      +'<td class="mono '+(t.ctx_vol_r>=2?'green':t.ctx_vol_r>=1.5?'amber':'muted')+'">'+(t.ctx_vol_r!=null?Number(t.ctx_vol_r).toFixed(1)+'x':'—')+'</td>'
+      +'<td>'+(t.ctx_ret5!=null?rc(t.ctx_ret5):'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(t.ctx_ret20!=null?rc(t.ctx_ret20):'<span class="muted">—</span>')+'</td>'
+      +statusCell
+      +'<td class="mono green">'+(t.min_ret_strategy!=null?'+'+Number(t.min_ret_strategy).toFixed(1)+'%':'—')+'</td>'
+      +'<td class="mono">'+(t.avg_ret_strategy!=null?'+'+Number(t.avg_ret_strategy).toFixed(1)+'%':'—')+'</td>'
+      +'<td class="mono amber">'+(t.current_price?'&#8377;'+t.current_price:'—')+'</td>'
+      +gapCell
+      +daysElCell
+      +daysRemCell
+      +'<td class="mono muted">'+(t.hold_days||'—')+'d</td>'
+      +'</tr>';
+  }).join('');
+}
+
+function renderUC(uc){
+  var st=ucS[uc]; if(!st) return;
+  var tbody=document.getElementById(st.tbody); if(!tbody) return;
+  var d=D[uc];
+  if(!d){
+    tbody.innerHTML='<tr><td colspan="'+st.cols+'" class="empty">No '+uc.toUpperCase()+' data yet. Run master_stock_analyzer_v3 workflow first.</td></tr>';
+    return;
+  }
+  var rows=[...(d.stocks||[])];
+  var q=(document.getElementById(st.qid)?.value||'').toUpperCase().trim();
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  // Grade filter — default ALL, filter only when specific grades deselected
+  // UC stocks may have grade B/C which are valid since they passed UC-specific 95% win rate
+  var showAll=(st.grds.has('A+')&&st.grds.has('A')&&st.grds.has('B'));
+  if(!showAll){
+    rows=rows.filter(function(r){return st.grds.has(r.grade||'B');});
+  }
+  // View filter: all / today / active
+  var _uv=(typeof ucViews!=='undefined'?ucViews[uc]:'all')||'all';
+  if(_uv==='today'){
+    var _ts=new Set((D.alerts&&D.alerts.alerts||[]).filter(function(a){
+      var bu=(a.best_uc||'').toUpperCase(), uc_=(uc||'').toUpperCase();
+      return bu===uc_||(a.signal_from||[]).some(function(s){return s.toUpperCase()===uc_;});
+    }).map(function(a){return a.sym;}));
+    rows=rows.filter(function(r){return _ts.has(r.sym);});
+    if(!rows.length){
+      tbody.innerHTML='<tr><td colspan="'+st.cols+'" class="empty">No '+uc.toUpperCase()+' signal today. View All to see historical stocks.</td></tr>';
+      return;
+    }
+  } else if(_uv==='active'){
+    var _as=new Set(computeStillValid().filter(function(p){return (p.uc||'').toUpperCase()===(uc||'').toUpperCase();}).map(function(p){return p.sym;}));
+    rows=rows.filter(function(r){return _as.has(r.sym);});
+    if(!rows.length){
+      tbody.innerHTML='<tr><td colspan="'+st.cols+'" class="empty">No active '+uc.toUpperCase()+' positions in tenure with 5pct gap. Check Still Valid tab.</td></tr>';
+      return;
+    }
+  }
+  rows.sort(function(a,b){var v=(b[st.sk]??0)-(a[st.sk]??0);return st.sd==='asc'?-v:v;});
+  var ucUp=uc.toUpperCase();
+  var todayN=(D.alerts&&D.alerts.alerts||[]).filter(function(a){return (a.best_uc||'').toUpperCase()===ucUp||(a.signal_from||[]).some(function(s){return s.toUpperCase()===ucUp;});}).length;
+  var activeN=computeStillValid().filter(function(p){return (p.uc||'').toUpperCase()===ucUp;}).length;
+  var pillEl=document.getElementById(st.pills);
+  if(pillEl) pillEl.innerHTML=[
+    ['Showing',rows.length,'b','qualifying stocks'],
+    ['&#x1F514; Today',todayN,'g','click Today to filter'],
+    ['&#x23F3; Active',activeN,'y','click Active to filter'],
+    ['A+',rows.filter(function(r){return r.grade==='A+';}).length,'g'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';}).join('');
+  if(!rows.length){
+    tbody.innerHTML='<tr><td colspan="'+st.cols+'" class="empty">No results. Try selecting more grade filters or run workflow.</td></tr>';
+    return;
+  }
+  var rowsHtml='';
+  rows.forEach(function(r,i){
+    var did=uc+'d'+i;
+    var descField=r.desc||'';
+    var valHtml='';
+    if(r.val_results){Object.keys(r.val_results).forEach(function(p){var v=r.val_results[p];valHtml+='<span style="margin-right:8px;color:'+(v?'var(--green)':'var(--red)')+'">'+p+':'+(v?v.wr+'%wr':'FAIL')+'</span>';});}
+    var ctxSection=(r.ctx_rsi||r.ctx_vol_r)?('<div class="ctx-box">'+'<div style="font-size:9px;color:var(--gold);font-weight:600;margin-bottom:3px">SIGNAL CONDITIONS</div>'+ctxRow('RSI at Signal',r.ctx_rsi,null,'')+ctxRow('Vol Ratio',r.ctx_vol_r,null,'x')+ctxRow('5d Before%',r.ctx_ret5,null,'%')+'</div>'):'';
+    var detail='<div style="padding:10px;background:rgba(0,0,0,.25)">'+ctxSection+'<div class="ac-explain" style="margin-top:8px">'+descField+'</div><div style="font-size:10px;color:var(--t3);margin-top:6px">Years: '+((r.years||[]).join(', ')||'—')+'</div>'+(valHtml?'<div style="font-size:10px;margin-top:4px">Validation: '+valHtml+'</div>':'')+'</div>';
+    var extraCol=(uc!=='uc2'&&uc!=='uc3')?('<td class="mono">'+Number(r.sharpe||0).toFixed(1)+'</td>'):'';
+        var tr1 = '<tr class="uc-row" data-did="'+did+'" style="cursor:pointer">';
+    var cells='<td><span id="x'+did+'" style="font-size:10px;color:var(--t3)">&#x25B6;</span></td>'
+      +'<td class="mono gold" style="font-weight:600">'+r.sym+'</td>'
+      +'<td class="mono">&#8377;'+fmt(r.price)+'</td>'
+      +'<td>'+gB(r.grade||'B')+'</td>'
+      +'<td>'+confBar(r.confidence||0)+'</td>'
+      +'<td class="mono green" style="font-weight:700;background:rgba(34,197,94,.06)">'+Number(r.ret_rate||0).toFixed(2)+'</td>'
+      +'<td>'+rc(r.avg_ret)+'</td>'
+      +'<td class="mono green">+'+Number(r.min_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono muted">'+r.hold_days+'d</td>'
+      +'<td class="mono green">'+Number(r.win_rate||0).toFixed(0)+'%</td>'
+      +'<td class="mono">'+r.n_trades+'</td>'
+      +extraCol
+      +'<td style="font-size:10px;color:var(--t2);max-width:200px">'+descField.slice(0,60)+'</td>'
+      +'</tr>';
+    var detRow='<tr id="'+did+'" style="display:none"><td colspan="'+st.cols+'" style="padding:0">'+detail+'</td></tr>';
+    rowsHtml+=tr1+cells+detRow;
+  });
+  tbody.innerHTML=rowsHtml;
+}
+
+
+function ucToggle(id){
+  var row=document.getElementById(id);
+  if(!row) return;
+  var arrow=document.getElementById('x'+id);
+  if(row.style.display==='none'){
+    row.style.display='';
+    if(arrow) arrow.textContent='&#x25BC;';
+  } else {
+    row.style.display='none';
+    if(arrow) arrow.textContent='&#x25B6;';
+  }
+}
+
+function renderAll(){
+  var tbody=document.getElementById('all-tbody'); if(!tbody)return;
+  var d=D.master;
+  if(!d){tbody.innerHTML='<tr><td colspan="21" class="empty">No master data. Run workflow.</td></tr>';return;}
+  var rows=[...(d.stocks||[])];
+  var q=(document.getElementById('allq')?.value||'').toUpperCase().trim();
+  if(q)rows=rows.filter(r=>r.sym.includes(q));
+  if(!allFilters.has('ALL')){
+    if(allFilters.has('A+'))    rows=rows.filter(r=>r.best_grade==='A+');
+    if(allFilters.has('SIGNAL'))rows=rows.filter(r=>r.signal_today);
+    if(allFilters.has('LT'))    rows=rows.filter(r=>(r.longterm_score||0)>=60);
+    if(allFilters.has('UC1'))   rows=rows.filter(r=>r.uc1);
+    if(allFilters.has('UC2'))   rows=rows.filter(r=>r.uc2);
+  }
+  rows.sort((a,b)=>{var v=(b[allSK]??0)-(a[allSK]??0);return allSD==='asc'?-v:v;});
+  document.getElementById('all-pills').innerHTML=[['Total',rows.length,'b'],['A+',rows.filter(r=>r.best_grade==='A+').length,'g'],['Alerts',rows.filter(r=>r.signal_today).length,'y']].map(x=>'<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>').join('');
+  if(!rows.length){tbody.innerHTML='<tr><td colspan="21" class="empty">No stocks match filter.</td></tr>';return;}
+  var html='';
+  rows.forEach((r,i)=>{
+    var did='atd'+i;
+    var ucs=['uc1','uc2','uc3','uc4'].filter(u=>r[u]).map(u=>ucB(u)).join('');
+    var detail='<div style="padding:10px;background:rgba(0,0,0,.25)">'
+      +['uc1','uc2','uc3','uc4'].filter(u=>r[u]).map(u=>'<div style="margin-bottom:6px"><div style="font-size:10px;font-weight:600;margin-bottom:2px">'+ucB(u)+' '+r[u].desc+'</div>'
+        +'<span class="green" style="font-size:10px">Ret%/Day: '+Number(r[u].ret_rate||0).toFixed(2)+' &#x00B7; Avg: +'+r[u].avg_ret+'% &#x00B7; Min: +'+r[u].min_ret+'% &#x00B7; Hold: '+r[u].hold_days+'d</span></div>').join('')
+      +(r.ctx_rsi?'<div class="ctx-box"><div style="font-size:9px;color:var(--gold);font-weight:600;margin-bottom:3px">SIGNAL CONDITIONS</div>'
+        +ctxRow('RSI',r.ctx_rsi,r.rsi,'')+ctxRow('Vol Ratio',r.ctx_vol_r,r.vol_r,'x')+ctxRow('5d Before%',r.ctx_ret5,r.ret5,'%')
+        +'</div>':'')
+      +'</div>';
+    html+='<tr onclick="atToggle(\''+did+'\')" style="cursor:pointer;'+(r.signal_today?'background:rgba(34,197,94,.03)':'')+'">'
+      +'<td><span id="ax'+did+'" style="font-size:10px;color:var(--t3)">&#x25B6;</span></td>'
+      +'<td class="mono gold" style="font-weight:600">'+r.sym+(r.signal_today?' <span class="green" style="font-size:8px;border:1px solid var(--gr2);padding:1px 4px;border-radius:2px;background:var(--grb)">ALERT</span>':'')+'</td>'
+      +'<td class="mono">&#8377;'+fmt(r.price)+'</td>'
+      +'<td>'+gB(r.best_grade)+'</td>'
+      +'<td>'+confBar(r.confidence||0)+'</td>'
+      +'<td>'+sBar(r.longterm_score)+'</td>'
+      +'<td>'+ucB(r.best_uc)+'</td>'
+      +'<td class="mono green" style="font-weight:700;background:rgba(34,197,94,.06)">'+Number(r.best_ret_rate||0).toFixed(2)+'</td>'
+      +'<td>'+rc(r.best_avg_ret)+'</td>'
+      +'<td class="mono green">+'+Number(r.best_min_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono muted">'+r.best_hold_days+'d</td>'
+      +'<td class="mono green">'+Number(r.best_wr||0).toFixed(0)+'%</td>'
+      +'<td class="mono">'+r.best_n_trades+'</td>'
+      +'<td class="mono">'+Number(r.best_sharpe||0).toFixed(1)+'</td>'
+      +'<td class="mono '+(r.rsi<30?'green':r.rsi>70?'red':'muted')+'">'+Number(r.rsi||0).toFixed(0)+'</td>'
+      +'<td class="mono '+(r.vol_r>=2?'green':r.vol_r>=1.5?'amber':'muted')+'">'+Number(r.vol_r||0).toFixed(1)+'x</td>'
+      +'<td class="mono '+(r.adx>25?'green':'muted')+'">'+Number(r.adx||0).toFixed(0)+'</td>'
+      +'<td>'+rc(r.ret5)+'</td><td>'+rc(r.ret20)+'</td>'
+      +'<td class="mono muted">'+(r.avg_turnover_cr||'—')+' Cr</td>'
+      +'<td>'+(r.signal_today?'<span class="green" style="font-weight:700">&#x1F514;</span>':'<span class="muted">—</span>')+'</td>'
+      +'</tr>'
+      +'<tr id="'+did+'" style="display:none"><td colspan="21" style="padding:0">'+detail+'</td></tr>';
+  });
+  tbody.innerHTML += html;
+}
+function atToggle(id){var r=document.getElementById(id);if(!r)return;var x=document.getElementById('ax'+id);r.style.display=r.style.display==='none'?'':'none';if(x)x.textContent=r.style.display===''?'&#x25BC;':'&#x25B6;';}
+
+function renderLT(){
+  var d=D.lt; var el=document.getElementById('lt-grid');
+  if(!d){el.innerHTML='<div class="empty">No long-term data. Run master_stock_analyzer_v3 workflow.</div>';return;}
+  var rows=[...(d.picks||[])];
+  var q=(document.getElementById('ltq')?.value||'').toUpperCase().trim();
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  if(!ltGrds.has('A+')) rows=rows.filter(function(r){return r.grade!=='A+';});
+  if(!ltGrds.has('A'))  rows=rows.filter(function(r){return r.grade!=='A';});
+  rows.sort(function(a,b){return (b[ltSK]??0)-(a[ltSK]??0);});
+  document.getElementById('lt-pills').innerHTML=[
+    ['Picks',rows.length,'g'],
+    ['A+',rows.filter(function(r){return r.grade==='A+';}).length,'g'],
+    ['Latest',d.latest||'—','b'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
+  if(!rows.length){el.innerHTML='<div class="empty">No picks match filter.</div>';return;}
+  // Build alert and still-valid lookups
+  var ltAlerts=new Set((D.alerts&&D.alerts.alerts||[]).map(function(a){return a.sym;}));
+  var ltSV={}; computeStillValid().forEach(function(p){if(!ltSV[p.sym])ltSV[p.sym]=p;});
+  el.innerHTML=rows.map(function(r,i){
+    var isT=ltAlerts.has(r.sym);
+    var svP=ltSV[r.sym];
+    var statusBadge=isT
+      ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:4px;font-size:9px;font-weight:700;padding:2px 6px">&#x1F514; SIGNAL TODAY</span>'
+      :svP
+      ?'<span style="background:var(--ab);color:var(--amber);border:1px solid var(--amb);border-radius:4px;font-size:9px;font-weight:700;padding:2px 6px">&#x23F3; ACTIVE '+svP.days_remaining+'d left | +'+svP.gap_to_min_target_pct+'% gap</span>'
+      :'<span style="color:var(--t3);font-size:9px;padding:2px 6px">Watch for signal</span>';
+    var cardBorder=isT?'border-left-color:var(--green)':svP?'border-left-color:var(--amber)':'';
+    var strats=(r.all_strategies||[]).slice(0,5).map(function(s){
+      return '<div style="display:flex;justify-content:space-between;font-size:10px;padding:3px 0;border-bottom:1px solid var(--b)">'
+        +'<span style="color:var(--t2)">'+ucB(s.uc)+(s.desc||'').slice(0,45)+'</span>'
+        +'<span class="green">avg +'+s.avg_ret+'% | min +'+s.min_ret+'%</span></div>';
+    }).join('');
+    return '<div class="lt-card '+(r.grade==='A+'?'ap':'')+'" style="'+cardBorder+'">'
+      +'<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:8px">'
+      +'<div><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">'
+      +'<span style="font-size:16px;font-weight:700;color:var(--gold)">'+(i+1)+'. '+r.sym+'</span>'+gB(r.grade)+statusBadge+'</div>'
+      +'<div style="font-size:11px;color:var(--t2);margin-top:2px">&#8377;'+fmt(r.price)+' &middot; '+(r.avg_turnover_cr||'—')+' Cr &middot; RSI '+Number(r.rsi||0).toFixed(0)+'</div></div>'
+      +'<div>'+sBar(r.longterm_score)+'<div style="font-size:9px;color:var(--t3);margin-top:2px">Confidence: '+confBar(r.confidence||0)+'</div></div></div>'
+      +'<div class="ac-grid" style="margin-bottom:8px">'
+      +'<div class="ac-mini"><div class="ac-ml">Ret%/Day</div><div class="ac-mv green" style="font-size:16px;font-weight:700">'+Number(r.ret_rate||0).toFixed(2)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Win Rate</div><div class="ac-mv green">'+Number(r.win_rate||0).toFixed(0)+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Avg Return</div><div class="ac-mv green">+'+r.avg_ret+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Return</div><div class="ac-mv green">+'+r.min_ret+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Hold Days</div><div class="ac-mv">'+r.hold_days+'d</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Occurrences</div><div class="ac-mv">'+r.n_trades+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">1M Return</div>'+rc(r.ret20)+'</div>'
+      +'<div class="ac-mini"><div class="ac-ml">LT Score</div><div class="ac-mv">'+r.longterm_score+'/100</div></div>'
+      +(svP?'<div class="ac-mini" style="background:var(--ab)"><div class="ac-ml">Gap to Min Target</div><div class="ac-mv amber" style="font-weight:700">+'+svP.gap_to_min_target_pct+'%</div></div>':'')
+      +(svP?'<div class="ac-mini" style="background:var(--ab)"><div class="ac-ml">Days Remaining</div><div class="ac-mv '+(svP.days_remaining>10?'green':'amber')+'">'+svP.days_remaining+'d</div></div>':'')
+      +(svP?'<div class="ac-mini" style="background:var(--ab)"><div class="ac-ml">Min Exit Price</div><div class="ac-mv green">&#8377;'+svP.min_target_price+'</div></div>':'')
+      +(svP?'<div class="ac-mini" style="background:var(--ab)"><div class="ac-ml">Cur Return</div><div class="ac-mv '+(svP.current_return_pct>=0?'green':'red')+'">'+Number(svP.current_return_pct||0).toFixed(1)+'%</div></div>':'')
+      +'</div>'
+      +'<div class="ac-explain">'+r.best_desc+'</div>'
+      +(strats?'<div style="font-size:9px;color:var(--t3);font-weight:600;margin-bottom:3px;margin-top:8px">ALL QUALIFYING STRATEGIES:</div>'+strats:'')
+      +'</div>';
+  }).join('');
+}
+
+
+// UC row click delegation
+document.addEventListener('click', function(e){
+  var row = e.target.closest && e.target.closest('.uc-row');
+  if(!row) return;
+  var did = row.getAttribute('data-did');
+  if(did) ucToggle(did);
+});
+
+// ══ BUYING STRATEGY ═══════════════════════════════════════════════════════════
+var buySortKey='ret_rate', buySD='desc', buyFilter='all';
+
+function buySrt(k, btn, filter){
+  if(k) buySortKey=k;
+  if(filter!=='') buyFilter=filter;
+  document.querySelectorAll('[id^="bsrt-"],[id^="bv-"]').forEach(function(b){b.classList.remove('on');});
+  if(btn) btn.classList.add('on');
+  renderBuying();
+}
+function buyTh(k){
+  if(buySortKey===k) buySD=buySD==='desc'?'asc':'desc';
+  else{buySortKey=k; buySD='desc';}
+  renderBuying();
+}
+
+function buildBuyRows(){
+  var master=D.master;
+  if(!master) return [];
+  var alertSyms=new Set((D.alerts&&D.alerts.alerts||[]).map(function(a){return a.sym;}));
+  var rows=[];
+  (master.stocks||[]).forEach(function(s){
+    if(!s.buy_stats) return;
+    var bs=s.buy_stats;
+    rows.push({
+      sym:           s.sym,
+      grade:         s.best_grade,
+      confidence:    s.confidence,
+      ret_rate:      s.best_ret_rate,
+      avg_ret:       s.best_avg_ret,
+      min_ret:       s.best_min_ret,
+      hold_days:     s.best_hold_days,
+      n_trades:      s.best_n_trades,
+      is_alert:      alertSyms.has(s.sym),
+      // Gap stats
+      avg_gap_pct:          bs.avg_gap_pct,
+      min_gap_pct:          bs.min_gap_pct,
+      max_gap_pct:          bs.max_gap_pct,
+      pct_gap_up:           bs.pct_gap_up,
+      pct_gap_down:         bs.pct_gap_down,
+      // Dip stats
+      avg_dip_pct:          bs.avg_dip_pct,
+      worst_dip_pct:        bs.worst_dip_pct,
+      pct_dips_below_open:  bs.pct_dips_below_open,
+      avg_dip_when_dips:    bs.avg_dip_when_dips,
+      // D1 close stats
+      avg_d1_close_ret:     bs.avg_d1_close_ret,
+      min_d1_close_ret:     bs.min_d1_close_ret,
+      max_d1_close_ret:     bs.max_d1_close_ret,
+      pct_d1_close_pos:     bs.pct_d1_close_pos,
+      avg_d1_intra_ret:     bs.avg_d1_intra_ret,
+      pct_d1_intra_pos:     bs.pct_d1_intra_pos,
+      // Recommendation
+      buy_strategy:         bs.buy_strategy,
+      buy_at:               bs.buy_at,
+    });
+  });
+  return rows;
+}
+
+function renderBuying(){
+  var tbody=document.getElementById('buy-tbody'); if(!tbody) return;
+  var rows=buildBuyRows();
+  var q=(document.getElementById('buy-q')?.value||'').toUpperCase().trim();
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  if(buyFilter==='alert') rows=rows.filter(function(r){return r.is_alert;});
+  rows.sort(function(a,b){
+    var av=a[buySortKey]!=null?a[buySortKey]:0;
+    var bv=b[buySortKey]!=null?b[buySortKey]:0;
+    if(typeof av==='string') return buySD==='desc'?bv.localeCompare(av):av.localeCompare(bv);
+    return buySD==='desc'?bv-av:av-bv;
+  });
+
+  var alertN=buildBuyRows().filter(function(r){return r.is_alert;}).length;
+  document.getElementById('buy-pills').innerHTML=[
+    ['Stocks with Buy Data',rows.length,'b'],
+    ['Today Alerts with Buy Data',alertN,'g','for immediate action'],
+    ['Gap Up >0%',rows.filter(function(r){return (r.avg_gap_pct||0)>0;}).length,'g','avg gap is positive'],
+    ['Dip Opportunity',rows.filter(function(r){return (r.pct_dips_below_open||0)>60;}).length,'y','price dips below open >60% of times'],
+  ].map(function(x){
+    return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';
+  }).join('');
+
+  if(!rows.length){
+    tbody.innerHTML='<tr><td colspan="19" class="empty">No buying strategy data. Run master_stock_analyzer_v3 workflow (new version with buy_stats).</td></tr>';
+    return;
+  }
+
+  var rowsHtml='';
+  rows.forEach(function(r,i){
+    var did='bsd'+i;
+    // Color helpers
+    var gapCol=(r.avg_gap_pct||0)>0?'green':'red';
+    var dipCol=(r.pct_dips_below_open||0)>60?'amber':'muted';
+    var d1col=(r.pct_d1_close_pos||0)>=70?'green':(r.pct_d1_close_pos||0)>=50?'amber':'red';
+
+    // Expanded detail: show explanation card
+    var detail='<div style="padding:14px;background:rgba(0,0,0,.25);display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px">'
+
+      // Gap card
+      +'<div class="lt-card" style="border-left-color:var(--purple)">'
+      +'<div style="color:var(--purple);font-weight:600;margin-bottom:6px">&#x1F4CA; Gap Statistics (D1 Open vs D0 Close)</div>'
+      +'<div class="ctx-row"><span class="ctx-lbl">Average Gap</span><span class="'+(gapCol)+'" style="font-family:DM Mono,monospace">'+(r.avg_gap_pct>0?'+':'')+Number(r.avg_gap_pct||0).toFixed(2)+'%</span></div>'
+      +'<div class="ctx-row"><span class="ctx-lbl">Range</span><span class="muted" style="font-family:DM Mono,monospace">'+Number(r.min_gap_pct||0).toFixed(2)+'% to +'+Number(r.max_gap_pct||0).toFixed(2)+'%</span></div>'
+      +'<div class="ctx-row"><span class="ctx-lbl">Opens gap UP</span><span class="green" style="font-family:DM Mono,monospace">'+Number(r.pct_gap_up||0).toFixed(0)+'% of signals</span></div>'
+      +'<div class="ctx-row"><span class="ctx-lbl">Opens gap DOWN</span><span class="'+(r.pct_gap_down>30?'amber':'muted')+'" style="font-family:DM Mono,monospace">'+Number(r.pct_gap_down||0).toFixed(0)+'% of signals</span></div>'
+      +'<div class="ac-explain" style="margin-top:8px">If avg gap is positive, the stock typically opens ABOVE the previous close on signal day. You may need to chase. If negative, you get a cheaper entry than yesterday\'s close.</div>'
+      +'</div>'
+
+      // Dip card
+      +'<div class="lt-card" style="border-left-color:var(--amber)">'
+      +'<div style="color:var(--amber);font-weight:600;margin-bottom:6px">&#x1F4C9; Intraday Dip (How far below D1 Open)</div>'
+      +'<div class="ctx-row"><span class="ctx-lbl">Dips below open</span><span class="amber" style="font-family:DM Mono,monospace">'+Number(r.pct_dips_below_open||0).toFixed(0)+'% of signals</span></div>'
+      +'<div class="ctx-row"><span class="ctx-lbl">Average dip size</span><span class="muted" style="font-family:DM Mono,monospace">'+Number(r.avg_dip_when_dips||0).toFixed(2)+'% below open</span></div>'
+      +'<div class="ctx-row"><span class="ctx-lbl">Worst dip ever</span><span class="red" style="font-family:DM Mono,monospace">'+Number(r.worst_dip_pct||0).toFixed(2)+'%</span></div>'
+      +'<div class="ctx-row"><span class="ctx-lbl">Average dip all days</span><span class="muted" style="font-family:DM Mono,monospace">'+Number(r.avg_dip_pct||0).toFixed(2)+'%</span></div>'
+      +'<div class="ac-explain" style="margin-top:8px">'+r.buy_strategy+'</div>'
+      +'</div>'
+
+      // D1 Close card
+      +'<div class="lt-card" style="border-left-color:var(--green)">'
+      +'<div style="color:var(--green);font-weight:600;margin-bottom:6px">&#x1F4C8; D1 Close Performance (vs Signal Day Close)</div>'
+      +'<div class="ctx-row"><span class="ctx-lbl">D1 closes ABOVE D0</span><span class="'+(d1col)+'" style="font-family:DM Mono,monospace">'+Number(r.pct_d1_close_pos||0).toFixed(0)+'% of signals</span></div>'
+      +'<div class="ctx-row"><span class="ctx-lbl">Average D1 return</span><span class="'+(r.avg_d1_close_ret>0?'green':'red')+'" style="font-family:DM Mono,monospace">'+(r.avg_d1_close_ret>0?'+':'')+Number(r.avg_d1_close_ret||0).toFixed(2)+'%</span></div>'
+      +'<div class="ctx-row"><span class="ctx-lbl">Range D1 close</span><span class="muted" style="font-family:DM Mono,monospace">'+Number(r.min_d1_close_ret||0).toFixed(2)+'% to +'+Number(r.max_d1_close_ret||0).toFixed(2)+'%</span></div>'
+      +'<div class="ctx-row"><span class="ctx-lbl">Open→Close direction</span><span class="'+(r.avg_d1_intra_ret>0?'green':'red')+'" style="font-family:DM Mono,monospace">'+(r.avg_d1_intra_ret>0?'+':'')+Number(r.avg_d1_intra_ret||0).toFixed(2)+'% avg intraday</span></div>'
+      +'<div class="ac-explain" style="margin-top:8px">If D1 close is above D0 close most of the time, holding through D1 is safe. If D1 close is typically below D0 close, consider waiting until D2 open to enter (after the initial enthusiasm fades).</div>'
+      +'</div>'
+
+      +'</div>';
+
+    var tr1='<tr class="uc-row" data-did="'+did+'" style="cursor:pointer;'+(r.is_alert?'background:rgba(34,197,94,.04)':'')+'">';
+    var cells=''
+      +'<td><span id="x'+did+'" style="font-size:10px;color:var(--t3)">&#x25B6;</span></td>'
+      +'<td class="mono gold" style="font-weight:600">'+r.sym+(r.is_alert?' <span class="green" style="font-size:8px;border:1px solid var(--gr2);padding:1px 4px;border-radius:2px;background:var(--grb)">ALERT</span>':'')+'</td>'
+      +'<td>'+gB(r.grade||'B')+'</td>'
+      +'<td class="mono green" style="font-weight:700;border-right:2px solid var(--b)">'+Number(r.ret_rate||0).toFixed(2)+'</td>'
+      // Gap
+      +'<td class="mono '+gapCol+'" style="background:var(--pb)">'+(r.avg_gap_pct>0?'+':'')+Number(r.avg_gap_pct||0).toFixed(2)+'%</td>'
+      +'<td class="mono muted" style="background:var(--pb)">'+Number(r.min_gap_pct||0).toFixed(2)+'%</td>'
+      +'<td class="mono muted" style="background:var(--pb)">+'+Number(r.max_gap_pct||0).toFixed(2)+'%</td>'
+      +'<td class="mono '+(r.pct_gap_up>50?'green':'amber')+'" style="background:var(--pb);border-right:2px solid var(--b)">'+Number(r.pct_gap_up||0).toFixed(0)+'%</td>'
+      // Dip
+      +'<td class="mono amber" style="background:var(--ab)">'+Number(r.avg_dip_pct||0).toFixed(2)+'%</td>'
+      +'<td class="mono red" style="background:var(--ab)">'+Number(r.worst_dip_pct||0).toFixed(2)+'%</td>'
+      +'<td class="mono '+dipCol+'" style="background:var(--ab)">'+Number(r.pct_dips_below_open||0).toFixed(0)+'%</td>'
+      +'<td class="mono amber" style="background:var(--ab);border-right:2px solid var(--b)">'+Number(r.avg_dip_when_dips||0).toFixed(2)+'%</td>'
+      // D1 close
+      +'<td class="mono '+(r.avg_d1_close_ret>0?'green':'red')+'" style="background:var(--grb)">'+(r.avg_d1_close_ret>0?'+':'')+Number(r.avg_d1_close_ret||0).toFixed(2)+'%</td>'
+      +'<td class="mono muted" style="background:var(--grb)">'+Number(r.min_d1_close_ret||0).toFixed(2)+'%</td>'
+      +'<td class="mono muted" style="background:var(--grb)">+'+Number(r.max_d1_close_ret||0).toFixed(2)+'%</td>'
+      +'<td class="mono '+d1col+'" style="background:var(--grb)">'+Number(r.pct_d1_close_pos||0).toFixed(0)+'%</td>'
+      +'<td class="mono '+(r.avg_d1_intra_ret>0?'green':'red')+'" style="background:var(--grb);border-right:2px solid var(--b)">'+(r.avg_d1_intra_ret>0?'+':'')+Number(r.avg_d1_intra_ret||0).toFixed(2)+'%</td>'
+      // Recommendation
+      +'<td class="mono '+(r.buy_at==='Open'?'muted':'amber')+'" style="font-weight:600">'+r.buy_at+'</td>'
+      +'<td style="font-size:10px;color:var(--t2);white-space:normal;min-width:200px;max-width:280px">'+r.buy_strategy+'</td>'
+      +'</tr>';
+    var detRow='<tr id="'+did+'" style="display:none"><td colspan="19" style="padding:0">'+detail+'</td></tr>';
+    rowsHtml+=tr1+cells+detRow;
+  });
+  tbody.innerHTML=rowsHtml;
+}
+
+
+// ══ TRADING CALENDAR ══════════════════════════════════════════════════════════
+var calCurrentView = 'month';
+var calMonthSel    = 0;        // 0 = all months
+var calTrackUC     = 'all';
+var calTrackSortK  = 'match_score';
+var calTrackSD     = 'desc';
+
+var MONTH_NAMES = ['','January','February','March','April','May','June',
+                   'July','August','September','October','November','December'];
+var MONTH_ABR   = ['','Jan','Feb','Mar','Apr','May','Jun',
+                   'Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function calView(v, btn){
+  calCurrentView = v;
+  document.querySelectorAll('[id^="calv-"]').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('cal-month-filter').style.display  = v==='month' ? 'flex' : 'none';
+  document.getElementById('cal-track-filter').style.display  = v==='track' ? 'flex' : 'none';
+  document.getElementById('cal-monthly-view').style.display  = v==='month' ? ''      : 'none';
+  document.getElementById('cal-tracker-view').style.display  = v==='track' ? ''      : 'none';
+  renderCalendar();
+}
+
+function calMonthFilter(m, btn){
+  calMonthSel = m;
+  document.querySelectorAll('[id^="cmf-"]').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderCalendar();
+}
+
+function calTrackFilter(uc, btn){
+  calTrackUC = uc;
+  document.querySelectorAll('[id^="ctf-"]').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderCalendar();
+}
+
+function calTrackTh(k){
+  if(calTrackSortK===k) calTrackSD = calTrackSD==='desc'?'asc':'desc';
+  else { calTrackSortK=k; calTrackSD='desc'; }
+  renderCalendar();
+}
+
+// Parse month number from UC2 desc string
+// "Buy on first trading day of Jun, hold 20d" → 6
+function parseMonth(desc){
+  if(!desc) return 0;
+  var m = desc.match(/of (\w{3}),/i);
+  if(!m) return 0;
+  var idx = MONTH_ABR.indexOf(m[1].charAt(0).toUpperCase()+m[1].slice(1).toLowerCase());
+  return idx > 0 ? idx : 0;
+}
+
+// Check if a value is within a context range (with 10% tolerance)
+function inRange(val, ctx){
+  if(val==null || !ctx) return null;
+  var lo = ctx.min, hi = ctx.max;
+  var range = hi - lo; var tol = range * 0.1;
+  if(val >= lo - tol && val <= hi + tol) return 'in';
+  if(val < lo - tol) return 'low';
+  return 'high';
+}
+
+function rangeCell(val, ctx, unit){
+  if(val==null||!ctx) return '<td class="muted" style="font-size:10px">—</td>';
+  var st = inRange(val, ctx);
+  var col = st==='in'?'green':st==='low'?'amber':'red';
+  var icon = st==='in'?'✓':st==='low'?'▼':'▲';
+  var u = unit||'';
+  return '<td style="font-size:10px">'
+    +'<div class="mono '+col+'" style="font-weight:700">'+icon+' '+(val>0?'+':'')+Number(val).toFixed(1)+u+'</div>'
+    +'<div class="muted" style="font-size:9px">range: '+ctx.min+u+'→'+ctx.max+u+'</div>'
+    +'</td>';
+}
+
+// Build UC2 calendar data from master_results
+function buildCalendarData(){
+  var master = D.master;
+  if(!master) return {};
+  var byMonth = {};  // month → [stock entries]
+  for(var m=1; m<=12; m++) byMonth[m] = [];
+
+  (master.stocks||[]).forEach(function(s){
+    if(!s.uc2) return;
+    var uc2 = s.uc2;
+    var mo = parseMonth(uc2.desc||'');
+    if(mo < 1 || mo > 12) return;
+    byMonth[mo].push({
+      sym:      s.sym,
+      price:    s.price,
+      grade:    s.best_grade,
+      confidence: s.confidence,
+      mo:       mo,
+      mo_name:  MONTH_NAMES[mo],
+      desc:     uc2.desc||'',
+      avg_ret:  uc2.avg_ret,
+      min_ret:  uc2.min_ret,
+      hold_days:uc2.hold_days,
+      win_rate: uc2.win_rate,
+      ret_rate: uc2.ret_rate,
+      n_trades: uc2.n_trades,
+      ctx_rsi:  uc2.ctx_rsi,
+      ctx_vol_r:uc2.ctx_vol_r,
+      years:    uc2.years||[],
+      // Current conditions vs signal range
+      rsi:      s.rsi,
+      vol_r:    s.vol_r,
+      ret5:     s.ret5,
+    });
+  });
+
+  // Sort each month by ret_rate descending
+  for(var m=1; m<=12; m++){
+    byMonth[m].sort(function(a,b){ return (b.ret_rate||0)-(a.ret_rate||0); });
+  }
+  return byMonth;
+}
+
+// Build conditions tracker data — stocks where today's indicators are in signal range
+function buildTrackerData(){
+  var master = D.master;
+  if(!master) return [];
+  var today = new Date().getMonth()+1; // current month (1-12)
+
+  return (master.stocks||[]).map(function(s){
+    var ctx_rsi   = s.ctx_rsi;
+    var ctx_vol   = s.ctx_vol_r;
+    var ctx_ret5  = s.ctx_ret5;
+    var rsi_st    = inRange(s.rsi, ctx_rsi);
+    var vol_st    = inRange(s.vol_r, ctx_vol);
+    var ret5_st   = inRange(s.ret5, ctx_ret5);
+
+    // Match score: 0-3 based on how many conditions are in range
+    var score = [rsi_st,vol_st,ret5_st].filter(function(x){return x==='in';}).length;
+
+    return {
+      sym:          s.sym,
+      price:        s.price,
+      grade:        s.best_grade,
+      best_uc:      s.best_uc,
+      best_avg_ret: s.best_avg_ret,
+      best_min_ret: s.best_min_ret,
+      best_hold_days:s.best_hold_days,
+      best_desc:    s.best_desc,
+      ctx_rsi:      ctx_rsi,
+      ctx_vol_r:    ctx_vol,
+      ctx_ret5:     ctx_ret5,
+      rsi:          s.rsi,
+      vol_r:        s.vol_r,
+      ret5:         s.ret5,
+      match_score:  score,
+      rsi_st:       rsi_st,
+      vol_st:       vol_st,
+      ret5_st:      ret5_st,
+    };
+  }).filter(function(s){ return s.match_score > 0; });
+}
+
+function renderCalendar(){
+  var q = (document.getElementById('cal-q')?.value||'').toUpperCase().trim();
+  var master = D.master;
+
+  // Pills
+  var calByMonth = buildCalendarData();
+  var totalUC2 = 0; for(var m=1;m<=12;m++) totalUC2+=calByMonth[m].length;
+  var trackerData = buildTrackerData();
+  var fullMatch = trackerData.filter(function(s){return s.match_score===3;}).length;
+
+  document.getElementById('cal-pills').innerHTML = [
+    ['UC2 Seasonal Stocks', totalUC2, 'b', 'across all months'],
+    ['Full Condition Match', fullMatch, 'g', 'RSI + Vol + Momentum all in range'],
+    ['Partial Match', trackerData.length - fullMatch, 'y', '1 or 2 conditions in range'],
+    ['Current Month', MONTH_NAMES[new Date().getMonth()+1], 'b'],
+  ].map(function(x){
+    return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';
+  }).join('');
+
+  if(calCurrentView === 'month') renderMonthly(calByMonth, q);
+  else renderTracker(trackerData, q);
+}
+
+function renderMonthly(byMonth, q){
+  var el = document.getElementById('cal-monthly-view'); if(!el) return;
+  var today_mo = new Date().getMonth() + 1;
+
+  // Build ordered months starting from current
+  var months = [];
+  for(var i=0; i<12; i++){
+    var mo = ((today_mo - 1 + i) % 12) + 1;
+    months.push(mo);
+  }
+
+  var html = '';
+  months.forEach(function(mo){
+    if(calMonthSel !== 0 && calMonthSel !== mo) return;
+    var stocks = byMonth[mo] || [];
+    if(q) stocks = stocks.filter(function(s){ return s.sym.includes(q); });
+    if(!stocks.length && calMonthSel !== mo) return;
+
+    var isCurrent = mo === today_mo;
+    var isNext    = mo === ((today_mo % 12) + 1);
+    var headerBg  = isCurrent ? 'var(--green)' : isNext ? 'var(--amber)' : 'var(--bl2)';
+    var headerTxt = isCurrent ? '🟢 BUY NOW — CURRENT MONTH' : isNext ? '🔜 NEXT MONTH' : '';
+
+    html += '<div style="margin-bottom:18px;border-radius:9px;overflow:hidden;border:1px solid var(--b)">';
+    // Month header
+    html += '<div style="background:'+headerBg+';padding:10px 14px;display:flex;justify-content:space-between;align-items:center">'
+      + '<div style="font-weight:700;font-size:15px;color:#fff">'+MONTH_NAMES[mo]
+      + '<span style="font-size:10px;font-weight:400;margin-left:8px;opacity:.8">Buy on 1st trading day of '+MONTH_ABR[mo]+' · '+stocks.length+' stocks</span></div>'
+      + '<div style="font-size:11px;color:#fff;font-weight:600">'+headerTxt+'</div>'
+      + '</div>';
+
+    if(!stocks.length){
+      html += '<div class="empty" style="padding:14px">No qualifying seasonal stocks for '+MONTH_NAMES[mo]+'</div></div>';
+      return;
+    }
+
+    // Stock cards grid
+    html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px;padding:10px;background:var(--card)">';
+
+    stocks.forEach(function(s){
+      var rsi_st  = inRange(s.rsi, s.ctx_rsi);
+      var vol_st  = inRange(s.vol_r, s.ctx_vol_r);
+      var match   = [rsi_st,vol_st].filter(function(x){return x==='in';}).length;
+      var matchBadge = match===2
+        ? '<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">Conditions Ready</span>'
+        : match===1
+        ? '<span style="background:var(--ab);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:9px;padding:1px 5px">Partial Match</span>'
+        : '<span style="color:var(--t3);font-size:9px">Watch</span>';
+
+      html += '<div class="lt-card" style="margin-bottom:0;padding:10px">'
+        // Header row
+        + '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">'
+        + '<div>'
+        + '<span style="font-size:15px;font-weight:700;color:var(--gold)">'+s.sym+'</span> '
+        + gB(s.grade)
+        + '<div style="font-size:10px;color:var(--t2);margin-top:2px">&#8377;'+fmt(s.price)+' &middot; '+s.n_trades+' past Junes</div>'
+        + '</div>'
+        + '<div style="text-align:right">'
+        + '<div class="green" style="font-size:16px;font-weight:700">+'+Number(s.avg_ret||0).toFixed(1)+'%</div>'
+        + '<div style="font-size:9px;color:var(--t3)">avg over '+s.hold_days+'d</div>'
+        + '</div></div>'
+
+        // Key numbers
+        + '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:8px">'
+        + '<div class="ac-mini"><div class="ac-ml">Min Return</div><div class="ac-mv green">+'+Number(s.min_ret||0).toFixed(1)+'%</div></div>'
+        + '<div class="ac-mini"><div class="ac-ml">At Min Target</div><div class="ac-mv amber">&#8377;'+Number(s.price*(1+s.min_ret/100)).toFixed(1)+'</div></div>'
+        + '<div class="ac-mini"><div class="ac-ml">Ret%/Day</div><div class="ac-mv green">'+Number(s.ret_rate||0).toFixed(2)+'</div></div>'
+        + '<div class="ac-mini"><div class="ac-ml">Win Rate</div><div class="ac-mv green">'+s.win_rate+'%</div></div>'
+        + '</div>'
+
+        // What to do
+        + '<div style="background:var(--s);border-radius:5px;padding:7px;font-size:10px;margin-bottom:6px">'
+        + '<span style="color:var(--gold);font-weight:600">When: </span>'
+        + '<span style="color:var(--text)">Buy on first trading day of '+MONTH_NAMES[mo]+'</span><br>'
+        + '<span style="color:var(--gold);font-weight:600">Entry: </span>'
+        + '<span style="color:var(--text)">Next day open after 1st-of-month signal</span><br>'
+        + '<span style="color:var(--gold);font-weight:600">Exit: </span>'
+        + '<span style="color:var(--text)">After '+s.hold_days+' trading days (close price)</span><br>'
+        + '<span style="color:var(--gold);font-weight:600">Min target: </span>'
+        + '<span class="green">&#8377;'+Number(s.price*(1+s.min_ret/100)).toFixed(2)+' from current price</span>'
+        + '</div>'
+
+        // Condition match status
+        + '<div style="display:flex;justify-content:space-between;align-items:center">'
+        + '<div style="font-size:9px;color:var(--t3)">Seen in years: '+(s.years||[]).join(', ')+'</div>'
+        + matchBadge
+        + '</div>'
+
+        // Condition bars if context available
+        + (s.ctx_rsi ? '<div class="ctx-box" style="margin-top:6px">'
+          + '<div style="font-size:9px;color:var(--t3);margin-bottom:3px">Current conditions vs historical signal range:</div>'
+          + (s.ctx_rsi?'<div class="ctx-row"><span class="ctx-lbl">RSI</span><span class="ctx-rng">'+s.ctx_rsi.min+'→'+s.ctx_rsi.max+'</span>'
+            +'<span class="mono '+(rsi_st==='in'?'green':rsi_st==='low'?'amber':'red')+'" style="font-size:10px">'+(rsi_st==='in'?'✓ ':rsi_st==='low'?'▼ ':'▲ ')+Number(s.rsi||0).toFixed(0)+' now</span></div>':'')
+          + (s.ctx_vol_r?'<div class="ctx-row"><span class="ctx-lbl">Vol Ratio</span><span class="ctx-rng">'+s.ctx_vol_r.min+'x→'+s.ctx_vol_r.max+'x</span>'
+            +'<span class="mono '+(vol_st==='in'?'green':vol_st==='low'?'amber':'red')+'" style="font-size:10px">'+(vol_st==='in'?'✓ ':vol_st==='low'?'▼ ':'▲ ')+Number(s.vol_r||0).toFixed(1)+'x now</span></div>':'')
+          + '</div>' : '')
+
+        + '</div>';
+    });
+
+    html += '</div></div>';
+  });
+
+  el.innerHTML = html || '<div class="empty">No seasonal stocks found. Run master_stock_analyzer_v3 workflow first.</div>';
+}
+
+function renderTracker(data, q){
+  var tbody = document.getElementById('cal-track-tbody'); if(!tbody) return;
+  var rows = [...data];
+  if(q) rows = rows.filter(function(r){ return r.sym.includes(q); });
+  if(calTrackUC !== 'all') rows = rows.filter(function(r){ return (r.best_uc||'').toUpperCase() === calTrackUC; });
+  rows.sort(function(a,b){
+    var av=a[calTrackSortK]!=null?a[calTrackSortK]:0;
+    var bv=b[calTrackSortK]!=null?b[calTrackSortK]:0;
+    if(typeof av==='string') return calTrackSD==='desc'?bv.localeCompare(av):av.localeCompare(bv);
+    return calTrackSD==='desc'?bv-av:av-bv;
+  });
+  if(!rows.length){
+    tbody.innerHTML='<tr><td colspan="12" class="empty">No stocks with conditions matching signal range today. Check tomorrow or after market open.</td></tr>';
+    return;
+  }
+  rows.sort(function(a,b){if(b.match_score!==a.match_score)return b.match_score-a.match_score;
+    var av=a[calTrackSortK]!=null?a[calTrackSortK]:0,bv=b[calTrackSortK]!=null?b[calTrackSortK]:0;
+    return calTrackSD==='desc'?bv-av:av-bv;});
+  var _ls=-1;
+  tbody.innerHTML = rows.map(function(r){
+    var _h='';
+    if(r.match_score!==_ls){_ls=r.match_score;
+      var _labels=['','\u1f50d 1 of 3 in Signal Range','\u26a0 2 of 3 in Signal Range','\u2705 All 3 in Signal Range'];
+      var _bgs=['rgba(148,163,184,.05)','rgba(148,163,184,.05)','rgba(245,158,11,.1)','rgba(34,197,94,.1)'];
+      var _bcs=['var(--b)','var(--b)','var(--amb)','var(--gr2)'];
+      var _tcs=['var(--t2)','var(--t2)','var(--amber)','var(--green)'];
+      var _l=r.match_score===3?'\u2705 All 3 Conditions in Signal Range (RSI + Volume + Momentum)':r.match_score===2?'\u26a0 2 of 3 Conditions in Signal Range':'\uD83D\uDD0D 1 of 3 in Signal Range';
+      var _bg=_bgs[r.match_score]||_bgs[0], _bc=_bcs[r.match_score]||_bcs[0], _tc=_tcs[r.match_score]||_tcs[0];
+      _h='<tr><td colspan="12" style="padding:7px 12px;background:'+_bg+';border-top:2px solid '+_bc+';font-size:11px;font-weight:700;color:'+_tc+'">'+_l+'</td></tr>';}
+    var scoreColor = r.match_score===3?'green':r.match_score===2?'amber':'muted';
+    var scoreDots = '●'.repeat(r.match_score) + '○'.repeat(3-r.match_score);
+    return _h+'<tr>'
+      + '<td class="mono gold" style="font-weight:600">'+r.sym+'</td>'
+      + '<td>'+ucB(r.best_uc)+'</td>'
+      + '<td><span class="'+scoreColor+'" style="font-size:14px;font-weight:700">'+scoreDots+'</span>'
+        +'<div style="font-size:9px;color:var(--t3)">'+r.match_score+'/3 conditions</div></td>'
+      + '<td class="mono">&#8377;'+fmt(r.price)+'</td>'
+      + '<td>'+gB(r.grade||'B')+'</td>'
+      + '<td class="mono green">+'+Number(r.best_avg_ret||0).toFixed(1)+'%</td>'
+      + '<td class="mono green">+'+Number(r.best_min_ret||0).toFixed(1)+'%</td>'
+      + '<td class="mono muted">'+r.best_hold_days+'d</td>'
+      + rangeCell(r.rsi,   r.ctx_rsi,   '')
+      + rangeCell(r.vol_r, r.ctx_vol_r, 'x')
+      + rangeCell(r.ret5,  r.ctx_ret5,  '%')
+      + '<td style="font-size:10px;color:var(--t2);max-width:200px;white-space:normal">'+(r.best_desc||'').slice(0,60)+'</td>'
+      + '</tr>';
+  }).join('');
+}
+
+
+// UC2 TIMING OPTIMIZER
+// (declared globally)
+
+function uc2tFilter(m,btn){uc2tMF=m;document.querySelectorAll('[id^="uc2t-m"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderUC2Timing();}
+function uc2tSort(k,btn){uc2tSK=k;document.querySelectorAll('[id^="uc2t-s"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderUC2Timing();}
+
+function exitSparkline(curve,peakDay,sweetStart,sweetEnd){
+  if(!curve||!curve.length) return '<div class="muted" style="font-size:10px">No curve data yet</div>';
+  var vals=curve.map(function(p){return p.avg_ret||0;});
+  var minV=Math.min(0,Math.min.apply(null,vals)), maxV=Math.max.apply(null,vals), rng=maxV-minV||1;
+  var W=220,H=50,P=4;
+  var pts=vals.map(function(v,i){return [P+(i/(vals.length-1||1))*(W-2*P), H-P-((v-minV)/rng)*(H-2*P)];});
+  var d=pts.map(function(p,i){return (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' ');
+  var sx1=P+((sweetStart-1)/(vals.length-1||1))*(W-2*P);
+  var sx2=P+((sweetEnd-1)/(vals.length-1||1))*(W-2*P);
+  var pi=Math.min(Math.max(0,peakDay-1),pts.length-1);
+  return '<svg width="'+W+'" height="'+H+'" style="display:block;overflow:visible">'
+    +'<rect x="'+sx1.toFixed(1)+'" y="'+P+'" width="'+(sx2-sx1).toFixed(1)+'" height="'+(H-2*P)+'" fill="rgba(34,197,94,.12)" rx="2"/>'
+    +'<path d="'+d+'" fill="none" stroke="var(--green)" stroke-width="1.5"/>'
+    +'<circle cx="'+pts[pi][0].toFixed(1)+'" cy="'+pts[pi][1].toFixed(1)+'" r="3.5" fill="var(--green)"/>'
+    +'<text x="'+pts[pi][0].toFixed(1)+'" y="'+(pts[pi][1]-6).toFixed(1)+'" text-anchor="middle" font-size="8" fill="var(--green)">peak</text>'
+    +'</svg>';
+}
+
+function renderUC2Timing(){
+  var el=document.getElementById('uc2t-grid'); if(!el) return;
+  var d=D.uc2timing;
+  if(!d){el.innerHTML='<div class="empty">No timing data. Run the <strong>UC2 Timing Optimizer</strong> GitHub Actions workflow, then refresh the page.</div>';return;}
+  var q=(document.getElementById('uc2t-q')?.value||'').toUpperCase().trim();
+  var rows=[];
+  (d.stocks||[]).forEach(function(s){
+    (s.timing||[]).forEach(function(t){
+      if(uc2tMF!==0&&t.month!==uc2tMF) return;
+      if(q&&!s.sym.includes(q)) return;
+      rows.push({sym:s.sym,price:s.price,month:t.month,month_name:t.month_name,
+        season_wr:t.season_win_rate,season_avg:t.season_avg_ret,season_min:t.season_min_ret,
+        season_n:t.season_n_years,season_years:t.season_years||[],
+        best_offset:t.best_entry_offset,entry_rec:t.entry_recommendation,
+        entry_analysis:t.entry_analysis||[],
+        peak_day:t.peak_return_day,peak_ret:t.peak_avg_return_pct,
+        sweet_start:t.sweet_spot_start_day,sweet_end:t.sweet_spot_end_day,
+        sweet_width:(t.sweet_spot_end_day||0)-(t.sweet_spot_start_day||0),
+        decline_after:t.decline_after_day,exit_rec:t.exit_recommendation,
+        exit_curve:t.exit_curve||[]});
+    });
+  });
+  rows.sort(function(a,b){
+    if(uc2tSK==='peak') return (b.peak_ret||0)-(a.peak_ret||0);
+    if(uc2tSK==='sweet') return (b.sweet_width||0)-(a.sweet_width||0);
+    if(uc2tSK==='n') return (b.season_n||0)-(a.season_n||0);
+    return 0;
+  });
+  var pills_el=document.getElementById('uc2t-pills');
+  if(pills_el) pills_el.innerHTML=[
+    ['Opportunities',rows.length,'b'],
+    ['Stocks',new Set(rows.map(function(r){return r.sym;})).size,'g'],
+    ['Peak >30%',rows.filter(function(r){return (r.peak_ret||0)>30;}).length,'g'],
+    ['Enter Before 1st',rows.filter(function(r){return (r.best_offset||0)<0;}).length,'y'],
+    ['Enter After 1st',rows.filter(function(r){return (r.best_offset||0)>0;}).length,'y'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
+  if(!rows.length){el.innerHTML='<div class="empty">No data matches filter.</div>';return;}
+  el.innerHTML=rows.map(function(r){
+    var ob=r.best_offset<0
+      ?'<span style="background:rgba(168,85,247,.15);color:#c084fc;border:1px solid #c084fc;border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">'+Math.abs(r.best_offset)+'d BEFORE 1st</span>'
+      :r.best_offset===0
+      ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">ON 1st of Month</span>'
+      :'<span style="background:var(--ab);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">'+r.best_offset+'d AFTER 1st</span>';
+    var db=r.decline_after?'<span style="background:rgba(239,68,68,.1);color:var(--red);border:1px solid var(--red);border-radius:3px;font-size:9px;padding:1px 5px">Declines after day '+r.decline_after+'</span>':'';
+    var et=r.entry_analysis.length?'<details style="margin:6px 0"><summary style="font-size:10px;color:var(--t3);cursor:pointer;font-weight:600">All entry offsets compared (click to expand)</summary>'
+      +'<table style="width:100%;font-size:10px;border-collapse:collapse;margin-top:4px">'
+      +'<tr style="background:var(--card2)"><th style="padding:3px 6px;text-align:left">Entry Day</th><th>Avg Ret%</th><th>Min Ret%</th><th>Win%</th><th>Years</th></tr>'
+      +r.entry_analysis.sort(function(a,b){return a.offset-b.offset;}).map(function(e){
+        var ib=e.offset===r.best_offset;
+        return '<tr style="'+(ib?'background:rgba(34,197,94,.12);font-weight:700':'')+'"><td style="padding:3px 6px">'+(ib?'* ':'')+e.label+'</td>'
+          +'<td class="mono '+(e.avg_ret>=10?'green':'amber')+'">+'+(e.avg_ret||0).toFixed(1)+'%</td>'
+          +'<td class="mono green">+'+(e.min_ret||0).toFixed(1)+'%</td>'
+          +'<td class="mono '+(e.win_rate>=95?'green':'amber')+'">'+(e.win_rate||0).toFixed(0)+'%</td>'
+          +'<td class="mono muted">'+e.n+'</td></tr>';}).join('')
+      +'</table></details>':'';
+    return '<div class="lt-card" style="margin-bottom:10px">'
+      +'<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">'
+      +'<div><span style="font-size:18px;font-weight:700;color:var(--gold)">'+r.sym+'</span>'
+      +' <span style="background:var(--blb);color:var(--blue);border:1px solid var(--bl2);border-radius:3px;font-size:11px;padding:1px 7px">'+r.month_name+'</span>'
+      +'<div style="font-size:10px;color:var(--t2);margin-top:2px">Rs '+fmt(r.price)+' - '+r.season_n+' years observed - '+r.season_wr+'% win rate</div></div>'
+      +'<div style="text-align:right"><div class="green" style="font-size:22px;font-weight:700">+'+(r.peak_ret||0).toFixed(1)+'%</div>'
+      +'<div style="font-size:9px;color:var(--t3)">peak avg on day '+r.peak_day+' after entry</div></div></div>'
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:5px;margin-bottom:8px">'
+      +'<div class="ac-mini"><div class="ac-ml">Avg Ret (base)</div><div class="ac-mv green">+'+r.season_avg+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Ret (floor)</div><div class="ac-mv green">+'+r.season_min+'%</div></div>'
+      +'<div class="ac-mini" style="background:rgba(168,85,247,.07)"><div class="ac-ml">Best Entry</div><div class="ac-mv">'+ob+'</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Peak Day</div><div class="ac-mv green">Day '+r.peak_day+'</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Sweet Spot</div><div class="ac-mv green">Day '+r.sweet_start+'-'+r.sweet_end+'</div></div>'
+      +'</div>'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">'
+      +'<div style="background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.3);border-radius:6px;padding:8px">'
+      +'<div style="color:#c084fc;font-size:10px;font-weight:600;margin-bottom:4px">WHEN TO ENTER</div>'
+      +'<div style="font-size:11px;color:var(--text);line-height:1.6">'+r.entry_rec+'</div>'
+      +'<div style="margin-top:5px">'+ob+'</div></div>'
+      +'<div style="background:var(--grb);border:1px solid var(--gr2);border-radius:6px;padding:8px">'
+      +'<div style="color:var(--green);font-size:10px;font-weight:600;margin-bottom:4px">WHEN TO EXIT</div>'
+      +'<div style="font-size:11px;color:var(--text);line-height:1.6">'+r.exit_rec+'</div>'
+      +'<div style="margin-top:5px">'+db+'</div></div></div>'
+      +'<div style="background:var(--s);border-radius:6px;padding:8px;margin-bottom:6px">'
+      +'<div style="font-size:10px;color:var(--t3);font-weight:600;margin-bottom:4px">RETURN CURVE: avg return vs day held (green zone=sweet spot, dot=peak)</div>'
+      +exitSparkline(r.exit_curve,r.peak_day,r.sweet_start,r.sweet_end)
+      +'<div style="display:flex;justify-content:space-between;font-size:9px;color:var(--t3);margin-top:2px"><span>Day 1</span><span>Day '+(r.exit_curve[Math.floor(r.exit_curve.length/2)]?.day||'')+'</span><span>Day '+(r.exit_curve[r.exit_curve.length-1]?.day||'')+'</span></div>'
+      +'</div>'
+      +et
+      +'<div style="font-size:9px;color:var(--t3);margin-top:4px">Observed years: '+r.season_years.join(', ')+'</div>'
+      +'</div>';
+  }).join('');
+}
+
+// ══ MONTHLY PICKS — LIVE TRACKER ══════════════════════════════════════════════
+// (declared globally)
+
+function mpFilter(v,btn){mpFilterVal=v;document.querySelectorAll('[id^="mpf-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderMonthlyPicks();}
+function mpSort(v,btn){mpSortVal=v;document.querySelectorAll('[id^="mps-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderMonthlyPicks();}
+
+function renderMonthlyPicks(){
+  var el=document.getElementById('mp-grid'); if(!el) return;
+  var d=D.timingAll;
+  if(!d){el.innerHTML='<div class="empty">No timing data. Run <strong>Seasonal Timing Optimizer</strong> workflow, then refresh.</div>';return;}
+
+  var today=new Date();
+  var curMonth=today.getMonth()+1;  // 1-12
+
+  // Get current prices from master_results
+  var priceMap={};
+  if(D.master) (D.master.stocks||[]).forEach(function(s){priceMap[s.sym]=s.price;});
+
+  var q=(document.getElementById('mp-q')?.value||'').toUpperCase().trim();
+  var thisYear=today.getFullYear();
+  var rows=(d.stocks||[]).filter(function(r){
+    if(r.month!==curMonth) return false;
+    if(q&&!r.sym.includes(q)) return false;
+    if(mpFilterVal!=='all'&&r.uc!==mpFilterVal) return false;
+    // Only show stocks with signal in all last 4 years (excluding current year which may not have fired yet)
+    var yrs=r.season_years||[];
+    var required=[thisYear-3,thisYear-2,thisYear-1];
+    if(!required.every(function(y){return yrs.indexOf(y)>=0;})) return false;
+    return true;
+  }).map(function(r){
+    var _pm=priceMap[r.sym]; var curPrice=(_pm&&_pm.price)?_pm.price:(typeof _pm==='number'?_pm:(r.price||0));
+
+    // CRITICAL FIX: Targets must be calculated from CURRENT price.
+    // Historical avg_entry_price (e.g. Rs 600 from 2022) is irrelevant for today.
+    // The strategy's avg_ret% applies to WHOEVER enters — at today's price.
+    // So: if avg_ret = 20% and today's price = Rs 1808, target = Rs 1808 × 1.20 = Rs 2170
+    var avgRet = r.season_avg_ret || 0;
+    var minRet = r.season_min_ret || 0;
+    var peakRet = r.peak_ret || r.peak_avg_ret || avgRet;
+
+    var avgTgt  = curPrice > 0 ? Math.round(curPrice * (1 + avgRet/100) * 100) / 100 : 0;
+    var minTgt  = curPrice > 0 ? Math.round(curPrice * (1 + minRet/100) * 100) / 100 : 0;
+    var peakTgt = curPrice > 0 ? Math.round(curPrice * (1 + peakRet/100) * 100) / 100 : 0;
+
+    // Remaining upside = the strategy return % (since base IS current price)
+    var remToAvg  = r2pct(avgRet);
+    var remToMin  = r2pct(minRet);
+    var remToPeak = r2pct(peakRet);
+
+    // Historical entry price shown for context only (not used in target calculation)
+    var ep = r.avg_entry_price || curPrice;
+    var curRetFromEntry = null;  // not relevant for live tracking — entry was years ago
+
+    // Day we're on in the month (approximate trading days since month start)
+    // Use daily_profile to find closest day
+    var todayDay=null;
+    if(r.daily_profile&&r.daily_profile.length){
+      // Find which day in the cycle today roughly corresponds to
+      // (this is approximate — the profile shows avg prices on day 0,1,2... after entry)
+      var entryOffset=r.best_entry_offset||0;
+      // Simple: assume best entry was on 1st of month + offset
+      var monthStart=new Date(today.getFullYear(),curMonth-1,1);
+      var diffDays=Math.floor((today-monthStart)/86400000);
+      // Convert to approx trading days (×5/7)
+      var approxTd=Math.round(diffDays*5/7);
+      var entryTd=Math.max(0,approxTd-Math.max(0,entryOffset));
+      todayDay=Math.min(30,Math.max(0,entryTd));
+    }
+
+    return {
+      sym:r.sym, uc:r.uc, price:curPrice, ep:ep,
+      month:r.month, month_name:r.month_name,
+      wr:r.season_win_rate, avg_ret:r.season_avg_ret, min_ret:r.season_min_ret,
+      n:r.season_n_years, years:r.season_years||[],
+      best_offset:r.best_entry_offset||0,
+      entry_rec:r.entry_recommendation||'',
+      peak_day:r.peak_day, peak_ret:r.peak_avg_return_pct||r.peak_avg_ret,
+      sweet_start:r.sweet_spot_start_day||r.sweet_start,
+      sweet_end:r.sweet_spot_end_day||r.sweet_end,
+      decline_after:r.decline_after_day||r.decline_after,
+      peak_tgt:peakTgt,
+      rem_to_peak:remToPeak,
+      exit_rec:r.exit_recommendation||'',
+      avg_tgt:avgTgt, min_tgt:minTgt,
+      rem_to_avg:remToAvg, rem_to_min:remToMin,
+      cur_ret:curRetFromEntry,
+      today_day:todayDay,
+      profile:r.daily_profile||[],
+      curve:r.exit_curve||[],
+    };
+  });
+
+  // Sort
+  rows.sort(function(a,b){
+    if(mpSortVal==='peak')      return (b.peak_ret||0)-(a.peak_ret||0);
+    if(mpSortVal==='remaining') return (b.rem_to_avg||0)-(a.rem_to_avg||0);
+    if(mpSortVal==='min')       return (b.min_ret||0)-(a.min_ret||0);
+    return 0;
+  });
+
+  // Pills
+  document.getElementById('mp-pills').innerHTML=[
+    ['Verified 4-Year Stocks ('+['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][curMonth]+')',rows.length,'g','signal in all last 4 years'],
+    ['UC2 Seasonal',rows.filter(function(r){return r.uc==='UC2';}).length,'b'],
+    ['UC1 Surge',rows.filter(function(r){return r.uc==='UC1';}).length,'b'],
+    ['Peak >25%',rows.filter(function(r){return (r.peak_ret||0)>25;}).length,'g'],
+    ['Rem Upside >10%',rows.filter(function(r){return (r.rem_to_avg||0)>10;}).length,'y','from today\u2019s price to avg target'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';}).join('');
+
+  if(!rows.length){
+    el.innerHTML='<div class="empty">No stocks found for this month. Run the Seasonal Timing Optimizer workflow first, then check that data exists for '+['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][curMonth]+'.</div>';
+    return;
+  }
+
+  el.innerHTML=rows.map(function(r){
+    var offsetBadge=r.best_offset<0
+      ?'<span style="background:rgba(168,85,247,.15);color:#c084fc;border:1px solid #c084fc;border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">'+Math.abs(r.best_offset)+'d BEFORE 1st</span>'
+      :r.best_offset===0
+      ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">ON 1st of Month</span>'
+      :'<span style="background:var(--ab);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">'+r.best_offset+'d AFTER 1st</span>';
+
+    var ucBadge=r.uc==='UC2'
+      ?'<span style="background:rgba(245,158,11,.15);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">UC2 Seasonal</span>'
+      :'<span style="background:rgba(99,102,241,.15);color:#818cf8;border:1px solid #818cf8;border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">UC1 Surge</span>';
+
+    // Live tracking section
+    var remAvgColor=(r.avg_ret||0)>10?'green':(r.avg_ret||0)>0?'amber':'red';
+    var remMinColor=(r.min_ret||0)>0?'green':'red';
+    var curRetColor='green'; // entry today always starts at 0%
+
+    var liveSection='<div style="background:var(--s);border-radius:6px;padding:10px;margin-bottom:8px;border:1px solid var(--b)">'
+      +'<div style="font-size:10px;font-weight:600;color:var(--t3);margin-bottom:6px">LIVE TRACKING &mdash; enter at today\'s price (Rs '+fmt(r.price)+') and target:</div>'
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px">'
+      +'<div class="ac-mini"><div class="ac-ml">Entry Price (today)</div><div class="ac-mv">Rs '+fmt(r.price)+'</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Avg Return Expected</div><div class="ac-mv green">+'+Number(r.avg_ret||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Avg Exit Target</div><div class="ac-mv green">Rs '+fmt(r.avg_tgt)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Return (floor)</div><div class="ac-mv amber">+'+Number(r.min_ret||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Exit Target</div><div class="ac-mv amber">Rs '+fmt(r.min_tgt)+'</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Peak Return (best case)</div><div class="ac-mv green">+'+Number(r.rem_to_peak||r.peak_ret||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Peak Exit Target</div><div class="ac-mv green">Rs '+fmt(r.peak_tgt)+'</div></div>'
+      +'<div class="ac-mini" style="background:rgba(34,197,94,.06)">'
+      +'<div class="ac-ml">Exit on Day</div>'
+      +'<div class="ac-mv green">Day '+(r.peak_day||r.sweet_start||'?')+' after entry</div>'
+      +'</div>'
+      +'</div>'
+
+      // Info: expected return from today
+      +'<div style="background:rgba(34,197,94,.08);border:1px solid var(--gr2);border-radius:5px;padding:6px 8px;margin-top:6px;font-size:11px">'
+      +'<span class="green" style="font-weight:600">From today\'s price of Rs '+fmt(r.price)+': </span>'
+      +'Avg target = Rs '+fmt(r.avg_tgt)+' (+'+Number(r.avg_ret||0).toFixed(1)+'%). '
+      +'Min target = Rs '+fmt(r.min_tgt)+' (+'+Number(r.min_ret||0).toFixed(1)+'%). '
+      +'Peak target = Rs '+fmt(r.peak_tgt)+' (+'+Number(r.rem_to_peak||r.peak_ret||0).toFixed(1)+'%). '
+      +'Exit around day '+r.peak_day+' after entry for best results.'
+      +'</div>'
+      +'</div>';
+
+    return '<div class="lt-card" style="margin-bottom:10px">'
+      // Header
+      +'<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">'
+      +'<div>'
+      +'<span style="font-size:18px;font-weight:700;color:var(--gold)">'+r.sym+'</span> '
+      +ucBadge+' '
+      +'<span style="background:var(--blb);color:var(--blue);border:1px solid var(--bl2);border-radius:3px;font-size:11px;padding:1px 7px">'+r.month_name+'</span>'
+      +(function(){
+  var thisYr=new Date().getFullYear();
+  var yrs=r.years||[];
+  var req=[thisYr-3,thisYr-2,thisYr-1];
+  var badges=yrs.map(function(y){
+    var isReq=req.indexOf(y)>=0||y===thisYr;
+    return '<span style="font-size:9px;font-weight:600;padding:1px 5px;border-radius:3px;margin-right:3px;'
+      +(isReq?'background:var(--grb);color:var(--green);border:1px solid var(--gr2)':'background:var(--s);color:var(--t3);border:1px solid var(--b)')
+      +'">'+y+'</span>';
+  }).join('');
+  return '<div style="font-size:10px;color:var(--t2);margin-top:4px">'+r.n+' years &middot; '+r.wr+'% win rate &middot; '+badges+'</div>';
+})()
+      +'</div>'
+      +'<div style="text-align:right">'
+      +'<div class="green" style="font-size:22px;font-weight:700">+'+(r.peak_ret||0).toFixed(1)+'%</div>'
+      +'<div style="font-size:9px;color:var(--t3)">peak avg on day '+(r.peak_day||'?')+' after entry</div>'
+      +'</div>'
+      +'</div>'
+
+      // Entry / Exit summary
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">'
+      +'<div style="background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.3);border-radius:6px;padding:8px">'
+      +'<div style="color:#c084fc;font-size:10px;font-weight:600;margin-bottom:4px">WHEN TO ENTER</div>'
+      +'<div style="font-size:11px;color:var(--text);line-height:1.5">'+r.entry_rec+'</div>'
+      +'<div style="margin-top:5px">'+offsetBadge+'</div>'
+      +'</div>'
+      +'<div style="background:var(--grb);border:1px solid var(--gr2);border-radius:6px;padding:8px">'
+      +'<div style="color:var(--green);font-size:10px;font-weight:600;margin-bottom:4px">WHEN TO EXIT</div>'
+      +'<div style="font-size:11px;color:var(--text);line-height:1.5">'+r.exit_rec+'</div>'
+      +(r.decline_after?'<div style="font-size:9px;color:var(--red);margin-top:4px">Returns decline after day '+r.decline_after+'</div>':'')
+      +'</div>'
+      +'</div>'
+
+      // Key stats
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:5px;margin-bottom:8px">'
+      +'<div class="ac-mini"><div class="ac-ml">Avg Return</div><div class="ac-mv green">+'+r.avg_ret+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Return (floor)</div><div class="ac-mv green">+'+r.min_ret+'%</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Peak on Day</div><div class="ac-mv green">Day '+(r.peak_day||'?')+'</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Sweet Spot</div><div class="ac-mv green">Day '+(r.sweet_start||'?')+'\u2013'+(r.sweet_end||'?')+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Avg Target Rs</div><div class="ac-mv green">Rs '+fmt(r.avg_tgt)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Target Rs</div><div class="ac-mv amber">Rs '+fmt(r.min_tgt)+'</div></div>'
+      +'</div>'
+
+      // Live tracking
+      +liveSection
+      +'</div>';
+  }).join('');
+}
+
+function r2pct(x){ return Math.round(x*100)/100; }
+
+
+// ══ SHORT HOLD ANALYZER ═══════════════════════════════════════════════════════
+// (declared globally)
+
+function shHold(v,btn){shHoldFilter=v;document.querySelectorAll('[id^="shh-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderShortHold();}
+function shSort(k,btn){
+  if(shSortKey===k) shSortDir=shSortDir==='desc'?'asc':'desc';
+  else{shSortKey=k;shSortDir='desc';}
+  document.querySelectorAll('[id^="shs-"]').forEach(function(b){b.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  renderShortHold();
+}
+function shTh(k){shSort(k,null);}
+
+function shToggle(id){
+  var r=document.getElementById('sh-det-'+id);
+  if(!r) return;
+  var arrow=document.getElementById('sh-arr-'+id);
+  if(r.style.display==='none'){r.style.display='';if(arrow)arrow.textContent='\u25BC';}
+  else{r.style.display='none';if(arrow)arrow.textContent='\u25B6';}
+}
+
+function renderShortHold(){
+  var tbody=document.getElementById('sh-tbody'); if(!tbody) return;
+  var d=D.shorthold;
+  if(!d){
+    tbody.innerHTML='<tr><td colspan="13" class="empty">No data. Run <strong>Short Hold Analyzer</strong> workflow, then refresh.</td></tr>';
+    return;
+  }
+
+  var q=(document.getElementById('sh-q')?.value||'').toUpperCase().trim();
+  var rows=[...(d.stocks||[])];
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  if(shHoldFilter!==0) rows=rows.filter(function(r){return r.hold_days===shHoldFilter;});
+
+  // Pills
+  var req=d.required_years||[];
+  document.getElementById('sh-pills').innerHTML=[
+    ['Patterns (stock × week slot)',d.n_patterns||rows.length,'g','100% win rate, all required years'],
+    ['Unique stocks',d.n_stocks||0,'g'],
+    ['Alerts Today',d.n_alerts_today||0,'g','signal fires this week historically'],
+    ['Alerts Tomorrow',d.n_alerts_tomorrow||0,'y'],
+    ['Required years',req.join(', '),'b'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';}).join('');
+
+  if(shCurrentView!=='list'){return;}
+
+  // Sort rows
+  rows.sort(function(a,b){
+    var aAlert=a.alert_today?2:a.alert_tomorrow?1:0;
+    var bAlert=b.alert_today?2:b.alert_tomorrow?1:0;
+    if(shSortKey==='week_label'){
+      // Group by month then week for calendar sort
+      var aKey=(a.month*10+a.week)*1000+(b.avg_max_ret||0);
+      var bKey=(b.month*10+b.week)*1000+(a.avg_max_ret||0);
+      return shSortDir==='asc'?aKey-bKey:bKey-aKey;
+    }
+    if(bAlert!==aAlert) return bAlert-aAlert;
+    var av=a[shSortKey]!=null?a[shSortKey]:0;
+    var bv=b[shSortKey]!=null?b[shSortKey]:0;
+    return shSortDir==='desc'?bv-av:av-bv;
+  });
+
+  if(!rows.length){
+    tbody.innerHTML='<tr><td colspan="13" class="empty">No patterns match filter.</td></tr>';
+    return;
+  }
+
+  var html='';
+
+  // If sorted by week_label — group by month + week with section headers
+  if(shSortKey==='week_label'){
+    var lastSlot='';
+    rows.forEach(function(r,idx){
+      var slot=r.week_label;
+      if(slot!==lastSlot){
+        lastSlot=slot;
+        var isAlert=rows.filter(function(x){return x.week_label===slot&&(x.alert_today||x.alert_tomorrow);}).length>0;
+        var headerBg=r.alert_today?'rgba(34,197,94,.12)':r.alert_tomorrow?'rgba(245,158,11,.12)':'rgba(255,255,255,.04)';
+        var headerColor=r.alert_today?'var(--green)':r.alert_tomorrow?'var(--amber)':'var(--t3)';
+        var alertTag=r.alert_today?' \u2705 SIGNALS THIS WEEK':r.alert_tomorrow?' \u23f0 SIGNALS NEXT WEEK':'';
+        html+='<tr><td colspan="13" style="padding:6px 12px;background:'+headerBg+';border-top:2px solid '+headerColor+';font-size:11px;font-weight:700;color:'+headerColor+'">'+slot+alertTag+'</td></tr>';
+      }
+      html+=buildSHRow(r,idx,d);
+    });
+  } else {
+    rows.forEach(function(r,idx){ html+=buildSHRow(r,idx,d); });
+  }
+  tbody.innerHTML=html;
+}
+
+function buildSHRow(r,idx,d){
+  var rid='shrow'+idx;
+  var reqSet=new Set((r.required_years||d.required_years||[]));
+  var yrBadges=(r.years||[]).map(function(y){
+    var isReq=reqSet.has(y);
+    return '<span style="font-size:9px;padding:1px 4px;border-radius:2px;margin-right:2px;'
+      +(isReq?'background:var(--grb);color:var(--green);border:1px solid var(--gr2)':'background:var(--s);color:var(--t3);border:1px solid var(--b)')
+      +'">'+y+'</span>';
+  }).join('');
+
+  var alertBadge=r.alert_today
+    ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 4px">\u2705 THIS WEEK</span> '
+    :r.alert_tomorrow
+    ?'<span style="background:var(--ab);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:9px;font-weight:700;padding:1px 4px">\u23f0 NEXT WEEK</span> '
+    :'';
+
+  var occRows=(r.occurrences||[]).map(function(o){
+    var rc=(o.max_ret||0)>=20?'green':(o.max_ret||0)>=10?'amber':'red';
+    var ec=(o.ret_on_exit||0)>=10?'green':(o.ret_on_exit||0)>=0?'amber':'red';
+    return '<tr style="font-size:11px">'
+      +'<td class="mono muted">'+o.year+'</td>'
+      +'<td class="mono muted">Wk '+(o.week||'?')+'</td>'
+      +'<td class="mono">'+o.sig_date+'</td>'
+      +'<td class="mono">'+o.entry_date+'</td>'
+      +'<td class="mono">'+o.exit_date+'</td>'
+      +'<td class="mono">&#8377;'+o.entry_px+'</td>'
+      +'<td class="mono">&#8377;'+(o.exit_px||'—')+'</td>'
+      +'<td class="mono '+rc+'">+'+Number(o.max_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono '+ec+'">'+(o.ret_on_exit!=null?(o.ret_on_exit>0?'+':'')+Number(o.ret_on_exit).toFixed(1)+'%':'—')+'</td>'
+      +'<td class="mono green">+'+Number(o.max_gain||0).toFixed(1)+'%</td>'
+      +'<td class="mono muted">'+(o.days_to_10||'—')+'d</td>'
+      +'</tr>';
+  }).join('');
+
+  var detailHtml='<tr id="sh-det-'+rid+'" style="display:none"><td colspan="13" style="padding:0">'
+    +'<div style="padding:10px;background:rgba(0,0,0,.2)">'
+    +(r.alert_today||r.alert_tomorrow?'<div style="background:rgba(34,197,94,.1);border:1px solid var(--gr2);border-radius:5px;padding:6px 10px;margin-bottom:8px;font-size:11px"><strong class="green">Buy tomorrow at open.</strong> This stock has historically risen 10%+ every time in '+r.week_label+'. Hold '+r.hold_days+' trading days. Min target: Rs '+Math.round(r.price*(1+r.min_max_ret/100))+'. Avg target: Rs '+Math.round(r.price*(1+r.avg_max_ret/100))+'.</div>':'')
+    +'<div style="font-size:10px;font-weight:600;color:var(--t3);margin-bottom:6px">ALL HISTORICAL OCCURRENCES IN '+r.week_label.toUpperCase()+' ('+r.n_occurrences+' signals, 100% gave \u226510%)</div>'
+    +'<div style="font-size:9px;color:var(--t3);margin-bottom:4px">Required years: '+(r.required_years||[]).join(', ')+' — all present \u2713</div>'
+    +'<table style="width:100%;font-size:10px;border-collapse:collapse">'
+    +'<tr style="background:var(--card2)"><th style="padding:4px 6px">Year</th><th>Week</th><th>Signal Date</th><th>Entry Date</th><th>Exit Date</th><th>Entry Rs</th><th>Exit Rs</th><th>Max Ret%</th><th>Exit Ret%</th><th>Max Gain%</th><th>Days to 10%</th></tr>'
+    +occRows
+    +'</table></div></td></tr>';
+
+  return '<tr class="uc-row" style="cursor:pointer;'+(r.alert_today?'background:rgba(34,197,94,.04)':r.alert_tomorrow?'background:rgba(245,158,11,.03)':'')+'" onclick="shToggle(\''+rid+'\')">'
+    +'<td><span id="sh-arr-'+rid+'" style="font-size:10px;color:var(--t3)">&#x25B6;</span></td>'
+    +'<td class="mono gold" style="font-weight:700">'+alertBadge+r.sym+'</td>'
+    +'<td class="mono">&#8377;'+fmt(r.price)+'</td>'
+    +'<td style="font-size:10px;color:var(--t2)">'+r.week_label+'</td>'
+    +'<td class="mono muted">'+r.hold_days+'td</td>'
+    +'<td class="mono green" style="font-weight:700;background:rgba(34,197,94,.06)">+'+Number(r.avg_max_ret||0).toFixed(1)+'%</td>'
+    +'<td class="mono green">+'+Number(r.min_max_ret||0).toFixed(1)+'%</td>'
+    +'<td class="mono '+(r.avg_exit_ret!=null&&r.avg_exit_ret>=10?'green':'amber')+'">'+(r.avg_exit_ret!=null?(r.avg_exit_ret>0?'+':'')+Number(r.avg_exit_ret).toFixed(1)+'%':'—')+'</td>'
+    +'<td class="mono green" style="font-weight:700">'+Number(r.ret_rate||0).toFixed(2)+'</td>'
+    +'<td class="mono muted">'+(r.avg_days_to_10!=null?Number(r.avg_days_to_10).toFixed(1)+'d':'—')+'</td>'
+    +'<td class="mono muted">'+r.n_occurrences+'</td>'
+    +'<td class="mono muted">'+r.n_years+'</td>'
+    +'<td>'+yrBadges+'</td>'
+    +'</tr>'
+    +detailHtml;
+}
+
+
+function renderSHAlerts(){
+  var el=document.getElementById('sh-alerts-view'); if(!el) return;
+  var d=D.shorthold;
+  if(!d){el.innerHTML='<div class="empty">No data.</div>';return;}
+  var today=d.alerts_today||[];
+  var tomorrow=d.alerts_tomorrow||[];
+  var window_=d.alerts_window||[];
+  var todayStr=d.today_date||'';
+  var html='';
+
+  // TODAY alerts
+  html+='<div style="margin-bottom:16px">'
+    +'<div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:8px">'
+    +'✅ BUY TOMORROW — Signal fires TODAY historically ('+(today.length)+' stocks)</div>';
+  if(!today.length){
+    html+='<div class="empty" style="padding:12px">No alerts for today\'s date. Check tomorrow\'s alerts below.</div>';
+  } else {
+    html+='<div class="twrap"><table class="tbl"><thead><tr>'
+      +'<th>Stock</th><th>Avg Return%</th><th>Min Return%</th><th>Hold</th><th>Occurrences</th><th>Years</th>'
+      +'</tr></thead><tbody>';
+    today.sort(function(a,b){return (b.avg_max_ret||0)-(a.avg_max_ret||0);});
+    html+=today.map(function(r){
+      return '<tr><td class="mono gold" style="font-weight:700">'+r.sym+'</td>'
+        +'<td class="mono green" style="font-weight:700">+'+Number(r.avg_max_ret||0).toFixed(1)+'%</td>'
+        +'<td class="mono green">+'+Number(r.min_max_ret||0).toFixed(1)+'%</td>'
+        +'<td class="mono muted">'+r.hold_days+'td</td>'
+        +'<td class="mono muted">'+r.n_occurrences+'</td>'
+        +'<td style="font-size:10px;color:var(--t3)">'+(r.years||[]).join(', ')+'</td>'
+        +'</tr>';
+    }).join('');
+    html+='</tbody></table></div>';
+  }
+  html+='</div>';
+
+  // TOMORROW alerts
+  html+='<div style="margin-bottom:16px">'
+    +'<div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:8px">'
+    +'⏰ WATCH TODAY — Signal fires TOMORROW historically ('+(tomorrow.length)+' stocks)</div>';
+  if(!tomorrow.length){
+    html+='<div class="empty" style="padding:12px">No alerts for tomorrow\'s date.</div>';
+  } else {
+    html+='<div class="twrap"><table class="tbl"><thead><tr>'
+      +'<th>Stock</th><th>Avg Return%</th><th>Min Return%</th><th>Hold</th><th>Occurrences</th><th>Years</th>'
+      +'</tr></thead><tbody>';
+    tomorrow.sort(function(a,b){return (b.avg_max_ret||0)-(a.avg_max_ret||0);});
+    html+=tomorrow.map(function(r){
+      return '<tr><td class="mono gold" style="font-weight:700">'+r.sym+'</td>'
+        +'<td class="mono amber" style="font-weight:700">+'+Number(r.avg_max_ret||0).toFixed(1)+'%</td>'
+        +'<td class="mono amber">+'+Number(r.min_max_ret||0).toFixed(1)+'%</td>'
+        +'<td class="mono muted">'+r.hold_days+'td</td>'
+        +'<td class="mono muted">'+r.n_occurrences+'</td>'
+        +'<td style="font-size:10px;color:var(--t3)">'+(r.years||[]).join(', ')+'</td>'
+        +'</tr>';
+    }).join('');
+    html+='</tbody></table></div>';
+  }
+  html+='</div>';
+  html+='<div style="font-size:10px;color:var(--t3);margin-top:4px">Data as of: '+todayStr+' &middot; All stocks gave ≥10% in 100% of occurrences &middot; Sorted by avg return descending</div>';
+  el.innerHTML=html;
+}
+
+var _MON_FULL=['','January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function renderSHCalendar(){
+  var el=document.getElementById('sh-cal-view'); if(!el) return;
+  var d=D.shorthold;
+  if(!d||!d.year_calendar){el.innerHTML='<div class="empty">No calendar data. Rerun workflow.</div>';return;}
+  var cal=d.year_calendar;
+  var months=Object.keys(cal).sort();
+  if(!months.length){el.innerHTML='<div class="empty">No calendar data found.</div>';return;}
+  var today=new Date();
+  var curMo=(today.getMonth()+1).toString().padStart(2,'0');
+  var html='<div style="font-size:11px;color:var(--t3);margin-bottom:12px">Yearly plan: all months where short-hold signals have historically fired. Sorted by avg return within each month. Green = current/upcoming months.</div>';
+  months.forEach(function(mo){
+    var stocks=cal[mo]||[];
+    if(!stocks.length) return;
+    var moNum=parseInt(mo);
+    var isCur=mo===curMo;
+    var isUpcoming=moNum>parseInt(curMo)&&moNum<=parseInt(curMo)+2;
+    var borderCol=isCur?'var(--green)':isUpcoming?'var(--amber)':'var(--b)';
+    var hdrBg=isCur?'var(--grb)':isUpcoming?'var(--ab)':'var(--s)';
+    var hdrColor=isCur?'var(--green)':isUpcoming?'var(--amber)':'var(--t2)';
+    html+='<div style="margin-bottom:14px;border:1px solid '+borderCol+';border-radius:8px;overflow:hidden">'
+      +'<div style="background:'+hdrBg+';padding:8px 12px;display:flex;justify-content:space-between;align-items:center">'
+      +'<span style="font-weight:700;color:'+hdrColor+';font-size:14px">'+_MON_FULL[moNum]+'</span>'
+      +'<span style="font-size:11px;color:'+hdrColor+'">'+stocks.length+' signals'+(isCur?' — Current Month':isUpcoming?' — Upcoming':'')+'</span>'
+      +'</div>'
+      +'<div class="twrap"><table class="tbl"><thead><tr>'
+      +'<th>Stock</th><th>Avg MM-DD</th><th>Avg Return%</th><th>Min Return%</th><th>Hold</th><th>Occurrences</th>'
+      +'</tr></thead><tbody>'
+      +stocks.map(function(s){
+        return '<tr><td class="mono gold" style="font-weight:700">'+s.sym+'</td>'
+          +'<td class="mono muted">'+s.mmdd+'</td>'
+          +'<td class="mono green" style="font-weight:700">+'+Number(s.avg_max_ret||0).toFixed(1)+'%</td>'
+          +'<td class="mono green">+'+Number(s.min_max_ret||0).toFixed(1)+'%</td>'
+          +'<td class="mono muted">'+s.hold_days+'td</td>'
+          +'<td class="mono muted">'+s.n_occ+'</td>'
+          +'</tr>';
+      }).join('')
+      +'</tbody></table></div></div>';
+  });
+  el.innerHTML=html;
+}
+
+loadData();
+</script>
+</body>
+</html>
