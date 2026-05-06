@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-06T01:28:58+05:30",
-  "latest_date": "2026-05-05",
-  "n_patterns": 350,
+  "generated_at": "2026-05-06T21:45:12+05:30",
+  "latest_date": "2026-05-06",
+  "n_patterns": 352,
   "description": "100% next-day positive. Ranked by minimum return (highest first).",
   "patterns": [
     {
@@ -1534,11 +1534,11 @@
         "max": 13.71
       },
       "win_20d": {
-        "n": 6,
-        "wr": 50.0,
-        "avg": 7.39,
+        "n": 7,
+        "wr": 57.1,
+        "avg": 12.15,
         "min": -4.27,
-        "max": 26.02
+        "max": 40.68
       },
       "years": [
         2020,
@@ -3200,7 +3200,13 @@
       "nd_max": 9.99,
       "gap_up_rate": 100.0,
       "avg_gap_pct": 1.88,
-      "win_5d": null,
+      "win_5d": {
+        "n": 6,
+        "wr": 83.3,
+        "avg": 5.18,
+        "min": -2.22,
+        "max": 10.29
+      },
       "win_10d": null,
       "win_20d": null,
       "years": [
@@ -4138,9 +4144,9 @@
         "max": 28.11
       },
       "win_20d": {
-        "n": 6,
-        "wr": 83.3,
-        "avg": 10.99,
+        "n": 7,
+        "wr": 85.7,
+        "avg": 14.18,
         "min": -9.15,
         "max": 46.58
       },
@@ -4896,6 +4902,29 @@
       "last_date": "2025-12-19"
     },
     {
+      "sym": "DELHIVERY",
+      "candle_key": "R_small_Llong_Utiny",
+      "desc": "Red small body | lower:long | upper:tiny",
+      "occurrences": 6,
+      "nd_wr": 100.0,
+      "nd_avg": 2.29,
+      "nd_min": 0.38,
+      "nd_max": 4.68,
+      "gap_up_rate": 33.3,
+      "avg_gap_pct": -1.52,
+      "win_5d": null,
+      "win_10d": null,
+      "win_20d": null,
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "last_date": "2026-05-05"
+    },
+    {
       "sym": "LTIM",
       "candle_key": "G_small_Lnone_Usmall",
       "desc": "Green small body | lower:none | upper:small",
@@ -5190,7 +5219,13 @@
         "min": -0.39,
         "max": 9.38
       },
-      "win_10d": null,
+      "win_10d": {
+        "n": 6,
+        "wr": 100.0,
+        "avg": 8.03,
+        "min": 1.71,
+        "max": 12.86
+      },
       "win_20d": null,
       "years": [
         2022,
@@ -6173,47 +6208,6 @@
       "last_date": "2025-01-22"
     },
     {
-      "sym": "RALLIS",
-      "candle_key": "G_tiny_Lsmall_Usmall",
-      "desc": "Green tiny body | lower:small | upper:small",
-      "occurrences": 6,
-      "nd_wr": 100.0,
-      "nd_avg": 1.13,
-      "nd_min": 0.24,
-      "nd_max": 1.92,
-      "gap_up_rate": 50.0,
-      "avg_gap_pct": 0.11,
-      "win_5d": {
-        "n": 6,
-        "wr": 66.7,
-        "avg": 0.38,
-        "min": -2.04,
-        "max": 2.83
-      },
-      "win_10d": {
-        "n": 6,
-        "wr": 33.3,
-        "avg": -0.23,
-        "min": -6.56,
-        "max": 6.15
-      },
-      "win_20d": {
-        "n": 6,
-        "wr": 33.3,
-        "avg": -2.91,
-        "min": -10.5,
-        "max": 5.25
-      },
-      "years": [
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "last_date": "2025-12-12"
-    },
-    {
       "sym": "TNPETRO",
       "candle_key": "G_small_Lmedium_Utiny",
       "desc": "Green small body | lower:medium | upper:tiny",
@@ -6765,6 +6759,27 @@
       "last_date": "2025-08-29"
     },
     {
+      "sym": "AWHCL",
+      "candle_key": "R_tiny_Llong_Usmall",
+      "desc": "Red tiny body | lower:long | upper:small",
+      "occurrences": 6,
+      "nd_wr": 100.0,
+      "nd_avg": 1.54,
+      "nd_min": 0.21,
+      "nd_max": 3.53,
+      "gap_up_rate": 66.7,
+      "avg_gap_pct": 0.48,
+      "win_5d": null,
+      "win_10d": null,
+      "win_20d": null,
+      "years": [
+        2021,
+        2025,
+        2026
+      ],
+      "last_date": "2026-05-05"
+    },
+    {
       "sym": "FCL",
       "candle_key": "R_small_Lmedium_Utiny",
       "desc": "Red small body | lower:medium | upper:tiny",
@@ -6989,7 +7004,13 @@
         "min": -6.41,
         "max": 14.45
       },
-      "win_20d": null,
+      "win_20d": {
+        "n": 6,
+        "wr": 33.3,
+        "avg": -0.76,
+        "min": -14.94,
+        "max": 18.4
+      },
       "years": [
         2024,
         2025,
@@ -7403,7 +7424,13 @@
         "min": 1.01,
         "max": 6.78
       },
-      "win_20d": null,
+      "win_20d": {
+        "n": 6,
+        "wr": 83.3,
+        "avg": 2.99,
+        "min": -6.82,
+        "max": 6.92
+      },
       "years": [
         2024,
         2025,
@@ -10507,6 +10534,26 @@
       "last_date": "2026-04-09"
     },
     {
+      "sym": "SANSTAR",
+      "candle_key": "G_small_Lnone_Utiny",
+      "desc": "Green small body | lower:none | upper:tiny",
+      "occurrences": 6,
+      "nd_wr": 100.0,
+      "nd_avg": 1.79,
+      "nd_min": 0.03,
+      "nd_max": 4.2,
+      "gap_up_rate": 66.7,
+      "avg_gap_pct": 0.14,
+      "win_5d": null,
+      "win_10d": null,
+      "win_20d": null,
+      "years": [
+        2025,
+        2026
+      ],
+      "last_date": "2026-05-05"
+    },
+    {
       "sym": "SIKKO",
       "candle_key": "G_medium_Lsmall_Utiny",
       "desc": "Green medium body | lower:small | upper:tiny",
@@ -11167,12 +11214,12 @@
       "sym": "GROWWLIQID",
       "candle_key": "R_doji_Lnone_Unone",
       "desc": "Red doji body | lower:none | upper:none",
-      "occurrences": 83,
+      "occurrences": 84,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.01,
       "nd_max": 0.09,
-      "gap_up_rate": 72.3,
+      "gap_up_rate": 72.6,
       "avg_gap_pct": -0.04,
       "win_5d": {
         "n": 82,
@@ -11200,7 +11247,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-05-04"
+      "last_date": "2026-05-05"
     },
     {
       "sym": "LIQUID1",
@@ -11283,12 +11330,12 @@
       "sym": "LIQUID1",
       "candle_key": "R_doji_Lmedium_Unone",
       "desc": "Red doji body | lower:medium | upper:none",
-      "occurrences": 29,
+      "occurrences": 30,
       "nd_wr": 100.0,
-      "nd_avg": 0.03,
+      "nd_avg": 0.02,
       "nd_min": 0.01,
       "nd_max": 0.07,
-      "gap_up_rate": 72.4,
+      "gap_up_rate": 70.0,
       "avg_gap_pct": 0.02,
       "win_5d": {
         "n": 28,
@@ -11316,7 +11363,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-05-04"
+      "last_date": "2026-05-05"
     },
     {
       "sym": "LIQUID1",
@@ -11446,7 +11493,7 @@
       "gap_up_rate": 87.0,
       "avg_gap_pct": 0.07,
       "win_5d": {
-        "n": 45,
+        "n": 46,
         "wr": 100.0,
         "avg": 0.11,
         "min": 0.08,
@@ -11492,7 +11539,7 @@
         "max": 0.17
       },
       "win_10d": {
-        "n": 13,
+        "n": 14,
         "wr": 100.0,
         "avg": 0.22,
         "min": 0.17,
@@ -11516,13 +11563,13 @@
       "sym": "LIQUIDADD",
       "candle_key": "R_doji_Lmedium_Umedium",
       "desc": "Red doji body | lower:medium | upper:medium",
-      "occurrences": 7,
+      "occurrences": 8,
       "nd_wr": 100.0,
       "nd_avg": 0.03,
       "nd_min": 0.01,
       "nd_max": 0.06,
       "gap_up_rate": 100.0,
-      "avg_gap_pct": 0.53,
+      "avg_gap_pct": 0.46,
       "win_5d": {
         "n": 7,
         "wr": 100.0,
@@ -11546,9 +11593,10 @@
       },
       "years": [
         2024,
-        2025
+        2025,
+        2026
       ],
-      "last_date": "2025-11-03"
+      "last_date": "2026-05-05"
     },
     {
       "sym": "LIQUIDADD",
@@ -11716,14 +11764,14 @@
       "gap_up_rate": 93.5,
       "avg_gap_pct": 0.01,
       "win_5d": {
-        "n": 45,
+        "n": 46,
         "wr": 100.0,
         "avg": 0.11,
         "min": 0.08,
         "max": 0.19
       },
       "win_10d": {
-        "n": 44,
+        "n": 45,
         "wr": 100.0,
         "avg": 0.21,
         "min": 0.16,
@@ -12184,14 +12232,14 @@
       "gap_up_rate": 74.4,
       "avg_gap_pct": 0.0,
       "win_5d": {
-        "n": 80,
+        "n": 81,
         "wr": 100.0,
         "avg": 0.1,
         "min": 0.06,
         "max": 0.17
       },
       "win_10d": {
-        "n": 76,
+        "n": 77,
         "wr": 100.0,
         "avg": 0.2,
         "min": 0.14,
@@ -12686,12 +12734,12 @@
       "sym": "LIQUID",
       "candle_key": "R_doji_Lnone_Unone",
       "desc": "Red doji body | lower:none | upper:none",
-      "occurrences": 178,
+      "occurrences": 179,
       "nd_wr": 100.0,
       "nd_avg": 0.0,
       "nd_min": 0.0,
       "nd_max": 0.0,
-      "gap_up_rate": 34.3,
+      "gap_up_rate": 34.1,
       "avg_gap_pct": -0.0,
       "win_5d": {
         "n": 178,
@@ -12720,7 +12768,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-04-23"
+      "last_date": "2026-05-05"
     },
     {
       "sym": "LIQUID1",
@@ -12865,7 +12913,7 @@
         "max": 0.31
       },
       "win_20d": {
-        "n": 37,
+        "n": 38,
         "wr": 100.0,
         "avg": 0.41,
         "min": 0.0,
