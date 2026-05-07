@@ -93,6 +93,10 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <button class="tab" onclick="showPage('longterm',this)">&#x1F331; Long-Term</button>
     <button class="tab" onclick="showPage('allstocks',this)">&#x1F4CA; All Stocks</button>
     <button class="tab" onclick="showPage('calendar',this)">&#x1F4C6; Trading Calendar</button>
+    <button class="tab" onclick="showPage('uc2timing',this)">&#x23F1; UC2 Timing</button>
+    <button class="tab" onclick="showPage('monthlypicks',this)">&#x1F4C6; Monthly Picks</button>
+    <button class="tab" onclick="showPage('shorthold',this)">&#x26A1; Short Hold (5-10d)</button>
+    <button class="tab" onclick="showPage('presignal',this)">&#x1F52C; Pre-Signal Context</button>
     <button class="tab" onclick="showPage('buying',this)">&#x1F4B0; Buying Strategy</button>
     <button class="tab" onclick="showPage('guide',this)">&#x1F4D6; Guide</button>
   </div>
@@ -565,6 +569,156 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 </div>
 
 
+<!-- PAGE: UC2 TIMING OPTIMIZER -->
+<!-- PAGE: MONTHLY PICKS — LIVE TRACKER -->
+<div class="page" id="page-monthlypicks">
+  <div class="sh">&#x1F4C6; Monthly Picks <small>this month&#x2019;s seasonal stocks &#x00B7; live entry tracking &#x00B7; UC1+UC2</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue);line-height:1.7">
+    &#x1F4A1; <strong>How to use:</strong> Each card shows the optimal entry window and peak return day for the current month. The <strong>Live Tracking</strong> section tells you: if you enter TODAY at current price, how much upside remains to the avg/min return target. If the stock dipped since the best entry day &mdash; you have MORE remaining upside. Updated every time you open the page.
+  </div>
+  <div class="pill-row" id="mp-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Show:</span>
+    <button class="fb on" id="mpf-all"  onclick="mpFilter('all',this)">All UCs</button>
+    <button class="fb"    id="mpf-uc2"  onclick="mpFilter('UC2',this)">UC2 Seasonal</button>
+    <button class="fb"    id="mpf-uc1"  onclick="mpFilter('UC1',this)">UC1 Surge</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="mps-peak" onclick="mpSort('peak',this)">Peak Return</button>
+    <button class="fb"    id="mps-rem"  onclick="mpSort('remaining',this)">Remaining Upside</button>
+    <button class="fb"    id="mps-min"  onclick="mpSort('min',this)">Min Return</button>
+    <span class="fsep">|</span>
+    <input class="si" id="mp-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderMonthlyPicks()">
+  </div>
+  <div id="mp-grid"><div class="empty"><div class="spinner"></div>Loading&#x2026; Run Seasonal Timing Optimizer workflow first.</div></div>
+</div>
+
+
+<!-- PAGE: SHORT HOLD -->
+<div class="page" id="page-shorthold">
+  <div class="sh">&#x26A1; Short Hold Stocks <small>5&#x2013;10 trading days &#x00B7; 10%+ every single time &#x00B7; all last 4 years</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue);line-height:1.7">
+    &#x1F9E0; Only stocks where <strong>every single historical occurrence</strong> gave at least 10% within 5&#x2013;10 trading days AND the signal fired in all of the last 4 years. Zero exceptions. Sorted highest average return first. Click any row to see every past occurrence.
+  </div>
+  <div class="pill-row" id="sh-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Hold:</span>
+    <button class="fb on" id="shh-all" onclick="shHold(0,this)">All</button>
+    <button class="fb" id="shh-5"   onclick="shHold(5,this)">5d</button>
+    <button class="fb" id="shh-6"   onclick="shHold(6,this)">6d</button>
+    <button class="fb" id="shh-7"   onclick="shHold(7,this)">7d</button>
+    <button class="fb" id="shh-8"   onclick="shHold(8,this)">8d</button>
+    <button class="fb" id="shh-9"   onclick="shHold(9,this)">9d</button>
+    <button class="fb" id="shh-10"  onclick="shHold(10,this)">10d</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="shs-avg"  onclick="shSort('avg_max_ret',this)">Avg Return%</button>
+    <button class="fb" id="shs-min"    onclick="shSort('min_max_ret',this)">Min Return%</button>
+    <button class="fb" id="shs-rate"   onclick="shSort('ret_rate',this)">Ret%/Day</button>
+    <button class="fb" id="shs-n"      onclick="shSort('n_occurrences',this)">Occurrences</button>
+    <button class="fb" id="shs-days"   onclick="shSort('avg_days_to_10',this)">Days to 10%</button>
+    <span class="fsep">|</span>
+    <span class="fsep">|</span>
+    <span class="fsep">View:</span>
+    <button class="fb on" id="shv-list"  onclick="shView('list',this)">&#x1F4CB; Stock List</button>
+    <button class="fb"    id="shv-alerts" onclick="shView('alerts',this)">&#x1F514; Today's Alerts</button>
+    <button class="fb"    id="shv-cal"    onclick="shView('cal',this)">&#x1F4C5; Year Calendar</button>
+    <span class="fsep">|</span>
+    <input class="si" id="sh-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderShortHold()">
+  </div>
+  <div class="twrap">
+    <table class="tbl" id="sh-tbl" style="min-width:900px">
+      <thead><tr>
+        <th style="width:22px"></th>
+        <th onclick="shTh('sym')">Stock<span class="arr"></span></th>
+        <th onclick="shTh('price')">Price<span class="arr"></span></th>
+        <th onclick="shTh('week_label')" title="Sort by calendar week to group all stocks by month+week">Month &amp; Week<span class="arr"></span></th>
+        <th onclick="shTh('hold_days')">Hold<span class="arr"></span></th>
+        <th onclick="shTh('avg_max_ret')">Avg Return%<span class="arr"></span></th>
+        <th onclick="shTh('min_max_ret')">Min Return%<span class="arr"></span></th>
+        <th onclick="shTh('avg_exit_ret')">Avg Exit Ret%<span class="arr"></span></th>
+        <th onclick="shTh('ret_rate')">Ret%/Day<span class="arr"></span></th>
+        <th onclick="shTh('avg_days_to_10')">Avg Days to 10%<span class="arr"></span></th>
+        <th onclick="shTh('n_occurrences')">Occurrences<span class="arr"></span></th>
+        <th onclick="shTh('n_years')">Years<span class="arr"></span></th>
+        <th>Years Seen</th>
+      </tr></thead>
+      <tbody id="sh-tbody"><tr><td colspan="13" class="empty"><div class="spinner"></div>Loading&#x2026; Run Short Hold Analyzer workflow first.</td></tr></tbody>
+    </table>
+  </div>
+  <!-- Alerts view -->
+  <div id="sh-alerts-view" style="display:none"></div>
+  <!-- Year calendar view -->
+  <div id="sh-cal-view" style="display:none"></div>
+</div>
+
+
+<!-- PAGE: PRE-SIGNAL CONTEXT -->
+<div class="page" id="page-presignal">
+  <div class="sh">&#x1F52C; Pre-Signal Context <small>what happened 1&#x2013;20 days BEFORE each signal &#x00B7; pattern fingerprint</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue);line-height:1.7">
+    &#x1F9E0; For every stock in Short Hold and Monthly Picks: analyzes what specific conditions existed in the 1&#x2013;20 trading days BEFORE each successful signal. Shows RSI, price trend, volume pattern, 52-week high/low proximity, loss-then-recovery pattern. Classifies each stock into one pattern type so you know exactly what to look for before the next entry.
+  </div>
+  <div class="pill-row" id="ps-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Pattern:</span>
+    <button class="fb on" id="psf-all"  onclick="psFilter('all',this)">All</button>
+    <button class="fb" id="psf-hi52"    onclick="psFilter('52W High',this)">52W High</button>
+    <button class="fb" id="psf-lo52"    onclick="psFilter('52W Low',this)">52W Low</button>
+    <button class="fb" id="psf-oversold" onclick="psFilter('Oversold',this)">Oversold</button>
+    <button class="fb" id="psf-ltr"     onclick="psFilter('Loss Then',this)">Loss→Rise</button>
+    <button class="fb" id="psf-volspike" onclick="psFilter('Volume Spike',this)">Vol Spike</button>
+    <button class="fb" id="psf-volaccum" onclick="psFilter('Volume Accum',this)">Vol Accum</button>
+    <button class="fb" id="psf-momentum" onclick="psFilter('Momentum',this)">Momentum</button>
+    <button class="fb" id="psf-heavy"   onclick="psFilter('Heavyweight',this)">Heavyweight</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="pss-pat"  onclick="psSort('pattern_type',this)">Pattern</button>
+    <button class="fb" id="pss-rsi"     onclick="psSort('avg_rsi_signal',this)">RSI</button>
+    <button class="fb" id="pss-ret5"    onclick="psSort('avg_ret_5d_before',this)">5d Before</button>
+    <button class="fb" id="pss-vol"     onclick="psSort('avg_vol_signal',this)">Volume</button>
+    <button class="fb" id="pss-n"       onclick="psSort('n_signals',this)">Signals</button>
+    <span class="fsep">|</span>
+    <input class="si" id="ps-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderPresignal()">
+  </div>
+  <div id="ps-grid"><div class="empty"><div class="spinner"></div>Loading&#x2026; Run Pre-Signal Analyzer workflow first.</div></div>
+</div>
+
+
+<div class="page" id="page-uc2timing">
+  <div class="sh">&#x23F1; UC2 Seasonal Timing Optimizer <small>optimal entry &amp; exit windows for seasonal stocks</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue);line-height:1.7">
+    &#x1F9E0; For each UC2 seasonal stock: this tab shows <strong>when exactly to enter</strong> (up to 5 days before or after the 1st of month) and <strong>when exactly to exit</strong> (which day gives peak profit before the stock starts pulling back). Run the UC2 Timing Optimizer workflow to populate this tab.
+  </div>
+  <div class="pill-row" id="uc2t-pills"></div>
+  <div class="fbar">
+    <span class="fsep">Month:</span>
+    <button class="fb on" id="uc2t-m0"  onclick="uc2tFilter(0,this)">All</button>
+    <button class="fb" id="uc2t-m1"  onclick="uc2tFilter(1,this)">Jan</button>
+    <button class="fb" id="uc2t-m2"  onclick="uc2tFilter(2,this)">Feb</button>
+    <button class="fb" id="uc2t-m3"  onclick="uc2tFilter(3,this)">Mar</button>
+    <button class="fb" id="uc2t-m4"  onclick="uc2tFilter(4,this)">Apr</button>
+    <button class="fb" id="uc2t-m5"  onclick="uc2tFilter(5,this)">May</button>
+    <button class="fb" id="uc2t-m6"  onclick="uc2tFilter(6,this)">Jun</button>
+    <button class="fb" id="uc2t-m7"  onclick="uc2tFilter(7,this)">Jul</button>
+    <button class="fb" id="uc2t-m8"  onclick="uc2tFilter(8,this)">Aug</button>
+    <button class="fb" id="uc2t-m9"  onclick="uc2tFilter(9,this)">Sep</button>
+    <button class="fb" id="uc2t-m10" onclick="uc2tFilter(10,this)">Oct</button>
+    <button class="fb" id="uc2t-m11" onclick="uc2tFilter(11,this)">Nov</button>
+    <button class="fb" id="uc2t-m12" onclick="uc2tFilter(12,this)">Dec</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="uc2t-sp" onclick="uc2tSort('peak',this)">Peak Return</button>
+    <button class="fb" id="uc2t-ss"   onclick="uc2tSort('sweet',this)">Sweet Spot Width</button>
+    <button class="fb" id="uc2t-sn"   onclick="uc2tSort('n',this)">Most Occurrences</button>
+    <span class="fsep">|</span>
+    <input class="si" id="uc2t-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderUC2Timing()">
+  </div>
+
+  <div id="uc2t-grid"><div class="empty"><div class="spinner"></div>Loading&#x2026; Run the UC2 Timing Optimizer workflow if this stays empty.</div></div>
+</div>
+
+
 <div class="page" id="page-guide">
   <div class="sh">&#x1F4D6; Guide <small>tabs &#xB7; columns &#xB7; abbreviations</small></div>
   <div style="max-width:820px;display:grid;gap:12px">
@@ -613,7 +767,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 
 <script>
 const BASE='https://raw.githubusercontent.com/animesh2007asansol/itis/main/stock_analysis';
-const D={alerts:null,history:null,master:null,lt:null,uc1:null,uc2:null,uc3:null,uc4:null,stillvalid:null};
+const D={alerts:null,history:null,master:null,lt:null,uc1:null,uc2:null,uc3:null,uc4:null,stillvalid:null,uc2timing:null,timingAll:null,shorthold:null,presignal:null};
 
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -701,6 +855,13 @@ function hTh(k){if(histSK===k)histSD=histSD==='desc'?'asc':'desc';else{histSK=k;
 
 // ── UC table renderer (no eval) ───────────────────────────────────────────────
 var ucState=ucS; // alias used in renderUC
+// Short Hold global state
+var shHoldFilter=0, shSortKey='avg_max_ret', shSortDir='desc', shCurrentView='list';
+// Monthly Picks global state
+// (declared globally)
+// UC2 Timing global state
+// (declared globally)
+
 var ucViews={uc1:'all',uc2:'all',uc3:'all',uc4:'all'};
 var buySD='desc'; var buyFilter='all'; var svSD='desc'; var histSD='desc';
 
@@ -811,15 +972,19 @@ async function loadData(){
     fetch(BASE+'/uc1_surge.json'),fetch(BASE+'/uc2_seasonal.json'),
     fetch(BASE+'/uc3_combined.json'),fetch(BASE+'/uc4_technical.json'),
     fetch(BASE+'/still_valid.json'),
+    fetch(BASE+'/uc2_timing.json'),
+    fetch(BASE+'/timing_all.json'),
+    fetch(BASE+'/short_hold.json'),
+    fetch(BASE+'/presignal_context.json'),
   ]);
-  const keys=['alerts','history','master','lt','uc1','uc2','uc3','uc4','stillvalid'];
+  const keys=['alerts','history','master','lt','uc1','uc2','uc3','uc4','stillvalid','uc2timing','timingAll','shorthold','presignal'];
   for(let i=0;i<r.length;i++){
     try{
       if(r[i].status==='fulfilled'&&r[i].value?.ok)
         D[keys[i]]=await r[i].value.json();
     }catch(e){ console.log(keys[i]+':',e.message); }
   }
-  renderAlerts();renderHist();renderLT();renderAll();renderSV();renderBuying();renderCalendar();
+  renderAlerts();renderHist();renderLT();renderAll();renderSV();renderBuying();renderCalendar();renderUC2Timing();renderMonthlyPicks();renderShortHold();renderPresignal();renderUC2Timing();
   ['uc1','uc2','uc3','uc4'].forEach(function(u){renderUC(u);});
 }
 
@@ -1160,7 +1325,7 @@ function renderAll(){
       +'</tr>'
       +'<tr id="'+did+'" style="display:none"><td colspan="21" style="padding:0">'+detail+'</td></tr>';
   });
-  tbody.innerHTML=html;
+  tbody.innerHTML += html;
 }
 function atToggle(id){var r=document.getElementById(id);if(!r)return;var x=document.getElementById('ax'+id);r.style.display=r.style.display==='none'?'':'none';if(x)x.textContent=r.style.display===''?'&#x25BC;':'&#x25B6;';}
 
@@ -1731,6 +1896,722 @@ function renderTracker(data, q){
   }).join('');
 }
 
+
+// UC2 TIMING OPTIMIZER
+// (declared globally)
+
+function uc2tFilter(m,btn){uc2tMF=m;document.querySelectorAll('[id^="uc2t-m"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderUC2Timing();}
+function uc2tSort(k,btn){uc2tSK=k;document.querySelectorAll('[id^="uc2t-s"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderUC2Timing();}
+
+function exitSparkline(curve,peakDay,sweetStart,sweetEnd){
+  if(!curve||!curve.length) return '<div class="muted" style="font-size:10px">No curve data yet</div>';
+  var vals=curve.map(function(p){return p.avg_ret||0;});
+  var minV=Math.min(0,Math.min.apply(null,vals)), maxV=Math.max.apply(null,vals), rng=maxV-minV||1;
+  var W=220,H=50,P=4;
+  var pts=vals.map(function(v,i){return [P+(i/(vals.length-1||1))*(W-2*P), H-P-((v-minV)/rng)*(H-2*P)];});
+  var d=pts.map(function(p,i){return (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' ');
+  var sx1=P+((sweetStart-1)/(vals.length-1||1))*(W-2*P);
+  var sx2=P+((sweetEnd-1)/(vals.length-1||1))*(W-2*P);
+  var pi=Math.min(Math.max(0,peakDay-1),pts.length-1);
+  return '<svg width="'+W+'" height="'+H+'" style="display:block;overflow:visible">'
+    +'<rect x="'+sx1.toFixed(1)+'" y="'+P+'" width="'+(sx2-sx1).toFixed(1)+'" height="'+(H-2*P)+'" fill="rgba(34,197,94,.12)" rx="2"/>'
+    +'<path d="'+d+'" fill="none" stroke="var(--green)" stroke-width="1.5"/>'
+    +'<circle cx="'+pts[pi][0].toFixed(1)+'" cy="'+pts[pi][1].toFixed(1)+'" r="3.5" fill="var(--green)"/>'
+    +'<text x="'+pts[pi][0].toFixed(1)+'" y="'+(pts[pi][1]-6).toFixed(1)+'" text-anchor="middle" font-size="8" fill="var(--green)">peak</text>'
+    +'</svg>';
+}
+
+function renderUC2Timing(){
+  var el=document.getElementById('uc2t-grid'); if(!el) return;
+  var d=D.uc2timing;
+  if(!d){el.innerHTML='<div class="empty">No timing data. Run the <strong>UC2 Timing Optimizer</strong> GitHub Actions workflow, then refresh the page.</div>';return;}
+  var q=(document.getElementById('uc2t-q')?.value||'').toUpperCase().trim();
+  var rows=[];
+  (d.stocks||[]).forEach(function(s){
+    (s.timing||[]).forEach(function(t){
+      if(uc2tMF!==0&&t.month!==uc2tMF) return;
+      if(q&&!s.sym.includes(q)) return;
+      rows.push({sym:s.sym,price:s.price,month:t.month,month_name:t.month_name,
+        season_wr:t.season_win_rate,season_avg:t.season_avg_ret,season_min:t.season_min_ret,
+        season_n:t.season_n_years,season_years:t.season_years||[],
+        best_offset:t.best_entry_offset,entry_rec:t.entry_recommendation,
+        entry_analysis:t.entry_analysis||[],
+        peak_day:t.peak_return_day,peak_ret:t.peak_avg_return_pct,
+        sweet_start:t.sweet_spot_start_day,sweet_end:t.sweet_spot_end_day,
+        sweet_width:(t.sweet_spot_end_day||0)-(t.sweet_spot_start_day||0),
+        decline_after:t.decline_after_day,exit_rec:t.exit_recommendation,
+        exit_curve:t.exit_curve||[]});
+    });
+  });
+  rows.sort(function(a,b){
+    if(uc2tSK==='peak') return (b.peak_ret||0)-(a.peak_ret||0);
+    if(uc2tSK==='sweet') return (b.sweet_width||0)-(a.sweet_width||0);
+    if(uc2tSK==='n') return (b.season_n||0)-(a.season_n||0);
+    return 0;
+  });
+  var pills_el=document.getElementById('uc2t-pills');
+  if(pills_el) pills_el.innerHTML=[
+    ['Opportunities',rows.length,'b'],
+    ['Stocks',new Set(rows.map(function(r){return r.sym;})).size,'g'],
+    ['Peak >30%',rows.filter(function(r){return (r.peak_ret||0)>30;}).length,'g'],
+    ['Enter Before 1st',rows.filter(function(r){return (r.best_offset||0)<0;}).length,'y'],
+    ['Enter After 1st',rows.filter(function(r){return (r.best_offset||0)>0;}).length,'y'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div></div>';}).join('');
+  if(!rows.length){el.innerHTML='<div class="empty">No data matches filter.</div>';return;}
+  el.innerHTML=rows.map(function(r){
+    var ob=r.best_offset<0
+      ?'<span style="background:rgba(168,85,247,.15);color:#c084fc;border:1px solid #c084fc;border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">'+Math.abs(r.best_offset)+'d BEFORE 1st</span>'
+      :r.best_offset===0
+      ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">ON 1st of Month</span>'
+      :'<span style="background:var(--ab);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">'+r.best_offset+'d AFTER 1st</span>';
+    var db=r.decline_after?'<span style="background:rgba(239,68,68,.1);color:var(--red);border:1px solid var(--red);border-radius:3px;font-size:9px;padding:1px 5px">Declines after day '+r.decline_after+'</span>':'';
+    var et=r.entry_analysis.length?'<details style="margin:6px 0"><summary style="font-size:10px;color:var(--t3);cursor:pointer;font-weight:600">All entry offsets compared (click to expand)</summary>'
+      +'<table style="width:100%;font-size:10px;border-collapse:collapse;margin-top:4px">'
+      +'<tr style="background:var(--card2)"><th style="padding:3px 6px;text-align:left">Entry Day</th><th>Avg Ret%</th><th>Min Ret%</th><th>Win%</th><th>Years</th></tr>'
+      +r.entry_analysis.sort(function(a,b){return a.offset-b.offset;}).map(function(e){
+        var ib=e.offset===r.best_offset;
+        return '<tr style="'+(ib?'background:rgba(34,197,94,.12);font-weight:700':'')+'"><td style="padding:3px 6px">'+(ib?'* ':'')+e.label+'</td>'
+          +'<td class="mono '+(e.avg_ret>=10?'green':'amber')+'">+'+(e.avg_ret||0).toFixed(1)+'%</td>'
+          +'<td class="mono green">+'+(e.min_ret||0).toFixed(1)+'%</td>'
+          +'<td class="mono '+(e.win_rate>=95?'green':'amber')+'">'+(e.win_rate||0).toFixed(0)+'%</td>'
+          +'<td class="mono muted">'+e.n+'</td></tr>';}).join('')
+      +'</table></details>':'';
+    return '<div class="lt-card" style="margin-bottom:10px">'
+      +'<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">'
+      +'<div><span style="font-size:18px;font-weight:700;color:var(--gold)">'+r.sym+'</span>'
+      +' <span style="background:var(--blb);color:var(--blue);border:1px solid var(--bl2);border-radius:3px;font-size:11px;padding:1px 7px">'+r.month_name+'</span>'
+      +'<div style="font-size:10px;color:var(--t2);margin-top:2px">Rs '+fmt(r.price)+' - '+r.season_n+' years observed - '+r.season_wr+'% win rate</div></div>'
+      +'<div style="text-align:right"><div class="green" style="font-size:22px;font-weight:700">+'+(r.peak_ret||0).toFixed(1)+'%</div>'
+      +'<div style="font-size:9px;color:var(--t3)">peak avg on day '+r.peak_day+' after entry</div></div></div>'
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:5px;margin-bottom:8px">'
+      +'<div class="ac-mini"><div class="ac-ml">Avg Ret (base)</div><div class="ac-mv green">+'+r.season_avg+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Ret (floor)</div><div class="ac-mv green">+'+r.season_min+'%</div></div>'
+      +'<div class="ac-mini" style="background:rgba(168,85,247,.07)"><div class="ac-ml">Best Entry</div><div class="ac-mv">'+ob+'</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Peak Day</div><div class="ac-mv green">Day '+r.peak_day+'</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Sweet Spot</div><div class="ac-mv green">Day '+r.sweet_start+'-'+r.sweet_end+'</div></div>'
+      +'</div>'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">'
+      +'<div style="background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.3);border-radius:6px;padding:8px">'
+      +'<div style="color:#c084fc;font-size:10px;font-weight:600;margin-bottom:4px">WHEN TO ENTER</div>'
+      +'<div style="font-size:11px;color:var(--text);line-height:1.6">'+r.entry_rec+'</div>'
+      +'<div style="margin-top:5px">'+ob+'</div></div>'
+      +'<div style="background:var(--grb);border:1px solid var(--gr2);border-radius:6px;padding:8px">'
+      +'<div style="color:var(--green);font-size:10px;font-weight:600;margin-bottom:4px">WHEN TO EXIT</div>'
+      +'<div style="font-size:11px;color:var(--text);line-height:1.6">'+r.exit_rec+'</div>'
+      +'<div style="margin-top:5px">'+db+'</div></div></div>'
+      +'<div style="background:var(--s);border-radius:6px;padding:8px;margin-bottom:6px">'
+      +'<div style="font-size:10px;color:var(--t3);font-weight:600;margin-bottom:4px">RETURN CURVE: avg return vs day held (green zone=sweet spot, dot=peak)</div>'
+      +exitSparkline(r.exit_curve,r.peak_day,r.sweet_start,r.sweet_end)
+      +'<div style="display:flex;justify-content:space-between;font-size:9px;color:var(--t3);margin-top:2px"><span>Day 1</span><span>Day '+(r.exit_curve[Math.floor(r.exit_curve.length/2)]?.day||'')+'</span><span>Day '+(r.exit_curve[r.exit_curve.length-1]?.day||'')+'</span></div>'
+      +'</div>'
+      +et
+      +'<div style="font-size:9px;color:var(--t3);margin-top:4px">Observed years: '+r.season_years.join(', ')+'</div>'
+      +'</div>';
+  }).join('');
+}
+
+// ══ MONTHLY PICKS — LIVE TRACKER ══════════════════════════════════════════════
+// (declared globally)
+
+function mpFilter(v,btn){mpFilterVal=v;document.querySelectorAll('[id^="mpf-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderMonthlyPicks();}
+function mpSort(v,btn){mpSortVal=v;document.querySelectorAll('[id^="mps-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderMonthlyPicks();}
+
+function renderMonthlyPicks(){
+  var el=document.getElementById('mp-grid'); if(!el) return;
+  var d=D.timingAll;
+  if(!d){el.innerHTML='<div class="empty">No timing data. Run <strong>Seasonal Timing Optimizer</strong> workflow, then refresh.</div>';return;}
+
+  var today=new Date();
+  var curMonth=today.getMonth()+1;  // 1-12
+
+  // Get current prices from master_results
+  var priceMap={};
+  if(D.master) (D.master.stocks||[]).forEach(function(s){priceMap[s.sym]=s.price;});
+
+  var q=(document.getElementById('mp-q')?.value||'').toUpperCase().trim();
+  var thisYear=today.getFullYear();
+  var rows=(d.stocks||[]).filter(function(r){
+    if(r.month!==curMonth) return false;
+    if(q&&!r.sym.includes(q)) return false;
+    if(mpFilterVal!=='all'&&r.uc!==mpFilterVal) return false;
+    // Only show stocks with signal in all last 4 years (excluding current year which may not have fired yet)
+    var yrs=r.season_years||[];
+    var required=[thisYear-3,thisYear-2,thisYear-1];
+    if(!required.every(function(y){return yrs.indexOf(y)>=0;})) return false;
+    return true;
+  }).map(function(r){
+    var _pm=priceMap[r.sym]; var curPrice=(_pm&&_pm.price)?_pm.price:(typeof _pm==='number'?_pm:(r.price||0));
+
+    // CRITICAL FIX: Targets must be calculated from CURRENT price.
+    // Historical avg_entry_price (e.g. Rs 600 from 2022) is irrelevant for today.
+    // The strategy's avg_ret% applies to WHOEVER enters — at today's price.
+    // So: if avg_ret = 20% and today's price = Rs 1808, target = Rs 1808 × 1.20 = Rs 2170
+    var avgRet = r.season_avg_ret || 0;
+    var minRet = r.season_min_ret || 0;
+    var peakRet = r.peak_ret || r.peak_avg_ret || avgRet;
+
+    var avgTgt  = curPrice > 0 ? Math.round(curPrice * (1 + avgRet/100) * 100) / 100 : 0;
+    var minTgt  = curPrice > 0 ? Math.round(curPrice * (1 + minRet/100) * 100) / 100 : 0;
+    var peakTgt = curPrice > 0 ? Math.round(curPrice * (1 + peakRet/100) * 100) / 100 : 0;
+
+    // Remaining upside = the strategy return % (since base IS current price)
+    var remToAvg  = r2pct(avgRet);
+    var remToMin  = r2pct(minRet);
+    var remToPeak = r2pct(peakRet);
+
+    // Historical entry price shown for context only (not used in target calculation)
+    var ep = r.avg_entry_price || curPrice;
+    var curRetFromEntry = null;  // not relevant for live tracking — entry was years ago
+
+    // Day we're on in the month (approximate trading days since month start)
+    // Use daily_profile to find closest day
+    var todayDay=null;
+    if(r.daily_profile&&r.daily_profile.length){
+      // Find which day in the cycle today roughly corresponds to
+      // (this is approximate — the profile shows avg prices on day 0,1,2... after entry)
+      var entryOffset=r.best_entry_offset||0;
+      // Simple: assume best entry was on 1st of month + offset
+      var monthStart=new Date(today.getFullYear(),curMonth-1,1);
+      var diffDays=Math.floor((today-monthStart)/86400000);
+      // Convert to approx trading days (×5/7)
+      var approxTd=Math.round(diffDays*5/7);
+      var entryTd=Math.max(0,approxTd-Math.max(0,entryOffset));
+      todayDay=Math.min(30,Math.max(0,entryTd));
+    }
+
+    return {
+      sym:r.sym, uc:r.uc, price:curPrice, ep:ep,
+      month:r.month, month_name:r.month_name,
+      wr:r.season_win_rate, avg_ret:r.season_avg_ret, min_ret:r.season_min_ret,
+      n:r.season_n_years, years:r.season_years||[],
+      best_offset:r.best_entry_offset||0,
+      entry_rec:r.entry_recommendation||'',
+      peak_day:r.peak_day, peak_ret:r.peak_avg_return_pct||r.peak_avg_ret,
+      sweet_start:r.sweet_spot_start_day||r.sweet_start,
+      sweet_end:r.sweet_spot_end_day||r.sweet_end,
+      decline_after:r.decline_after_day||r.decline_after,
+      peak_tgt:peakTgt,
+      rem_to_peak:remToPeak,
+      exit_rec:r.exit_recommendation||'',
+      avg_tgt:avgTgt, min_tgt:minTgt,
+      rem_to_avg:remToAvg, rem_to_min:remToMin,
+      cur_ret:curRetFromEntry,
+      today_day:todayDay,
+      profile:r.daily_profile||[],
+      curve:r.exit_curve||[],
+    };
+  });
+
+  // Sort
+  rows.sort(function(a,b){
+    if(mpSortVal==='peak')      return (b.peak_ret||0)-(a.peak_ret||0);
+    if(mpSortVal==='remaining') return (b.rem_to_avg||0)-(a.rem_to_avg||0);
+    if(mpSortVal==='min')       return (b.min_ret||0)-(a.min_ret||0);
+    return 0;
+  });
+
+  // Pills
+  document.getElementById('mp-pills').innerHTML=[
+    ['Verified 4-Year Stocks ('+['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][curMonth]+')',rows.length,'g','signal in all last 4 years'],
+    ['UC2 Seasonal',rows.filter(function(r){return r.uc==='UC2';}).length,'b'],
+    ['UC1 Surge',rows.filter(function(r){return r.uc==='UC1';}).length,'b'],
+    ['Peak >25%',rows.filter(function(r){return (r.peak_ret||0)>25;}).length,'g'],
+    ['Rem Upside >10%',rows.filter(function(r){return (r.rem_to_avg||0)>10;}).length,'y','from today\u2019s price to avg target'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';}).join('');
+
+  if(!rows.length){
+    el.innerHTML='<div class="empty">No stocks found for this month. Run the Seasonal Timing Optimizer workflow first, then check that data exists for '+['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][curMonth]+'.</div>';
+    return;
+  }
+
+  el.innerHTML=rows.map(function(r){
+    var offsetBadge=r.best_offset<0
+      ?'<span style="background:rgba(168,85,247,.15);color:#c084fc;border:1px solid #c084fc;border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">'+Math.abs(r.best_offset)+'d BEFORE 1st</span>'
+      :r.best_offset===0
+      ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">ON 1st of Month</span>'
+      :'<span style="background:var(--ab);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">'+r.best_offset+'d AFTER 1st</span>';
+
+    var ucBadge=r.uc==='UC2'
+      ?'<span style="background:rgba(245,158,11,.15);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">UC2 Seasonal</span>'
+      :'<span style="background:rgba(99,102,241,.15);color:#818cf8;border:1px solid #818cf8;border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">UC1 Surge</span>';
+
+    // Live tracking section
+    var remAvgColor=(r.avg_ret||0)>10?'green':(r.avg_ret||0)>0?'amber':'red';
+    var remMinColor=(r.min_ret||0)>0?'green':'red';
+    var curRetColor='green'; // entry today always starts at 0%
+
+    var liveSection='<div style="background:var(--s);border-radius:6px;padding:10px;margin-bottom:8px;border:1px solid var(--b)">'
+      +'<div style="font-size:10px;font-weight:600;color:var(--t3);margin-bottom:6px">LIVE TRACKING &mdash; enter at today\'s price (Rs '+fmt(r.price)+') and target:</div>'
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px">'
+      +'<div class="ac-mini"><div class="ac-ml">Entry Price (today)</div><div class="ac-mv">Rs '+fmt(r.price)+'</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Avg Return Expected</div><div class="ac-mv green">+'+Number(r.avg_ret||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Avg Exit Target</div><div class="ac-mv green">Rs '+fmt(r.avg_tgt)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Return (floor)</div><div class="ac-mv amber">+'+Number(r.min_ret||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Exit Target</div><div class="ac-mv amber">Rs '+fmt(r.min_tgt)+'</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Peak Return (best case)</div><div class="ac-mv green">+'+Number(r.rem_to_peak||r.peak_ret||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Peak Exit Target</div><div class="ac-mv green">Rs '+fmt(r.peak_tgt)+'</div></div>'
+      +'<div class="ac-mini" style="background:rgba(34,197,94,.06)">'
+      +'<div class="ac-ml">Exit on Day</div>'
+      +'<div class="ac-mv green">Day '+(r.peak_day||r.sweet_start||'?')+' after entry</div>'
+      +'</div>'
+      +'</div>'
+
+      // Info: expected return from today
+      +'<div style="background:rgba(34,197,94,.08);border:1px solid var(--gr2);border-radius:5px;padding:6px 8px;margin-top:6px;font-size:11px">'
+      +'<span class="green" style="font-weight:600">From today\'s price of Rs '+fmt(r.price)+': </span>'
+      +'Avg target = Rs '+fmt(r.avg_tgt)+' (+'+Number(r.avg_ret||0).toFixed(1)+'%). '
+      +'Min target = Rs '+fmt(r.min_tgt)+' (+'+Number(r.min_ret||0).toFixed(1)+'%). '
+      +'Peak target = Rs '+fmt(r.peak_tgt)+' (+'+Number(r.rem_to_peak||r.peak_ret||0).toFixed(1)+'%). '
+      +'Exit around day '+r.peak_day+' after entry for best results.'
+      +'</div>'
+      +'</div>';
+
+    return '<div class="lt-card" style="margin-bottom:10px">'
+      // Header
+      +'<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">'
+      +'<div>'
+      +'<span style="font-size:18px;font-weight:700;color:var(--gold)">'+r.sym+'</span> '
+      +ucBadge+' '
+      +'<span style="background:var(--blb);color:var(--blue);border:1px solid var(--bl2);border-radius:3px;font-size:11px;padding:1px 7px">'+r.month_name+'</span>'
+      +(function(){
+  var thisYr=new Date().getFullYear();
+  var yrs=r.years||[];
+  var req=[thisYr-3,thisYr-2,thisYr-1];
+  var badges=yrs.map(function(y){
+    var isReq=req.indexOf(y)>=0||y===thisYr;
+    return '<span style="font-size:9px;font-weight:600;padding:1px 5px;border-radius:3px;margin-right:3px;'
+      +(isReq?'background:var(--grb);color:var(--green);border:1px solid var(--gr2)':'background:var(--s);color:var(--t3);border:1px solid var(--b)')
+      +'">'+y+'</span>';
+  }).join('');
+  return '<div style="font-size:10px;color:var(--t2);margin-top:4px">'+r.n+' years &middot; '+r.wr+'% win rate &middot; '+badges+'</div>';
+})()
+      +'</div>'
+      +'<div style="text-align:right">'
+      +'<div class="green" style="font-size:22px;font-weight:700">+'+(r.peak_ret||0).toFixed(1)+'%</div>'
+      +'<div style="font-size:9px;color:var(--t3)">peak avg on day '+(r.peak_day||'?')+' after entry</div>'
+      +'</div>'
+      +'</div>'
+
+      // Entry / Exit summary
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">'
+      +'<div style="background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.3);border-radius:6px;padding:8px">'
+      +'<div style="color:#c084fc;font-size:10px;font-weight:600;margin-bottom:4px">WHEN TO ENTER</div>'
+      +'<div style="font-size:11px;color:var(--text);line-height:1.5">'+r.entry_rec+'</div>'
+      +'<div style="margin-top:5px">'+offsetBadge+'</div>'
+      +'</div>'
+      +'<div style="background:var(--grb);border:1px solid var(--gr2);border-radius:6px;padding:8px">'
+      +'<div style="color:var(--green);font-size:10px;font-weight:600;margin-bottom:4px">WHEN TO EXIT</div>'
+      +'<div style="font-size:11px;color:var(--text);line-height:1.5">'+r.exit_rec+'</div>'
+      +(r.decline_after?'<div style="font-size:9px;color:var(--red);margin-top:4px">Returns decline after day '+r.decline_after+'</div>':'')
+      +'</div>'
+      +'</div>'
+
+      // Key stats
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:5px;margin-bottom:8px">'
+      +'<div class="ac-mini"><div class="ac-ml">Avg Return</div><div class="ac-mv green">+'+r.avg_ret+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Return (floor)</div><div class="ac-mv green">+'+r.min_ret+'%</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Peak on Day</div><div class="ac-mv green">Day '+(r.peak_day||'?')+'</div></div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Sweet Spot</div><div class="ac-mv green">Day '+(r.sweet_start||'?')+'\u2013'+(r.sweet_end||'?')+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Avg Target Rs</div><div class="ac-mv green">Rs '+fmt(r.avg_tgt)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Target Rs</div><div class="ac-mv amber">Rs '+fmt(r.min_tgt)+'</div></div>'
+      +'</div>'
+
+      // Live tracking
+      +liveSection
+      +'</div>';
+  }).join('');
+}
+
+function r2pct(x){ return Math.round(x*100)/100; }
+
+
+// ══ SHORT HOLD ANALYZER ═══════════════════════════════════════════════════════
+// (declared globally)
+
+function shHold(v,btn){shHoldFilter=v;document.querySelectorAll('[id^="shh-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderShortHold();}
+function shSort(k,btn){
+  if(shSortKey===k) shSortDir=shSortDir==='desc'?'asc':'desc';
+  else{shSortKey=k;shSortDir='desc';}
+  document.querySelectorAll('[id^="shs-"]').forEach(function(b){b.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  renderShortHold();
+}
+function shTh(k){shSort(k,null);}
+
+function shToggle(id){
+  var r=document.getElementById('sh-det-'+id);
+  if(!r) return;
+  var arrow=document.getElementById('sh-arr-'+id);
+  if(r.style.display==='none'){r.style.display='';if(arrow)arrow.textContent='\u25BC';}
+  else{r.style.display='none';if(arrow)arrow.textContent='\u25B6';}
+}
+
+function renderShortHold(){
+  var tbody=document.getElementById('sh-tbody'); if(!tbody) return;
+  var d=D.shorthold;
+  if(!d){
+    tbody.innerHTML='<tr><td colspan="13" class="empty">No data. Run <strong>Short Hold Analyzer</strong> workflow, then refresh.</td></tr>';
+    return;
+  }
+
+  var q=(document.getElementById('sh-q')?.value||'').toUpperCase().trim();
+  var rows=[...(d.stocks||[])];
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  if(shHoldFilter!==0) rows=rows.filter(function(r){return r.hold_days===shHoldFilter;});
+
+  // Pills
+  var req=d.required_years||[];
+  document.getElementById('sh-pills').innerHTML=[
+    ['Patterns (stock × week slot)',d.n_patterns||rows.length,'g','100% win rate, all required years'],
+    ['Unique stocks',d.n_stocks||0,'g'],
+    ['Alerts Today',d.n_alerts_today||0,'g','signal fires this week historically'],
+    ['Alerts Tomorrow',d.n_alerts_tomorrow||0,'y'],
+    ['Required years',req.join(', '),'b'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';}).join('');
+
+  if(shCurrentView!=='list'){return;}
+
+  // Sort rows
+  rows.sort(function(a,b){
+    var aAlert=a.alert_today?2:a.alert_tomorrow?1:0;
+    var bAlert=b.alert_today?2:b.alert_tomorrow?1:0;
+    if(shSortKey==='week_label'){
+      // Group by month then week for calendar sort
+      var aKey=(a.month*10+a.week)*1000+(b.avg_max_ret||0);
+      var bKey=(b.month*10+b.week)*1000+(a.avg_max_ret||0);
+      return shSortDir==='asc'?aKey-bKey:bKey-aKey;
+    }
+    if(bAlert!==aAlert) return bAlert-aAlert;
+    var av=a[shSortKey]!=null?a[shSortKey]:0;
+    var bv=b[shSortKey]!=null?b[shSortKey]:0;
+    return shSortDir==='desc'?bv-av:av-bv;
+  });
+
+  if(!rows.length){
+    tbody.innerHTML='<tr><td colspan="13" class="empty">No patterns match filter.</td></tr>';
+    return;
+  }
+
+  var html='';
+
+  // If sorted by week_label — group by month + week with section headers
+  if(shSortKey==='week_label'){
+    var lastSlot='';
+    rows.forEach(function(r,idx){
+      var slot=r.week_label;
+      if(slot!==lastSlot){
+        lastSlot=slot;
+        var isAlert=rows.filter(function(x){return x.week_label===slot&&(x.alert_today||x.alert_tomorrow);}).length>0;
+        var headerBg=r.alert_today?'rgba(34,197,94,.12)':r.alert_tomorrow?'rgba(245,158,11,.12)':'rgba(255,255,255,.04)';
+        var headerColor=r.alert_today?'var(--green)':r.alert_tomorrow?'var(--amber)':'var(--t3)';
+        var alertTag=r.alert_today?' \u2705 SIGNALS THIS WEEK':r.alert_tomorrow?' \u23f0 SIGNALS NEXT WEEK':'';
+        html+='<tr><td colspan="13" style="padding:6px 12px;background:'+headerBg+';border-top:2px solid '+headerColor+';font-size:11px;font-weight:700;color:'+headerColor+'">'+slot+alertTag+'</td></tr>';
+      }
+      html+=buildSHRow(r,idx,d);
+    });
+  } else {
+    rows.forEach(function(r,idx){ html+=buildSHRow(r,idx,d); });
+  }
+  tbody.innerHTML=html;
+}
+
+function buildSHRow(r,idx,d){
+  var rid='shrow'+idx;
+  var reqSet=new Set((r.required_years||d.required_years||[]));
+  var yrBadges=(r.years||[]).map(function(y){
+    var isReq=reqSet.has(y);
+    return '<span style="font-size:9px;padding:1px 4px;border-radius:2px;margin-right:2px;'
+      +(isReq?'background:var(--grb);color:var(--green);border:1px solid var(--gr2)':'background:var(--s);color:var(--t3);border:1px solid var(--b)')
+      +'">'+y+'</span>';
+  }).join('');
+
+  var alertBadge=r.alert_today
+    ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 4px">\u2705 THIS WEEK</span> '
+    :r.alert_tomorrow
+    ?'<span style="background:var(--ab);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:9px;font-weight:700;padding:1px 4px">\u23f0 NEXT WEEK</span> '
+    :'';
+
+  var occRows=(r.occurrences||[]).map(function(o){
+    var rc=(o.max_ret||0)>=20?'green':(o.max_ret||0)>=10?'amber':'red';
+    var ec=(o.ret_on_exit||0)>=10?'green':(o.ret_on_exit||0)>=0?'amber':'red';
+    return '<tr style="font-size:11px">'
+      +'<td class="mono muted">'+o.year+'</td>'
+      +'<td class="mono muted">Wk '+(o.week||'?')+'</td>'
+      +'<td class="mono">'+o.sig_date+'</td>'
+      +'<td class="mono">'+o.entry_date+'</td>'
+      +'<td class="mono">'+o.exit_date+'</td>'
+      +'<td class="mono">&#8377;'+o.entry_px+'</td>'
+      +'<td class="mono">&#8377;'+(o.exit_px||'—')+'</td>'
+      +'<td class="mono '+rc+'">+'+Number(o.max_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono '+ec+'">'+(o.ret_on_exit!=null?(o.ret_on_exit>0?'+':'')+Number(o.ret_on_exit).toFixed(1)+'%':'—')+'</td>'
+      +'<td class="mono green">+'+Number(o.max_gain||0).toFixed(1)+'%</td>'
+      +'<td class="mono muted">'+(o.days_to_10||'—')+'d</td>'
+      +'</tr>';
+  }).join('');
+
+  var detailHtml='<tr id="sh-det-'+rid+'" style="display:none"><td colspan="13" style="padding:0">'
+    +'<div style="padding:10px;background:rgba(0,0,0,.2)">'
+    +(r.alert_today||r.alert_tomorrow?'<div style="background:rgba(34,197,94,.1);border:1px solid var(--gr2);border-radius:5px;padding:6px 10px;margin-bottom:8px;font-size:11px"><strong class="green">Buy tomorrow at open.</strong> This stock has historically risen 10%+ every time in '+r.week_label+'. Hold '+r.hold_days+' trading days. Min target: Rs '+Math.round(r.price*(1+r.min_max_ret/100))+'. Avg target: Rs '+Math.round(r.price*(1+r.avg_max_ret/100))+'.</div>':'')
+    +'<div style="font-size:10px;font-weight:600;color:var(--t3);margin-bottom:6px">ALL HISTORICAL OCCURRENCES IN '+r.week_label.toUpperCase()+' ('+r.n_occurrences+' signals, 100% gave \u226510%)</div>'
+    +'<div style="font-size:9px;color:var(--t3);margin-bottom:4px">Required years: '+(r.required_years||[]).join(', ')+' — all present \u2713</div>'
+    +'<table style="width:100%;font-size:10px;border-collapse:collapse">'
+    +'<tr style="background:var(--card2)"><th style="padding:4px 6px">Year</th><th>Week</th><th>Signal Date</th><th>Entry Date</th><th>Exit Date</th><th>Entry Rs</th><th>Exit Rs</th><th>Max Ret%</th><th>Exit Ret%</th><th>Max Gain%</th><th>Days to 10%</th></tr>'
+    +occRows
+    +'</table></div></td></tr>';
+
+  return '<tr class="uc-row" style="cursor:pointer;'+(r.alert_today?'background:rgba(34,197,94,.04)':r.alert_tomorrow?'background:rgba(245,158,11,.03)':'')+'" onclick="shToggle(\''+rid+'\')">'
+    +'<td><span id="sh-arr-'+rid+'" style="font-size:10px;color:var(--t3)">&#x25B6;</span></td>'
+    +'<td class="mono gold" style="font-weight:700">'+alertBadge+r.sym+'</td>'
+    +'<td class="mono">&#8377;'+fmt(r.price)+'</td>'
+    +'<td style="font-size:10px;color:var(--t2)">'+r.week_label+'</td>'
+    +'<td class="mono muted">'+r.hold_days+'td</td>'
+    +'<td class="mono green" style="font-weight:700;background:rgba(34,197,94,.06)">+'+Number(r.avg_max_ret||0).toFixed(1)+'%</td>'
+    +'<td class="mono green">+'+Number(r.min_max_ret||0).toFixed(1)+'%</td>'
+    +'<td class="mono '+(r.avg_exit_ret!=null&&r.avg_exit_ret>=10?'green':'amber')+'">'+(r.avg_exit_ret!=null?(r.avg_exit_ret>0?'+':'')+Number(r.avg_exit_ret).toFixed(1)+'%':'—')+'</td>'
+    +'<td class="mono green" style="font-weight:700">'+Number(r.ret_rate||0).toFixed(2)+'</td>'
+    +'<td class="mono muted">'+(r.avg_days_to_10!=null?Number(r.avg_days_to_10).toFixed(1)+'d':'—')+'</td>'
+    +'<td class="mono muted">'+r.n_occurrences+'</td>'
+    +'<td class="mono muted">'+r.n_years+'</td>'
+    +'<td>'+yrBadges+'</td>'
+    +'</tr>'
+    +detailHtml;
+}
+
+
+function renderSHAlerts(){
+  var el=document.getElementById('sh-alerts-view'); if(!el) return;
+  var d=D.shorthold;
+  if(!d){el.innerHTML='<div class="empty">No data.</div>';return;}
+  var today=d.alerts_today||[];
+  var tomorrow=d.alerts_tomorrow||[];
+  var window_=d.alerts_window||[];
+  var todayStr=d.today_date||'';
+  var html='';
+
+  // TODAY alerts
+  html+='<div style="margin-bottom:16px">'
+    +'<div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:8px">'
+    +'✅ BUY TOMORROW — Signal fires TODAY historically ('+(today.length)+' stocks)</div>';
+  if(!today.length){
+    html+='<div class="empty" style="padding:12px">No alerts for today\'s date. Check tomorrow\'s alerts below.</div>';
+  } else {
+    html+='<div class="twrap"><table class="tbl"><thead><tr>'
+      +'<th>Stock</th><th>Avg Return%</th><th>Min Return%</th><th>Hold</th><th>Occurrences</th><th>Years</th>'
+      +'</tr></thead><tbody>';
+    today.sort(function(a,b){return (b.avg_max_ret||0)-(a.avg_max_ret||0);});
+    html+=today.map(function(r){
+      return '<tr><td class="mono gold" style="font-weight:700">'+r.sym+'</td>'
+        +'<td class="mono green" style="font-weight:700">+'+Number(r.avg_max_ret||0).toFixed(1)+'%</td>'
+        +'<td class="mono green">+'+Number(r.min_max_ret||0).toFixed(1)+'%</td>'
+        +'<td class="mono muted">'+r.hold_days+'td</td>'
+        +'<td class="mono muted">'+r.n_occurrences+'</td>'
+        +'<td style="font-size:10px;color:var(--t3)">'+(r.years||[]).join(', ')+'</td>'
+        +'</tr>';
+    }).join('');
+    html+='</tbody></table></div>';
+  }
+  html+='</div>';
+
+  // TOMORROW alerts
+  html+='<div style="margin-bottom:16px">'
+    +'<div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:8px">'
+    +'⏰ WATCH TODAY — Signal fires TOMORROW historically ('+(tomorrow.length)+' stocks)</div>';
+  if(!tomorrow.length){
+    html+='<div class="empty" style="padding:12px">No alerts for tomorrow\'s date.</div>';
+  } else {
+    html+='<div class="twrap"><table class="tbl"><thead><tr>'
+      +'<th>Stock</th><th>Avg Return%</th><th>Min Return%</th><th>Hold</th><th>Occurrences</th><th>Years</th>'
+      +'</tr></thead><tbody>';
+    tomorrow.sort(function(a,b){return (b.avg_max_ret||0)-(a.avg_max_ret||0);});
+    html+=tomorrow.map(function(r){
+      return '<tr><td class="mono gold" style="font-weight:700">'+r.sym+'</td>'
+        +'<td class="mono amber" style="font-weight:700">+'+Number(r.avg_max_ret||0).toFixed(1)+'%</td>'
+        +'<td class="mono amber">+'+Number(r.min_max_ret||0).toFixed(1)+'%</td>'
+        +'<td class="mono muted">'+r.hold_days+'td</td>'
+        +'<td class="mono muted">'+r.n_occurrences+'</td>'
+        +'<td style="font-size:10px;color:var(--t3)">'+(r.years||[]).join(', ')+'</td>'
+        +'</tr>';
+    }).join('');
+    html+='</tbody></table></div>';
+  }
+  html+='</div>';
+  html+='<div style="font-size:10px;color:var(--t3);margin-top:4px">Data as of: '+todayStr+' &middot; All stocks gave ≥10% in 100% of occurrences &middot; Sorted by avg return descending</div>';
+  el.innerHTML=html;
+}
+
+var _MON_FULL=['','January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function renderSHCalendar(){
+  var el=document.getElementById('sh-cal-view'); if(!el) return;
+  var d=D.shorthold;
+  if(!d||!d.year_calendar){el.innerHTML='<div class="empty">No calendar data. Rerun workflow.</div>';return;}
+  var cal=d.year_calendar;
+  var months=Object.keys(cal).sort();
+  if(!months.length){el.innerHTML='<div class="empty">No calendar data found.</div>';return;}
+  var today=new Date();
+  var curMo=(today.getMonth()+1).toString().padStart(2,'0');
+  var html='<div style="font-size:11px;color:var(--t3);margin-bottom:12px">Yearly plan: all months where short-hold signals have historically fired. Sorted by avg return within each month. Green = current/upcoming months.</div>';
+  months.forEach(function(mo){
+    var stocks=cal[mo]||[];
+    if(!stocks.length) return;
+    var moNum=parseInt(mo);
+    var isCur=mo===curMo;
+    var isUpcoming=moNum>parseInt(curMo)&&moNum<=parseInt(curMo)+2;
+    var borderCol=isCur?'var(--green)':isUpcoming?'var(--amber)':'var(--b)';
+    var hdrBg=isCur?'var(--grb)':isUpcoming?'var(--ab)':'var(--s)';
+    var hdrColor=isCur?'var(--green)':isUpcoming?'var(--amber)':'var(--t2)';
+    html+='<div style="margin-bottom:14px;border:1px solid '+borderCol+';border-radius:8px;overflow:hidden">'
+      +'<div style="background:'+hdrBg+';padding:8px 12px;display:flex;justify-content:space-between;align-items:center">'
+      +'<span style="font-weight:700;color:'+hdrColor+';font-size:14px">'+_MON_FULL[moNum]+'</span>'
+      +'<span style="font-size:11px;color:'+hdrColor+'">'+stocks.length+' signals'+(isCur?' — Current Month':isUpcoming?' — Upcoming':'')+'</span>'
+      +'</div>'
+      +'<div class="twrap"><table class="tbl"><thead><tr>'
+      +'<th>Stock</th><th>Avg MM-DD</th><th>Avg Return%</th><th>Min Return%</th><th>Hold</th><th>Occurrences</th>'
+      +'</tr></thead><tbody>'
+      +stocks.map(function(s){
+        return '<tr><td class="mono gold" style="font-weight:700">'+s.sym+'</td>'
+          +'<td class="mono muted">'+s.mmdd+'</td>'
+          +'<td class="mono green" style="font-weight:700">+'+Number(s.avg_max_ret||0).toFixed(1)+'%</td>'
+          +'<td class="mono green">+'+Number(s.min_max_ret||0).toFixed(1)+'%</td>'
+          +'<td class="mono muted">'+s.hold_days+'td</td>'
+          +'<td class="mono muted">'+s.n_occ+'</td>'
+          +'</tr>';
+      }).join('')
+      +'</tbody></table></div></div>';
+  });
+  el.innerHTML=html;
+}
+
+// ══ PRE-SIGNAL CONTEXT ════════════════════════════════════════════════════════
+var psFilterVal='all', psSortVal='pattern_type', psSortDir='asc';
+
+var PS_COLORS={
+  "52W High Breakout":"#818cf8","52W Low Reversal":"#34d399",
+  "Oversold Bounce":"#f87171","Loss Then Rise":"#fb923c",
+  "Volume Spike Entry":"#a78bfa","Volume Accumulation":"#60a5fa",
+  "Momentum Continuation":"#4ade80","Heavyweight":"#fbbf24",
+  "Mixed / Multiple Factors":"#94a3b8"
+};
+var PS_ICONS={
+  "52W High Breakout":"📈","52W Low Reversal":"📉","Oversold Bounce":"🔴",
+  "Loss Then Rise":"🔄","Volume Spike Entry":"⚡","Volume Accumulation":"🌊",
+  "Momentum Continuation":"🚀","Heavyweight":"🏋","Mixed / Multiple Factors":"🔀"
+};
+
+function psFilter(v,btn){psFilterVal=v;document.querySelectorAll('[id^="psf-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderPresignal();}
+function psSort(k,btn){
+  if(psSortVal===k) psSortDir=psSortDir==='desc'?'asc':'desc';
+  else{psSortVal=k;psSortDir=k==='avg_rsi_signal'||k==='avg_ret_5d_before'?'asc':'desc';}
+  document.querySelectorAll('[id^="pss-"]').forEach(function(b){b.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  renderPresignal();
+}
+
+function renderPresignal(){
+  var el=document.getElementById('ps-grid'); if(!el) return;
+  var d=D.presignal;
+  if(!d){el.innerHTML='<div class="empty">No data. Run <strong>Pre-Signal Analyzer</strong> workflow, then refresh.</div>';return;}
+  var q=(document.getElementById('ps-q')?.value||'').toUpperCase().trim();
+  var rows=[...(d.stocks||[])];
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+  if(psFilterVal!=='all') rows=rows.filter(function(r){return (r.pattern_type||'').includes(psFilterVal);});
+  rows.sort(function(a,b){
+    var av=a[psSortVal]!=null?a[psSortVal]:psSortDir==='desc'?-Infinity:Infinity;
+    var bv=b[psSortVal]!=null?b[psSortVal]:psSortDir==='desc'?-Infinity:Infinity;
+    if(typeof av==='string') return psSortDir==='desc'?String(bv).localeCompare(String(av)):String(av).localeCompare(String(bv));
+    return psSortDir==='desc'?bv-av:av-bv;
+  });
+  // Pills
+  var patCounts={};
+  (d.stocks||[]).forEach(function(r){var p=(r.pattern_type||'Unknown').split('+')[0].trim();patCounts[p]=(patCounts[p]||0)+1;});
+  document.getElementById('ps-pills').innerHTML='<div class="kp g"><div class="kl">Total stocks</div><div class="kv">'+d.n_stocks+'</div></div>'
+    +Object.keys(patCounts).sort().map(function(p){
+      return '<div class="kp b"><div class="kl" style="font-size:9px">'+(PS_ICONS[p]||'')+'</div><div class="kv">'+patCounts[p]+'</div><div class="ks">'+p.split(' ').slice(0,2).join(' ')+'</div></div>';
+    }).join('');
+  if(!rows.length){el.innerHTML='<div class="empty">No stocks match filter.</div>';return;}
+  el.innerHTML=rows.map(function(r,ri){
+    var rid='ps'+ri;
+    var pat=r.pattern_type||'Unknown';
+    var pc=PS_COLORS[pat.split('+')[0].trim()]||'#94a3b8';
+    var pi=PS_ICONS[pat.split('+')[0].trim()]||'🔍';
+    // Daily profile sparkline
+    var prof=r.daily_profile||[];
+    var sparkCells=prof.map(function(p){
+      var col=p.avg_ret<-5?'red':p.avg_ret<0?'amber':p.avg_ret<3?'muted':'green';
+      return '<div style="text-align:center;padding:3px"><div style="font-size:8px;color:var(--t3)">-'+p.days_before+'d</div>'
+        +'<div class="mono '+col+'" style="font-size:10px;font-weight:600">'+(p.avg_ret>0?'+':'')+Number(p.avg_ret).toFixed(1)+'%</div>'
+        +'<div style="font-size:8px;color:var(--t3)">'+(p.avg_vol!=null?Number(p.avg_vol).toFixed(1)+'x':'—')+'</div>'
+        +'<div style="font-size:8px;color:var(--t3)">'+(p.avg_rsi!=null?'RSI '+Number(p.avg_rsi).toFixed(0):'')+'</div>'
+        +'</div>';
+    }).join('');
+    // Per-occurrence table
+    var occRows=(r.per_occurrence||[]).slice(0,15).map(function(o){
+      var rsiCol=(o.rsi||50)<35?'red':(o.rsi||50)<45?'amber':(o.rsi||50)>65?'green':'muted';
+      var volCol=(o.vol_ratio||1)>2?'green':(o.vol_ratio||1)>1.4?'amber':'muted';
+      var hiCol=(o.pct_from_hi52||0)>=-5?'green':'muted';
+      var loCol=(o.pct_from_lo52||99)<=10?'amber':'muted';
+      return '<tr style="font-size:10px">'
+        +'<td class="mono">'+o.sig_date+'</td>'
+        +'<td class="mono">&#8377;'+(o.price||'—')+'</td>'
+        +'<td class="mono '+rsiCol+'">'+(o.rsi!=null?Number(o.rsi).toFixed(0):'—')+'</td>'
+        +'<td class="mono '+volCol+'">'+(o.vol_ratio!=null?Number(o.vol_ratio).toFixed(1)+'x':'—')+'</td>'
+        +'<td class="mono '+(( o.ret_before_5d||0)<0?'red':'green')+'">'+(o.ret_before_5d!=null?(o.ret_before_5d>0?'+':'')+Number(o.ret_before_5d).toFixed(1)+'%':'—')+'</td>'
+        +'<td class="mono '+(( o.ret_before_10d||0)<0?'red':'green')+'">'+(o.ret_before_10d!=null?(o.ret_before_10d>0?'+':'')+Number(o.ret_before_10d).toFixed(1)+'%':'—')+'</td>'
+        +'<td class="mono '+hiCol+'">'+(o.pct_from_hi52!=null?Number(o.pct_from_hi52).toFixed(1)+'%':'—')+'</td>'
+        +'<td class="mono '+loCol+'">'+(o.pct_from_lo52!=null?'+'+Number(o.pct_from_lo52).toFixed(1)+'%':'—')+'</td>'
+        +'<td class="mono '+(o.c_dn>=3?'red':'muted')+'">'+(o.c_dn||0)+'</td>'
+        +'<td style="font-size:9px;color:var(--t3)">'+(o.loss_then_rise?'<span class="amber">✓ dip→rise</span>':'')+'</td>'
+        +'</tr>';
+    }).join('');
+    return '<div class="lt-card" style="margin-bottom:10px;border-left:3px solid '+pc+'">'
+      // Header
+      +'<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">'
+      +'<div>'
+      +'<span style="font-size:18px;font-weight:700;color:var(--gold)">'+r.sym+'</span>'
+      +' <span style="background:var(--s);border:1px solid '+pc+';color:'+pc+';border-radius:4px;font-size:10px;font-weight:700;padding:2px 8px">'+pi+' '+pat+'</span>'
+      +' <span style="background:var(--blb);color:var(--blue);border:1px solid var(--bl2);border-radius:3px;font-size:10px;padding:1px 6px">'+r.source+'</span>'
+      +'<div style="font-size:10px;color:var(--t2);margin-top:3px">&#8377;'+fmt(r.price)+' &middot; '+r.n_signals+' historical signals analyzed</div>'
+      +'</div>'
+      +'<div style="text-align:right;font-size:10px;color:var(--t3)">'
+      +(r.avg_rsi_signal!=null?'<div>Signal RSI avg: <span class="mono '+(r.avg_rsi_signal<40?'red':r.avg_rsi_signal>60?'green':'amber')+'">'+Number(r.avg_rsi_signal).toFixed(0)+'</span></div>':'')
+      +(r.avg_ret_5d_before!=null?'<div>5d before avg: <span class="mono '+(r.avg_ret_5d_before<0?'red':'green')+'">'+(r.avg_ret_5d_before>0?'+':'')+Number(r.avg_ret_5d_before).toFixed(1)+'%</span></div>':'')
+      +(r.avg_vol_signal!=null?'<div>Signal vol: <span class="mono '+(r.avg_vol_signal>1.5?'green':'muted')+'">'+Number(r.avg_vol_signal).toFixed(1)+'x</span></div>':'')
+      +'</div>'
+      +'</div>'
+      // Key stats
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:5px;margin-bottom:8px">'
+      +(r.pct_near_hi52!=null?'<div class="ac-mini"><div class="ac-ml">Near 52W High</div><div class="ac-mv '+(r.pct_near_hi52>60?'green':'muted')+'">'+r.pct_near_hi52+'% of signals</div></div>':'')
+      +(r.pct_near_lo52!=null?'<div class="ac-mini"><div class="ac-ml">Near 52W Low</div><div class="ac-mv '+(r.pct_near_lo52>60?'amber':'muted')+'">'+r.pct_near_lo52+'% of signals</div></div>':'')
+      +(r.pct_rsi_below_40!=null?'<div class="ac-mini"><div class="ac-ml">RSI < 40 at signal</div><div class="ac-mv '+(r.pct_rsi_below_40>60?'red':'muted')+'">'+r.pct_rsi_below_40+'%</div></div>':'')
+      +(r.pct_vol_spike!=null?'<div class="ac-mini"><div class="ac-ml">Vol ≥1.8x at signal</div><div class="ac-mv '+(r.pct_vol_spike>50?'green':'muted')+'">'+r.pct_vol_spike+'%</div></div>':'')
+      +(r.pct_loss_then_rise!=null?'<div class="ac-mini"><div class="ac-ml">Loss→Rise pattern</div><div class="ac-mv '+(r.pct_loss_then_rise>60?'amber':'muted')+'">'+r.pct_loss_then_rise+'%</div></div>':'')
+      +(r.pct_loss_before_5d!=null?'<div class="ac-mini"><div class="ac-ml">Fell in 5d before</div><div class="ac-mv muted">'+r.pct_loss_before_5d+'%</div></div>':'')
+      +'</div>'
+      // Conditions
+      +'<div style="background:var(--s);border-radius:6px;padding:8px;margin-bottom:8px">'
+      +'<div style="font-size:10px;font-weight:600;color:var(--t3);margin-bottom:5px">WHAT HAPPENS BEFORE SIGNAL:</div>'
+      +(r.conditions||[]).map(function(c){return '<div style="font-size:11px;color:var(--text);line-height:1.6;margin-bottom:2px">\u2022 '+c+'</div>';}).join('')
+      +'</div>'
+      // Buy when
+      +'<div style="background:rgba(34,197,94,.07);border:1px solid var(--gr2);border-radius:6px;padding:8px;margin-bottom:8px">'
+      +'<div style="color:var(--green);font-size:10px;font-weight:600;margin-bottom:4px">\uD83D\uDCCD WHEN TO ENTER (based on pre-signal pattern):</div>'
+      +'<div style="font-size:11px;color:var(--text);line-height:1.6">'+(r.buy_when||'')+'</div>'
+      +'</div>'
+      // Daily profile
+      +(sparkCells?'<div style="background:var(--s);border-radius:6px;padding:8px;margin-bottom:8px">'
+        +'<div style="font-size:10px;color:var(--t3);font-weight:600;margin-bottom:4px">DAY-BY-DAY AVERAGE CONDITIONS BEFORE SIGNAL (row: avg price ret / avg vol / avg RSI):</div>'
+        +'<div style="display:flex;flex-wrap:nowrap;gap:4px;overflow-x:auto">'+sparkCells+'</div>'
+        +'</div>':'')
+      // Occurrence table
+      +'<details><summary style="font-size:10px;color:var(--t3);cursor:pointer;font-weight:600">All historical occurrences with pre-signal context (click to expand)</summary>'
+      +'<div class="twrap" style="margin-top:6px"><table class="tbl"><thead><tr style="font-size:10px">'
+      +'<th>Signal Date</th><th>Price</th><th>RSI</th><th>Vol Ratio</th>'
+      +'<th>5d Before</th><th>10d Before</th><th>% from Hi52</th><th>% from Lo52</th>'
+      +'<th>Consec Dn</th><th>Pattern</th>'
+      +'</tr></thead><tbody>'+occRows+'</tbody></table></div></details>'
+      +'</div>';
+  }).join('');
+}
 
 loadData();
 </script>
