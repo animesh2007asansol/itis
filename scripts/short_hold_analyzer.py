@@ -29,7 +29,7 @@ OUT.mkdir(exist_ok=True)
 
 # ── CONFIG ────────────────────────────────────────────────────────────────────
 MIN_PRICE      = 10.0
-MIN_TURNOVER   = 1_000_000      # Rs 1 Cr avg daily traded value
+MIN_TURNOVER   = 3_000_000      # Rs 3 Cr avg daily traded value (MINIMUM per day)
 MIN_RETURN     = 10.0           # must rise 10%+ every time
 WIN_RATE       = 100.0          # zero exceptions allowed
 HOLD_DAYS_LIST = [5, 6, 7, 8, 9, 10]
@@ -121,6 +121,9 @@ def analyze_stock(sym, df):
     dates = pd.to_datetime(df["date"].values)
 
     if float(c[-1]) < MIN_PRICE: return []
+    # Last day turnover must be >= 3 Cr
+    last_tv = float(c[-1]) * float(v[-1])
+    if last_tv < MIN_TURNOVER: return []
 
     # Index each trading day by (year, month, week_of_month)
     day_info = []
