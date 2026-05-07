@@ -97,6 +97,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <button class="tab" onclick="showPage('monthlypicks',this)">&#x1F4C6; Monthly Picks</button>
     <button class="tab" onclick="showPage('shorthold',this)">&#x26A1; Short Hold (5-10d)</button>
     <button class="tab" onclick="showPage('presignal',this)">&#x1F52C; Pre-Signal Context</button>
+    <button class="tab" onclick="showPage('bounce',this)">&#x1F4A5; Support Bounce</button>
     <button class="tab" onclick="showPage('buying',this)">&#x1F4B0; Buying Strategy</button>
     <button class="tab" onclick="showPage('guide',this)">&#x1F4D6; Guide</button>
   </div>
@@ -654,6 +655,63 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 
 
 <!-- PAGE: PRE-SIGNAL CONTEXT -->
+<!-- PAGE: BOUNCE / SUPPORT ANALYZER -->
+<div class="page" id="page-bounce">
+  <div class="sh">&#x1F4A5; Support Bounce Analyzer <small>historical support levels &#x00B7; &#xB15% touch &#x2192; consistent bounce &#x00B7; daily alerts</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue);line-height:1.7">
+    &#x1F9E0; Finds stocks that consistently bounce from a support price level (within &#xB15%). Every touch of the support must have bounced &#x2265;8% within the hold period. <strong>Daily alert</strong> = today's price is near a proven support level. Sort by tenure to compare 1-week vs 3-month opportunities. Candle patterns (Hammer, Engulfing, etc.) shown at each touch.
+  </div>
+  <div class="pill-row" id="bn-pills"></div>
+
+  <!-- View selector -->
+  <div class="fbar" style="margin-bottom:6px">
+    <span class="fsep">View:</span>
+    <button class="fb on" id="bnv-stocks" onclick="bnView('stocks',this)">&#x1F4CB; All Stocks</button>
+    <button class="fb"    id="bnv-alerts" onclick="bnView('alerts',this)">&#x1F514; Today's Alerts</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Hold:</span>
+    <button class="fb on" id="bnh-all"  onclick="bnHold(0,this)">All</button>
+    <button class="fb"    id="bnh-5"    onclick="bnHold(5,this)">1 Week</button>
+    <button class="fb"    id="bnh-10"   onclick="bnHold(10,this)">2 Weeks</button>
+    <button class="fb"    id="bnh-20"   onclick="bnHold(20,this)">1 Month</button>
+    <button class="fb"    id="bnh-40"   onclick="bnHold(40,this)">2 Months</button>
+    <button class="fb"    id="bnh-60"   onclick="bnHold(60,this)">3 Months</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="bns-avg"  onclick="bnSort('avg_bounce',this)">Avg Bounce%</button>
+    <button class="fb"    id="bns-min"  onclick="bnSort('min_bounce',this)">Min Bounce%</button>
+    <button class="fb"    id="bns-rate" onclick="bnSort('ret_rate',this)">Ret%/Day</button>
+    <button class="fb"    id="bns-n"    onclick="bnSort('n_touches',this)">Touches</button>
+    <span class="fsep">|</span>
+    <input class="si" id="bn-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderBounce()">
+  </div>
+
+  <div id="bn-main-view">
+    <div class="twrap">
+      <table class="tbl" id="bn-tbl" style="min-width:900px">
+        <thead><tr>
+          <th style="width:22px"></th>
+          <th onclick="bnTh('sym')">Stock<span class="arr"></span></th>
+          <th onclick="bnTh('price')">Price<span class="arr"></span></th>
+          <th onclick="bnTh('support_level')">Support Level<span class="arr"></span></th>
+          <th onclick="bnTh('current_pct_from_sup')">% from Support<span class="arr"></span></th>
+          <th onclick="bnTh('hold_label')">Hold<span class="arr"></span></th>
+          <th onclick="bnTh('avg_bounce')">Avg Bounce%<span class="arr"></span></th>
+          <th onclick="bnTh('min_bounce')">Min Bounce%<span class="arr"></span></th>
+          <th onclick="bnTh('avg_max_gain')">Avg Max Gain%<span class="arr"></span></th>
+          <th onclick="bnTh('ret_rate')">Ret%/Day<span class="arr"></span></th>
+          <th onclick="bnTh('n_touches')">Touches<span class="arr"></span></th>
+          <th onclick="bnTh('dominant_candle')">Candle Pattern<span class="arr"></span></th>
+          <th>Alert</th>
+        </tr></thead>
+        <tbody id="bn-tbody"><tr><td colspan="13" class="empty"><div class="spinner"></div>Loading&#x2026; Run Bounce Support Analyzer workflow first.</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+  <div id="bn-alerts-view" style="display:none"></div>
+</div>
+
+
 <div class="page" id="page-presignal">
   <div class="sh">&#x1F52C; Pre-Signal Context <small>what happened 1&#x2013;20 days BEFORE each signal &#x00B7; pattern fingerprint</small></div>
   <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue);line-height:1.7">
@@ -767,7 +825,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 
 <script>
 const BASE='https://raw.githubusercontent.com/animesh2007asansol/itis/main/stock_analysis';
-const D={alerts:null,history:null,master:null,lt:null,uc1:null,uc2:null,uc3:null,uc4:null,stillvalid:null,uc2timing:null,timingAll:null,shorthold:null,presignal:null};
+const D={alerts:null,history:null,master:null,lt:null,uc1:null,uc2:null,uc3:null,uc4:null,stillvalid:null,uc2timing:null,timingAll:null,shorthold:null,presignal:null,bounce:null};
 
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -976,15 +1034,16 @@ async function loadData(){
     fetch(BASE+'/timing_all.json'),
     fetch(BASE+'/short_hold.json'),
     fetch(BASE+'/presignal_context.json'),
+    fetch(BASE+'/bounce_signals.json'),
   ]);
-  const keys=['alerts','history','master','lt','uc1','uc2','uc3','uc4','stillvalid','uc2timing','timingAll','shorthold','presignal'];
+  const keys=['alerts','history','master','lt','uc1','uc2','uc3','uc4','stillvalid','uc2timing','timingAll','shorthold','presignal','bounce'];
   for(let i=0;i<r.length;i++){
     try{
       if(r[i].status==='fulfilled'&&r[i].value?.ok)
         D[keys[i]]=await r[i].value.json();
     }catch(e){ console.log(keys[i]+':',e.message); }
   }
-  renderAlerts();renderHist();renderLT();renderAll();renderSV();renderBuying();renderCalendar();renderUC2Timing();renderMonthlyPicks();renderShortHold();renderPresignal();renderUC2Timing();
+  renderAlerts();renderHist();renderLT();renderAll();renderSV();renderBuying();renderCalendar();renderUC2Timing();renderMonthlyPicks();renderShortHold();renderPresignal();renderBounce();renderUC2Timing();
   ['uc1','uc2','uc3','uc4'].forEach(function(u){renderUC(u);});
 }
 
@@ -2446,39 +2505,97 @@ function renderSHCalendar(){
   var d=D.shorthold;
   if(!d||!d.year_calendar){el.innerHTML='<div class="empty">No calendar data. Rerun workflow.</div>';return;}
   var cal=d.year_calendar;
-  var months=Object.keys(cal).sort();
-  if(!months.length){el.innerHTML='<div class="empty">No calendar data found.</div>';return;}
-  var today=new Date();
-  var curMo=(today.getMonth()+1).toString().padStart(2,'0');
-  var html='<div style="font-size:11px;color:var(--t3);margin-bottom:12px">Yearly plan: all months where short-hold signals have historically fired. Sorted by avg return within each month. Green = current/upcoming months.</div>';
-  months.forEach(function(mo){
-    var stocks=cal[mo]||[];
-    if(!stocks.length) return;
-    var moNum=parseInt(mo);
-    var isCur=mo===curMo;
-    var isUpcoming=moNum>parseInt(curMo)&&moNum<=parseInt(curMo)+2;
-    var borderCol=isCur?'var(--green)':isUpcoming?'var(--amber)':'var(--b)';
-    var hdrBg=isCur?'var(--grb)':isUpcoming?'var(--ab)':'var(--s)';
-    var hdrColor=isCur?'var(--green)':isUpcoming?'var(--amber)':'var(--t2)';
-    html+='<div style="margin-bottom:14px;border:1px solid '+borderCol+';border-radius:8px;overflow:hidden">'
-      +'<div style="background:'+hdrBg+';padding:8px 12px;display:flex;justify-content:space-between;align-items:center">'
-      +'<span style="font-weight:700;color:'+hdrColor+';font-size:14px">'+_MON_FULL[moNum]+'</span>'
-      +'<span style="font-size:11px;color:'+hdrColor+'">'+stocks.length+' signals'+(isCur?' — Current Month':isUpcoming?' — Upcoming':'')+'</span>'
-      +'</div>'
-      +'<div class="twrap"><table class="tbl"><thead><tr>'
-      +'<th>Stock</th><th>Avg MM-DD</th><th>Avg Return%</th><th>Min Return%</th><th>Hold</th><th>Occurrences</th>'
-      +'</tr></thead><tbody>'
-      +stocks.map(function(s){
-        return '<tr><td class="mono gold" style="font-weight:700">'+s.sym+'</td>'
-          +'<td class="mono muted">'+s.mmdd+'</td>'
-          +'<td class="mono green" style="font-weight:700">+'+Number(s.avg_max_ret||0).toFixed(1)+'%</td>'
-          +'<td class="mono green">+'+Number(s.min_max_ret||0).toFixed(1)+'%</td>'
-          +'<td class="mono muted">'+s.hold_days+'td</td>'
-          +'<td class="mono muted">'+s.n_occ+'</td>'
-          +'</tr>';
-      }).join('')
-      +'</tbody></table></div></div>';
+
+  // Build flat list: all (sym, month, week, ...) rows
+  var allRows=[];
+  Object.keys(cal).sort().forEach(function(mo){
+    (cal[mo]||[]).forEach(function(s){
+      allRows.push({
+        mo_num: parseInt(mo),
+        month_name: _MON_FULL[parseInt(mo)]||mo,
+        sym: s.sym, week: s.week, week_label: s.week_label,
+        avg_max_ret: s.avg_max_ret, min_max_ret: s.min_max_ret,
+        hold_days: s.hold_days, n_occ: s.n_occ,
+        years: s.years||[],
+        alert_today: s.alert_today||false,
+        alert_tomorrow: s.alert_tomorrow||false,
+      });
+    });
   });
+
+  // Week filter
+  var wf=parseInt(document.getElementById('sh-cal-wf')?.value||0)||0;
+  if(wf>0) allRows=allRows.filter(function(r){return r.week===wf;});
+
+  // Sort
+  var sk=document.getElementById('sh-cal-sk')?.value||'avg_max_ret';
+  var sd=document.getElementById('sh-cal-sd')?.value||'desc';
+  allRows.sort(function(a,b){
+    if(sk==='week_label'){
+      var ak=a.mo_num*10+a.week, bk=b.mo_num*10+b.week;
+      return sd==='asc'?ak-bk:bk-ak;
+    }
+    var av=a[sk]!=null?a[sk]:0, bv=b[sk]!=null?b[sk]:0;
+    return sd==='desc'?bv-av:av-bv;
+  });
+
+  var today=new Date(); var cm=(today.getMonth()+1).toString().padStart(2,'0');
+  var html='<div style="margin-bottom:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">'
+    +'<span style="font-size:11px;color:var(--t3)">Filter week:</span>'
+    +'<select id="sh-cal-wf" onchange="renderSHCalendar()" style="background:var(--s);border:1px solid var(--b);color:var(--text);border-radius:4px;padding:3px 8px;font-size:11px">'
+    +'<option value="0">All weeks</option>'
+    +'<option value="1">Week 1</option><option value="2">Week 2</option>'
+    +'<option value="3">Week 3</option><option value="4">Week 4</option><option value="5">Week 5</option>'
+    +'</select>'
+    +'<span style="font-size:11px;color:var(--t3)">Sort by:</span>'
+    +'<select id="sh-cal-sk" onchange="renderSHCalendar()" style="background:var(--s);border:1px solid var(--b);color:var(--text);border-radius:4px;padding:3px 8px;font-size:11px">'
+    +'<option value="avg_max_ret">Avg Return%</option>'
+    +'<option value="min_max_ret">Min Return%</option>'
+    +'<option value="hold_days">Hold Days</option>'
+    +'<option value="n_occ">Occurrences</option>'
+    +'<option value="week_label">Month & Week (calendar order)</option>'
+    +'</select>'
+    +'<select id="sh-cal-sd" onchange="renderSHCalendar()" style="background:var(--s);border:1px solid var(--b);color:var(--text);border-radius:4px;padding:3px 8px;font-size:11px">'
+    +'<option value="desc">Highest first</option>'
+    +'<option value="asc">Lowest first</option>'
+    +'</select>'
+    +'<span style="font-size:11px;color:var(--t3)">'+allRows.length+' patterns</span>'
+    +'</div>';
+
+  if(!allRows.length){html+='<div class="empty">No patterns match filter.</div>';el.innerHTML=html;return;}
+
+  html+='<div class="twrap"><table class="tbl"><thead><tr>'
+    +'<th>Stock</th><th>Month</th><th>Week</th><th>Hold</th>'
+    +'<th>Avg Return%</th><th>Min Return%</th><th>Occurrences</th><th>Alert</th><th>Years</th>'
+    +'</tr></thead><tbody>';
+
+  html+=allRows.map(function(r){
+    var reqSet=new Set(d.required_years||[]);
+    var yrBadges=(r.years||[]).map(function(y){
+      return '<span style="font-size:9px;padding:1px 3px;border-radius:2px;margin-right:2px;'
+        +(reqSet.has(y)?'background:var(--grb);color:var(--green);border:1px solid var(--gr2)':'background:var(--s);color:var(--t3);border:1px solid var(--b)')
+        +'">'+y+'</span>';
+    }).join('');
+    var alertBadge=r.alert_today
+      ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 4px">\u2705 NOW</span>'
+      :r.alert_tomorrow
+      ?'<span style="background:var(--ab);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:9px;padding:1px 4px">\u23f0 TMR</span>'
+      :'';
+    var mo=r.mo_num; var cm2=new Date().getMonth()+1;
+    var rowBg=mo===cm2?'rgba(34,197,94,.04)':mo===((cm2%12)+1)?'rgba(245,158,11,.03)':'';
+    return '<tr style="background:'+rowBg+'">'
+      +'<td class="mono gold" style="font-weight:700">'+r.sym+'</td>'
+      +'<td style="font-size:11px">'+r.month_name+'</td>'
+      +'<td class="mono muted">Wk '+r.week+'</td>'
+      +'<td class="mono muted">'+r.hold_days+'td</td>'
+      +'<td class="mono green" style="font-weight:700">+'+Number(r.avg_max_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono green">+'+Number(r.min_max_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono muted">'+r.n_occ+'</td>'
+      +'<td>'+alertBadge+'</td>'
+      +'<td>'+yrBadges+'</td>'
+      +'</tr>';
+  }).join('');
+  html+='</tbody></table></div>';
   el.innerHTML=html;
 }
 
@@ -2611,6 +2728,141 @@ function renderPresignal(){
       +'</tr></thead><tbody>'+occRows+'</tbody></table></div></details>'
       +'</div>';
   }).join('');
+}
+
+// ══ BOUNCE / SUPPORT ANALYZER ═════════════════════════════════════════════════
+var bnViewMode='stocks', bnHoldFilter=0, bnSortKey='avg_bounce', bnSortDir='desc';
+
+function bnView(v,btn){bnViewMode=v;document.querySelectorAll('[id^="bnv-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');
+  document.getElementById('bn-main-view').style.display=v==='stocks'?'':'none';
+  document.getElementById('bn-alerts-view').style.display=v==='alerts'?'':'none';
+  if(v==='alerts')renderBnAlerts(); else renderBounce();}
+function bnHold(v,btn){bnHoldFilter=v;document.querySelectorAll('[id^="bnh-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderBounce();}
+function bnSort(k,btn){if(bnSortKey===k)bnSortDir=bnSortDir==='desc'?'asc':'desc';else{bnSortKey=k;bnSortDir='desc';}
+  document.querySelectorAll('[id^="bns-"]').forEach(function(b){b.classList.remove('on');});if(btn)btn.classList.add('on');renderBounce();}
+function bnTh(k){bnSort(k,null);}
+
+function bnToggle(id){var r=document.getElementById('bn-det-'+id);var a=document.getElementById('bn-arr-'+id);
+  if(!r)return;if(r.style.display==='none'){r.style.display='';if(a)a.textContent='\u25BC';}else{r.style.display='none';if(a)a.textContent='\u25B6';}}
+
+function renderBounce(){
+  var tbody=document.getElementById('bn-tbody'); if(!tbody) return;
+  var d=D.bounce;
+  if(!d){tbody.innerHTML='<tr><td colspan="13" class="empty">No data. Run <strong>Bounce Support Analyzer</strong> workflow, then refresh.</td></tr>';return;}
+
+  var q=(document.getElementById('bn-q')?.value||'').toUpperCase().trim();
+
+  // Flatten: one row per (stock, support_level, hold_period)
+  var rows=[];
+  (d.stocks||[]).forEach(function(s){
+    (s.levels||[]).forEach(function(lv){
+      if(bnHoldFilter!==0&&lv.hold_days!==bnHoldFilter)return;
+      if(q&&!s.sym.includes(q))return;
+      rows.push({sym:s.sym,price:s.price,...lv});
+    });
+  });
+
+  // Sort
+  rows.sort(function(a,b){
+    if(a.alert_today!==b.alert_today)return b.alert_today?1:-1;
+    var av=a[bnSortKey]!=null?a[bnSortKey]:0;
+    var bv=b[bnSortKey]!=null?b[bnSortKey]:0;
+    if(typeof av==='string')return bnSortDir==='desc'?String(bv).localeCompare(String(av)):String(av).localeCompare(String(bv));
+    return bnSortDir==='desc'?bv-av:av-bv;
+  });
+
+  // Pills
+  var alertN=(d.alerts_today||[]).length;
+  document.getElementById('bn-pills').innerHTML=[
+    ['Qualifying stocks',d.n_stocks,'g'],
+    ['Alerts today',alertN,'g','price near support level now'],
+    ['Patterns found',rows.length,'b'],
+    ['1-Week bounces',rows.filter(function(r){return r.hold_days===5;}).length,'b'],
+    ['1-Month bounces',rows.filter(function(r){return r.hold_days===20;}).length,'b'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';}).join('');
+
+  if(!rows.length){tbody.innerHTML='<tr><td colspan="13" class="empty">No patterns match filter.</td></tr>';return;}
+
+  var html='';
+  rows.forEach(function(lv,ri){
+    var rid='bn'+ri;
+    var alertBadge=lv.alert_today
+      ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 4px">\u2705 NEAR SUPPORT</span>'
+      :'';
+    var distColor=(lv.current_pct_from_sup!=null&&Math.abs(lv.current_pct_from_sup)<=5)?'green':'muted';
+    var occRows=(lv.touches||[]).slice(0,12).map(function(t){
+      var bounceH=t.bounces&&t.bounces[lv.hold_days]||{};
+      var ret=bounceH.ret!=null?bounceH.ret:null;
+      var rc=ret!=null&&ret>=20?'green':ret!=null&&ret>=10?'amber':'red';
+      return '<tr style="font-size:10px">'
+        +'<td class="mono muted">'+t.year+'</td>'
+        +'<td class="mono">'+t.date+'</td>'
+        +'<td class="mono">&#8377;'+(t.low||'—')+'</td>'
+        +'<td class="mono '+(t.pct_from_sup<0?'amber':'muted')+'">'+(t.pct_from_sup!=null?(t.pct_from_sup>0?'+':'')+Number(t.pct_from_sup).toFixed(1)+'%':'—')+'</td>'
+        +'<td class="mono '+(t.candle&&t.candle[0]!=='No pattern'?'amber':'muted')+'">'+(t.candle||[]).slice(0,2).join(', ')+'</td>'
+        +'<td class="mono">&#8377;'+(bounceH.entry_px||'—')+'</td>'
+        +'<td class="mono">&#8377;'+(bounceH.exit_px||'—')+'</td>'
+        +'<td class="mono '+rc+'">'+(ret!=null?(ret>0?'+':'')+Number(ret).toFixed(1)+'%':'—')+'</td>'
+        +'<td class="mono green">'+(bounceH.max_gain!=null?'+'+Number(bounceH.max_gain).toFixed(1)+'%':'—')+'</td>'
+        +'</tr>';
+    }).join('');
+    var detHtml='<tr id="bn-det-'+rid+'" style="display:none"><td colspan="13" style="padding:0">'
+      +'<div style="padding:10px;background:rgba(0,0,0,.2)">'
+      +(lv.alert_today?'<div style="background:rgba(34,197,94,.1);border:1px solid var(--gr2);border-radius:5px;padding:7px 10px;margin-bottom:8px;font-size:11px"><strong class="green">\u2705 NEAR SUPPORT NOW!</strong> Current price Rs '+fmt(lv.price)+' is '+Math.abs(lv.current_pct_from_sup||0).toFixed(1)+'% '+(lv.current_pct_from_sup<0?'below':'above')+' support Rs '+fmt(lv.support_level)+'. Historically bounced avg +'+lv.avg_bounce+'% (min +'+lv.min_bounce+'%) in '+lv.hold_label+'. <strong>Consider entering now.</strong></div>':'')
+      +'<div style="font-size:10px;font-weight:600;color:var(--t3);margin-bottom:6px">ALL TOUCHES OF SUPPORT Rs '+fmt(lv.support_level)+' ('+lv.hold_label+' hold) — '+lv.n_touches+' times, all bounced \u226510%</div>'
+      +'<table style="width:100%;font-size:10px;border-collapse:collapse"><tr style="background:var(--card2)">'
+      +'<th style="padding:3px 6px">Year</th><th>Date</th><th>Low Rs</th><th>% from Sup</th><th>Candle</th><th>Entry Rs</th><th>Exit Rs</th><th>Bounce%</th><th>Max Gain%</th>'
+      +'</tr>'+occRows+'</table></div></td></tr>';
+    html+='<tr class="uc-row" style="cursor:pointer;'+(lv.alert_today?'background:rgba(34,197,94,.04)':'')+'" onclick="bnToggle(\''+rid+'\')">'
+      +'<td><span id="bn-arr-'+rid+'" style="font-size:10px;color:var(--t3)">\u25B6</span></td>'
+      +'<td class="mono gold" style="font-weight:700">'+lv.sym+'</td>'
+      +'<td class="mono">&#8377;'+fmt(lv.price)+'</td>'
+      +'<td class="mono amber">&#8377;'+fmt(lv.support_level)+'</td>'
+      +'<td class="mono '+distColor+'">'+(lv.current_pct_from_sup!=null?(lv.current_pct_from_sup>0?'+':'')+Number(lv.current_pct_from_sup).toFixed(1)+'%':'—')+'</td>'
+      +'<td class="mono muted">'+lv.hold_label+'</td>'
+      +'<td class="mono green" style="font-weight:700;background:rgba(34,197,94,.06)">+'+Number(lv.avg_bounce||0).toFixed(1)+'%</td>'
+      +'<td class="mono green">+'+Number(lv.min_bounce||0).toFixed(1)+'%</td>'
+      +'<td class="mono green">+'+(lv.avg_max_gain!=null?Number(lv.avg_max_gain).toFixed(1):'—')+'%</td>'
+      +'<td class="mono green" style="font-weight:700">'+Number(lv.ret_rate||0).toFixed(2)+'</td>'
+      +'<td class="mono muted">'+lv.n_touches+'</td>'
+      +'<td class="mono '+(lv.dominant_candle!=='None'&&lv.dominant_candle!=='No pattern'?'amber':'muted')+'" style="font-size:10px">'+lv.dominant_candle+'</td>'
+      +'<td>'+alertBadge+'</td>'
+      +'</tr>'+detHtml;
+  });
+  tbody.innerHTML=html;
+}
+
+function renderBnAlerts(){
+  var el=document.getElementById('bn-alerts-view'); if(!el) return;
+  var d=D.bounce;
+  if(!d){el.innerHTML='<div class="empty">No data. Run workflow first.</div>';return;}
+  var alerts=d.alerts_today||[];
+  if(!alerts.length){el.innerHTML='<div class="empty">No stocks near support today. Check tomorrow.</div>';return;}
+
+  var html='<div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px">'
+    +'\u2705 '+alerts.length+' Stock'+(alerts.length>1?'s are':'is')+' near proven support level today — all hold periods shown</div>';
+
+  alerts.forEach(function(s){
+    var alv=s.alert_levels||[];
+    html+='<div class="lt-card" style="margin-bottom:10px;border-left:3px solid var(--green)">'
+      +'<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">'
+      +'<div><span style="font-size:18px;font-weight:700;color:var(--gold)">'+s.sym+'</span>'
+      +'<div style="font-size:11px;color:var(--t2);margin-top:2px">Current: Rs '+fmt(s.price)+'</div></div>'
+      +'</div>';
+    html+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px">';
+    alv.forEach(function(lv){
+      html+='<div class="ac-mini" style="background:var(--grb);border:1px solid var(--gr2)">'
+        +'<div class="ac-ml">Support Rs '+fmt(lv.support_level)+' ('+Number(lv.current_pct_from_sup||0).toFixed(1)+'%)</div>'
+        +'<div class="ac-ml" style="font-size:10px;color:var(--green);font-weight:700">'+lv.hold_label+'</div>'
+        +'<div class="ac-mv green">Avg +'+lv.avg_bounce+'%</div>'
+        +'<div style="font-size:9px;color:var(--t3)">Min +'+lv.min_bounce+'% &middot; '+lv.n_touches+' times</div>'
+        +'<div style="font-size:9px;color:var(--amber)">Candle: '+lv.dominant_candle+'</div>'
+        +'</div>';
+    });
+    html+='</div></div>';
+  });
+  html+='<div style="font-size:10px;color:var(--t3);margin-top:8px">Data: '+d.today_date+' &middot; Every touch of support gave \u226510% bounce &middot; Sorted by avg bounce% descending</div>';
+  el.innerHTML=html;
 }
 
 loadData();
