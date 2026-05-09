@@ -18,6 +18,7 @@ Outputs:
 """
 
 import json, sys, warnings
+from datetime import datetime as _dt2
 from datetime import datetime
 from pathlib import Path
 
@@ -140,8 +141,9 @@ def build_exit_curve(df, signal_indices, entry_offset=0):
             "win_rate":      r2(sum(1 for r in rets if r > 0) / len(rets) * 100),
             "n":             len(rets),
         })
-        if exit_day == 1:
-            entry_prices = ep_list
+        # Collect entry prices from the first exit_day iteration
+        if exit_day == 1 and ep_list:
+            entry_prices = list(ep_list)
 
     avg_entry_price = r2(sum(entry_prices) / len(entry_prices)) if entry_prices else None
     return curve, avg_entry_price
@@ -445,8 +447,8 @@ def analyze_uc1(df, sym):
         month_signals.setdefault(mo, []).append(si)
 
     results = []
-    import datetime as _dt2
-    cur_yr2 = _dt2.datetime.now().year
+    from datetime import datetime as _dt2
+    cur_yr2 = _dt2.now().year
     for mo, sigs in month_signals.items():
         if len(sigs) < MIN_OCC: continue
 

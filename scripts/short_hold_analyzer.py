@@ -122,7 +122,10 @@ def analyze_stock(sym, df):
 
     if float(c[-1]) < MIN_PRICE: return []
     # Last day turnover must be >= 3 Cr
-    last_tv = float(c[-1]) * float(v[-1])
+    # Use average of last 5 days turnover to avoid single-day anomalies
+    last_tv = float(np.mean(
+        [float(c[j]) * float(v[j]) for j in range(max(0, n-5), n) if float(v[j]) > 0]
+    )) if n >= 1 else 0
     if last_tv < MIN_TURNOVER: return []
 
     # Index each trading day by (year, month, week_of_month)
@@ -149,8 +152,10 @@ def analyze_stock(sym, df):
             # Determine required years for this slot:
             # If this month+week has already passed in the current year,
             # then current year is REQUIRED too — no misses allowed.
+            # A slot has 'passed' this year if that month+week is already over
+            # Handle year-end wrap: if cur_mo is Jan(1), months 2-12 haven't passed yet
             slot_has_passed = (
-                month < cur_mo or
+                (month < cur_mo) or
                 (month == cur_mo and week < cur_wk)
             )
             req_years = BASE_REQUIRED_YEARS | ({cur_yr} if slot_has_passed else set())
@@ -225,8 +230,8 @@ def analyze_stock(sym, df):
                 # Calendar alert: is today or tomorrow in this month+week slot?
                 today_dt   = datetime.now()
                 alert_today    = (today_dt.month == month and week_of_month(today_dt) == week)
-                tomorrow_dt    = today_dt.__class__(today_dt.year, today_dt.month,
-                                     min(today_dt.day+1, 28))
+                import datetime as _dtt
+                tomorrow_dt    = today_dt + _dtt.timedelta(days=1)
                 alert_tomorrow = (tomorrow_dt.month == month and week_of_month(tomorrow_dt) == week)
 
                 qualifying.append({
@@ -250,6 +255,9 @@ def analyze_stock(sym, df):
                     "alert_today":      alert_today,
                     "alert_tomorrow":   alert_tomorrow,
                     "occurrences":      sorted(occurrences, key=lambda x: x["sig_date"], reverse=True),
+                    # Calendar MMDD list for each occurrence (used by year calendar)
+                    "calendar_mmdd":    [{"mmdd": occ["sig_date"][5:], "year": occ["year"]}
+                                        for occ in occurrences],
                 })
 
     # Per stock: keep best pattern per (month, week) slot

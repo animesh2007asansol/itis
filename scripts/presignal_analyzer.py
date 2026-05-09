@@ -102,8 +102,8 @@ def context_at(df, idx):
     ctx["rsi"]           = r2(df["rsi"].iloc[idx])
     ctx["vol_ratio"]     = r2(df["vol_ratio"].iloc[idx])
     ctx["atr_pct"]       = r2(df["atr_pct"].iloc[idx])
-    ctx["c_dn"]          = int(df["c_dn"].iloc[idx])
-    ctx["c_up"]          = int(df["c_up"].iloc[idx])
+    ctx["c_dn"]          = int(df["c_dn"].iloc[idx]) if not pd.isna(df["c_dn"].iloc[idx]) else 0
+    ctx["c_up"]          = int(df["c_up"].iloc[idx]) if not pd.isna(df["c_up"].iloc[idx]) else 0
     ctx["pct_from_hi52"] = r2(df["pct_from_hi52"].iloc[idx])
     ctx["pct_from_lo52"] = r2(df["pct_from_lo52"].iloc[idx])
     sma = df["sma20"].iloc[idx]
@@ -246,7 +246,7 @@ def build_fp(ctxs):
     if "Momentum"    in pattern: bw.append("Do not wait for a dip. Enter while stock is already rising.")
     if "Heavyweight" in pattern: bw.append("Enter on the defined signal date. Conditions do not matter for this stock.")
     if not bw: bw.append("Enter on the defined signal date (1st of month / specific week) regardless of current conditions.")
-    return {"pattern_type":pattern,"conditions":[c for c in conds if c],"buy_when":" ".join(bw),
+    return {"pattern_type":pattern,"conditions":[cond for cond in conds if cond],"buy_when":" ".join(bw),
             "daily_profile":daily,"avg_rsi_signal":ar,"avg_ret_5d_before":ar5,"avg_ret_10d_before":ar10,
             "avg_ret_20d_before":ar20,"avg_vol_signal":av,"avg_vol_5d_before":av5,
             "avg_pct_from_hi52":aph,"avg_pct_from_lo52":apl,
@@ -273,7 +273,10 @@ def main():
         for stk in (tm.get("stocks") or []):
             sym = stk["sym"]
             for t in (stk.get("timing") or []):
-                for occ in (t.get("occurrences") or []):
+                # Try occurrences first, then per_occurrence, then exit_curve dates
+                occ_list = (t.get("occurrences") or
+                            t.get("per_occurrence") or [])
+                for occ in occ_list:
                     d = occ.get("sig_date") or occ.get("entry_date")
                     if d: sym_sigs[sym].append(d)
             if sym not in sym_source: sym_source[sym] = "Monthly Picks"
