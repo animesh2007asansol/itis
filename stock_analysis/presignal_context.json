@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-09T19:28:41",
+  "generated_at": "2026-05-09T19:57:23",
   "n_stocks": 337,
   "n_skipped": 0,
   "pattern_types": {
@@ -74848,7 +74848,7 @@
     {
       "sym": "NECLIFE",
       "price": 14.36,
-      "source": "Short Hold",
+      "source": "Short Hold + Monthly",
       "n_signals": 37,
       "pattern_type": "Oversold Bounce + Heavyweight",
       "conditions": [
