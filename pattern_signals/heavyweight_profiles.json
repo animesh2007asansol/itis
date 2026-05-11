@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-10T01:34:27+05:30",
-  "data_range": "2020-01-01 to 2026-05-08",
+  "generated_at": "2026-05-11T20:52:06+05:30",
+  "data_range": "2020-01-01 to 2026-05-11",
   "thresholds": {
     "min_years_traded": 4,
     "min_turnover_cr": 2.0,
@@ -57,10 +57,10 @@
           "med_return": 20.88
         },
         "30": {
-          "n": 3,
+          "n": 4,
           "win_rate": 100.0,
           "beats15_rate": 100.0,
-          "avg_return": 20.65,
+          "avg_return": 20.73,
           "min_return": 15.58,
           "max_return": 25.34,
           "med_return": 21.03
@@ -180,7 +180,11 @@
               "positive": true,
               "beats_15pct": true
             },
-            "30": null
+            "30": {
+              "return_pct": 20.96,
+              "positive": true,
+              "beats_15pct": true
+            }
           }
         }
       ]
