@@ -14,10 +14,10 @@ name: 📈 NSE Daily Data Fetch
 
 on:
   schedule:
-    - cron: '30 13 * * 1-5'   # 21:00 IST – primary
-    - cron: '0  16 * * 1-5'   # 21:30 IST – retry 1
-    - cron: '0  17 * * 1-5'   # 22:30 IST – retry 2
-    - cron: '30 17 * * 1-5'   # 23:00 IST – final safety net
+    - cron: '30 12 * * 1-5'   # 21:00 IST – primary
+    - cron: '0  13 * * 1-5'   # 21:30 IST – retry 1
+    - cron: '0  14 * * 1-5'   # 22:30 IST – retry 2
+    - cron: '30 15 * * 1-5'   # 23:00 IST – final safety net
 
   workflow_dispatch:
     inputs:
