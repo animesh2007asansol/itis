@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-12T18:29:11",
-  "today_date": "2026-05-12",
+  "generated_at": "2026-05-13T17:48:16",
+  "today_date": "2026-05-13",
   "today_week_label": "Week 2 of May",
   "required_years": [
     2022,
@@ -9,14 +9,14 @@
     2025,
     2026
   ],
-  "n_patterns": 579,
-  "n_stocks": 338,
-  "n_alerts_today": 39,
-  "n_alerts_tomorrow": 39,
+  "n_patterns": 577,
+  "n_stocks": 337,
+  "n_alerts_today": 38,
+  "n_alerts_tomorrow": 38,
   "alerts_today": [
     {
       "sym": "NDTV",
-      "price": 73.88,
+      "price": 74.35,
       "hold_days": 7,
       "month": 5,
       "month_name": "May",
@@ -397,7 +397,7 @@
     },
     {
       "sym": "KAMATHOTEL",
-      "price": 174.33,
+      "price": 168.66,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -633,7 +633,7 @@
     },
     {
       "sym": "DENORA",
-      "price": 715.05,
+      "price": 722.05,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -1031,7 +1031,7 @@
     },
     {
       "sym": "BANCOINDIA",
-      "price": 593.25,
+      "price": 598.55,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -1357,7 +1357,7 @@
     },
     {
       "sym": "NUCLEUS",
-      "price": 791.25,
+      "price": 786.35,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -1720,7 +1720,7 @@
     },
     {
       "sym": "KIRLOSENG",
-      "price": 1561.1,
+      "price": 1599.6,
       "hold_days": 5,
       "month": 5,
       "month_name": "May",
@@ -1991,7 +1991,7 @@
     },
     {
       "sym": "ELECON",
-      "price": 502.0,
+      "price": 505.8,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -2353,7 +2353,7 @@
     },
     {
       "sym": "VOLTAMP",
-      "price": 9284.0,
+      "price": 9390.0,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -2605,243 +2605,8 @@
       ]
     },
     {
-      "sym": "AVROIND",
-      "price": 10.25,
-      "hold_days": 7,
-      "month": 5,
-      "month_name": "May",
-      "month_abbr": "May",
-      "week": 2,
-      "week_label": "Week 2 of May",
-      "description": "Enter in Week 2 of May, hold 7 trading days",
-      "n_occurrences": 11,
-      "n_years": 4,
-      "years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "required_years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "slot_passed_2026": false,
-      "avg_max_ret": 20.09,
-      "min_max_ret": 11.85,
-      "avg_exit_ret": 14.26,
-      "avg_days_to_10": 2.45,
-      "ret_rate": 2.87,
-      "alert_today": true,
-      "alert_tomorrow": true,
-      "occurrences": [
-        {
-          "sig_date": "2025-05-12",
-          "entry_date": "2025-05-13",
-          "exit_date": "2025-05-22",
-          "year": 2025,
-          "month": 5,
-          "week": 2,
-          "entry_px": 156.0,
-          "exit_px": 182.14,
-          "max_ret": 20.93,
-          "ret_on_exit": 16.76,
-          "max_gain": 27.56,
-          "days_to_10": 1
-        },
-        {
-          "sig_date": "2025-05-09",
-          "entry_date": "2025-05-12",
-          "exit_date": "2025-05-21",
-          "year": 2025,
-          "month": 5,
-          "week": 2,
-          "entry_px": 155.0,
-          "exit_px": 184.01,
-          "max_ret": 21.71,
-          "ret_on_exit": 18.72,
-          "max_gain": 28.39,
-          "days_to_10": 1
-        },
-        {
-          "sig_date": "2025-05-08",
-          "entry_date": "2025-05-09",
-          "exit_date": "2025-05-20",
-          "year": 2025,
-          "month": 5,
-          "week": 2,
-          "entry_px": 141.0,
-          "exit_px": 183.33,
-          "max_ret": 33.79,
-          "ret_on_exit": 30.02,
-          "max_gain": 41.13,
-          "days_to_10": 1
-        },
-        {
-          "sig_date": "2024-05-09",
-          "entry_date": "2024-05-10",
-          "exit_date": "2024-05-22",
-          "year": 2024,
-          "month": 5,
-          "week": 2,
-          "entry_px": 114.65,
-          "exit_px": 125.9,
-          "max_ret": 13.56,
-          "ret_on_exit": 9.81,
-          "max_gain": 19.93,
-          "days_to_10": 4
-        },
-        {
-          "sig_date": "2023-05-12",
-          "entry_date": "2023-05-15",
-          "exit_date": "2023-05-24",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 132.9,
-          "exit_px": 128.65,
-          "max_ret": 11.85,
-          "ret_on_exit": -3.2,
-          "max_gain": 15.05,
-          "days_to_10": 3
-        },
-        {
-          "sig_date": "2023-05-11",
-          "entry_date": "2023-05-12",
-          "exit_date": "2023-05-23",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 125.0,
-          "exit_px": 130.2,
-          "max_ret": 18.92,
-          "ret_on_exit": 4.16,
-          "max_gain": 22.32,
-          "days_to_10": 2
-        },
-        {
-          "sig_date": "2023-05-10",
-          "entry_date": "2023-05-11",
-          "exit_date": "2023-05-22",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 123.4,
-          "exit_px": 137.05,
-          "max_ret": 20.46,
-          "ret_on_exit": 11.06,
-          "max_gain": 23.91,
-          "days_to_10": 3
-        },
-        {
-          "sig_date": "2023-05-09",
-          "entry_date": "2023-05-10",
-          "exit_date": "2023-05-19",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 125.0,
-          "exit_px": 144.1,
-          "max_ret": 18.92,
-          "ret_on_exit": 15.28,
-          "max_gain": 22.32,
-          "days_to_10": 4
-        },
-        {
-          "sig_date": "2023-05-08",
-          "entry_date": "2023-05-09",
-          "exit_date": "2023-05-18",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 123.15,
-          "exit_px": 148.65,
-          "max_ret": 20.71,
-          "ret_on_exit": 20.71,
-          "max_gain": 23.3,
-          "days_to_10": 4
-        },
-        {
-          "sig_date": "2022-05-10",
-          "entry_date": "2022-05-11",
-          "exit_date": "2022-05-20",
-          "year": 2022,
-          "month": 5,
-          "week": 2,
-          "entry_px": 107.65,
-          "exit_px": 122.0,
-          "max_ret": 15.56,
-          "ret_on_exit": 13.33,
-          "max_gain": 19.83,
-          "days_to_10": 2
-        },
-        {
-          "sig_date": "2022-05-09",
-          "entry_date": "2022-05-10",
-          "exit_date": "2022-05-19",
-          "year": 2022,
-          "month": 5,
-          "week": 2,
-          "entry_px": 99.85,
-          "exit_px": 120.0,
-          "max_ret": 24.59,
-          "ret_on_exit": 20.18,
-          "max_gain": 29.19,
-          "days_to_10": 2
-        }
-      ],
-      "calendar_mmdd": [
-        {
-          "mmdd": "05-09",
-          "year": 2022
-        },
-        {
-          "mmdd": "05-10",
-          "year": 2022
-        },
-        {
-          "mmdd": "05-08",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-09",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-10",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-11",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-12",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-09",
-          "year": 2024
-        },
-        {
-          "mmdd": "05-08",
-          "year": 2025
-        },
-        {
-          "mmdd": "05-09",
-          "year": 2025
-        },
-        {
-          "mmdd": "05-12",
-          "year": 2025
-        }
-      ]
-    },
-    {
       "sym": "DYNAMATECH",
-      "price": 10754.0,
+      "price": 10714.0,
       "hold_days": 7,
       "month": 5,
       "month_name": "May",
@@ -3113,7 +2878,7 @@
     },
     {
       "sym": "WHEELS",
-      "price": 1277.5,
+      "price": 1328.9,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -3439,7 +3204,7 @@
     },
     {
       "sym": "SANDHAR",
-      "price": 505.95,
+      "price": 514.05,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -3783,7 +3548,7 @@
     },
     {
       "sym": "REMSONSIND",
-      "price": 108.01,
+      "price": 108.97,
       "hold_days": 7,
       "month": 5,
       "month_name": "May",
@@ -4018,7 +3783,7 @@
     },
     {
       "sym": "ADSL",
-      "price": 123.87,
+      "price": 126.01,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -4362,7 +4127,7 @@
     },
     {
       "sym": "CHENNPETRO",
-      "price": 1009.7,
+      "price": 1027.4,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -4795,8 +4560,297 @@
       ]
     },
     {
+      "sym": "DEVIT",
+      "price": 29.71,
+      "hold_days": 10,
+      "month": 5,
+      "month_name": "May",
+      "month_abbr": "May",
+      "week": 2,
+      "week_label": "Week 2 of May",
+      "description": "Enter in Week 2 of May, hold 10 trading days",
+      "n_occurrences": 14,
+      "n_years": 4,
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "required_years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "slot_passed_2026": false,
+      "avg_max_ret": 19.21,
+      "min_max_ret": 10.7,
+      "avg_exit_ret": 14.77,
+      "avg_days_to_10": 5.0,
+      "ret_rate": 1.92,
+      "alert_today": true,
+      "alert_tomorrow": true,
+      "occurrences": [
+        {
+          "sig_date": "2025-05-08",
+          "entry_date": "2025-05-09",
+          "exit_date": "2025-05-23",
+          "year": 2025,
+          "month": 5,
+          "week": 2,
+          "entry_px": 97.0,
+          "exit_px": 111.0,
+          "max_ret": 16.04,
+          "ret_on_exit": 14.43,
+          "max_gain": 19.27,
+          "days_to_10": 3
+        },
+        {
+          "sig_date": "2024-05-13",
+          "entry_date": "2024-05-14",
+          "exit_date": "2024-05-29",
+          "year": 2024,
+          "month": 5,
+          "week": 2,
+          "entry_px": 109.8,
+          "exit_px": 117.85,
+          "max_ret": 10.7,
+          "ret_on_exit": 7.33,
+          "max_gain": 13.3,
+          "days_to_10": 8
+        },
+        {
+          "sig_date": "2024-05-10",
+          "entry_date": "2024-05-13",
+          "exit_date": "2024-05-28",
+          "year": 2024,
+          "month": 5,
+          "week": 2,
+          "entry_px": 107.55,
+          "exit_px": 120.55,
+          "max_ret": 13.02,
+          "ret_on_exit": 12.09,
+          "max_gain": 15.67,
+          "days_to_10": 7
+        },
+        {
+          "sig_date": "2024-05-08",
+          "entry_date": "2024-05-09",
+          "exit_date": "2024-05-24",
+          "year": 2024,
+          "month": 5,
+          "week": 2,
+          "entry_px": 107.0,
+          "exit_px": 117.85,
+          "max_ret": 12.1,
+          "ret_on_exit": 10.14,
+          "max_gain": 14.16,
+          "days_to_10": 9
+        },
+        {
+          "sig_date": "2023-05-12",
+          "entry_date": "2023-05-15",
+          "exit_date": "2023-05-29",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 94.1,
+          "exit_px": 119.3,
+          "max_ret": 26.78,
+          "ret_on_exit": 26.78,
+          "max_gain": 28.53,
+          "days_to_10": 3
+        },
+        {
+          "sig_date": "2023-05-11",
+          "entry_date": "2023-05-12",
+          "exit_date": "2023-05-26",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 96.2,
+          "exit_px": 112.3,
+          "max_ret": 18.45,
+          "ret_on_exit": 16.74,
+          "max_gain": 25.73,
+          "days_to_10": 4
+        },
+        {
+          "sig_date": "2023-05-10",
+          "entry_date": "2023-05-11",
+          "exit_date": "2023-05-25",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 96.25,
+          "exit_px": 109.5,
+          "max_ret": 18.39,
+          "ret_on_exit": 13.77,
+          "max_gain": 25.66,
+          "days_to_10": 5
+        },
+        {
+          "sig_date": "2023-05-09",
+          "entry_date": "2023-05-10",
+          "exit_date": "2023-05-24",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 97.0,
+          "exit_px": 111.95,
+          "max_ret": 17.47,
+          "ret_on_exit": 15.41,
+          "max_gain": 24.69,
+          "days_to_10": 6
+        },
+        {
+          "sig_date": "2023-05-08",
+          "entry_date": "2023-05-09",
+          "exit_date": "2023-05-23",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 94.45,
+          "exit_px": 113.95,
+          "max_ret": 20.65,
+          "ret_on_exit": 20.65,
+          "max_gain": 28.06,
+          "days_to_10": 7
+        },
+        {
+          "sig_date": "2022-05-13",
+          "entry_date": "2022-05-16",
+          "exit_date": "2022-05-30",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 166.15,
+          "exit_px": 178.2,
+          "max_ret": 16.13,
+          "ret_on_exit": 7.25,
+          "max_gain": 19.77,
+          "days_to_10": 2
+        },
+        {
+          "sig_date": "2022-05-12",
+          "entry_date": "2022-05-13",
+          "exit_date": "2022-05-27",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 143.45,
+          "exit_px": 176.35,
+          "max_ret": 34.51,
+          "ret_on_exit": 22.93,
+          "max_gain": 38.72,
+          "days_to_10": 1
+        },
+        {
+          "sig_date": "2022-05-11",
+          "entry_date": "2022-05-12",
+          "exit_date": "2022-05-26",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 150.95,
+          "exit_px": 179.25,
+          "max_ret": 27.82,
+          "ret_on_exit": 18.75,
+          "max_gain": 31.83,
+          "days_to_10": 2
+        },
+        {
+          "sig_date": "2022-05-10",
+          "entry_date": "2022-05-11",
+          "exit_date": "2022-05-25",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 158.85,
+          "exit_px": 176.1,
+          "max_ret": 21.47,
+          "ret_on_exit": 10.86,
+          "max_gain": 25.28,
+          "days_to_10": 5
+        },
+        {
+          "sig_date": "2022-05-09",
+          "entry_date": "2022-05-10",
+          "exit_date": "2022-05-24",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 167.2,
+          "exit_px": 183.35,
+          "max_ret": 15.4,
+          "ret_on_exit": 9.66,
+          "max_gain": 19.02,
+          "days_to_10": 8
+        }
+      ],
+      "calendar_mmdd": [
+        {
+          "mmdd": "05-09",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-10",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-11",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-12",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-13",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-08",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-09",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-10",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-11",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-12",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-08",
+          "year": 2024
+        },
+        {
+          "mmdd": "05-10",
+          "year": 2024
+        },
+        {
+          "mmdd": "05-13",
+          "year": 2024
+        },
+        {
+          "mmdd": "05-08",
+          "year": 2025
+        }
+      ]
+    },
+    {
       "sym": "MIDHANI",
-      "price": 389.4,
+      "price": 419.0,
       "hold_days": 6,
       "month": 5,
       "month_name": "May",
@@ -5085,7 +5139,7 @@
     },
     {
       "sym": "HCC",
-      "price": 21.74,
+      "price": 22.03,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -5465,7 +5519,7 @@
     },
     {
       "sym": "WINDMACHIN",
-      "price": 305.25,
+      "price": 303.85,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -5737,7 +5791,7 @@
     },
     {
       "sym": "PRECAM",
-      "price": 158.14,
+      "price": 157.8,
       "hold_days": 8,
       "month": 5,
       "month_name": "May",
@@ -6389,7 +6443,7 @@
     },
     {
       "sym": "TDPOWERSYS",
-      "price": 1166.9,
+      "price": 1175.9,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -6733,7 +6787,7 @@
     },
     {
       "sym": "PATELENG",
-      "price": 26.76,
+      "price": 27.27,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -7113,7 +7167,7 @@
     },
     {
       "sym": "HUBTOWN",
-      "price": 216.71,
+      "price": 220.15,
       "hold_days": 5,
       "month": 5,
       "month_name": "May",
@@ -7366,7 +7420,7 @@
     },
     {
       "sym": "MARINE",
-      "price": 217.88,
+      "price": 221.41,
       "hold_days": 8,
       "month": 5,
       "month_name": "May",
@@ -7674,7 +7728,7 @@
     },
     {
       "sym": "ROTO",
-      "price": 56.21,
+      "price": 57.82,
       "hold_days": 8,
       "month": 5,
       "month_name": "May",
@@ -7981,7 +8035,7 @@
     },
     {
       "sym": "DSSL",
-      "price": 1354.1,
+      "price": 1379.4,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -8180,7 +8234,7 @@
     },
     {
       "sym": "KAJARIACER",
-      "price": 1072.6,
+      "price": 1072.7,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -8434,7 +8488,7 @@
     },
     {
       "sym": "MBAPL",
-      "price": 547.6,
+      "price": 535.35,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -8651,7 +8705,7 @@
     },
     {
       "sym": "CAPACITE",
-      "price": 236.65,
+      "price": 237.0,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -8941,7 +8995,7 @@
     },
     {
       "sym": "NLCINDIA",
-      "price": 308.1,
+      "price": 325.7,
       "hold_days": 7,
       "month": 5,
       "month_name": "May",
@@ -9141,7 +9195,7 @@
     },
     {
       "sym": "BHAGCHEM",
-      "price": 244.3,
+      "price": 241.45,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -9376,7 +9430,7 @@
     },
     {
       "sym": "SUNFLAG",
-      "price": 365.7,
+      "price": 379.1,
       "hold_days": 6,
       "month": 5,
       "month_name": "May",
@@ -9629,7 +9683,7 @@
     },
     {
       "sym": "CGPOWER",
-      "price": 833.7,
+      "price": 847.05,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -9882,7 +9936,7 @@
     },
     {
       "sym": "JASH",
-      "price": 410.1,
+      "price": 399.6,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -10116,189 +10170,8 @@
       ]
     },
     {
-      "sym": "JINDALPHOT",
-      "price": 1041.6,
-      "hold_days": 5,
-      "month": 5,
-      "month_name": "May",
-      "month_abbr": "May",
-      "week": 2,
-      "week_label": "Week 2 of May",
-      "description": "Enter in Week 2 of May, hold 5 trading days",
-      "n_occurrences": 8,
-      "n_years": 4,
-      "years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "required_years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "slot_passed_2026": false,
-      "avg_max_ret": 13.41,
-      "min_max_ret": 10.72,
-      "avg_exit_ret": 10.83,
-      "avg_days_to_10": 3.12,
-      "ret_rate": 2.68,
-      "alert_today": true,
-      "alert_tomorrow": true,
-      "occurrences": [
-        {
-          "sig_date": "2025-05-08",
-          "entry_date": "2025-05-09",
-          "exit_date": "2025-05-16",
-          "year": 2025,
-          "month": 5,
-          "week": 2,
-          "entry_px": 865.5,
-          "exit_px": 978.0,
-          "max_ret": 13.0,
-          "ret_on_exit": 13.0,
-          "max_gain": 14.04,
-          "days_to_10": 3
-        },
-        {
-          "sig_date": "2024-05-14",
-          "entry_date": "2024-05-15",
-          "exit_date": "2024-05-23",
-          "year": 2024,
-          "month": 5,
-          "week": 2,
-          "entry_px": 626.0,
-          "exit_px": 681.75,
-          "max_ret": 11.95,
-          "ret_on_exit": 8.91,
-          "max_gain": 16.29,
-          "days_to_10": 4
-        },
-        {
-          "sig_date": "2024-05-13",
-          "entry_date": "2024-05-14",
-          "exit_date": "2024-05-22",
-          "year": 2024,
-          "month": 5,
-          "week": 2,
-          "entry_px": 611.5,
-          "exit_px": 700.8,
-          "max_ret": 14.6,
-          "ret_on_exit": 14.6,
-          "max_gain": 19.04,
-          "days_to_10": 5
-        },
-        {
-          "sig_date": "2023-05-12",
-          "entry_date": "2023-05-15",
-          "exit_date": "2023-05-22",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 335.85,
-          "exit_px": 368.15,
-          "max_ret": 12.42,
-          "ret_on_exit": 9.62,
-          "max_gain": 17.54,
-          "days_to_10": 1
-        },
-        {
-          "sig_date": "2023-05-11",
-          "entry_date": "2023-05-12",
-          "exit_date": "2023-05-19",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 341.0,
-          "exit_px": 355.45,
-          "max_ret": 10.72,
-          "ret_on_exit": 4.24,
-          "max_gain": 15.76,
-          "days_to_10": 2
-        },
-        {
-          "sig_date": "2023-05-08",
-          "entry_date": "2023-05-09",
-          "exit_date": "2023-05-16",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 332.0,
-          "exit_px": 377.55,
-          "max_ret": 13.72,
-          "ret_on_exit": 13.72,
-          "max_gain": 18.9,
-          "days_to_10": 5
-        },
-        {
-          "sig_date": "2022-05-12",
-          "entry_date": "2022-05-13",
-          "exit_date": "2022-05-20",
-          "year": 2022,
-          "month": 5,
-          "week": 2,
-          "entry_px": 185.0,
-          "exit_px": 209.05,
-          "max_ret": 15.43,
-          "ret_on_exit": 13.0,
-          "max_gain": 22.84,
-          "days_to_10": 2
-        },
-        {
-          "sig_date": "2022-05-11",
-          "entry_date": "2022-05-12",
-          "exit_date": "2022-05-19",
-          "year": 2022,
-          "month": 5,
-          "week": 2,
-          "entry_px": 185.0,
-          "exit_px": 202.7,
-          "max_ret": 15.43,
-          "ret_on_exit": 9.57,
-          "max_gain": 22.84,
-          "days_to_10": 3
-        }
-      ],
-      "calendar_mmdd": [
-        {
-          "mmdd": "05-11",
-          "year": 2022
-        },
-        {
-          "mmdd": "05-12",
-          "year": 2022
-        },
-        {
-          "mmdd": "05-08",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-11",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-12",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-13",
-          "year": 2024
-        },
-        {
-          "mmdd": "05-14",
-          "year": 2024
-        },
-        {
-          "mmdd": "05-08",
-          "year": 2025
-        }
-      ]
-    },
-    {
       "sym": "ASTERDM",
-      "price": 730.35,
+      "price": 735.75,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -10479,7 +10352,7 @@
     },
     {
       "sym": "SHAILY",
-      "price": 2693.6,
+      "price": 2744.0,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -10714,7 +10587,7 @@
     },
     {
       "sym": "ICIL",
-      "price": 281.5,
+      "price": 283.45,
       "hold_days": 6,
       "month": 5,
       "month_name": "May",
@@ -10877,7 +10750,7 @@
     },
     {
       "sym": "SBC",
-      "price": 34.61,
+      "price": 34.13,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -11096,7 +10969,7 @@
   "alerts_tomorrow": [
     {
       "sym": "NDTV",
-      "price": 73.88,
+      "price": 74.35,
       "hold_days": 7,
       "month": 5,
       "month_name": "May",
@@ -11477,7 +11350,7 @@
     },
     {
       "sym": "KAMATHOTEL",
-      "price": 174.33,
+      "price": 168.66,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -11713,7 +11586,7 @@
     },
     {
       "sym": "DENORA",
-      "price": 715.05,
+      "price": 722.05,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -12111,7 +11984,7 @@
     },
     {
       "sym": "BANCOINDIA",
-      "price": 593.25,
+      "price": 598.55,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -12437,7 +12310,7 @@
     },
     {
       "sym": "NUCLEUS",
-      "price": 791.25,
+      "price": 786.35,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -12800,7 +12673,7 @@
     },
     {
       "sym": "KIRLOSENG",
-      "price": 1561.1,
+      "price": 1599.6,
       "hold_days": 5,
       "month": 5,
       "month_name": "May",
@@ -13071,7 +12944,7 @@
     },
     {
       "sym": "ELECON",
-      "price": 502.0,
+      "price": 505.8,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -13433,7 +13306,7 @@
     },
     {
       "sym": "VOLTAMP",
-      "price": 9284.0,
+      "price": 9390.0,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -13685,243 +13558,8 @@
       ]
     },
     {
-      "sym": "AVROIND",
-      "price": 10.25,
-      "hold_days": 7,
-      "month": 5,
-      "month_name": "May",
-      "month_abbr": "May",
-      "week": 2,
-      "week_label": "Week 2 of May",
-      "description": "Enter in Week 2 of May, hold 7 trading days",
-      "n_occurrences": 11,
-      "n_years": 4,
-      "years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "required_years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "slot_passed_2026": false,
-      "avg_max_ret": 20.09,
-      "min_max_ret": 11.85,
-      "avg_exit_ret": 14.26,
-      "avg_days_to_10": 2.45,
-      "ret_rate": 2.87,
-      "alert_today": true,
-      "alert_tomorrow": true,
-      "occurrences": [
-        {
-          "sig_date": "2025-05-12",
-          "entry_date": "2025-05-13",
-          "exit_date": "2025-05-22",
-          "year": 2025,
-          "month": 5,
-          "week": 2,
-          "entry_px": 156.0,
-          "exit_px": 182.14,
-          "max_ret": 20.93,
-          "ret_on_exit": 16.76,
-          "max_gain": 27.56,
-          "days_to_10": 1
-        },
-        {
-          "sig_date": "2025-05-09",
-          "entry_date": "2025-05-12",
-          "exit_date": "2025-05-21",
-          "year": 2025,
-          "month": 5,
-          "week": 2,
-          "entry_px": 155.0,
-          "exit_px": 184.01,
-          "max_ret": 21.71,
-          "ret_on_exit": 18.72,
-          "max_gain": 28.39,
-          "days_to_10": 1
-        },
-        {
-          "sig_date": "2025-05-08",
-          "entry_date": "2025-05-09",
-          "exit_date": "2025-05-20",
-          "year": 2025,
-          "month": 5,
-          "week": 2,
-          "entry_px": 141.0,
-          "exit_px": 183.33,
-          "max_ret": 33.79,
-          "ret_on_exit": 30.02,
-          "max_gain": 41.13,
-          "days_to_10": 1
-        },
-        {
-          "sig_date": "2024-05-09",
-          "entry_date": "2024-05-10",
-          "exit_date": "2024-05-22",
-          "year": 2024,
-          "month": 5,
-          "week": 2,
-          "entry_px": 114.65,
-          "exit_px": 125.9,
-          "max_ret": 13.56,
-          "ret_on_exit": 9.81,
-          "max_gain": 19.93,
-          "days_to_10": 4
-        },
-        {
-          "sig_date": "2023-05-12",
-          "entry_date": "2023-05-15",
-          "exit_date": "2023-05-24",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 132.9,
-          "exit_px": 128.65,
-          "max_ret": 11.85,
-          "ret_on_exit": -3.2,
-          "max_gain": 15.05,
-          "days_to_10": 3
-        },
-        {
-          "sig_date": "2023-05-11",
-          "entry_date": "2023-05-12",
-          "exit_date": "2023-05-23",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 125.0,
-          "exit_px": 130.2,
-          "max_ret": 18.92,
-          "ret_on_exit": 4.16,
-          "max_gain": 22.32,
-          "days_to_10": 2
-        },
-        {
-          "sig_date": "2023-05-10",
-          "entry_date": "2023-05-11",
-          "exit_date": "2023-05-22",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 123.4,
-          "exit_px": 137.05,
-          "max_ret": 20.46,
-          "ret_on_exit": 11.06,
-          "max_gain": 23.91,
-          "days_to_10": 3
-        },
-        {
-          "sig_date": "2023-05-09",
-          "entry_date": "2023-05-10",
-          "exit_date": "2023-05-19",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 125.0,
-          "exit_px": 144.1,
-          "max_ret": 18.92,
-          "ret_on_exit": 15.28,
-          "max_gain": 22.32,
-          "days_to_10": 4
-        },
-        {
-          "sig_date": "2023-05-08",
-          "entry_date": "2023-05-09",
-          "exit_date": "2023-05-18",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 123.15,
-          "exit_px": 148.65,
-          "max_ret": 20.71,
-          "ret_on_exit": 20.71,
-          "max_gain": 23.3,
-          "days_to_10": 4
-        },
-        {
-          "sig_date": "2022-05-10",
-          "entry_date": "2022-05-11",
-          "exit_date": "2022-05-20",
-          "year": 2022,
-          "month": 5,
-          "week": 2,
-          "entry_px": 107.65,
-          "exit_px": 122.0,
-          "max_ret": 15.56,
-          "ret_on_exit": 13.33,
-          "max_gain": 19.83,
-          "days_to_10": 2
-        },
-        {
-          "sig_date": "2022-05-09",
-          "entry_date": "2022-05-10",
-          "exit_date": "2022-05-19",
-          "year": 2022,
-          "month": 5,
-          "week": 2,
-          "entry_px": 99.85,
-          "exit_px": 120.0,
-          "max_ret": 24.59,
-          "ret_on_exit": 20.18,
-          "max_gain": 29.19,
-          "days_to_10": 2
-        }
-      ],
-      "calendar_mmdd": [
-        {
-          "mmdd": "05-09",
-          "year": 2022
-        },
-        {
-          "mmdd": "05-10",
-          "year": 2022
-        },
-        {
-          "mmdd": "05-08",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-09",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-10",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-11",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-12",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-09",
-          "year": 2024
-        },
-        {
-          "mmdd": "05-08",
-          "year": 2025
-        },
-        {
-          "mmdd": "05-09",
-          "year": 2025
-        },
-        {
-          "mmdd": "05-12",
-          "year": 2025
-        }
-      ]
-    },
-    {
       "sym": "DYNAMATECH",
-      "price": 10754.0,
+      "price": 10714.0,
       "hold_days": 7,
       "month": 5,
       "month_name": "May",
@@ -14193,7 +13831,7 @@
     },
     {
       "sym": "WHEELS",
-      "price": 1277.5,
+      "price": 1328.9,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -14519,7 +14157,7 @@
     },
     {
       "sym": "SANDHAR",
-      "price": 505.95,
+      "price": 514.05,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -14863,7 +14501,7 @@
     },
     {
       "sym": "REMSONSIND",
-      "price": 108.01,
+      "price": 108.97,
       "hold_days": 7,
       "month": 5,
       "month_name": "May",
@@ -15098,7 +14736,7 @@
     },
     {
       "sym": "ADSL",
-      "price": 123.87,
+      "price": 126.01,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -15442,7 +15080,7 @@
     },
     {
       "sym": "CHENNPETRO",
-      "price": 1009.7,
+      "price": 1027.4,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -15875,8 +15513,297 @@
       ]
     },
     {
+      "sym": "DEVIT",
+      "price": 29.71,
+      "hold_days": 10,
+      "month": 5,
+      "month_name": "May",
+      "month_abbr": "May",
+      "week": 2,
+      "week_label": "Week 2 of May",
+      "description": "Enter in Week 2 of May, hold 10 trading days",
+      "n_occurrences": 14,
+      "n_years": 4,
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "required_years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "slot_passed_2026": false,
+      "avg_max_ret": 19.21,
+      "min_max_ret": 10.7,
+      "avg_exit_ret": 14.77,
+      "avg_days_to_10": 5.0,
+      "ret_rate": 1.92,
+      "alert_today": true,
+      "alert_tomorrow": true,
+      "occurrences": [
+        {
+          "sig_date": "2025-05-08",
+          "entry_date": "2025-05-09",
+          "exit_date": "2025-05-23",
+          "year": 2025,
+          "month": 5,
+          "week": 2,
+          "entry_px": 97.0,
+          "exit_px": 111.0,
+          "max_ret": 16.04,
+          "ret_on_exit": 14.43,
+          "max_gain": 19.27,
+          "days_to_10": 3
+        },
+        {
+          "sig_date": "2024-05-13",
+          "entry_date": "2024-05-14",
+          "exit_date": "2024-05-29",
+          "year": 2024,
+          "month": 5,
+          "week": 2,
+          "entry_px": 109.8,
+          "exit_px": 117.85,
+          "max_ret": 10.7,
+          "ret_on_exit": 7.33,
+          "max_gain": 13.3,
+          "days_to_10": 8
+        },
+        {
+          "sig_date": "2024-05-10",
+          "entry_date": "2024-05-13",
+          "exit_date": "2024-05-28",
+          "year": 2024,
+          "month": 5,
+          "week": 2,
+          "entry_px": 107.55,
+          "exit_px": 120.55,
+          "max_ret": 13.02,
+          "ret_on_exit": 12.09,
+          "max_gain": 15.67,
+          "days_to_10": 7
+        },
+        {
+          "sig_date": "2024-05-08",
+          "entry_date": "2024-05-09",
+          "exit_date": "2024-05-24",
+          "year": 2024,
+          "month": 5,
+          "week": 2,
+          "entry_px": 107.0,
+          "exit_px": 117.85,
+          "max_ret": 12.1,
+          "ret_on_exit": 10.14,
+          "max_gain": 14.16,
+          "days_to_10": 9
+        },
+        {
+          "sig_date": "2023-05-12",
+          "entry_date": "2023-05-15",
+          "exit_date": "2023-05-29",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 94.1,
+          "exit_px": 119.3,
+          "max_ret": 26.78,
+          "ret_on_exit": 26.78,
+          "max_gain": 28.53,
+          "days_to_10": 3
+        },
+        {
+          "sig_date": "2023-05-11",
+          "entry_date": "2023-05-12",
+          "exit_date": "2023-05-26",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 96.2,
+          "exit_px": 112.3,
+          "max_ret": 18.45,
+          "ret_on_exit": 16.74,
+          "max_gain": 25.73,
+          "days_to_10": 4
+        },
+        {
+          "sig_date": "2023-05-10",
+          "entry_date": "2023-05-11",
+          "exit_date": "2023-05-25",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 96.25,
+          "exit_px": 109.5,
+          "max_ret": 18.39,
+          "ret_on_exit": 13.77,
+          "max_gain": 25.66,
+          "days_to_10": 5
+        },
+        {
+          "sig_date": "2023-05-09",
+          "entry_date": "2023-05-10",
+          "exit_date": "2023-05-24",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 97.0,
+          "exit_px": 111.95,
+          "max_ret": 17.47,
+          "ret_on_exit": 15.41,
+          "max_gain": 24.69,
+          "days_to_10": 6
+        },
+        {
+          "sig_date": "2023-05-08",
+          "entry_date": "2023-05-09",
+          "exit_date": "2023-05-23",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 94.45,
+          "exit_px": 113.95,
+          "max_ret": 20.65,
+          "ret_on_exit": 20.65,
+          "max_gain": 28.06,
+          "days_to_10": 7
+        },
+        {
+          "sig_date": "2022-05-13",
+          "entry_date": "2022-05-16",
+          "exit_date": "2022-05-30",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 166.15,
+          "exit_px": 178.2,
+          "max_ret": 16.13,
+          "ret_on_exit": 7.25,
+          "max_gain": 19.77,
+          "days_to_10": 2
+        },
+        {
+          "sig_date": "2022-05-12",
+          "entry_date": "2022-05-13",
+          "exit_date": "2022-05-27",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 143.45,
+          "exit_px": 176.35,
+          "max_ret": 34.51,
+          "ret_on_exit": 22.93,
+          "max_gain": 38.72,
+          "days_to_10": 1
+        },
+        {
+          "sig_date": "2022-05-11",
+          "entry_date": "2022-05-12",
+          "exit_date": "2022-05-26",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 150.95,
+          "exit_px": 179.25,
+          "max_ret": 27.82,
+          "ret_on_exit": 18.75,
+          "max_gain": 31.83,
+          "days_to_10": 2
+        },
+        {
+          "sig_date": "2022-05-10",
+          "entry_date": "2022-05-11",
+          "exit_date": "2022-05-25",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 158.85,
+          "exit_px": 176.1,
+          "max_ret": 21.47,
+          "ret_on_exit": 10.86,
+          "max_gain": 25.28,
+          "days_to_10": 5
+        },
+        {
+          "sig_date": "2022-05-09",
+          "entry_date": "2022-05-10",
+          "exit_date": "2022-05-24",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 167.2,
+          "exit_px": 183.35,
+          "max_ret": 15.4,
+          "ret_on_exit": 9.66,
+          "max_gain": 19.02,
+          "days_to_10": 8
+        }
+      ],
+      "calendar_mmdd": [
+        {
+          "mmdd": "05-09",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-10",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-11",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-12",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-13",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-08",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-09",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-10",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-11",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-12",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-08",
+          "year": 2024
+        },
+        {
+          "mmdd": "05-10",
+          "year": 2024
+        },
+        {
+          "mmdd": "05-13",
+          "year": 2024
+        },
+        {
+          "mmdd": "05-08",
+          "year": 2025
+        }
+      ]
+    },
+    {
       "sym": "MIDHANI",
-      "price": 389.4,
+      "price": 419.0,
       "hold_days": 6,
       "month": 5,
       "month_name": "May",
@@ -16165,7 +16092,7 @@
     },
     {
       "sym": "HCC",
-      "price": 21.74,
+      "price": 22.03,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -16545,7 +16472,7 @@
     },
     {
       "sym": "WINDMACHIN",
-      "price": 305.25,
+      "price": 303.85,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -16817,7 +16744,7 @@
     },
     {
       "sym": "PRECAM",
-      "price": 158.14,
+      "price": 157.8,
       "hold_days": 8,
       "month": 5,
       "month_name": "May",
@@ -17469,7 +17396,7 @@
     },
     {
       "sym": "TDPOWERSYS",
-      "price": 1166.9,
+      "price": 1175.9,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -17813,7 +17740,7 @@
     },
     {
       "sym": "PATELENG",
-      "price": 26.76,
+      "price": 27.27,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -18193,7 +18120,7 @@
     },
     {
       "sym": "HUBTOWN",
-      "price": 216.71,
+      "price": 220.15,
       "hold_days": 5,
       "month": 5,
       "month_name": "May",
@@ -18446,7 +18373,7 @@
     },
     {
       "sym": "MARINE",
-      "price": 217.88,
+      "price": 221.41,
       "hold_days": 8,
       "month": 5,
       "month_name": "May",
@@ -18754,7 +18681,7 @@
     },
     {
       "sym": "ROTO",
-      "price": 56.21,
+      "price": 57.82,
       "hold_days": 8,
       "month": 5,
       "month_name": "May",
@@ -19061,7 +18988,7 @@
     },
     {
       "sym": "DSSL",
-      "price": 1354.1,
+      "price": 1379.4,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -19260,7 +19187,7 @@
     },
     {
       "sym": "KAJARIACER",
-      "price": 1072.6,
+      "price": 1072.7,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -19514,7 +19441,7 @@
     },
     {
       "sym": "MBAPL",
-      "price": 547.6,
+      "price": 535.35,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -19731,7 +19658,7 @@
     },
     {
       "sym": "CAPACITE",
-      "price": 236.65,
+      "price": 237.0,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -20021,7 +19948,7 @@
     },
     {
       "sym": "NLCINDIA",
-      "price": 308.1,
+      "price": 325.7,
       "hold_days": 7,
       "month": 5,
       "month_name": "May",
@@ -20221,7 +20148,7 @@
     },
     {
       "sym": "BHAGCHEM",
-      "price": 244.3,
+      "price": 241.45,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -20456,7 +20383,7 @@
     },
     {
       "sym": "SUNFLAG",
-      "price": 365.7,
+      "price": 379.1,
       "hold_days": 6,
       "month": 5,
       "month_name": "May",
@@ -20709,7 +20636,7 @@
     },
     {
       "sym": "CGPOWER",
-      "price": 833.7,
+      "price": 847.05,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -20962,7 +20889,7 @@
     },
     {
       "sym": "JASH",
-      "price": 410.1,
+      "price": 399.6,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -21196,189 +21123,8 @@
       ]
     },
     {
-      "sym": "JINDALPHOT",
-      "price": 1041.6,
-      "hold_days": 5,
-      "month": 5,
-      "month_name": "May",
-      "month_abbr": "May",
-      "week": 2,
-      "week_label": "Week 2 of May",
-      "description": "Enter in Week 2 of May, hold 5 trading days",
-      "n_occurrences": 8,
-      "n_years": 4,
-      "years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "required_years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "slot_passed_2026": false,
-      "avg_max_ret": 13.41,
-      "min_max_ret": 10.72,
-      "avg_exit_ret": 10.83,
-      "avg_days_to_10": 3.12,
-      "ret_rate": 2.68,
-      "alert_today": true,
-      "alert_tomorrow": true,
-      "occurrences": [
-        {
-          "sig_date": "2025-05-08",
-          "entry_date": "2025-05-09",
-          "exit_date": "2025-05-16",
-          "year": 2025,
-          "month": 5,
-          "week": 2,
-          "entry_px": 865.5,
-          "exit_px": 978.0,
-          "max_ret": 13.0,
-          "ret_on_exit": 13.0,
-          "max_gain": 14.04,
-          "days_to_10": 3
-        },
-        {
-          "sig_date": "2024-05-14",
-          "entry_date": "2024-05-15",
-          "exit_date": "2024-05-23",
-          "year": 2024,
-          "month": 5,
-          "week": 2,
-          "entry_px": 626.0,
-          "exit_px": 681.75,
-          "max_ret": 11.95,
-          "ret_on_exit": 8.91,
-          "max_gain": 16.29,
-          "days_to_10": 4
-        },
-        {
-          "sig_date": "2024-05-13",
-          "entry_date": "2024-05-14",
-          "exit_date": "2024-05-22",
-          "year": 2024,
-          "month": 5,
-          "week": 2,
-          "entry_px": 611.5,
-          "exit_px": 700.8,
-          "max_ret": 14.6,
-          "ret_on_exit": 14.6,
-          "max_gain": 19.04,
-          "days_to_10": 5
-        },
-        {
-          "sig_date": "2023-05-12",
-          "entry_date": "2023-05-15",
-          "exit_date": "2023-05-22",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 335.85,
-          "exit_px": 368.15,
-          "max_ret": 12.42,
-          "ret_on_exit": 9.62,
-          "max_gain": 17.54,
-          "days_to_10": 1
-        },
-        {
-          "sig_date": "2023-05-11",
-          "entry_date": "2023-05-12",
-          "exit_date": "2023-05-19",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 341.0,
-          "exit_px": 355.45,
-          "max_ret": 10.72,
-          "ret_on_exit": 4.24,
-          "max_gain": 15.76,
-          "days_to_10": 2
-        },
-        {
-          "sig_date": "2023-05-08",
-          "entry_date": "2023-05-09",
-          "exit_date": "2023-05-16",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 332.0,
-          "exit_px": 377.55,
-          "max_ret": 13.72,
-          "ret_on_exit": 13.72,
-          "max_gain": 18.9,
-          "days_to_10": 5
-        },
-        {
-          "sig_date": "2022-05-12",
-          "entry_date": "2022-05-13",
-          "exit_date": "2022-05-20",
-          "year": 2022,
-          "month": 5,
-          "week": 2,
-          "entry_px": 185.0,
-          "exit_px": 209.05,
-          "max_ret": 15.43,
-          "ret_on_exit": 13.0,
-          "max_gain": 22.84,
-          "days_to_10": 2
-        },
-        {
-          "sig_date": "2022-05-11",
-          "entry_date": "2022-05-12",
-          "exit_date": "2022-05-19",
-          "year": 2022,
-          "month": 5,
-          "week": 2,
-          "entry_px": 185.0,
-          "exit_px": 202.7,
-          "max_ret": 15.43,
-          "ret_on_exit": 9.57,
-          "max_gain": 22.84,
-          "days_to_10": 3
-        }
-      ],
-      "calendar_mmdd": [
-        {
-          "mmdd": "05-11",
-          "year": 2022
-        },
-        {
-          "mmdd": "05-12",
-          "year": 2022
-        },
-        {
-          "mmdd": "05-08",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-11",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-12",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-13",
-          "year": 2024
-        },
-        {
-          "mmdd": "05-14",
-          "year": 2024
-        },
-        {
-          "mmdd": "05-08",
-          "year": 2025
-        }
-      ]
-    },
-    {
       "sym": "ASTERDM",
-      "price": 730.35,
+      "price": 735.75,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -21559,7 +21305,7 @@
     },
     {
       "sym": "SHAILY",
-      "price": 2693.6,
+      "price": 2744.0,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -21794,7 +21540,7 @@
     },
     {
       "sym": "ICIL",
-      "price": 281.5,
+      "price": 283.45,
       "hold_days": 6,
       "month": 5,
       "month_name": "May",
@@ -21957,7 +21703,7 @@
     },
     {
       "sym": "SBC",
-      "price": 34.61,
+      "price": 34.13,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -22887,23 +22633,6 @@
         "n_occ": 20,
         "years": [
           2020,
-          2022,
-          2023,
-          2024,
-          2025
-        ],
-        "alert_today": false,
-        "alert_tomorrow": false
-      },
-      {
-        "sym": "JINDALPHOT",
-        "week": 2,
-        "week_label": "Week 2 of August",
-        "avg_max_ret": 36.28,
-        "min_max_ret": 10.45,
-        "hold_days": 10,
-        "n_occ": 9,
-        "years": [
           2022,
           2023,
           2024,
@@ -25312,23 +25041,6 @@
         "alert_tomorrow": false
       },
       {
-        "sym": "AVROIND",
-        "week": 2,
-        "week_label": "Week 2 of May",
-        "avg_max_ret": 20.09,
-        "min_max_ret": 11.85,
-        "hold_days": 7,
-        "n_occ": 11,
-        "years": [
-          2022,
-          2023,
-          2024,
-          2025
-        ],
-        "alert_today": true,
-        "alert_tomorrow": true
-      },
-      {
         "sym": "DYNAMATECH",
         "week": 2,
         "week_label": "Week 2 of May",
@@ -25445,6 +25157,23 @@
         "n_occ": 22,
         "years": [
           2021,
+          2022,
+          2023,
+          2024,
+          2025
+        ],
+        "alert_today": true,
+        "alert_tomorrow": true
+      },
+      {
+        "sym": "DEVIT",
+        "week": 2,
+        "week_label": "Week 2 of May",
+        "avg_max_ret": 19.21,
+        "min_max_ret": 10.7,
+        "hold_days": 10,
+        "n_occ": 14,
+        "years": [
           2022,
           2023,
           2024,
@@ -26209,23 +25938,6 @@
         "min_max_ret": 10.62,
         "hold_days": 9,
         "n_occ": 11,
-        "years": [
-          2022,
-          2023,
-          2024,
-          2025
-        ],
-        "alert_today": true,
-        "alert_tomorrow": true
-      },
-      {
-        "sym": "JINDALPHOT",
-        "week": 2,
-        "week_label": "Week 2 of May",
-        "avg_max_ret": 13.41,
-        "min_max_ret": 10.72,
-        "hold_days": 5,
-        "n_occ": 8,
         "years": [
           2022,
           2023,
@@ -29071,6 +28783,23 @@
         "alert_tomorrow": false
       },
       {
+        "sym": "DEVIT",
+        "week": 3,
+        "week_label": "Week 3 of June",
+        "avg_max_ret": 14.84,
+        "min_max_ret": 10.02,
+        "hold_days": 8,
+        "n_occ": 9,
+        "years": [
+          2022,
+          2023,
+          2024,
+          2025
+        ],
+        "alert_today": false,
+        "alert_tomorrow": false
+      },
+      {
         "sym": "CARTRADE",
         "week": 1,
         "week_label": "Week 1 of June",
@@ -29280,23 +29009,6 @@
         "n_occ": 13,
         "years": [
           2021,
-          2022,
-          2023,
-          2024,
-          2025
-        ],
-        "alert_today": false,
-        "alert_tomorrow": false
-      },
-      {
-        "sym": "AVROIND",
-        "week": 5,
-        "week_label": "Week 5 of December",
-        "avg_max_ret": 21.16,
-        "min_max_ret": 10.4,
-        "hold_days": 10,
-        "n_occ": 5,
-        "years": [
           2022,
           2023,
           2024,
@@ -32682,7 +32394,7 @@
   "stocks": [
     {
       "sym": "JPOLYINVST",
-      "price": 1049.9,
+      "price": 1039.5,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -33026,7 +32738,7 @@
     },
     {
       "sym": "NDRAUTO",
-      "price": 821.15,
+      "price": 794.95,
       "hold_days": 8,
       "month": 8,
       "month_name": "August",
@@ -33316,7 +33028,7 @@
     },
     {
       "sym": "63MOONS",
-      "price": 662.1,
+      "price": 664.5,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -33715,7 +33427,7 @@
     },
     {
       "sym": "MIRCELECTR",
-      "price": 43.97,
+      "price": 43.41,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -34113,7 +33825,7 @@
     },
     {
       "sym": "NUCLEUS",
-      "price": 791.25,
+      "price": 786.35,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -34384,207 +34096,8 @@
       ]
     },
     {
-      "sym": "JINDALPHOT",
-      "price": 1041.6,
-      "hold_days": 10,
-      "month": 8,
-      "month_name": "August",
-      "month_abbr": "Aug",
-      "week": 2,
-      "week_label": "Week 2 of August",
-      "description": "Enter in Week 2 of August, hold 10 trading days",
-      "n_occurrences": 9,
-      "n_years": 4,
-      "years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "required_years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "slot_passed_2026": false,
-      "avg_max_ret": 36.28,
-      "min_max_ret": 10.45,
-      "avg_exit_ret": 29.36,
-      "avg_days_to_10": 6.89,
-      "ret_rate": 3.63,
-      "alert_today": false,
-      "alert_tomorrow": false,
-      "occurrences": [
-        {
-          "sig_date": "2025-08-14",
-          "entry_date": "2025-08-18",
-          "exit_date": "2025-09-02",
-          "year": 2025,
-          "month": 8,
-          "week": 2,
-          "entry_px": 838.5,
-          "exit_px": 1132.6,
-          "max_ret": 47.31,
-          "ret_on_exit": 35.07,
-          "max_gain": 47.31,
-          "days_to_10": 8
-        },
-        {
-          "sig_date": "2025-08-13",
-          "entry_date": "2025-08-14",
-          "exit_date": "2025-09-01",
-          "year": 2025,
-          "month": 8,
-          "week": 2,
-          "entry_px": 796.0,
-          "exit_px": 1235.2,
-          "max_ret": 55.18,
-          "ret_on_exit": 55.18,
-          "max_gain": 55.18,
-          "days_to_10": 9
-        },
-        {
-          "sig_date": "2024-08-14",
-          "entry_date": "2024-08-16",
-          "exit_date": "2024-08-30",
-          "year": 2024,
-          "month": 8,
-          "week": 2,
-          "entry_px": 797.35,
-          "exit_px": 840.9,
-          "max_ret": 13.6,
-          "ret_on_exit": 5.46,
-          "max_gain": 16.64,
-          "days_to_10": 5
-        },
-        {
-          "sig_date": "2024-08-13",
-          "entry_date": "2024-08-14",
-          "exit_date": "2024-08-29",
-          "year": 2024,
-          "month": 8,
-          "week": 2,
-          "entry_px": 799.0,
-          "exit_px": 848.0,
-          "max_ret": 13.37,
-          "ret_on_exit": 6.13,
-          "max_gain": 16.4,
-          "days_to_10": 6
-        },
-        {
-          "sig_date": "2023-08-10",
-          "entry_date": "2023-08-11",
-          "exit_date": "2023-08-28",
-          "year": 2023,
-          "month": 8,
-          "week": 2,
-          "entry_px": 324.75,
-          "exit_px": 357.55,
-          "max_ret": 10.45,
-          "ret_on_exit": 10.1,
-          "max_gain": 16.84,
-          "days_to_10": 8
-        },
-        {
-          "sig_date": "2022-08-12",
-          "entry_date": "2022-08-16",
-          "exit_date": "2022-08-30",
-          "year": 2022,
-          "month": 8,
-          "week": 2,
-          "entry_px": 219.9,
-          "exit_px": 287.0,
-          "max_ret": 45.48,
-          "ret_on_exit": 30.51,
-          "max_gain": 52.64,
-          "days_to_10": 6
-        },
-        {
-          "sig_date": "2022-08-11",
-          "entry_date": "2022-08-12",
-          "exit_date": "2022-08-29",
-          "year": 2022,
-          "month": 8,
-          "week": 2,
-          "entry_px": 221.0,
-          "exit_px": 289.25,
-          "max_ret": 44.75,
-          "ret_on_exit": 30.88,
-          "max_gain": 51.88,
-          "days_to_10": 7
-        },
-        {
-          "sig_date": "2022-08-10",
-          "entry_date": "2022-08-11",
-          "exit_date": "2022-08-26",
-          "year": 2022,
-          "month": 8,
-          "week": 2,
-          "entry_px": 211.9,
-          "exit_px": 308.4,
-          "max_ret": 50.97,
-          "ret_on_exit": 45.54,
-          "max_gain": 58.4,
-          "days_to_10": 4
-        },
-        {
-          "sig_date": "2022-08-08",
-          "entry_date": "2022-08-10",
-          "exit_date": "2022-08-25",
-          "year": 2022,
-          "month": 8,
-          "week": 2,
-          "entry_px": 220.0,
-          "exit_px": 319.9,
-          "max_ret": 45.41,
-          "ret_on_exit": 45.41,
-          "max_gain": 52.0,
-          "days_to_10": 9
-        }
-      ],
-      "calendar_mmdd": [
-        {
-          "mmdd": "08-08",
-          "year": 2022
-        },
-        {
-          "mmdd": "08-10",
-          "year": 2022
-        },
-        {
-          "mmdd": "08-11",
-          "year": 2022
-        },
-        {
-          "mmdd": "08-12",
-          "year": 2022
-        },
-        {
-          "mmdd": "08-10",
-          "year": 2023
-        },
-        {
-          "mmdd": "08-13",
-          "year": 2024
-        },
-        {
-          "mmdd": "08-14",
-          "year": 2024
-        },
-        {
-          "mmdd": "08-13",
-          "year": 2025
-        },
-        {
-          "mmdd": "08-14",
-          "year": 2025
-        }
-      ]
-    },
-    {
       "sym": "HEG",
-      "price": 581.9,
+      "price": 604.3,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -35039,7 +34552,7 @@
     },
     {
       "sym": "JPOLYINVST",
-      "price": 1049.9,
+      "price": 1039.5,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -35383,7 +34896,7 @@
     },
     {
       "sym": "SUZLON",
-      "price": 51.52,
+      "price": 53.1,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -35818,7 +35331,7 @@
     },
     {
       "sym": "MOREPENLAB",
-      "price": 42.94,
+      "price": 43.9,
       "hold_days": 9,
       "month": 3,
       "month_name": "March",
@@ -36255,7 +35768,7 @@
     },
     {
       "sym": "SERVOTECH",
-      "price": 89.6,
+      "price": 94.57,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -36454,7 +35967,7 @@
     },
     {
       "sym": "IFCI",
-      "price": 61.07,
+      "price": 64.96,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -36817,7 +36330,7 @@
     },
     {
       "sym": "63MOONS",
-      "price": 662.1,
+      "price": 664.5,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -37198,7 +36711,7 @@
     },
     {
       "sym": "NECLIFE",
-      "price": 12.96,
+      "price": 12.92,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -37598,7 +37111,7 @@
     },
     {
       "sym": "VIPCLOTHNG",
-      "price": 23.65,
+      "price": 25.66,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -37871,7 +37384,7 @@
     },
     {
       "sym": "A2ZINFRA",
-      "price": 16.15,
+      "price": 15.49,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -38234,7 +37747,7 @@
     },
     {
       "sym": "INDOTHAI",
-      "price": 280.85,
+      "price": 274.55,
       "hold_days": 10,
       "month": 1,
       "month_name": "January",
@@ -38507,7 +38020,7 @@
     },
     {
       "sym": "MINDTECK",
-      "price": 202.93,
+      "price": 207.96,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -38870,7 +38383,7 @@
     },
     {
       "sym": "JAICORPLTD",
-      "price": 111.83,
+      "price": 113.86,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -39087,7 +38600,7 @@
     },
     {
       "sym": "MCLEODRUSS",
-      "price": 56.3,
+      "price": 56.87,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -39342,7 +38855,7 @@
     },
     {
       "sym": "AARTISURF",
-      "price": 396.4,
+      "price": 394.2,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -40321,7 +39834,7 @@
     },
     {
       "sym": "20MICRONS",
-      "price": 174.65,
+      "price": 176.43,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -40628,7 +40141,7 @@
     },
     {
       "sym": "NDTV",
-      "price": 73.88,
+      "price": 74.35,
       "hold_days": 7,
       "month": 5,
       "month_name": "May",
@@ -41009,7 +40522,7 @@
     },
     {
       "sym": "BGRENERGY",
-      "price": 259.8,
+      "price": 262.0,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -41353,7 +40866,7 @@
     },
     {
       "sym": "DSSL",
-      "price": 1354.1,
+      "price": 1379.4,
       "hold_days": 9,
       "month": 4,
       "month_name": "April",
@@ -42007,7 +41520,7 @@
     },
     {
       "sym": "ATULAUTO",
-      "price": 476.9,
+      "price": 491.1,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -42933,7 +42446,7 @@
     },
     {
       "sym": "E2E",
-      "price": 3425.1,
+      "price": 3253.9,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -43294,7 +42807,7 @@
     },
     {
       "sym": "WEBELSOLAR",
-      "price": 105.23,
+      "price": 108.27,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -43621,7 +43134,7 @@
     },
     {
       "sym": "APOLLO",
-      "price": 294.85,
+      "price": 304.35,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -44073,7 +43586,7 @@
     },
     {
       "sym": "IZMO",
-      "price": 663.95,
+      "price": 670.0,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -44326,7 +43839,7 @@
     },
     {
       "sym": "SKMEGGPROD",
-      "price": 167.98,
+      "price": 175.96,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -44670,7 +44183,7 @@
     },
     {
       "sym": "RAMRAT",
-      "price": 423.35,
+      "price": 420.4,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -45485,7 +44998,7 @@
     },
     {
       "sym": "JAYNECOIND",
-      "price": 103.6,
+      "price": 104.73,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -45685,7 +45198,7 @@
     },
     {
       "sym": "SERVOTECH",
-      "price": 89.6,
+      "price": 94.57,
       "hold_days": 10,
       "month": 1,
       "month_name": "January",
@@ -45940,7 +45453,7 @@
     },
     {
       "sym": "HIRECT",
-      "price": 882.8,
+      "price": 877.8,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -46284,7 +45797,7 @@
     },
     {
       "sym": "WALCHANNAG",
-      "price": 220.73,
+      "price": 239.8,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -46666,7 +46179,7 @@
     },
     {
       "sym": "GALLANTT",
-      "price": 817.1,
+      "price": 797.6,
       "hold_days": 8,
       "month": 4,
       "month_name": "April",
@@ -46976,7 +46489,7 @@
     },
     {
       "sym": "E2E",
-      "price": 3425.1,
+      "price": 3253.9,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -47610,7 +47123,7 @@
     },
     {
       "sym": "RKFORGE",
-      "price": 582.0,
+      "price": 581.9,
       "hold_days": 7,
       "month": 4,
       "month_name": "April",
@@ -47794,7 +47307,7 @@
     },
     {
       "sym": "DREDGECORP",
-      "price": 889.85,
+      "price": 900.6,
       "hold_days": 6,
       "month": 10,
       "month_name": "October",
@@ -47975,7 +47488,7 @@
     },
     {
       "sym": "MAANALU",
-      "price": 140.31,
+      "price": 141.88,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -48356,7 +47869,7 @@
     },
     {
       "sym": "GALLANTT",
-      "price": 817.1,
+      "price": 797.6,
       "hold_days": 8,
       "month": 4,
       "month_name": "April",
@@ -48702,7 +48215,7 @@
     },
     {
       "sym": "MAANALU",
-      "price": 140.31,
+      "price": 141.88,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -48973,7 +48486,7 @@
     },
     {
       "sym": "DATAPATTNS",
-      "price": 4062.5,
+      "price": 4196.2,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -49210,7 +48723,7 @@
     },
     {
       "sym": "APOLLO",
-      "price": 294.85,
+      "price": 304.35,
       "hold_days": 9,
       "month": 4,
       "month_name": "April",
@@ -49484,7 +48997,7 @@
     },
     {
       "sym": "AARTISURF",
-      "price": 396.4,
+      "price": 394.2,
       "hold_days": 7,
       "month": 4,
       "month_name": "April",
@@ -49812,7 +49325,7 @@
     },
     {
       "sym": "VERTOZ",
-      "price": 48.42,
+      "price": 48.09,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -50049,7 +49562,7 @@
     },
     {
       "sym": "MADRASFERT",
-      "price": 71.18,
+      "price": 68.97,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -50485,7 +49998,7 @@
     },
     {
       "sym": "RCF",
-      "price": 123.07,
+      "price": 124.66,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -50921,7 +50434,7 @@
     },
     {
       "sym": "JAICORPLTD",
-      "price": 111.83,
+      "price": 113.86,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -51157,7 +50670,7 @@
     },
     {
       "sym": "OPTIEMUS",
-      "price": 420.2,
+      "price": 424.3,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -51321,7 +50834,7 @@
     },
     {
       "sym": "ZUARI",
-      "price": 232.63,
+      "price": 234.06,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -51757,7 +51270,7 @@
     },
     {
       "sym": "NITCO",
-      "price": 98.21,
+      "price": 102.13,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -52156,7 +51669,7 @@
     },
     {
       "sym": "KECL",
-      "price": 117.12,
+      "price": 117.31,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -52429,7 +51942,7 @@
     },
     {
       "sym": "KAMATHOTEL",
-      "price": 174.33,
+      "price": 168.66,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -52665,7 +52178,7 @@
     },
     {
       "sym": "SERVOTECH",
-      "price": 89.6,
+      "price": 94.57,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -52902,7 +52415,7 @@
     },
     {
       "sym": "PGEL",
-      "price": 493.9,
+      "price": 495.5,
       "hold_days": 10,
       "month": 1,
       "month_name": "January",
@@ -53249,7 +52762,7 @@
     },
     {
       "sym": "DENORA",
-      "price": 715.05,
+      "price": 722.05,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -53647,7 +53160,7 @@
     },
     {
       "sym": "LAURUSLABS",
-      "price": 1268.0,
+      "price": 1280.5,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -53992,7 +53505,7 @@
     },
     {
       "sym": "BANCOINDIA",
-      "price": 593.25,
+      "price": 598.55,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -54318,7 +53831,7 @@
     },
     {
       "sym": "ARMANFIN",
-      "price": 1770.9,
+      "price": 1801.3,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -54699,7 +54212,7 @@
     },
     {
       "sym": "NEULANDLAB",
-      "price": 17003.0,
+      "price": 16497.0,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -55482,7 +54995,7 @@
     },
     {
       "sym": "NDRAUTO",
-      "price": 821.15,
+      "price": 794.95,
       "hold_days": 9,
       "month": 8,
       "month_name": "August",
@@ -55754,7 +55267,7 @@
     },
     {
       "sym": "GEEKAYWIRE",
-      "price": 26.45,
+      "price": 26.52,
       "hold_days": 7,
       "month": 8,
       "month_name": "August",
@@ -56043,7 +55556,7 @@
     },
     {
       "sym": "GUJALKALI",
-      "price": 679.2,
+      "price": 691.55,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -56534,7 +56047,7 @@
     },
     {
       "sym": "ZENTEC",
-      "price": 1587.0,
+      "price": 1584.2,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -56987,7 +56500,7 @@
     },
     {
       "sym": "20MICRONS",
-      "price": 174.65,
+      "price": 176.43,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -57367,7 +56880,7 @@
     },
     {
       "sym": "SWELECTES",
-      "price": 628.3,
+      "price": 632.6,
       "hold_days": 9,
       "month": 8,
       "month_name": "August",
@@ -57566,7 +57079,7 @@
     },
     {
       "sym": "SUBROS",
-      "price": 750.7,
+      "price": 756.1,
       "hold_days": 9,
       "month": 6,
       "month_name": "June",
@@ -57855,7 +57368,7 @@
     },
     {
       "sym": "PANACEABIO",
-      "price": 365.55,
+      "price": 391.25,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -58220,7 +57733,7 @@
     },
     {
       "sym": "KAYA",
-      "price": 241.85,
+      "price": 243.85,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -58674,7 +58187,7 @@
     },
     {
       "sym": "NURECA",
-      "price": 271.75,
+      "price": 276.85,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -58964,7 +58477,7 @@
     },
     {
       "sym": "RAMKY",
-      "price": 465.9,
+      "price": 461.7,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -59256,7 +58769,7 @@
     },
     {
       "sym": "RAMCOSYS",
-      "price": 381.8,
+      "price": 379.8,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -59692,7 +59205,7 @@
     },
     {
       "sym": "MARKSANS",
-      "price": 198.4,
+      "price": 200.13,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -59967,7 +59480,7 @@
     },
     {
       "sym": "WALCHANNAG",
-      "price": 220.73,
+      "price": 239.8,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -60277,7 +59790,7 @@
     },
     {
       "sym": "LIBERTSHOE",
-      "price": 238.3,
+      "price": 241.4,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -60550,7 +60063,7 @@
     },
     {
       "sym": "RAJRATAN",
-      "price": 406.05,
+      "price": 416.1,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -60932,7 +60445,7 @@
     },
     {
       "sym": "ELECON",
-      "price": 502.0,
+      "price": 505.8,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -61278,7 +60791,7 @@
     },
     {
       "sym": "PRECAM",
-      "price": 158.14,
+      "price": 157.8,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -61605,7 +61118,7 @@
     },
     {
       "sym": "BAJAJHIND",
-      "price": 19.05,
+      "price": 18.73,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -61952,7 +61465,7 @@
     },
     {
       "sym": "NUCLEUS",
-      "price": 791.25,
+      "price": 786.35,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -62315,7 +61828,7 @@
     },
     {
       "sym": "PREMEXPLN",
-      "price": 498.7,
+      "price": 542.0,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -62568,7 +62081,7 @@
     },
     {
       "sym": "JAYNECOIND",
-      "price": 103.6,
+      "price": 104.73,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -62911,7 +62424,7 @@
     },
     {
       "sym": "TIIL",
-      "price": 2479.7,
+      "price": 2484.4,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -63167,7 +62680,7 @@
     },
     {
       "sym": "WABAG",
-      "price": 1374.7,
+      "price": 1377.9,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -63477,7 +62990,7 @@
     },
     {
       "sym": "COFFEEDAY",
-      "price": 24.76,
+      "price": 24.82,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -63749,7 +63262,7 @@
     },
     {
       "sym": "REFEX",
-      "price": 255.45,
+      "price": 255.6,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -64204,7 +63717,7 @@
     },
     {
       "sym": "FINOPB",
-      "price": 125.88,
+      "price": 125.12,
       "hold_days": 6,
       "month": 11,
       "month_name": "November",
@@ -64439,7 +63952,7 @@
     },
     {
       "sym": "BGRENERGY",
-      "price": 259.8,
+      "price": 262.0,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -64674,7 +64187,7 @@
     },
     {
       "sym": "TPLPLASTEH",
-      "price": 63.32,
+      "price": 62.79,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -65182,7 +64695,7 @@
     },
     {
       "sym": "MIRCELECTR",
-      "price": 43.97,
+      "price": 43.41,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -65653,7 +65166,7 @@
     },
     {
       "sym": "DBREALTY",
-      "price": 129.06,
+      "price": 129.21,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -66016,7 +65529,7 @@
     },
     {
       "sym": "LXCHEM",
-      "price": 155.59,
+      "price": 155.36,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -66306,7 +65819,7 @@
     },
     {
       "sym": "HUBTOWN",
-      "price": 216.71,
+      "price": 220.15,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -66596,7 +66109,7 @@
     },
     {
       "sym": "MOLDTECH",
-      "price": 128.7,
+      "price": 134.58,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -66923,7 +66436,7 @@
     },
     {
       "sym": "VOLTAMP",
-      "price": 9284.0,
+      "price": 9390.0,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -67249,7 +66762,7 @@
     },
     {
       "sym": "MARATHON",
-      "price": 473.2,
+      "price": 486.25,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -67485,7 +66998,7 @@
     },
     {
       "sym": "SUVEN",
-      "price": 216.38,
+      "price": 209.78,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -67976,7 +67489,7 @@
     },
     {
       "sym": "MUNJALAU",
-      "price": 87.79,
+      "price": 89.67,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -68248,7 +67761,7 @@
     },
     {
       "sym": "GABRIEL",
-      "price": 1098.7,
+      "price": 1097.7,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -68556,7 +68069,7 @@
     },
     {
       "sym": "KINGFA",
-      "price": 5261.3,
+      "price": 5198.8,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -69062,7 +68575,7 @@
     },
     {
       "sym": "SKMEGGPROD",
-      "price": 167.98,
+      "price": 175.96,
       "hold_days": 8,
       "month": 8,
       "month_name": "August",
@@ -69298,7 +68811,7 @@
     },
     {
       "sym": "GREENPOWER",
-      "price": 11.29,
+      "price": 11.63,
       "hold_days": 8,
       "month": 6,
       "month_name": "June",
@@ -69515,7 +69028,7 @@
     },
     {
       "sym": "DEEPINDS",
-      "price": 459.35,
+      "price": 470.45,
       "hold_days": 9,
       "month": 3,
       "month_name": "March",
@@ -69842,7 +69355,7 @@
     },
     {
       "sym": "LXCHEM",
-      "price": 155.59,
+      "price": 155.36,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -70186,7 +69699,7 @@
     },
     {
       "sym": "A2ZINFRA",
-      "price": 16.15,
+      "price": 15.49,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -70512,7 +70025,7 @@
     },
     {
       "sym": "TEJASNET",
-      "price": 460.8,
+      "price": 467.15,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -70858,7 +70371,7 @@
     },
     {
       "sym": "EDELWEISS",
-      "price": 118.8,
+      "price": 116.18,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -71202,7 +70715,7 @@
     },
     {
       "sym": "MIRCELECTR",
-      "price": 43.97,
+      "price": 43.41,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -71456,7 +70969,7 @@
     },
     {
       "sym": "RAJRATAN",
-      "price": 406.05,
+      "price": 416.1,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -71802,7 +71315,7 @@
     },
     {
       "sym": "MIRCELECTR",
-      "price": 43.97,
+      "price": 43.41,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -72073,7 +71586,7 @@
     },
     {
       "sym": "NEULANDLAB",
-      "price": 17003.0,
+      "price": 16497.0,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -72381,7 +71894,7 @@
     },
     {
       "sym": "RAMCOSYS",
-      "price": 381.8,
+      "price": 379.8,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -72763,7 +72276,7 @@
     },
     {
       "sym": "NEULANDLAB",
-      "price": 17003.0,
+      "price": 16497.0,
       "hold_days": 8,
       "month": 10,
       "month_name": "October",
@@ -72926,7 +72439,7 @@
     },
     {
       "sym": "NAVKARCORP",
-      "price": 95.34,
+      "price": 94.85,
       "hold_days": 9,
       "month": 7,
       "month_name": "July",
@@ -73161,7 +72674,7 @@
     },
     {
       "sym": "INDRAMEDCO",
-      "price": 415.85,
+      "price": 394.35,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -73435,7 +72948,7 @@
     },
     {
       "sym": "ATULAUTO",
-      "price": 476.9,
+      "price": 491.1,
       "hold_days": 6,
       "month": 8,
       "month_name": "August",
@@ -73706,7 +73219,7 @@
     },
     {
       "sym": "THEMISMED",
-      "price": 96.77,
+      "price": 100.88,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -74013,7 +73526,7 @@
     },
     {
       "sym": "PGIL",
-      "price": 1497.9,
+      "price": 1492.7,
       "hold_days": 6,
       "month": 7,
       "month_name": "July",
@@ -74285,7 +73798,7 @@
     },
     {
       "sym": "A2ZINFRA",
-      "price": 16.15,
+      "price": 15.49,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -74575,7 +74088,7 @@
     },
     {
       "sym": "ARMANFIN",
-      "price": 1770.9,
+      "price": 1801.3,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -74757,7 +74270,7 @@
     },
     {
       "sym": "INDSWFTLAB",
-      "price": 137.76,
+      "price": 138.11,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -75083,7 +74596,7 @@
     },
     {
       "sym": "V2RETAIL",
-      "price": 220.12,
+      "price": 237.79,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -75355,7 +74868,7 @@
     },
     {
       "sym": "SHILPAMED",
-      "price": 438.65,
+      "price": 438.85,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -75720,7 +75233,7 @@
     },
     {
       "sym": "RUCHIRA",
-      "price": 117.47,
+      "price": 120.62,
       "hold_days": 9,
       "month": 8,
       "month_name": "August",
@@ -76299,7 +75812,7 @@
     },
     {
       "sym": "LIBERTSHOE",
-      "price": 238.3,
+      "price": 241.4,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -76588,7 +76101,7 @@
     },
     {
       "sym": "SPAL",
-      "price": 811.7,
+      "price": 805.2,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -76896,7 +76409,7 @@
     },
     {
       "sym": "MOLDTECH",
-      "price": 128.7,
+      "price": 134.58,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -77187,7 +76700,7 @@
     },
     {
       "sym": "EIMCOELECO",
-      "price": 1561.7,
+      "price": 1587.9,
       "hold_days": 7,
       "month": 6,
       "month_name": "June",
@@ -77495,7 +77008,7 @@
     },
     {
       "sym": "SIMPLEXINF",
-      "price": 204.01,
+      "price": 211.31,
       "hold_days": 8,
       "month": 8,
       "month_name": "August",
@@ -77730,7 +77243,7 @@
     },
     {
       "sym": "USHAMART",
-      "price": 457.85,
+      "price": 475.5,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -78075,7 +77588,7 @@
     },
     {
       "sym": "WEBELSOLAR",
-      "price": 105.23,
+      "price": 108.27,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -78455,7 +77968,7 @@
     },
     {
       "sym": "VIPCLOTHNG",
-      "price": 23.65,
+      "price": 25.66,
       "hold_days": 8,
       "month": 9,
       "month_name": "September",
@@ -78744,7 +78257,7 @@
     },
     {
       "sym": "FORCEMOT",
-      "price": 19861.0,
+      "price": 19906.0,
       "hold_days": 9,
       "month": 10,
       "month_name": "October",
@@ -79052,7 +78565,7 @@
     },
     {
       "sym": "KOLTEPATIL",
-      "price": 364.0,
+      "price": 364.3,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -79324,7 +78837,7 @@
     },
     {
       "sym": "MAZDOCK",
-      "price": 2443.8,
+      "price": 2518.5,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -79614,7 +79127,7 @@
     },
     {
       "sym": "TARC",
-      "price": 132.26,
+      "price": 130.49,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -79977,7 +79490,7 @@
     },
     {
       "sym": "DREDGECORP",
-      "price": 889.85,
+      "price": 900.6,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -80287,7 +79800,7 @@
     },
     {
       "sym": "SPIC",
-      "price": 65.62,
+      "price": 67.68,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -80504,7 +80017,7 @@
     },
     {
       "sym": "MAANALU",
-      "price": 140.31,
+      "price": 141.88,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -80793,7 +80306,7 @@
     },
     {
       "sym": "EIMCOELECO",
-      "price": 1561.7,
+      "price": 1587.9,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -81500,7 +81013,7 @@
     },
     {
       "sym": "KIRLOSENG",
-      "price": 1561.1,
+      "price": 1599.6,
       "hold_days": 5,
       "month": 5,
       "month_name": "May",
@@ -81771,7 +81284,7 @@
     },
     {
       "sym": "BROOKS",
-      "price": 49.81,
+      "price": 47.68,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -82006,7 +81519,7 @@
     },
     {
       "sym": "SRHHYPOLTD",
-      "price": 510.4,
+      "price": 501.8,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -82331,7 +81844,7 @@
     },
     {
       "sym": "NBCC",
-      "price": 92.66,
+      "price": 94.88,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -82695,7 +82208,7 @@
     },
     {
       "sym": "NDRAUTO",
-      "price": 821.15,
+      "price": 794.95,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -83129,7 +82642,7 @@
     },
     {
       "sym": "HESTERBIO",
-      "price": 1695.0,
+      "price": 1707.2,
       "hold_days": 8,
       "month": 3,
       "month_name": "March",
@@ -83422,7 +82935,7 @@
     },
     {
       "sym": "SAKSOFT",
-      "price": 141.12,
+      "price": 140.1,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -83821,7 +83334,7 @@
     },
     {
       "sym": "STEL",
-      "price": 460.5,
+      "price": 462.6,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -84148,7 +83661,7 @@
     },
     {
       "sym": "IZMO",
-      "price": 663.95,
+      "price": 670.0,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -84473,7 +83986,7 @@
     },
     {
       "sym": "RICOAUTO",
-      "price": 114.7,
+      "price": 115.72,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -84854,7 +84367,7 @@
     },
     {
       "sym": "RICOAUTO",
-      "price": 114.7,
+      "price": 115.72,
       "hold_days": 8,
       "month": 11,
       "month_name": "November",
@@ -85053,7 +84566,7 @@
     },
     {
       "sym": "ABAN",
-      "price": 18.81,
+      "price": 19.74,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -85433,7 +84946,7 @@
     },
     {
       "sym": "INDRAMEDCO",
-      "price": 415.85,
+      "price": 394.35,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -85758,7 +85271,7 @@
     },
     {
       "sym": "VOLTAMP",
-      "price": 9284.0,
+      "price": 9390.0,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -86465,7 +85978,7 @@
     },
     {
       "sym": "PGIL",
-      "price": 1497.9,
+      "price": 1492.7,
       "hold_days": 7,
       "month": 1,
       "month_name": "January",
@@ -86702,7 +86215,7 @@
     },
     {
       "sym": "NEULANDLAB",
-      "price": 17003.0,
+      "price": 16497.0,
       "hold_days": 5,
       "month": 4,
       "month_name": "April",
@@ -87031,7 +86544,7 @@
     },
     {
       "sym": "NEULANDLAB",
-      "price": 17003.0,
+      "price": 16497.0,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -87410,133 +86923,6 @@
       ]
     },
     {
-      "sym": "AVROIND",
-      "price": 10.25,
-      "hold_days": 10,
-      "month": 12,
-      "month_name": "December",
-      "month_abbr": "Dec",
-      "week": 5,
-      "week_label": "Week 5 of December",
-      "description": "Enter in Week 5 of December, hold 10 trading days",
-      "n_occurrences": 5,
-      "n_years": 4,
-      "years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "required_years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "slot_passed_2026": false,
-      "avg_max_ret": 21.16,
-      "min_max_ret": 10.4,
-      "avg_exit_ret": 15.39,
-      "avg_days_to_10": 6.0,
-      "ret_rate": 2.12,
-      "alert_today": false,
-      "alert_tomorrow": false,
-      "occurrences": [
-        {
-          "sig_date": "2025-12-31",
-          "entry_date": "2026-01-01",
-          "exit_date": "2026-01-16",
-          "year": 2025,
-          "month": 12,
-          "week": 5,
-          "entry_px": 117.6,
-          "exit_px": 144.84,
-          "max_ret": 28.83,
-          "ret_on_exit": 23.16,
-          "max_gain": 34.95,
-          "days_to_10": 8
-        },
-        {
-          "sig_date": "2025-12-30",
-          "entry_date": "2025-12-31",
-          "exit_date": "2026-01-14",
-          "year": 2025,
-          "month": 12,
-          "week": 5,
-          "entry_px": 120.63,
-          "exit_px": 151.5,
-          "max_ret": 25.59,
-          "ret_on_exit": 25.59,
-          "max_gain": 29.24,
-          "days_to_10": 9
-        },
-        {
-          "sig_date": "2024-12-30",
-          "entry_date": "2024-12-31",
-          "exit_date": "2025-01-14",
-          "year": 2024,
-          "month": 12,
-          "week": 5,
-          "entry_px": 205.54,
-          "exit_px": 217.26,
-          "max_ret": 10.4,
-          "ret_on_exit": 5.7,
-          "max_gain": 10.4,
-          "days_to_10": 5
-        },
-        {
-          "sig_date": "2023-12-29",
-          "entry_date": "2024-01-01",
-          "exit_date": "2024-01-15",
-          "year": 2023,
-          "month": 12,
-          "week": 5,
-          "entry_px": 114.8,
-          "exit_px": 127.85,
-          "max_ret": 15.2,
-          "ret_on_exit": 11.37,
-          "max_gain": 23.69,
-          "days_to_10": 7
-        },
-        {
-          "sig_date": "2022-12-29",
-          "entry_date": "2022-12-30",
-          "exit_date": "2023-01-13",
-          "year": 2022,
-          "month": 12,
-          "week": 5,
-          "entry_px": 123.2,
-          "exit_px": 136.9,
-          "max_ret": 25.77,
-          "ret_on_exit": 11.12,
-          "max_gain": 37.54,
-          "days_to_10": 1
-        }
-      ],
-      "calendar_mmdd": [
-        {
-          "mmdd": "12-29",
-          "year": 2022
-        },
-        {
-          "mmdd": "12-29",
-          "year": 2023
-        },
-        {
-          "mmdd": "12-30",
-          "year": 2024
-        },
-        {
-          "mmdd": "12-30",
-          "year": 2025
-        },
-        {
-          "mmdd": "12-31",
-          "year": 2025
-        }
-      ]
-    },
-    {
       "sym": "MEGASOFT",
       "price": 188.95,
       "hold_days": 10,
@@ -87720,7 +87106,7 @@
     },
     {
       "sym": "ELECON",
-      "price": 502.0,
+      "price": 505.8,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -88082,7 +87468,7 @@
     },
     {
       "sym": "TEXRAIL",
-      "price": 105.71,
+      "price": 120.2,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -88428,7 +87814,7 @@
     },
     {
       "sym": "NDRAUTO",
-      "price": 821.15,
+      "price": 794.95,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -88664,7 +88050,7 @@
     },
     {
       "sym": "MIRCELECTR",
-      "price": 43.97,
+      "price": 43.41,
       "hold_days": 8,
       "month": 7,
       "month_name": "July",
@@ -88917,7 +88303,7 @@
     },
     {
       "sym": "JAGSNPHARM",
-      "price": 212.29,
+      "price": 209.79,
       "hold_days": 9,
       "month": 7,
       "month_name": "July",
@@ -89225,7 +88611,7 @@
     },
     {
       "sym": "WALCHANNAG",
-      "price": 220.73,
+      "price": 239.8,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -89444,7 +88830,7 @@
     },
     {
       "sym": "NAVKARCORP",
-      "price": 95.34,
+      "price": 94.85,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -89951,7 +89337,7 @@
     },
     {
       "sym": "WEBELSOLAR",
-      "price": 105.23,
+      "price": 108.27,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -90368,7 +89754,7 @@
     },
     {
       "sym": "MAANALU",
-      "price": 140.31,
+      "price": 141.88,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -90657,7 +90043,7 @@
     },
     {
       "sym": "BGRENERGY",
-      "price": 259.8,
+      "price": 262.0,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -90893,7 +90279,7 @@
     },
     {
       "sym": "ARIHANTCAP",
-      "price": 69.37,
+      "price": 69.53,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -91128,7 +90514,7 @@
     },
     {
       "sym": "SOLARA",
-      "price": 508.6,
+      "price": 503.7,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -91511,7 +90897,7 @@
     },
     {
       "sym": "BROOKS",
-      "price": 49.81,
+      "price": 47.68,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -91711,7 +91097,7 @@
     },
     {
       "sym": "KRITI",
-      "price": 83.5,
+      "price": 79.33,
       "hold_days": 10,
       "month": 2,
       "month_name": "February",
@@ -92092,7 +91478,7 @@
     },
     {
       "sym": "THEMISMED",
-      "price": 96.77,
+      "price": 100.88,
       "hold_days": 9,
       "month": 9,
       "month_name": "September",
@@ -92436,7 +91822,7 @@
     },
     {
       "sym": "CLEDUCATE",
-      "price": 42.05,
+      "price": 40.57,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -92654,7 +92040,7 @@
     },
     {
       "sym": "RELIGARE",
-      "price": 222.3,
+      "price": 227.44,
       "hold_days": 9,
       "month": 8,
       "month_name": "August",
@@ -92800,7 +92186,7 @@
     },
     {
       "sym": "DATAPATTNS",
-      "price": 4062.5,
+      "price": 4196.2,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -93163,7 +92549,7 @@
     },
     {
       "sym": "DEEPAKFERT",
-      "price": 1231.9,
+      "price": 1268.5,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -93618,7 +93004,7 @@
     },
     {
       "sym": "SURYODAY",
-      "price": 172.64,
+      "price": 173.73,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -93909,7 +93295,7 @@
     },
     {
       "sym": "VOLTAMP",
-      "price": 9284.0,
+      "price": 9390.0,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -94162,7 +93548,7 @@
     },
     {
       "sym": "SBCL",
-      "price": 583.1,
+      "price": 573.75,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -94453,7 +93839,7 @@
     },
     {
       "sym": "ALEMBICLTD",
-      "price": 90.43,
+      "price": 89.93,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -94781,7 +94167,7 @@
     },
     {
       "sym": "REFEX",
-      "price": 255.45,
+      "price": 255.6,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -95254,7 +94640,7 @@
     },
     {
       "sym": "AJMERA",
-      "price": 117.01,
+      "price": 121.69,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -95510,7 +94896,7 @@
     },
     {
       "sym": "MOLDTECH",
-      "price": 128.7,
+      "price": 134.58,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -95747,7 +95133,7 @@
     },
     {
       "sym": "ORISSAMINE",
-      "price": 4094.2,
+      "price": 4168.9,
       "hold_days": 9,
       "month": 4,
       "month_name": "April",
@@ -96148,7 +95534,7 @@
     },
     {
       "sym": "DATAPATTNS",
-      "price": 4062.5,
+      "price": 4196.2,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -96547,7 +95933,7 @@
     },
     {
       "sym": "BBTC",
-      "price": 1465.6,
+      "price": 1494.1,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -97019,7 +96405,7 @@
     },
     {
       "sym": "KRITI",
-      "price": 83.5,
+      "price": 79.33,
       "hold_days": 7,
       "month": 1,
       "month_name": "January",
@@ -97256,7 +96642,7 @@
     },
     {
       "sym": "ASHAPURMIN",
-      "price": 648.55,
+      "price": 660.0,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -97618,7 +97004,7 @@
     },
     {
       "sym": "TCPLPACK",
-      "price": 2697.2,
+      "price": 2621.2,
       "hold_days": 10,
       "month": 2,
       "month_name": "February",
@@ -98000,7 +97386,7 @@
     },
     {
       "sym": "MARINE",
-      "price": 217.88,
+      "price": 221.41,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -98327,7 +97713,7 @@
     },
     {
       "sym": "IZMO",
-      "price": 663.95,
+      "price": 670.0,
       "hold_days": 9,
       "month": 11,
       "month_name": "November",
@@ -98616,7 +98002,7 @@
     },
     {
       "sym": "NEULANDLAB",
-      "price": 17003.0,
+      "price": 16497.0,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -98900,241 +98286,6 @@
         },
         {
           "mmdd": "07-11",
-          "year": 2025
-        }
-      ]
-    },
-    {
-      "sym": "AVROIND",
-      "price": 10.25,
-      "hold_days": 7,
-      "month": 5,
-      "month_name": "May",
-      "month_abbr": "May",
-      "week": 2,
-      "week_label": "Week 2 of May",
-      "description": "Enter in Week 2 of May, hold 7 trading days",
-      "n_occurrences": 11,
-      "n_years": 4,
-      "years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "required_years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "slot_passed_2026": false,
-      "avg_max_ret": 20.09,
-      "min_max_ret": 11.85,
-      "avg_exit_ret": 14.26,
-      "avg_days_to_10": 2.45,
-      "ret_rate": 2.87,
-      "alert_today": true,
-      "alert_tomorrow": true,
-      "occurrences": [
-        {
-          "sig_date": "2025-05-12",
-          "entry_date": "2025-05-13",
-          "exit_date": "2025-05-22",
-          "year": 2025,
-          "month": 5,
-          "week": 2,
-          "entry_px": 156.0,
-          "exit_px": 182.14,
-          "max_ret": 20.93,
-          "ret_on_exit": 16.76,
-          "max_gain": 27.56,
-          "days_to_10": 1
-        },
-        {
-          "sig_date": "2025-05-09",
-          "entry_date": "2025-05-12",
-          "exit_date": "2025-05-21",
-          "year": 2025,
-          "month": 5,
-          "week": 2,
-          "entry_px": 155.0,
-          "exit_px": 184.01,
-          "max_ret": 21.71,
-          "ret_on_exit": 18.72,
-          "max_gain": 28.39,
-          "days_to_10": 1
-        },
-        {
-          "sig_date": "2025-05-08",
-          "entry_date": "2025-05-09",
-          "exit_date": "2025-05-20",
-          "year": 2025,
-          "month": 5,
-          "week": 2,
-          "entry_px": 141.0,
-          "exit_px": 183.33,
-          "max_ret": 33.79,
-          "ret_on_exit": 30.02,
-          "max_gain": 41.13,
-          "days_to_10": 1
-        },
-        {
-          "sig_date": "2024-05-09",
-          "entry_date": "2024-05-10",
-          "exit_date": "2024-05-22",
-          "year": 2024,
-          "month": 5,
-          "week": 2,
-          "entry_px": 114.65,
-          "exit_px": 125.9,
-          "max_ret": 13.56,
-          "ret_on_exit": 9.81,
-          "max_gain": 19.93,
-          "days_to_10": 4
-        },
-        {
-          "sig_date": "2023-05-12",
-          "entry_date": "2023-05-15",
-          "exit_date": "2023-05-24",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 132.9,
-          "exit_px": 128.65,
-          "max_ret": 11.85,
-          "ret_on_exit": -3.2,
-          "max_gain": 15.05,
-          "days_to_10": 3
-        },
-        {
-          "sig_date": "2023-05-11",
-          "entry_date": "2023-05-12",
-          "exit_date": "2023-05-23",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 125.0,
-          "exit_px": 130.2,
-          "max_ret": 18.92,
-          "ret_on_exit": 4.16,
-          "max_gain": 22.32,
-          "days_to_10": 2
-        },
-        {
-          "sig_date": "2023-05-10",
-          "entry_date": "2023-05-11",
-          "exit_date": "2023-05-22",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 123.4,
-          "exit_px": 137.05,
-          "max_ret": 20.46,
-          "ret_on_exit": 11.06,
-          "max_gain": 23.91,
-          "days_to_10": 3
-        },
-        {
-          "sig_date": "2023-05-09",
-          "entry_date": "2023-05-10",
-          "exit_date": "2023-05-19",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 125.0,
-          "exit_px": 144.1,
-          "max_ret": 18.92,
-          "ret_on_exit": 15.28,
-          "max_gain": 22.32,
-          "days_to_10": 4
-        },
-        {
-          "sig_date": "2023-05-08",
-          "entry_date": "2023-05-09",
-          "exit_date": "2023-05-18",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 123.15,
-          "exit_px": 148.65,
-          "max_ret": 20.71,
-          "ret_on_exit": 20.71,
-          "max_gain": 23.3,
-          "days_to_10": 4
-        },
-        {
-          "sig_date": "2022-05-10",
-          "entry_date": "2022-05-11",
-          "exit_date": "2022-05-20",
-          "year": 2022,
-          "month": 5,
-          "week": 2,
-          "entry_px": 107.65,
-          "exit_px": 122.0,
-          "max_ret": 15.56,
-          "ret_on_exit": 13.33,
-          "max_gain": 19.83,
-          "days_to_10": 2
-        },
-        {
-          "sig_date": "2022-05-09",
-          "entry_date": "2022-05-10",
-          "exit_date": "2022-05-19",
-          "year": 2022,
-          "month": 5,
-          "week": 2,
-          "entry_px": 99.85,
-          "exit_px": 120.0,
-          "max_ret": 24.59,
-          "ret_on_exit": 20.18,
-          "max_gain": 29.19,
-          "days_to_10": 2
-        }
-      ],
-      "calendar_mmdd": [
-        {
-          "mmdd": "05-09",
-          "year": 2022
-        },
-        {
-          "mmdd": "05-10",
-          "year": 2022
-        },
-        {
-          "mmdd": "05-08",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-09",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-10",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-11",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-12",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-09",
-          "year": 2024
-        },
-        {
-          "mmdd": "05-08",
-          "year": 2025
-        },
-        {
-          "mmdd": "05-09",
-          "year": 2025
-        },
-        {
-          "mmdd": "05-12",
           "year": 2025
         }
       ]
@@ -99521,7 +98672,7 @@
     },
     {
       "sym": "DYNAMATECH",
-      "price": 10754.0,
+      "price": 10714.0,
       "hold_days": 7,
       "month": 5,
       "month_name": "May",
@@ -99793,7 +98944,7 @@
     },
     {
       "sym": "TIMETECHNO",
-      "price": 177.4,
+      "price": 173.34,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -99993,7 +99144,7 @@
     },
     {
       "sym": "WHEELS",
-      "price": 1277.5,
+      "price": 1328.9,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -100319,7 +99470,7 @@
     },
     {
       "sym": "SANDHAR",
-      "price": 505.95,
+      "price": 514.05,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -100663,7 +99814,7 @@
     },
     {
       "sym": "REMSONSIND",
-      "price": 108.01,
+      "price": 108.97,
       "hold_days": 7,
       "month": 5,
       "month_name": "May",
@@ -100898,7 +100049,7 @@
     },
     {
       "sym": "GRSE",
-      "price": 2791.3,
+      "price": 2853.4,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -101151,7 +100302,7 @@
     },
     {
       "sym": "PRECWIRE",
-      "price": 389.05,
+      "price": 388.55,
       "hold_days": 6,
       "month": 9,
       "month_name": "September",
@@ -101423,7 +100574,7 @@
     },
     {
       "sym": "DENORA",
-      "price": 715.05,
+      "price": 722.05,
       "hold_days": 9,
       "month": 6,
       "month_name": "June",
@@ -101730,7 +100881,7 @@
     },
     {
       "sym": "JAIBALAJI",
-      "price": 82.98,
+      "price": 84.65,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -102003,7 +101154,7 @@
     },
     {
       "sym": "AXISCADES",
-      "price": 2017.1,
+      "price": 2042.7,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -102166,7 +101317,7 @@
     },
     {
       "sym": "DENORA",
-      "price": 715.05,
+      "price": 722.05,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -102529,7 +101680,7 @@
     },
     {
       "sym": "ADSL",
-      "price": 123.87,
+      "price": 126.01,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -102873,7 +102024,7 @@
     },
     {
       "sym": "GALLANTT",
-      "price": 817.1,
+      "price": 797.6,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -103199,7 +102350,7 @@
     },
     {
       "sym": "SWELECTES",
-      "price": 628.3,
+      "price": 632.6,
       "hold_days": 9,
       "month": 8,
       "month_name": "August",
@@ -103380,7 +102531,7 @@
     },
     {
       "sym": "NECLIFE",
-      "price": 12.96,
+      "price": 12.92,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -103725,7 +102876,7 @@
     },
     {
       "sym": "ARVIND",
-      "price": 442.0,
+      "price": 442.4,
       "hold_days": 8,
       "month": 4,
       "month_name": "April",
@@ -103963,7 +103114,7 @@
     },
     {
       "sym": "CHEMFAB",
-      "price": 430.4,
+      "price": 431.35,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -104362,7 +103513,7 @@
     },
     {
       "sym": "WALCHANNAG",
-      "price": 220.73,
+      "price": 239.8,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -104597,7 +103748,7 @@
     },
     {
       "sym": "DLINKINDIA",
-      "price": 464.0,
+      "price": 475.9,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -104961,7 +104112,7 @@
     },
     {
       "sym": "HUBTOWN",
-      "price": 216.71,
+      "price": 220.15,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -105234,7 +104385,7 @@
     },
     {
       "sym": "POWERINDIA",
-      "price": 32265.0,
+      "price": 31745.0,
       "hold_days": 10,
       "month": 2,
       "month_name": "February",
@@ -105706,7 +104857,7 @@
     },
     {
       "sym": "PARAGMILK",
-      "price": 218.45,
+      "price": 221.29,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -105995,7 +105146,7 @@
     },
     {
       "sym": "MIRCELECTR",
-      "price": 43.97,
+      "price": 43.41,
       "hold_days": 9,
       "month": 3,
       "month_name": "March",
@@ -106250,7 +105401,7 @@
     },
     {
       "sym": "SWELECTES",
-      "price": 628.3,
+      "price": 632.6,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -106539,7 +105690,7 @@
     },
     {
       "sym": "E2E",
-      "price": 3425.1,
+      "price": 3253.9,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -106828,7 +105979,7 @@
     },
     {
       "sym": "RAMKY",
-      "price": 465.9,
+      "price": 461.7,
       "hold_days": 9,
       "month": 6,
       "month_name": "June",
@@ -107119,7 +106270,7 @@
     },
     {
       "sym": "SPANDANA",
-      "price": 258.91,
+      "price": 265.54,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -107411,7 +106562,7 @@
     },
     {
       "sym": "ARIHANTSUP",
-      "price": 255.9,
+      "price": 255.7,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -107738,7 +106889,7 @@
     },
     {
       "sym": "JISLJALEQS",
-      "price": 32.3,
+      "price": 32.7,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -108064,7 +107215,7 @@
     },
     {
       "sym": "SURYAROSNI",
-      "price": 239.7,
+      "price": 247.0,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -108372,7 +107523,7 @@
     },
     {
       "sym": "PARACABLES",
-      "price": 54.22,
+      "price": 59.64,
       "hold_days": 9,
       "month": 4,
       "month_name": "April",
@@ -108663,7 +107814,7 @@
     },
     {
       "sym": "DENORA",
-      "price": 715.05,
+      "price": 722.05,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -109026,7 +108177,7 @@
     },
     {
       "sym": "GENUSPOWER",
-      "price": 307.7,
+      "price": 313.5,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -109552,7 +108703,7 @@
     },
     {
       "sym": "WHEELS",
-      "price": 1277.5,
+      "price": 1328.9,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -109787,7 +108938,7 @@
     },
     {
       "sym": "CHENNPETRO",
-      "price": 1009.7,
+      "price": 1027.4,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -110221,7 +109372,7 @@
     },
     {
       "sym": "GENESYS",
-      "price": 218.25,
+      "price": 216.35,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -110420,7 +109571,7 @@
     },
     {
       "sym": "ASTRAMICRO",
-      "price": 1108.7,
+      "price": 1111.2,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -110838,7 +109989,7 @@
     },
     {
       "sym": "AXISCADES",
-      "price": 2017.1,
+      "price": 2042.7,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -111200,8 +110351,297 @@
       ]
     },
     {
+      "sym": "DEVIT",
+      "price": 29.71,
+      "hold_days": 10,
+      "month": 5,
+      "month_name": "May",
+      "month_abbr": "May",
+      "week": 2,
+      "week_label": "Week 2 of May",
+      "description": "Enter in Week 2 of May, hold 10 trading days",
+      "n_occurrences": 14,
+      "n_years": 4,
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "required_years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "slot_passed_2026": false,
+      "avg_max_ret": 19.21,
+      "min_max_ret": 10.7,
+      "avg_exit_ret": 14.77,
+      "avg_days_to_10": 5.0,
+      "ret_rate": 1.92,
+      "alert_today": true,
+      "alert_tomorrow": true,
+      "occurrences": [
+        {
+          "sig_date": "2025-05-08",
+          "entry_date": "2025-05-09",
+          "exit_date": "2025-05-23",
+          "year": 2025,
+          "month": 5,
+          "week": 2,
+          "entry_px": 97.0,
+          "exit_px": 111.0,
+          "max_ret": 16.04,
+          "ret_on_exit": 14.43,
+          "max_gain": 19.27,
+          "days_to_10": 3
+        },
+        {
+          "sig_date": "2024-05-13",
+          "entry_date": "2024-05-14",
+          "exit_date": "2024-05-29",
+          "year": 2024,
+          "month": 5,
+          "week": 2,
+          "entry_px": 109.8,
+          "exit_px": 117.85,
+          "max_ret": 10.7,
+          "ret_on_exit": 7.33,
+          "max_gain": 13.3,
+          "days_to_10": 8
+        },
+        {
+          "sig_date": "2024-05-10",
+          "entry_date": "2024-05-13",
+          "exit_date": "2024-05-28",
+          "year": 2024,
+          "month": 5,
+          "week": 2,
+          "entry_px": 107.55,
+          "exit_px": 120.55,
+          "max_ret": 13.02,
+          "ret_on_exit": 12.09,
+          "max_gain": 15.67,
+          "days_to_10": 7
+        },
+        {
+          "sig_date": "2024-05-08",
+          "entry_date": "2024-05-09",
+          "exit_date": "2024-05-24",
+          "year": 2024,
+          "month": 5,
+          "week": 2,
+          "entry_px": 107.0,
+          "exit_px": 117.85,
+          "max_ret": 12.1,
+          "ret_on_exit": 10.14,
+          "max_gain": 14.16,
+          "days_to_10": 9
+        },
+        {
+          "sig_date": "2023-05-12",
+          "entry_date": "2023-05-15",
+          "exit_date": "2023-05-29",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 94.1,
+          "exit_px": 119.3,
+          "max_ret": 26.78,
+          "ret_on_exit": 26.78,
+          "max_gain": 28.53,
+          "days_to_10": 3
+        },
+        {
+          "sig_date": "2023-05-11",
+          "entry_date": "2023-05-12",
+          "exit_date": "2023-05-26",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 96.2,
+          "exit_px": 112.3,
+          "max_ret": 18.45,
+          "ret_on_exit": 16.74,
+          "max_gain": 25.73,
+          "days_to_10": 4
+        },
+        {
+          "sig_date": "2023-05-10",
+          "entry_date": "2023-05-11",
+          "exit_date": "2023-05-25",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 96.25,
+          "exit_px": 109.5,
+          "max_ret": 18.39,
+          "ret_on_exit": 13.77,
+          "max_gain": 25.66,
+          "days_to_10": 5
+        },
+        {
+          "sig_date": "2023-05-09",
+          "entry_date": "2023-05-10",
+          "exit_date": "2023-05-24",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 97.0,
+          "exit_px": 111.95,
+          "max_ret": 17.47,
+          "ret_on_exit": 15.41,
+          "max_gain": 24.69,
+          "days_to_10": 6
+        },
+        {
+          "sig_date": "2023-05-08",
+          "entry_date": "2023-05-09",
+          "exit_date": "2023-05-23",
+          "year": 2023,
+          "month": 5,
+          "week": 2,
+          "entry_px": 94.45,
+          "exit_px": 113.95,
+          "max_ret": 20.65,
+          "ret_on_exit": 20.65,
+          "max_gain": 28.06,
+          "days_to_10": 7
+        },
+        {
+          "sig_date": "2022-05-13",
+          "entry_date": "2022-05-16",
+          "exit_date": "2022-05-30",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 166.15,
+          "exit_px": 178.2,
+          "max_ret": 16.13,
+          "ret_on_exit": 7.25,
+          "max_gain": 19.77,
+          "days_to_10": 2
+        },
+        {
+          "sig_date": "2022-05-12",
+          "entry_date": "2022-05-13",
+          "exit_date": "2022-05-27",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 143.45,
+          "exit_px": 176.35,
+          "max_ret": 34.51,
+          "ret_on_exit": 22.93,
+          "max_gain": 38.72,
+          "days_to_10": 1
+        },
+        {
+          "sig_date": "2022-05-11",
+          "entry_date": "2022-05-12",
+          "exit_date": "2022-05-26",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 150.95,
+          "exit_px": 179.25,
+          "max_ret": 27.82,
+          "ret_on_exit": 18.75,
+          "max_gain": 31.83,
+          "days_to_10": 2
+        },
+        {
+          "sig_date": "2022-05-10",
+          "entry_date": "2022-05-11",
+          "exit_date": "2022-05-25",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 158.85,
+          "exit_px": 176.1,
+          "max_ret": 21.47,
+          "ret_on_exit": 10.86,
+          "max_gain": 25.28,
+          "days_to_10": 5
+        },
+        {
+          "sig_date": "2022-05-09",
+          "entry_date": "2022-05-10",
+          "exit_date": "2022-05-24",
+          "year": 2022,
+          "month": 5,
+          "week": 2,
+          "entry_px": 167.2,
+          "exit_px": 183.35,
+          "max_ret": 15.4,
+          "ret_on_exit": 9.66,
+          "max_gain": 19.02,
+          "days_to_10": 8
+        }
+      ],
+      "calendar_mmdd": [
+        {
+          "mmdd": "05-09",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-10",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-11",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-12",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-13",
+          "year": 2022
+        },
+        {
+          "mmdd": "05-08",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-09",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-10",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-11",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-12",
+          "year": 2023
+        },
+        {
+          "mmdd": "05-08",
+          "year": 2024
+        },
+        {
+          "mmdd": "05-10",
+          "year": 2024
+        },
+        {
+          "mmdd": "05-13",
+          "year": 2024
+        },
+        {
+          "mmdd": "05-08",
+          "year": 2025
+        }
+      ]
+    },
+    {
       "sym": "PENIND",
-      "price": 161.15,
+      "price": 161.94,
       "hold_days": 7,
       "month": 8,
       "month_name": "August",
@@ -111562,7 +111002,7 @@
     },
     {
       "sym": "IOLCP",
-      "price": 105.71,
+      "price": 106.22,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -111725,7 +111165,7 @@
     },
     {
       "sym": "GOLDIAM",
-      "price": 383.35,
+      "price": 390.2,
       "hold_days": 10,
       "month": 1,
       "month_name": "January",
@@ -112089,7 +111529,7 @@
     },
     {
       "sym": "PGIL",
-      "price": 1497.9,
+      "price": 1492.7,
       "hold_days": 8,
       "month": 6,
       "month_name": "June",
@@ -112379,7 +111819,7 @@
     },
     {
       "sym": "KAMATHOTEL",
-      "price": 174.33,
+      "price": 168.66,
       "hold_days": 9,
       "month": 4,
       "month_name": "April",
@@ -112580,7 +112020,7 @@
     },
     {
       "sym": "KERNEX",
-      "price": 1374.0,
+      "price": 1406.2,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -112833,7 +112273,7 @@
     },
     {
       "sym": "ROHLTD",
-      "price": 326.65,
+      "price": 329.45,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -113161,7 +112601,7 @@
     },
     {
       "sym": "PREMEXPLN",
-      "price": 498.7,
+      "price": 542.0,
       "hold_days": 9,
       "month": 3,
       "month_name": "March",
@@ -113434,7 +112874,7 @@
     },
     {
       "sym": "ELECON",
-      "price": 502.0,
+      "price": 505.8,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -113888,7 +113328,7 @@
     },
     {
       "sym": "AXISCADES",
-      "price": 2017.1,
+      "price": 2042.7,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -114142,7 +113582,7 @@
     },
     {
       "sym": "PARAGMILK",
-      "price": 218.45,
+      "price": 221.29,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -114449,7 +113889,7 @@
     },
     {
       "sym": "RANASUG",
-      "price": 13.23,
+      "price": 13.78,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -114721,7 +114161,7 @@
     },
     {
       "sym": "MIDHANI",
-      "price": 389.4,
+      "price": 419.0,
       "hold_days": 6,
       "month": 5,
       "month_name": "May",
@@ -115010,7 +114450,7 @@
     },
     {
       "sym": "XPROINDIA",
-      "price": 1096.4,
+      "price": 1090.0,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -115336,7 +114776,7 @@
     },
     {
       "sym": "OLECTRA",
-      "price": 1270.0,
+      "price": 1280.7,
       "hold_days": 8,
       "month": 3,
       "month_name": "March",
@@ -115628,7 +115068,7 @@
     },
     {
       "sym": "STOVEKRAFT",
-      "price": 563.45,
+      "price": 541.6,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -115935,7 +115375,7 @@
     },
     {
       "sym": "HCC",
-      "price": 21.74,
+      "price": 22.03,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -116315,7 +115755,7 @@
     },
     {
       "sym": "VENUSREM",
-      "price": 931.7,
+      "price": 922.55,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -116660,7 +116100,7 @@
     },
     {
       "sym": "TIRUMALCHM",
-      "price": 203.48,
+      "price": 203.93,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -117096,7 +116536,7 @@
     },
     {
       "sym": "ANGELONE",
-      "price": 299.1,
+      "price": 298.15,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -117241,7 +116681,7 @@
     },
     {
       "sym": "AURIONPRO",
-      "price": 762.2,
+      "price": 765.45,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -117696,7 +117136,7 @@
     },
     {
       "sym": "DEEPAKFERT",
-      "price": 1231.9,
+      "price": 1268.5,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -118605,7 +118045,7 @@
     },
     {
       "sym": "VENUSREM",
-      "price": 931.7,
+      "price": 922.55,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -119093,7 +118533,7 @@
     },
     {
       "sym": "TARC",
-      "price": 132.26,
+      "price": 130.49,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -119438,7 +118878,7 @@
     },
     {
       "sym": "MARATHON",
-      "price": 473.2,
+      "price": 486.25,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -119764,7 +119204,7 @@
     },
     {
       "sym": "SDBL",
-      "price": 85.69,
+      "price": 88.39,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -120037,7 +119477,7 @@
     },
     {
       "sym": "WINDMACHIN",
-      "price": 305.25,
+      "price": 303.85,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -120309,7 +119749,7 @@
     },
     {
       "sym": "NEULANDLAB",
-      "price": 17003.0,
+      "price": 16497.0,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -120636,7 +120076,7 @@
     },
     {
       "sym": "KITEX",
-      "price": 156.81,
+      "price": 159.02,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -120946,7 +120386,7 @@
     },
     {
       "sym": "SBC",
-      "price": 34.61,
+      "price": 34.13,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -121345,7 +120785,7 @@
     },
     {
       "sym": "PREMEXPLN",
-      "price": 498.7,
+      "price": 542.0,
       "hold_days": 8,
       "month": 4,
       "month_name": "April",
@@ -121690,7 +121130,7 @@
     },
     {
       "sym": "SPARC",
-      "price": 166.43,
+      "price": 168.68,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -122072,7 +121512,7 @@
     },
     {
       "sym": "MAZDOCK",
-      "price": 2443.8,
+      "price": 2518.5,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -122345,7 +121785,7 @@
     },
     {
       "sym": "ANGELONE",
-      "price": 299.1,
+      "price": 298.15,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -122598,7 +122038,7 @@
     },
     {
       "sym": "SRHHYPOLTD",
-      "price": 510.4,
+      "price": 501.8,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -122960,7 +122400,7 @@
     },
     {
       "sym": "ASIANTILES",
-      "price": 60.74,
+      "price": 60.99,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -123376,7 +122816,7 @@
     },
     {
       "sym": "HIMATSEIDE",
-      "price": 79.13,
+      "price": 77.67,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -123758,7 +123198,7 @@
     },
     {
       "sym": "PRECAM",
-      "price": 158.14,
+      "price": 157.8,
       "hold_days": 8,
       "month": 5,
       "month_name": "May",
@@ -124066,7 +123506,7 @@
     },
     {
       "sym": "RUSHIL",
-      "price": 15.8,
+      "price": 16.03,
       "hold_days": 8,
       "month": 8,
       "month_name": "August",
@@ -124357,7 +123797,7 @@
     },
     {
       "sym": "KERNEX",
-      "price": 1374.0,
+      "price": 1406.2,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -124628,7 +124068,7 @@
     },
     {
       "sym": "JUSTDIAL",
-      "price": 530.15,
+      "price": 528.95,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -125137,7 +124577,7 @@
     },
     {
       "sym": "MCLEODRUSS",
-      "price": 56.3,
+      "price": 56.87,
       "hold_days": 8,
       "month": 6,
       "month_name": "June",
@@ -125445,7 +124885,7 @@
     },
     {
       "sym": "TREJHARA",
-      "price": 162.7,
+      "price": 156.81,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -125789,7 +125229,7 @@
     },
     {
       "sym": "DYNPRO",
-      "price": 225.11,
+      "price": 233.32,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -126098,7 +125538,7 @@
     },
     {
       "sym": "A2ZINFRA",
-      "price": 16.15,
+      "price": 15.49,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -126316,7 +125756,7 @@
     },
     {
       "sym": "UNIVCABLES",
-      "price": 1040.2,
+      "price": 999.5,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -126589,7 +126029,7 @@
     },
     {
       "sym": "NELCO",
-      "price": 675.8,
+      "price": 679.35,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -126808,7 +126248,7 @@
     },
     {
       "sym": "NATHBIOGEN",
-      "price": 163.34,
+      "price": 163.59,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -127100,7 +126540,7 @@
     },
     {
       "sym": "POKARNA",
-      "price": 828.95,
+      "price": 839.05,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -127391,7 +126831,7 @@
     },
     {
       "sym": "PRUDENT",
-      "price": 2740.1,
+      "price": 2741.4,
       "hold_days": 7,
       "month": 8,
       "month_name": "August",
@@ -127934,7 +127374,7 @@
     },
     {
       "sym": "UFLEX",
-      "price": 421.5,
+      "price": 416.55,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -128280,7 +127720,7 @@
     },
     {
       "sym": "DENORA",
-      "price": 715.05,
+      "price": 722.05,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -128517,7 +127957,7 @@
     },
     {
       "sym": "SJS",
-      "price": 1968.6,
+      "price": 1935.1,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -128788,7 +128228,7 @@
     },
     {
       "sym": "GULPOLY",
-      "price": 186.1,
+      "price": 191.62,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -129062,7 +128502,7 @@
     },
     {
       "sym": "GLOBAL",
-      "price": 107.31,
+      "price": 103.22,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -129279,7 +128719,7 @@
     },
     {
       "sym": "TDPOWERSYS",
-      "price": 1166.9,
+      "price": 1175.9,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -129623,7 +129063,7 @@
     },
     {
       "sym": "WSTCSTPAPR",
-      "price": 502.45,
+      "price": 483.85,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -129930,7 +129370,7 @@
     },
     {
       "sym": "KRITI",
-      "price": 83.5,
+      "price": 79.33,
       "hold_days": 8,
       "month": 1,
       "month_name": "January",
@@ -130095,7 +129535,7 @@
     },
     {
       "sym": "BROOKS",
-      "price": 49.81,
+      "price": 47.68,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -130385,7 +129825,7 @@
     },
     {
       "sym": "DYCL",
-      "price": 328.7,
+      "price": 334.2,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -130692,7 +130132,7 @@
     },
     {
       "sym": "BHAGCHEM",
-      "price": 244.3,
+      "price": 241.45,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -131019,7 +130459,7 @@
     },
     {
       "sym": "GOACARBON",
-      "price": 404.7,
+      "price": 407.75,
       "hold_days": 9,
       "month": 4,
       "month_name": "April",
@@ -131347,7 +130787,7 @@
     },
     {
       "sym": "RANASUG",
-      "price": 13.23,
+      "price": 13.78,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -131729,7 +131169,7 @@
     },
     {
       "sym": "ARVIND",
-      "price": 442.0,
+      "price": 442.4,
       "hold_days": 9,
       "month": 3,
       "month_name": "March",
@@ -132057,7 +131497,7 @@
     },
     {
       "sym": "PDSL",
-      "price": 285.0,
+      "price": 280.9,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -132346,7 +131786,7 @@
     },
     {
       "sym": "SHREDIGCEM",
-      "price": 71.81,
+      "price": 72.99,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -132783,7 +132223,7 @@
     },
     {
       "sym": "ANANTRAJ",
-      "price": 502.45,
+      "price": 498.0,
       "hold_days": 9,
       "month": 7,
       "month_name": "July",
@@ -133019,7 +132459,7 @@
     },
     {
       "sym": "JAICORPLTD",
-      "price": 111.83,
+      "price": 113.86,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -133309,7 +132749,7 @@
     },
     {
       "sym": "MOTILALOFS",
-      "price": 841.7,
+      "price": 843.9,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -133546,7 +132986,7 @@
     },
     {
       "sym": "KELLTONTEC",
-      "price": 15.11,
+      "price": 15.51,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -133781,7 +133221,7 @@
     },
     {
       "sym": "DSSL",
-      "price": 1354.1,
+      "price": 1379.4,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -134018,7 +133458,7 @@
     },
     {
       "sym": "PATELENG",
-      "price": 26.76,
+      "price": 27.27,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -134398,7 +133838,7 @@
     },
     {
       "sym": "SURYAROSNI",
-      "price": 239.7,
+      "price": 247.0,
       "hold_days": 8,
       "month": 4,
       "month_name": "April",
@@ -134654,7 +134094,7 @@
     },
     {
       "sym": "HUBTOWN",
-      "price": 216.71,
+      "price": 220.15,
       "hold_days": 5,
       "month": 5,
       "month_name": "May",
@@ -134907,7 +134347,7 @@
     },
     {
       "sym": "EIHAHOTELS",
-      "price": 317.55,
+      "price": 316.0,
       "hold_days": 9,
       "month": 1,
       "month_name": "January",
@@ -135524,7 +134964,7 @@
     },
     {
       "sym": "SUPRIYA",
-      "price": 675.8,
+      "price": 683.85,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -135797,7 +135237,7 @@
     },
     {
       "sym": "AUTOIND",
-      "price": 71.94,
+      "price": 75.84,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -136106,7 +135546,7 @@
     },
     {
       "sym": "DYNPRO",
-      "price": 225.11,
+      "price": 233.32,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -136398,7 +135838,7 @@
     },
     {
       "sym": "JAGSNPHARM",
-      "price": 212.29,
+      "price": 209.79,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -136670,7 +136110,7 @@
     },
     {
       "sym": "TARC",
-      "price": 132.26,
+      "price": 130.49,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -136907,7 +136347,7 @@
     },
     {
       "sym": "POLYMED",
-      "price": 1671.1,
+      "price": 1597.7,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -137180,7 +136620,7 @@
     },
     {
       "sym": "MAHSCOOTER",
-      "price": 12147.0,
+      "price": 12083.0,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -137325,7 +136765,7 @@
     },
     {
       "sym": "IGARASHI",
-      "price": 406.35,
+      "price": 408.8,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -137650,7 +137090,7 @@
     },
     {
       "sym": "SATIN",
-      "price": 225.08,
+      "price": 225.45,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -138086,7 +137526,7 @@
     },
     {
       "sym": "VIPCLOTHNG",
-      "price": 23.65,
+      "price": 25.66,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -138357,7 +137797,7 @@
     },
     {
       "sym": "PENIND",
-      "price": 161.15,
+      "price": 161.94,
       "hold_days": 9,
       "month": 10,
       "month_name": "October",
@@ -138664,7 +138104,7 @@
     },
     {
       "sym": "KIRLOSBROS",
-      "price": 1679.0,
+      "price": 1583.6,
       "hold_days": 9,
       "month": 6,
       "month_name": "June",
@@ -138954,7 +138394,7 @@
     },
     {
       "sym": "ONWARDTEC",
-      "price": 265.71,
+      "price": 270.26,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -139442,7 +138882,7 @@
     },
     {
       "sym": "V2RETAIL",
-      "price": 220.12,
+      "price": 237.79,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -139732,7 +139172,7 @@
     },
     {
       "sym": "CENTUM",
-      "price": 2936.0,
+      "price": 3021.5,
       "hold_days": 7,
       "month": 8,
       "month_name": "August",
@@ -139985,7 +139425,7 @@
     },
     {
       "sym": "TARSONS",
-      "price": 214.7,
+      "price": 216.84,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -140240,7 +139680,7 @@
     },
     {
       "sym": "MANINDS",
-      "price": 520.75,
+      "price": 532.05,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -140457,7 +139897,7 @@
     },
     {
       "sym": "ANGELONE",
-      "price": 299.1,
+      "price": 298.15,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -140802,7 +140242,7 @@
     },
     {
       "sym": "THOMASCOOK",
-      "price": 93.43,
+      "price": 95.66,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -141184,7 +140624,7 @@
     },
     {
       "sym": "AAREYDRUGS",
-      "price": 88.3,
+      "price": 90.65,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -141419,7 +140859,7 @@
     },
     {
       "sym": "NATHBIOGEN",
-      "price": 163.34,
+      "price": 163.59,
       "hold_days": 7,
       "month": 6,
       "month_name": "June",
@@ -141726,7 +141166,7 @@
     },
     {
       "sym": "BPL",
-      "price": 55.14,
+      "price": 56.15,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -141982,7 +141422,7 @@
     },
     {
       "sym": "ORISSAMINE",
-      "price": 4094.2,
+      "price": 4168.9,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -142274,7 +141714,7 @@
     },
     {
       "sym": "SUBROS",
-      "price": 750.7,
+      "price": 756.1,
       "hold_days": 8,
       "month": 6,
       "month_name": "June",
@@ -142527,7 +141967,7 @@
     },
     {
       "sym": "ESTER",
-      "price": 94.42,
+      "price": 97.64,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -142891,7 +142331,7 @@
     },
     {
       "sym": "ORCHPHARMA",
-      "price": 708.65,
+      "price": 695.55,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -143216,7 +142656,7 @@
     },
     {
       "sym": "JTEKTINDIA",
-      "price": 135.59,
+      "price": 136.82,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -143544,7 +142984,7 @@
     },
     {
       "sym": "NELCO",
-      "price": 675.8,
+      "price": 679.35,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -143925,7 +143365,7 @@
     },
     {
       "sym": "GOODLUCK",
-      "price": 1305.0,
+      "price": 1302.1,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -144341,7 +143781,7 @@
     },
     {
       "sym": "GLOBUSSPR",
-      "price": 940.0,
+      "price": 937.0,
       "hold_days": 9,
       "month": 3,
       "month_name": "March",
@@ -144633,7 +144073,7 @@
     },
     {
       "sym": "SSWL",
-      "price": 205.66,
+      "price": 209.57,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -144996,7 +144436,7 @@
     },
     {
       "sym": "VENUSREM",
-      "price": 931.7,
+      "price": 922.55,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -145268,7 +144708,7 @@
     },
     {
       "sym": "WALCHANNAG",
-      "price": 220.73,
+      "price": 239.8,
       "hold_days": 9,
       "month": 12,
       "month_name": "December",
@@ -145577,7 +145017,7 @@
     },
     {
       "sym": "ESTER",
-      "price": 94.42,
+      "price": 97.64,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -145905,7 +145345,7 @@
     },
     {
       "sym": "JAICORPLTD",
-      "price": 111.83,
+      "price": 113.86,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -146286,7 +145726,7 @@
     },
     {
       "sym": "UJJIVANSFB",
-      "price": 57.25,
+      "price": 56.77,
       "hold_days": 6,
       "month": 3,
       "month_name": "March",
@@ -146560,7 +146000,7 @@
     },
     {
       "sym": "MARINE",
-      "price": 217.88,
+      "price": 221.41,
       "hold_days": 8,
       "month": 5,
       "month_name": "May",
@@ -146868,7 +146308,7 @@
     },
     {
       "sym": "MACPOWER",
-      "price": 1176.4,
+      "price": 1183.1,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -147123,7 +146563,7 @@
     },
     {
       "sym": "NDRAUTO",
-      "price": 821.15,
+      "price": 794.95,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -147376,7 +146816,7 @@
     },
     {
       "sym": "MUKANDLTD",
-      "price": 135.32,
+      "price": 137.23,
       "hold_days": 5,
       "month": 7,
       "month_name": "July",
@@ -147648,7 +147088,7 @@
     },
     {
       "sym": "PTC",
-      "price": 201.93,
+      "price": 206.46,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -148067,7 +147507,7 @@
     },
     {
       "sym": "VASCONEQ",
-      "price": 37.61,
+      "price": 35.78,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -148412,7 +147852,7 @@
     },
     {
       "sym": "KEI",
-      "price": 4997.1,
+      "price": 4919.5,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -148721,7 +148161,7 @@
     },
     {
       "sym": "PATELENG",
-      "price": 26.76,
+      "price": 27.27,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -149012,7 +148452,7 @@
     },
     {
       "sym": "GAEL",
-      "price": 166.42,
+      "price": 164.95,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -149466,7 +148906,7 @@
     },
     {
       "sym": "ISGEC",
-      "price": 1054.0,
+      "price": 1061.8,
       "hold_days": 10,
       "month": 1,
       "month_name": "January",
@@ -150028,7 +149468,7 @@
     },
     {
       "sym": "SPLPETRO",
-      "price": 696.8,
+      "price": 687.75,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -150353,7 +149793,7 @@
     },
     {
       "sym": "BHARATWIRE",
-      "price": 232.67,
+      "price": 246.09,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -150734,7 +150174,7 @@
     },
     {
       "sym": "EVERESTIND",
-      "price": 380.5,
+      "price": 377.55,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -151077,7 +150517,7 @@
     },
     {
       "sym": "STOVEKRAFT",
-      "price": 563.45,
+      "price": 541.6,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -151421,7 +150861,7 @@
     },
     {
       "sym": "MARKSANS",
-      "price": 198.4,
+      "price": 200.13,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -151638,7 +151078,7 @@
     },
     {
       "sym": "PENIND",
-      "price": 161.15,
+      "price": 161.94,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -152072,7 +151512,7 @@
     },
     {
       "sym": "RAMAPHO",
-      "price": 132.26,
+      "price": 132.67,
       "hold_days": 9,
       "month": 12,
       "month_name": "December",
@@ -152271,7 +151711,7 @@
     },
     {
       "sym": "WALCHANNAG",
-      "price": 220.73,
+      "price": 239.8,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -152652,7 +152092,7 @@
     },
     {
       "sym": "SOTL",
-      "price": 419.95,
+      "price": 417.85,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -152907,7 +152347,7 @@
     },
     {
       "sym": "ICIL",
-      "price": 281.5,
+      "price": 283.45,
       "hold_days": 9,
       "month": 3,
       "month_name": "March",
@@ -153290,7 +152730,7 @@
     },
     {
       "sym": "MAZDOCK",
-      "price": 2443.8,
+      "price": 2518.5,
       "hold_days": 9,
       "month": 8,
       "month_name": "August",
@@ -153453,7 +152893,7 @@
     },
     {
       "sym": "AXISCADES",
-      "price": 2017.1,
+      "price": 2042.7,
       "hold_days": 10,
       "month": 1,
       "month_name": "January",
@@ -153799,7 +153239,7 @@
     },
     {
       "sym": "HPAL",
-      "price": 41.03,
+      "price": 38.24,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -154108,7 +153548,7 @@
     },
     {
       "sym": "RSWM",
-      "price": 160.31,
+      "price": 159.24,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -154435,7 +153875,7 @@
     },
     {
       "sym": "AURIONPRO",
-      "price": 762.2,
+      "price": 765.45,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -154779,7 +154219,7 @@
     },
     {
       "sym": "TEXRAIL",
-      "price": 105.71,
+      "price": 120.2,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -155196,7 +154636,7 @@
     },
     {
       "sym": "SOUTHWEST",
-      "price": 220.83,
+      "price": 234.37,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -155469,7 +154909,7 @@
     },
     {
       "sym": "ASTRAZEN",
-      "price": 8320.0,
+      "price": 8376.0,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -155849,7 +155289,7 @@
     },
     {
       "sym": "PVP",
-      "price": 30.78,
+      "price": 28.05,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -156356,7 +155796,7 @@
     },
     {
       "sym": "SKIPPER",
-      "price": 436.05,
+      "price": 451.55,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -156538,7 +155978,7 @@
     },
     {
       "sym": "PVP",
-      "price": 30.78,
+      "price": 28.05,
       "hold_days": 8,
       "month": 12,
       "month_name": "December",
@@ -156756,7 +156196,7 @@
     },
     {
       "sym": "SUVEN",
-      "price": 216.38,
+      "price": 209.78,
       "hold_days": 9,
       "month": 9,
       "month_name": "September",
@@ -157083,7 +156523,7 @@
     },
     {
       "sym": "PRUDENT",
-      "price": 2740.1,
+      "price": 2741.4,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -157300,7 +156740,7 @@
     },
     {
       "sym": "ORCHPHARMA",
-      "price": 708.65,
+      "price": 695.55,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -157499,7 +156939,7 @@
     },
     {
       "sym": "KIOCL",
-      "price": 379.6,
+      "price": 396.45,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -157843,7 +157283,7 @@
     },
     {
       "sym": "NFL",
-      "price": 73.98,
+      "price": 75.19,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -158372,7 +157812,7 @@
     },
     {
       "sym": "KUANTUM",
-      "price": 76.85,
+      "price": 79.54,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -158825,7 +158265,7 @@
     },
     {
       "sym": "TARC",
-      "price": 132.26,
+      "price": 130.49,
       "hold_days": 9,
       "month": 11,
       "month_name": "November",
@@ -159078,7 +158518,7 @@
     },
     {
       "sym": "TIRUMALCHM",
-      "price": 203.48,
+      "price": 203.93,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -159442,7 +158882,7 @@
     },
     {
       "sym": "RUSHIL",
-      "price": 15.8,
+      "price": 16.03,
       "hold_days": 9,
       "month": 3,
       "month_name": "March",
@@ -159661,7 +159101,7 @@
     },
     {
       "sym": "ONWARDTEC",
-      "price": 265.71,
+      "price": 270.26,
       "hold_days": 6,
       "month": 7,
       "month_name": "July",
@@ -160023,7 +159463,7 @@
     },
     {
       "sym": "JUSTDIAL",
-      "price": 530.15,
+      "price": 528.95,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -160369,7 +159809,7 @@
     },
     {
       "sym": "IGPL",
-      "price": 447.55,
+      "price": 445.15,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -160697,7 +160137,7 @@
     },
     {
       "sym": "INDIANHUME",
-      "price": 328.85,
+      "price": 333.5,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -161007,7 +160447,7 @@
     },
     {
       "sym": "DATAPATTNS",
-      "price": 4062.5,
+      "price": 4196.2,
       "hold_days": 8,
       "month": 2,
       "month_name": "February",
@@ -161334,7 +160774,7 @@
     },
     {
       "sym": "MANINDS",
-      "price": 520.75,
+      "price": 532.05,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -161662,7 +161102,7 @@
     },
     {
       "sym": "ASTRAZEN",
-      "price": 8320.0,
+      "price": 8376.0,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -161988,7 +161428,7 @@
     },
     {
       "sym": "AGI",
-      "price": 587.35,
+      "price": 593.45,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -162223,7 +161663,7 @@
     },
     {
       "sym": "ASIANTILES",
-      "price": 60.74,
+      "price": 60.99,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -162585,7 +162025,7 @@
     },
     {
       "sym": "SPMLINFRA",
-      "price": 200.35,
+      "price": 205.18,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -162802,7 +162242,7 @@
     },
     {
       "sym": "KHADIM",
-      "price": 100.22,
+      "price": 106.31,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -163507,7 +162947,7 @@
     },
     {
       "sym": "ALKYLAMINE",
-      "price": 1592.6,
+      "price": 1636.7,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -163926,7 +163366,7 @@
     },
     {
       "sym": "DREDGECORP",
-      "price": 889.85,
+      "price": 900.6,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -164144,7 +163584,7 @@
     },
     {
       "sym": "KOPRAN",
-      "price": 150.38,
+      "price": 153.51,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -164471,7 +163911,7 @@
     },
     {
       "sym": "ANANTRAJ",
-      "price": 502.45,
+      "price": 498.0,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -164815,7 +164255,7 @@
     },
     {
       "sym": "ROTO",
-      "price": 56.21,
+      "price": 57.82,
       "hold_days": 8,
       "month": 5,
       "month_name": "May",
@@ -165122,7 +164562,7 @@
     },
     {
       "sym": "PNBHOUSING",
-      "price": 1057.7,
+      "price": 1062.9,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -165430,7 +164870,7 @@
     },
     {
       "sym": "ASTRAMICRO",
-      "price": 1108.7,
+      "price": 1111.2,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -165794,7 +165234,7 @@
     },
     {
       "sym": "TVSSRICHAK",
-      "price": 3722.3,
+      "price": 3787.3,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -166122,7 +165562,7 @@
     },
     {
       "sym": "BHEL",
-      "price": 391.75,
+      "price": 403.85,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -166339,7 +165779,7 @@
     },
     {
       "sym": "ANGELONE",
-      "price": 299.1,
+      "price": 298.15,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -166556,7 +165996,7 @@
     },
     {
       "sym": "ANANTRAJ",
-      "price": 502.45,
+      "price": 498.0,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -166792,7 +166232,7 @@
     },
     {
       "sym": "SKIPPER",
-      "price": 436.05,
+      "price": 451.55,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -167154,7 +166594,7 @@
     },
     {
       "sym": "TALBROAUTO",
-      "price": 312.75,
+      "price": 333.7,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -167373,7 +166813,7 @@
     },
     {
       "sym": "KUANTUM",
-      "price": 76.85,
+      "price": 79.54,
       "hold_days": 9,
       "month": 3,
       "month_name": "March",
@@ -167610,7 +167050,7 @@
     },
     {
       "sym": "EIMCOELECO",
-      "price": 1561.7,
+      "price": 1587.9,
       "hold_days": 9,
       "month": 6,
       "month_name": "June",
@@ -168027,7 +167467,7 @@
     },
     {
       "sym": "CENTUM",
-      "price": 2936.0,
+      "price": 3021.5,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -168280,7 +167720,7 @@
     },
     {
       "sym": "ICIL",
-      "price": 281.5,
+      "price": 283.45,
       "hold_days": 8,
       "month": 8,
       "month_name": "August",
@@ -168480,7 +167920,7 @@
     },
     {
       "sym": "OPTIEMUS",
-      "price": 420.2,
+      "price": 424.3,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -168681,7 +168121,7 @@
     },
     {
       "sym": "RICOAUTO",
-      "price": 114.7,
+      "price": 115.72,
       "hold_days": 7,
       "month": 5,
       "month_name": "May",
@@ -168845,7 +168285,7 @@
     },
     {
       "sym": "JISLJALEQS",
-      "price": 32.3,
+      "price": 32.7,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -169136,7 +168576,7 @@
     },
     {
       "sym": "TARC",
-      "price": 132.26,
+      "price": 130.49,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -169480,7 +168920,7 @@
     },
     {
       "sym": "CARTRADE",
-      "price": 1892.2,
+      "price": 1888.4,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -169787,7 +169227,7 @@
     },
     {
       "sym": "DSSL",
-      "price": 1354.1,
+      "price": 1379.4,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -169986,7 +169426,7 @@
     },
     {
       "sym": "KAJARIACER",
-      "price": 1072.6,
+      "price": 1072.7,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -170240,7 +169680,7 @@
     },
     {
       "sym": "MAZDOCK",
-      "price": 2443.8,
+      "price": 2518.5,
       "hold_days": 6,
       "month": 9,
       "month_name": "September",
@@ -170403,7 +169843,7 @@
     },
     {
       "sym": "CANBK",
-      "price": 130.01,
+      "price": 129.26,
       "hold_days": 9,
       "month": 10,
       "month_name": "October",
@@ -170676,7 +170116,7 @@
     },
     {
       "sym": "KIRLOSENG",
-      "price": 1561.1,
+      "price": 1599.6,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -170983,7 +170423,7 @@
     },
     {
       "sym": "SUVEN",
-      "price": 216.38,
+      "price": 209.78,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -171146,7 +170586,7 @@
     },
     {
       "sym": "JYOTHYLAB",
-      "price": 228.65,
+      "price": 222.95,
       "hold_days": 9,
       "month": 6,
       "month_name": "June",
@@ -171454,7 +170894,7 @@
     },
     {
       "sym": "DSSL",
-      "price": 1354.1,
+      "price": 1379.4,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -171781,7 +171221,7 @@
     },
     {
       "sym": "ASHOKA",
-      "price": 127.23,
+      "price": 128.06,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -172106,7 +171546,7 @@
     },
     {
       "sym": "PRUDENT",
-      "price": 2740.1,
+      "price": 2741.4,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -172395,7 +171835,7 @@
     },
     {
       "sym": "MBAPL",
-      "price": 547.6,
+      "price": 535.35,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -172612,7 +172052,7 @@
     },
     {
       "sym": "MANGLMCEM",
-      "price": 880.35,
+      "price": 883.25,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -172904,7 +172344,7 @@
     },
     {
       "sym": "TVSELECT",
-      "price": 479.7,
+      "price": 479.6,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -173449,7 +172889,7 @@
     },
     {
       "sym": "SURYAROSNI",
-      "price": 239.7,
+      "price": 247.0,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -173739,7 +173179,7 @@
     },
     {
       "sym": "BBL",
-      "price": 2575.7,
+      "price": 2507.4,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -174029,7 +173469,7 @@
     },
     {
       "sym": "SOBHA",
-      "price": 1394.3,
+      "price": 1385.4,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -174373,7 +173813,7 @@
     },
     {
       "sym": "TIMETECHNO",
-      "price": 177.4,
+      "price": 173.34,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -174807,7 +174247,7 @@
     },
     {
       "sym": "NUCLEUS",
-      "price": 791.25,
+      "price": 786.35,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -175172,7 +174612,7 @@
     },
     {
       "sym": "IIFL",
-      "price": 445.7,
+      "price": 463.6,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -175390,7 +174830,7 @@
     },
     {
       "sym": "ELGIEQUIP",
-      "price": 522.95,
+      "price": 518.5,
       "hold_days": 9,
       "month": 4,
       "month_name": "April",
@@ -175719,7 +175159,7 @@
     },
     {
       "sym": "GOKULAGRO",
-      "price": 235.08,
+      "price": 237.64,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -175938,7 +175378,7 @@
     },
     {
       "sym": "SATIN",
-      "price": 225.08,
+      "price": 225.45,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -176230,7 +175670,7 @@
     },
     {
       "sym": "CAPACITE",
-      "price": 236.65,
+      "price": 237.0,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -176486,7 +175926,7 @@
     },
     {
       "sym": "IIFL",
-      "price": 445.7,
+      "price": 463.6,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -176831,7 +176271,7 @@
     },
     {
       "sym": "CRAFTSMAN",
-      "price": 8688.0,
+      "price": 8584.5,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -177121,7 +176561,7 @@
     },
     {
       "sym": "PDMJEPAPER",
-      "price": 81.48,
+      "price": 81.19,
       "hold_days": 6,
       "month": 8,
       "month_name": "August",
@@ -177357,7 +176797,7 @@
     },
     {
       "sym": "TEXINFRA",
-      "price": 99.66,
+      "price": 101.36,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -177593,7 +177033,7 @@
     },
     {
       "sym": "SUDARSCHEM",
-      "price": 874.7,
+      "price": 878.55,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -177847,7 +177287,7 @@
     },
     {
       "sym": "KERNEX",
-      "price": 1374.0,
+      "price": 1406.2,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -178100,7 +177540,7 @@
     },
     {
       "sym": "AJMERA",
-      "price": 117.01,
+      "price": 121.69,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -178320,7 +177760,7 @@
     },
     {
       "sym": "IIFL",
-      "price": 445.7,
+      "price": 463.6,
       "hold_days": 8,
       "month": 6,
       "month_name": "June",
@@ -178611,7 +178051,7 @@
     },
     {
       "sym": "PTC",
-      "price": 201.93,
+      "price": 206.46,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -179175,7 +178615,7 @@
     },
     {
       "sym": "REDINGTON",
-      "price": 210.69,
+      "price": 210.05,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -179465,7 +178905,7 @@
     },
     {
       "sym": "HEG",
-      "price": 581.9,
+      "price": 604.3,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -179664,7 +179104,7 @@
     },
     {
       "sym": "CHENNPETRO",
-      "price": 1009.7,
+      "price": 1027.4,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -179973,7 +179413,7 @@
     },
     {
       "sym": "LOKESHMACH",
-      "price": 251.6,
+      "price": 252.41,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -180228,7 +179668,7 @@
     },
     {
       "sym": "DCW",
-      "price": 46.99,
+      "price": 47.82,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -180556,7 +179996,7 @@
     },
     {
       "sym": "ARMANFIN",
-      "price": 1770.9,
+      "price": 1801.3,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -180848,7 +180288,7 @@
     },
     {
       "sym": "ARTEMISMED",
-      "price": 270.68,
+      "price": 275.26,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -181119,7 +180559,7 @@
     },
     {
       "sym": "CAPACITE",
-      "price": 236.65,
+      "price": 237.0,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -181409,7 +180849,7 @@
     },
     {
       "sym": "PRUDENT",
-      "price": 2740.1,
+      "price": 2741.4,
       "hold_days": 9,
       "month": 7,
       "month_name": "July",
@@ -181698,7 +181138,7 @@
     },
     {
       "sym": "TIIL",
-      "price": 2479.7,
+      "price": 2484.4,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -181988,7 +181428,7 @@
     },
     {
       "sym": "HARDWYN",
-      "price": 23.07,
+      "price": 23.09,
       "hold_days": 9,
       "month": 10,
       "month_name": "October",
@@ -182114,8 +181554,207 @@
       ]
     },
     {
+      "sym": "DEVIT",
+      "price": 29.71,
+      "hold_days": 8,
+      "month": 6,
+      "month_name": "June",
+      "month_abbr": "Jun",
+      "week": 3,
+      "week_label": "Week 3 of June",
+      "description": "Enter in Week 3 of June, hold 8 trading days",
+      "n_occurrences": 9,
+      "n_years": 4,
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "required_years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "slot_passed_2026": false,
+      "avg_max_ret": 14.84,
+      "min_max_ret": 10.02,
+      "avg_exit_ret": 11.01,
+      "avg_days_to_10": 5.33,
+      "ret_rate": 1.85,
+      "alert_today": false,
+      "alert_tomorrow": false,
+      "occurrences": [
+        {
+          "sig_date": "2025-06-20",
+          "entry_date": "2025-06-23",
+          "exit_date": "2025-07-03",
+          "year": 2025,
+          "month": 6,
+          "week": 3,
+          "entry_px": 107.5,
+          "exit_px": 122.14,
+          "max_ret": 13.62,
+          "ret_on_exit": 13.62,
+          "max_gain": 17.12,
+          "days_to_10": 6
+        },
+        {
+          "sig_date": "2025-06-19",
+          "entry_date": "2025-06-20",
+          "exit_date": "2025-07-02",
+          "year": 2025,
+          "month": 6,
+          "week": 3,
+          "entry_px": 104.71,
+          "exit_px": 120.77,
+          "max_ret": 15.34,
+          "ret_on_exit": 15.34,
+          "max_gain": 20.24,
+          "days_to_10": 7
+        },
+        {
+          "sig_date": "2024-06-21",
+          "entry_date": "2024-06-24",
+          "exit_date": "2024-07-04",
+          "year": 2024,
+          "month": 6,
+          "week": 3,
+          "entry_px": 117.3,
+          "exit_px": 130.55,
+          "max_ret": 11.3,
+          "ret_on_exit": 11.3,
+          "max_gain": 15.1,
+          "days_to_10": 8
+        },
+        {
+          "sig_date": "2023-06-16",
+          "entry_date": "2023-06-19",
+          "exit_date": "2023-06-30",
+          "year": 2023,
+          "month": 6,
+          "week": 3,
+          "entry_px": 143.15,
+          "exit_px": 140.9,
+          "max_ret": 10.02,
+          "ret_on_exit": -1.57,
+          "max_gain": 14.53,
+          "days_to_10": 2
+        },
+        {
+          "sig_date": "2023-06-15",
+          "entry_date": "2023-06-16",
+          "exit_date": "2023-06-28",
+          "year": 2023,
+          "month": 6,
+          "week": 3,
+          "entry_px": 131.9,
+          "exit_px": 137.65,
+          "max_ret": 19.41,
+          "ret_on_exit": 4.36,
+          "max_gain": 24.3,
+          "days_to_10": 2
+        },
+        {
+          "sig_date": "2022-06-21",
+          "entry_date": "2022-06-22",
+          "exit_date": "2022-07-04",
+          "year": 2022,
+          "month": 6,
+          "week": 3,
+          "entry_px": 160.0,
+          "exit_px": 178.65,
+          "max_ret": 14.69,
+          "ret_on_exit": 11.66,
+          "max_gain": 20.31,
+          "days_to_10": 5
+        },
+        {
+          "sig_date": "2022-06-20",
+          "entry_date": "2022-06-21",
+          "exit_date": "2022-07-01",
+          "year": 2022,
+          "month": 6,
+          "week": 3,
+          "entry_px": 150.0,
+          "exit_px": 176.4,
+          "max_ret": 22.33,
+          "ret_on_exit": 17.6,
+          "max_gain": 28.33,
+          "days_to_10": 4
+        },
+        {
+          "sig_date": "2022-06-17",
+          "entry_date": "2022-06-20",
+          "exit_date": "2022-06-30",
+          "year": 2022,
+          "month": 6,
+          "week": 3,
+          "entry_px": 164.9,
+          "exit_px": 183.5,
+          "max_ret": 11.28,
+          "ret_on_exit": 11.28,
+          "max_gain": 16.74,
+          "days_to_10": 7
+        },
+        {
+          "sig_date": "2022-06-16",
+          "entry_date": "2022-06-17",
+          "exit_date": "2022-06-29",
+          "year": 2022,
+          "month": 6,
+          "week": 3,
+          "entry_px": 158.75,
+          "exit_px": 183.4,
+          "max_ret": 15.53,
+          "ret_on_exit": 15.53,
+          "max_gain": 15.65,
+          "days_to_10": 7
+        }
+      ],
+      "calendar_mmdd": [
+        {
+          "mmdd": "06-16",
+          "year": 2022
+        },
+        {
+          "mmdd": "06-17",
+          "year": 2022
+        },
+        {
+          "mmdd": "06-20",
+          "year": 2022
+        },
+        {
+          "mmdd": "06-21",
+          "year": 2022
+        },
+        {
+          "mmdd": "06-15",
+          "year": 2023
+        },
+        {
+          "mmdd": "06-16",
+          "year": 2023
+        },
+        {
+          "mmdd": "06-21",
+          "year": 2024
+        },
+        {
+          "mmdd": "06-19",
+          "year": 2025
+        },
+        {
+          "mmdd": "06-20",
+          "year": 2025
+        }
+      ]
+    },
+    {
       "sym": "MCX",
-      "price": 3156.9,
+      "price": 3204.2,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -182460,7 +182099,7 @@
     },
     {
       "sym": "RPSGVENT",
-      "price": 998.65,
+      "price": 962.95,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -182750,7 +182389,7 @@
     },
     {
       "sym": "HINDCOPPER",
-      "price": 564.2,
+      "price": 595.3,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -183040,7 +182679,7 @@
     },
     {
       "sym": "ZENTEC",
-      "price": 1587.0,
+      "price": 1584.2,
       "hold_days": 9,
       "month": 2,
       "month_name": "February",
@@ -183349,7 +182988,7 @@
     },
     {
       "sym": "CHEMCON",
-      "price": 165.55,
+      "price": 166.99,
       "hold_days": 8,
       "month": 9,
       "month_name": "September",
@@ -183530,7 +183169,7 @@
     },
     {
       "sym": "INDOSTAR",
-      "price": 200.66,
+      "price": 201.79,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -183822,7 +183461,7 @@
     },
     {
       "sym": "SJS",
-      "price": 1968.6,
+      "price": 1935.1,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -184021,7 +183660,7 @@
     },
     {
       "sym": "EDELWEISS",
-      "price": 118.8,
+      "price": 116.18,
       "hold_days": 9,
       "month": 8,
       "month_name": "August",
@@ -184274,7 +183913,7 @@
     },
     {
       "sym": "BRIGADE",
-      "price": 718.8,
+      "price": 694.95,
       "hold_days": 10,
       "month": 1,
       "month_name": "January",
@@ -184602,7 +184241,7 @@
     },
     {
       "sym": "TIRUPATIFL",
-      "price": 40.54,
+      "price": 39.43,
       "hold_days": 7,
       "month": 2,
       "month_name": "February",
@@ -184767,7 +184406,7 @@
     },
     {
       "sym": "PAYTM",
-      "price": 1154.6,
+      "price": 1121.8,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -185056,7 +184695,7 @@
     },
     {
       "sym": "CHEMCON",
-      "price": 165.55,
+      "price": 166.99,
       "hold_days": 9,
       "month": 3,
       "month_name": "March",
@@ -185293,7 +184932,7 @@
     },
     {
       "sym": "REFEX",
-      "price": 255.45,
+      "price": 255.6,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -185638,7 +185277,7 @@
     },
     {
       "sym": "GRSE",
-      "price": 2791.3,
+      "price": 2853.4,
       "hold_days": 9,
       "month": 4,
       "month_name": "April",
@@ -186001,7 +185640,7 @@
     },
     {
       "sym": "BLS",
-      "price": 270.8,
+      "price": 266.65,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -186201,7 +185840,7 @@
     },
     {
       "sym": "MAGADSUGAR",
-      "price": 505.95,
+      "price": 500.85,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -186583,7 +186222,7 @@
     },
     {
       "sym": "ASHOKA",
-      "price": 127.23,
+      "price": 128.06,
       "hold_days": 6,
       "month": 8,
       "month_name": "August",
@@ -186764,7 +186403,7 @@
     },
     {
       "sym": "KELLTONTEC",
-      "price": 15.11,
+      "price": 15.51,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -187018,7 +186657,7 @@
     },
     {
       "sym": "INTLCONV",
-      "price": 81.14,
+      "price": 80.96,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -187291,7 +186930,7 @@
     },
     {
       "sym": "JTEKTINDIA",
-      "price": 135.59,
+      "price": 136.82,
       "hold_days": 7,
       "month": 12,
       "month_name": "December",
@@ -187581,7 +187220,7 @@
     },
     {
       "sym": "GEEKAYWIRE",
-      "price": 26.45,
+      "price": 26.52,
       "hold_days": 5,
       "month": 8,
       "month_name": "August",
@@ -187708,7 +187347,7 @@
     },
     {
       "sym": "HUDCO",
-      "price": 218.93,
+      "price": 219.49,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -188018,7 +187657,7 @@
     },
     {
       "sym": "APARINDS",
-      "price": 12459.0,
+      "price": 12424.0,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -188271,7 +187910,7 @@
     },
     {
       "sym": "NLCINDIA",
-      "price": 308.1,
+      "price": 325.7,
       "hold_days": 7,
       "month": 5,
       "month_name": "May",
@@ -188471,7 +188110,7 @@
     },
     {
       "sym": "KARURVYSYA",
-      "price": 283.9,
+      "price": 280.2,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -188981,7 +188620,7 @@
     },
     {
       "sym": "CARTRADE",
-      "price": 1892.2,
+      "price": 1888.4,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -189252,7 +188891,7 @@
     },
     {
       "sym": "BHAGCHEM",
-      "price": 244.3,
+      "price": 241.45,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -189487,7 +189126,7 @@
     },
     {
       "sym": "ICIL",
-      "price": 281.5,
+      "price": 283.45,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -189743,7 +189382,7 @@
     },
     {
       "sym": "JSL",
-      "price": 732.1,
+      "price": 725.25,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -190051,7 +189690,7 @@
     },
     {
       "sym": "THEMISMED",
-      "price": 96.77,
+      "price": 100.88,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -190377,7 +190016,7 @@
     },
     {
       "sym": "SUNFLAG",
-      "price": 365.7,
+      "price": 379.1,
       "hold_days": 6,
       "month": 5,
       "month_name": "May",
@@ -190630,7 +190269,7 @@
     },
     {
       "sym": "NACLIND",
-      "price": 165.31,
+      "price": 166.48,
       "hold_days": 9,
       "month": 12,
       "month_name": "December",
@@ -190957,7 +190596,7 @@
     },
     {
       "sym": "MAZDOCK",
-      "price": 2443.8,
+      "price": 2518.5,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -191212,7 +190851,7 @@
     },
     {
       "sym": "PRECWIRE",
-      "price": 389.05,
+      "price": 388.55,
       "hold_days": 8,
       "month": 12,
       "month_name": "December",
@@ -191393,7 +191032,7 @@
     },
     {
       "sym": "IMFA",
-      "price": 1450.2,
+      "price": 1470.3,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -191701,7 +191340,7 @@
     },
     {
       "sym": "AURIONPRO",
-      "price": 762.2,
+      "price": 765.45,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -191957,7 +191596,7 @@
     },
     {
       "sym": "GLOBAL",
-      "price": 107.31,
+      "price": 103.22,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -192192,7 +191831,7 @@
     },
     {
       "sym": "CARTRADE",
-      "price": 1892.2,
+      "price": 1888.4,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -192355,7 +191994,7 @@
     },
     {
       "sym": "HUBTOWN",
-      "price": 216.71,
+      "price": 220.15,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -192644,7 +192283,7 @@
     },
     {
       "sym": "RITCO",
-      "price": 234.88,
+      "price": 271.77,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -193191,7 +192830,7 @@
     },
     {
       "sym": "CGPOWER",
-      "price": 833.7,
+      "price": 847.05,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -193752,7 +193391,7 @@
     },
     {
       "sym": "STAR",
-      "price": 1151.8,
+      "price": 1146.4,
       "hold_days": 8,
       "month": 3,
       "month_name": "March",
@@ -194009,7 +193648,7 @@
     },
     {
       "sym": "APARINDS",
-      "price": 12459.0,
+      "price": 12424.0,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -194317,7 +193956,7 @@
     },
     {
       "sym": "IGPL",
-      "price": 447.55,
+      "price": 445.15,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -194591,7 +194230,7 @@
     },
     {
       "sym": "JASH",
-      "price": 410.1,
+      "price": 399.6,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -194826,7 +194465,7 @@
     },
     {
       "sym": "AUBANK",
-      "price": 999.6,
+      "price": 994.8,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -195191,7 +194830,7 @@
     },
     {
       "sym": "DCAL",
-      "price": 174.83,
+      "price": 176.1,
       "hold_days": 10,
       "month": 1,
       "month_name": "January",
@@ -195501,7 +195140,7 @@
     },
     {
       "sym": "OMAXAUTO",
-      "price": 218.32,
+      "price": 227.74,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -195737,7 +195376,7 @@
     },
     {
       "sym": "MCX",
-      "price": 3156.9,
+      "price": 3204.2,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -195954,7 +195593,7 @@
     },
     {
       "sym": "TEMBO",
-      "price": 569.3,
+      "price": 581.6,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -196207,7 +195846,7 @@
     },
     {
       "sym": "SURYAROSNI",
-      "price": 239.7,
+      "price": 247.0,
       "hold_days": 10,
       "month": 4,
       "month_name": "April",
@@ -196518,7 +196157,7 @@
     },
     {
       "sym": "GESHIP",
-      "price": 1510.5,
+      "price": 1498.4,
       "hold_days": 8,
       "month": 2,
       "month_name": "February",
@@ -196756,7 +196395,7 @@
     },
     {
       "sym": "TCPLPACK",
-      "price": 2697.2,
+      "price": 2621.2,
       "hold_days": 10,
       "month": 1,
       "month_name": "January",
@@ -196957,189 +196596,8 @@
       ]
     },
     {
-      "sym": "JINDALPHOT",
-      "price": 1041.6,
-      "hold_days": 5,
-      "month": 5,
-      "month_name": "May",
-      "month_abbr": "May",
-      "week": 2,
-      "week_label": "Week 2 of May",
-      "description": "Enter in Week 2 of May, hold 5 trading days",
-      "n_occurrences": 8,
-      "n_years": 4,
-      "years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "required_years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "slot_passed_2026": false,
-      "avg_max_ret": 13.41,
-      "min_max_ret": 10.72,
-      "avg_exit_ret": 10.83,
-      "avg_days_to_10": 3.12,
-      "ret_rate": 2.68,
-      "alert_today": true,
-      "alert_tomorrow": true,
-      "occurrences": [
-        {
-          "sig_date": "2025-05-08",
-          "entry_date": "2025-05-09",
-          "exit_date": "2025-05-16",
-          "year": 2025,
-          "month": 5,
-          "week": 2,
-          "entry_px": 865.5,
-          "exit_px": 978.0,
-          "max_ret": 13.0,
-          "ret_on_exit": 13.0,
-          "max_gain": 14.04,
-          "days_to_10": 3
-        },
-        {
-          "sig_date": "2024-05-14",
-          "entry_date": "2024-05-15",
-          "exit_date": "2024-05-23",
-          "year": 2024,
-          "month": 5,
-          "week": 2,
-          "entry_px": 626.0,
-          "exit_px": 681.75,
-          "max_ret": 11.95,
-          "ret_on_exit": 8.91,
-          "max_gain": 16.29,
-          "days_to_10": 4
-        },
-        {
-          "sig_date": "2024-05-13",
-          "entry_date": "2024-05-14",
-          "exit_date": "2024-05-22",
-          "year": 2024,
-          "month": 5,
-          "week": 2,
-          "entry_px": 611.5,
-          "exit_px": 700.8,
-          "max_ret": 14.6,
-          "ret_on_exit": 14.6,
-          "max_gain": 19.04,
-          "days_to_10": 5
-        },
-        {
-          "sig_date": "2023-05-12",
-          "entry_date": "2023-05-15",
-          "exit_date": "2023-05-22",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 335.85,
-          "exit_px": 368.15,
-          "max_ret": 12.42,
-          "ret_on_exit": 9.62,
-          "max_gain": 17.54,
-          "days_to_10": 1
-        },
-        {
-          "sig_date": "2023-05-11",
-          "entry_date": "2023-05-12",
-          "exit_date": "2023-05-19",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 341.0,
-          "exit_px": 355.45,
-          "max_ret": 10.72,
-          "ret_on_exit": 4.24,
-          "max_gain": 15.76,
-          "days_to_10": 2
-        },
-        {
-          "sig_date": "2023-05-08",
-          "entry_date": "2023-05-09",
-          "exit_date": "2023-05-16",
-          "year": 2023,
-          "month": 5,
-          "week": 2,
-          "entry_px": 332.0,
-          "exit_px": 377.55,
-          "max_ret": 13.72,
-          "ret_on_exit": 13.72,
-          "max_gain": 18.9,
-          "days_to_10": 5
-        },
-        {
-          "sig_date": "2022-05-12",
-          "entry_date": "2022-05-13",
-          "exit_date": "2022-05-20",
-          "year": 2022,
-          "month": 5,
-          "week": 2,
-          "entry_px": 185.0,
-          "exit_px": 209.05,
-          "max_ret": 15.43,
-          "ret_on_exit": 13.0,
-          "max_gain": 22.84,
-          "days_to_10": 2
-        },
-        {
-          "sig_date": "2022-05-11",
-          "entry_date": "2022-05-12",
-          "exit_date": "2022-05-19",
-          "year": 2022,
-          "month": 5,
-          "week": 2,
-          "entry_px": 185.0,
-          "exit_px": 202.7,
-          "max_ret": 15.43,
-          "ret_on_exit": 9.57,
-          "max_gain": 22.84,
-          "days_to_10": 3
-        }
-      ],
-      "calendar_mmdd": [
-        {
-          "mmdd": "05-11",
-          "year": 2022
-        },
-        {
-          "mmdd": "05-12",
-          "year": 2022
-        },
-        {
-          "mmdd": "05-08",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-11",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-12",
-          "year": 2023
-        },
-        {
-          "mmdd": "05-13",
-          "year": 2024
-        },
-        {
-          "mmdd": "05-14",
-          "year": 2024
-        },
-        {
-          "mmdd": "05-08",
-          "year": 2025
-        }
-      ]
-    },
-    {
       "sym": "MAANALU",
-      "price": 140.31,
+      "price": 141.88,
       "hold_days": 10,
       "month": 3,
       "month_name": "March",
@@ -197377,7 +196835,7 @@
     },
     {
       "sym": "DREDGECORP",
-      "price": 889.85,
+      "price": 900.6,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -197631,7 +197089,7 @@
     },
     {
       "sym": "AURIONPRO",
-      "price": 762.2,
+      "price": 765.45,
       "hold_days": 9,
       "month": 7,
       "month_name": "July",
@@ -198029,7 +197487,7 @@
     },
     {
       "sym": "TDPOWERSYS",
-      "price": 1166.9,
+      "price": 1175.9,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -198229,7 +197687,7 @@
     },
     {
       "sym": "TARC",
-      "price": 132.26,
+      "price": 130.49,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -198446,7 +197904,7 @@
     },
     {
       "sym": "NEWGEN",
-      "price": 464.95,
+      "price": 471.25,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -198844,7 +198302,7 @@
     },
     {
       "sym": "ASTERDM",
-      "price": 730.35,
+      "price": 735.75,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -199025,7 +198483,7 @@
     },
     {
       "sym": "PAYTM",
-      "price": 1154.6,
+      "price": 1121.8,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -199242,7 +198700,7 @@
     },
     {
       "sym": "NAVKARCORP",
-      "price": 95.34,
+      "price": 94.85,
       "hold_days": 8,
       "month": 7,
       "month_name": "July",
@@ -199659,7 +199117,7 @@
     },
     {
       "sym": "LINC",
-      "price": 99.06,
+      "price": 97.05,
       "hold_days": 7,
       "month": 9,
       "month_name": "September",
@@ -199949,7 +199407,7 @@
     },
     {
       "sym": "SCHNEIDER",
-      "price": 1265.2,
+      "price": 1281.3,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -200257,7 +199715,7 @@
     },
     {
       "sym": "HIMATSEIDE",
-      "price": 79.13,
+      "price": 77.67,
       "hold_days": 8,
       "month": 6,
       "month_name": "June",
@@ -200439,7 +199897,7 @@
     },
     {
       "sym": "JPOLYINVST",
-      "price": 1049.9,
+      "price": 1039.5,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -200602,7 +200060,7 @@
     },
     {
       "sym": "KARURVYSYA",
-      "price": 283.9,
+      "price": 280.2,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -200837,7 +200295,7 @@
     },
     {
       "sym": "UNIDT",
-      "price": 214.93,
+      "price": 217.92,
       "hold_days": 7,
       "month": 12,
       "month_name": "December",
@@ -200982,7 +200440,7 @@
     },
     {
       "sym": "SBCL",
-      "price": 583.1,
+      "price": 573.75,
       "hold_days": 10,
       "month": 6,
       "month_name": "June",
@@ -201290,7 +200748,7 @@
     },
     {
       "sym": "SUDARSCHEM",
-      "price": 874.7,
+      "price": 878.55,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -201490,7 +200948,7 @@
     },
     {
       "sym": "SHAILY",
-      "price": 2693.6,
+      "price": 2744.0,
       "hold_days": 9,
       "month": 5,
       "month_name": "May",
@@ -201725,7 +201183,7 @@
     },
     {
       "sym": "SDBL",
-      "price": 85.69,
+      "price": 88.39,
       "hold_days": 7,
       "month": 4,
       "month_name": "April",
@@ -202180,7 +201638,7 @@
     },
     {
       "sym": "PAYTM",
-      "price": 1154.6,
+      "price": 1121.8,
       "hold_days": 10,
       "month": 9,
       "month_name": "September",
@@ -202415,7 +201873,7 @@
     },
     {
       "sym": "SHREDIGCEM",
-      "price": 71.81,
+      "price": 72.99,
       "hold_days": 9,
       "month": 4,
       "month_name": "April",
@@ -202690,7 +202148,7 @@
     },
     {
       "sym": "SBCL",
-      "price": 583.1,
+      "price": 573.75,
       "hold_days": 10,
       "month": 7,
       "month_name": "July",
@@ -203034,7 +202492,7 @@
     },
     {
       "sym": "GMDCLTD",
-      "price": 643.1,
+      "price": 663.1,
       "hold_days": 10,
       "month": 11,
       "month_name": "November",
@@ -203215,7 +202673,7 @@
     },
     {
       "sym": "KCPSUGIND",
-      "price": 25.74,
+      "price": 25.24,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
@@ -203378,7 +202836,7 @@
     },
     {
       "sym": "ICIL",
-      "price": 281.5,
+      "price": 283.45,
       "hold_days": 6,
       "month": 5,
       "month_name": "May",
@@ -203541,7 +202999,7 @@
     },
     {
       "sym": "SBC",
-      "price": 34.61,
+      "price": 34.13,
       "hold_days": 10,
       "month": 5,
       "month_name": "May",
@@ -203758,7 +203216,7 @@
     },
     {
       "sym": "PRICOLLTD",
-      "price": 592.45,
+      "price": 584.35,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -204066,7 +203524,7 @@
     },
     {
       "sym": "PRIMESECU",
-      "price": 275.2,
+      "price": 275.4,
       "hold_days": 10,
       "month": 10,
       "month_name": "October",
@@ -204230,7 +203688,7 @@
     },
     {
       "sym": "INGERRAND",
-      "price": 4293.6,
+      "price": 4260.3,
       "hold_days": 9,
       "month": 4,
       "month_name": "April",
@@ -204431,7 +203889,7 @@
     },
     {
       "sym": "FUSION",
-      "price": 202.75,
+      "price": 208.09,
       "hold_days": 10,
       "month": 12,
       "month_name": "December",
@@ -204612,7 +204070,7 @@
     },
     {
       "sym": "RAMCOIND",
-      "price": 282.2,
+      "price": 280.0,
       "hold_days": 10,
       "month": 8,
       "month_name": "August",
