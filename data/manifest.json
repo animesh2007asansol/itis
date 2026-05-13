@@ -1,4 +1,21 @@
 {
+  "2026-05-13": {
+    "fetched_at": "2026-05-13T14:40:01.586318Z",
+    "results": {
+      "equity": true,
+      "fo": true,
+      "index": true,
+      "delivery": false,
+      "corporate_actions": false,
+      "sme": false
+    },
+    "success": true,
+    "files": {
+      "equity": "data/equity/2026/05/2026-05-13.csv",
+      "fo": "data/fo/2026/05/2026-05-13.csv",
+      "index": "data/index/2026/05/2026-05-13.csv"
+    }
+  },
   "2026-05-12": {
     "fetched_at": "2026-05-12T17:14:00.422003Z",
     "results": {
