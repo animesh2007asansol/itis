@@ -1,0 +1,76 @@
+2026-05-15 14:45:29,393 [INFO] ============================================================
+2026-05-15 14:45:29,393 [INFO]   NSE Fetcher v2 (Cloudflare-proof) -- 2026-05-15
+2026-05-15 14:45:29,393 [INFO] ============================================================
+2026-05-15 14:45:29,521 [INFO]   HTTP engine: curl_cffi
+2026-05-15 14:45:30,010 [INFO]   Warm-up https://www.nseindia.com -> 200
+2026-05-15 14:45:32,080 [INFO]   Warm-up market-data -> 200
+2026-05-15 14:45:32,835 [INFO]   Session engine: curl_cffi
+2026-05-15 14:45:33,118 [INFO] 
+-- 1/6  EQUITY --
+2026-05-15 14:45:33,118 [INFO]   [1/3] GET https://archives.nseindia.com/content/historical/EQUITIES/2026/MAY/cm15MAY2026bhav.csv.zip
+2026-05-15 14:45:34,392 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-15 14:45:34,393 [INFO]   [1/3] GET https://archives.nseindia.com/archives/equities/bhavcopy/cm15MAY2026.csv.zip
+2026-05-15 14:45:34,734 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-15 14:45:34,734 [INFO]   [1/3] GET https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20260515_F_0000.csv.zip
+2026-05-15 14:45:35,134 [INFO]   OK 189,305 bytes
+2026-05-15 14:45:35,149 [INFO]   Extracted 'BhavCopy_NSE_CM_0_0_0_20260515_F_0000.csv': 3,370 rows x 34 cols
+2026-05-15 14:45:35,219 [INFO]   Saved -> data/equity/2026/05/2026-05-15.csv
+2026-05-15 14:45:35,219 [INFO] 
+-- 2/6  F&O --
+2026-05-15 14:45:35,219 [INFO]   [1/3] GET https://archives.nseindia.com/content/historical/DERIVATIVES/2026/MAY/fo15MAY2026bhav.csv.zip
+2026-05-15 14:45:35,514 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-15 14:45:35,514 [INFO]   [1/3] GET https://archives.nseindia.com/archives/derivatives/bhavcopy/fo15MAY2026.csv.zip
+2026-05-15 14:45:35,869 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-15 14:45:35,870 [INFO]   [1/3] GET https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_20260515_F_0000.csv.zip
+2026-05-15 14:45:37,866 [INFO]   OK 1,377,181 bytes
+2026-05-15 14:45:37,970 [INFO]   Extracted 'BhavCopy_NSE_FO_0_0_0_20260515_F_0000.csv': 44,322 rows x 34 cols
+2026-05-15 14:45:38,666 [INFO]   Saved -> data/fo/2026/05/2026-05-15.csv
+2026-05-15 14:45:38,669 [INFO] 
+-- 3/6  INDEX --
+2026-05-15 14:45:38,669 [INFO]   [1/3] GET https://archives.nseindia.com/content/indices/ind_close_all_15052026.csv
+2026-05-15 14:45:39,447 [INFO]   OK 15,797 bytes
+2026-05-15 14:45:39,451 [INFO]   Saved -> data/index/2026/05/2026-05-15.csv
+2026-05-15 14:45:39,451 [INFO] 
+-- 4/6  DELIVERY --
+2026-05-15 14:45:39,451 [INFO]   [1/3] GET https://archives.nseindia.com/archives/equities/mto/MTO_15052026.DAT
+2026-05-15 14:45:40,873 [INFO]   OK 116,413 bytes
+2026-05-15 14:45:40,878 [INFO]   [1/3] GET https://archives.nseindia.com/archives/equities/bhavcopy/sec_bhavdata15MAY2026.csv
+2026-05-15 14:45:41,571 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-15 14:45:41,572 [INFO] 
+-- 5/6  CORPORATE ACTIONS --
+2026-05-15 14:45:41,572 [INFO]   [1/3] GET https://www.nseindia.com/corporates/shownCorporateActions?index=equities&from_date=08-05-2026&to_date=15-05-2026
+2026-05-15 14:46:41,574 [WARNING]   Error: Failed to perform, curl: (28) Operation timed out after 60002 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-05-15 14:46:41,575 [INFO]   Sleeping 5.8s...
+2026-05-15 14:46:47,377 [INFO]   [2/3] GET https://www.nseindia.com/corporates/shownCorporateActions?index=equities&from_date=08-05-2026&to_date=15-05-2026
+2026-05-15 14:47:47,380 [WARNING]   Error: Failed to perform, curl: (28) Operation timed out after 60001 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-05-15 14:47:47,380 [INFO]   Sleeping 8.5s...
+2026-05-15 14:47:55,928 [INFO]   [3/3] GET https://www.nseindia.com/corporates/shownCorporateActions?index=equities&from_date=08-05-2026&to_date=15-05-2026
+2026-05-15 14:48:55,931 [WARNING]   Error: Failed to perform, curl: (28) Operation timed out after 60002 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-05-15 14:48:55,931 [INFO]   Sleeping 13.8s...
+2026-05-15 14:49:09,763 [ERROR]   All 3 attempts failed
+2026-05-15 14:49:09,764 [INFO] 
+-- 6/6  SME --
+2026-05-15 14:49:09,764 [INFO]   [1/3] GET https://archives.nseindia.com/content/historical/EQUITIES/2026/MAY/SME15MAY2026BHAV.csv.zip
+2026-05-15 14:49:10,172 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-15 14:49:10,173 [INFO]   [1/3] GET https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_SME_0_0_0_20260515_F_0000.csv.zip
+2026-05-15 14:50:10,176 [WARNING]   Error: Failed to perform, curl: (28) Operation timed out after 60002 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-05-15 14:50:10,176 [INFO]   Sleeping 5.6s...
+2026-05-15 14:50:15,728 [INFO]   [2/3] GET https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_SME_0_0_0_20260515_F_0000.csv.zip
+2026-05-15 14:51:15,731 [WARNING]   Error: Failed to perform, curl: (28) Operation timed out after 60002 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-05-15 14:51:15,731 [INFO]   Sleeping 8.5s...
+2026-05-15 14:51:24,235 [INFO]   [3/3] GET https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_SME_0_0_0_20260515_F_0000.csv.zip
+2026-05-15 14:52:24,238 [WARNING]   Error: Failed to perform, curl: (28) Operation timed out after 60002 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-05-15 14:52:24,238 [INFO]   Sleeping 12.2s...
+2026-05-15 14:52:36,397 [ERROR]   All 3 attempts failed
+2026-05-15 14:52:36,397 [INFO] 
+-- MANIFEST --
+2026-05-15 14:52:36,415 [INFO]   Manifest + summary updated.
+2026-05-15 14:52:36,415 [INFO] 
+============================================================
+2026-05-15 14:52:36,415 [INFO]   OK  equity
+2026-05-15 14:52:36,416 [INFO]   OK  fo
+2026-05-15 14:52:36,416 [INFO]   OK  index
+2026-05-15 14:52:36,416 [INFO]   FAIL  delivery
+2026-05-15 14:52:36,416 [INFO]   FAIL  corporate_actions
+2026-05-15 14:52:36,416 [INFO]   FAIL  sme
+2026-05-15 14:52:36,416 [INFO] ============================================================
