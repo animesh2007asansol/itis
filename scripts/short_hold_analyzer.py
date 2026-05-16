@@ -223,7 +223,7 @@ def analyze_stock(sym, df):
                 if not all(occ["max_ret"] >= MIN_RETURN for occ in occurrences): continue
 
                 occ_years = set(occ["year"] for occ in occurrences)
-                if not req_years.issubset(occ_years): continue
+                if not BASE_REQUIRED_YEARS.issubset(occ_years): continue
 
                 max_rets  = [occ["max_ret"] for occ in occurrences]
                 exit_rets = [occ["ret_on_exit"] for occ in occurrences if occ["ret_on_exit"] is not None]
@@ -288,7 +288,7 @@ def analyze_stock(sym, df):
                     "n_occurrences":    len(occurrences),
                     "n_years":          len(occ_years),
                     "years":            sorted(occ_years),
-                    "required_years":   sorted(req_years),
+                    "required_years":   sorted(BASE_REQUIRED_YEARS | ({cur_yr} if slot_has_passed else set())),
                     "slot_passed_2026": slot_has_passed,
                     "avg_max_ret":      avg_max,
                     "min_max_ret":      min_max,
