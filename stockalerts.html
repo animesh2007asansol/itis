@@ -625,6 +625,13 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <button class="fb"    id="shv-alerts" onclick="shView('alerts',this)">&#x1F514; Today's Alerts</button>
     <button class="fb"    id="shv-cal"    onclick="shView('cal',this)">&#x1F4C5; Year Calendar</button>
     <span class="fsep">|</span>
+    <span class="fsep">|</span>
+    <span class="fsep">Status:</span>
+    <button class="fb on" id="shst-all"    onclick="shStatus('all',this)">All</button>
+    <button class="fb"    id="shst-active"  onclick="shStatus('active',this)">&#x23F3; Active</button>
+    <button class="fb"    id="shst-upcoming" onclick="shStatus('upcoming',this)">&#x1F4C5; Upcoming</button>
+    <button class="fb"    id="shst-missed"  onclick="shStatus('missed',this)">&#x274C; Missed</button>
+    <span class="fsep">|</span>
     <input class="si" id="sh-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderShortHold()">
   </div>
   <div class="twrap">
@@ -914,7 +921,7 @@ function hTh(k){if(histSK===k)histSD=histSD==='desc'?'asc':'desc';else{histSK=k;
 // ── UC table renderer (no eval) ───────────────────────────────────────────────
 var ucState=ucS; // alias used in renderUC
 // Short Hold global state
-var shHoldFilter=0, shSortKey='avg_max_ret', shSortDir='desc', shCurrentView='list';
+var shHoldFilter=0, shSortKey='avg_max_ret', shSortDir='desc', shCurrentView='list', shStatusFilter='all';
 // Monthly Picks global state
 // (declared globally)
 // UC2 Timing global state
@@ -2288,6 +2295,7 @@ function r2pct(x){ return Math.round(x*100)/100; }
 // (declared globally)
 
 function shHold(v,btn){shHoldFilter=v;document.querySelectorAll('[id^="shh-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderShortHold();}
+function shStatus(v,btn){shStatusFilter=v;document.querySelectorAll('[id^="shst-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderShortHold();}
 function shSort(k,btn){
   if(shSortKey===k) shSortDir=shSortDir==='desc'?'asc':'desc';
   else{shSortKey=k;shSortDir='desc';}
@@ -2317,6 +2325,7 @@ function renderShortHold(){
   var rows=[...(d.stocks||[])];
   if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
   if(shHoldFilter!==0) rows=rows.filter(function(r){return r.hold_days===shHoldFilter;});
+  if(shStatusFilter!=='all') rows=rows.filter(function(r){return (r.slot_status||'upcoming')===shStatusFilter;});
 
   // Pills
   var req=d.required_years||[];
@@ -2384,23 +2393,76 @@ function buildSHRow(r,idx,d){
       +'">'+y+'</span>';
   }).join('');
 
-  var alertBadge=r.alert_today
-    ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 4px">\u2705 THIS WEEK</span> '
+  // Status badge
+  var status=r.slot_status||'upcoming';
+  var statusBadge=status==='active'
+    ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">\u23F3 ACTIVE</span> '
+    :status==='missed'
+    ?'<span style="background:rgba(239,68,68,.1);color:var(--red);border:1px solid var(--red);border-radius:3px;font-size:9px;padding:1px 5px">\u274C MISSED 2026</span> '
+    :r.alert_today
+    ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">\u2705 THIS WEEK</span> '
     :r.alert_tomorrow
-    ?'<span style="background:var(--ab);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:9px;font-weight:700;padding:1px 4px">\u23f0 NEXT WEEK</span> '
+    ?'<span style="background:var(--ab);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">\u23f0 NEXT WEEK</span> '
     :'';
 
+  // Live tracking section
+  var liveSection='';
+  var ld=r.live_data;
+  if(ld){
+    var retCol=ld.live_ret>=10?'green':ld.live_ret>=0?'amber':'red';
+    var progPct=ld.hold_cal>0?Math.min(100,Math.round((ld.cal_elapsed||0)/ld.hold_cal*100)):0;
+    var isInHold=ld.is_in_hold;
+    liveSection='<div style="background:'+(isInHold?'rgba(34,197,94,.07)':'rgba(255,255,255,.03)')+';border:1px solid '+(isInHold?'var(--gr2)':'var(--b)')+';border-radius:6px;padding:8px;margin:6px 0">'
+      +'<div style="font-size:10px;font-weight:600;color:'+(isInHold?'var(--green)':'var(--t3)')+';margin-bottom:6px">'
+      +(isInHold?'\uD83D\uDCCA LIVE TRACKING \u2014 entered '+ld.entry_date+' at \u20b9'+fmt(ld.entry_px):'COMPLETED \u2014 entered '+ld.entry_date+' at \u20b9'+fmt(ld.entry_px))
+      +'</div>'
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:5px">'
+      +'<div class="ac-mini"><div class="ac-ml">Entry Price</div><div class="ac-mv">\u20b9'+fmt(ld.entry_px)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Current Price</div><div class="ac-mv">\u20b9'+fmt(ld.current_px)+'</div></div>'
+      +'<div class="ac-mini" style="background:'+(retCol==='green'?'var(--grb)':retCol==='amber'?'var(--ab)':'rgba(239,68,68,.08)')+'">'
+      +'<div class="ac-ml">Return Since Entry</div>'
+      +'<div class="ac-mv '+retCol+'" style="font-weight:700">'+(ld.live_ret>0?'+':'')+Number(ld.live_ret||0).toFixed(1)+'%</div>'
+      +'</div>'
+      +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Avg Target \u20b9</div><div class="ac-mv green">\u20b9'+fmt(ld.avg_target_px)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Min Target \u20b9</div><div class="ac-mv amber">\u20b9'+fmt(ld.min_target_px)+'</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Remaining to Avg</div><div class="ac-mv '+(ld.remaining_to_avg>0?'green':'red')+'">'+(ld.remaining_to_avg>0?'+':'')+Number(ld.remaining_to_avg||0).toFixed(1)+'%</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Days Elapsed</div><div class="ac-mv muted">'+(ld.cal_elapsed||0)+' cal</div></div>'
+      +'<div class="ac-mini"><div class="ac-ml">Days Remaining</div><div class="ac-mv '+(ld.cal_remaining>5?'green':'amber')+'">'+(ld.cal_remaining||0)+' cal</div></div>'
+      +'</div>'
+      // Progress bar
+      +'<div style="margin-top:8px"><div style="font-size:9px;color:var(--t3);margin-bottom:3px">Hold progress: '+(ld.cal_elapsed||0)+' / '+(ld.hold_cal||0)+' calendar days</div>'
+      +'<div style="background:var(--s);border-radius:3px;height:6px;overflow:hidden">'
+      +'<div style="background:'+(progPct>=80?'var(--amber)':'var(--green)')+';width:'+progPct+'%;height:100%;border-radius:3px;transition:.3s"></div>'
+      +'</div></div>'
+      +(isInHold?'<div style="font-size:10px;color:var(--t2);margin-top:6px">'
+        +'Target exit: \u20b9'+fmt(ld.avg_target_px)+' (avg) or \u20b9'+fmt(ld.min_target_px)+' (min). '
+        +(ld.remaining_to_avg>0?'<span class="green">'+Number(ld.remaining_to_avg).toFixed(1)+'% more needed to hit avg target.</span>':'<span class="amber">Already past avg target — consider exiting.</span>')
+        +'</div>':'')
+      +'</div>';
+  } else if(status==='missed'){
+    liveSection='<div style="background:rgba(239,68,68,.06);border:1px solid var(--red);border-radius:6px;padding:8px;margin:6px 0;font-size:11px">'
+      +'<span class="red" style="font-weight:600">\u274C Missed 2026: </span>'
+      +'No signal fired in Week '+r.week+' of '+r.month_name+' in 2026. Historical pattern intact for next year.'
+      +'</div>';
+  } else if(status==='upcoming'){
+    liveSection='<div style="font-size:10px;color:var(--t3);margin:4px 0">'
+      +'Upcoming: '+(r.alert_today?'This week is the signal week — enter now.':r.alert_tomorrow?'Signal week starts next week.':'Pattern expected in Week '+r.week+' of '+r.month_name+'.')
+      +'</div>';
+  }
+
+  // Occurrence table
   var occRows=(r.occurrences||[]).map(function(o){
     var rc=(o.max_ret||0)>=20?'green':(o.max_ret||0)>=10?'amber':'red';
     var ec=(o.ret_on_exit||0)>=10?'green':(o.ret_on_exit||0)>=0?'amber':'red';
-    return '<tr style="font-size:11px">'
-      +'<td class="mono muted">'+o.year+'</td>'
+    var isCurYr=o.year===new Date().getFullYear();
+    return '<tr style="font-size:11px;'+(isCurYr?'background:rgba(34,197,94,.08)':'')+'">'
+      +'<td class="mono muted">'+(isCurYr?'<b>':'')+o.year+(isCurYr?'</b>':'')+(isCurYr?' \u2b50':'')+'</td>'
       +'<td class="mono muted">Wk '+(o.week||'?')+'</td>'
       +'<td class="mono">'+o.sig_date+'</td>'
       +'<td class="mono">'+o.entry_date+'</td>'
       +'<td class="mono">'+o.exit_date+'</td>'
-      +'<td class="mono">&#8377;'+o.entry_px+'</td>'
-      +'<td class="mono">&#8377;'+(o.exit_px||'—')+'</td>'
+      +'<td class="mono">\u20b9'+o.entry_px+'</td>'
+      +'<td class="mono">\u20b9'+(o.exit_px||'—')+'</td>'
       +'<td class="mono '+rc+'">+'+Number(o.max_ret||0).toFixed(1)+'%</td>'
       +'<td class="mono '+ec+'">'+(o.ret_on_exit!=null?(o.ret_on_exit>0?'+':'')+Number(o.ret_on_exit).toFixed(1)+'%':'—')+'</td>'
       +'<td class="mono green">+'+Number(o.max_gain||0).toFixed(1)+'%</td>'
@@ -2410,18 +2472,21 @@ function buildSHRow(r,idx,d){
 
   var detailHtml='<tr id="sh-det-'+rid+'" style="display:none"><td colspan="13" style="padding:0">'
     +'<div style="padding:10px;background:rgba(0,0,0,.2)">'
-    +(r.alert_today||r.alert_tomorrow?'<div style="background:rgba(34,197,94,.1);border:1px solid var(--gr2);border-radius:5px;padding:6px 10px;margin-bottom:8px;font-size:11px"><strong class="green">Buy tomorrow at open.</strong> This stock has historically risen 10%+ every time in '+r.week_label+'. Hold '+r.hold_days+' trading days. Min target: Rs '+Math.round(r.price*(1+r.min_max_ret/100))+'. Avg target: Rs '+Math.round(r.price*(1+r.avg_max_ret/100))+'.</div>':'')
-    +'<div style="font-size:10px;font-weight:600;color:var(--t3);margin-bottom:6px">ALL HISTORICAL OCCURRENCES IN '+r.week_label.toUpperCase()+' ('+r.n_occurrences+' signals, 100% gave \u226510%)</div>'
-    +'<div style="font-size:9px;color:var(--t3);margin-bottom:4px">Required years: '+(r.required_years||[]).join(', ')+' — all present \u2713</div>'
+    +liveSection
+    +'<div style="font-size:10px;font-weight:600;color:var(--t3);margin:8px 0 4px">ALL HISTORICAL OCCURRENCES IN '+r.week_label.toUpperCase()+' ('+r.n_occurrences+' signals, 100% gave \u226510%)</div>'
+    +'<div style="font-size:9px;color:var(--t3);margin-bottom:4px">Required years: '+(r.required_years||[]).join(', ')+(r.cur_yr_fired?' \u2014 2026: \u2705 Fired':' \u2014 2026: \u274C Not fired')+'</div>'
     +'<table style="width:100%;font-size:10px;border-collapse:collapse">'
-    +'<tr style="background:var(--card2)"><th style="padding:4px 6px">Year</th><th>Week</th><th>Signal Date</th><th>Entry Date</th><th>Exit Date</th><th>Entry Rs</th><th>Exit Rs</th><th>Max Ret%</th><th>Exit Ret%</th><th>Max Gain%</th><th>Days to 10%</th></tr>'
+    +'<tr style="background:var(--card2)"><th style="padding:4px 6px">Year</th><th>Week</th><th>Signal Date</th><th>Entry Date</th><th>Exit Date</th><th>Entry \u20b9</th><th>Exit \u20b9</th><th>Max Ret%</th><th>Exit Ret%</th><th>Max Gain%</th><th>Days to 10%</th></tr>'
     +occRows
     +'</table></div></td></tr>';
 
-  return '<tr class="uc-row" style="cursor:pointer;'+(r.alert_today?'background:rgba(34,197,94,.04)':r.alert_tomorrow?'background:rgba(245,158,11,.03)':'')+'" onclick="shToggle(\''+rid+'\')">'
+  var rowBg=status==='active'?'rgba(34,197,94,.04)':status==='missed'?'rgba(239,68,68,.03)':
+    (r.alert_today?'rgba(34,197,94,.04)':r.alert_tomorrow?'rgba(245,158,11,.03)':'');
+
+  return '<tr class="uc-row" style="cursor:pointer;'+rowBg+'" onclick="shToggle(\''+rid+'\')">'
     +'<td><span id="sh-arr-'+rid+'" style="font-size:10px;color:var(--t3)">&#x25B6;</span></td>'
-    +'<td class="mono gold" style="font-weight:700">'+alertBadge+r.sym+'</td>'
-    +'<td class="mono">&#8377;'+fmt(r.price)+'</td>'
+    +'<td class="mono gold" style="font-weight:700">'+statusBadge+r.sym+'</td>'
+    +'<td class="mono">\u20b9'+fmt(r.price)+'</td>'
     +'<td style="font-size:10px;color:var(--t2)">'+r.week_label+'</td>'
     +'<td class="mono muted">'+r.hold_days+'td</td>'
     +'<td class="mono green" style="font-weight:700;background:rgba(34,197,94,.06)">+'+Number(r.avg_max_ret||0).toFixed(1)+'%</td>'
@@ -2737,9 +2802,9 @@ function bnView(v,btn){bnViewMode=v;document.querySelectorAll('[id^="bnv-"]').fo
   document.getElementById('bn-main-view').style.display=v==='stocks'?'':'none';
   document.getElementById('bn-alerts-view').style.display=v==='alerts'?'':'none';
   if(v==='alerts')renderBnAlerts(); else renderBounce();}
-function bnHold(v,btn){bnHoldFilter=v;document.querySelectorAll('[id^="bnh-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');renderBounce();}
+function bnHold(v,btn){bnHoldFilter=v;document.querySelectorAll('[id^="bnh-"]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');if(bnViewMode==='alerts')renderBnAlerts();else renderBounce();}
 function bnSort(k,btn){if(bnSortKey===k)bnSortDir=bnSortDir==='desc'?'asc':'desc';else{bnSortKey=k;bnSortDir='desc';}
-  document.querySelectorAll('[id^="bns-"]').forEach(function(b){b.classList.remove('on');});if(btn)btn.classList.add('on');renderBounce();}
+  document.querySelectorAll('[id^="bns-"]').forEach(function(b){b.classList.remove('on');});if(btn)btn.classList.add('on');if(bnViewMode==='alerts')renderBnAlerts();else renderBounce();}
 function bnTh(k){bnSort(k,null);}
 
 function bnToggle(id){var r=document.getElementById('bn-det-'+id);var a=document.getElementById('bn-arr-'+id);
@@ -2836,34 +2901,116 @@ function renderBnAlerts(){
   var el=document.getElementById('bn-alerts-view'); if(!el) return;
   var d=D.bounce;
   if(!d){el.innerHTML='<div class="empty">No data. Run workflow first.</div>';return;}
-  var alerts=d.alerts_today||[];
-  if(!alerts.length){el.innerHTML='<div class="empty">No stocks near support today. Check tomorrow.</div>';return;}
+
+  var q=(document.getElementById('bn-q')?.value||'').toUpperCase().trim();
+
+  // Flatten alert stocks into per-(stock,level,hold) rows — same as main view
+  var rows=[];
+  (d.alerts_today||[]).forEach(function(s){
+    (s.alert_levels||[]).forEach(function(lv){
+      if(bnHoldFilter!==0&&lv.hold_days!==bnHoldFilter) return;
+      if(q&&!s.sym.includes(q)) return;
+      rows.push({sym:s.sym, price:s.price, ...lv});
+    });
+  });
+
+  // Sort using same bnSortKey/bnSortDir as main view
+  rows.sort(function(a,b){
+    var av=a[bnSortKey]!=null?a[bnSortKey]:0;
+    var bv=b[bnSortKey]!=null?b[bnSortKey]:0;
+    if(typeof av==='string') return bnSortDir==='desc'?String(bv).localeCompare(String(av)):String(av).localeCompare(String(bv));
+    return bnSortDir==='desc'?bv-av:av-bv;
+  });
+
+  if(!rows.length){
+    el.innerHTML='<div class="empty">No alerts match current hold/sort filters. '+(bnHoldFilter?'Try "All" hold filter.':'No stocks near support today.')+'</div>';
+    return;
+  }
 
   var html='<div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px">'
-    +'\u2705 '+alerts.length+' Stock'+(alerts.length>1?'s are':'is')+' near proven support level today — all hold periods shown</div>';
+    +'\u2705 '+rows.length+' alert row'+(rows.length>1?'s':'')
+    +' — price near proven support now'
+    +(bnHoldFilter?' (filtered: '+({5:"1 Week",10:"2 Weeks",20:"1 Month",40:"2 Months",60:"3 Months"}[bnHoldFilter]||bnHoldFilter+'td')+')'
+    :' — all hold periods')+'</div>';
 
-  alerts.forEach(function(s){
-    var alv=s.alert_levels||[];
-    html+='<div class="lt-card" style="margin-bottom:10px;border-left:3px solid var(--green)">'
-      +'<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">'
-      +'<div><span style="font-size:18px;font-weight:700;color:var(--gold)">'+s.sym+'</span>'
-      +'<div style="font-size:11px;color:var(--t2);margin-top:2px">Current: Rs '+fmt(s.price)+'</div></div>'
-      +'</div>';
-    html+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px">';
-    alv.forEach(function(lv){
-      html+='<div class="ac-mini" style="background:var(--grb);border:1px solid var(--gr2)">'
-        +'<div class="ac-ml">Support Rs '+fmt(lv.support_level)+' ('+Number(lv.current_pct_from_sup||0).toFixed(1)+'%)</div>'
-        +'<div class="ac-ml" style="font-size:10px;color:var(--green);font-weight:700">'+lv.hold_label+'</div>'
-        +'<div class="ac-mv green">Avg +'+lv.avg_bounce+'%</div>'
-        +'<div style="font-size:9px;color:var(--t3)">Min +'+lv.min_bounce+'% &middot; '+lv.n_touches+' times</div>'
-        +'<div style="font-size:9px;color:var(--amber)">Candle: '+lv.dominant_candle+'</div>'
-        +'</div>';
-    });
-    html+='</div></div>';
+  // Table view — same structure as main table for consistency
+  html+='<div class="twrap"><table class="tbl" style="min-width:820px"><thead><tr>'
+    +'<th style="width:22px"></th>'
+    +'<th onclick="bnTh(\'sym\')">Stock<span class="arr"></span></th>'
+    +'<th onclick="bnTh(\'price\')">Price<span class="arr"></span></th>'
+    +'<th onclick="bnTh(\'support_level\')">Support Level<span class="arr"></span></th>'
+    +'<th onclick="bnTh(\'current_pct_from_sup\')">% from Support<span class="arr"></span></th>'
+    +'<th onclick="bnTh(\'hold_label\')">Hold<span class="arr"></span></th>'
+    +'<th onclick="bnTh(\'avg_bounce\')">Avg Bounce%<span class="arr"></span></th>'
+    +'<th onclick="bnTh(\'min_bounce\')">Min Bounce%<span class="arr"></span></th>'
+    +'<th onclick="bnTh(\'avg_max_gain\')">Avg Max Gain%<span class="arr"></span></th>'
+    +'<th onclick="bnTh(\'ret_rate\')">Ret%/Day<span class="arr"></span></th>'
+    +'<th onclick="bnTh(\'n_touches\')">Touches<span class="arr"></span></th>'
+    +'<th onclick="bnTh(\'dominant_candle\')">Candle<span class="arr"></span></th>'
+    +'</tr></thead><tbody>';
+
+  var todayStr=d.today_date||'';
+  rows.forEach(function(lv,ri){
+    var rid='bna'+ri;
+    var distColor=Math.abs(lv.current_pct_from_sup||0)<=2?'green':Math.abs(lv.current_pct_from_sup||0)<=5?'amber':'muted';
+
+    // Target price from today's price
+    var curPrice=lv.price||0;
+    var avgTgt=curPrice>0?Math.round(curPrice*(1+(lv.avg_bounce||0)/100)):0;
+    var minTgt=curPrice>0?Math.round(curPrice*(1+(lv.min_bounce||0)/100)):0;
+
+    var occRows=(lv.touches||[]).slice(0,10).map(function(t){
+      var bh=t.bounces&&t.bounces[lv.hold_days]||{};
+      var ret=bh.ret!=null?bh.ret:null;
+      var rc=ret!=null&&ret>=20?'green':ret!=null&&ret>=10?'amber':'red';
+      return '<tr style="font-size:10px">'
+        +'<td class="mono muted">'+t.year+'</td>'
+        +'<td class="mono">'+t.date+'</td>'
+        +'<td class="mono">&#8377;'+(t.low||'—')+'</td>'
+        +'<td class="mono '+(t.pct_from_sup<0?'amber':'muted')+'">'+(t.pct_from_sup!=null?(t.pct_from_sup>0?'+':'')+Number(t.pct_from_sup).toFixed(1)+'%':'—')+'</td>'
+        +'<td class="mono amber" style="font-size:9px">'+(t.candle||[]).slice(0,1).join('')+'</td>'
+        +'<td class="mono">&#8377;'+(bh.entry_px||'—')+'</td>'
+        +'<td class="mono">&#8377;'+(bh.exit_px||'—')+'</td>'
+        +'<td class="mono '+rc+'">'+(ret!=null?(ret>0?'+':'')+Number(ret).toFixed(1)+'%':'—')+'</td>'
+        +'<td class="mono green">'+(bh.max_gain!=null?'+'+Number(bh.max_gain).toFixed(1)+'%':'—')+'</td>'
+        +'</tr>';
+    }).join('');
+
+    var detHtml='<tr id="bna-det-'+rid+'" style="display:none"><td colspan="12" style="padding:0">'
+      +'<div style="padding:10px;background:rgba(0,0,0,.2)">'
+      +'<div style="background:rgba(34,197,94,.1);border:1px solid var(--gr2);border-radius:5px;padding:7px 10px;margin-bottom:8px;font-size:11px">'
+      +'<strong class="green">\u2705 NEAR SUPPORT NOW:</strong> Rs '+fmt(lv.price)+' is '
+      +Math.abs(lv.current_pct_from_sup||0).toFixed(1)+'% '+(lv.current_pct_from_sup<0?'below':'above')
+      +' support Rs '+fmt(lv.support_level)
+      +'<br><strong>Avg target: Rs '+avgTgt+'</strong> &middot; Min target: Rs '+minTgt
+      +' &middot; Hold: '+lv.hold_label
+      +'</div>'
+      +'<div style="font-size:10px;font-weight:600;color:var(--t3);margin-bottom:6px">ALL TOUCHES ('+lv.n_touches+') — every one bounced \u226510%</div>'
+      +'<table style="width:100%;font-size:10px;border-collapse:collapse"><tr style="background:var(--card2)">'
+      +'<th style="padding:3px 6px">Year</th><th>Date</th><th>Low Rs</th><th>% from Sup</th><th>Candle</th><th>Entry Rs</th><th>Exit Rs</th><th>Bounce%</th><th>Max Gain%</th>'
+      +'</tr>'+occRows+'</table></div></td></tr>';
+
+    html+='<tr style="cursor:pointer;background:rgba(34,197,94,.05)" onclick="(function(){var r=document.getElementById(\'bna-det-'+rid+'\');var a=document.getElementById(\'bna-arr-'+rid+'\');if(!r)return;if(r.style.display===\'none\'){r.style.display=\'\';if(a)a.textContent=\'\\u25BC\';}else{r.style.display=\'none\';if(a)a.textContent=\'\\u25B6\';}})();">'
+      +'<td><span id="bna-arr-'+rid+'" style="font-size:10px;color:var(--t3)">\u25B6</span></td>'
+      +'<td class="mono gold" style="font-weight:700">'+lv.sym+'</td>'
+      +'<td class="mono">&#8377;'+fmt(lv.price)+'</td>'
+      +'<td class="mono amber">&#8377;'+fmt(lv.support_level)+'</td>'
+      +'<td class="mono '+distColor+'">'+(lv.current_pct_from_sup!=null?(lv.current_pct_from_sup>0?'+':'')+Number(lv.current_pct_from_sup).toFixed(1)+'%':'—')+'</td>'
+      +'<td class="mono muted">'+lv.hold_label+'</td>'
+      +'<td class="mono green" style="font-weight:700;background:rgba(34,197,94,.06)">+'+Number(lv.avg_bounce||0).toFixed(1)+'%</td>'
+      +'<td class="mono green">+'+Number(lv.min_bounce||0).toFixed(1)+'%</td>'
+      +'<td class="mono green">+'+(lv.avg_max_gain!=null?Number(lv.avg_max_gain).toFixed(1):'—')+'%</td>'
+      +'<td class="mono green" style="font-weight:700">'+Number(lv.ret_rate||0).toFixed(2)+'</td>'
+      +'<td class="mono muted">'+lv.n_touches+'</td>'
+      +'<td class="mono '+(lv.dominant_candle!=='None'&&lv.dominant_candle!=='No pattern'?'amber':'muted')+'" style="font-size:10px">'+lv.dominant_candle+'</td>'
+      +'</tr>'+detHtml;
   });
-  html+='<div style="font-size:10px;color:var(--t3);margin-top:8px">Data: '+d.today_date+' &middot; Every touch of support gave \u226510% bounce &middot; Sorted by avg bounce% descending</div>';
+
+  html+='</tbody></table></div>';
+  html+='<div style="font-size:10px;color:var(--t3);margin-top:8px">Data: '+todayStr+' \u00B7 Every touch of support gave \u226510% bounce \u00B7 Use hold filter and sort buttons above</div>';
   el.innerHTML=html;
 }
+
 
 loadData();
 </script>
