@@ -152,14 +152,22 @@ def analyze_stock(sym, df):
             # Determine required years for this slot:
             # If this month+week has already passed in the current year,
             # then current year is REQUIRED too — no misses allowed.
-            # A slot has 'passed' this year if that month+week is already over
-            # Handle year-end wrap: if cur_mo is Jan(1), months 2-12 haven't passed yet
+            # Determine if this slot has passed in the current year
             slot_has_passed = (
                 (month < cur_mo) or
                 (month == cur_mo and week < cur_wk)
             )
-            req_years = BASE_REQUIRED_YEARS | ({cur_yr} if slot_has_passed else set())
-            if not req_years.issubset(slot_years): continue
+            # For base qualification, only require the 4 completed years
+            # (We don't reject based on 2026 firing or not — track separately)
+            if not BASE_REQUIRED_YEARS.issubset(slot_years): continue
+            # Check if this year's slot had a signal
+            cur_yr_in_data = cur_yr in occ_years
+            slot_status = 'upcoming'
+            if slot_has_passed:
+                if cur_yr_in_data:
+                    slot_status = 'active'   # fired this year, may still be in hold
+                else:
+                    slot_status = 'missed'   # past slot, no signal this year
 
             for hold in HOLD_DAYS_LIST:
                 # For each day in this slot: can we enter next day and get 10% within hold days?
@@ -234,6 +242,41 @@ def analyze_stock(sym, df):
                 tomorrow_dt    = today_dt + _dtt.timedelta(days=1)
                 alert_tomorrow = (tomorrow_dt.month == month and week_of_month(tomorrow_dt) == week)
 
+                # Find this year's occurrence for live tracking
+                cur_yr_occ = next((occ for occ in occurrences if occ['year']==cur_yr), None)
+                # Compute live return if we have this year's signal
+                live_data = None
+                if cur_yr_occ:
+                    ep_live = cur_yr_occ.get('entry_px', 0) or 0
+                    if ep_live > 0 and len(c) > 0:
+                        cur_price_now = float(c[-1])
+                        live_ret = r2((cur_price_now - ep_live) / ep_live * 100)
+                        # Days elapsed since entry
+                        try:
+                            import datetime as _dt_live
+                            entry_dt = _dt_live.datetime.strptime(cur_yr_occ['entry_date'], '%Y-%m-%d')
+                            today_dt_l = _dt_live.datetime.now()
+                            cal_elapsed = (today_dt_l - entry_dt).days
+                            hold_cal = round(hold * 1.5)
+                            cal_remaining = max(0, hold_cal - cal_elapsed)
+                        except:
+                            cal_elapsed = None; cal_remaining = None; hold_cal = round(hold*1.5)
+                        # Target prices from entry
+                        avg_ret_est = sum([occ['max_ret'] for occ in occurrences]) / len(occurrences)
+                        min_ret_est = min(occ['max_ret'] for occ in occurrences)
+                        live_data = {
+                            'entry_date':    cur_yr_occ['entry_date'],
+                            'entry_px':      r2(ep_live),
+                            'current_px':    r2(cur_price_now),
+                            'live_ret':      live_ret,
+                            'avg_target_px': r2(ep_live * (1 + avg_ret_est/100)),
+                            'min_target_px': r2(ep_live * (1 + min_ret_est/100)),
+                            'remaining_to_avg': r2(avg_ret_est - live_ret) if live_ret is not None else None,
+                            'cal_elapsed':   cal_elapsed,
+                            'cal_remaining': cal_remaining,
+                            'hold_cal':      hold_cal,
+                            'is_in_hold':    cal_remaining > 0 if cal_remaining is not None else False,
+                        }
                 qualifying.append({
                     "hold_days":        hold,
                     "month":            month,
@@ -252,6 +295,9 @@ def analyze_stock(sym, df):
                     "avg_exit_ret":     avg_exit,
                     "avg_days_to_10":   avg_days,
                     "ret_rate":         ret_rate,
+                    "slot_status":      slot_status,
+                    "cur_yr_fired":     cur_yr_in_data,
+                    "live_data":        live_data,
                     "alert_today":      alert_today,
                     "alert_tomorrow":   alert_tomorrow,
                     "occurrences":      sorted(occurrences, key=lambda x: x["sig_date"], reverse=True),
