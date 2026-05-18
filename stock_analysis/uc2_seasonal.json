@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-15T22:01:48+05:30",
+  "generated_at": "2026-05-18T22:57:40+05:30",
   "n": 49,
   "stocks": [
     {
@@ -36,7 +36,7 @@
     },
     {
       "sym": "TPLPLASTEH",
-      "price": 62.42,
+      "price": 62.47,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -101,7 +101,7 @@
     },
     {
       "sym": "WSI",
-      "price": 69.03,
+      "price": 66.92,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -165,7 +165,7 @@
     },
     {
       "sym": "E2E",
-      "price": 3116.7,
+      "price": 3024.4,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -196,7 +196,7 @@
     },
     {
       "sym": "ANGELONE",
-      "price": 306.85,
+      "price": 303.95,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -227,7 +227,7 @@
     },
     {
       "sym": "ASAL",
-      "price": 477.2,
+      "price": 469.15,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -291,7 +291,7 @@
     },
     {
       "sym": "GMRP&UI",
-      "price": 113.9,
+      "price": 114.35,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -322,7 +322,7 @@
     },
     {
       "sym": "PENINLAND",
-      "price": 16.8,
+      "price": 16.49,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -355,7 +355,7 @@
     },
     {
       "sym": "LXCHEM",
-      "price": 152.49,
+      "price": 151.09,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -418,7 +418,7 @@
     },
     {
       "sym": "SEJALLTD",
-      "price": 783.4,
+      "price": 752.15,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -445,38 +445,6 @@
         "min": 0.44,
         "max": 2.42,
         "avg": 1.58
-      }
-    },
-    {
-      "sym": "ZODIAC",
-      "price": 295.6,
-      "grade": "C",
-      "confidence": 0,
-      "uc": "UC2",
-      "desc": "Buy on first trading day of Apr, hold 30d",
-      "ret_rate": 1.02,
-      "avg_ret": 30.68,
-      "min_ret": 15.75,
-      "hold_days": 30,
-      "win_rate": 100.0,
-      "n_trades": 5,
-      "sharpe": 6.41,
-      "years": [
-        "2022",
-        "2023",
-        "2024",
-        "2025",
-        "2026"
-      ],
-      "ctx_rsi": {
-        "min": 29.07,
-        "max": 59.78,
-        "avg": 46.11
-      },
-      "ctx_vol_r": {
-        "min": 0.53,
-        "max": 1.24,
-        "avg": 0.78
       }
     },
     {
@@ -543,6 +511,38 @@
       }
     },
     {
+      "sym": "ZODIAC",
+      "price": 281.75,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC2",
+      "desc": "Buy on first trading day of Apr, hold 30d",
+      "ret_rate": 0.98,
+      "avg_ret": 29.5,
+      "min_ret": 15.75,
+      "hold_days": 30,
+      "win_rate": 100.0,
+      "n_trades": 5,
+      "sharpe": 5.91,
+      "years": [
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "ctx_rsi": {
+        "min": 29.07,
+        "max": 59.78,
+        "avg": 46.11
+      },
+      "ctx_vol_r": {
+        "min": 0.53,
+        "max": 1.24,
+        "avg": 0.78
+      }
+    },
+    {
       "sym": "TRIL",
       "price": 745.3,
       "grade": "C",
@@ -575,7 +575,7 @@
     },
     {
       "sym": "STOVEKRAFT",
-      "price": 552.25,
+      "price": 544.45,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -638,7 +638,7 @@
     },
     {
       "sym": "INOXGREEN",
-      "price": 177.64,
+      "price": 179.93,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -668,19 +668,50 @@
       }
     },
     {
+      "sym": "MANORAMA",
+      "price": 1370.6,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC2",
+      "desc": "Buy on first trading day of Apr, hold 30d",
+      "ret_rate": 0.87,
+      "avg_ret": 26.24,
+      "min_ret": 14.22,
+      "hold_days": 30,
+      "win_rate": 100.0,
+      "n_trades": 4,
+      "sharpe": 8.99,
+      "years": [
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "ctx_rsi": {
+        "min": 36.59,
+        "max": 61.54,
+        "avg": 48.68
+      },
+      "ctx_vol_r": {
+        "min": 0.56,
+        "max": 1.84,
+        "avg": 1.12
+      }
+    },
+    {
       "sym": "TITAGARH",
-      "price": 763.3,
+      "price": 753.15,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
       "desc": "Buy on first trading day of Q2, hold 30d",
-      "ret_rate": 0.88,
-      "avg_ret": 26.42,
+      "ret_rate": 0.87,
+      "avg_ret": 25.99,
       "min_ret": 10.4,
       "hold_days": 30,
       "win_rate": 100.0,
       "n_trades": 4,
-      "sharpe": 7.73,
+      "sharpe": 7.65,
       "years": [
         "2023",
         "2024",
@@ -700,18 +731,18 @@
     },
     {
       "sym": "ZIMLAB",
-      "price": 98.16,
+      "price": 97.41,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
       "desc": "Buy on first trading day of Apr, hold 30d",
-      "ret_rate": 0.88,
-      "avg_ret": 26.28,
+      "ret_rate": 0.87,
+      "avg_ret": 25.99,
       "min_ret": 10.76,
       "hold_days": 30,
       "win_rate": 100.0,
       "n_trades": 4,
-      "sharpe": 4.61,
+      "sharpe": 4.7,
       "years": [
         "2023",
         "2024",
@@ -730,39 +761,8 @@
       }
     },
     {
-      "sym": "MANORAMA",
-      "price": 1351.8,
-      "grade": "C",
-      "confidence": 0,
-      "uc": "UC2",
-      "desc": "Buy on first trading day of Apr, hold 30d",
-      "ret_rate": 0.86,
-      "avg_ret": 25.84,
-      "min_ret": 12.65,
-      "hold_days": 30,
-      "win_rate": 100.0,
-      "n_trades": 4,
-      "sharpe": 8.3,
-      "years": [
-        "2023",
-        "2024",
-        "2025",
-        "2026"
-      ],
-      "ctx_rsi": {
-        "min": 36.59,
-        "max": 61.54,
-        "avg": 48.68
-      },
-      "ctx_vol_r": {
-        "min": 0.56,
-        "max": 1.84,
-        "avg": 1.12
-      }
-    },
-    {
       "sym": "NECLIFE",
-      "price": 12.7,
+      "price": 12.38,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -795,7 +795,7 @@
     },
     {
       "sym": "PRUDENT",
-      "price": 2832.3,
+      "price": 2757.1,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -890,7 +890,7 @@
     },
     {
       "sym": "KERNEX",
-      "price": 1404.8,
+      "price": 1357.6,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -954,7 +954,7 @@
     },
     {
       "sym": "SPLPETRO",
-      "price": 695.45,
+      "price": 692.35,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -985,7 +985,7 @@
     },
     {
       "sym": "BESTAGRO",
-      "price": 17.03,
+      "price": 16.53,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1050,7 +1050,7 @@
     },
     {
       "sym": "AGI",
-      "price": 579.5,
+      "price": 572.85,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1080,39 +1080,8 @@
       }
     },
     {
-      "sym": "AARTIPHARM",
-      "price": 711.75,
-      "grade": "C",
-      "confidence": 0,
-      "uc": "UC2",
-      "desc": "Buy on first trading day of Apr, hold 30d",
-      "ret_rate": 0.68,
-      "avg_ret": 20.28,
-      "min_ret": 11.41,
-      "hold_days": 30,
-      "win_rate": 100.0,
-      "n_trades": 4,
-      "sharpe": 6.5,
-      "years": [
-        "2023",
-        "2024",
-        "2025",
-        "2026"
-      ],
-      "ctx_rsi": {
-        "min": 30.66,
-        "max": 51.85,
-        "avg": 42.26
-      },
-      "ctx_vol_r": {
-        "min": 0.62,
-        "max": 1.61,
-        "avg": 0.95
-      }
-    },
-    {
       "sym": "LUMAXTECH",
-      "price": 1636.1,
+      "price": 1629.2,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1145,7 +1114,7 @@
     },
     {
       "sym": "RAMRAT",
-      "price": 420.4,
+      "price": 423.25,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1268,19 +1237,19 @@
       }
     },
     {
-      "sym": "STYRENIX",
-      "price": 2344.8,
+      "sym": "AARTIPHARM",
+      "price": 701.3,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
       "desc": "Buy on first trading day of Apr, hold 30d",
-      "ret_rate": 0.64,
-      "avg_ret": 19.18,
-      "min_ret": 12.34,
+      "ret_rate": 0.66,
+      "avg_ret": 19.87,
+      "min_ret": 10.75,
       "hold_days": 30,
       "win_rate": 100.0,
       "n_trades": 4,
-      "sharpe": 9.38,
+      "sharpe": 6.11,
       "years": [
         "2023",
         "2024",
@@ -1288,50 +1257,19 @@
         "2026"
       ],
       "ctx_rsi": {
-        "min": 41.3,
-        "max": 68.19,
-        "avg": 50.1
+        "min": 30.66,
+        "max": 51.85,
+        "avg": 42.26
       },
       "ctx_vol_r": {
-        "min": 0.39,
-        "max": 0.89,
-        "avg": 0.58
-      }
-    },
-    {
-      "sym": "JYOTISTRUC",
-      "price": 12.46,
-      "grade": "C",
-      "confidence": 0,
-      "uc": "UC2",
-      "desc": "Buy on first trading day of Q2, hold 30d",
-      "ret_rate": 0.63,
-      "avg_ret": 18.84,
-      "min_ret": 12.23,
-      "hold_days": 30,
-      "win_rate": 100.0,
-      "n_trades": 4,
-      "sharpe": 8.34,
-      "years": [
-        "2023",
-        "2024",
-        "2025",
-        "2026"
-      ],
-      "ctx_rsi": {
-        "min": 43.68,
-        "max": 54.06,
-        "avg": 47.37
-      },
-      "ctx_vol_r": {
-        "min": 0.24,
-        "max": 2.27,
-        "avg": 1.05
+        "min": 0.62,
+        "max": 1.61,
+        "avg": 0.95
       }
     },
     {
       "sym": "ARTEMISMED",
-      "price": 279.8,
+      "price": 272.46,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1364,18 +1302,18 @@
     },
     {
       "sym": "TDPOWERSYS",
-      "price": 1311.3,
+      "price": 1328.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
       "desc": "Buy on first trading day of May, hold 30d",
-      "ret_rate": 0.6,
-      "avg_ret": 18.04,
+      "ret_rate": 0.61,
+      "avg_ret": 18.25,
       "min_ret": 12.73,
       "hold_days": 30,
       "win_rate": 100.0,
       "n_trades": 7,
-      "sharpe": 12.54,
+      "sharpe": 13.45,
       "years": [
         "2020",
         "2021",
@@ -1397,8 +1335,70 @@
       }
     },
     {
+      "sym": "STYRENIX",
+      "price": 2284.7,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC2",
+      "desc": "Buy on first trading day of Apr, hold 30d",
+      "ret_rate": 0.61,
+      "avg_ret": 18.36,
+      "min_ret": 12.34,
+      "hold_days": 30,
+      "win_rate": 100.0,
+      "n_trades": 4,
+      "sharpe": 11.15,
+      "years": [
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "ctx_rsi": {
+        "min": 41.3,
+        "max": 68.19,
+        "avg": 50.1
+      },
+      "ctx_vol_r": {
+        "min": 0.39,
+        "max": 0.89,
+        "avg": 0.58
+      }
+    },
+    {
+      "sym": "JYOTISTRUC",
+      "price": 12.1,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC2",
+      "desc": "Buy on first trading day of Q2, hold 30d",
+      "ret_rate": 0.6,
+      "avg_ret": 17.94,
+      "min_ret": 12.23,
+      "hold_days": 30,
+      "win_rate": 100.0,
+      "n_trades": 4,
+      "sharpe": 8.86,
+      "years": [
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "ctx_rsi": {
+        "min": 43.68,
+        "max": 54.06,
+        "avg": 47.37
+      },
+      "ctx_vol_r": {
+        "min": 0.24,
+        "max": 2.27,
+        "avg": 1.05
+      }
+    },
+    {
       "sym": "SBC",
-      "price": 33.52,
+      "price": 33.75,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1460,18 +1460,18 @@
     },
     {
       "sym": "KPIGREEN",
-      "price": 420.6,
+      "price": 421.25,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
       "desc": "Buy on first trading day of Apr, hold 30d",
       "ret_rate": 0.51,
-      "avg_ret": 15.29,
+      "avg_ret": 15.33,
       "min_ret": 10.86,
       "hold_days": 30,
       "win_rate": 100.0,
       "n_trades": 5,
-      "sharpe": 9.73,
+      "sharpe": 9.81,
       "years": [
         "2022",
         "2023",
@@ -1492,7 +1492,7 @@
     },
     {
       "sym": "ENDURANCE",
-      "price": 2548.5,
+      "price": 2526.7,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
