@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-05-16T02:08:58",
+  "generated_at": "2026-05-18T18:03:17",
   "n": 40,
   "stocks": [
     {
       "uc": "UC2",
       "sym": "RAMRAT",
-      "price": 420.4,
+      "price": 423.25,
       "month": 3,
       "month_name": "Mar",
       "season_win_rate": 100.0,
@@ -656,7 +656,7 @@
     {
       "uc": "UC2",
       "sym": "MANORAMA",
-      "price": 1305.6,
+      "price": 1370.6,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -760,11 +760,11 @@
         {
           "offset": 4,
           "label": "4d after 1st of Apr",
-          "avg_ret": 31.19,
-          "min_ret": 22.81,
+          "avg_ret": 24.56,
+          "min_ret": 4.66,
           "max_ret": 46.41,
-          "win_rate": 100.0,
-          "n": 3
+          "win_rate": 75.0,
+          "n": 4
         },
         {
           "offset": 5,
@@ -1040,12 +1040,12 @@
         },
         {
           "day": 30,
-          "avg_ret": 32.84,
-          "min_ret": 29.95,
+          "avg_ret": 29.79,
+          "min_ret": 20.64,
           "max_ret": 34.48,
-          "avg_max_gain": 45.03,
+          "avg_max_gain": 44.15,
           "win_rate": 100.0,
-          "n": 3
+          "n": 4
         }
       ],
       "daily_profile": [
@@ -1291,11 +1291,11 @@
         },
         {
           "day": 30,
-          "avg_open": 1106.9,
-          "avg_high": 1139.9,
-          "avg_low": 1085.07,
-          "avg_close": 1113.27,
-          "avg_ret_from_entry": 21.8
+          "avg_open": 1155.17,
+          "avg_high": 1198.6,
+          "avg_low": 1135.65,
+          "avg_close": 1177.6,
+          "avg_ret_from_entry": 28.84
         }
       ],
       "peak_day": 25,
@@ -1307,7 +1307,7 @@
     {
       "uc": "UC2",
       "sym": "DYCL",
-      "price": 307.95,
+      "price": 286.7,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -1411,11 +1411,11 @@
         {
           "offset": 4,
           "label": "4d after 1st of Apr",
-          "avg_ret": 36.21,
-          "min_ret": 9.47,
+          "avg_ret": 25.81,
+          "min_ret": -5.38,
           "max_ret": 62.61,
-          "win_rate": 66.67,
-          "n": 3
+          "win_rate": 50.0,
+          "n": 4
         },
         {
           "offset": 5,
@@ -1664,12 +1664,12 @@
         },
         {
           "day": 27,
-          "avg_ret": 33.61,
-          "min_ret": 10.82,
+          "avg_ret": 26.83,
+          "min_ret": 6.5,
           "max_ret": 47.63,
-          "avg_max_gain": 36.24,
+          "avg_max_gain": 41.36,
           "win_rate": 100.0,
-          "n": 3
+          "n": 4
         },
         {
           "day": 28,
@@ -1918,11 +1918,11 @@
         },
         {
           "day": 27,
-          "avg_open": 544.47,
-          "avg_high": 565.45,
-          "avg_low": 526.95,
-          "avg_close": 543.07,
-          "avg_ret_from_entry": 51.92
+          "avg_open": 484.15,
+          "avg_high": 500.06,
+          "avg_low": 464.71,
+          "avg_close": 478.98,
+          "avg_ret_from_entry": 33.99
         },
         {
           "day": 28,
@@ -1958,7 +1958,7 @@
     {
       "uc": "UC2",
       "sym": "MINDTECK",
-      "price": 203.67,
+      "price": 201.47,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -1976,10 +1976,10 @@
       ],
       "best_entry_offset": -1,
       "avg_entry_price": 117.08,
-      "target_price_avg": 156.99,
+      "target_price_avg": 156.16,
       "min_target_price": 133.29,
       "entry_recommendation": "Enter 1 trading day BEFORE 1st of Apr \u2014 stock builds momentum early",
-      "exit_recommendation": "Exit on day 30 after entry (avg +34.1%). Sweet spot: day 13\u201330.",
+      "exit_recommendation": "Exit on day 30 after entry (avg +33.4%). Sweet spot: day 13\u201330.",
       "entry_analysis": [
         {
           "offset": -5,
@@ -2345,12 +2345,12 @@
         },
         {
           "day": 30,
-          "avg_ret": 34.09,
+          "avg_ret": 33.38,
           "min_ret": 13.13,
           "max_ret": 58.99,
-          "avg_max_gain": 42.49,
+          "avg_max_gain": 42.28,
           "win_rate": 100.0,
-          "n": 6
+          "n": 7
         }
       ],
       "daily_profile": [
@@ -2596,15 +2596,15 @@
         },
         {
           "day": 30,
-          "avg_open": 147.04,
-          "avg_high": 156.78,
-          "avg_low": 145.97,
-          "avg_close": 151.98,
-          "avg_ret_from_entry": 29.81
+          "avg_open": 155.05,
+          "avg_high": 163.67,
+          "avg_low": 152.98,
+          "avg_close": 159.05,
+          "avg_ret_from_entry": 35.84
         }
       ],
       "peak_day": 30,
-      "peak_avg_ret": 34.09,
+      "peak_avg_ret": 33.38,
       "sweet_start": 13,
       "sweet_end": 30,
       "decline_after": null
@@ -2612,7 +2612,7 @@
     {
       "uc": "UC2",
       "sym": "ZODIAC",
-      "price": 295.6,
+      "price": 281.75,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -2627,10 +2627,10 @@
       ],
       "best_entry_offset": -1,
       "avg_entry_price": 236.37,
-      "target_price_avg": 314.28,
+      "target_price_avg": 312.65,
       "min_target_price": 273.59,
       "entry_recommendation": "Enter 1 trading day BEFORE 1st of Apr \u2014 stock builds momentum early",
-      "exit_recommendation": "Exit on day 30 after entry (avg +33.0%). Sweet spot: day 14\u201330.",
+      "exit_recommendation": "Exit on day 30 after entry (avg +32.3%). Sweet spot: day 14\u201330.",
       "entry_analysis": [
         {
           "offset": -5,
@@ -2671,11 +2671,11 @@
         {
           "offset": -1,
           "label": "1d before 1st of Apr",
-          "avg_ret": 32.96,
+          "avg_ret": 32.27,
           "min_ret": 17.99,
           "max_ret": 57.97,
           "win_rate": 100.0,
-          "n": 4
+          "n": 5
         },
         {
           "offset": 0,
@@ -2996,12 +2996,12 @@
         },
         {
           "day": 30,
-          "avg_ret": 32.96,
+          "avg_ret": 32.27,
           "min_ret": 17.99,
           "max_ret": 57.97,
-          "avg_max_gain": 44.29,
+          "avg_max_gain": 48.15,
           "win_rate": 100.0,
-          "n": 4
+          "n": 5
         }
       ],
       "daily_profile": [
@@ -3247,15 +3247,15 @@
         },
         {
           "day": 30,
-          "avg_open": 341.54,
-          "avg_high": 342.45,
-          "avg_low": 332.49,
-          "avg_close": 341.31,
-          "avg_ret_from_entry": 44.4
+          "avg_open": 331.26,
+          "avg_high": 332.56,
+          "avg_low": 322.19,
+          "avg_close": 329.4,
+          "avg_ret_from_entry": 39.36
         }
       ],
       "peak_day": 30,
-      "peak_avg_ret": 32.96,
+      "peak_avg_ret": 32.27,
       "sweet_start": 14,
       "sweet_end": 30,
       "decline_after": null
@@ -3263,7 +3263,7 @@
     {
       "uc": "UC2",
       "sym": "TPLPLASTEH",
-      "price": 62.42,
+      "price": 62.47,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -3650,12 +3650,12 @@
         },
         {
           "day": 30,
-          "avg_ret": 27.08,
+          "avg_ret": 25.21,
           "min_ret": 8.27,
           "max_ret": 51.25,
-          "avg_max_gain": 39.63,
+          "avg_max_gain": 38.37,
           "win_rate": 100.0,
-          "n": 6
+          "n": 7
         }
       ],
       "daily_profile": [
@@ -3901,11 +3901,11 @@
         },
         {
           "day": 30,
-          "avg_open": 109.29,
-          "avg_high": 114.17,
-          "avg_low": 108.19,
-          "avg_close": 111.04,
-          "avg_ret_from_entry": 36.14
+          "avg_open": 102.55,
+          "avg_high": 106.93,
+          "avg_low": 101.46,
+          "avg_close": 104.1,
+          "avg_ret_from_entry": 27.63
         }
       ],
       "peak_day": 13,
@@ -3917,7 +3917,7 @@
     {
       "uc": "UC2",
       "sym": "KPIGREEN",
-      "price": 420.6,
+      "price": 421.25,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -3935,7 +3935,7 @@
       "target_price_avg": 843.82,
       "min_target_price": 746.29,
       "entry_recommendation": "Enter 3 trading days AFTER 1st of Apr \u2014 wait for initial volatility to settle",
-      "exit_recommendation": "Exit on day 30 after entry (avg +25.4%). Sweet spot: day 26\u201330.",
+      "exit_recommendation": "Exit on day 30 after entry (avg +25.4%). Sweet spot: day 27\u201330.",
       "entry_analysis": [
         {
           "offset": -5,
@@ -3976,11 +3976,11 @@
         {
           "offset": -1,
           "label": "1d before 1st of Apr",
-          "avg_ret": 17.96,
+          "avg_ret": 17.29,
           "min_ret": -0.11,
           "max_ret": 26.67,
-          "win_rate": 75.0,
-          "n": 4
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "offset": 0,
@@ -4265,12 +4265,12 @@
         },
         {
           "day": 26,
-          "avg_ret": 21.13,
-          "min_ret": 13.21,
+          "avg_ret": 17.54,
+          "min_ret": 3.17,
           "max_ret": 32.0,
-          "avg_max_gain": 24.43,
+          "avg_max_gain": 23.46,
           "win_rate": 100.0,
-          "n": 4
+          "n": 5
         },
         {
           "day": 27,
@@ -4520,11 +4520,11 @@
         },
         {
           "day": 26,
-          "avg_open": 881.52,
-          "avg_high": 917.24,
-          "avg_low": 846.42,
-          "avg_close": 880.31,
-          "avg_ret_from_entry": 30.77
+          "avg_open": 788.02,
+          "avg_high": 818.48,
+          "avg_low": 758.39,
+          "avg_close": 788.5,
+          "avg_ret_from_entry": 17.13
         },
         {
           "day": 27,
@@ -4561,14 +4561,14 @@
       ],
       "peak_day": 30,
       "peak_avg_ret": 25.35,
-      "sweet_start": 26,
+      "sweet_start": 27,
       "sweet_end": 30,
       "decline_after": null
     },
     {
       "uc": "UC2",
       "sym": "CHOICEIN",
-      "price": 664.25,
+      "price": 655.9,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -4586,7 +4586,7 @@
       "target_price_avg": 509.72,
       "min_target_price": 457.32,
       "entry_recommendation": "Enter 3 trading days AFTER 1st of Apr \u2014 wait for initial volatility to settle",
-      "exit_recommendation": "Exit on day 28 after entry (avg +25.0%). Sweet spot: day 26\u201330.",
+      "exit_recommendation": "Exit on day 28 after entry (avg +25.0%). Sweet spot: day 27\u201330.",
       "entry_analysis": [
         {
           "offset": -5,
@@ -4627,11 +4627,11 @@
         {
           "offset": -1,
           "label": "1d before 1st of Apr",
-          "avg_ret": 24.53,
-          "min_ret": 13.54,
+          "avg_ret": 20.45,
+          "min_ret": 4.14,
           "max_ret": 37.7,
-          "win_rate": 100.0,
-          "n": 4
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "offset": 0,
@@ -4916,12 +4916,12 @@
         },
         {
           "day": 26,
-          "avg_ret": 23.55,
-          "min_ret": 11.37,
+          "avg_ret": 18.42,
+          "min_ret": -2.09,
           "max_ret": 42.38,
-          "avg_max_gain": 24.06,
-          "win_rate": 100.0,
-          "n": 4
+          "avg_max_gain": 20.92,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 27,
@@ -5171,11 +5171,11 @@
         },
         {
           "day": 26,
-          "avg_open": 432.93,
-          "avg_high": 440.6,
-          "avg_low": 426.51,
-          "avg_close": 431.5,
-          "avg_ret_from_entry": 5.82
+          "avg_open": 478.66,
+          "avg_high": 484.82,
+          "avg_low": 471.52,
+          "avg_close": 476.38,
+          "avg_ret_from_entry": 16.82
         },
         {
           "day": 27,
@@ -5212,14 +5212,14 @@
       ],
       "peak_day": 28,
       "peak_avg_ret": 25.0,
-      "sweet_start": 26,
+      "sweet_start": 27,
       "sweet_end": 30,
       "decline_after": null
     },
     {
       "uc": "UC2",
       "sym": "INOXGREEN",
-      "price": 177.64,
+      "price": 179.93,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -5234,10 +5234,10 @@
       ],
       "best_entry_offset": -1,
       "avg_entry_price": 105.31,
-      "target_price_avg": 127.92,
+      "target_price_avg": 128.11,
       "min_target_price": 115.96,
       "entry_recommendation": "Enter 1 trading day BEFORE 1st of Apr \u2014 stock builds momentum early",
-      "exit_recommendation": "Exit on day 20 after entry (avg +21.5%). Sweet spot: day 14\u201330. Returns decline after day 21.",
+      "exit_recommendation": "Exit on day 30 after entry (avg +21.6%). Sweet spot: day 14\u201330.",
       "entry_analysis": [
         {
           "offset": -5,
@@ -5603,12 +5603,12 @@
         },
         {
           "day": 30,
-          "avg_ret": 19.36,
+          "avg_ret": 21.65,
           "min_ret": 3.64,
           "max_ret": 35.23,
-          "avg_max_gain": 28.04,
+          "avg_max_gain": 30.7,
           "win_rate": 100.0,
-          "n": 3
+          "n": 4
         }
       ],
       "daily_profile": [
@@ -5854,23 +5854,23 @@
         },
         {
           "day": 30,
-          "avg_open": 107.0,
-          "avg_high": 114.47,
-          "avg_low": 106.3,
-          "avg_close": 111.75,
-          "avg_ret_from_entry": 6.12
+          "avg_open": 124.27,
+          "avg_high": 131.09,
+          "avg_low": 122.25,
+          "avg_close": 128.8,
+          "avg_ret_from_entry": 22.3
         }
       ],
-      "peak_day": 20,
-      "peak_avg_ret": 21.47,
+      "peak_day": 30,
+      "peak_avg_ret": 21.65,
       "sweet_start": 14,
       "sweet_end": 30,
-      "decline_after": 21
+      "decline_after": null
     },
     {
       "uc": "UC2",
       "sym": "IRISDOREME",
-      "price": 35.62,
+      "price": 35.52,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -5976,11 +5976,11 @@
         {
           "offset": 4,
           "label": "4d after 1st of Apr",
-          "avg_ret": 15.51,
+          "avg_ret": 14.44,
           "min_ret": -1.73,
           "max_ret": 36.89,
-          "win_rate": 40.0,
-          "n": 5
+          "win_rate": 33.33,
+          "n": 6
         },
         {
           "offset": 5,
@@ -6247,12 +6247,12 @@
         },
         {
           "day": 29,
-          "avg_ret": 20.73,
+          "avg_ret": 19.47,
           "min_ret": 6.52,
           "max_ret": 31.61,
-          "avg_max_gain": 25.22,
+          "avg_max_gain": 24.16,
           "win_rate": 100.0,
-          "n": 5
+          "n": 6
         },
         {
           "day": 30,
@@ -6499,11 +6499,11 @@
         },
         {
           "day": 29,
-          "avg_open": 171.8,
-          "avg_high": 178.63,
-          "avg_low": 169.29,
-          "avg_close": 171.71,
-          "avg_ret_from_entry": 36.51
+          "avg_open": 149.08,
+          "avg_high": 154.86,
+          "avg_low": 146.79,
+          "avg_close": 149.01,
+          "avg_ret_from_entry": 18.46
         },
         {
           "day": 30,
@@ -6523,7 +6523,7 @@
     {
       "uc": "UC2",
       "sym": "ELECON",
-      "price": 484.85,
+      "price": 484.3,
       "month": 5,
       "month_name": "May",
       "season_win_rate": 100.0,
@@ -6711,12 +6711,12 @@
         },
         {
           "day": 8,
-          "avg_ret": 7.42,
-          "min_ret": -3.47,
+          "avg_ret": 5.03,
+          "min_ret": -9.31,
           "max_ret": 23.41,
-          "avg_max_gain": 9.0,
-          "win_rate": 83.33,
-          "n": 6
+          "avg_max_gain": 8.48,
+          "win_rate": 71.43,
+          "n": 7
         },
         {
           "day": 9,
@@ -6984,11 +6984,11 @@
         },
         {
           "day": 8,
-          "avg_open": 433.68,
-          "avg_high": 446.94,
-          "avg_low": 425.88,
-          "avg_close": 440.85,
-          "avg_ret_from_entry": 5.04
+          "avg_open": 440.01,
+          "avg_high": 452.66,
+          "avg_low": 432.13,
+          "avg_close": 447.06,
+          "avg_ret_from_entry": 6.52
         },
         {
           "day": 9,
@@ -7176,7 +7176,7 @@
     {
       "uc": "UC2",
       "sym": "SJS",
-      "price": 1902.7,
+      "price": 1867.7,
       "month": 5,
       "month_name": "May",
       "season_win_rate": 100.0,
@@ -7335,12 +7335,12 @@
         },
         {
           "day": 5,
-          "avg_ret": 4.7,
-          "min_ret": -0.06,
+          "avg_ret": 2.32,
+          "min_ret": -7.21,
           "max_ret": 16.92,
-          "avg_max_gain": 5.53,
-          "win_rate": 75.0,
-          "n": 4
+          "avg_max_gain": 4.42,
+          "win_rate": 60.0,
+          "n": 5
         },
         {
           "day": 6,
@@ -7611,11 +7611,11 @@
         },
         {
           "day": 5,
-          "avg_open": 637.94,
-          "avg_high": 659.25,
-          "avg_low": 630.05,
-          "avg_close": 642.16,
-          "avg_ret_from_entry": -27.28
+          "avg_open": 889.43,
+          "avg_high": 906.48,
+          "avg_low": 874.12,
+          "avg_close": 887.27,
+          "avg_ret_from_entry": 0.48
         },
         {
           "day": 6,
@@ -7827,7 +7827,7 @@
     {
       "uc": "UC2",
       "sym": "VOLTAMP",
-      "price": 9501.0,
+      "price": 9226.0,
       "month": 5,
       "month_name": "May",
       "season_win_rate": 100.0,
@@ -8006,12 +8006,12 @@
         },
         {
           "day": 7,
-          "avg_ret": 6.18,
-          "min_ret": -1.85,
+          "avg_ret": 4.18,
+          "min_ret": -7.76,
           "max_ret": 10.98,
-          "avg_max_gain": 7.79,
-          "win_rate": 83.33,
-          "n": 6
+          "avg_max_gain": 6.16,
+          "win_rate": 71.43,
+          "n": 7
         },
         {
           "day": 8,
@@ -8280,11 +8280,11 @@
         },
         {
           "day": 7,
-          "avg_open": 4395.3,
-          "avg_high": 4519.38,
-          "avg_low": 4355.88,
-          "avg_close": 4441.21,
-          "avg_ret_from_entry": -9.56
+          "avg_open": 5124.54,
+          "avg_high": 5230.9,
+          "avg_low": 5040.76,
+          "avg_close": 5124.75,
+          "avg_ret_from_entry": 4.36
         },
         {
           "day": 8,
@@ -8480,7 +8480,7 @@
     {
       "uc": "UC2",
       "sym": "ROTO",
-      "price": 57.45,
+      "price": 56.65,
       "month": 5,
       "month_name": "May",
       "season_win_rate": 100.0,
@@ -8630,12 +8630,12 @@
         },
         {
           "day": 4,
-          "avg_ret": 10.22,
-          "min_ret": 4.67,
+          "avg_ret": 7.64,
+          "min_ret": -2.66,
           "max_ret": 15.92,
-          "avg_max_gain": 10.22,
-          "win_rate": 100.0,
-          "n": 4
+          "avg_max_gain": 8.25,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 5,
@@ -8907,11 +8907,11 @@
         },
         {
           "day": 4,
-          "avg_open": 444.52,
-          "avg_high": 463.75,
-          "avg_low": 440.24,
-          "avg_close": 451.15,
-          "avg_ret_from_entry": 31.69
+          "avg_open": 367.11,
+          "avg_high": 382.7,
+          "avg_low": 363.31,
+          "avg_close": 372.25,
+          "avg_ret_from_entry": 8.66
         },
         {
           "day": 5,
@@ -9131,7 +9131,7 @@
     {
       "uc": "UC2",
       "sym": "TDPOWERSYS",
-      "price": 1311.3,
+      "price": 1328.0,
       "month": 5,
       "month_name": "May",
       "season_win_rate": 100.0,
@@ -9319,12 +9319,12 @@
         },
         {
           "day": 8,
-          "avg_ret": 12.72,
+          "avg_ret": 12.64,
           "min_ret": -11.31,
           "max_ret": 31.9,
-          "avg_max_gain": 16.01,
-          "win_rate": 66.67,
-          "n": 6
+          "avg_max_gain": 15.46,
+          "win_rate": 71.43,
+          "n": 7
         },
         {
           "day": 9,
@@ -9592,11 +9592,11 @@
         },
         {
           "day": 8,
-          "avg_open": 295.82,
-          "avg_high": 300.69,
-          "avg_low": 287.1,
-          "avg_close": 291.7,
-          "avg_ret_from_entry": -24.47
+          "avg_open": 443.42,
+          "avg_high": 452.16,
+          "avg_low": 425.39,
+          "avg_close": 439.74,
+          "avg_ret_from_entry": 13.86
         },
         {
           "day": 9,
@@ -9784,7 +9784,7 @@
     {
       "uc": "UC2",
       "sym": "CHOICEIN",
-      "price": 664.25,
+      "price": 655.9,
       "month": 5,
       "month_name": "May",
       "season_win_rate": 100.0,
@@ -10015,12 +10015,12 @@
         },
         {
           "day": 13,
-          "avg_ret": 6.74,
-          "min_ret": 3.34,
+          "avg_ret": 4.29,
+          "min_ret": -5.49,
           "max_ret": 11.58,
-          "avg_max_gain": 7.82,
-          "win_rate": 100.0,
-          "n": 4
+          "avg_max_gain": 6.14,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 14,
@@ -10283,11 +10283,11 @@
         },
         {
           "day": 13,
-          "avg_open": 421.9,
-          "avg_high": 425.09,
-          "avg_low": 418.17,
-          "avg_close": 422.48,
-          "avg_ret_from_entry": -7.13
+          "avg_open": 469.84,
+          "avg_high": 472.41,
+          "avg_low": 464.85,
+          "avg_close": 469.16,
+          "avg_ret_from_entry": 3.13
         },
         {
           "day": 14,
@@ -10435,7 +10435,7 @@
     {
       "uc": "UC2",
       "sym": "WSI",
-      "price": 69.03,
+      "price": 66.92,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -11088,7 +11088,7 @@
     {
       "uc": "UC2",
       "sym": "PENINLAND",
-      "price": 16.8,
+      "price": 16.49,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -11741,7 +11741,7 @@
     {
       "uc": "UC2",
       "sym": "ASAL",
-      "price": 477.2,
+      "price": 469.15,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -12394,7 +12394,7 @@
     {
       "uc": "UC2",
       "sym": "KIRLOSBROS",
-      "price": 1607.4,
+      "price": 1634.4,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -13047,7 +13047,7 @@
     {
       "uc": "UC2",
       "sym": "EIMCOELECO",
-      "price": 1580.7,
+      "price": 1552.7,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -13700,7 +13700,7 @@
     {
       "uc": "UC2",
       "sym": "LUMAXTECH",
-      "price": 1636.1,
+      "price": 1629.2,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -14353,7 +14353,7 @@
     {
       "uc": "UC2",
       "sym": "SPLPETRO",
-      "price": 695.45,
+      "price": 692.35,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -15004,7 +15004,7 @@
     {
       "uc": "UC2",
       "sym": "BESTAGRO",
-      "price": 17.03,
+      "price": 16.53,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -15656,7 +15656,7 @@
     {
       "uc": "UC2",
       "sym": "ENDURANCE",
-      "price": 2548.5,
+      "price": 2526.7,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -16309,7 +16309,7 @@
     {
       "uc": "UC2",
       "sym": "AGI",
-      "price": 579.5,
+      "price": 572.85,
       "month": 7,
       "month_name": "Jul",
       "season_win_rate": 100.0,
@@ -16960,7 +16960,7 @@
     {
       "uc": "UC2",
       "sym": "PRUDENT",
-      "price": 2832.3,
+      "price": 2757.1,
       "month": 7,
       "month_name": "Jul",
       "season_win_rate": 100.0,
@@ -17611,7 +17611,7 @@
     {
       "uc": "UC2",
       "sym": "IRIS",
-      "price": 235.04,
+      "price": 226.49,
       "month": 7,
       "month_name": "Jul",
       "season_win_rate": 100.0,
@@ -18262,7 +18262,7 @@
     {
       "uc": "UC2",
       "sym": "E2E",
-      "price": 3116.7,
+      "price": 3024.4,
       "month": 8,
       "month_name": "Aug",
       "season_win_rate": 100.0,
@@ -18913,7 +18913,7 @@
     {
       "uc": "UC2",
       "sym": "GMRP&UI",
-      "price": 113.9,
+      "price": 114.35,
       "month": 8,
       "month_name": "Aug",
       "season_win_rate": 100.0,
@@ -19564,7 +19564,7 @@
     {
       "uc": "UC2",
       "sym": "LXCHEM",
-      "price": 152.49,
+      "price": 151.09,
       "month": 8,
       "month_name": "Aug",
       "season_win_rate": 100.0,
@@ -20216,7 +20216,7 @@
     {
       "uc": "UC2",
       "sym": "STOVEKRAFT",
-      "price": 552.25,
+      "price": 544.45,
       "month": 8,
       "month_name": "Aug",
       "season_win_rate": 100.0,
@@ -20868,7 +20868,7 @@
     {
       "uc": "UC2",
       "sym": "SBC",
-      "price": 33.52,
+      "price": 33.75,
       "month": 8,
       "month_name": "Aug",
       "season_win_rate": 100.0,
@@ -21519,7 +21519,7 @@
     {
       "uc": "UC2",
       "sym": "SEJALLTD",
-      "price": 783.4,
+      "price": 752.15,
       "month": 9,
       "month_name": "Sep",
       "season_win_rate": 100.0,
@@ -22170,7 +22170,7 @@
     {
       "uc": "UC2",
       "sym": "MEDICO",
-      "price": 44.27,
+      "price": 44.19,
       "month": 10,
       "month_name": "Oct",
       "season_win_rate": 100.0,
@@ -22821,7 +22821,7 @@
     {
       "uc": "UC2",
       "sym": "KERNEX",
-      "price": 1404.8,
+      "price": 1357.6,
       "month": 10,
       "month_name": "Oct",
       "season_win_rate": 100.0,
@@ -23474,7 +23474,7 @@
     {
       "uc": "UC2",
       "sym": "ANGELONE",
-      "price": 306.85,
+      "price": 303.95,
       "month": 10,
       "month_name": "Oct",
       "season_win_rate": 100.0,
@@ -24125,7 +24125,7 @@
     {
       "uc": "UC2",
       "sym": "ARTEMISMED",
-      "price": 279.8,
+      "price": 272.46,
       "month": 11,
       "month_name": "Nov",
       "season_win_rate": 100.0,
@@ -24778,7 +24778,7 @@
     {
       "uc": "UC2",
       "sym": "BSOFT",
-      "price": 314.4,
+      "price": 309.6,
       "month": 11,
       "month_name": "Nov",
       "season_win_rate": 100.0,
@@ -25431,7 +25431,7 @@
     {
       "uc": "UC2",
       "sym": "NECLIFE",
-      "price": 12.7,
+      "price": 12.38,
       "month": 12,
       "month_name": "Dec",
       "season_win_rate": 100.0,
