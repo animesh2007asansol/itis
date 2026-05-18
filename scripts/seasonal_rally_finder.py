@@ -267,39 +267,52 @@ def analyze_stock(sym, df, latest_trading_dates):
             slot_status   = "upcoming"
 
             if started_this_yr:
-                if this_yr_occ:
-                    slot_status = "active" if not passed_this_yr else "completed"
-                    ep_live   = this_yr_occ["entry_px"] or cur_price
-                    live_ret  = r2((cur_price - ep_live) / ep_live * 100)
-                    avg_tgt   = r2(ep_live * (1 + avg_ret  / 100))
-                    min_tgt   = r2(ep_live * (1 + min_ret  / 100))
-                    rem_avg   = r2(avg_ret - (live_ret or 0))
-                    try:
-                        start_dt    = datetime.strptime(this_yr_occ["start_date"], "%Y-%m-%d")
-                        end_dt      = start_dt + timedelta(days=extended_window)
-                        cal_elapsed = (now_ist.replace(tzinfo=None) - start_dt).days
-                        cal_left    = max(0, (end_dt - now_ist.replace(tzinfo=None)).days)
-                    except: cal_elapsed = None; cal_left = None
+                # Find this year's entry price even if target not yet achieved
+                # (stock may be mid-rally — entry was first trading day of start_mo)
+                start_idx_cur = find_first_trading_day_of_month(dates_arr, cur_yr, start_mo)
 
-                    # Switch suggestion: if close to or past avg target
-                    near_target    = live_ret is not None and live_ret >= avg_ret - 5
-                    past_min       = live_ret is not None and live_ret >= min_ret
+                if start_idx_cur is not None:
+                    ep_live = float(c_arr[start_idx_cur])
+                    if ep_live > 0:
+                        live_ret = r2((cur_price - ep_live) / ep_live * 100)
+                        avg_tgt  = r2(ep_live * (1 + avg_ret / 100))
+                        min_tgt  = r2(ep_live * (1 + min_ret / 100))
+                        rem_avg  = r2(avg_ret - (live_ret or 0))
+                        start_date_cur = str(dates_arr[start_idx_cur].date())
+                        try:
+                            start_dt    = datetime.strptime(start_date_cur, "%Y-%m-%d")
+                            end_dt      = start_dt + timedelta(days=extended_window)
+                            cal_elapsed = max(0, (now_ist.replace(tzinfo=None) - start_dt).days)
+                            cal_left    = max(0, (end_dt - now_ist.replace(tzinfo=None)).days)
+                        except:
+                            cal_elapsed = None; cal_left = None
 
-                    live_data = {
-                        "start_date":   this_yr_occ["start_date"],
-                        "entry_px":     r2(ep_live),
-                        "current_px":   r2(cur_price),
-                        "live_ret":     live_ret,
-                        "avg_target":   avg_tgt,
-                        "min_target":   min_tgt,
-                        "remaining_to_avg": rem_avg,
-                        "cal_elapsed":  cal_elapsed,
-                        "cal_left":     cal_left,
-                        "window_days":  extended_window,
-                        "near_target":  near_target,
-                        "past_min":     past_min,
-                        "suggest_exit": near_target and not passed_this_yr,
-                    }
+                        near_target  = live_ret is not None and live_ret >= avg_ret - 5
+                        past_min     = live_ret is not None and live_ret >= min_ret
+
+                        live_data = {
+                            "start_date":       start_date_cur,
+                            "entry_px":         r2(ep_live),
+                            "current_px":       r2(cur_price),
+                            "live_ret":         live_ret,
+                            "avg_target":       avg_tgt,
+                            "min_target":       min_tgt,
+                            "remaining_to_avg": rem_avg,
+                            "cal_elapsed":      cal_elapsed,
+                            "cal_left":         cal_left,
+                            "window_days":      extended_window,
+                            "near_target":      near_target,
+                            "past_min":         past_min,
+                            "suggest_exit":     near_target and not passed_this_yr,
+                        }
+
+                        # Slot status based on calendar position
+                        if passed_this_yr:
+                            slot_status = "completed" if this_yr_occ else "passed"
+                        else:
+                            slot_status = "active"
+                    else:
+                        slot_status = "missed"
                 else:
                     slot_status = "missed"
 
