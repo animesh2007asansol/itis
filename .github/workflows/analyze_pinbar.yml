@@ -1,6 +1,6 @@
 name: 🕯️ Pin Bar Analysis & Alerts
 
-on:
+off:
   # Run automatically after the daily data fetch completes
   workflow_run:
     workflows: ["📈 NSE Daily Data Fetch"]
