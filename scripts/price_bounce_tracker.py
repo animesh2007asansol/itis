@@ -43,7 +43,7 @@ RECENT_DAYS      = 5              # must have traded within last 5 trading dates
 PRICE_BAND_TIGHT = 2.0            # ±2% tight band
 PRICE_BAND_LOOSE = 5.0            # ±5% loose band
 PIVOT_WINDOW     = 8              # days each side to confirm pivot low
-MIN_BOUNCES      = 3              # minimum touch-and-bounce occurrences
+MIN_BOUNCES      = 2              # minimum 2 touches of the support level
 MIN_BOUNCE_PCT   = 5.0            # minimum 5% bounce to count
 HOLD_PERIODS     = {
     "1W":  5,    # 1 week  = 5 trading days
@@ -123,17 +123,22 @@ def find_pivot_lows(l_arr, n):
 
 
 def cluster_pivots(pivots, band=PRICE_BAND_LOOSE):
-    """Cluster nearby pivot lows. Returns list of (median_price, [indices])."""
+    """
+    Cluster nearby pivot lows into support zones.
+    Returns list of (min_low_price, [indices]).
+    Uses the MINIMUM of each cluster as the support (the actual floor).
+    """
     if not pivots: return []
     sp = sorted(pivots, key=lambda x: x[1])
     clusters = [[sp[0]]]
     for i in range(1, len(sp)):
-        anchor = clusters[-1][0][1]
+        anchor = clusters[-1][0][1]   # first item in cluster = anchor
         if abs(sp[i][1] - anchor) / anchor * 100 <= band:
             clusters[-1].append(sp[i])
         else:
             clusters.append([sp[i]])
-    return [(float(np.median([p[1] for p in cl])), [p[0] for p in cl])
+    # Support = minimum pivot in cluster (the actual price floor)
+    return [(float(min(p[1] for p in cl)), [p[0] for p in cl])
             for cl in clusters]
 
 
@@ -191,11 +196,23 @@ def analyze_stock(sym, df, latest_set):
     support_levels = []
     max_hold = max(HOLD_PERIODS.values())
 
-    for (support, _pivot_idxs) in clusters:
-        # Support definition: price can be any amount ABOVE support (bounce happened)
-        # But if price is MORE than 5% BELOW support, that support is broken — skip it
+    for (support, pivot_idxs) in clusters:
+        if support <= 0: continue
+
+        # ── CORE RULE: Stock must NEVER have gone more than 5% below this
+        # support level AFTER it was first established.
+        # Example: support=60, then stock dropped to 55 (which is -8.3%) → REJECT
+        # But stock dropped to 57 (which is -5%) → ACCEPT
+        first_idx = min(pivot_idxs)
+        post_min  = float(np.min(l_arr[first_idx:]))   # lowest low after 1st touch
+        if post_min < support * 0.95:
+            continue  # support was violated by more than 5% at some point — not a valid floor
+
+        # Current price check: should not be more than 5% below support
         _cur_pct_check = (cur_price - support) / support * 100
-        if _cur_pct_check < -5.0: continue   # support broken — price too far below
+        if _cur_pct_check < -5.0: continue
+
+        # Price can be ANY amount above support (stock bounced up to 50% or 100% — fine)
 
         for band_name, band_pct in [("tight_2pct", PRICE_BAND_TIGHT),
                                      ("loose_5pct", PRICE_BAND_LOOSE)]:
