@@ -192,8 +192,10 @@ def analyze_stock(sym, df, latest_set):
     max_hold = max(HOLD_PERIODS.values())
 
     for (support, _pivot_idxs) in clusters:
-        # Support must be within 60% of current price (relevance filter)
-        if abs(cur_price - support) / support * 100 > 60: continue
+        # Only keep support levels where current price is within ±5% of support
+        # If current price is below support, max allowed is -5% (not -58%)
+        _cur_pct_check = (cur_price - support) / support * 100
+        if abs(_cur_pct_check) > 5.0: continue
 
         for band_name, band_pct in [("tight_2pct", PRICE_BAND_TIGHT),
                                      ("loose_5pct", PRICE_BAND_LOOSE)]:
@@ -201,7 +203,7 @@ def analyze_stock(sym, df, latest_set):
             i = 0
             while i < n - max_hold - 1:
                 low_i = float(l_arr[i])
-                pct_from_sup = (low_i - support) / support * 100
+                pct_from_sup = (low_i - support) / support * 100 if support != 0 else 0
                 if abs(pct_from_sup) <= band_pct:
                     # Candle pattern
                     candle = detect_candle(o_arr, h_arr, l_arr, c_arr, i)
@@ -264,8 +266,8 @@ def analyze_stock(sym, df, latest_set):
             best       = hold_stats[best_label]
 
             # Alert: is today's price within this band of support?
-            cur_pct    = r2((cur_price - support) / support * 100)
-            alert_now  = abs(cur_price - support) / support * 100 <= band_pct
+            cur_pct    = r2((cur_price - support) / support * 100) if support != 0 else None
+            alert_now  = abs(cur_price - support) / support * 100 <= 5.0
 
             support_levels.append({
                 "support":      r2(support),
@@ -289,6 +291,7 @@ def analyze_stock(sym, df, latest_set):
                 "touches": sorted(touches, key=lambda x: x["date"], reverse=True),
             })
 
+    # After ±5% filter, only keep stocks that have at least one nearby level
     if not support_levels: return None
     support_levels.sort(key=lambda x: -(x.get("best_avg_ret") or 0))
 
