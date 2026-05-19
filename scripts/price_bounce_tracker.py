@@ -192,10 +192,10 @@ def analyze_stock(sym, df, latest_set):
     max_hold = max(HOLD_PERIODS.values())
 
     for (support, _pivot_idxs) in clusters:
-        # Only keep support levels where current price is within ±5% of support
-        # If current price is below support, max allowed is -5% (not -58%)
+        # Support definition: price can be any amount ABOVE support (bounce happened)
+        # But if price is MORE than 5% BELOW support, that support is broken — skip it
         _cur_pct_check = (cur_price - support) / support * 100
-        if abs(_cur_pct_check) > 5.0: continue
+        if _cur_pct_check < -5.0: continue   # support broken — price too far below
 
         for band_name, band_pct in [("tight_2pct", PRICE_BAND_TIGHT),
                                      ("loose_5pct", PRICE_BAND_LOOSE)]:
@@ -266,8 +266,8 @@ def analyze_stock(sym, df, latest_set):
             best       = hold_stats[best_label]
 
             # Alert: is today's price within this band of support?
-            cur_pct    = r2((cur_price - support) / support * 100) if support != 0 else None
-            alert_now  = abs(cur_price - support) / support * 100 <= 5.0
+            cur_pct    = r2(_cur_pct_check)
+            alert_now  = abs(_cur_pct_check) <= band_pct
 
             support_levels.append({
                 "support":      r2(support),
@@ -278,7 +278,7 @@ def analyze_stock(sym, df, latest_set):
                 "best_avg_ret": best["avg_ret"],
                 "best_min_ret": best["min_ret"],
                 "hold_stats":   hold_stats,
-                "cur_pct_from_sup": cur_pct,
+                "cur_pct_from_sup": r2(_cur_pct_check),
                 "alert_now":    alert_now,
                 # Target prices from today's price
                 "targets": {
