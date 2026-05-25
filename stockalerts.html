@@ -98,6 +98,8 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
     <button class="tab" onclick="showPage('shorthold',this)">&#x26A1; Short Hold (5-10d)</button>
     <button class="tab" onclick="showPage('presignal',this)">&#x1F52C; Pre-Signal Context</button>
     <button class="tab" onclick="showPage('bounce',this)">&#x1F4A5; Support Bounce</button>
+    <button class="tab" onclick="showPage('srally',this)">&#x1F4C8; Seasonal Rally</button>
+    <button class="tab" onclick="showPage('pbounce',this)">&#x1F3AF; Price Bounce</button>
     <button class="tab" onclick="showPage('buying',this)">&#x1F4B0; Buying Strategy</button>
     <button class="tab" onclick="showPage('guide',this)">&#x1F4D6; Guide</button>
   </div>
@@ -719,6 +721,163 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 </div>
 
 
+<!-- PAGE: SEASONAL RALLY FINDER -->
+<div class="page" id="page-srally">
+  <div class="sh">&#x1F4C8; Seasonal Rally Finder <small>consistent 25%+ calendar windows &#x00B7; every year without a miss &#x00B7; 8Cr+ stocks</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue);line-height:1.7">
+    &#x1F9E0; Stocks that rise <strong>25%+</strong> in the <strong>same calendar window every year</strong> (30-90 days) with zero misses. Min Rs 8 Cr daily turnover. Only recently-active stocks. <strong>Multi-select filters</strong> — click multiple months/statuses simultaneously. Switch Recommendations shown when active positions near target.
+  </div>
+  <div class="pill-row" id="sr-pills"></div>
+
+  <!-- View buttons -->
+  <div class="fbar">
+    <span class="fsep">View:</span>
+    <button class="fb on" id="srv-all"      onclick="srView('all',this)">&#x1F4CB; All Patterns</button>
+    <button class="fb"    id="srv-active"   onclick="srView('active',this)">&#x23F3; Active Now</button>
+    <button class="fb"    id="srv-upcoming" onclick="srView('upcoming',this)">&#x1F4C5; Upcoming</button>
+    <button class="fb"    id="srv-switch"   onclick="srView('switch',this)">&#x1F504; Switch Alerts</button>
+  </div>
+
+  <!-- Multi-select month filter -->
+  <div class="fbar" style="flex-wrap:wrap">
+    <span class="fsep">Month filter <small style="color:var(--t3)">(multi-select)</small>:</span>
+    <button class="fb sr-mo" data-mo="0"  onclick="srToggleMo(0,this)">All</button>
+    <button class="fb sr-mo" data-mo="1"  onclick="srToggleMo(1,this)">Jan</button>
+    <button class="fb sr-mo" data-mo="2"  onclick="srToggleMo(2,this)">Feb</button>
+    <button class="fb sr-mo" data-mo="3"  onclick="srToggleMo(3,this)">Mar</button>
+    <button class="fb sr-mo" data-mo="4"  onclick="srToggleMo(4,this)">Apr</button>
+    <button class="fb sr-mo" data-mo="5"  onclick="srToggleMo(5,this)">May</button>
+    <button class="fb sr-mo" data-mo="6"  onclick="srToggleMo(6,this)">Jun</button>
+    <button class="fb sr-mo" data-mo="7"  onclick="srToggleMo(7,this)">Jul</button>
+    <button class="fb sr-mo" data-mo="8"  onclick="srToggleMo(8,this)">Aug</button>
+    <button class="fb sr-mo" data-mo="9"  onclick="srToggleMo(9,this)">Sep</button>
+    <button class="fb sr-mo" data-mo="10" onclick="srToggleMo(10,this)">Oct</button>
+    <button class="fb sr-mo" data-mo="11" onclick="srToggleMo(11,this)">Nov</button>
+    <button class="fb sr-mo" data-mo="12" onclick="srToggleMo(12,this)">Dec</button>
+  </div>
+
+  <!-- Window + sort -->
+  <div class="fbar">
+    <span class="fsep">Window:</span>
+    <button class="fb sr-win on" data-w="0"  onclick="srToggleWin(0,this)">All</button>
+    <button class="fb sr-win"    data-w="30" onclick="srToggleWin(30,this)">~1 Mo</button>
+    <button class="fb sr-win"    data-w="40" onclick="srToggleWin(40,this)">40d</button>
+    <button class="fb sr-win"    data-w="50" onclick="srToggleWin(50,this)">50d</button>
+    <button class="fb sr-win"    data-w="60" onclick="srToggleWin(60,this)">2 Mo</button>
+    <button class="fb sr-win"    data-w="75" onclick="srToggleWin(75,this)">75d</button>
+    <button class="fb sr-win"    data-w="90" onclick="srToggleWin(90,this)">3 Mo</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="srs-min"  onclick="srSort('min_ret','desc',this)">Min Ret% &#x2193;</button>
+    <button class="fb"    id="srs-avg"  onclick="srSort('avg_ret','desc',this)">Avg Ret%</button>
+    <button class="fb"    id="srs-max"  onclick="srSort('max_ret','desc',this)">Max Ret%</button>
+    <button class="fb"    id="srs-win"  onclick="srSort('window_days','asc',this)">Window</button>
+    <button class="fb"    id="srs-n"    onclick="srSort('n_occurrences','desc',this)">Occurrences</button>
+    <button class="fb"    id="srs-sym"  onclick="srSort('sym','asc',this)">Symbol</button>
+    <span class="fsep">|</span>
+    <input class="si" id="sr-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderSRally()">
+  </div>
+
+  <!-- Main table -->
+  <div id="sr-main">
+    <div class="twrap">
+      <table class="tbl" id="sr-tbl" style="min-width:980px">
+        <thead><tr>
+          <th style="width:22px"></th>
+          <th onclick="srSort('sym','asc',null)">Stock<span class="arr"></span></th>
+          <th onclick="srSort('price','desc',null)">Price<span class="arr"></span></th>
+          <th onclick="srSort('start_month','asc',null)">Window<span class="arr"></span></th>
+          <th onclick="srSort('window_days','asc',null)">Days<span class="arr"></span></th>
+          <th onclick="srSort('min_ret','desc',null)">Min Ret%<span class="arr"></span></th>
+          <th onclick="srSort('avg_ret','desc',null)">Avg Ret%<span class="arr"></span></th>
+          <th onclick="srSort('max_ret','desc',null)">Max Ret%<span class="arr"></span></th>
+          <th onclick="srSort('avg_max_gain','desc',null)">Avg Max%<span class="arr"></span></th>
+          <th onclick="srSort('n_occurrences','desc',null)">Years<span class="arr"></span></th>
+          <th>Status</th>
+          <th>Live Ret%</th>
+          <th>Time Left</th>
+        </tr></thead>
+        <tbody id="sr-tbody"><tr><td colspan="13" class="empty"><div class="spinner"></div>Loading&#x2026; Run Seasonal Rally Finder workflow first.</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+  <div id="sr-switch-view" style="display:none"></div>
+</div>
+
+
+<!-- PAGE: PRICE BOUNCE TRACKER -->
+<div class="page" id="page-pbounce">
+  <div class="sh">&#x1F3AF; Price Bounce Tracker <small>only stocks where price is within &#xB15% of a proven support &#x00B7; 1W&#x2013;1M returns &#x00B7; 5Cr+ &#x00B7; 6 years active</small></div>
+  <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue);line-height:1.7">
+    &#x1F9E0; Stocks that bounce from a proven support level (pivot low) in 100% of historical touches. <strong>Only shows stocks where today's price is within ±5% of a proven support.</strong> Min Rs 5 Cr turnover, active in all last 6 years, currently trading. Returns shown for 1W/2W/3W/4W/1M. Multi-select filters, all columns sortable.
+  </div>
+  <div class="pill-row" id="pb-pills"></div>
+
+  <!-- View buttons -->
+  <div class="fbar">
+    <span class="fsep">View:</span>
+    <button class="fb on" id="pbv-stocks"  onclick="pbView('stocks',this)">&#x1F4CB; All Stocks</button>
+    <button class="fb"    id="pbv-daily"   onclick="pbView('daily',this)">&#x1F514; Daily Alerts</button>
+    <button class="fb"    id="pbv-weekly"  onclick="pbView('weekly',this)">&#x1F4C6; Weekly Alerts</button>
+    <button class="fb"    id="pbv-chron"   onclick="pbView('chron',this)">&#x1F4DC; Alert History</button>
+  </div>
+
+  <!-- Multi-select filters -->
+  <div class="fbar" style="flex-wrap:wrap">
+    <span class="fsep">Band <small style="color:var(--t3)">(multi)</small>:</span>
+    <button class="fb pb-band on" data-b="all"    onclick="pbToggle('band','all',this)">Both</button>
+    <button class="fb pb-band"    data-b="tight"  onclick="pbToggle('band','tight',this)">&#xB12% Tight</button>
+    <button class="fb pb-band"    data-b="loose"  onclick="pbToggle('band','loose',this)">&#xB15% Loose</button>
+    <span class="fsep">|</span>
+    <span class="fsep">Hold <small style="color:var(--t3)">(multi)</small>:</span>
+    <button class="fb pb-hold on" data-h="all" onclick="pbToggle('hold','all',this)">All</button>
+    <button class="fb pb-hold"    data-h="1W"  onclick="pbToggle('hold','1W',this)">1 Week</button>
+    <button class="fb pb-hold"    data-h="2W"  onclick="pbToggle('hold','2W',this)">2 Weeks</button>
+    <button class="fb pb-hold"    data-h="3W"  onclick="pbToggle('hold','3W',this)">3 Weeks</button>
+    <button class="fb pb-hold"    data-h="4W"  onclick="pbToggle('hold','4W',this)">4 Weeks</button>
+    <button class="fb pb-hold"    data-h="1M"  onclick="pbToggle('hold','1M',this)">1 Month</button>
+  </div>
+  <div class="fbar">
+    <span class="fsep">Sort:</span>
+    <button class="fb on" id="pbs-ret" onclick="pbSort('best_avg_ret','desc',this)">Avg Ret% &#x2193;</button>
+    <button class="fb"    id="pbs-min" onclick="pbSort('best_min_ret','desc',this)">Min Ret%</button>
+    <button class="fb"    id="pbs-n"   onclick="pbSort('n_touches','desc',this)">Touches</button>
+    <button class="fb"    id="pbs-sym" onclick="pbSort('sym','asc',this)">Symbol</button>
+    <button class="fb"    id="pbs-pr"  onclick="pbSort('price','desc',this)">Price</button>
+    <span class="fsep">|</span>
+    <button class="fb"    id="pbs-dir" onclick="pbFlipDir(this)" style="min-width:70px">&#x2193; Desc</button>
+    <span class="fsep">|</span>
+    <input class="si" id="pb-q" placeholder="Symbol&#x2026;" style="width:100px" oninput="renderPBounce()">
+  </div>
+
+  <!-- Main content area (swapped by view) -->
+  <div id="pb-stocks-view">
+    <div class="twrap">
+      <table class="tbl" id="pb-tbl" style="min-width:960px">
+        <thead><tr>
+          <th style="width:22px"></th>
+          <th onclick="pbSort('sym','asc',null)">Stock<span class="arr"></span></th>
+          <th onclick="pbSort('price','desc',null)">Price<span class="arr"></span></th>
+          <th onclick="pbSort('support','asc',null)">Support<span class="arr"></span></th>
+          <th onclick="pbSort('cur_pct_from_sup','asc',null)" title="Negative=below support (red if <-5%), Positive=above support (already bounced)">% from Sup<span class="arr"></span></th>
+          <th onclick="pbSort('band_pct','asc',null)">Band<span class="arr"></span></th>
+          <th onclick="pbSort('best_avg_ret','desc',null)">Best Avg Ret%<span class="arr"></span></th>
+          <th onclick="pbSort('best_min_ret','desc',null)">Best Min Ret%<span class="arr"></span></th>
+          <th onclick="pbSort('best_hold','asc',null)">Best Hold<span class="arr"></span></th>
+          <th onclick="pbSort('n_touches','desc',null)">Touches<span class="arr"></span></th>
+          <th>Hold Returns</th>
+          <th>Alert</th>
+        </tr></thead>
+        <tbody id="pb-tbody"><tr><td colspan="12" class="empty"><div class="spinner"></div>Loading&#x2026; Run Price Bounce Tracker workflow first.</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+  <div id="pb-daily-view"  style="display:none"></div>
+  <div id="pb-weekly-view" style="display:none"></div>
+  <div id="pb-chron-view"  style="display:none"></div>
+</div>
+
+
 <div class="page" id="page-presignal">
   <div class="sh">&#x1F52C; Pre-Signal Context <small>what happened 1&#x2013;20 days BEFORE each signal &#x00B7; pattern fingerprint</small></div>
   <div style="background:var(--blb);border:1px solid var(--bl2);border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--blue);line-height:1.7">
@@ -832,7 +991,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,15,.97);backdrop-filte
 
 <script>
 const BASE='https://raw.githubusercontent.com/animesh2007asansol/itis/main/stock_analysis';
-const D={alerts:null,history:null,master:null,lt:null,uc1:null,uc2:null,uc3:null,uc4:null,stillvalid:null,uc2timing:null,timingAll:null,shorthold:null,presignal:null,bounce:null};
+const D={alerts:null,history:null,master:null,lt:null,uc1:null,uc2:null,uc3:null,uc4:null,stillvalid:null,uc2timing:null,timingAll:null,shorthold:null,presignal:null,bounce:null,srally:null,pbounce:null};
 
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -1042,15 +1201,17 @@ async function loadData(){
     fetch(BASE+'/short_hold.json'),
     fetch(BASE+'/presignal_context.json'),
     fetch(BASE+'/bounce_signals.json'),
+    fetch(BASE+'/seasonal_rally.json'),
+    fetch(BASE+'/price_bounce.json'),
   ]);
-  const keys=['alerts','history','master','lt','uc1','uc2','uc3','uc4','stillvalid','uc2timing','timingAll','shorthold','presignal','bounce'];
+  const keys=['alerts','history','master','lt','uc1','uc2','uc3','uc4','stillvalid','uc2timing','timingAll','shorthold','presignal','bounce','srally','pbounce'];
   for(let i=0;i<r.length;i++){
     try{
       if(r[i].status==='fulfilled'&&r[i].value?.ok)
         D[keys[i]]=await r[i].value.json();
     }catch(e){ console.log(keys[i]+':',e.message); }
   }
-  renderAlerts();renderHist();renderLT();renderAll();renderSV();renderBuying();renderCalendar();renderUC2Timing();renderMonthlyPicks();renderShortHold();renderPresignal();renderBounce();renderUC2Timing();
+  renderAlerts();renderHist();renderLT();renderAll();renderSV();renderBuying();renderCalendar();renderUC2Timing();renderMonthlyPicks();renderShortHold();renderPresignal();renderBounce();renderSRally();renderPBounce();renderUC2Timing();
   ['uc1','uc2','uc3','uc4'].forEach(function(u){renderUC(u);});
 }
 
@@ -2827,6 +2988,11 @@ function renderBounce(){
     });
   });
 
+  // PROXIMITY FILTER: only show support levels within ±5% of current price
+  rows=rows.filter(function(r){
+    return r.current_pct_from_sup!=null && Math.abs(r.current_pct_from_sup)<=5;
+  });
+
   // Sort
   rows.sort(function(a,b){
     if(a.alert_today!==b.alert_today)return b.alert_today?1:-1;
@@ -3011,6 +3177,591 @@ function renderBnAlerts(){
   el.innerHTML=html;
 }
 
+
+// ══ SEASONAL RALLY FINDER ═════════════════════════════════════════════════════
+var srViewMode='all', srSortKey='min_ret', srSortDir='desc';
+var srSelMonths=new Set([0]);   // 0 = all
+var srSelWindows=new Set([0]);  // 0 = all
+
+function srView(v,btn){
+  srViewMode=v;
+  document.querySelectorAll('[id^="srv-"]').forEach(function(b){b.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  document.getElementById('sr-main').style.display=v==='switch'?'none':'';
+  document.getElementById('sr-switch-view').style.display=v==='switch'?'':'none';
+  if(v==='switch') renderSRSwitch(); else renderSRally();
+}
+
+function srToggleMo(mo,btn){
+  if(mo===0){
+    srSelMonths=new Set([0]);
+    document.querySelectorAll('.sr-mo').forEach(function(b){
+      b.classList.toggle('on', parseInt(b.dataset.mo)===0);
+    });
+  } else {
+    srSelMonths.delete(0);
+    if(srSelMonths.has(mo)) srSelMonths.delete(mo);
+    else srSelMonths.add(mo);
+    if(srSelMonths.size===0) srSelMonths.add(0);
+    document.querySelectorAll('.sr-mo').forEach(function(b){
+      var m=parseInt(b.dataset.mo);
+      b.classList.toggle('on', m===0?srSelMonths.has(0):srSelMonths.has(m));
+    });
+  }
+  renderSRally();
+}
+
+function srToggleWin(w,btn){
+  if(w===0){
+    srSelWindows=new Set([0]);
+    document.querySelectorAll('.sr-win').forEach(function(b){
+      b.classList.toggle('on', parseInt(b.dataset.w)===0);
+    });
+  } else {
+    srSelWindows.delete(0);
+    if(srSelWindows.has(w)) srSelWindows.delete(w);
+    else srSelWindows.add(w);
+    if(srSelWindows.size===0) srSelWindows.add(0);
+    document.querySelectorAll('.sr-win').forEach(function(b){
+      var wv=parseInt(b.dataset.w);
+      b.classList.toggle('on', wv===0?srSelWindows.has(0):srSelWindows.has(wv));
+    });
+  }
+  renderSRally();
+}
+
+function srSort(k,dir,btn){
+  if(srSortKey===k) srSortDir=srSortDir==='desc'?'asc':'desc';
+  else{srSortKey=k;srSortDir=dir||'desc';}
+  document.querySelectorAll('[id^="srs-"]').forEach(function(b){b.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  renderSRally();
+}
+
+function srToggle(id){
+  var r=document.getElementById('sr-det-'+id);
+  var a=document.getElementById('sr-arr-'+id);
+  if(!r)return;
+  if(r.style.display==='none'){r.style.display='';if(a)a.textContent='\u25BC';}
+  else{r.style.display='none';if(a)a.textContent='\u25B6';}
+}
+
+var _MON=['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var _MON_FULL=['','January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function renderSRally(){
+  var tbody=document.getElementById('sr-tbody'); if(!tbody) return;
+  var d=D.srally;
+  if(!d){
+    tbody.innerHTML='<tr><td colspan="13" class="empty">No data. Run <strong>Seasonal Rally Finder</strong> workflow first.</td></tr>';
+    return;
+  }
+
+  var q=(document.getElementById('sr-q')?.value||'').toUpperCase().trim();
+  var rows=[...(d.flat_rows||[])];
+
+  // View filter
+  if(srViewMode==='active')   rows=rows.filter(function(r){return r.slot_status==='active';});
+  if(srViewMode==='upcoming') rows=rows.filter(function(r){return r.slot_status==='upcoming';});
+
+  // Month multi-select
+  if(!srSelMonths.has(0)){
+    rows=rows.filter(function(r){return srSelMonths.has(r.start_month);});
+  }
+  // Window multi-select
+  if(!srSelWindows.has(0)){
+    rows=rows.filter(function(r){
+      var w=r.base_window||r.window_days;
+      return srSelWindows.has(w);
+    });
+  }
+  // Symbol search
+  if(q) rows=rows.filter(function(r){return r.sym.includes(q);});
+
+  // Sort
+  rows.sort(function(a,b){
+    var av=a[srSortKey]!=null?a[srSortKey]:srSortDir==='desc'?-Infinity:Infinity;
+    var bv=b[srSortKey]!=null?b[srSortKey]:srSortDir==='desc'?-Infinity:Infinity;
+    if(typeof av==='string') return srSortDir==='desc'?String(bv).localeCompare(String(av)):String(av).localeCompare(String(bv));
+    return srSortDir==='desc'?bv-av:av-bv;
+  });
+
+  // Pills
+  document.getElementById('sr-pills').innerHTML=[
+    ['Qualifying stocks',d.n_stocks,'g'],
+    ['Total patterns',d.n_patterns,'b'],
+    ['Active now',d.n_active,'g','currently in rally window'],
+    ['Upcoming',d.n_upcoming_now,'y','start this month'],
+    ['Switch alerts',d.n_switch_suggest,'y','near avg target — consider exit'],
+    ['Showing',rows.length,'b'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';}).join('');
+
+  if(!rows.length){
+    tbody.innerHTML='<tr><td colspan="13" class="empty">No patterns match filters. Try clearing month/window filters.</td></tr>';
+    return;
+  }
+
+  var curMo=new Date().getMonth()+1;
+  var html='';
+  rows.forEach(function(r,ri){
+    var rid='sr'+ri;
+    var ld=r.live_data;
+    var status=r.slot_status||'upcoming';
+
+    var statusBadge=status==='active'
+      ?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">\u23F3 ACTIVE</span>'
+      :status==='completed'
+      ?'<span style="background:var(--s);color:var(--t3);border:1px solid var(--b);border-radius:3px;font-size:9px;padding:1px 5px">DONE</span>'
+      :status==='missed'
+      ?'<span style="background:rgba(239,68,68,.1);color:var(--red);border:1px solid var(--red);border-radius:3px;font-size:9px;padding:1px 5px">\u274C MISSED</span>'
+      :r.start_month===curMo
+      ?'<span style="background:var(--ab);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">\u1F4C5 THIS MONTH</span>'
+      :'<span style="color:var(--t3);font-size:9px">Upcoming</span>';
+
+    var liveCell='<td class="muted">—</td>';
+    var leftCell='<td class="muted">—</td>';
+    if(ld&&ld.live_ret!==null&&ld.live_ret!==undefined){
+      var rc=(ld.live_ret||0)>=25?'green':(ld.live_ret||0)>=10?'amber':'red';
+      liveCell='<td class="mono '+rc+'" style="font-weight:700">'+(ld.live_ret>0?'+':'')+Number(ld.live_ret||0).toFixed(1)+'%'+(ld.suggest_exit?' \u1F504':'')+'</td>';
+      leftCell='<td class="mono '+(( ld.cal_left||0)>14?'green':'amber')+'">'+(ld.cal_left!==null&&ld.cal_left!==undefined?ld.cal_left+'d':'—')+'</td>';
+    }
+
+    var rowBg=status==='active'?'rgba(34,197,94,.04)':status==='missed'?'rgba(239,68,68,.02)':'';
+    if(ld&&ld.suggest_exit) rowBg='rgba(245,158,11,.06)';
+
+    // Occurrences detail table
+    var occRows=(r.occurrences||[]).map(function(occ){
+      var rc2=(occ.ret||0)>=25?'green':(occ.ret||0)>=10?'amber':'red';
+      var isCurYr=occ.year===new Date().getFullYear();
+      return '<tr style="font-size:10px;'+(isCurYr?'background:rgba(34,197,94,.08)':'')+'">'
+        +'<td class="mono muted">'+(isCurYr?'<b>':'')+occ.year+(isCurYr?'</b> \u2B50':'')+'</td>'
+        +'<td class="mono">'+occ.start_date+'</td>'
+        +'<td class="mono">'+occ.exit_date+'</td>'
+        +'<td class="mono">\u20b9'+(occ.entry_px||'—')+'</td>'
+        +'<td class="mono">\u20b9'+(occ.exit_px||'—')+'</td>'
+        +'<td class="mono '+rc2+'" style="font-weight:700">+'+(occ.ret||0).toFixed(1)+'%</td>'
+        +'<td class="mono green">+'+(occ.max_ret||0).toFixed(1)+'%</td>'
+        +(occ.ret_extended!=null?'<td class="mono amber">+'+occ.ret_extended.toFixed(1)+'% ext</td>':'<td></td>')
+        +'</tr>';
+    }).join('');
+
+    var liveBox='';
+    if(ld){
+      var progPct=ld.window_days>0?Math.min(100,Math.round((ld.cal_elapsed||0)/ld.window_days*100)):0;
+      var tgtCol=(ld.live_ret||0)>=(r.min_ret||0)?'green':'amber';
+      liveBox='<div style="background:'+(ld.suggest_exit?'rgba(245,158,11,.1)':'rgba(34,197,94,.07)')+';border:1px solid '+(ld.suggest_exit?'var(--amb)':'var(--gr2)')+';border-radius:6px;padding:8px;margin-top:6px">'
+        +(ld.suggest_exit?'<div style="color:var(--amber);font-size:11px;font-weight:700;margin-bottom:6px">\u1F504 CONSIDER SWITCHING: Live return +'+Number(ld.live_ret).toFixed(1)+'% already near avg target '+r.avg_ret+'%. Only '+Number(ld.remaining_to_avg||0).toFixed(1)+'% left to avg. Check upcoming stocks below for better opportunity.</div>':'')
+        +'<div style="font-size:10px;font-weight:600;color:var(--t3);margin-bottom:5px">LIVE TRACKING — entered '+ld.start_date+' at \u20b9'+fmt(ld.entry_px)+'</div>'
+        +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:5px">'
+        +'<div class="ac-mini"><div class="ac-ml">Entry Price</div><div class="ac-mv">\u20b9'+fmt(ld.entry_px)+'</div></div>'
+        +'<div class="ac-mini"><div class="ac-ml">Current</div><div class="ac-mv">\u20b9'+fmt(ld.current_px)+'</div></div>'
+        +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Live Return</div><div class="ac-mv '+(tgtCol)+'" style="font-weight:700">'+(ld.live_ret>0?'+':'')+Number(ld.live_ret||0).toFixed(1)+'%</div></div>'
+        +'<div class="ac-mini"><div class="ac-ml">Min Target \u20b9</div><div class="ac-mv amber">\u20b9'+fmt(ld.min_target)+'</div></div>'
+        +'<div class="ac-mini" style="background:var(--grb)"><div class="ac-ml">Avg Target \u20b9</div><div class="ac-mv green">\u20b9'+fmt(ld.avg_target)+'</div></div>'
+        +'<div class="ac-mini"><div class="ac-ml">Rem to Avg</div><div class="ac-mv '+(ld.remaining_to_avg>0?'green':'red')+'">'+(ld.remaining_to_avg>0?'+':'')+Number(ld.remaining_to_avg||0).toFixed(1)+'%</div></div>'
+        +'<div class="ac-mini"><div class="ac-ml">Days Elapsed</div><div class="ac-mv muted">'+(ld.cal_elapsed||0)+'d</div></div>'
+        +'<div class="ac-mini"><div class="ac-ml">Days Left</div><div class="ac-mv '+(( ld.cal_left||0)>14?'green':'amber')+'">'+(ld.cal_left||0)+'d</div></div>'
+        +'</div>'
+        +'<div style="margin-top:6px"><div style="font-size:9px;color:var(--t3);margin-bottom:2px">Window progress: '+(ld.cal_elapsed||0)+' / '+(ld.window_days||0)+' days</div>'
+        +'<div style="background:var(--s);border-radius:3px;height:5px"><div style="background:'+(progPct>=80?'var(--amber)':'var(--green)')+';width:'+progPct+'%;height:100%;border-radius:3px"></div></div>'
+        +'</div></div>';
+    }
+
+    var detHtml='<tr id="sr-det-'+rid+'" style="display:none"><td colspan="13" style="padding:0">'
+      +'<div style="padding:10px;background:rgba(0,0,0,.2)">'
+      +liveBox
+      +'<div style="font-size:10px;font-weight:600;color:var(--t3);margin:8px 0 4px">ALL HISTORICAL YEARS ('+r.n_occurrences+' — 100% gave \u226525%)</div>'
+      +'<table style="width:100%;font-size:10px;border-collapse:collapse">'
+      +'<tr style="background:var(--card2)"><th style="padding:3px 6px">Year</th><th>Start</th><th>Exit</th><th>Entry \u20b9</th><th>Exit \u20b9</th><th>Return%</th><th>Max Gain%</th><th>Extended</th></tr>'
+      +occRows
+      +'</table></div></td></tr>';
+
+    html+='<tr style="cursor:pointer;'+rowBg+'" onclick="srToggle(\''+rid+'\')">'
+      +'<td><span id="sr-arr-'+rid+'" style="font-size:10px;color:var(--t3)">\u25B6</span></td>'
+      +'<td class="mono gold" style="font-weight:700">'+r.sym+'</td>'
+      +'<td class="mono">\u20b9'+fmt(r.price)+'</td>'
+      +'<td style="font-size:10px;color:var(--t2)">'+r.window_label+'</td>'
+      +'<td class="mono muted">'+r.window_days+'d</td>'
+      +'<td class="mono green" style="font-weight:700;background:rgba(34,197,94,.06)">+'+Number(r.min_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono green">+'+Number(r.avg_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono green">+'+Number(r.max_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono amber">+'+Number(r.avg_max_gain||0).toFixed(1)+'%</td>'
+      +'<td class="mono muted">'+r.n_occurrences+'</td>'
+      +'<td>'+statusBadge+'</td>'
+      +liveCell
+      +leftCell
+      +'</tr>'+detHtml;
+  });
+  tbody.innerHTML=html;
+}
+
+function renderSRSwitch(){
+  var el=document.getElementById('sr-switch-view'); if(!el) return;
+  var d=D.srally;
+  if(!d){el.innerHTML='<div class="empty">No data.</div>';return;}
+  var switches=d.switch_suggestions||[];
+  var upcoming=(d.upcoming_now||[]).slice(0,15);
+  var html='';
+
+  if(!switches.length){
+    html='<div class="empty" style="padding:20px">\u2705 No switch recommendations right now. All active positions still have good upside remaining.</div>';
+  } else {
+    html='<div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:10px">\u1F504 Switch Recommendation: '+switches.length+' active position'+(switches.length>1?'s':'')+" near/past average target</div>";
+    html+='<div style="display:grid;gap:8px;margin-bottom:16px">';
+    switches.forEach(function(r){
+      var ld=r.live_data||{};
+      html+='<div class="lt-card" style="border-left:3px solid var(--amber)">'
+        +'<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px">'
+        +'<div><span style="font-size:16px;font-weight:700;color:var(--gold)">'+r.sym+'</span>'
+        +'<span style="background:var(--ab);color:var(--amber);border:1px solid var(--amb);border-radius:3px;font-size:10px;padding:1px 6px;margin-left:8px">Consider Exit</span>'
+        +'<div style="font-size:11px;color:var(--t2);margin-top:2px">Window: '+r.window_label+' &middot; Entered '+ld.start_date+' at \u20b9'+fmt(ld.entry_px)+'</div></div>'
+        +'<div style="text-align:right"><div class="amber" style="font-size:20px;font-weight:700">+'+(ld.live_ret||0).toFixed(1)+'%</div>'
+        +'<div style="font-size:9px;color:var(--t3)">live vs avg target +'+r.avg_ret+'%</div></div></div>'
+        +'<div style="font-size:11px;color:var(--text);margin-top:6px;background:rgba(245,158,11,.08);border-radius:5px;padding:6px 8px">'
+        +'<strong>Why switch:</strong> You\'ve gained +'+(ld.live_ret||0).toFixed(1)+'%. Avg target is +'+r.avg_ret+'%, only '+(ld.remaining_to_avg||0).toFixed(1)+'% left. '
+        +(upcoming.length?'Consider moving into these upcoming rallies instead:':'Check upcoming rallies tab for next opportunities.')
+        +'</div>'
+        +'</div>';
+    });
+    html+='</div>';
+  }
+
+  if(upcoming.length){
+    html+='<div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:8px">\u1F4C5 Enter These Now — Current month upcoming rallies (sorted by min return)</div>';
+    html+='<div class="twrap"><table class="tbl"><thead><tr>'
+      +'<th>Stock</th><th>Window</th><th>Days</th><th>Min Ret%</th><th>Avg Ret%</th><th>Max Ret%</th><th>Years</th>'
+      +'</tr></thead><tbody>';
+    upcoming.forEach(function(r){
+      html+='<tr><td class="mono gold" style="font-weight:700">'+r.sym+'</td>'
+        +'<td style="font-size:10px">'+r.window_label+'</td>'
+        +'<td class="mono muted">'+r.window_days+'d</td>'
+        +'<td class="mono green" style="font-weight:700">+'+Number(r.min_ret||0).toFixed(1)+'%</td>'
+        +'<td class="mono green">+'+Number(r.avg_ret||0).toFixed(1)+'%</td>'
+        +'<td class="mono green">+'+Number(r.max_ret||0).toFixed(1)+'%</td>'
+        +'<td class="mono muted">'+r.n_occurrences+'</td></tr>';
+    });
+    html+='</tbody></table></div>';
+    html+='<div style="font-size:10px;color:var(--t3);margin-top:6px">Data as of '+d.today_ist+'. All stocks gave \u226525% min in every historical year.</div>';
+  }
+  el.innerHTML=html;
+}
+
+// ══ PRICE BOUNCE TRACKER ══════════════════════════════════════════════════════
+var pbViewMode='stocks', pbSortKey='best_avg_ret', pbSortDir='desc';
+var pbSelBand=new Set(['all']);
+var pbSelHold=new Set(['all']);
+
+function pbView(v,btn){
+  pbViewMode=v;
+  document.querySelectorAll('[id^="pbv-"]').forEach(function(b){b.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  ['stocks','daily','weekly','chron'].forEach(function(n){
+    var el=document.getElementById('pb-'+n+'-view');
+    if(el) el.style.display=v===n?'':'none';
+  });
+  if(v==='daily')  renderPBDaily();
+  else if(v==='weekly') renderPBWeekly();
+  else if(v==='chron')  renderPBChron();
+  else renderPBounce();
+}
+
+function pbToggle(type,val,btn){
+  var sel=type==='band'?pbSelBand:pbSelHold;
+  if(val==='all'){
+    sel.clear(); sel.add('all');
+    document.querySelectorAll('.pb-'+type).forEach(function(b){
+      b.classList.toggle('on', b.dataset[type[0]]==='all'||b.dataset.b==='all'||b.dataset.h==='all');
+    });
+  } else {
+    sel.delete('all');
+    if(sel.has(val)) sel.delete(val); else sel.add(val);
+    if(sel.size===0) sel.add('all');
+    var cls='.pb-'+type;
+    document.querySelectorAll(cls).forEach(function(b){
+      var dv=b.dataset.b||b.dataset.h;
+      b.classList.toggle('on', dv==='all'?sel.has('all'):sel.has(dv));
+    });
+  }
+  if(pbViewMode==='stocks') renderPBounce();
+}
+
+function pbSort(k,d,btn){
+  if(pbSortKey===k) pbSortDir=pbSortDir==='desc'?'asc':'desc';
+  else{pbSortKey=k;pbSortDir=d||'desc';}
+  document.querySelectorAll('[id^="pbs-"]').forEach(function(b){b.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  document.getElementById('pbs-dir').textContent=(pbSortDir==='desc'?'\u2193 Desc':'\u2191 Asc');
+  renderPBounce();
+}
+
+function pbFlipDir(btn){
+  pbSortDir=pbSortDir==='desc'?'asc':'desc';
+  btn.textContent=(pbSortDir==='desc'?'\u2193 Desc':'\u2191 Asc');
+  renderPBounce();
+}
+
+function pbTog(id){
+  var r=document.getElementById('pb-det-'+id);
+  var a=document.getElementById('pb-arr-'+id);
+  if(!r)return;
+  if(r.style.display==='none'){r.style.display='';if(a)a.textContent='\u25BC';}
+  else{r.style.display='none';if(a)a.textContent='\u25B6';}
+}
+
+function pbBandMatch(sl){
+  if(pbSelBand.has('all')) return true;
+  if(pbSelBand.has('tight') && sl.band_pct<=2) return true;
+  if(pbSelBand.has('loose') && sl.band_pct>2)  return true;
+  return false;
+}
+
+function pbHoldMatch(sl){
+  if(pbSelHold.has('all')) return true;
+  return Object.keys(sl.hold_stats||{}).some(function(k){return pbSelHold.has(k);});
+}
+
+function pbHoldBadges(hold_stats){
+  var labels={'1W':'1W','2W':'2W','3W':'3W','4W':'4W','1M':'1M'};
+  return Object.keys(labels).map(function(k){
+    var s=hold_stats&&hold_stats[k];
+    if(!s) return '<span style="font-size:9px;color:var(--t3);padding:1px 3px">'+k+':—</span>';
+    var col=s.avg_ret>=15?'green':s.avg_ret>=8?'amber':'muted';
+    return '<span style="font-size:9px;padding:1px 4px;border-radius:2px;margin-right:2px;background:var(--s);color:var(--'+col+')">'+k+':+'+Number(s.avg_ret||0).toFixed(1)+'%</span>';
+  }).join('');
+}
+
+function renderPBounce(){
+  var tbody=document.getElementById('pb-tbody'); if(!tbody) return;
+  var d=D.pbounce;
+  if(!d){tbody.innerHTML='<tr><td colspan="12" class="empty">No data. Run <strong>Price Bounce Tracker</strong> workflow first.</td></tr>';return;}
+
+  var q=(document.getElementById('pb-q')?.value||'').toUpperCase().trim();
+
+  // Flatten: one row per (stock, support_level) matching filters
+  var rows=[];
+  (d.stocks||[]).forEach(function(s){
+    (s.levels||[]).forEach(function(sl){
+      if(!pbBandMatch(sl)) return;
+      if(!pbHoldMatch(sl)) return;
+      if(q&&!s.sym.includes(q)) return;
+      rows.push({
+        sym:s.sym, price:s.price,
+        support:sl.support, band:sl.band, band_pct:sl.band_pct,
+        best_hold:sl.best_hold, best_avg_ret:sl.best_avg_ret,
+        best_min_ret:sl.best_min_ret,
+        n_touches:sl.n_touches, hold_stats:sl.hold_stats,
+        cur_pct_from_sup:sl.cur_pct_from_sup,
+        alert_now:sl.alert_now, targets:sl.targets,
+        touches:sl.touches,
+      });
+    });
+  });
+
+  // Filter: exclude only if price is more than 5% BELOW support (broken support)
+  // Price being 50% ABOVE support is fine — stock already bounced up from there
+  rows=rows.filter(function(r){
+    return r.cur_pct_from_sup==null || r.cur_pct_from_sup >= -5;
+  });
+
+  // Sort
+  rows.sort(function(a,b){
+    var av=a[pbSortKey]!=null?a[pbSortKey]:pbSortDir==='desc'?-1e9:1e9;
+    var bv=b[pbSortKey]!=null?b[pbSortKey]:pbSortDir==='desc'?-1e9:1e9;
+    if(typeof av==='string') return pbSortDir==='desc'?bv.localeCompare(av):av.localeCompare(bv);
+    return pbSortDir==='desc'?bv-av:av-bv;
+  });
+  // Alerts first
+  rows.sort(function(a,b){return (b.alert_now?1:0)-(a.alert_now?1:0);});
+
+  // Pills
+  document.getElementById('pb-pills').innerHTML=[
+    ['Qualifying stocks',d.n_stocks,'g'],
+    ['Alerts today',d.n_alerts_now,'g','price near support now'],
+    ['This week',d.n_alerts_week,'y','touched support this week'],
+    ['Alert history',d.n_chron,'b','last 30 days'],
+    ['Showing patterns',rows.length,'b'],
+  ].map(function(x){return '<div class="kp '+x[2]+'"><div class="kl">'+x[0]+'</div><div class="kv">'+x[1]+'</div><div class="ks">'+(x[3]||'')+'</div></div>';}).join('');
+
+  if(!rows.length){tbody.innerHTML='<tr><td colspan="12" class="empty">No patterns match filters.</td></tr>';return;}
+
+  var html='';
+  rows.forEach(function(sl,ri){
+    var rid='pb'+ri;
+    var _cpfs=sl.cur_pct_from_sup;
+var distCol=_cpfs!=null&&_cpfs>=-2&&_cpfs<=5?'green':_cpfs!=null&&_cpfs>=-5?'amber':_cpfs!=null&&_cpfs>0?'muted':'red';
+    var alertBadge=sl.alert_now?'<span style="background:var(--grb);color:var(--green);border:1px solid var(--gr2);border-radius:3px;font-size:9px;font-weight:700;padding:1px 5px">\u2705 NEAR NOW</span>':'';
+    var bandCol=sl.band_pct<=2?'color:var(--amber)':'color:var(--blue)';
+
+    // Target prices if alert_now
+    var tgtBox='';
+    if(sl.alert_now&&sl.targets){
+      var tgts=Object.keys(sl.targets).map(function(k){
+        var t=sl.targets[k];
+        return '<span style="font-size:10px;margin-right:8px"><b>'+k+':</b> \u20b9'+fmt(t.min_tgt)+' min / \u20b9'+fmt(t.avg_tgt)+' avg</span>';
+      }).join('');
+      tgtBox='<div style="background:rgba(34,197,94,.08);border:1px solid var(--gr2);border-radius:4px;padding:5px 8px;font-size:10px;color:var(--text)"><strong class="green">\u2705 Near support — targets from Rs '+fmt(sl.price)+':</strong><br>'+tgts+'</div>';
+    }
+
+    // Touch table rows
+    var occRows=(sl.touches||[]).slice(0,12).map(function(t){
+      var rets=['1W','2W','3W','4W','1M'].map(function(k){
+        var r2=t.hold_rets&&t.hold_rets[k]&&t.hold_rets[k].ret;
+        if(r2==null) return '<td class="muted" style="font-size:10px">—</td>';
+        var c2=r2>=15?'green':r2>=8?'amber':r2>=0?'muted':'red';
+        return '<td class="mono '+c2+'" style="font-size:10px">'+(r2>0?'+':'')+Number(r2).toFixed(1)+'%</td>';
+      }).join('');
+      return '<tr style="font-size:10px">'
+        +'<td class="mono muted">'+t.year+'</td>'
+        +'<td class="mono">'+t.date+'</td>'
+        +'<td class="mono">\u20b9'+(t.low||'—')+'</td>'
+        +'<td class="mono '+(t.pct_from_sup<0?'amber':'muted')+'">'+(t.pct_from_sup!=null?(t.pct_from_sup>0?'+':'')+Number(t.pct_from_sup).toFixed(1)+'%':'—')+'</td>'
+        +'<td class="mono amber" style="font-size:9px">'+t.candle+'</td>'
+        +rets
+        +'</tr>';
+    }).join('');
+
+    var detHtml='<tr id="pb-det-'+rid+'" style="display:none"><td colspan="12" style="padding:0">'
+      +'<div style="padding:10px;background:rgba(0,0,0,.2)">'
+      +tgtBox
+      +'<div style="font-size:10px;font-weight:600;color:var(--t3);margin:6px 0 4px">ALL HISTORICAL TOUCHES OF SUPPORT \u20b9'+fmt(sl.support)+' ('+sl.n_touches+' — all bounced)</div>'
+      +'<table style="width:100%;font-size:10px;border-collapse:collapse"><tr style="background:var(--card2)">'
+      +'<th style="padding:3px 5px">Year</th><th>Date</th><th>Low \u20b9</th><th>% from Sup</th><th>Candle</th>'
+      +'<th>1W Ret%</th><th>2W Ret%</th><th>3W Ret%</th><th>4W Ret%</th><th>1M Ret%</th>'
+      +'</tr>'+occRows+'</table></div></td></tr>';
+
+    html+='<tr style="cursor:pointer;'+(sl.alert_now?'background:rgba(34,197,94,.04)':'')+'" onclick="pbTog(\''+rid+'\')">'
+      +'<td><span id="pb-arr-'+rid+'" style="font-size:10px;color:var(--t3)">\u25B6</span></td>'
+      +'<td class="mono gold" style="font-weight:700">'+sl.sym+'</td>'
+      +'<td class="mono">\u20b9'+fmt(sl.price)+'</td>'
+      +'<td class="mono amber">\u20b9'+fmt(sl.support)+'</td>'
+      +'<td class="mono '+distCol+'">'+(sl.cur_pct_from_sup!=null?(sl.cur_pct_from_sup>0?'+':'')+Number(sl.cur_pct_from_sup).toFixed(1)+'%':'—')+'</td>'
+      +'<td style="font-size:10px;'+bandCol+'">\xB1'+sl.band_pct+'%</td>'
+      +'<td class="mono green" style="font-weight:700;background:rgba(34,197,94,.06)">+'+Number(sl.best_avg_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono green">+'+Number(sl.best_min_ret||0).toFixed(1)+'%</td>'
+      +'<td class="mono muted">'+sl.best_hold+'</td>'
+      +'<td class="mono muted">'+sl.n_touches+'</td>'
+      +'<td>'+pbHoldBadges(sl.hold_stats)+'</td>'
+      +'<td>'+alertBadge+'</td>'
+      +'</tr>'+detHtml;
+  });
+  tbody.innerHTML=html;
+}
+
+function renderPBDaily(){
+  var el=document.getElementById('pb-daily-view'); if(!el) return;
+  var d=D.pbounce;
+  if(!d){el.innerHTML='<div class="empty">No data.</div>';return;}
+  // Only show stocks where current price is within ±5% of support
+  var alerts=(d.alerts_now||[]).filter(function(s){
+    return (s.alert_levels||[]).some(function(al){
+      return al.cur_pct_from_sup!=null && Math.abs(al.cur_pct_from_sup)<=5;
+    });
+  });
+  if(!alerts.length){el.innerHTML='<div class="empty">\u2705 No stocks near support today. Market open at a normal level.</div>';return;}
+
+  var html='<div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px">'
+    +'\u2705 '+alerts.length+' Stock'+(alerts.length>1?'s':'')
+    +' near proven support today \u2014 sorted by best avg bounce%</div>';
+
+  alerts.forEach(function(s){
+    var best=s.alert_levels&&s.alert_levels[0];
+    if(!best) return;
+    var tgts=s.alert_levels.map(function(al){
+      return '<div style="margin-bottom:6px;background:var(--s);border-radius:5px;padding:7px 10px">'
+        +'<span class="amber" style="font-weight:600">\u20b9'+fmt(al.support)+'</span>'
+        +' <span style="font-size:9px;color:var(--t3)">\xB1'+al.band_pct+'% band</span>'
+        +' <span style="font-size:10px;color:var(--t2)">'+(al.cur_pct_from_sup!=null?(al.cur_pct_from_sup>0?'+':'')+Number(al.cur_pct_from_sup).toFixed(1)+'% from support':'')+'</span><br>'
+        +Object.keys(al.targets||{}).map(function(k){
+          var t=al.targets[k];
+          return '<span style="font-size:10px;margin-right:10px"><b>'+k+'</b>: min \u20b9'+fmt(t.min_tgt)+' | avg \u20b9'+fmt(t.avg_tgt)+'</span>';
+        }).join('')
+        +'</div>';
+    }).join('');
+    html+='<div class="lt-card" style="margin-bottom:10px;border-left:3px solid var(--green)">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px">'
+      +'<div><span style="font-size:18px;font-weight:700;color:var(--gold)">'+s.sym+'</span>'
+      +'<div style="font-size:11px;color:var(--t2);margin-top:2px">Current: \u20b9'+fmt(s.price)+' \u00B7 Best bounce: +'+fmt(best.best_avg_ret)+'%</div></div>'
+      +'<span class="green" style="font-size:22px;font-weight:700">+'+Number(s.best_avg_ret||0).toFixed(1)+'%</span>'
+      +'</div>'+tgts+'</div>';
+  });
+  html+='<div style="font-size:10px;color:var(--t3);margin-top:6px">IST '+d.today_ist+' \u00B7 Every historical touch of these support levels gave a bounce.</div>';
+  el.innerHTML=html;
+}
+
+function renderPBWeekly(){
+  var el=document.getElementById('pb-weekly-view'); if(!el) return;
+  var d=D.pbounce;
+  if(!d){el.innerHTML='<div class="empty">No data.</div>';return;}
+  var wk=d.alerts_week||[];
+  if(!wk.length){el.innerHTML='<div class="empty">No support touches this week.</div>';return;}
+
+  var html='<div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:10px">'
+    +'\u1F4C6 '+wk.length+' stock'+(wk.length>1?'s':'')
+    +' touched proven support this week \u2014 tracking results</div>';
+
+  html+='<div class="twrap"><table class="tbl"><thead><tr>'
+    +'<th>Stock</th><th>Date</th><th>Support</th><th>% from Sup</th><th>Candle</th>'
+    +'<th>1W Ret%</th><th>2W Ret%</th><th>3W Ret%</th><th>4W Ret%</th><th>1M Ret%</th>'
+    +'</tr></thead><tbody>';
+
+  wk.forEach(function(s){
+    (s.touches||[]).forEach(function(t){
+      var rets=['1W','2W','3W','4W','1M'].map(function(k){
+        var rv=t.hold_rets&&t.hold_rets[k]&&t.hold_rets[k].ret;
+        if(rv==null) return '<td class="muted">—</td>';
+        var cv=rv>=15?'green':rv>=8?'amber':rv>=0?'muted':'red';
+        return '<td class="mono '+cv+'">'+(rv>0?'+':'')+Number(rv).toFixed(1)+'%</td>';
+      }).join('');
+      html+='<tr style="background:rgba(34,197,94,.04)">'
+        +'<td class="mono gold" style="font-weight:700">'+s.sym+'</td>'
+        +'<td class="mono">'+t.date+'</td>'
+        +'<td class="mono amber">\u20b9'+fmt(t.support)+'</td>'
+        +'<td class="mono '+(Math.abs(t.pct_from_sup||0)<=2?'green':'amber')+'">'+(t.pct_from_sup!=null?(t.pct_from_sup>0?'+':'')+Number(t.pct_from_sup).toFixed(1)+'%':'—')+'</td>'
+        +'<td style="font-size:9px;color:var(--amber)">'+t.candle+'</td>'
+        +rets+'</tr>';
+    });
+  });
+  html+='</tbody></table></div>';
+  el.innerHTML=html;
+}
+
+function renderPBChron(){
+  var el=document.getElementById('pb-chron-view'); if(!el) return;
+  var d=D.pbounce;
+  if(!d){el.innerHTML='<div class="empty">No data.</div>';return;}
+  var chron=d.chron_alerts||[];
+  if(!chron.length){el.innerHTML='<div class="empty">No alerts in last 30 days.</div>';return;}
+
+  var html='<div style="font-size:12px;color:var(--t3);margin-bottom:8px">Chronological order — last 30 days of support touches ('+(chron.length)+' total). Most recent first.</div>';
+  html+='<div class="twrap"><table class="tbl"><thead><tr>'
+    +'<th>Date</th><th>Stock</th><th>Price</th><th>Support</th><th>Band</th>'
+    +'<th>% from Sup</th><th>Candle</th>'
+    +'<th>1W Ret%</th><th>2W Ret%</th><th>4W Ret%</th><th>1M Ret%</th>'
+    +'</tr></thead><tbody>';
+
+  chron.forEach(function(a){
+    var isToday=a.date===d.today_ist;
+    var rc1=a['1W_ret']!=null?(a['1W_ret']>=10?'green':a['1W_ret']>=5?'amber':'muted'):'muted';
+    var rc2=a['2W_ret']!=null?(a['2W_ret']>=10?'green':a['2W_ret']>=5?'amber':'muted'):'muted';
+    var rc4=a['4W_ret']!=null?(a['4W_ret']>=15?'green':a['4W_ret']>=8?'amber':'muted'):'muted';
+    var rcm=a['1M_ret']!=null?(a['1M_ret']>=15?'green':a['1M_ret']>=8?'amber':'muted'):'muted';
+    html+='<tr style="'+(isToday?'background:rgba(34,197,94,.06)':'')+'">'
+      +'<td class="mono '+(isToday?'green':'muted')+'">'+(isToday?'\u2705 ':'')+a.date+'</td>'
+      +'<td class="mono gold" style="font-weight:700">'+a.sym+'</td>'
+      +'<td class="mono">\u20b9'+fmt(a.price)+'</td>'
+      +'<td class="mono amber">\u20b9'+fmt(a.support)+'</td>'
+      +'<td style="font-size:9px;color:var(--t3)">'+a.band+'</td>'
+      +'<td class="mono '+(Math.abs(a.pct_from_sup||0)<=2?'green':'amber')+'">'+(a.pct_from_sup!=null?(a.pct_from_sup>0?'+':'')+Number(a.pct_from_sup).toFixed(1)+'%':'—')+'</td>'
+      +'<td style="font-size:9px;color:var(--amber)">'+a.candle+'</td>'
+      +'<td class="mono '+rc1+'">'+(a['1W_ret']!=null?(a['1W_ret']>0?'+':'')+Number(a['1W_ret']).toFixed(1)+'%':'—')+'</td>'
+      +'<td class="mono '+rc2+'">'+(a['2W_ret']!=null?(a['2W_ret']>0?'+':'')+Number(a['2W_ret']).toFixed(1)+'%':'—')+'</td>'
+      +'<td class="mono '+rc4+'">'+(a['4W_ret']!=null?(a['4W_ret']>0?'+':'')+Number(a['4W_ret']).toFixed(1)+'%':'—')+'</td>'
+      +'<td class="mono '+rcm+'">'+(a['1M_ret']!=null?(a['1M_ret']>0?'+':'')+Number(a['1M_ret']).toFixed(1)+'%':'—')+'</td>'
+      +'</tr>';
+  });
+  html+='</tbody></table></div>';
+  el.innerHTML=html;
+}
 
 loadData();
 </script>
