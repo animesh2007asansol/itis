@@ -1,0 +1,60 @@
+2026-05-26 16:16:52,254 [INFO] ============================================================
+2026-05-26 16:16:52,254 [INFO]   NSE Fetcher v2 (Cloudflare-proof) -- 2026-05-26
+2026-05-26 16:16:52,255 [INFO] ============================================================
+2026-05-26 16:16:52,319 [INFO]   HTTP engine: curl_cffi
+2026-05-26 16:16:52,845 [INFO]   Warm-up https://www.nseindia.com -> 200
+2026-05-26 16:16:54,709 [INFO]   Warm-up market-data -> 200
+2026-05-26 16:16:55,301 [INFO]   Session engine: curl_cffi
+2026-05-26 16:16:55,421 [INFO] 
+-- 1/6  EQUITY --
+2026-05-26 16:16:55,421 [INFO]   [1/3] GET https://archives.nseindia.com/content/historical/EQUITIES/2026/MAY/cm26MAY2026bhav.csv.zip
+2026-05-26 16:16:56,014 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-26 16:16:56,014 [INFO]   [1/3] GET https://archives.nseindia.com/archives/equities/bhavcopy/cm26MAY2026.csv.zip
+2026-05-26 16:16:56,289 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-26 16:16:56,289 [INFO]   [1/3] GET https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20260526_F_0000.csv.zip
+2026-05-26 16:16:56,778 [INFO]   OK 192,497 bytes
+2026-05-26 16:16:56,794 [INFO]   Extracted 'BhavCopy_NSE_CM_0_0_0_20260526_F_0000.csv': 3,429 rows x 34 cols
+2026-05-26 16:16:56,858 [INFO]   Saved -> data/equity/2026/05/2026-05-26.csv
+2026-05-26 16:16:56,858 [INFO] 
+-- 2/6  F&O --
+2026-05-26 16:16:56,859 [INFO]   [1/3] GET https://archives.nseindia.com/content/historical/DERIVATIVES/2026/MAY/fo26MAY2026bhav.csv.zip
+2026-05-26 16:16:57,137 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-26 16:16:57,137 [INFO]   [1/3] GET https://archives.nseindia.com/archives/derivatives/bhavcopy/fo26MAY2026.csv.zip
+2026-05-26 16:16:57,510 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-26 16:16:57,510 [INFO]   [1/3] GET https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_20260526_F_0000.csv.zip
+2026-05-26 16:16:57,967 [INFO]   OK 1,470,417 bytes
+2026-05-26 16:16:58,080 [INFO]   Extracted 'BhavCopy_NSE_FO_0_0_0_20260526_F_0000.csv': 46,332 rows x 34 cols
+2026-05-26 16:16:58,845 [INFO]   Saved -> data/fo/2026/05/2026-05-26.csv
+2026-05-26 16:16:58,849 [INFO] 
+-- 3/6  INDEX --
+2026-05-26 16:16:58,849 [INFO]   [1/3] GET https://archives.nseindia.com/content/indices/ind_close_all_26052026.csv
+2026-05-26 16:16:59,164 [INFO]   OK 15,658 bytes
+2026-05-26 16:16:59,168 [INFO]   Saved -> data/index/2026/05/2026-05-26.csv
+2026-05-26 16:16:59,168 [INFO] 
+-- 4/6  DELIVERY --
+2026-05-26 16:16:59,168 [INFO]   [1/3] GET https://archives.nseindia.com/archives/equities/mto/MTO_26052026.DAT
+2026-05-26 16:16:59,525 [INFO]   OK 120,210 bytes
+2026-05-26 16:16:59,531 [INFO]   [1/3] GET https://archives.nseindia.com/archives/equities/bhavcopy/sec_bhavdata26MAY2026.csv
+2026-05-26 16:16:59,792 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-26 16:16:59,792 [INFO] 
+-- 5/6  CORPORATE ACTIONS --
+2026-05-26 16:16:59,792 [INFO]   [1/3] GET https://www.nseindia.com/corporates/shownCorporateActions?index=equities&from_date=19-05-2026&to_date=26-05-2026
+2026-05-26 16:17:00,124 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-26 16:17:00,124 [INFO] 
+-- 6/6  SME --
+2026-05-26 16:17:00,124 [INFO]   [1/3] GET https://archives.nseindia.com/content/historical/EQUITIES/2026/MAY/SME26MAY2026BHAV.csv.zip
+2026-05-26 16:17:00,397 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-26 16:17:00,397 [INFO]   [1/3] GET https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_SME_0_0_0_20260526_F_0000.csv.zip
+2026-05-26 16:17:00,813 [WARNING]   404 — file not on NSE (holiday or wrong date)
+2026-05-26 16:17:00,813 [INFO] 
+-- MANIFEST --
+2026-05-26 16:17:00,832 [INFO]   Manifest + summary updated.
+2026-05-26 16:17:00,832 [INFO] 
+============================================================
+2026-05-26 16:17:00,832 [INFO]   OK  equity
+2026-05-26 16:17:00,832 [INFO]   OK  fo
+2026-05-26 16:17:00,832 [INFO]   OK  index
+2026-05-26 16:17:00,832 [INFO]   FAIL  delivery
+2026-05-26 16:17:00,833 [INFO]   FAIL  corporate_actions
+2026-05-26 16:17:00,833 [INFO]   FAIL  sme
+2026-05-26 16:17:00,833 [INFO] ============================================================
