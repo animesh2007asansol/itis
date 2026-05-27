@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-27T02:02:40+05:30",
-  "latest_date": "2026-05-26",
+  "generated_at": "2026-05-28T02:06:24+05:30",
+  "latest_date": "2026-05-27",
   "n_patterns": 351,
   "description": "100% next-day positive. Ranked by minimum return (highest first).",
   "patterns": [
@@ -2619,7 +2619,13 @@
       "nd_max": 4.85,
       "gap_up_rate": 33.3,
       "avg_gap_pct": -0.08,
-      "win_5d": null,
+      "win_5d": {
+        "n": 6,
+        "wr": 66.7,
+        "avg": 0.97,
+        "min": -3.75,
+        "max": 8.2
+      },
       "win_10d": null,
       "win_20d": null,
       "years": [
@@ -3197,7 +3203,13 @@
         "min": -6.96,
         "max": 19.65
       },
-      "win_20d": null,
+      "win_20d": {
+        "n": 6,
+        "wr": 66.7,
+        "avg": 9.28,
+        "min": -11.97,
+        "max": 37.46
+      },
       "years": [
         2025,
         2026
@@ -5766,9 +5778,9 @@
       "gap_up_rate": 85.7,
       "avg_gap_pct": 0.31,
       "win_5d": {
-        "n": 6,
+        "n": 7,
         "wr": 100.0,
-        "avg": 6.38,
+        "avg": 6.35,
         "min": 2.2,
         "max": 16.53
       },
@@ -7066,9 +7078,9 @@
       "gap_up_rate": 57.1,
       "avg_gap_pct": 0.84,
       "win_5d": {
-        "n": 6,
-        "wr": 83.3,
-        "avg": 2.12,
+        "n": 7,
+        "wr": 85.7,
+        "avg": 2.23,
         "min": -4.55,
         "max": 7.73
       },
@@ -11325,7 +11337,7 @@
       "gap_up_rate": 77.8,
       "avg_gap_pct": 0.03,
       "win_5d": {
-        "n": 17,
+        "n": 18,
         "wr": 100.0,
         "avg": 0.11,
         "min": 0.09,
@@ -11533,7 +11545,7 @@
         "max": 0.3
       },
       "win_20d": {
-        "n": 45,
+        "n": 46,
         "wr": 100.0,
         "avg": 0.45,
         "min": 0.36,
@@ -11798,14 +11810,14 @@
         "max": 0.19
       },
       "win_10d": {
-        "n": 48,
+        "n": 49,
         "wr": 100.0,
         "avg": 0.21,
         "min": 0.16,
         "max": 0.29
       },
       "win_20d": {
-        "n": 45,
+        "n": 46,
         "wr": 100.0,
         "avg": 0.43,
         "min": 0.34,
@@ -12251,15 +12263,15 @@
       "sym": "GROWWLIQID",
       "candle_key": "G_doji_Lnone_Uvery_long",
       "desc": "Green doji body | lower:none | upper:very_long",
-      "occurrences": 89,
+      "occurrences": 90,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.06,
-      "gap_up_rate": 76.4,
+      "gap_up_rate": 76.7,
       "avg_gap_pct": 0.01,
       "win_5d": {
-        "n": 85,
+        "n": 86,
         "wr": 100.0,
         "avg": 0.1,
         "min": 0.06,
@@ -12273,7 +12285,7 @@
         "max": 0.3
       },
       "win_20d": {
-        "n": 80,
+        "n": 81,
         "wr": 100.0,
         "avg": 0.4,
         "min": 0.32,
@@ -12284,7 +12296,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-05-25"
+      "last_date": "2026-05-26"
     },
     {
       "sym": "GROWWLIQID",
@@ -12305,7 +12317,7 @@
         "max": 0.17
       },
       "win_10d": {
-        "n": 10,
+        "n": 11,
         "wr": 100.0,
         "avg": 0.23,
         "min": 0.18,
@@ -12782,7 +12794,7 @@
         "max": 0.0
       },
       "win_10d": {
-        "n": 180,
+        "n": 181,
         "wr": 2.8,
         "avg": 0.0,
         "min": 0.0,
@@ -12971,7 +12983,7 @@
       "gap_up_rate": 90.6,
       "avg_gap_pct": 0.01,
       "win_5d": {
-        "n": 83,
+        "n": 84,
         "wr": 100.0,
         "avg": 0.11,
         "min": 0.06,
@@ -13056,7 +13068,7 @@
         "max": 0.17
       },
       "win_10d": {
-        "n": 61,
+        "n": 62,
         "wr": 100.0,
         "avg": 0.22,
         "min": 0.17,
@@ -13080,12 +13092,12 @@
       "sym": "LIQUIDADD",
       "candle_key": "G_doji_Lvery_long_Uvery_long",
       "desc": "Green doji body | lower:very_long | upper:very_long",
-      "occurrences": 42,
+      "occurrences": 43,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.05,
-      "gap_up_rate": 88.1,
+      "gap_up_rate": 88.4,
       "avg_gap_pct": 0.14,
       "win_5d": {
         "n": 42,
@@ -13113,7 +13125,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-05-15"
+      "last_date": "2026-05-26"
     },
     {
       "sym": "LIQUIDADD",
