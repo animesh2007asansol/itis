@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-05-28T23:21:52+05:30",
-  "n": 9,
+  "generated_at": "2026-05-29T23:32:54+05:30",
+  "n": 10,
   "stocks": [
     {
       "sym": "TTML",
-      "price": 43.07,
+      "price": 42.81,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -64,7 +64,7 @@
     },
     {
       "sym": "HAL",
-      "price": 4413.0,
+      "price": 4303.8,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -123,6 +123,36 @@
       }
     },
     {
+      "sym": "EXICOM",
+      "price": 159.4,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC4",
+      "desc": "",
+      "ret_rate": 1.19,
+      "avg_ret": 23.89,
+      "min_ret": 10.78,
+      "hold_days": 20,
+      "win_rate": 100.0,
+      "n_trades": 5,
+      "sharpe": 4.69,
+      "years": [
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "ctx_rsi": {
+        "min": 31.26,
+        "max": 70.92,
+        "avg": 47.51
+      },
+      "ctx_vol_r": {
+        "min": 1.63,
+        "max": 9.37,
+        "avg": 5.43
+      }
+    },
+    {
       "sym": "WELSPUNIND",
       "price": 158.95,
       "grade": "C",
@@ -153,7 +183,7 @@
     },
     {
       "sym": "SALZERELEC",
-      "price": 634.0,
+      "price": 619.7,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -182,7 +212,7 @@
     },
     {
       "sym": "THYROCARE",
-      "price": 512.15,
+      "price": 506.3,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -213,7 +243,7 @@
     },
     {
       "sym": "ANURAS",
-      "price": 1368.0,
+      "price": 1293.9,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
