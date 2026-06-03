@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-05-26T18:58:48",
+  "generated_at": "2026-06-03T03:30:41",
   "n": 42,
   "stocks": [
     {
       "uc": "UC2",
       "sym": "RAMRAT",
-      "price": 470.6,
+      "price": 395.9,
       "month": 3,
       "month_name": "Mar",
       "season_win_rate": 100.0,
@@ -656,7 +656,7 @@
     {
       "uc": "UC2",
       "sym": "ZIMLAB",
-      "price": 103.4,
+      "price": 103.91,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -1307,7 +1307,7 @@
     {
       "uc": "UC2",
       "sym": "DYCL",
-      "price": 324.4,
+      "price": 317.7,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -1958,7 +1958,7 @@
     {
       "uc": "UC2",
       "sym": "MANORAMA",
-      "price": 1461.2,
+      "price": 1481.4,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -2609,7 +2609,7 @@
     {
       "uc": "UC2",
       "sym": "MINDTECK",
-      "price": 203.29,
+      "price": 215.12,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -3263,7 +3263,7 @@
     {
       "uc": "UC2",
       "sym": "ZODIAC",
-      "price": 307.85,
+      "price": 287.95,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -3915,7 +3915,7 @@
     {
       "uc": "UC2",
       "sym": "TPLPLASTEH",
-      "price": 65.75,
+      "price": 71.21,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -4569,7 +4569,7 @@
     {
       "uc": "UC2",
       "sym": "AARTIPHARM",
-      "price": 694.6,
+      "price": 635.2,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -5220,7 +5220,7 @@
     {
       "uc": "UC2",
       "sym": "KPIGREEN",
-      "price": 431.95,
+      "price": 420.6,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -5872,7 +5872,7 @@
     {
       "uc": "UC2",
       "sym": "INOXGREEN",
-      "price": 179.29,
+      "price": 173.09,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -6523,7 +6523,7 @@
     {
       "uc": "UC2",
       "sym": "IRISDOREME",
-      "price": 36.65,
+      "price": 35.61,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -7176,7 +7176,7 @@
     {
       "uc": "UC2",
       "sym": "STYRENIX",
-      "price": 2306.7,
+      "price": 2263.1,
       "month": 4,
       "month_name": "Apr",
       "season_win_rate": 100.0,
@@ -7827,7 +7827,7 @@
     {
       "uc": "UC2",
       "sym": "ELECON",
-      "price": 525.15,
+      "price": 508.9,
       "month": 5,
       "month_name": "May",
       "season_win_rate": 100.0,
@@ -8078,39 +8078,39 @@
         },
         {
           "day": 15,
-          "avg_ret": 12.32,
+          "avg_ret": 10.53,
           "min_ret": -3.72,
           "max_ret": 36.99,
-          "avg_max_gain": 14.97,
-          "win_rate": 83.33,
-          "n": 6
+          "avg_max_gain": 13.6,
+          "win_rate": 71.43,
+          "n": 7
         },
         {
           "day": 16,
-          "avg_ret": 12.83,
-          "min_ret": -3.97,
+          "avg_ret": 10.35,
+          "min_ret": -4.49,
           "max_ret": 34.3,
-          "avg_max_gain": 16.02,
-          "win_rate": 83.33,
-          "n": 6
+          "avg_max_gain": 14.5,
+          "win_rate": 71.43,
+          "n": 7
         },
         {
           "day": 17,
-          "avg_ret": 13.8,
-          "min_ret": -0.46,
+          "avg_ret": 11.04,
+          "min_ret": -5.51,
           "max_ret": 30.19,
-          "avg_max_gain": 17.59,
-          "win_rate": 83.33,
-          "n": 6
+          "avg_max_gain": 15.84,
+          "win_rate": 71.43,
+          "n": 7
         },
         {
           "day": 18,
-          "avg_ret": 12.68,
-          "min_ret": 0.83,
+          "avg_ret": 10.2,
+          "min_ret": -4.7,
           "max_ret": 25.87,
-          "avg_max_gain": 18.21,
-          "win_rate": 100.0,
-          "n": 6
+          "avg_max_gain": 16.38,
+          "win_rate": 85.71,
+          "n": 7
         },
         {
           "day": 19,
@@ -8344,35 +8344,35 @@
         },
         {
           "day": 15,
-          "avg_open": 452.98,
-          "avg_high": 464.75,
-          "avg_low": 443.16,
-          "avg_close": 455.19,
-          "avg_ret_from_entry": 8.46
+          "avg_open": 463.29,
+          "avg_high": 475.46,
+          "avg_low": 454.87,
+          "avg_close": 466.26,
+          "avg_ret_from_entry": 11.09
         },
         {
           "day": 16,
-          "avg_open": 455.08,
-          "avg_high": 464.51,
-          "avg_low": 443.38,
-          "avg_close": 448.87,
-          "avg_ret_from_entry": 6.95
+          "avg_open": 465.93,
+          "avg_high": 474.89,
+          "avg_low": 452.37,
+          "avg_close": 457.6,
+          "avg_ret_from_entry": 9.03
         },
         {
           "day": 17,
-          "avg_open": 450.86,
-          "avg_high": 459.1,
-          "avg_low": 437.0,
-          "avg_close": 441.78,
-          "avg_ret_from_entry": 5.26
+          "avg_open": 460.01,
+          "avg_high": 468.22,
+          "avg_low": 446.14,
+          "avg_close": 450.74,
+          "avg_ret_from_entry": 7.4
         },
         {
           "day": 18,
-          "avg_open": 443.43,
-          "avg_high": 450.31,
-          "avg_low": 430.73,
-          "avg_close": 438.19,
-          "avg_ret_from_entry": 4.41
+          "avg_open": 451.66,
+          "avg_high": 458.96,
+          "avg_low": 440.1,
+          "avg_close": 448.29,
+          "avg_ret_from_entry": 6.81
         },
         {
           "day": 19,
@@ -8480,7 +8480,7 @@
     {
       "uc": "UC2",
       "sym": "SJS",
-      "price": 2038.4,
+      "price": 2018.2,
       "month": 5,
       "month_name": "May",
       "season_win_rate": 100.0,
@@ -8702,39 +8702,39 @@
         },
         {
           "day": 12,
-          "avg_ret": 8.9,
+          "avg_ret": 7.38,
           "min_ret": -1.9,
           "max_ret": 20.89,
-          "avg_max_gain": 11.76,
-          "win_rate": 75.0,
-          "n": 4
+          "avg_max_gain": 9.66,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 13,
-          "avg_ret": 10.18,
+          "avg_ret": 9.06,
           "min_ret": -0.79,
           "max_ret": 16.68,
-          "avg_max_gain": 13.01,
-          "win_rate": 75.0,
-          "n": 4
+          "avg_max_gain": 11.32,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 14,
-          "avg_ret": 10.33,
-          "min_ret": 0.89,
+          "avg_ret": 8.22,
+          "min_ret": -0.22,
           "max_ret": 15.54,
-          "avg_max_gain": 13.27,
-          "win_rate": 100.0,
-          "n": 4
+          "avg_max_gain": 11.53,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 15,
-          "avg_ret": 13.25,
-          "min_ret": 1.34,
+          "avg_ret": 10.65,
+          "min_ret": 0.26,
           "max_ret": 19.48,
-          "avg_max_gain": 14.27,
+          "avg_max_gain": 12.33,
           "win_rate": 100.0,
-          "n": 4
+          "n": 5
         },
         {
           "day": 16,
@@ -8971,35 +8971,35 @@
         },
         {
           "day": 12,
-          "avg_open": 670.35,
-          "avg_high": 676.48,
-          "avg_low": 658.2,
-          "avg_close": 669.01,
-          "avg_ret_from_entry": -24.24
+          "avg_open": 947.48,
+          "avg_high": 958.18,
+          "avg_low": 932.76,
+          "avg_close": 942.99,
+          "avg_ret_from_entry": 6.79
         },
         {
           "day": 13,
-          "avg_open": 671.25,
-          "avg_high": 686.95,
-          "avg_low": 654.5,
-          "avg_close": 670.61,
-          "avg_ret_from_entry": -24.06
+          "avg_open": 943.18,
+          "avg_high": 973.54,
+          "avg_low": 922.64,
+          "avg_close": 957.53,
+          "avg_ret_from_entry": 8.43
         },
         {
           "day": 14,
-          "avg_open": 677.88,
-          "avg_high": 683.33,
-          "avg_low": 659.71,
-          "avg_close": 670.21,
-          "avg_ret_from_entry": -24.1
+          "avg_open": 962.9,
+          "avg_high": 974.22,
+          "avg_low": 926.25,
+          "avg_close": 937.87,
+          "avg_ret_from_entry": 6.21
         },
         {
           "day": 15,
-          "avg_open": 674.06,
-          "avg_high": 696.6,
-          "avg_low": 668.56,
-          "avg_close": 687.7,
-          "avg_ret_from_entry": -22.12
+          "avg_open": 941.25,
+          "avg_high": 970.34,
+          "avg_low": 932.15,
+          "avg_close": 953.8,
+          "avg_ret_from_entry": 8.01
         },
         {
           "day": 16,
@@ -9131,7 +9131,7 @@
     {
       "uc": "UC2",
       "sym": "VOLTAMP",
-      "price": 9173.0,
+      "price": 9127.0,
       "month": 5,
       "month_name": "May",
       "season_win_rate": 100.0,
@@ -9373,39 +9373,39 @@
         },
         {
           "day": 14,
-          "avg_ret": 7.95,
-          "min_ret": -5.11,
+          "avg_ret": 5.84,
+          "min_ret": -6.79,
           "max_ret": 12.92,
-          "avg_max_gain": 12.36,
-          "win_rate": 83.33,
-          "n": 6
+          "avg_max_gain": 10.08,
+          "win_rate": 71.43,
+          "n": 7
         },
         {
           "day": 15,
-          "avg_ret": 12.16,
-          "min_ret": -2.88,
+          "avg_ret": 9.71,
+          "min_ret": -5.05,
           "max_ret": 28.24,
-          "avg_max_gain": 15.93,
-          "win_rate": 83.33,
-          "n": 6
+          "avg_max_gain": 13.13,
+          "win_rate": 71.43,
+          "n": 7
         },
         {
           "day": 16,
-          "avg_ret": 14.62,
-          "min_ret": 0.95,
+          "avg_ret": 11.34,
+          "min_ret": -8.35,
           "max_ret": 35.69,
-          "avg_max_gain": 17.54,
-          "win_rate": 100.0,
-          "n": 6
+          "avg_max_gain": 14.51,
+          "win_rate": 85.71,
+          "n": 7
         },
         {
           "day": 17,
-          "avg_ret": 15.86,
-          "min_ret": 3.47,
+          "avg_ret": 12.34,
+          "min_ret": -8.75,
           "max_ret": 38.23,
-          "avg_max_gain": 19.26,
-          "win_rate": 100.0,
-          "n": 6
+          "avg_max_gain": 15.99,
+          "win_rate": 85.71,
+          "n": 7
         },
         {
           "day": 18,
@@ -9640,35 +9640,35 @@
         },
         {
           "day": 14,
-          "avg_open": 4520.97,
-          "avg_high": 4533.07,
-          "avg_low": 4393.35,
-          "avg_close": 4469.53,
-          "avg_ret_from_entry": -8.99
+          "avg_open": 5182.11,
+          "avg_high": 5225.06,
+          "avg_low": 5068.73,
+          "avg_close": 5162.88,
+          "avg_ret_from_entry": 5.13
         },
         {
           "day": 15,
-          "avg_open": 4527.32,
-          "avg_high": 4726.98,
-          "avg_low": 4475.64,
-          "avg_close": 4587.22,
-          "avg_ret_from_entry": -6.59
+          "avg_open": 5219.13,
+          "avg_high": 5425.99,
+          "avg_low": 5149.12,
+          "avg_close": 5288.61,
+          "avg_ret_from_entry": 7.69
         },
         {
           "day": 16,
-          "avg_open": 4643.71,
-          "avg_high": 4717.33,
-          "avg_low": 4556.47,
-          "avg_close": 4653.47,
-          "avg_ret_from_entry": -5.24
+          "avg_open": 5335.32,
+          "avg_high": 5405.57,
+          "avg_low": 5205.54,
+          "avg_close": 5298.26,
+          "avg_ret_from_entry": 7.89
         },
         {
           "day": 17,
-          "avg_open": 4681.15,
-          "avg_high": 4798.42,
-          "avg_low": 4557.4,
-          "avg_close": 4678.1,
-          "avg_ret_from_entry": -4.74
+          "avg_open": 5320.27,
+          "avg_high": 5427.36,
+          "avg_low": 5203.77,
+          "avg_close": 5313.66,
+          "avg_ret_from_entry": 8.2
         },
         {
           "day": 18,
@@ -9784,7 +9784,7 @@
     {
       "uc": "UC2",
       "sym": "ROTO",
-      "price": 57.29,
+      "price": 56.02,
       "month": 5,
       "month_name": "May",
       "season_win_rate": 100.0,
@@ -9997,39 +9997,39 @@
         },
         {
           "day": 11,
-          "avg_ret": 11.24,
-          "min_ret": 8.63,
+          "avg_ret": 8.74,
+          "min_ret": -1.29,
           "max_ret": 14.15,
-          "avg_max_gain": 16.42,
-          "win_rate": 100.0,
-          "n": 4
+          "avg_max_gain": 13.21,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 12,
-          "avg_ret": 13.02,
-          "min_ret": 9.25,
+          "avg_ret": 9.69,
+          "min_ret": -3.66,
           "max_ret": 17.8,
-          "avg_max_gain": 16.51,
-          "win_rate": 100.0,
-          "n": 4
+          "avg_max_gain": 13.29,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 13,
-          "avg_ret": 12.37,
-          "min_ret": 7.43,
+          "avg_ret": 9.03,
+          "min_ret": -4.31,
           "max_ret": 18.12,
-          "avg_max_gain": 16.59,
-          "win_rate": 100.0,
-          "n": 4
+          "avg_max_gain": 13.35,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 14,
-          "avg_ret": 11.99,
-          "min_ret": 7.73,
+          "avg_ret": 8.84,
+          "min_ret": -3.75,
           "max_ret": 17.43,
-          "avg_max_gain": 16.59,
-          "win_rate": 100.0,
-          "n": 4
+          "avg_max_gain": 13.35,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 15,
@@ -10267,35 +10267,35 @@
         },
         {
           "day": 11,
-          "avg_open": 464.75,
-          "avg_high": 473.02,
-          "avg_low": 449.47,
-          "avg_close": 458.17,
-          "avg_ret_from_entry": 33.74
+          "avg_open": 383.38,
+          "avg_high": 390.02,
+          "avg_low": 370.98,
+          "avg_close": 378.02,
+          "avg_ret_from_entry": 10.34
         },
         {
           "day": 12,
-          "avg_open": 456.87,
-          "avg_high": 470.01,
-          "avg_low": 453.59,
-          "avg_close": 465.81,
-          "avg_ret_from_entry": 35.97
+          "avg_open": 376.7,
+          "avg_high": 387.9,
+          "avg_low": 373.79,
+          "avg_close": 383.86,
+          "avg_ret_from_entry": 12.05
         },
         {
           "day": 13,
-          "avg_open": 471.27,
-          "avg_high": 473.06,
-          "avg_low": 459.24,
-          "avg_close": 462.87,
-          "avg_ret_from_entry": 35.11
+          "avg_open": 388.41,
+          "avg_high": 389.93,
+          "avg_low": 378.44,
+          "avg_close": 381.44,
+          "avg_ret_from_entry": 11.34
         },
         {
           "day": 14,
-          "avg_open": 467.32,
-          "avg_high": 467.86,
-          "avg_low": 458.99,
-          "avg_close": 461.46,
-          "avg_ret_from_entry": 34.7
+          "avg_open": 385.0,
+          "avg_high": 385.6,
+          "avg_low": 378.23,
+          "avg_close": 380.37,
+          "avg_ret_from_entry": 11.03
         },
         {
           "day": 15,
@@ -10435,7 +10435,7 @@
     {
       "uc": "UC2",
       "sym": "TDPOWERSYS",
-      "price": 1367.2,
+      "price": 1235.0,
       "month": 5,
       "month_name": "May",
       "season_win_rate": 100.0,
@@ -10686,39 +10686,39 @@
         },
         {
           "day": 15,
-          "avg_ret": 12.72,
+          "avg_ret": 12.68,
           "min_ret": 0.18,
           "max_ret": 21.86,
-          "avg_max_gain": 18.86,
+          "avg_max_gain": 18.38,
           "win_rate": 100.0,
-          "n": 6
+          "n": 7
         },
         {
           "day": 16,
-          "avg_ret": 12.14,
+          "avg_ret": 12.03,
           "min_ret": -2.78,
           "max_ret": 26.46,
-          "avg_max_gain": 18.86,
-          "win_rate": 83.33,
-          "n": 6
+          "avg_max_gain": 18.38,
+          "win_rate": 85.71,
+          "n": 7
         },
         {
           "day": 17,
-          "avg_ret": 13.84,
+          "avg_ret": 12.43,
           "min_ret": 0.15,
           "max_ret": 26.97,
-          "avg_max_gain": 19.57,
+          "avg_max_gain": 18.98,
           "win_rate": 100.0,
-          "n": 6
+          "n": 7
         },
         {
           "day": 18,
-          "avg_ret": 14.96,
+          "avg_ret": 13.44,
           "min_ret": 2.28,
           "max_ret": 32.49,
-          "avg_max_gain": 20.87,
+          "avg_max_gain": 20.1,
           "win_rate": 100.0,
-          "n": 6
+          "n": 7
         },
         {
           "day": 19,
@@ -10952,35 +10952,35 @@
         },
         {
           "day": 15,
-          "avg_open": 287.26,
-          "avg_high": 292.67,
-          "avg_low": 282.53,
-          "avg_close": 287.59,
-          "avg_ret_from_entry": -25.54
+          "avg_open": 442.99,
+          "avg_high": 447.94,
+          "avg_low": 425.69,
+          "avg_close": 436.72,
+          "avg_ret_from_entry": 13.08
         },
         {
           "day": 16,
-          "avg_open": 290.69,
-          "avg_high": 297.19,
-          "avg_low": 284.29,
-          "avg_close": 290.12,
-          "avg_ret_from_entry": -24.88
+          "avg_open": 435.59,
+          "avg_high": 448.88,
+          "avg_low": 425.89,
+          "avg_close": 437.04,
+          "avg_ret_from_entry": 13.16
         },
         {
           "day": 17,
-          "avg_open": 293.9,
-          "avg_high": 300.47,
-          "avg_low": 285.33,
-          "avg_close": 294.14,
-          "avg_ret_from_entry": -23.84
+          "avg_open": 440.3,
+          "avg_high": 446.19,
+          "avg_low": 418.86,
+          "avg_close": 427.94,
+          "avg_ret_from_entry": 10.8
         },
         {
           "day": 18,
-          "avg_open": 296.34,
-          "avg_high": 303.0,
-          "avg_low": 291.27,
-          "avg_close": 298.6,
-          "avg_ret_from_entry": -22.69
+          "avg_open": 428.29,
+          "avg_high": 438.27,
+          "avg_low": 420.09,
+          "avg_close": 432.37,
+          "avg_ret_from_entry": 11.95
         },
         {
           "day": 19,
@@ -11088,7 +11088,7 @@
     {
       "uc": "UC2",
       "sym": "CHOICEIN",
-      "price": 687.6,
+      "price": 662.95,
       "month": 5,
       "month_name": "May",
       "season_win_rate": 100.0,
@@ -11106,7 +11106,7 @@
       "target_price_avg": 521.04,
       "min_target_price": 507.48,
       "entry_recommendation": "Enter 4 trading days BEFORE 1st of May \u2014 stock builds momentum early",
-      "exit_recommendation": "Exit on day 30 after entry (avg +14.5%). Sweet spot: day 23\u201330.",
+      "exit_recommendation": "Exit on day 30 after entry (avg +14.5%). Sweet spot: day 24\u201330.",
       "entry_analysis": [
         {
           "offset": -5,
@@ -11382,39 +11382,39 @@
         },
         {
           "day": 20,
-          "avg_ret": 10.23,
-          "min_ret": 4.3,
+          "avg_ret": 7.95,
+          "min_ret": -1.19,
           "max_ret": 13.98,
-          "avg_max_gain": 11.29,
-          "win_rate": 100.0,
-          "n": 4
+          "avg_max_gain": 8.91,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 21,
-          "avg_ret": 11.33,
-          "min_ret": 5.24,
+          "avg_ret": 8.44,
+          "min_ret": -3.13,
           "max_ret": 14.31,
-          "avg_max_gain": 11.55,
-          "win_rate": 100.0,
-          "n": 4
+          "avg_max_gain": 9.12,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 22,
-          "avg_ret": 11.04,
-          "min_ret": 5.56,
+          "avg_ret": 8.1,
+          "min_ret": -3.67,
           "max_ret": 15.08,
-          "avg_max_gain": 11.84,
-          "win_rate": 100.0,
-          "n": 4
+          "avg_max_gain": 9.35,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 23,
-          "avg_ret": 12.02,
-          "min_ret": 9.55,
+          "avg_ret": 8.72,
+          "min_ret": -4.47,
           "max_ret": 15.27,
-          "avg_max_gain": 12.74,
-          "win_rate": 100.0,
-          "n": 4
+          "avg_max_gain": 10.07,
+          "win_rate": 80.0,
+          "n": 5
         },
         {
           "day": 24,
@@ -11643,35 +11643,35 @@
         },
         {
           "day": 20,
-          "avg_open": 440.0,
-          "avg_high": 441.41,
-          "avg_low": 430.39,
-          "avg_close": 435.84,
-          "avg_ret_from_entry": -4.19
+          "avg_open": 489.74,
+          "avg_high": 491.53,
+          "avg_low": 480.92,
+          "avg_close": 485.82,
+          "avg_ret_from_entry": 6.8
         },
         {
           "day": 21,
-          "avg_open": 438.49,
-          "avg_high": 447.52,
-          "avg_low": 435.93,
-          "avg_close": 440.05,
-          "avg_ret_from_entry": -3.26
+          "avg_open": 487.87,
+          "avg_high": 495.41,
+          "avg_low": 481.93,
+          "avg_close": 486.5,
+          "avg_ret_from_entry": 6.95
         },
         {
           "day": 22,
-          "avg_open": 441.35,
-          "avg_high": 444.91,
-          "avg_low": 436.01,
-          "avg_close": 438.59,
-          "avg_ret_from_entry": -3.59
+          "avg_open": 487.67,
+          "avg_high": 490.71,
+          "avg_low": 481.41,
+          "avg_close": 484.58,
+          "avg_ret_from_entry": 6.52
         },
         {
           "day": 23,
-          "avg_open": 440.61,
-          "avg_high": 450.43,
-          "avg_low": 434.51,
-          "avg_close": 441.2,
-          "avg_ret_from_entry": -3.01
+          "avg_open": 485.6,
+          "avg_high": 494.26,
+          "avg_low": 479.61,
+          "avg_close": 485.55,
+          "avg_ret_from_entry": 6.74
         },
         {
           "day": 24,
@@ -11732,14 +11732,14 @@
       ],
       "peak_day": 30,
       "peak_avg_ret": 14.54,
-      "sweet_start": 23,
+      "sweet_start": 24,
       "sweet_end": 30,
       "decline_after": null
     },
     {
       "uc": "UC2",
       "sym": "WSI",
-      "price": 69.16,
+      "price": 68.03,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -11755,9 +11755,9 @@
         2025
       ],
       "best_entry_offset": -1,
-      "avg_entry_price": 51.27,
-      "target_price_avg": 73.41,
-      "min_target_price": 58.89,
+      "avg_entry_price": 53.66,
+      "target_price_avg": 76.83,
+      "min_target_price": 61.63,
       "entry_recommendation": "Enter 1 trading day BEFORE 1st of Jun \u2014 stock builds momentum early",
       "exit_recommendation": "Exit on day 24 after entry (avg +43.2%). Sweet spot: day 19\u201330. Returns decline after day 26.",
       "entry_analysis": [
@@ -11864,12 +11864,12 @@
       "exit_curve": [
         {
           "day": 1,
-          "avg_ret": 3.01,
+          "avg_ret": 2.58,
           "min_ret": -12.6,
           "max_ret": 12.36,
-          "avg_max_gain": 4.84,
-          "win_rate": 83.33,
-          "n": 6
+          "avg_max_gain": 4.16,
+          "win_rate": 85.71,
+          "n": 7
         },
         {
           "day": 2,
@@ -12136,19 +12136,19 @@
       "daily_profile": [
         {
           "day": 0,
-          "avg_open": 51.27,
-          "avg_high": 51.78,
-          "avg_low": 50.49,
-          "avg_close": 51.13,
-          "avg_ret_from_entry": -0.28
+          "avg_open": 53.66,
+          "avg_high": 54.39,
+          "avg_low": 52.87,
+          "avg_close": 53.5,
+          "avg_ret_from_entry": -0.3
         },
         {
           "day": 1,
-          "avg_open": 51.0,
-          "avg_high": 52.52,
-          "avg_low": 45.95,
-          "avg_close": 49.54,
-          "avg_ret_from_entry": -3.37
+          "avg_open": 53.34,
+          "avg_high": 54.87,
+          "avg_low": 49.01,
+          "avg_close": 52.18,
+          "avg_ret_from_entry": -2.75
         },
         {
           "day": 2,
@@ -12156,7 +12156,7 @@
           "avg_high": 52.54,
           "avg_low": 49.03,
           "avg_close": 51.95,
-          "avg_ret_from_entry": 1.32
+          "avg_ret_from_entry": -3.19
         },
         {
           "day": 3,
@@ -12164,7 +12164,7 @@
           "avg_high": 53.66,
           "avg_low": 51.3,
           "avg_close": 52.16,
-          "avg_ret_from_entry": 1.73
+          "avg_ret_from_entry": -2.8
         },
         {
           "day": 4,
@@ -12172,7 +12172,7 @@
           "avg_high": 53.62,
           "avg_low": 52.47,
           "avg_close": 52.81,
-          "avg_ret_from_entry": 3.0
+          "avg_ret_from_entry": -1.58
         },
         {
           "day": 5,
@@ -12180,7 +12180,7 @@
           "avg_high": 54.42,
           "avg_low": 52.22,
           "avg_close": 52.62,
-          "avg_ret_from_entry": 2.64
+          "avg_ret_from_entry": -1.93
         },
         {
           "day": 6,
@@ -12188,7 +12188,7 @@
           "avg_high": 53.84,
           "avg_low": 51.91,
           "avg_close": 53.52,
-          "avg_ret_from_entry": 4.4
+          "avg_ret_from_entry": -0.25
         },
         {
           "day": 7,
@@ -12196,7 +12196,7 @@
           "avg_high": 54.6,
           "avg_low": 53.36,
           "avg_close": 54.21,
-          "avg_ret_from_entry": 5.73
+          "avg_ret_from_entry": 1.02
         },
         {
           "day": 8,
@@ -12204,7 +12204,7 @@
           "avg_high": 56.38,
           "avg_low": 54.36,
           "avg_close": 55.24,
-          "avg_ret_from_entry": 7.75
+          "avg_ret_from_entry": 2.95
         },
         {
           "day": 9,
@@ -12212,7 +12212,7 @@
           "avg_high": 56.64,
           "avg_low": 54.64,
           "avg_close": 55.84,
-          "avg_ret_from_entry": 8.9
+          "avg_ret_from_entry": 4.05
         },
         {
           "day": 10,
@@ -12220,7 +12220,7 @@
           "avg_high": 57.52,
           "avg_low": 55.33,
           "avg_close": 57.14,
-          "avg_ret_from_entry": 11.45
+          "avg_ret_from_entry": 6.49
         },
         {
           "day": 11,
@@ -12228,7 +12228,7 @@
           "avg_high": 58.63,
           "avg_low": 56.9,
           "avg_close": 57.47,
-          "avg_ret_from_entry": 12.08
+          "avg_ret_from_entry": 7.09
         },
         {
           "day": 12,
@@ -12236,7 +12236,7 @@
           "avg_high": 59.24,
           "avg_low": 57.12,
           "avg_close": 57.81,
-          "avg_ret_from_entry": 12.75
+          "avg_ret_from_entry": 7.73
         },
         {
           "day": 13,
@@ -12244,7 +12244,7 @@
           "avg_high": 59.33,
           "avg_low": 58.27,
           "avg_close": 58.86,
-          "avg_ret_from_entry": 14.8
+          "avg_ret_from_entry": 9.68
         },
         {
           "day": 14,
@@ -12252,7 +12252,7 @@
           "avg_high": 58.82,
           "avg_low": 57.74,
           "avg_close": 58.42,
-          "avg_ret_from_entry": 13.94
+          "avg_ret_from_entry": 8.86
         },
         {
           "day": 15,
@@ -12260,7 +12260,7 @@
           "avg_high": 59.06,
           "avg_low": 57.53,
           "avg_close": 58.17,
-          "avg_ret_from_entry": 13.45
+          "avg_ret_from_entry": 8.4
         },
         {
           "day": 16,
@@ -12268,7 +12268,7 @@
           "avg_high": 58.89,
           "avg_low": 57.82,
           "avg_close": 58.35,
-          "avg_ret_from_entry": 13.81
+          "avg_ret_from_entry": 8.74
         },
         {
           "day": 17,
@@ -12276,7 +12276,7 @@
           "avg_high": 59.03,
           "avg_low": 57.76,
           "avg_close": 58.44,
-          "avg_ret_from_entry": 13.98
+          "avg_ret_from_entry": 8.9
         },
         {
           "day": 18,
@@ -12284,7 +12284,7 @@
           "avg_high": 59.9,
           "avg_low": 58.56,
           "avg_close": 59.65,
-          "avg_ret_from_entry": 16.34
+          "avg_ret_from_entry": 11.15
         },
         {
           "day": 19,
@@ -12292,7 +12292,7 @@
           "avg_high": 65.5,
           "avg_low": 60.72,
           "avg_close": 65.03,
-          "avg_ret_from_entry": 26.85
+          "avg_ret_from_entry": 21.2
         },
         {
           "day": 20,
@@ -12300,7 +12300,7 @@
           "avg_high": 66.59,
           "avg_low": 65.05,
           "avg_close": 65.89,
-          "avg_ret_from_entry": 28.52
+          "avg_ret_from_entry": 22.8
         },
         {
           "day": 21,
@@ -12308,7 +12308,7 @@
           "avg_high": 67.59,
           "avg_low": 66.58,
           "avg_close": 66.76,
-          "avg_ret_from_entry": 30.21
+          "avg_ret_from_entry": 24.41
         },
         {
           "day": 22,
@@ -12316,7 +12316,7 @@
           "avg_high": 70.15,
           "avg_low": 67.57,
           "avg_close": 69.18,
-          "avg_ret_from_entry": 34.94
+          "avg_ret_from_entry": 28.93
         },
         {
           "day": 23,
@@ -12324,7 +12324,7 @@
           "avg_high": 70.94,
           "avg_low": 69.51,
           "avg_close": 70.16,
-          "avg_ret_from_entry": 36.84
+          "avg_ret_from_entry": 30.75
         },
         {
           "day": 24,
@@ -12332,7 +12332,7 @@
           "avg_high": 72.27,
           "avg_low": 70.44,
           "avg_close": 70.6,
-          "avg_ret_from_entry": 37.7
+          "avg_ret_from_entry": 31.56
         },
         {
           "day": 25,
@@ -12340,7 +12340,7 @@
           "avg_high": 71.33,
           "avg_low": 68.88,
           "avg_close": 70.12,
-          "avg_ret_from_entry": 36.78
+          "avg_ret_from_entry": 30.68
         },
         {
           "day": 26,
@@ -12348,7 +12348,7 @@
           "avg_high": 70.88,
           "avg_low": 68.35,
           "avg_close": 69.55,
-          "avg_ret_from_entry": 35.65
+          "avg_ret_from_entry": 29.61
         },
         {
           "day": 27,
@@ -12356,7 +12356,7 @@
           "avg_high": 70.22,
           "avg_low": 68.86,
           "avg_close": 70.17,
-          "avg_ret_from_entry": 36.86
+          "avg_ret_from_entry": 30.76
         },
         {
           "day": 28,
@@ -12364,7 +12364,7 @@
           "avg_high": 71.02,
           "avg_low": 69.12,
           "avg_close": 69.65,
-          "avg_ret_from_entry": 35.85
+          "avg_ret_from_entry": 29.8
         },
         {
           "day": 29,
@@ -12372,7 +12372,7 @@
           "avg_high": 71.87,
           "avg_low": 68.78,
           "avg_close": 71.18,
-          "avg_ret_from_entry": 38.84
+          "avg_ret_from_entry": 32.65
         },
         {
           "day": 30,
@@ -12380,7 +12380,7 @@
           "avg_high": 71.4,
           "avg_low": 69.13,
           "avg_close": 69.62,
-          "avg_ret_from_entry": 35.79
+          "avg_ret_from_entry": 29.74
         }
       ],
       "peak_day": 24,
@@ -12392,7 +12392,7 @@
     {
       "uc": "UC2",
       "sym": "PENINLAND",
-      "price": 17.1,
+      "price": 16.42,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -13045,7 +13045,7 @@
     {
       "uc": "UC2",
       "sym": "ASAL",
-      "price": 506.9,
+      "price": 531.7,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -13698,7 +13698,7 @@
     {
       "uc": "UC2",
       "sym": "KIRLOSBROS",
-      "price": 1610.6,
+      "price": 1619.5,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -13714,9 +13714,9 @@
         2025
       ],
       "best_entry_offset": -2,
-      "avg_entry_price": 780.29,
-      "target_price_avg": 1002.98,
-      "min_target_price": 869.01,
+      "avg_entry_price": 907.39,
+      "target_price_avg": 1166.36,
+      "min_target_price": 1010.57,
       "entry_recommendation": "Enter 2 trading days BEFORE 1st of Jun \u2014 stock builds momentum early",
       "exit_recommendation": "Exit on day 25 after entry (avg +28.5%). Sweet spot: day 20\u201330. Returns decline after day 28.",
       "entry_analysis": [
@@ -13823,21 +13823,21 @@
       "exit_curve": [
         {
           "day": 1,
-          "avg_ret": 4.45,
+          "avg_ret": 3.42,
           "min_ret": -5.0,
           "max_ret": 9.35,
-          "avg_max_gain": 5.66,
-          "win_rate": 83.33,
-          "n": 6
+          "avg_max_gain": 4.54,
+          "win_rate": 71.43,
+          "n": 7
         },
         {
           "day": 2,
-          "avg_ret": 4.18,
+          "avg_ret": 3.15,
           "min_ret": -3.33,
           "max_ret": 13.05,
-          "avg_max_gain": 7.22,
-          "win_rate": 50.0,
-          "n": 6
+          "avg_max_gain": 5.87,
+          "win_rate": 42.86,
+          "n": 7
         },
         {
           "day": 3,
@@ -14095,27 +14095,27 @@
       "daily_profile": [
         {
           "day": 0,
-          "avg_open": 780.29,
-          "avg_high": 841.72,
-          "avg_low": 772.35,
-          "avg_close": 810.87,
-          "avg_ret_from_entry": 3.92
+          "avg_open": 907.39,
+          "avg_high": 969.3,
+          "avg_low": 892.01,
+          "avg_close": 928.31,
+          "avg_ret_from_entry": 2.31
         },
         {
           "day": 1,
-          "avg_open": 837.12,
-          "avg_high": 846.18,
-          "avg_low": 792.88,
-          "avg_close": 816.51,
-          "avg_ret_from_entry": 4.64
+          "avg_open": 951.91,
+          "avg_high": 965.04,
+          "avg_low": 909.96,
+          "avg_close": 931.86,
+          "avg_ret_from_entry": 2.7
         },
         {
           "day": 2,
-          "avg_open": 816.88,
-          "avg_high": 828.77,
-          "avg_low": 768.73,
-          "avg_close": 783.38,
-          "avg_ret_from_entry": 0.4
+          "avg_open": 930.5,
+          "avg_high": 945.53,
+          "avg_low": 886.66,
+          "avg_close": 902.83,
+          "avg_ret_from_entry": -0.5
         },
         {
           "day": 3,
@@ -14123,7 +14123,7 @@
           "avg_high": 804.96,
           "avg_low": 769.0,
           "avg_close": 783.07,
-          "avg_ret_from_entry": 0.36
+          "avg_ret_from_entry": -13.7
         },
         {
           "day": 4,
@@ -14131,7 +14131,7 @@
           "avg_high": 828.1,
           "avg_low": 781.78,
           "avg_close": 816.93,
-          "avg_ret_from_entry": 4.7
+          "avg_ret_from_entry": -9.97
         },
         {
           "day": 5,
@@ -14139,7 +14139,7 @@
           "avg_high": 846.3,
           "avg_low": 811.4,
           "avg_close": 833.77,
-          "avg_ret_from_entry": 6.85
+          "avg_ret_from_entry": -8.11
         },
         {
           "day": 6,
@@ -14147,7 +14147,7 @@
           "avg_high": 866.07,
           "avg_low": 816.92,
           "avg_close": 838.34,
-          "avg_ret_from_entry": 7.44
+          "avg_ret_from_entry": -7.61
         },
         {
           "day": 7,
@@ -14155,7 +14155,7 @@
           "avg_high": 862.73,
           "avg_low": 830.59,
           "avg_close": 852.27,
-          "avg_ret_from_entry": 9.23
+          "avg_ret_from_entry": -6.07
         },
         {
           "day": 8,
@@ -14163,7 +14163,7 @@
           "avg_high": 906.51,
           "avg_low": 843.15,
           "avg_close": 877.24,
-          "avg_ret_from_entry": 12.43
+          "avg_ret_from_entry": -3.32
         },
         {
           "day": 9,
@@ -14171,7 +14171,7 @@
           "avg_high": 903.52,
           "avg_low": 863.64,
           "avg_close": 880.86,
-          "avg_ret_from_entry": 12.89
+          "avg_ret_from_entry": -2.92
         },
         {
           "day": 10,
@@ -14179,7 +14179,7 @@
           "avg_high": 923.62,
           "avg_low": 863.05,
           "avg_close": 910.12,
-          "avg_ret_from_entry": 16.64
+          "avg_ret_from_entry": 0.3
         },
         {
           "day": 11,
@@ -14187,7 +14187,7 @@
           "avg_high": 932.98,
           "avg_low": 887.71,
           "avg_close": 911.88,
-          "avg_ret_from_entry": 16.86
+          "avg_ret_from_entry": 0.5
         },
         {
           "day": 12,
@@ -14195,7 +14195,7 @@
           "avg_high": 928.5,
           "avg_low": 883.36,
           "avg_close": 899.74,
-          "avg_ret_from_entry": 15.31
+          "avg_ret_from_entry": -0.84
         },
         {
           "day": 13,
@@ -14203,7 +14203,7 @@
           "avg_high": 910.29,
           "avg_low": 878.68,
           "avg_close": 895.78,
-          "avg_ret_from_entry": 14.8
+          "avg_ret_from_entry": -1.28
         },
         {
           "day": 14,
@@ -14211,7 +14211,7 @@
           "avg_high": 920.95,
           "avg_low": 884.93,
           "avg_close": 899.57,
-          "avg_ret_from_entry": 15.29
+          "avg_ret_from_entry": -0.86
         },
         {
           "day": 15,
@@ -14219,7 +14219,7 @@
           "avg_high": 929.06,
           "avg_low": 878.67,
           "avg_close": 904.01,
-          "avg_ret_from_entry": 15.86
+          "avg_ret_from_entry": -0.37
         },
         {
           "day": 16,
@@ -14227,7 +14227,7 @@
           "avg_high": 935.41,
           "avg_low": 881.48,
           "avg_close": 913.26,
-          "avg_ret_from_entry": 17.04
+          "avg_ret_from_entry": 0.65
         },
         {
           "day": 17,
@@ -14235,7 +14235,7 @@
           "avg_high": 953.06,
           "avg_low": 894.41,
           "avg_close": 923.91,
-          "avg_ret_from_entry": 18.41
+          "avg_ret_from_entry": 1.82
         },
         {
           "day": 18,
@@ -14243,7 +14243,7 @@
           "avg_high": 1004.46,
           "avg_low": 907.38,
           "avg_close": 970.05,
-          "avg_ret_from_entry": 24.32
+          "avg_ret_from_entry": 6.91
         },
         {
           "day": 19,
@@ -14251,7 +14251,7 @@
           "avg_high": 991.5,
           "avg_low": 942.29,
           "avg_close": 957.42,
-          "avg_ret_from_entry": 22.7
+          "avg_ret_from_entry": 5.51
         },
         {
           "day": 20,
@@ -14259,7 +14259,7 @@
           "avg_high": 1037.6,
           "avg_low": 946.91,
           "avg_close": 1002.94,
-          "avg_ret_from_entry": 28.53
+          "avg_ret_from_entry": 10.53
         },
         {
           "day": 21,
@@ -14267,7 +14267,7 @@
           "avg_high": 1041.62,
           "avg_low": 989.71,
           "avg_close": 1019.59,
-          "avg_ret_from_entry": 30.67
+          "avg_ret_from_entry": 12.37
         },
         {
           "day": 22,
@@ -14275,7 +14275,7 @@
           "avg_high": 1045.93,
           "avg_low": 1000.35,
           "avg_close": 1024.77,
-          "avg_ret_from_entry": 31.33
+          "avg_ret_from_entry": 12.94
         },
         {
           "day": 23,
@@ -14283,7 +14283,7 @@
           "avg_high": 1037.55,
           "avg_low": 992.65,
           "avg_close": 1002.92,
-          "avg_ret_from_entry": 28.53
+          "avg_ret_from_entry": 10.53
         },
         {
           "day": 24,
@@ -14291,7 +14291,7 @@
           "avg_high": 1075.3,
           "avg_low": 993.56,
           "avg_close": 1058.73,
-          "avg_ret_from_entry": 35.68
+          "avg_ret_from_entry": 16.68
         },
         {
           "day": 25,
@@ -14299,7 +14299,7 @@
           "avg_high": 1110.19,
           "avg_low": 1022.6,
           "avg_close": 1073.98,
-          "avg_ret_from_entry": 37.64
+          "avg_ret_from_entry": 18.36
         },
         {
           "day": 26,
@@ -14307,7 +14307,7 @@
           "avg_high": 1098.19,
           "avg_low": 1039.9,
           "avg_close": 1055.81,
-          "avg_ret_from_entry": 35.31
+          "avg_ret_from_entry": 16.36
         },
         {
           "day": 27,
@@ -14315,7 +14315,7 @@
           "avg_high": 1076.98,
           "avg_low": 999.85,
           "avg_close": 1022.58,
-          "avg_ret_from_entry": 31.05
+          "avg_ret_from_entry": 12.69
         },
         {
           "day": 28,
@@ -14323,7 +14323,7 @@
           "avg_high": 1040.62,
           "avg_low": 1010.05,
           "avg_close": 1027.35,
-          "avg_ret_from_entry": 31.66
+          "avg_ret_from_entry": 13.22
         },
         {
           "day": 29,
@@ -14331,7 +14331,7 @@
           "avg_high": 1040.73,
           "avg_low": 1006.35,
           "avg_close": 1020.66,
-          "avg_ret_from_entry": 30.8
+          "avg_ret_from_entry": 12.48
         },
         {
           "day": 30,
@@ -14339,7 +14339,7 @@
           "avg_high": 1036.36,
           "avg_low": 988.43,
           "avg_close": 999.62,
-          "avg_ret_from_entry": 28.11
+          "avg_ret_from_entry": 10.16
         }
       ],
       "peak_day": 25,
@@ -14351,7 +14351,7 @@
     {
       "uc": "UC2",
       "sym": "EIMCOELECO",
-      "price": 1578.8,
+      "price": 1523.4,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -15004,7 +15004,7 @@
     {
       "uc": "UC2",
       "sym": "LUMAXTECH",
-      "price": 1619.3,
+      "price": 1746.8,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -15020,9 +15020,9 @@
         2025
       ],
       "best_entry_offset": -2,
-      "avg_entry_price": 326.19,
-      "target_price_avg": 406.11,
-      "min_target_price": 366.71,
+      "avg_entry_price": 517.94,
+      "target_price_avg": 644.84,
+      "min_target_price": 582.28,
       "entry_recommendation": "Enter 2 trading days BEFORE 1st of Jun \u2014 stock builds momentum early",
       "exit_recommendation": "Exit on day 30 after entry (avg +24.5%). Sweet spot: day 24\u201330.",
       "entry_analysis": [
@@ -15129,21 +15129,21 @@
       "exit_curve": [
         {
           "day": 1,
-          "avg_ret": 2.07,
+          "avg_ret": 2.57,
           "min_ret": -3.81,
           "max_ret": 18.87,
-          "avg_max_gain": 2.72,
-          "win_rate": 33.33,
-          "n": 6
+          "avg_max_gain": 3.13,
+          "win_rate": 42.86,
+          "n": 7
         },
         {
           "day": 2,
-          "avg_ret": 4.93,
+          "avg_ret": 4.9,
           "min_ret": -7.24,
           "max_ret": 24.44,
-          "avg_max_gain": 6.14,
-          "win_rate": 50.0,
-          "n": 6
+          "avg_max_gain": 6.06,
+          "win_rate": 57.14,
+          "n": 7
         },
         {
           "day": 3,
@@ -15401,27 +15401,27 @@
       "daily_profile": [
         {
           "day": 0,
-          "avg_open": 326.19,
-          "avg_high": 342.23,
-          "avg_low": 318.12,
-          "avg_close": 330.76,
-          "avg_ret_from_entry": 1.4
+          "avg_open": 517.94,
+          "avg_high": 542.77,
+          "avg_low": 510.98,
+          "avg_close": 529.91,
+          "avg_ret_from_entry": 2.31
         },
         {
           "day": 1,
-          "avg_open": 332.94,
-          "avg_high": 355.45,
-          "avg_low": 326.17,
-          "avg_close": 344.72,
-          "avg_ret_from_entry": 5.68
+          "avg_open": 535.38,
+          "avg_high": 562.24,
+          "avg_low": 518.03,
+          "avg_close": 547.08,
+          "avg_ret_from_entry": 5.63
         },
         {
           "day": 2,
-          "avg_open": 347.07,
-          "avg_high": 365.53,
-          "avg_low": 334.04,
-          "avg_close": 355.52,
-          "avg_ret_from_entry": 8.99
+          "avg_open": 546.06,
+          "avg_high": 564.02,
+          "avg_low": 525.61,
+          "avg_close": 554.27,
+          "avg_ret_from_entry": 7.01
         },
         {
           "day": 3,
@@ -15429,7 +15429,7 @@
           "avg_high": 373.85,
           "avg_low": 351.34,
           "avg_close": 368.36,
-          "avg_ret_from_entry": 12.93
+          "avg_ret_from_entry": -28.88
         },
         {
           "day": 4,
@@ -15437,7 +15437,7 @@
           "avg_high": 377.42,
           "avg_low": 358.33,
           "avg_close": 369.28,
-          "avg_ret_from_entry": 13.21
+          "avg_ret_from_entry": -28.7
         },
         {
           "day": 5,
@@ -15445,7 +15445,7 @@
           "avg_high": 380.01,
           "avg_low": 362.96,
           "avg_close": 370.03,
-          "avg_ret_from_entry": 13.44
+          "avg_ret_from_entry": -28.56
         },
         {
           "day": 6,
@@ -15453,7 +15453,7 @@
           "avg_high": 377.59,
           "avg_low": 362.22,
           "avg_close": 371.21,
-          "avg_ret_from_entry": 13.8
+          "avg_ret_from_entry": -28.33
         },
         {
           "day": 7,
@@ -15461,7 +15461,7 @@
           "avg_high": 386.98,
           "avg_low": 366.6,
           "avg_close": 379.06,
-          "avg_ret_from_entry": 16.21
+          "avg_ret_from_entry": -26.81
         },
         {
           "day": 8,
@@ -15469,7 +15469,7 @@
           "avg_high": 392.97,
           "avg_low": 369.61,
           "avg_close": 378.88,
-          "avg_ret_from_entry": 16.15
+          "avg_ret_from_entry": -26.85
         },
         {
           "day": 9,
@@ -15477,7 +15477,7 @@
           "avg_high": 391.26,
           "avg_low": 375.53,
           "avg_close": 383.35,
-          "avg_ret_from_entry": 17.52
+          "avg_ret_from_entry": -25.99
         },
         {
           "day": 10,
@@ -15485,7 +15485,7 @@
           "avg_high": 392.71,
           "avg_low": 374.8,
           "avg_close": 386.85,
-          "avg_ret_from_entry": 18.6
+          "avg_ret_from_entry": -25.31
         },
         {
           "day": 11,
@@ -15493,7 +15493,7 @@
           "avg_high": 391.34,
           "avg_low": 374.79,
           "avg_close": 382.11,
-          "avg_ret_from_entry": 17.14
+          "avg_ret_from_entry": -26.23
         },
         {
           "day": 12,
@@ -15501,7 +15501,7 @@
           "avg_high": 403.42,
           "avg_low": 374.82,
           "avg_close": 388.37,
-          "avg_ret_from_entry": 19.06
+          "avg_ret_from_entry": -25.02
         },
         {
           "day": 13,
@@ -15509,7 +15509,7 @@
           "avg_high": 409.06,
           "avg_low": 380.78,
           "avg_close": 393.52,
-          "avg_ret_from_entry": 20.64
+          "avg_ret_from_entry": -24.02
         },
         {
           "day": 14,
@@ -15517,7 +15517,7 @@
           "avg_high": 403.39,
           "avg_low": 386.38,
           "avg_close": 392.19,
-          "avg_ret_from_entry": 20.23
+          "avg_ret_from_entry": -24.28
         },
         {
           "day": 15,
@@ -15525,7 +15525,7 @@
           "avg_high": 402.74,
           "avg_low": 379.52,
           "avg_close": 393.11,
-          "avg_ret_from_entry": 20.52
+          "avg_ret_from_entry": -24.1
         },
         {
           "day": 16,
@@ -15533,7 +15533,7 @@
           "avg_high": 409.39,
           "avg_low": 385.07,
           "avg_close": 401.18,
-          "avg_ret_from_entry": 22.99
+          "avg_ret_from_entry": -22.54
         },
         {
           "day": 17,
@@ -15541,7 +15541,7 @@
           "avg_high": 413.68,
           "avg_low": 395.18,
           "avg_close": 407.23,
-          "avg_ret_from_entry": 24.85
+          "avg_ret_from_entry": -21.37
         },
         {
           "day": 18,
@@ -15549,7 +15549,7 @@
           "avg_high": 418.69,
           "avg_low": 399.77,
           "avg_close": 404.88,
-          "avg_ret_from_entry": 24.12
+          "avg_ret_from_entry": -21.83
         },
         {
           "day": 19,
@@ -15557,7 +15557,7 @@
           "avg_high": 421.96,
           "avg_low": 405.03,
           "avg_close": 417.94,
-          "avg_ret_from_entry": 28.13
+          "avg_ret_from_entry": -19.31
         },
         {
           "day": 20,
@@ -15565,7 +15565,7 @@
           "avg_high": 427.35,
           "avg_low": 407.49,
           "avg_close": 414.73,
-          "avg_ret_from_entry": 27.14
+          "avg_ret_from_entry": -19.93
         },
         {
           "day": 21,
@@ -15573,7 +15573,7 @@
           "avg_high": 431.68,
           "avg_low": 414.52,
           "avg_close": 423.3,
-          "avg_ret_from_entry": 29.77
+          "avg_ret_from_entry": -18.27
         },
         {
           "day": 22,
@@ -15581,7 +15581,7 @@
           "avg_high": 434.16,
           "avg_low": 413.25,
           "avg_close": 418.17,
-          "avg_ret_from_entry": 28.2
+          "avg_ret_from_entry": -19.26
         },
         {
           "day": 23,
@@ -15589,7 +15589,7 @@
           "avg_high": 427.32,
           "avg_low": 407.52,
           "avg_close": 410.21,
-          "avg_ret_from_entry": 25.76
+          "avg_ret_from_entry": -20.8
         },
         {
           "day": 24,
@@ -15597,7 +15597,7 @@
           "avg_high": 423.49,
           "avg_low": 408.62,
           "avg_close": 418.22,
-          "avg_ret_from_entry": 28.22
+          "avg_ret_from_entry": -19.25
         },
         {
           "day": 25,
@@ -15605,7 +15605,7 @@
           "avg_high": 429.18,
           "avg_low": 415.87,
           "avg_close": 419.8,
-          "avg_ret_from_entry": 28.7
+          "avg_ret_from_entry": -18.95
         },
         {
           "day": 26,
@@ -15613,7 +15613,7 @@
           "avg_high": 426.38,
           "avg_low": 409.58,
           "avg_close": 414.47,
-          "avg_ret_from_entry": 27.06
+          "avg_ret_from_entry": -19.98
         },
         {
           "day": 27,
@@ -15621,7 +15621,7 @@
           "avg_high": 429.43,
           "avg_low": 409.65,
           "avg_close": 418.14,
-          "avg_ret_from_entry": 28.19
+          "avg_ret_from_entry": -19.27
         },
         {
           "day": 28,
@@ -15629,7 +15629,7 @@
           "avg_high": 427.93,
           "avg_low": 415.61,
           "avg_close": 421.83,
-          "avg_ret_from_entry": 29.32
+          "avg_ret_from_entry": -18.56
         },
         {
           "day": 29,
@@ -15637,7 +15637,7 @@
           "avg_high": 430.76,
           "avg_low": 416.98,
           "avg_close": 423.23,
-          "avg_ret_from_entry": 29.75
+          "avg_ret_from_entry": -18.29
         },
         {
           "day": 30,
@@ -15645,7 +15645,7 @@
           "avg_high": 432.16,
           "avg_low": 418.28,
           "avg_close": 424.78,
-          "avg_ret_from_entry": 30.22
+          "avg_ret_from_entry": -17.99
         }
       ],
       "peak_day": 30,
@@ -15657,7 +15657,7 @@
     {
       "uc": "UC2",
       "sym": "SPLPETRO",
-      "price": 670.85,
+      "price": 702.3,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -15671,9 +15671,9 @@
         2025
       ],
       "best_entry_offset": -1,
-      "avg_entry_price": 619.9,
-      "target_price_avg": 771.47,
-      "min_target_price": 687.31,
+      "avg_entry_price": 628.72,
+      "target_price_avg": 782.44,
+      "min_target_price": 697.09,
       "entry_recommendation": "Enter 1 trading day BEFORE 1st of Jun \u2014 stock builds momentum early",
       "exit_recommendation": "Exit on day 30 after entry (avg +24.4%). Sweet spot: day 15\u201330.",
       "entry_analysis": [
@@ -15780,12 +15780,12 @@
       "exit_curve": [
         {
           "day": 1,
-          "avg_ret": 1.38,
+          "avg_ret": 2.26,
           "min_ret": -1.64,
           "max_ret": 7.43,
-          "avg_max_gain": 2.63,
-          "win_rate": 50.0,
-          "n": 4
+          "avg_max_gain": 3.26,
+          "win_rate": 60.0,
+          "n": 5
         },
         {
           "day": 2,
@@ -16052,19 +16052,19 @@
       "daily_profile": [
         {
           "day": 0,
-          "avg_open": 619.9,
-          "avg_high": 633.49,
-          "avg_low": 611.61,
-          "avg_close": 629.19,
-          "avg_ret_from_entry": 1.5
+          "avg_open": 628.72,
+          "avg_high": 642.39,
+          "avg_low": 621.53,
+          "avg_close": 637.84,
+          "avg_ret_from_entry": 1.45
         },
         {
           "day": 1,
-          "avg_open": 641.67,
-          "avg_high": 641.99,
-          "avg_low": 621.01,
-          "avg_close": 630.6,
-          "avg_ret_from_entry": 1.73
+          "avg_open": 648.5,
+          "avg_high": 655.42,
+          "avg_low": 628.93,
+          "avg_close": 644.94,
+          "avg_ret_from_entry": 2.58
         },
         {
           "day": 2,
@@ -16072,7 +16072,7 @@
           "avg_high": 647.04,
           "avg_low": 628.56,
           "avg_close": 637.61,
-          "avg_ret_from_entry": 2.86
+          "avg_ret_from_entry": 1.41
         },
         {
           "day": 3,
@@ -16080,7 +16080,7 @@
           "avg_high": 666.34,
           "avg_low": 630.55,
           "avg_close": 659.92,
-          "avg_ret_from_entry": 6.46
+          "avg_ret_from_entry": 4.96
         },
         {
           "day": 4,
@@ -16088,7 +16088,7 @@
           "avg_high": 684.18,
           "avg_low": 658.04,
           "avg_close": 672.01,
-          "avg_ret_from_entry": 8.41
+          "avg_ret_from_entry": 6.89
         },
         {
           "day": 5,
@@ -16096,7 +16096,7 @@
           "avg_high": 680.92,
           "avg_low": 656.77,
           "avg_close": 665.33,
-          "avg_ret_from_entry": 7.33
+          "avg_ret_from_entry": 5.82
         },
         {
           "day": 6,
@@ -16104,7 +16104,7 @@
           "avg_high": 687.96,
           "avg_low": 656.81,
           "avg_close": 681.69,
-          "avg_ret_from_entry": 9.97
+          "avg_ret_from_entry": 8.42
         },
         {
           "day": 7,
@@ -16112,7 +16112,7 @@
           "avg_high": 709.18,
           "avg_low": 672.3,
           "avg_close": 696.19,
-          "avg_ret_from_entry": 12.31
+          "avg_ret_from_entry": 10.73
         },
         {
           "day": 8,
@@ -16120,7 +16120,7 @@
           "avg_high": 708.46,
           "avg_low": 681.24,
           "avg_close": 688.81,
-          "avg_ret_from_entry": 11.12
+          "avg_ret_from_entry": 9.56
         },
         {
           "day": 9,
@@ -16128,7 +16128,7 @@
           "avg_high": 702.79,
           "avg_low": 675.91,
           "avg_close": 690.81,
-          "avg_ret_from_entry": 11.44
+          "avg_ret_from_entry": 9.88
         },
         {
           "day": 10,
@@ -16136,7 +16136,7 @@
           "avg_high": 707.62,
           "avg_low": 676.66,
           "avg_close": 692.08,
-          "avg_ret_from_entry": 11.64
+          "avg_ret_from_entry": 10.08
         },
         {
           "day": 11,
@@ -16144,7 +16144,7 @@
           "avg_high": 719.24,
           "avg_low": 677.66,
           "avg_close": 705.08,
-          "avg_ret_from_entry": 13.74
+          "avg_ret_from_entry": 12.14
         },
         {
           "day": 12,
@@ -16152,7 +16152,7 @@
           "avg_high": 732.68,
           "avg_low": 695.28,
           "avg_close": 719.2,
-          "avg_ret_from_entry": 16.02
+          "avg_ret_from_entry": 14.39
         },
         {
           "day": 13,
@@ -16160,7 +16160,7 @@
           "avg_high": 731.83,
           "avg_low": 707.27,
           "avg_close": 715.09,
-          "avg_ret_from_entry": 15.36
+          "avg_ret_from_entry": 13.74
         },
         {
           "day": 14,
@@ -16168,7 +16168,7 @@
           "avg_high": 744.45,
           "avg_low": 706.46,
           "avg_close": 729.12,
-          "avg_ret_from_entry": 17.62
+          "avg_ret_from_entry": 15.97
         },
         {
           "day": 15,
@@ -16176,7 +16176,7 @@
           "avg_high": 761.44,
           "avg_low": 712.49,
           "avg_close": 741.99,
-          "avg_ret_from_entry": 19.69
+          "avg_ret_from_entry": 18.02
         },
         {
           "day": 16,
@@ -16184,7 +16184,7 @@
           "avg_high": 750.83,
           "avg_low": 729.4,
           "avg_close": 741.0,
-          "avg_ret_from_entry": 19.54
+          "avg_ret_from_entry": 17.86
         },
         {
           "day": 17,
@@ -16192,7 +16192,7 @@
           "avg_high": 753.67,
           "avg_low": 721.99,
           "avg_close": 746.65,
-          "avg_ret_from_entry": 20.45
+          "avg_ret_from_entry": 18.76
         },
         {
           "day": 18,
@@ -16200,7 +16200,7 @@
           "avg_high": 757.83,
           "avg_low": 733.29,
           "avg_close": 742.8,
-          "avg_ret_from_entry": 19.83
+          "avg_ret_from_entry": 18.14
         },
         {
           "day": 19,
@@ -16208,7 +16208,7 @@
           "avg_high": 758.14,
           "avg_low": 735.02,
           "avg_close": 746.59,
-          "avg_ret_from_entry": 20.44
+          "avg_ret_from_entry": 18.75
         },
         {
           "day": 20,
@@ -16216,7 +16216,7 @@
           "avg_high": 758.69,
           "avg_low": 734.88,
           "avg_close": 743.38,
-          "avg_ret_from_entry": 19.92
+          "avg_ret_from_entry": 18.24
         },
         {
           "day": 21,
@@ -16224,7 +16224,7 @@
           "avg_high": 755.29,
           "avg_low": 724.34,
           "avg_close": 737.3,
-          "avg_ret_from_entry": 18.94
+          "avg_ret_from_entry": 17.27
         },
         {
           "day": 22,
@@ -16232,7 +16232,7 @@
           "avg_high": 747.79,
           "avg_low": 722.55,
           "avg_close": 735.25,
-          "avg_ret_from_entry": 18.61
+          "avg_ret_from_entry": 16.94
         },
         {
           "day": 23,
@@ -16240,7 +16240,7 @@
           "avg_high": 763.21,
           "avg_low": 728.74,
           "avg_close": 752.7,
-          "avg_ret_from_entry": 21.42
+          "avg_ret_from_entry": 19.72
         },
         {
           "day": 24,
@@ -16248,7 +16248,7 @@
           "avg_high": 767.46,
           "avg_low": 744.29,
           "avg_close": 757.25,
-          "avg_ret_from_entry": 22.16
+          "avg_ret_from_entry": 20.44
         },
         {
           "day": 25,
@@ -16256,7 +16256,7 @@
           "avg_high": 767.81,
           "avg_low": 750.6,
           "avg_close": 756.75,
-          "avg_ret_from_entry": 22.08
+          "avg_ret_from_entry": 20.36
         },
         {
           "day": 26,
@@ -16264,7 +16264,7 @@
           "avg_high": 764.49,
           "avg_low": 744.29,
           "avg_close": 754.26,
-          "avg_ret_from_entry": 21.67
+          "avg_ret_from_entry": 19.97
         },
         {
           "day": 27,
@@ -16272,7 +16272,7 @@
           "avg_high": 768.05,
           "avg_low": 748.21,
           "avg_close": 754.49,
-          "avg_ret_from_entry": 21.71
+          "avg_ret_from_entry": 20.0
         },
         {
           "day": 28,
@@ -16280,7 +16280,7 @@
           "avg_high": 767.4,
           "avg_low": 747.8,
           "avg_close": 756.31,
-          "avg_ret_from_entry": 22.01
+          "avg_ret_from_entry": 20.29
         },
         {
           "day": 29,
@@ -16288,7 +16288,7 @@
           "avg_high": 764.99,
           "avg_low": 748.52,
           "avg_close": 752.19,
-          "avg_ret_from_entry": 21.34
+          "avg_ret_from_entry": 19.64
         },
         {
           "day": 30,
@@ -16296,7 +16296,7 @@
           "avg_high": 783.43,
           "avg_low": 750.97,
           "avg_close": 770.67,
-          "avg_ret_from_entry": 24.32
+          "avg_ret_from_entry": 22.58
         }
       ],
       "peak_day": 30,
@@ -16308,7 +16308,7 @@
     {
       "uc": "UC2",
       "sym": "BESTAGRO",
-      "price": 18.71,
+      "price": 16.49,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -16704,11 +16704,11 @@
       "daily_profile": [
         {
           "day": 0,
-          "avg_open": 589.44,
-          "avg_high": 613.85,
-          "avg_low": 571.45,
-          "avg_close": 595.67,
-          "avg_ret_from_entry": 1.06
+          "avg_open": 493.9,
+          "avg_high": 514.33,
+          "avg_low": 478.84,
+          "avg_close": 499.14,
+          "avg_ret_from_entry": -15.32
         },
         {
           "day": 1,
@@ -16960,7 +16960,7 @@
     {
       "uc": "UC2",
       "sym": "ENDURANCE",
-      "price": 2732.9,
+      "price": 2687.4,
       "month": 6,
       "month_name": "Jun",
       "season_win_rate": 100.0,
@@ -17357,11 +17357,11 @@
       "daily_profile": [
         {
           "day": 0,
-          "avg_open": 1611.83,
-          "avg_high": 1639.43,
-          "avg_low": 1566.17,
-          "avg_close": 1609.89,
-          "avg_ret_from_entry": -0.12
+          "avg_open": 1770.14,
+          "avg_high": 1794.21,
+          "avg_low": 1723.86,
+          "avg_close": 1763.82,
+          "avg_ret_from_entry": 9.43
         },
         {
           "day": 1,
@@ -17613,7 +17613,7 @@
     {
       "uc": "UC2",
       "sym": "AGI",
-      "price": 597.3,
+      "price": 611.35,
       "month": 7,
       "month_name": "Jul",
       "season_win_rate": 100.0,
@@ -18264,7 +18264,7 @@
     {
       "uc": "UC2",
       "sym": "PRUDENT",
-      "price": 2722.6,
+      "price": 2708.2,
       "month": 7,
       "month_name": "Jul",
       "season_win_rate": 100.0,
@@ -18915,7 +18915,7 @@
     {
       "uc": "UC2",
       "sym": "IRIS",
-      "price": 253.79,
+      "price": 262.4,
       "month": 7,
       "month_name": "Jul",
       "season_win_rate": 100.0,
@@ -19566,7 +19566,7 @@
     {
       "uc": "UC2",
       "sym": "E2E",
-      "price": 3884.7,
+      "price": 4324.4,
       "month": 8,
       "month_name": "Aug",
       "season_win_rate": 100.0,
@@ -20217,7 +20217,7 @@
     {
       "uc": "UC2",
       "sym": "GMRP&UI",
-      "price": 106.89,
+      "price": 111.7,
       "month": 8,
       "month_name": "Aug",
       "season_win_rate": 100.0,
@@ -20868,7 +20868,7 @@
     {
       "uc": "UC2",
       "sym": "LXCHEM",
-      "price": 151.88,
+      "price": 150.67,
       "month": 8,
       "month_name": "Aug",
       "season_win_rate": 100.0,
@@ -21520,7 +21520,7 @@
     {
       "uc": "UC2",
       "sym": "STOVEKRAFT",
-      "price": 565.3,
+      "price": 622.9,
       "month": 8,
       "month_name": "Aug",
       "season_win_rate": 100.0,
@@ -22172,7 +22172,7 @@
     {
       "uc": "UC2",
       "sym": "SBC",
-      "price": 38.58,
+      "price": 36.81,
       "month": 8,
       "month_name": "Aug",
       "season_win_rate": 100.0,
@@ -22823,7 +22823,7 @@
     {
       "uc": "UC2",
       "sym": "SEJALLTD",
-      "price": 778.0,
+      "price": 773.05,
       "month": 9,
       "month_name": "Sep",
       "season_win_rate": 100.0,
@@ -23474,7 +23474,7 @@
     {
       "uc": "UC2",
       "sym": "MEDICO",
-      "price": 48.27,
+      "price": 47.47,
       "month": 10,
       "month_name": "Oct",
       "season_win_rate": 100.0,
@@ -24125,7 +24125,7 @@
     {
       "uc": "UC2",
       "sym": "KERNEX",
-      "price": 1486.4,
+      "price": 1804.7,
       "month": 10,
       "month_name": "Oct",
       "season_win_rate": 100.0,
@@ -24778,7 +24778,7 @@
     {
       "uc": "UC2",
       "sym": "ANGELONE",
-      "price": 344.45,
+      "price": 342.65,
       "month": 10,
       "month_name": "Oct",
       "season_win_rate": 100.0,
@@ -25429,7 +25429,7 @@
     {
       "uc": "UC2",
       "sym": "ARTEMISMED",
-      "price": 283.63,
+      "price": 270.9,
       "month": 11,
       "month_name": "Nov",
       "season_win_rate": 100.0,
@@ -26082,7 +26082,7 @@
     {
       "uc": "UC2",
       "sym": "BSOFT",
-      "price": 324.4,
+      "price": 344.8,
       "month": 11,
       "month_name": "Nov",
       "season_win_rate": 100.0,
@@ -26735,7 +26735,7 @@
     {
       "uc": "UC2",
       "sym": "NECLIFE",
-      "price": 12.27,
+      "price": 12.01,
       "month": 12,
       "month_name": "Dec",
       "season_win_rate": 100.0,
