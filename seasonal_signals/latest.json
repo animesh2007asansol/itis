@@ -1,119 +1,119 @@
 {
   "label": "latest",
-  "date": "2026-06-03",
-  "generated_at": "2026-06-04T00:14:46+05:30",
+  "date": "2026-06-04",
+  "generated_at": "2026-06-04T23:11:28+05:30",
   "trading_day": true,
   "symbol_count": 22,
   "prices": {
     "AMBER": {
-      "close": 7508.0,
-      "prev_close": 7591.5,
-      "chg_pct": -1.1
+      "close": 7617.0,
+      "prev_close": 7508.0,
+      "chg_pct": 1.45
     },
     "ASIANPAINT": {
-      "close": 2662.4,
-      "prev_close": 2660.7,
-      "chg_pct": 0.06
-    },
-    "BALRAMCHIN": {
-      "close": 529.95,
-      "prev_close": 537.4,
-      "chg_pct": -1.39
-    },
-    "BERGEPAINT": {
-      "close": 496.05,
-      "prev_close": 508.25,
-      "chg_pct": -2.4
-    },
-    "BLUESTARCO": {
-      "close": 1580.8,
-      "prev_close": 1579.6,
-      "chg_pct": 0.08
-    },
-    "CHAMBLFERT": {
-      "close": 461.25,
-      "prev_close": 469.55,
-      "chg_pct": -1.77
-    },
-    "COALINDIA": {
-      "close": 472.3,
-      "prev_close": 472.15,
-      "chg_pct": 0.03
-    },
-    "COROMANDEL": {
-      "close": 1745.6,
-      "prev_close": 1758.3,
-      "chg_pct": -0.72
-    },
-    "DEEPAKFERT": {
-      "close": 1406.9,
-      "prev_close": 1405.7,
-      "chg_pct": 0.09
-    },
-    "EIDPARRY": {
-      "close": 756.85,
-      "prev_close": 755.3,
-      "chg_pct": 0.21
-    },
-    "IRFC": {
-      "close": 95.75,
-      "prev_close": 96.67,
-      "chg_pct": -0.95
-    },
-    "JWL": {
-      "close": 280.35,
-      "prev_close": 284.1,
-      "chg_pct": -1.32
-    },
-    "KALYANKJIL": {
-      "close": 353.0,
-      "prev_close": 353.1,
+      "close": 2661.6,
+      "prev_close": 2662.4,
       "chg_pct": -0.03
     },
+    "BALRAMCHIN": {
+      "close": 532.2,
+      "prev_close": 529.95,
+      "chg_pct": 0.42
+    },
+    "BERGEPAINT": {
+      "close": 494.25,
+      "prev_close": 496.05,
+      "chg_pct": -0.36
+    },
+    "BLUESTARCO": {
+      "close": 1607.6,
+      "prev_close": 1580.8,
+      "chg_pct": 1.7
+    },
+    "CHAMBLFERT": {
+      "close": 462.7,
+      "prev_close": 461.25,
+      "chg_pct": 0.31
+    },
+    "COALINDIA": {
+      "close": 481.65,
+      "prev_close": 472.3,
+      "chg_pct": 1.98
+    },
+    "COROMANDEL": {
+      "close": 1763.0,
+      "prev_close": 1745.6,
+      "chg_pct": 1.0
+    },
+    "DEEPAKFERT": {
+      "close": 1420.6,
+      "prev_close": 1406.9,
+      "chg_pct": 0.97
+    },
+    "EIDPARRY": {
+      "close": 751.3,
+      "prev_close": 756.85,
+      "chg_pct": -0.73
+    },
+    "IRFC": {
+      "close": 96.06,
+      "prev_close": 95.75,
+      "chg_pct": 0.32
+    },
+    "JWL": {
+      "close": 279.85,
+      "prev_close": 280.35,
+      "chg_pct": -0.18
+    },
+    "KALYANKJIL": {
+      "close": 362.1,
+      "prev_close": 353.0,
+      "chg_pct": 2.58
+    },
     "KANSAINER": {
-      "close": 214.86,
-      "prev_close": 215.01,
-      "chg_pct": -0.07
-    },
-    "NTPC": {
-      "close": 366.8,
-      "prev_close": 367.4,
-      "chg_pct": -0.16
-    },
-    "RVNL": {
-      "close": 239.02,
-      "prev_close": 240.75,
-      "chg_pct": -0.72
-    },
-    "RCF": {
-      "close": 128.12,
-      "prev_close": 126.99,
-      "chg_pct": 0.89
-    },
-    "SENCO": {
-      "close": 343.4,
-      "prev_close": 345.35,
+      "close": 213.65,
+      "prev_close": 214.86,
       "chg_pct": -0.56
     },
+    "NTPC": {
+      "close": 366.4,
+      "prev_close": 366.8,
+      "chg_pct": -0.11
+    },
+    "RVNL": {
+      "close": 236.46,
+      "prev_close": 239.02,
+      "chg_pct": -1.07
+    },
+    "RCF": {
+      "close": 126.2,
+      "prev_close": 128.12,
+      "chg_pct": -1.5
+    },
+    "SENCO": {
+      "close": 344.5,
+      "prev_close": 343.4,
+      "chg_pct": 0.32
+    },
     "TITAGARH": {
-      "close": 853.35,
-      "prev_close": 834.4,
-      "chg_pct": 2.27
+      "close": 864.0,
+      "prev_close": 853.35,
+      "chg_pct": 1.25
     },
     "TITAN": {
-      "close": 4088.8,
-      "prev_close": 4078.1,
-      "chg_pct": 0.26
+      "close": 4231.0,
+      "prev_close": 4088.8,
+      "chg_pct": 3.48
     },
     "TRIVENI": {
-      "close": 362.2,
-      "prev_close": 366.65,
-      "chg_pct": -1.21
+      "close": 372.1,
+      "prev_close": 362.2,
+      "chg_pct": 2.73
     },
     "VOLTAS": {
-      "close": 1235.0,
-      "prev_close": 1240.4,
-      "chg_pct": -0.44
+      "close": 1286.5,
+      "prev_close": 1235.0,
+      "chg_pct": 4.17
     }
   },
   "csv_format": "new-format(sym=TCKRSYMB,close=CLSPRIC)",
