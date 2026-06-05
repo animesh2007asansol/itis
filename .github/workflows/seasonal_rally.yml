@@ -6,7 +6,7 @@ on:
     workflows: ["NSE Daily Data Fetch"]
     types: [completed]
   schedule:
-    - cron: '30 16 * * 1-5'   # 10 PM IST Mon-Fri
+    - cron: '30 17 * * 1-5'   # 10 PM IST Mon-Fri
 
 jobs:
   seasonal-rally:
