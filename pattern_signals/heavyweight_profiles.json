@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-05T01:59:37+05:30",
-  "data_range": "2020-01-01 to 2026-06-04",
+  "generated_at": "2026-06-06T01:47:27+05:30",
+  "data_range": "2020-01-01 to 2026-06-05",
   "thresholds": {
     "min_years_traded": 4,
     "min_turnover_cr": 2.0,
@@ -8,11 +8,141 @@
     "min_recovery_pct": 15.0,
     "min_win_rate_pct": 80.0
   },
-  "n_stocks": 4,
+  "n_stocks": 5,
   "n_aplus": 0,
   "n_a": 0,
   "n_b": 1,
   "profiles": {
+    "PUNJABCHEM": {
+      "sym": "PUNJABCHEM",
+      "grade": "C",
+      "score": 86.8,
+      "n_years": 3,
+      "years": [
+        2023,
+        2025,
+        2026
+      ],
+      "n_events": 3,
+      "best_window_days": 30,
+      "best_beats15_rate": 100.0,
+      "best_min_return": 20.87,
+      "avg_floor_depth": 2.5,
+      "win_stats": {
+        "5": {
+          "n": 2,
+          "win_rate": 100.0,
+          "beats15_rate": 50.0,
+          "avg_return": 12.68,
+          "min_return": 6.8,
+          "max_return": 18.56,
+          "med_return": 18.56
+        },
+        "10": {
+          "n": 2,
+          "win_rate": 100.0,
+          "beats15_rate": 0.0,
+          "avg_return": 5.18,
+          "min_return": 1.95,
+          "max_return": 8.42,
+          "med_return": 8.42
+        },
+        "20": {
+          "n": 2,
+          "win_rate": 100.0,
+          "beats15_rate": 50.0,
+          "avg_return": 16.72,
+          "min_return": 4.6,
+          "max_return": 28.84,
+          "med_return": 28.84
+        },
+        "30": {
+          "n": 2,
+          "win_rate": 100.0,
+          "beats15_rate": 100.0,
+          "avg_return": 32.56,
+          "min_return": 20.87,
+          "max_return": 44.26,
+          "med_return": 44.26
+        }
+      },
+      "events": [
+        {
+          "date": "2023-05-04",
+          "close": 748.3,
+          "low": 727.55,
+          "year": 2023,
+          "pos_in_range": -6.5,
+          "vol": 207901,
+          "recovery": {
+            "5": {
+              "return_pct": 6.8,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": 1.95,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": 4.6,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "30": {
+              "return_pct": 20.87,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2025-02-27",
+          "close": 719.45,
+          "low": 681.0,
+          "year": 2025,
+          "pos_in_range": 6.3,
+          "vol": 58702,
+          "recovery": {
+            "5": {
+              "return_pct": 18.56,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "10": {
+              "return_pct": 8.42,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": 28.84,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 44.26,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2026-06-05",
+          "close": 936.8,
+          "low": 931.4,
+          "year": 2026,
+          "pos_in_range": 7.6,
+          "vol": 68036,
+          "recovery": {
+            "5": null,
+            "10": null,
+            "20": null,
+            "30": null
+          }
+        }
+      ]
+    },
     "BDL": {
       "sym": "BDL",
       "grade": "B",
