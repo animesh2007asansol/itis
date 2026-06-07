@@ -166,15 +166,37 @@ def detect_patterns(o_arr, h_arr, l_arr, c_arr, idx):
 # ── OPTIMAL EXIT DETECTION ─────────────────────────────────────────────────────
 def find_optimal_exit(c_arr, entry_idx, n):
     """
-    From entry_idx, track weekly (5td) cumulative return.
-    Continue while weekly increment >= WEEKLY_GROWTH_MIN (5%).
-    Returns dict with optimal exit info and weekly tracking data.
+    From entry_idx (the day after signal), track returns day by day.
+
+    Two separate passes:
+    1. PEAK: scan every single day up to MAX_TRACK_WEEKS*5 to find the
+       actual maximum close return (not just 5-day samples).
+    2. WEEKLY: track every 5 days for the "optimal exit" logic
+       (find when weekly growth drops below WEEKLY_GROWTH_MIN).
+
+    This ensures we never miss a peak that falls between weekly samples.
     """
     ep = float(c_arr[entry_idx])
     if ep <= 0: return None
+    max_days = MAX_TRACK_WEEKS * 5
 
+    # ── Pass 1: find actual peak by scanning every trading day ────────────────
+    peak_ret  = -999.0
+    peak_day  = 1
+    for d in range(1, min(max_days + 1, n - entry_idx)):
+        xi  = entry_idx + d
+        ret = (float(c_arr[xi]) - ep) / ep * 100
+        if ret > peak_ret:
+            peak_ret = ret
+            peak_day = d
+
+    if peak_ret == -999.0: return None
+
+    # ── Pass 2: weekly tracking for optimal exit ───────────────────────────────
     weekly_track = []
     prev_cum     = 0.0
+    optimal_day  = peak_day    # default: hold until peak
+    optimal_ret  = peak_ret
 
     for wk in range(1, MAX_TRACK_WEEKS + 1):
         xi = entry_idx + wk * 5
@@ -187,16 +209,16 @@ def find_optimal_exit(c_arr, entry_idx, n):
             "cum_ret":    r2(cum_ret),
             "weekly_inc": r2(weekly_inc),
         })
+        # Optimal exit = last week BEFORE weekly growth drops below threshold
+        if wk == 1 or weekly_inc >= WEEKLY_GROWTH_MIN:
+            optimal_day = wk * 5
+            optimal_ret = cum_ret
+        else:
+            break   # growth slowed — stop here
+
         prev_cum = cum_ret
-        if wk >= 2 and weekly_inc < WEEKLY_GROWTH_MIN:
-            break   # growth slowed — this is the exit point
 
-    if not weekly_track: return None
-
-    peak     = max(weekly_track, key=lambda x: x["cum_ret"] or 0)
-    optimal  = weekly_track[-1]   # last tracked week before growth slowed
-
-    # Fixed hold returns
+    # ── Fixed hold period returns ──────────────────────────────────────────────
     hold_rets = {}
     for days in [3, 5, 10, 20, 44, 66]:
         xi = entry_idx + days
@@ -204,12 +226,12 @@ def find_optimal_exit(c_arr, entry_idx, n):
             hold_rets[days] = r2((float(c_arr[xi]) - ep) / ep * 100)
 
     return {
-        "optimal_days":    optimal["days"],
-        "optimal_ret":     optimal["cum_ret"],
-        "peak_days":       peak["days"],
-        "peak_ret":        peak["cum_ret"],
-        "weekly_track":    weekly_track,
-        "hold_rets":       hold_rets,
+        "optimal_days": optimal_day,
+        "optimal_ret":  r2(optimal_ret),
+        "peak_days":    peak_day,
+        "peak_ret":     r2(peak_ret),
+        "weekly_track": weekly_track,
+        "hold_rets":    hold_rets,
     }
 
 
@@ -274,9 +296,9 @@ def analyze_stock(sym, df, latest_set):
         exit_info = find_optimal_exit(c_arr, entry_idx, n)
         if exit_info is None: continue
 
-        # Check min return: optimal or peak must be >= 30%
-        best_ret = max(exit_info["peak_ret"] or 0, exit_info["optimal_ret"] or 0)
-        if best_ret < MIN_RETURN: continue
+        # Check min return: the ACTUAL peak (every-day scan) must be >= 30%
+        # This uses the day-by-day peak, not just weekly samples
+        if (exit_info["peak_ret"] or 0) < MIN_RETURN: continue
 
         # Context before signal
         ret_5d_before  = r2((float(c_arr[idx]) - float(c_arr[max(0, idx-5)])) /
