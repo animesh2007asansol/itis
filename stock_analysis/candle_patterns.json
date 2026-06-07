@@ -1,0 +1,7217 @@
+{
+  "generated_at": "2026-06-07T10:24:09",
+  "today_ist": "2026-06-07",
+  "last_fetch": "2026-06-05",
+  "n_stocks": 31,
+  "n_today": 0,
+  "n_active": 0,
+  "n_all_hist": 84,
+  "today_alerts": [],
+  "active_alerts": [],
+  "all_open": [],
+  "all_hist": [
+    {
+      "date": "2026-01-23",
+      "year": 2026,
+      "sym": "DBREALTY",
+      "price_now": 114.45,
+      "patterns": [
+        "Bullish Engulfing"
+      ],
+      "fall_15d": -12.79,
+      "vol_ratio": 3.95,
+      "entry_px": 97.85,
+      "peak_ret": 30.59,
+      "peak_days": 10,
+      "optimal_ret": 26.71,
+      "optimal_days": 15,
+      "ret_3d": 8.97,
+      "ret_5d": 12.45,
+      "ret_10d": 30.59,
+      "ret_20d": 15.34
+    },
+    {
+      "date": "2026-01-19",
+      "year": 2026,
+      "sym": "DBREALTY",
+      "price_now": 114.45,
+      "patterns": [
+        "Hammer"
+      ],
+      "fall_15d": -13.45,
+      "vol_ratio": 1.52,
+      "entry_px": 98.34,
+      "peak_ret": 31.3,
+      "peak_days": 15,
+      "optimal_ret": 31.3,
+      "optimal_days": 15,
+      "ret_3d": 4.38,
+      "ret_5d": 3.65,
+      "ret_10d": 29.87,
+      "ret_20d": 24.42
+    },
+    {
+      "date": "2025-08-20",
+      "year": 2025,
+      "sym": "TERASOFT",
+      "price_now": 443.0,
+      "patterns": [
+        "Hammer"
+      ],
+      "fall_15d": -6.56,
+      "vol_ratio": 1.5,
+      "entry_px": 295.0,
+      "peak_ret": 52.93,
+      "peak_days": 25,
+      "optimal_ret": 52.93,
+      "optimal_days": 25,
+      "ret_3d": -0.27,
+      "ret_5d": 3.73,
+      "ret_10d": 16.24,
+      "ret_20d": 51.73
+    },
+    {
+      "date": "2025-05-09",
+      "year": 2025,
+      "sym": "EDELWEISS",
+      "price_now": 114.67,
+      "patterns": [
+        "Bullish Engulfing",
+        "Piercing Line"
+      ],
+      "fall_15d": -5.52,
+      "vol_ratio": 1.67,
+      "entry_px": 80.94,
+      "peak_ret": 40.33,
+      "peak_days": 20,
+      "optimal_ret": 32.31,
+      "optimal_days": 25,
+      "ret_3d": 5.36,
+      "ret_5d": 12.8,
+      "ret_10d": 24.89,
+      "ret_20d": 40.33
+    },
+    {
+      "date": "2025-03-17",
+      "year": 2025,
+      "sym": "ELECTHERM",
+      "price_now": 970.6,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -5.42,
+      "vol_ratio": 1.77,
+      "entry_px": 719.0,
+      "peak_ret": 62.24,
+      "peak_days": 25,
+      "optimal_ret": 58.89,
+      "optimal_days": 30,
+      "ret_3d": 6.11,
+      "ret_5d": 10.4,
+      "ret_10d": 21.86,
+      "ret_20d": 46.96
+    },
+    {
+      "date": "2025-03-12",
+      "year": 2025,
+      "sym": "MARATHON",
+      "price_now": 408.9,
+      "patterns": [
+        "Bullish Engulfing"
+      ],
+      "fall_15d": -16.09,
+      "vol_ratio": 4.77,
+      "entry_px": 388.5,
+      "peak_ret": 33.31,
+      "peak_days": 10,
+      "optimal_ret": 16.31,
+      "optimal_days": 15,
+      "ret_3d": 21.08,
+      "ret_5d": 27.54,
+      "ret_10d": 33.31,
+      "ret_20d": 31.53
+    },
+    {
+      "date": "2025-03-06",
+      "year": 2025,
+      "sym": "MARATHON",
+      "price_now": 408.9,
+      "patterns": [
+        "Bullish Engulfing"
+      ],
+      "fall_15d": -25.22,
+      "vol_ratio": 1.62,
+      "entry_px": 388.0,
+      "peak_ret": 32.36,
+      "peak_days": 15,
+      "optimal_ret": 32.36,
+      "optimal_days": 15,
+      "ret_3d": -1.21,
+      "ret_5d": -0.63,
+      "ret_10d": 27.91,
+      "ret_20d": 18.9
+    },
+    {
+      "date": "2025-03-05",
+      "year": 2025,
+      "sym": "SIMPLEXINF",
+      "price_now": 241.0,
+      "patterns": [
+        "Piercing Line"
+      ],
+      "fall_15d": -14.63,
+      "vol_ratio": 3.12,
+      "entry_px": 245.85,
+      "peak_ret": 30.99,
+      "peak_days": 15,
+      "optimal_ret": 24.53,
+      "optimal_days": 20,
+      "ret_3d": 0.04,
+      "ret_5d": 2.48,
+      "ret_10d": 18.97,
+      "ret_20d": 24.53
+    },
+    {
+      "date": "2025-01-10",
+      "year": 2025,
+      "sym": "TERASOFT",
+      "price_now": 443.0,
+      "patterns": [
+        "Bullish Engulfing",
+        "Piercing Line"
+      ],
+      "fall_15d": -12.12,
+      "vol_ratio": 2.36,
+      "entry_px": 185.15,
+      "peak_ret": 37.62,
+      "peak_days": 15,
+      "optimal_ret": 37.62,
+      "optimal_days": 15,
+      "ret_3d": 15.75,
+      "ret_5d": 20.43,
+      "ret_10d": 32.94,
+      "ret_20d": 29.44
+    },
+    {
+      "date": "2024-12-12",
+      "year": 2024,
+      "sym": "SHAKTIPUMP",
+      "price_now": 540.5,
+      "patterns": [
+        "Dragonfly Doji"
+      ],
+      "fall_15d": -82.52,
+      "vol_ratio": 2.62,
+      "entry_px": 899.35,
+      "peak_ret": 35.64,
+      "peak_days": 15,
+      "optimal_ret": 34.99,
+      "optimal_days": 20,
+      "ret_3d": 2.99,
+      "ret_5d": 2.44,
+      "ret_10d": 16.22,
+      "ret_20d": 34.99
+    },
+    {
+      "date": "2024-12-02",
+      "year": 2024,
+      "sym": "SHAKTIPUMP",
+      "price_now": 540.5,
+      "patterns": [
+        "Piercing Line"
+      ],
+      "fall_15d": -83.5,
+      "vol_ratio": 3.27,
+      "entry_px": 785.3,
+      "peak_ret": 71.25,
+      "peak_days": 25,
+      "optimal_ret": 40.61,
+      "optimal_days": 30,
+      "ret_3d": -2.62,
+      "ret_5d": -0.5,
+      "ret_10d": 22.85,
+      "ret_20d": 42.74
+    },
+    {
+      "date": "2024-07-16",
+      "year": 2024,
+      "sym": "ELECTHERM",
+      "price_now": 970.6,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -16.17,
+      "vol_ratio": 3.08,
+      "entry_px": 683.3,
+      "peak_ret": 33.55,
+      "peak_days": 10,
+      "optimal_ret": 26.45,
+      "optimal_days": 15,
+      "ret_3d": 12.18,
+      "ret_5d": 23.67,
+      "ret_10d": 33.55,
+      "ret_20d": 35.63
+    },
+    {
+      "date": "2024-03-28",
+      "year": 2024,
+      "sym": "INDSWFTLAB",
+      "price_now": 158.0,
+      "patterns": [
+        "Morning Star"
+      ],
+      "fall_15d": -8.25,
+      "vol_ratio": 2.92,
+      "entry_px": 100.6,
+      "peak_ret": 31.66,
+      "peak_days": 5,
+      "optimal_ret": 20.13,
+      "optimal_days": 10,
+      "ret_3d": 11.38,
+      "ret_5d": 31.66,
+      "ret_10d": 20.13,
+      "ret_20d": 22.61
+    },
+    {
+      "date": "2024-03-22",
+      "year": 2024,
+      "sym": "EMKAY",
+      "price_now": 291.86,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -10.54,
+      "vol_ratio": 2.94,
+      "entry_px": 107.7,
+      "peak_ret": 64.25,
+      "peak_days": 10,
+      "optimal_ret": 43.73,
+      "optimal_days": 15,
+      "ret_3d": 14.35,
+      "ret_5d": 15.51,
+      "ret_10d": 64.25,
+      "ret_20d": 51.25
+    },
+    {
+      "date": "2024-03-18",
+      "year": 2024,
+      "sym": "WEBELSOLAR",
+      "price_now": 110.76,
+      "patterns": [
+        "Three White Soldiers"
+      ],
+      "fall_15d": -12.96,
+      "vol_ratio": 1.78,
+      "entry_px": 362.4,
+      "peak_ret": 91.36,
+      "peak_days": 25,
+      "optimal_ret": 78.44,
+      "optimal_days": 30,
+      "ret_3d": 15.69,
+      "ret_5d": 27.54,
+      "ret_10d": 47.63,
+      "ret_20d": 84.82
+    },
+    {
+      "date": "2024-03-14",
+      "year": 2024,
+      "sym": "RPOWER",
+      "price_now": 28.59,
+      "patterns": [
+        "Piercing Line"
+      ],
+      "fall_15d": -17.29,
+      "vol_ratio": 2.32,
+      "entry_px": 22.1,
+      "peak_ret": 37.1,
+      "peak_days": 10,
+      "optimal_ret": 34.84,
+      "optimal_days": 15,
+      "ret_3d": 8.14,
+      "ret_5d": 19.0,
+      "ret_10d": 37.1,
+      "ret_20d": 29.86
+    },
+    {
+      "date": "2023-11-03",
+      "year": 2023,
+      "sym": "SWSOLAR",
+      "price_now": 203.67,
+      "patterns": [
+        "Morning Star"
+      ],
+      "fall_15d": -9.71,
+      "vol_ratio": 1.67,
+      "entry_px": 279.45,
+      "peak_ret": 51.87,
+      "peak_days": 25,
+      "optimal_ret": 51.19,
+      "optimal_days": 30,
+      "ret_3d": 3.45,
+      "ret_5d": 1.04,
+      "ret_10d": 7.3,
+      "ret_20d": 38.93
+    },
+    {
+      "date": "2023-10-26",
+      "year": 2023,
+      "sym": "DBREALTY",
+      "price_now": 114.45,
+      "patterns": [
+        "Bullish Engulfing"
+      ],
+      "fall_15d": -8.77,
+      "vol_ratio": 1.51,
+      "entry_px": 162.65,
+      "peak_ret": 30.28,
+      "peak_days": 15,
+      "optimal_ret": 26.99,
+      "optimal_days": 20,
+      "ret_3d": 6.95,
+      "ret_5d": 8.95,
+      "ret_10d": 14.97,
+      "ret_20d": 26.99
+    },
+    {
+      "date": "2023-09-08",
+      "year": 2023,
+      "sym": "BCG",
+      "price_now": 12.09,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -45.47,
+      "vol_ratio": 5.22,
+      "entry_px": 14.5,
+      "peak_ret": 32.07,
+      "peak_days": 10,
+      "optimal_ret": 31.03,
+      "optimal_days": 15,
+      "ret_3d": 15.17,
+      "ret_5d": 26.55,
+      "ret_10d": 32.07,
+      "ret_20d": 16.9
+    },
+    {
+      "date": "2023-08-30",
+      "year": 2023,
+      "sym": "SPMLINFRA",
+      "price_now": 197.0,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -11.3,
+      "vol_ratio": 1.65,
+      "entry_px": 36.4,
+      "peak_ret": 50.0,
+      "peak_days": 15,
+      "optimal_ret": 35.85,
+      "optimal_days": 20,
+      "ret_3d": 5.91,
+      "ret_5d": 10.03,
+      "ret_10d": 35.99,
+      "ret_20d": 35.85
+    },
+    {
+      "date": "2023-08-29",
+      "year": 2023,
+      "sym": "SPMLINFRA",
+      "price_now": 197.0,
+      "patterns": [
+        "Hammer"
+      ],
+      "fall_15d": -11.39,
+      "vol_ratio": 3.59,
+      "entry_px": 35.7,
+      "peak_ret": 56.02,
+      "peak_days": 15,
+      "optimal_ret": 41.18,
+      "optimal_days": 20,
+      "ret_3d": 5.88,
+      "ret_5d": 10.08,
+      "ret_10d": 32.07,
+      "ret_20d": 41.18
+    },
+    {
+      "date": "2023-07-13",
+      "year": 2023,
+      "sym": "WEBELSOLAR",
+      "price_now": 110.76,
+      "patterns": [
+        "Bullish Engulfing",
+        "Piercing Line"
+      ],
+      "fall_15d": -5.52,
+      "vol_ratio": 2.33,
+      "entry_px": 84.85,
+      "peak_ret": 37.48,
+      "peak_days": 25,
+      "optimal_ret": 36.89,
+      "optimal_days": 30,
+      "ret_3d": 0.41,
+      "ret_5d": -1.3,
+      "ret_10d": 14.61,
+      "ret_20d": 31.17
+    },
+    {
+      "date": "2023-05-29",
+      "year": 2023,
+      "sym": "SPMLINFRA",
+      "price_now": 197.0,
+      "patterns": [
+        "Bullish Engulfing",
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -11.61,
+      "vol_ratio": 1.65,
+      "entry_px": 32.75,
+      "peak_ret": 35.88,
+      "peak_days": 15,
+      "optimal_ret": 15.57,
+      "optimal_days": 20,
+      "ret_3d": 11.91,
+      "ret_5d": 4.58,
+      "ret_10d": 14.2,
+      "ret_20d": 15.57
+    },
+    {
+      "date": "2023-05-10",
+      "year": 2023,
+      "sym": "BCG",
+      "price_now": 12.09,
+      "patterns": [
+        "Dragonfly Doji"
+      ],
+      "fall_15d": -7.5,
+      "vol_ratio": 1.75,
+      "entry_px": 13.55,
+      "peak_ret": 143.91,
+      "peak_days": 30,
+      "optimal_ret": 130.26,
+      "optimal_days": 35,
+      "ret_3d": 15.13,
+      "ret_5d": 14.76,
+      "ret_10d": 20.3,
+      "ret_20d": 66.42
+    },
+    {
+      "date": "2023-05-09",
+      "year": 2023,
+      "sym": "OPTIEMUS",
+      "price_now": 453.5,
+      "patterns": [
+        "Morning Star"
+      ],
+      "fall_15d": -7.94,
+      "vol_ratio": 1.82,
+      "entry_px": 177.6,
+      "peak_ret": 30.88,
+      "peak_days": 15,
+      "optimal_ret": 28.52,
+      "optimal_days": 20,
+      "ret_3d": -6.28,
+      "ret_5d": -2.79,
+      "ret_10d": 22.33,
+      "ret_20d": 28.52
+    },
+    {
+      "date": "2023-05-04",
+      "year": 2023,
+      "sym": "BCG",
+      "price_now": 12.09,
+      "patterns": [
+        "Dragonfly Doji"
+      ],
+      "fall_15d": -35.82,
+      "vol_ratio": 2.72,
+      "entry_px": 11.25,
+      "peak_ret": 183.56,
+      "peak_days": 40,
+      "optimal_ret": 183.56,
+      "optimal_days": 40,
+      "ret_3d": 15.11,
+      "ret_5d": 26.22,
+      "ret_10d": 31.56,
+      "ret_20d": 82.67
+    },
+    {
+      "date": "2023-04-19",
+      "year": 2023,
+      "sym": "WANBURY",
+      "price_now": 262.3,
+      "patterns": [
+        "Bullish Engulfing",
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -7.76,
+      "vol_ratio": 2.48,
+      "entry_px": 38.05,
+      "peak_ret": 33.25,
+      "peak_days": 10,
+      "optimal_ret": 26.68,
+      "optimal_days": 15,
+      "ret_3d": 12.48,
+      "ret_5d": 23.78,
+      "ret_10d": 33.25,
+      "ret_20d": 26.54
+    },
+    {
+      "date": "2023-03-29",
+      "year": 2023,
+      "sym": "POKARNA",
+      "price_now": 824.35,
+      "patterns": [
+        "Bullish Engulfing"
+      ],
+      "fall_15d": -15.8,
+      "vol_ratio": 3.05,
+      "entry_px": 244.55,
+      "peak_ret": 50.05,
+      "peak_days": 10,
+      "optimal_ret": 41.93,
+      "optimal_days": 15,
+      "ret_3d": 14.25,
+      "ret_5d": 13.51,
+      "ret_10d": 50.05,
+      "ret_20d": 44.1
+    },
+    {
+      "date": "2022-09-23",
+      "year": 2022,
+      "sym": "GAYAPROJ",
+      "price_now": 20.53,
+      "patterns": [
+        "Morning Star"
+      ],
+      "fall_15d": -17.16,
+      "vol_ratio": 1.52,
+      "entry_px": 10.3,
+      "peak_ret": 30.58,
+      "peak_days": 20,
+      "optimal_ret": 30.58,
+      "optimal_days": 20,
+      "ret_3d": -13.59,
+      "ret_5d": -20.39,
+      "ret_10d": 11.65,
+      "ret_20d": 30.58
+    },
+    {
+      "date": "2022-07-06",
+      "year": 2022,
+      "sym": "BCG",
+      "price_now": 12.09,
+      "patterns": [
+        "Dragonfly Doji"
+      ],
+      "fall_15d": -23.39,
+      "vol_ratio": 1.97,
+      "entry_px": 39.9,
+      "peak_ret": 32.83,
+      "peak_days": 10,
+      "optimal_ret": 18.05,
+      "optimal_days": 15,
+      "ret_3d": 15.41,
+      "ret_5d": 15.16,
+      "ret_10d": 32.83,
+      "ret_20d": 6.64
+    },
+    {
+      "date": "2022-06-28",
+      "year": 2022,
+      "sym": "SPMLINFRA",
+      "price_now": 197.0,
+      "patterns": [
+        "Three White Soldiers"
+      ],
+      "fall_15d": -9.4,
+      "vol_ratio": 3.07,
+      "entry_px": 37.95,
+      "peak_ret": 36.76,
+      "peak_days": 10,
+      "optimal_ret": 29.51,
+      "optimal_days": 15,
+      "ret_3d": 5.14,
+      "ret_5d": 15.68,
+      "ret_10d": 36.76,
+      "ret_20d": 8.04
+    },
+    {
+      "date": "2022-06-24",
+      "year": 2022,
+      "sym": "SPMLINFRA",
+      "price_now": 197.0,
+      "patterns": [
+        "Hammer"
+      ],
+      "fall_15d": -14.95,
+      "vol_ratio": 1.67,
+      "entry_px": 34.65,
+      "peak_ret": 41.7,
+      "peak_days": 10,
+      "optimal_ret": 36.22,
+      "optimal_days": 15,
+      "ret_3d": 4.47,
+      "ret_5d": 15.15,
+      "ret_10d": 41.7,
+      "ret_20d": 27.99
+    },
+    {
+      "date": "2022-05-23",
+      "year": 2022,
+      "sym": "PGEL",
+      "price_now": 485.35,
+      "patterns": [
+        "Three White Soldiers"
+      ],
+      "fall_15d": -6.97,
+      "vol_ratio": 1.61,
+      "entry_px": 725.2,
+      "peak_ret": 32.52,
+      "peak_days": 10,
+      "optimal_ret": 25.5,
+      "optimal_days": 15,
+      "ret_3d": -4.61,
+      "ret_5d": 22.21,
+      "ret_10d": 32.52,
+      "ret_20d": 15.64
+    },
+    {
+      "date": "2022-03-04",
+      "year": 2022,
+      "sym": "INTELLECT",
+      "price_now": 745.95,
+      "patterns": [
+        "Bullish Engulfing"
+      ],
+      "fall_15d": -5.7,
+      "vol_ratio": 2.93,
+      "entry_px": 681.2,
+      "peak_ret": 40.66,
+      "peak_days": 20,
+      "optimal_ret": 34.77,
+      "optimal_days": 25,
+      "ret_3d": 5.62,
+      "ret_5d": 7.81,
+      "ret_10d": 20.18,
+      "ret_20d": 40.66
+    },
+    {
+      "date": "2021-11-02",
+      "year": 2021,
+      "sym": "KPITTECH",
+      "price_now": 777.8,
+      "patterns": [
+        "Morning Star"
+      ],
+      "fall_15d": -5.52,
+      "vol_ratio": 1.5,
+      "entry_px": 344.75,
+      "peak_ret": 34.42,
+      "peak_days": 15,
+      "optimal_ret": 34.42,
+      "optimal_days": 15,
+      "ret_3d": 8.32,
+      "ret_5d": 17.1,
+      "ret_10d": 30.37,
+      "ret_20d": 44.41
+    },
+    {
+      "date": "2021-08-23",
+      "year": 2021,
+      "sym": "XPROINDIA",
+      "price_now": 1170.7,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -10.07,
+      "vol_ratio": 1.59,
+      "entry_px": 302.45,
+      "peak_ret": 36.11,
+      "peak_days": 15,
+      "optimal_ret": 36.11,
+      "optimal_days": 15,
+      "ret_3d": 15.74,
+      "ret_5d": 27.59,
+      "ret_10d": 32.8,
+      "ret_20d": 69.86
+    },
+    {
+      "date": "2021-08-18",
+      "year": 2021,
+      "sym": "RPOWER",
+      "price_now": 28.59,
+      "patterns": [
+        "Piercing Line"
+      ],
+      "fall_15d": -7.02,
+      "vol_ratio": 2.09,
+      "entry_px": 10.1,
+      "peak_ret": 37.62,
+      "peak_days": 15,
+      "optimal_ret": 32.67,
+      "optimal_days": 20,
+      "ret_3d": 4.46,
+      "ret_5d": 10.89,
+      "ret_10d": 20.79,
+      "ret_20d": 32.67
+    },
+    {
+      "date": "2021-08-12",
+      "year": 2021,
+      "sym": "OPTIEMUS",
+      "price_now": 453.5,
+      "patterns": [
+        "Morning Star"
+      ],
+      "fall_15d": -9.95,
+      "vol_ratio": 1.71,
+      "entry_px": 148.1,
+      "peak_ret": 149.53,
+      "peak_days": 25,
+      "optimal_ret": 105.81,
+      "optimal_days": 30,
+      "ret_3d": -3.51,
+      "ret_5d": -5.23,
+      "ret_10d": 20.86,
+      "ret_20d": 96.69
+    },
+    {
+      "date": "2021-08-11",
+      "year": 2021,
+      "sym": "XPROINDIA",
+      "price_now": 1170.7,
+      "patterns": [
+        "Piercing Line",
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -5.37,
+      "vol_ratio": 2.07,
+      "entry_px": 277.7,
+      "peak_ret": 44.58,
+      "peak_days": 20,
+      "optimal_ret": 44.58,
+      "optimal_days": 20,
+      "ret_3d": -2.77,
+      "ret_5d": -1.21,
+      "ret_10d": 26.05,
+      "ret_20d": 44.58
+    },
+    {
+      "date": "2021-01-08",
+      "year": 2021,
+      "sym": "PGEL",
+      "price_now": 485.35,
+      "patterns": [
+        "Hammer"
+      ],
+      "fall_15d": -5.48,
+      "vol_ratio": 1.72,
+      "entry_px": 147.8,
+      "peak_ret": 67.93,
+      "peak_days": 25,
+      "optimal_ret": 67.93,
+      "optimal_days": 25,
+      "ret_3d": -2.13,
+      "ret_5d": -8.73,
+      "ret_10d": 1.39,
+      "ret_20d": 64.99
+    },
+    {
+      "date": "2020-11-04",
+      "year": 2020,
+      "sym": "EDELWEISS",
+      "price_now": 114.67,
+      "patterns": [
+        "Bullish Engulfing",
+        "Piercing Line",
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -9.79,
+      "vol_ratio": 5.14,
+      "entry_px": 55.65,
+      "peak_ret": 46.99,
+      "peak_days": 20,
+      "optimal_ret": 40.07,
+      "optimal_days": 25,
+      "ret_3d": -4.04,
+      "ret_5d": -2.7,
+      "ret_10d": 10.24,
+      "ret_20d": 46.99
+    },
+    {
+      "date": "2020-09-14",
+      "year": 2020,
+      "sym": "INDSWFTLAB",
+      "price_now": 158.0,
+      "patterns": [
+        "Hammer",
+        "Morning Star"
+      ],
+      "fall_15d": -8.22,
+      "vol_ratio": 1.63,
+      "entry_px": 37.5,
+      "peak_ret": 53.47,
+      "peak_days": 15,
+      "optimal_ret": 51.2,
+      "optimal_days": 20,
+      "ret_3d": 15.6,
+      "ret_5d": 20.13,
+      "ret_10d": 32.4,
+      "ret_20d": 51.2
+    },
+    {
+      "date": "2020-08-05",
+      "year": 2020,
+      "sym": "PANAMAPET",
+      "price_now": 344.75,
+      "patterns": [
+        "Bullish Engulfing"
+      ],
+      "fall_15d": -7.82,
+      "vol_ratio": 3.34,
+      "entry_px": 40.9,
+      "peak_ret": 39.98,
+      "peak_days": 15,
+      "optimal_ret": 26.41,
+      "optimal_days": 20,
+      "ret_3d": 0.73,
+      "ret_5d": 4.16,
+      "ret_10d": 11.98,
+      "ret_20d": 26.41
+    },
+    {
+      "date": "2020-07-24",
+      "year": 2020,
+      "sym": "ALOKINDS",
+      "price_now": 12.45,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -48.4,
+      "vol_ratio": 2.34,
+      "entry_px": 28.7,
+      "peak_ret": 32.75,
+      "peak_days": 10,
+      "optimal_ret": 24.22,
+      "optimal_days": 15,
+      "ret_3d": 15.51,
+      "ret_5d": 27.18,
+      "ret_10d": 32.75,
+      "ret_20d": 18.82
+    },
+    {
+      "date": "2020-06-03",
+      "year": 2020,
+      "sym": "DCAL",
+      "price_now": 189.88,
+      "patterns": [
+        "Hammer"
+      ],
+      "fall_15d": -7.21,
+      "vol_ratio": 2.82,
+      "entry_px": 73.6,
+      "peak_ret": 66.24,
+      "peak_days": 10,
+      "optimal_ret": 66.24,
+      "optimal_days": 10,
+      "ret_3d": 38.79,
+      "ret_5d": 61.89,
+      "ret_10d": 66.24,
+      "ret_20d": 71.2
+    },
+    {
+      "date": "2020-06-01",
+      "year": 2020,
+      "sym": "DCAL",
+      "price_now": 189.88,
+      "patterns": [
+        "Bullish Engulfing"
+      ],
+      "fall_15d": -10.39,
+      "vol_ratio": 4.33,
+      "entry_px": 66.95,
+      "peak_ret": 95.52,
+      "peak_days": 10,
+      "optimal_ret": 84.99,
+      "optimal_days": 15,
+      "ret_3d": 7.47,
+      "ret_5d": 52.58,
+      "ret_10d": 95.52,
+      "ret_20d": 81.85
+    },
+    {
+      "date": "2020-05-27",
+      "year": 2020,
+      "sym": "TEJASNET",
+      "price_now": 576.2,
+      "patterns": [
+        "Dragonfly Doji"
+      ],
+      "fall_15d": -8.01,
+      "vol_ratio": 2.01,
+      "entry_px": 32.7,
+      "peak_ret": 57.8,
+      "peak_days": 10,
+      "optimal_ret": 51.99,
+      "optimal_days": 15,
+      "ret_3d": 8.41,
+      "ret_5d": 19.42,
+      "ret_10d": 57.8,
+      "ret_20d": 46.33
+    },
+    {
+      "date": "2020-05-27",
+      "year": 2020,
+      "sym": "KPITTECH",
+      "price_now": 777.8,
+      "patterns": [
+        "Three White Soldiers"
+      ],
+      "fall_15d": -18.71,
+      "vol_ratio": 3.64,
+      "entry_px": 46.95,
+      "peak_ret": 34.61,
+      "peak_days": 15,
+      "optimal_ret": 34.61,
+      "optimal_days": 15,
+      "ret_3d": 15.55,
+      "ret_5d": 17.47,
+      "ret_10d": 30.99,
+      "ret_20d": 34.19
+    },
+    {
+      "date": "2020-05-22",
+      "year": 2020,
+      "sym": "TEJASNET",
+      "price_now": 576.2,
+      "patterns": [
+        "Morning Star"
+      ],
+      "fall_15d": -16.82,
+      "vol_ratio": 1.5,
+      "entry_px": 31.5,
+      "peak_ret": 64.76,
+      "peak_days": 10,
+      "optimal_ret": 53.33,
+      "optimal_days": 15,
+      "ret_3d": 4.92,
+      "ret_5d": 12.54,
+      "ret_10d": 64.76,
+      "ret_20d": 58.57
+    },
+    {
+      "date": "2020-05-22",
+      "year": 2020,
+      "sym": "KPITTECH",
+      "price_now": 777.8,
+      "patterns": [
+        "Piercing Line"
+      ],
+      "fall_15d": -25.2,
+      "vol_ratio": 4.9,
+      "entry_px": 43.2,
+      "peak_ret": 47.57,
+      "peak_days": 10,
+      "optimal_ret": 45.37,
+      "optimal_days": 15,
+      "ret_3d": 14.0,
+      "ret_5d": 25.58,
+      "ret_10d": 47.57,
+      "ret_20d": 46.06
+    },
+    {
+      "date": "2020-05-12",
+      "year": 2020,
+      "sym": "INTELLECT",
+      "price_now": 745.95,
+      "patterns": [
+        "Hammer"
+      ],
+      "fall_15d": -18.0,
+      "vol_ratio": 1.64,
+      "entry_px": 69.8,
+      "peak_ret": 67.05,
+      "peak_days": 25,
+      "optimal_ret": 49.0,
+      "optimal_days": 30,
+      "ret_3d": -6.88,
+      "ret_5d": -9.24,
+      "ret_10d": -3.01,
+      "ret_20d": 26.22
+    },
+    {
+      "date": "2020-04-13",
+      "year": 2020,
+      "sym": "SWSOLAR",
+      "price_now": 203.67,
+      "patterns": [
+        "Hammer",
+        "Dragonfly Doji"
+      ],
+      "fall_15d": -6.8,
+      "vol_ratio": 2.02,
+      "entry_px": 107.15,
+      "peak_ret": 62.72,
+      "peak_days": 10,
+      "optimal_ret": 25.99,
+      "optimal_days": 15,
+      "ret_3d": 15.73,
+      "ret_5d": 27.58,
+      "ret_10d": 62.72,
+      "ret_20d": 4.34
+    },
+    {
+      "date": "2020-04-09",
+      "year": 2020,
+      "sym": "SIMPLEXINF",
+      "price_now": 241.0,
+      "patterns": [
+        "Dragonfly Doji"
+      ],
+      "fall_15d": -30.3,
+      "vol_ratio": 3.86,
+      "entry_px": 22.1,
+      "peak_ret": 32.81,
+      "peak_days": 10,
+      "optimal_ret": 16.74,
+      "optimal_days": 15,
+      "ret_3d": 15.61,
+      "ret_5d": 27.15,
+      "ret_10d": 32.81,
+      "ret_20d": 16.74
+    },
+    {
+      "date": "2020-04-08",
+      "year": 2020,
+      "sym": "SWSOLAR",
+      "price_now": 203.67,
+      "patterns": [
+        "Dragonfly Doji"
+      ],
+      "fall_15d": -19.41,
+      "vol_ratio": 1.87,
+      "entry_px": 97.2,
+      "peak_ret": 62.71,
+      "peak_days": 10,
+      "optimal_ret": 53.86,
+      "optimal_days": 15,
+      "ret_3d": 15.74,
+      "ret_5d": 27.57,
+      "ret_10d": 62.71,
+      "ret_20d": 23.35
+    },
+    {
+      "date": "2020-04-08",
+      "year": 2020,
+      "sym": "GAYAPROJ",
+      "price_now": 20.53,
+      "patterns": [
+        "Dragonfly Doji"
+      ],
+      "fall_15d": -22.64,
+      "vol_ratio": 1.83,
+      "entry_px": 9.75,
+      "peak_ret": 65.13,
+      "peak_days": 20,
+      "optimal_ret": 42.05,
+      "optimal_days": 25,
+      "ret_3d": -9.23,
+      "ret_5d": -0.51,
+      "ret_10d": 25.64,
+      "ret_20d": 65.13
+    },
+    {
+      "date": "2020-04-07",
+      "year": 2020,
+      "sym": "SWSOLAR",
+      "price_now": 203.67,
+      "patterns": [
+        "Dragonfly Doji"
+      ],
+      "fall_15d": -24.45,
+      "vol_ratio": 1.84,
+      "entry_px": 92.6,
+      "peak_ret": 69.98,
+      "peak_days": 15,
+      "optimal_ret": 34.18,
+      "optimal_days": 20,
+      "ret_3d": 15.71,
+      "ret_5d": 27.54,
+      "ret_10d": 62.69,
+      "ret_20d": 34.18
+    },
+    {
+      "date": "2020-04-03",
+      "year": 2020,
+      "sym": "SUVEN",
+      "price_now": 237.35,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -48.24,
+      "vol_ratio": 8.43,
+      "entry_px": 22.4,
+      "peak_ret": 105.13,
+      "peak_days": 15,
+      "optimal_ret": 75.89,
+      "optimal_days": 20,
+      "ret_3d": 15.4,
+      "ret_5d": 27.01,
+      "ret_10d": 61.38,
+      "ret_20d": 75.89
+    },
+    {
+      "date": "2020-04-03",
+      "year": 2020,
+      "sym": "GAYAPROJ",
+      "price_now": 20.53,
+      "patterns": [
+        "Dragonfly Doji"
+      ],
+      "fall_15d": -35.96,
+      "vol_ratio": 3.02,
+      "entry_px": 9.8,
+      "peak_ret": 81.12,
+      "peak_days": 20,
+      "optimal_ret": 41.33,
+      "optimal_days": 25,
+      "ret_3d": -5.1,
+      "ret_5d": -9.69,
+      "ret_10d": 13.78,
+      "ret_20d": 81.12
+    },
+    {
+      "date": "2020-04-03",
+      "year": 2020,
+      "sym": "SIMPLEXINF",
+      "price_now": 241.0,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -48.22,
+      "vol_ratio": 8.06,
+      "entry_px": 19.1,
+      "peak_ret": 62.04,
+      "peak_days": 10,
+      "optimal_ret": 39.01,
+      "optimal_days": 15,
+      "ret_3d": 15.71,
+      "ret_5d": 27.49,
+      "ret_10d": 62.04,
+      "ret_20d": 26.44
+    },
+    {
+      "date": "2020-04-01",
+      "year": 2020,
+      "sym": "ALOKINDS",
+      "price_now": 12.45,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -46.05,
+      "vol_ratio": 15.89,
+      "entry_px": 4.3,
+      "peak_ret": 1132.56,
+      "peak_days": 60,
+      "optimal_ret": 855.81,
+      "optimal_days": 65,
+      "ret_3d": 13.95,
+      "ret_5d": 24.42,
+      "ret_10d": 55.81,
+      "ret_20d": 102.33
+    },
+    {
+      "date": "2020-04-01",
+      "year": 2020,
+      "sym": "SWSOLAR",
+      "price_now": 203.67,
+      "patterns": [
+        "Hammer"
+      ],
+      "fall_15d": -38.13,
+      "vol_ratio": 4.63,
+      "entry_px": 84.0,
+      "peak_ret": 107.56,
+      "peak_days": 15,
+      "optimal_ret": 60.71,
+      "optimal_days": 20,
+      "ret_3d": 15.71,
+      "ret_5d": 27.56,
+      "ret_10d": 62.74,
+      "ret_20d": 60.71
+    },
+    {
+      "date": "2020-04-01",
+      "year": 2020,
+      "sym": "GAYAPROJ",
+      "price_now": 20.53,
+      "patterns": [
+        "Dragonfly Doji"
+      ],
+      "fall_15d": -41.69,
+      "vol_ratio": 4.2,
+      "entry_px": 9.35,
+      "peak_ret": 81.28,
+      "peak_days": 20,
+      "optimal_ret": 55.61,
+      "optimal_days": 25,
+      "ret_3d": 4.28,
+      "ret_5d": -5.35,
+      "ret_10d": 13.9,
+      "ret_20d": 81.28
+    },
+    {
+      "date": "2020-03-31",
+      "year": 2020,
+      "sym": "POKARNA",
+      "price_now": 824.35,
+      "patterns": [
+        "Piercing Line"
+      ],
+      "fall_15d": -28.98,
+      "vol_ratio": 3.82,
+      "entry_px": 50.9,
+      "peak_ret": 125.83,
+      "peak_days": 25,
+      "optimal_ret": 87.72,
+      "optimal_days": 30,
+      "ret_3d": 5.6,
+      "ret_5d": 16.21,
+      "ret_10d": 31.93,
+      "ret_20d": 92.83
+    },
+    {
+      "date": "2020-03-31",
+      "year": 2020,
+      "sym": "SWSOLAR",
+      "price_now": 203.67,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -43.42,
+      "vol_ratio": 11.31,
+      "entry_px": 80.0,
+      "peak_ret": 107.56,
+      "peak_days": 15,
+      "optimal_ret": 77.62,
+      "optimal_days": 20,
+      "ret_3d": 15.75,
+      "ret_5d": 27.56,
+      "ret_10d": 62.75,
+      "ret_20d": 77.62
+    },
+    {
+      "date": "2020-03-31",
+      "year": 2020,
+      "sym": "GAYAPROJ",
+      "price_now": 20.53,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -47.06,
+      "vol_ratio": 11.32,
+      "entry_px": 8.95,
+      "peak_ret": 81.56,
+      "peak_days": 20,
+      "optimal_ret": 70.95,
+      "optimal_days": 25,
+      "ret_3d": 14.53,
+      "ret_5d": 3.91,
+      "ret_10d": 13.41,
+      "ret_20d": 81.56
+    },
+    {
+      "date": "2020-03-31",
+      "year": 2020,
+      "sym": "ITI",
+      "price_now": 302.0,
+      "patterns": [
+        "Three White Soldiers"
+      ],
+      "fall_15d": -5.57,
+      "vol_ratio": 2.1,
+      "entry_px": 59.45,
+      "peak_ret": 46.93,
+      "peak_days": 5,
+      "optimal_ret": 36.67,
+      "optimal_days": 10,
+      "ret_3d": 16.23,
+      "ret_5d": 46.93,
+      "ret_10d": 36.67,
+      "ret_20d": 38.6
+    },
+    {
+      "date": "2020-03-31",
+      "year": 2020,
+      "sym": "EMKAY",
+      "price_now": 291.86,
+      "patterns": [
+        "Hammer"
+      ],
+      "fall_15d": -38.62,
+      "vol_ratio": 1.51,
+      "entry_px": 26.9,
+      "peak_ret": 41.45,
+      "peak_days": 10,
+      "optimal_ret": 31.04,
+      "optimal_days": 15,
+      "ret_3d": 15.43,
+      "ret_5d": 27.14,
+      "ret_10d": 41.45,
+      "ret_20d": 23.42
+    },
+    {
+      "date": "2020-03-30",
+      "year": 2020,
+      "sym": "ITI",
+      "price_now": 302.0,
+      "patterns": [
+        "Three White Soldiers"
+      ],
+      "fall_15d": -19.48,
+      "vol_ratio": 1.57,
+      "entry_px": 62.75,
+      "peak_ret": 38.73,
+      "peak_days": 10,
+      "optimal_ret": 34.18,
+      "optimal_days": 15,
+      "ret_3d": 1.67,
+      "ret_5d": 16.02,
+      "ret_10d": 38.73,
+      "ret_20d": 32.27
+    },
+    {
+      "date": "2020-03-30",
+      "year": 2020,
+      "sym": "JPPOWER",
+      "price_now": 19.03,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -45.0,
+      "vol_ratio": 2.75,
+      "entry_px": 0.6,
+      "peak_ret": 41.67,
+      "peak_days": 5,
+      "optimal_ret": 25.0,
+      "optimal_days": 10,
+      "ret_3d": 25.0,
+      "ret_5d": 41.67,
+      "ret_10d": 25.0,
+      "ret_20d": 16.67
+    },
+    {
+      "date": "2020-03-27",
+      "year": 2020,
+      "sym": "POKARNA",
+      "price_now": 824.35,
+      "patterns": [
+        "Hammer"
+      ],
+      "fall_15d": -33.68,
+      "vol_ratio": 1.65,
+      "entry_px": 48.55,
+      "peak_ret": 133.99,
+      "peak_days": 25,
+      "optimal_ret": 113.39,
+      "optimal_days": 30,
+      "ret_3d": 0.62,
+      "ret_5d": 10.71,
+      "ret_10d": 38.62,
+      "ret_20d": 83.42
+    },
+    {
+      "date": "2020-03-27",
+      "year": 2020,
+      "sym": "ITI",
+      "price_now": 302.0,
+      "patterns": [
+        "Three White Soldiers"
+      ],
+      "fall_15d": -28.25,
+      "vol_ratio": 1.62,
+      "entry_px": 57.25,
+      "peak_ret": 58.17,
+      "peak_days": 10,
+      "optimal_ret": 43.14,
+      "optimal_days": 15,
+      "ret_3d": 5.15,
+      "ret_5d": 20.7,
+      "ret_10d": 58.17,
+      "ret_20d": 43.76
+    },
+    {
+      "date": "2020-03-27",
+      "year": 2020,
+      "sym": "RPOWER",
+      "price_now": 28.59,
+      "patterns": [
+        "Dragonfly Doji"
+      ],
+      "fall_15d": -30.3,
+      "vol_ratio": 2.08,
+      "entry_px": 1.2,
+      "peak_ret": 83.33,
+      "peak_days": 20,
+      "optimal_ret": 50.0,
+      "optimal_days": 25,
+      "ret_3d": 12.5,
+      "ret_5d": 20.83,
+      "ret_10d": 41.67,
+      "ret_20d": 83.33
+    },
+    {
+      "date": "2020-03-26",
+      "year": 2020,
+      "sym": "SPARC",
+      "price_now": 212.82,
+      "patterns": [
+        "Morning Star"
+      ],
+      "fall_15d": -37.2,
+      "vol_ratio": 1.9,
+      "entry_px": 95.1,
+      "peak_ret": 48.63,
+      "peak_days": 15,
+      "optimal_ret": 48.63,
+      "optimal_days": 15,
+      "ret_3d": 2.79,
+      "ret_5d": 21.82,
+      "ret_10d": 45.9,
+      "ret_20d": 38.43
+    },
+    {
+      "date": "2020-03-26",
+      "year": 2020,
+      "sym": "FACT",
+      "price_now": 866.85,
+      "patterns": [
+        "Morning Star"
+      ],
+      "fall_15d": -9.25,
+      "vol_ratio": 2.31,
+      "entry_px": 27.2,
+      "peak_ret": 56.07,
+      "peak_days": 10,
+      "optimal_ret": 46.88,
+      "optimal_days": 15,
+      "ret_3d": 10.85,
+      "ret_5d": 11.76,
+      "ret_10d": 56.07,
+      "ret_20d": 51.47
+    },
+    {
+      "date": "2020-03-26",
+      "year": 2020,
+      "sym": "JPPOWER",
+      "price_now": 19.03,
+      "patterns": [
+        "Bullish Marubozu"
+      ],
+      "fall_15d": -59.09,
+      "vol_ratio": 6.4,
+      "entry_px": 0.5,
+      "peak_ret": 50.0,
+      "peak_days": 5,
+      "optimal_ret": 50.0,
+      "optimal_days": 10,
+      "ret_3d": 30.0,
+      "ret_5d": 50.0,
+      "ret_10d": 50.0,
+      "ret_20d": 40.0
+    },
+    {
+      "date": "2020-03-20",
+      "year": 2020,
+      "sym": "ITI",
+      "price_now": 302.0,
+      "patterns": [
+        "Morning Star"
+      ],
+      "fall_15d": -27.14,
+      "vol_ratio": 2.59,
+      "entry_px": 50.3,
+      "peak_ret": 80.02,
+      "peak_days": 15,
+      "optimal_ret": 62.92,
+      "optimal_days": 20,
+      "ret_3d": 1.69,
+      "ret_5d": 13.82,
+      "ret_10d": 37.38,
+      "ret_20d": 62.92
+    },
+    {
+      "date": "2020-03-20",
+      "year": 2020,
+      "sym": "SPARC",
+      "price_now": 212.82,
+      "patterns": [
+        "Morning Star"
+      ],
+      "fall_15d": -32.87,
+      "vol_ratio": 1.91,
+      "entry_px": 87.1,
+      "peak_ret": 60.56,
+      "peak_days": 20,
+      "optimal_ret": 60.56,
+      "optimal_days": 20,
+      "ret_3d": 12.11,
+      "ret_5d": 1.32,
+      "ret_10d": 37.26,
+      "ret_20d": 60.56
+    },
+    {
+      "date": "2020-03-20",
+      "year": 2020,
+      "sym": "PANAMAPET",
+      "price_now": 344.75,
+      "patterns": [
+        "Bullish Engulfing"
+      ],
+      "fall_15d": -38.93,
+      "vol_ratio": 1.8,
+      "entry_px": 27.15,
+      "peak_ret": 49.72,
+      "peak_days": 15,
+      "optimal_ret": 42.54,
+      "optimal_days": 20,
+      "ret_3d": 14.0,
+      "ret_5d": 0.18,
+      "ret_10d": 27.62,
+      "ret_20d": 42.54
+    },
+    {
+      "date": "2020-03-19",
+      "year": 2020,
+      "sym": "DCAL",
+      "price_now": 189.88,
+      "patterns": [
+        "Bullish Engulfing",
+        "Piercing Line"
+      ],
+      "fall_15d": -28.83,
+      "vol_ratio": 2.93,
+      "entry_px": 59.45,
+      "peak_ret": 48.19,
+      "peak_days": 20,
+      "optimal_ret": 40.79,
+      "optimal_days": 25,
+      "ret_3d": -14.13,
+      "ret_5d": -18.5,
+      "ret_10d": 3.78,
+      "ret_20d": 48.19
+    },
+    {
+      "date": "2020-03-13",
+      "year": 2020,
+      "sym": "FACT",
+      "price_now": 866.85,
+      "patterns": [
+        "Bullish Engulfing",
+        "Piercing Line"
+      ],
+      "fall_15d": -17.19,
+      "vol_ratio": 2.61,
+      "entry_px": 28.85,
+      "peak_ret": 47.83,
+      "peak_days": 25,
+      "optimal_ret": 41.94,
+      "optimal_days": 30,
+      "ret_3d": -12.82,
+      "ret_5d": -15.94,
+      "ret_10d": -2.6,
+      "ret_20d": 41.94
+    },
+    {
+      "date": "2020-03-11",
+      "year": 2020,
+      "sym": "INDSWFTLAB",
+      "price_now": 158.0,
+      "patterns": [
+        "Bullish Marubozu",
+        "Three White Soldiers"
+      ],
+      "fall_15d": -19.95,
+      "vol_ratio": 2.61,
+      "entry_px": 16.25,
+      "peak_ret": 58.77,
+      "peak_days": 20,
+      "optimal_ret": 35.38,
+      "optimal_days": 25,
+      "ret_3d": 12.0,
+      "ret_5d": 23.38,
+      "ret_10d": 29.23,
+      "ret_20d": 58.77
+    },
+    {
+      "date": "2020-02-07",
+      "year": 2020,
+      "sym": "SUVEN",
+      "price_now": 237.35,
+      "patterns": [
+        "Three White Soldiers"
+      ],
+      "fall_15d": -88.48,
+      "vol_ratio": 2.68,
+      "entry_px": 36.8,
+      "peak_ret": 60.73,
+      "peak_days": 10,
+      "optimal_ret": 52.17,
+      "optimal_days": 15,
+      "ret_3d": 14.54,
+      "ret_5d": 26.22,
+      "ret_10d": 60.73,
+      "ret_20d": 17.93
+    },
+    {
+      "date": "2020-02-06",
+      "year": 2020,
+      "sym": "SUVEN",
+      "price_now": 237.35,
+      "patterns": [
+        "Hammer"
+      ],
+      "fall_15d": -89.25,
+      "vol_ratio": 3.92,
+      "entry_px": 35.05,
+      "peak_ret": 68.05,
+      "peak_days": 15,
+      "optimal_ret": 30.24,
+      "optimal_days": 20,
+      "ret_3d": 15.55,
+      "ret_5d": 26.25,
+      "ret_10d": 60.77,
+      "ret_20d": 30.24
+    },
+    {
+      "date": "2020-02-04",
+      "year": 2020,
+      "sym": "WANBURY",
+      "price_now": 262.3,
+      "patterns": [
+        "Piercing Line"
+      ],
+      "fall_15d": -9.43,
+      "vol_ratio": 1.51,
+      "entry_px": 18.4,
+      "peak_ret": 67.93,
+      "peak_days": 15,
+      "optimal_ret": 31.79,
+      "optimal_days": 20,
+      "ret_3d": 2.99,
+      "ret_5d": 13.04,
+      "ret_10d": 42.93,
+      "ret_20d": 31.79
+    }
+  ],
+  "description": "Candle patterns (Hammer/Engulfing/Morning Star/etc) after a 5%+ fall with 1.5x+ volume \u2014 always giving 30%+ upside. Tracks optimal exit where weekly growth drops below 5%.",
+  "stocks": [
+    {
+      "sym": "ALOKINDS",
+      "price": 12.45,
+      "last_date": "2026-06-05",
+      "turnover_cr": 13.69,
+      "n_signals": 2,
+      "years": [
+        2020
+      ],
+      "dominant_pattern": "Bullish Marubozu",
+      "pattern_counts": {
+        "Bullish Marubozu": 2
+      },
+      "avg_peak_ret": 582.65,
+      "min_peak_ret": 32.75,
+      "avg_optimal_ret": 440.01,
+      "avg_opt_days": 40.0,
+      "avg_peak_days": 35.0,
+      "ret_5d": -2.35,
+      "ret_10d": 0.57,
+      "ret_15d": -9.59,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2020-07-24",
+          "year": 2020,
+          "close_at_signal": 27.35,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -48.4,
+          "vol_ratio": 2.34,
+          "entry_date": "2020-07-27",
+          "entry_px": 28.7,
+          "optimal_days": 15,
+          "optimal_ret": 24.22,
+          "peak_days": 10,
+          "peak_ret": 32.75,
+          "hold_rets": {
+            "3": 15.51,
+            "5": 27.18,
+            "10": 32.75,
+            "20": 18.82,
+            "44": -22.82,
+            "66": -23.52
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 27.18,
+              "weekly_inc": 27.18
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 32.75,
+              "weekly_inc": 5.57
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 24.22,
+              "weekly_inc": -8.54
+            }
+          ],
+          "ret_5d_before": -14.13,
+          "ret_10d_before": -33.45,
+          "ret_20d_before": -40.48
+        },
+        {
+          "date": "2020-04-01",
+          "year": 2020,
+          "close_at_signal": 4.1,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -46.05,
+          "vol_ratio": 15.89,
+          "entry_date": "2020-04-03",
+          "entry_px": 4.3,
+          "optimal_days": 65,
+          "optimal_ret": 855.81,
+          "peak_days": 60,
+          "peak_ret": 1132.56,
+          "hold_rets": {
+            "3": 13.95,
+            "5": 24.42,
+            "10": 55.81,
+            "20": 102.33,
+            "44": 530.23,
+            "66": 808.14
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 24.42,
+              "weekly_inc": 24.42
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 55.81,
+              "weekly_inc": 31.4
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 61.63,
+              "weekly_inc": 5.81
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 102.33,
+              "weekly_inc": 40.7
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 155.81,
+              "weekly_inc": 53.49
+            },
+            {
+              "week": 6,
+              "days": 30,
+              "cum_ret": 224.42,
+              "weekly_inc": 68.6
+            },
+            {
+              "week": 7,
+              "days": 35,
+              "cum_ret": 310.47,
+              "weekly_inc": 86.05
+            },
+            {
+              "week": 8,
+              "days": 40,
+              "cum_ret": 420.93,
+              "weekly_inc": 110.47
+            },
+            {
+              "week": 9,
+              "days": 45,
+              "cum_ret": 561.63,
+              "weekly_inc": 140.7
+            },
+            {
+              "week": 10,
+              "days": 50,
+              "cum_ret": 740.7,
+              "weekly_inc": 179.07
+            },
+            {
+              "week": 11,
+              "days": 55,
+              "cum_ret": 968.6,
+              "weekly_inc": 227.91
+            },
+            {
+              "week": 12,
+              "days": 60,
+              "cum_ret": 1132.56,
+              "weekly_inc": 163.95
+            },
+            {
+              "week": 13,
+              "days": 65,
+              "cum_ret": 855.81,
+              "weekly_inc": -276.74
+            }
+          ],
+          "ret_5d_before": -13.68,
+          "ret_10d_before": -31.67,
+          "ret_20d_before": -63.88
+        }
+      ]
+    },
+    {
+      "sym": "POKARNA",
+      "price": 824.35,
+      "last_date": "2026-06-05",
+      "turnover_cr": 4.84,
+      "n_signals": 3,
+      "years": [
+        2020,
+        2023
+      ],
+      "dominant_pattern": "Hammer",
+      "pattern_counts": {
+        "Hammer": 1,
+        "Piercing Line": 1,
+        "Bullish Engulfing": 1
+      },
+      "avg_peak_ret": 103.29,
+      "min_peak_ret": 50.05,
+      "avg_optimal_ret": 81.01,
+      "avg_opt_days": 25.0,
+      "avg_peak_days": 20.0,
+      "ret_5d": 2.95,
+      "ret_10d": 0.15,
+      "ret_15d": -2.01,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2023-03-29",
+          "year": 2023,
+          "close_at_signal": 256.0,
+          "patterns": [
+            "Bullish Engulfing"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -15.8,
+          "vol_ratio": 3.05,
+          "entry_date": "2023-03-31",
+          "entry_px": 244.55,
+          "optimal_days": 15,
+          "optimal_ret": 41.93,
+          "peak_days": 10,
+          "peak_ret": 50.05,
+          "hold_rets": {
+            "3": 14.25,
+            "5": 13.51,
+            "10": 50.05,
+            "20": 44.1,
+            "44": 46.19,
+            "66": 68.88
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 13.51,
+              "weekly_inc": 13.51
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 50.05,
+              "weekly_inc": 36.54
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 41.93,
+              "weekly_inc": -8.12
+            }
+          ],
+          "ret_5d_before": -4.67,
+          "ret_10d_before": -9.46,
+          "ret_20d_before": -11.0
+        },
+        {
+          "date": "2020-03-31",
+          "year": 2020,
+          "close_at_signal": 50.0,
+          "patterns": [
+            "Piercing Line"
+          ],
+          "primary_pattern": "Piercing Line",
+          "fall_15d_pct": -28.98,
+          "vol_ratio": 3.82,
+          "entry_date": "2020-04-01",
+          "entry_px": 50.9,
+          "optimal_days": 30,
+          "optimal_ret": 87.72,
+          "peak_days": 25,
+          "peak_ret": 125.83,
+          "hold_rets": {
+            "3": 5.6,
+            "5": 16.21,
+            "10": 31.93,
+            "20": 92.83,
+            "44": 106.97,
+            "66": 176.72
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 16.21,
+              "weekly_inc": 16.21
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 31.93,
+              "weekly_inc": 15.72
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 51.28,
+              "weekly_inc": 19.35
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 92.83,
+              "weekly_inc": 41.55
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 125.83,
+              "weekly_inc": 33.01
+            },
+            {
+              "week": 6,
+              "days": 30,
+              "cum_ret": 87.72,
+              "weekly_inc": -38.11
+            }
+          ],
+          "ret_5d_before": -0.5,
+          "ret_10d_before": -17.97,
+          "ret_20d_before": -36.31
+        },
+        {
+          "date": "2020-03-27",
+          "year": 2020,
+          "close_at_signal": 51.1,
+          "patterns": [
+            "Hammer"
+          ],
+          "primary_pattern": "Hammer",
+          "fall_15d_pct": -33.68,
+          "vol_ratio": 1.65,
+          "entry_date": "2020-03-30",
+          "entry_px": 48.55,
+          "optimal_days": 30,
+          "optimal_ret": 113.39,
+          "peak_days": 25,
+          "peak_ret": 133.99,
+          "hold_rets": {
+            "3": 0.62,
+            "5": 10.71,
+            "10": 38.62,
+            "20": 83.42,
+            "44": 135.12,
+            "66": 210.71
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 10.71,
+              "weekly_inc": 10.71
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 38.62,
+              "weekly_inc": 27.91
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 44.28,
+              "weekly_inc": 5.66
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 83.42,
+              "weekly_inc": 39.13
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 133.99,
+              "weekly_inc": 50.57
+            },
+            {
+              "week": 6,
+              "days": 30,
+              "cum_ret": 113.39,
+              "weekly_inc": -20.6
+            }
+          ],
+          "ret_5d_before": -6.41,
+          "ret_10d_before": -23.67,
+          "ret_20d_before": -37.3
+        }
+      ]
+    },
+    {
+      "sym": "BCG",
+      "price": 12.09,
+      "last_date": "2026-06-05",
+      "turnover_cr": 21.93,
+      "n_signals": 4,
+      "years": [
+        2022,
+        2023
+      ],
+      "dominant_pattern": "Dragonfly Doji",
+      "pattern_counts": {
+        "Dragonfly Doji": 3,
+        "Bullish Marubozu": 1
+      },
+      "avg_peak_ret": 98.09,
+      "min_peak_ret": 32.07,
+      "avg_optimal_ret": 90.72,
+      "avg_opt_days": 26.25,
+      "avg_peak_days": 22.5,
+      "ret_5d": 15.8,
+      "ret_10d": 15.03,
+      "ret_15d": 33.3,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2023-09-08",
+          "year": 2023,
+          "close_at_signal": 13.85,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -45.47,
+          "vol_ratio": 5.22,
+          "entry_date": "2023-09-11",
+          "entry_px": 14.5,
+          "optimal_days": 15,
+          "optimal_ret": 31.03,
+          "peak_days": 10,
+          "peak_ret": 32.07,
+          "hold_rets": {
+            "3": 15.17,
+            "5": 26.55,
+            "10": 32.07,
+            "20": 16.9,
+            "44": 17.93,
+            "66": 37.24
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 26.55,
+              "weekly_inc": 26.55
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 32.07,
+              "weekly_inc": 5.52
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 31.03,
+              "weekly_inc": -1.03
+            }
+          ],
+          "ret_5d_before": -14.24,
+          "ret_10d_before": -33.57,
+          "ret_20d_before": -43.81
+        },
+        {
+          "date": "2023-05-10",
+          "year": 2023,
+          "close_at_signal": 12.95,
+          "patterns": [
+            "Dragonfly Doji"
+          ],
+          "primary_pattern": "Dragonfly Doji",
+          "fall_15d_pct": -7.5,
+          "vol_ratio": 1.75,
+          "entry_date": "2023-05-11",
+          "entry_px": 13.55,
+          "optimal_days": 35,
+          "optimal_ret": 130.26,
+          "peak_days": 30,
+          "peak_ret": 143.91,
+          "hold_rets": {
+            "3": 15.13,
+            "5": 14.76,
+            "10": 20.3,
+            "20": 66.42,
+            "44": 84.5,
+            "66": 77.49
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 14.76,
+              "weekly_inc": 14.76
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 20.3,
+              "weekly_inc": 5.54
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 44.65,
+              "weekly_inc": 24.35
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 66.42,
+              "weekly_inc": 21.77
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 111.44,
+              "weekly_inc": 45.02
+            },
+            {
+              "week": 6,
+              "days": 30,
+              "cum_ret": 143.91,
+              "weekly_inc": 32.47
+            },
+            {
+              "week": 7,
+              "days": 35,
+              "cum_ret": 130.26,
+              "weekly_inc": -13.65
+            }
+          ],
+          "ret_5d_before": 26.34,
+          "ret_10d_before": 18.81,
+          "ret_20d_before": -26.42
+        },
+        {
+          "date": "2023-05-04",
+          "year": 2023,
+          "close_at_signal": 10.75,
+          "patterns": [
+            "Dragonfly Doji"
+          ],
+          "primary_pattern": "Dragonfly Doji",
+          "fall_15d_pct": -35.82,
+          "vol_ratio": 2.72,
+          "entry_date": "2023-05-05",
+          "entry_px": 11.25,
+          "optimal_days": 40,
+          "optimal_ret": 183.56,
+          "peak_days": 40,
+          "peak_ret": 183.56,
+          "hold_rets": {
+            "3": 15.11,
+            "5": 26.22,
+            "10": 31.56,
+            "20": 82.67,
+            "44": 171.56,
+            "66": 115.11
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 26.22,
+              "weekly_inc": 26.22
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 31.56,
+              "weekly_inc": 5.33
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 44.0,
+              "weekly_inc": 12.44
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 82.67,
+              "weekly_inc": 38.67
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 110.22,
+              "weekly_inc": 27.56
+            },
+            {
+              "week": 6,
+              "days": 30,
+              "cum_ret": 167.11,
+              "weekly_inc": 56.89
+            },
+            {
+              "week": 7,
+              "days": 35,
+              "cum_ret": 179.11,
+              "weekly_inc": 12.0
+            },
+            {
+              "week": 8,
+              "days": 40,
+              "cum_ret": 183.56,
+              "weekly_inc": 4.44
+            }
+          ],
+          "ret_5d_before": 3.86,
+          "ret_10d_before": -19.17,
+          "ret_20d_before": -26.37
+        },
+        {
+          "date": "2022-07-06",
+          "year": 2022,
+          "close_at_signal": 38.0,
+          "patterns": [
+            "Dragonfly Doji"
+          ],
+          "primary_pattern": "Dragonfly Doji",
+          "fall_15d_pct": -23.39,
+          "vol_ratio": 1.97,
+          "entry_date": "2022-07-07",
+          "entry_px": 39.9,
+          "optimal_days": 15,
+          "optimal_ret": 18.05,
+          "peak_days": 10,
+          "peak_ret": 32.83,
+          "hold_rets": {
+            "3": 15.41,
+            "5": 15.16,
+            "10": 32.83,
+            "20": 6.64,
+            "44": 1.5,
+            "66": -8.9
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 15.16,
+              "weekly_inc": 15.16
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 32.83,
+              "weekly_inc": 17.67
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 18.05,
+              "weekly_inc": -14.79
+            }
+          ],
+          "ret_5d_before": 27.09,
+          "ret_10d_before": -1.3,
+          "ret_20d_before": -34.03
+        }
+      ]
+    },
+    {
+      "sym": "OPTIEMUS",
+      "price": 453.5,
+      "last_date": "2026-06-05",
+      "turnover_cr": 21.42,
+      "n_signals": 2,
+      "years": [
+        2021,
+        2023
+      ],
+      "dominant_pattern": "Morning Star",
+      "pattern_counts": {
+        "Morning Star": 2
+      },
+      "avg_peak_ret": 90.2,
+      "min_peak_ret": 30.88,
+      "avg_optimal_ret": 67.17,
+      "avg_opt_days": 25.0,
+      "avg_peak_days": 20.0,
+      "ret_5d": 11.89,
+      "ret_10d": 7.87,
+      "ret_15d": 7.6,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2023-05-09",
+          "year": 2023,
+          "close_at_signal": 177.5,
+          "patterns": [
+            "Morning Star"
+          ],
+          "primary_pattern": "Morning Star",
+          "fall_15d_pct": -7.94,
+          "vol_ratio": 1.82,
+          "entry_date": "2023-05-10",
+          "entry_px": 177.6,
+          "optimal_days": 20,
+          "optimal_ret": 28.52,
+          "peak_days": 15,
+          "peak_ret": 30.88,
+          "hold_rets": {
+            "3": -6.28,
+            "5": -2.79,
+            "10": 22.33,
+            "20": 28.52,
+            "44": 36.82,
+            "66": 34.54
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -2.79,
+              "weekly_inc": -2.79
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 22.33,
+              "weekly_inc": 25.11
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 30.88,
+              "weekly_inc": 8.56
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 28.52,
+              "weekly_inc": -2.36
+            }
+          ],
+          "ret_5d_before": 6.48,
+          "ret_10d_before": 6.29,
+          "ret_20d_before": -15.31
+        },
+        {
+          "date": "2021-08-12",
+          "year": 2021,
+          "close_at_signal": 149.35,
+          "patterns": [
+            "Morning Star"
+          ],
+          "primary_pattern": "Morning Star",
+          "fall_15d_pct": -9.95,
+          "vol_ratio": 1.71,
+          "entry_date": "2021-08-13",
+          "entry_px": 148.1,
+          "optimal_days": 30,
+          "optimal_ret": 105.81,
+          "peak_days": 25,
+          "peak_ret": 149.53,
+          "hold_rets": {
+            "3": -3.51,
+            "5": -5.23,
+            "10": 20.86,
+            "20": 96.69,
+            "44": 148.18,
+            "66": 130.22
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -5.23,
+              "weekly_inc": -5.23
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 20.86,
+              "weekly_inc": 26.1
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 54.19,
+              "weekly_inc": 33.32
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 96.69,
+              "weekly_inc": 42.51
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 149.53,
+              "weekly_inc": 52.84
+            },
+            {
+              "week": 6,
+              "days": 30,
+              "cum_ret": 105.81,
+              "weekly_inc": -43.72
+            }
+          ],
+          "ret_5d_before": 2.96,
+          "ret_10d_before": 0.47,
+          "ret_20d_before": -14.12
+        }
+      ]
+    },
+    {
+      "sym": "SUVEN",
+      "price": 237.35,
+      "last_date": "2026-06-05",
+      "turnover_cr": 60.27,
+      "n_signals": 3,
+      "years": [
+        2020
+      ],
+      "dominant_pattern": "Hammer",
+      "pattern_counts": {
+        "Hammer": 1,
+        "Three White Soldiers": 1,
+        "Bullish Marubozu": 1
+      },
+      "avg_peak_ret": 77.97,
+      "min_peak_ret": 60.73,
+      "avg_optimal_ret": 52.77,
+      "avg_opt_days": 18.33,
+      "avg_peak_days": 13.33,
+      "ret_5d": -15.03,
+      "ret_10d": -11.94,
+      "ret_15d": 14.91,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2020-04-03",
+          "year": 2020,
+          "close_at_signal": 21.35,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -48.24,
+          "vol_ratio": 8.43,
+          "entry_date": "2020-04-07",
+          "entry_px": 22.4,
+          "optimal_days": 20,
+          "optimal_ret": 75.89,
+          "peak_days": 15,
+          "peak_ret": 105.13,
+          "hold_rets": {
+            "3": 15.4,
+            "5": 27.01,
+            "10": 61.38,
+            "20": 75.89,
+            "44": 43.3,
+            "66": 68.75
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 27.01,
+              "weekly_inc": 27.01
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 61.38,
+              "weekly_inc": 34.37
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 105.13,
+              "weekly_inc": 43.75
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 75.89,
+              "weekly_inc": -29.24
+            }
+          ],
+          "ret_5d_before": -14.08,
+          "ret_10d_before": -33.28,
+          "ret_20d_before": -59.87
+        },
+        {
+          "date": "2020-02-07",
+          "year": 2020,
+          "close_at_signal": 35.05,
+          "patterns": [
+            "Three White Soldiers"
+          ],
+          "primary_pattern": "Three White Soldiers",
+          "fall_15d_pct": -88.48,
+          "vol_ratio": 2.68,
+          "entry_date": "2020-02-10",
+          "entry_px": 36.8,
+          "optimal_days": 15,
+          "optimal_ret": 52.17,
+          "peak_days": 10,
+          "peak_ret": 60.73,
+          "hold_rets": {
+            "3": 14.54,
+            "5": 26.22,
+            "10": 60.73,
+            "20": 17.93,
+            "44": -14.95,
+            "66": 1.09
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 26.22,
+              "weekly_inc": 26.22
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 60.73,
+              "weekly_inc": 34.51
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 52.17,
+              "weekly_inc": -8.56
+            }
+          ],
+          "ret_5d_before": 50.11,
+          "ret_10d_before": 91.01,
+          "ret_20d_before": -88.51
+        },
+        {
+          "date": "2020-02-06",
+          "year": 2020,
+          "close_at_signal": 33.4,
+          "patterns": [
+            "Hammer"
+          ],
+          "primary_pattern": "Hammer",
+          "fall_15d_pct": -89.25,
+          "vol_ratio": 3.92,
+          "entry_date": "2020-02-07",
+          "entry_px": 35.05,
+          "optimal_days": 20,
+          "optimal_ret": 30.24,
+          "peak_days": 15,
+          "peak_ret": 68.05,
+          "hold_rets": {
+            "3": 15.55,
+            "5": 26.25,
+            "10": 60.77,
+            "20": 30.24,
+            "44": -14.84,
+            "66": 1.14
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 26.25,
+              "weekly_inc": 26.25
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 60.77,
+              "weekly_inc": 34.52
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 68.05,
+              "weekly_inc": 7.28
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 30.24,
+              "weekly_inc": -37.8
+            }
+          ],
+          "ret_5d_before": 50.11,
+          "ret_10d_before": 90.86,
+          "ret_20d_before": -89.09
+        }
+      ]
+    },
+    {
+      "sym": "SWSOLAR",
+      "price": 203.67,
+      "last_date": "2026-06-05",
+      "turnover_cr": 59.2,
+      "n_signals": 6,
+      "years": [
+        2020,
+        2023
+      ],
+      "dominant_pattern": "Dragonfly Doji",
+      "pattern_counts": {
+        "Dragonfly Doji": 3,
+        "Hammer": 2,
+        "Bullish Marubozu": 1,
+        "Morning Star": 1
+      },
+      "avg_peak_ret": 77.07,
+      "min_peak_ret": 51.87,
+      "avg_optimal_ret": 50.59,
+      "avg_opt_days": 20.0,
+      "avg_peak_days": 15.0,
+      "ret_5d": 8.58,
+      "ret_10d": 3.63,
+      "ret_15d": 0.29,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2023-11-03",
+          "year": 2023,
+          "close_at_signal": 275.25,
+          "patterns": [
+            "Morning Star"
+          ],
+          "primary_pattern": "Morning Star",
+          "fall_15d_pct": -9.71,
+          "vol_ratio": 1.67,
+          "entry_date": "2023-11-06",
+          "entry_px": 279.45,
+          "optimal_days": 30,
+          "optimal_ret": 51.19,
+          "peak_days": 25,
+          "peak_ret": 51.87,
+          "hold_rets": {
+            "3": 3.45,
+            "5": 1.04,
+            "10": 7.3,
+            "20": 38.93,
+            "44": 60.1,
+            "66": 98.87
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 1.04,
+              "weekly_inc": 1.04
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 7.3,
+              "weekly_inc": 6.26
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 21.01,
+              "weekly_inc": 13.71
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 38.93,
+              "weekly_inc": 17.93
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 51.87,
+              "weekly_inc": 12.94
+            },
+            {
+              "week": 6,
+              "days": 30,
+              "cum_ret": 51.19,
+              "weekly_inc": -0.68
+            }
+          ],
+          "ret_5d_before": -0.33,
+          "ret_10d_before": -1.56,
+          "ret_20d_before": -18.58
+        },
+        {
+          "date": "2020-04-13",
+          "year": 2020,
+          "close_at_signal": 102.05,
+          "patterns": [
+            "Hammer",
+            "Dragonfly Doji"
+          ],
+          "primary_pattern": "Hammer",
+          "fall_15d_pct": -6.8,
+          "vol_ratio": 2.02,
+          "entry_date": "2020-04-15",
+          "entry_px": 107.15,
+          "optimal_days": 15,
+          "optimal_ret": 25.99,
+          "peak_days": 10,
+          "peak_ret": 62.72,
+          "hold_rets": {
+            "3": 15.73,
+            "5": 27.58,
+            "10": 62.72,
+            "20": 4.34,
+            "44": 50.44,
+            "66": 125.15
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 27.58,
+              "weekly_inc": 27.58
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 62.72,
+              "weekly_inc": 35.14
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 25.99,
+              "weekly_inc": -36.72
+            }
+          ],
+          "ret_5d_before": 27.56,
+          "ret_10d_before": 19.36,
+          "ret_20d_before": -21.08
+        },
+        {
+          "date": "2020-04-08",
+          "year": 2020,
+          "close_at_signal": 92.6,
+          "patterns": [
+            "Dragonfly Doji"
+          ],
+          "primary_pattern": "Dragonfly Doji",
+          "fall_15d_pct": -19.41,
+          "vol_ratio": 1.87,
+          "entry_date": "2020-04-09",
+          "entry_px": 97.2,
+          "optimal_days": 15,
+          "optimal_ret": 53.86,
+          "peak_days": 10,
+          "peak_ret": 62.71,
+          "hold_rets": {
+            "3": 15.74,
+            "5": 27.57,
+            "10": 62.71,
+            "20": 23.35,
+            "44": 63.12,
+            "66": 146.35
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 27.57,
+              "weekly_inc": 27.57
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 62.71,
+              "weekly_inc": 35.13
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 53.86,
+              "weekly_inc": -8.85
+            }
+          ],
+          "ret_5d_before": 26.24,
+          "ret_10d_before": -2.22,
+          "ret_20d_before": -35.36
+        },
+        {
+          "date": "2020-04-07",
+          "year": 2020,
+          "close_at_signal": 88.2,
+          "patterns": [
+            "Dragonfly Doji"
+          ],
+          "primary_pattern": "Dragonfly Doji",
+          "fall_15d_pct": -24.45,
+          "vol_ratio": 1.84,
+          "entry_date": "2020-04-08",
+          "entry_px": 92.6,
+          "optimal_days": 20,
+          "optimal_ret": 34.18,
+          "peak_days": 15,
+          "peak_ret": 69.98,
+          "hold_rets": {
+            "3": 15.71,
+            "5": 27.54,
+            "10": 62.69,
+            "20": 34.18,
+            "44": 71.65,
+            "66": 147.57
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 27.54,
+              "weekly_inc": 27.54
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 62.69,
+              "weekly_inc": 35.15
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 69.98,
+              "weekly_inc": 7.29
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 34.18,
+              "weekly_inc": -35.8
+            }
+          ],
+          "ret_5d_before": 14.25,
+          "ret_10d_before": -11.49,
+          "ret_20d_before": -39.61
+        },
+        {
+          "date": "2020-04-01",
+          "year": 2020,
+          "close_at_signal": 80.0,
+          "patterns": [
+            "Hammer"
+          ],
+          "primary_pattern": "Hammer",
+          "fall_15d_pct": -38.13,
+          "vol_ratio": 4.63,
+          "entry_date": "2020-04-03",
+          "entry_px": 84.0,
+          "optimal_days": 20,
+          "optimal_ret": 60.71,
+          "peak_days": 15,
+          "peak_ret": 107.56,
+          "hold_rets": {
+            "3": 15.71,
+            "5": 27.56,
+            "10": 62.74,
+            "20": 60.71,
+            "44": 89.88,
+            "66": 168.27
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 27.56,
+              "weekly_inc": 27.56
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 62.74,
+              "weekly_inc": 35.18
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 107.56,
+              "weekly_inc": 44.82
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 60.71,
+              "weekly_inc": -46.85
+            }
+          ],
+          "ret_5d_before": -6.43,
+          "ret_10d_before": -26.94,
+          "ret_20d_before": -46.7
+        },
+        {
+          "date": "2020-03-31",
+          "year": 2020,
+          "close_at_signal": 77.0,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -43.42,
+          "vol_ratio": 11.31,
+          "entry_date": "2020-04-01",
+          "entry_px": 80.0,
+          "optimal_days": 20,
+          "optimal_ret": 77.62,
+          "peak_days": 15,
+          "peak_ret": 107.56,
+          "hold_rets": {
+            "3": 15.75,
+            "5": 27.56,
+            "10": 62.75,
+            "20": 77.62,
+            "44": 100.0,
+            "66": 190.69
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 27.56,
+              "weekly_inc": 27.56
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 62.75,
+              "weekly_inc": 35.19
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 107.56,
+              "weekly_inc": 44.81
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 77.62,
+              "weekly_inc": -29.94
+            }
+          ],
+          "ret_5d_before": -14.44,
+          "ret_10d_before": -33.1,
+          "ret_20d_before": -51.06
+        }
+      ]
+    },
+    {
+      "sym": "DCAL",
+      "price": 189.88,
+      "last_date": "2026-06-05",
+      "turnover_cr": 4.03,
+      "n_signals": 3,
+      "years": [
+        2020
+      ],
+      "dominant_pattern": "Bullish Engulfing",
+      "pattern_counts": {
+        "Bullish Engulfing": 2,
+        "Piercing Line": 1,
+        "Hammer": 1
+      },
+      "avg_peak_ret": 69.98,
+      "min_peak_ret": 48.19,
+      "avg_optimal_ret": 64.01,
+      "avg_opt_days": 16.67,
+      "avg_peak_days": 13.33,
+      "ret_5d": -2.48,
+      "ret_10d": -10.38,
+      "ret_15d": 6.9,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2020-06-03",
+          "year": 2020,
+          "close_at_signal": 70.1,
+          "patterns": [
+            "Hammer"
+          ],
+          "primary_pattern": "Hammer",
+          "fall_15d_pct": -7.21,
+          "vol_ratio": 2.82,
+          "entry_date": "2020-06-04",
+          "entry_px": 73.6,
+          "optimal_days": 10,
+          "optimal_ret": 66.24,
+          "peak_days": 10,
+          "peak_ret": 66.24,
+          "hold_rets": {
+            "3": 38.79,
+            "5": 61.89,
+            "10": 66.24,
+            "20": 71.2,
+            "44": 180.91,
+            "66": 151.9
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 61.89,
+              "weekly_inc": 61.89
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 66.24,
+              "weekly_inc": 4.35
+            }
+          ],
+          "ret_5d_before": 4.78,
+          "ret_10d_before": -6.1,
+          "ret_20d_before": -12.27
+        },
+        {
+          "date": "2020-06-01",
+          "year": 2020,
+          "close_at_signal": 67.7,
+          "patterns": [
+            "Bullish Engulfing"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -10.39,
+          "vol_ratio": 4.33,
+          "entry_date": "2020-06-02",
+          "entry_px": 66.95,
+          "optimal_days": 15,
+          "optimal_ret": 84.99,
+          "peak_days": 10,
+          "peak_ret": 95.52,
+          "hold_rets": {
+            "3": 7.47,
+            "5": 52.58,
+            "10": 95.52,
+            "20": 81.85,
+            "44": 208.07,
+            "66": 161.46
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 52.58,
+              "weekly_inc": 52.58
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 95.52,
+              "weekly_inc": 42.94
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 84.99,
+              "weekly_inc": -10.53
+            }
+          ],
+          "ret_5d_before": -8.02,
+          "ret_10d_before": -9.85,
+          "ret_20d_before": -19.12
+        },
+        {
+          "date": "2020-03-19",
+          "year": 2020,
+          "close_at_signal": 60.1,
+          "patterns": [
+            "Bullish Engulfing",
+            "Piercing Line"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -28.83,
+          "vol_ratio": 2.93,
+          "entry_date": "2020-03-20",
+          "entry_px": 59.45,
+          "optimal_days": 25,
+          "optimal_ret": 40.79,
+          "peak_days": 20,
+          "peak_ret": 48.19,
+          "hold_rets": {
+            "3": -14.13,
+            "5": -18.5,
+            "10": 3.78,
+            "20": 48.19,
+            "44": 8.58,
+            "66": 104.79
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -18.5,
+              "weekly_inc": -18.5
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 3.78,
+              "weekly_inc": 22.29
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 32.13,
+              "weekly_inc": 28.34
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 48.19,
+              "weekly_inc": 16.06
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 40.79,
+              "weekly_inc": -7.4
+            }
+          ],
+          "ret_5d_before": -8.66,
+          "ret_10d_before": -17.56,
+          "ret_20d_before": -36.87
+        }
+      ]
+    },
+    {
+      "sym": "GAYAPROJ",
+      "price": 20.53,
+      "last_date": "2026-06-05",
+      "turnover_cr": 2.19,
+      "n_signals": 5,
+      "years": [
+        2020,
+        2022
+      ],
+      "dominant_pattern": "Dragonfly Doji",
+      "pattern_counts": {
+        "Dragonfly Doji": 3,
+        "Bullish Marubozu": 1,
+        "Morning Star": 1
+      },
+      "avg_peak_ret": 67.93,
+      "min_peak_ret": 30.58,
+      "avg_optimal_ret": 48.1,
+      "avg_opt_days": 24.0,
+      "avg_peak_days": 20.0,
+      "ret_5d": 9.67,
+      "ret_10d": 21.91,
+      "ret_15d": 8.28,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2022-09-23",
+          "year": 2022,
+          "close_at_signal": 11.1,
+          "patterns": [
+            "Morning Star"
+          ],
+          "primary_pattern": "Morning Star",
+          "fall_15d_pct": -17.16,
+          "vol_ratio": 1.52,
+          "entry_date": "2022-09-26",
+          "entry_px": 10.3,
+          "optimal_days": 20,
+          "optimal_ret": 30.58,
+          "peak_days": 20,
+          "peak_ret": 30.58,
+          "hold_rets": {
+            "3": -13.59,
+            "5": -20.39,
+            "10": 11.65,
+            "20": 30.58,
+            "44": -10.68,
+            "66": -15.05
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -20.39,
+              "weekly_inc": -20.39
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 11.65,
+              "weekly_inc": 32.04
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 28.16,
+              "weekly_inc": 16.5
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 30.58,
+              "weekly_inc": 2.43
+            }
+          ],
+          "ret_5d_before": -5.53,
+          "ret_10d_before": -6.33,
+          "ret_20d_before": -24.23
+        },
+        {
+          "date": "2020-04-08",
+          "year": 2020,
+          "close_at_signal": 10.25,
+          "patterns": [
+            "Dragonfly Doji"
+          ],
+          "primary_pattern": "Dragonfly Doji",
+          "fall_15d_pct": -22.64,
+          "vol_ratio": 1.83,
+          "entry_date": "2020-04-09",
+          "entry_px": 9.75,
+          "optimal_days": 25,
+          "optimal_ret": 42.05,
+          "peak_days": 20,
+          "peak_ret": 65.13,
+          "hold_rets": {
+            "3": -9.23,
+            "5": -0.51,
+            "10": 25.64,
+            "20": 65.13,
+            "44": 74.87,
+            "66": 63.08
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -0.51,
+              "weekly_inc": -0.51
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 25.64,
+              "weekly_inc": 26.15
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 58.97,
+              "weekly_inc": 33.33
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 65.13,
+              "weekly_inc": 6.15
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 42.05,
+              "weekly_inc": -23.08
+            }
+          ],
+          "ret_5d_before": 25.77,
+          "ret_10d_before": -0.97,
+          "ret_20d_before": -39.53
+        },
+        {
+          "date": "2020-04-03",
+          "year": 2020,
+          "close_at_signal": 9.35,
+          "patterns": [
+            "Dragonfly Doji"
+          ],
+          "primary_pattern": "Dragonfly Doji",
+          "fall_15d_pct": -35.96,
+          "vol_ratio": 3.02,
+          "entry_date": "2020-04-07",
+          "entry_px": 9.8,
+          "optimal_days": 25,
+          "optimal_ret": 41.33,
+          "peak_days": 20,
+          "peak_ret": 81.12,
+          "hold_rets": {
+            "3": -5.1,
+            "5": -9.69,
+            "10": 13.78,
+            "20": 81.12,
+            "44": 91.84,
+            "66": 66.84
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -9.69,
+              "weekly_inc": -9.69
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 13.78,
+              "weekly_inc": 23.47
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 43.88,
+              "weekly_inc": 30.1
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 81.12,
+              "weekly_inc": 37.24
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 41.33,
+              "weekly_inc": -39.8
+            }
+          ],
+          "ret_5d_before": 4.47,
+          "ret_10d_before": -17.98,
+          "ret_20d_before": -50.0
+        },
+        {
+          "date": "2020-04-01",
+          "year": 2020,
+          "close_at_signal": 8.95,
+          "patterns": [
+            "Dragonfly Doji"
+          ],
+          "primary_pattern": "Dragonfly Doji",
+          "fall_15d_pct": -41.69,
+          "vol_ratio": 4.2,
+          "entry_date": "2020-04-03",
+          "entry_px": 9.35,
+          "optimal_days": 25,
+          "optimal_ret": 55.61,
+          "peak_days": 20,
+          "peak_ret": 81.28,
+          "hold_rets": {
+            "3": 4.28,
+            "5": -5.35,
+            "10": 13.9,
+            "20": 81.28,
+            "44": 98.4,
+            "66": 68.98
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -5.35,
+              "weekly_inc": -5.35
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 13.9,
+              "weekly_inc": 19.25
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 43.85,
+              "weekly_inc": 29.95
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 81.28,
+              "weekly_inc": 37.43
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 55.61,
+              "weekly_inc": -25.67
+            }
+          ],
+          "ret_5d_before": -4.79,
+          "ret_10d_before": -25.42,
+          "ret_20d_before": -54.45
+        },
+        {
+          "date": "2020-03-31",
+          "year": 2020,
+          "close_at_signal": 8.55,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -47.06,
+          "vol_ratio": 11.32,
+          "entry_date": "2020-04-01",
+          "entry_px": 8.95,
+          "optimal_days": 25,
+          "optimal_ret": 70.95,
+          "peak_days": 20,
+          "peak_ret": 81.56,
+          "hold_rets": {
+            "3": 14.53,
+            "5": 3.91,
+            "10": 13.41,
+            "20": 81.56,
+            "44": 98.32,
+            "66": 81.56
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 3.91,
+              "weekly_inc": 3.91
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 13.41,
+              "weekly_inc": 9.5
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 43.58,
+              "weekly_inc": 30.17
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 81.56,
+              "weekly_inc": 37.99
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 70.95,
+              "weekly_inc": -10.61
+            }
+          ],
+          "ret_5d_before": -13.2,
+          "ret_10d_before": -32.14,
+          "ret_20d_before": -58.6
+        }
+      ]
+    },
+    {
+      "sym": "WEBELSOLAR",
+      "price": 110.76,
+      "last_date": "2026-06-05",
+      "turnover_cr": 43.01,
+      "n_signals": 2,
+      "years": [
+        2023,
+        2024
+      ],
+      "dominant_pattern": "Bullish Engulfing",
+      "pattern_counts": {
+        "Bullish Engulfing": 1,
+        "Piercing Line": 1,
+        "Three White Soldiers": 1
+      },
+      "avg_peak_ret": 64.42,
+      "min_peak_ret": 37.48,
+      "avg_optimal_ret": 57.66,
+      "avg_opt_days": 30.0,
+      "avg_peak_days": 25.0,
+      "ret_5d": 1.37,
+      "ret_10d": 5.22,
+      "ret_15d": 5.11,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2024-03-18",
+          "year": 2024,
+          "close_at_signal": 361.55,
+          "patterns": [
+            "Three White Soldiers"
+          ],
+          "primary_pattern": "Three White Soldiers",
+          "fall_15d_pct": -12.96,
+          "vol_ratio": 1.78,
+          "entry_date": "2024-03-19",
+          "entry_px": 362.4,
+          "optimal_days": 30,
+          "optimal_ret": 78.44,
+          "peak_days": 25,
+          "peak_ret": 91.36,
+          "hold_rets": {
+            "3": 15.69,
+            "5": 27.54,
+            "10": 47.63,
+            "20": 84.82,
+            "44": 61.99,
+            "66": 59.96
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 27.54,
+              "weekly_inc": 27.54
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 47.63,
+              "weekly_inc": 20.09
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 64.6,
+              "weekly_inc": 16.97
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 84.82,
+              "weekly_inc": 20.23
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 91.36,
+              "weekly_inc": 6.54
+            },
+            {
+              "week": 6,
+              "days": 30,
+              "cum_ret": 78.44,
+              "weekly_inc": -12.93
+            }
+          ],
+          "ret_5d_before": -2.93,
+          "ret_10d_before": -9.03,
+          "ret_20d_before": -12.87
+        },
+        {
+          "date": "2023-07-13",
+          "year": 2023,
+          "close_at_signal": 85.6,
+          "patterns": [
+            "Bullish Engulfing",
+            "Piercing Line"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -5.52,
+          "vol_ratio": 2.33,
+          "entry_date": "2023-07-14",
+          "entry_px": 84.85,
+          "optimal_days": 30,
+          "optimal_ret": 36.89,
+          "peak_days": 25,
+          "peak_ret": 37.48,
+          "hold_rets": {
+            "3": 0.41,
+            "5": -1.3,
+            "10": 14.61,
+            "20": 31.17,
+            "44": 69.3,
+            "66": 121.33
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -1.3,
+              "weekly_inc": -1.3
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 14.61,
+              "weekly_inc": 15.91
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 23.16,
+              "weekly_inc": 8.54
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 31.17,
+              "weekly_inc": 8.01
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 37.48,
+              "weekly_inc": 6.31
+            },
+            {
+              "week": 6,
+              "days": 30,
+              "cum_ret": 36.89,
+              "weekly_inc": -0.59
+            }
+          ],
+          "ret_5d_before": -3.0,
+          "ret_10d_before": -0.64,
+          "ret_20d_before": -7.01
+        }
+      ]
+    },
+    {
+      "sym": "TEJASNET",
+      "price": 576.2,
+      "last_date": "2026-06-05",
+      "turnover_cr": 1304.04,
+      "n_signals": 2,
+      "years": [
+        2020
+      ],
+      "dominant_pattern": "Morning Star",
+      "pattern_counts": {
+        "Morning Star": 1,
+        "Dragonfly Doji": 1
+      },
+      "avg_peak_ret": 61.28,
+      "min_peak_ret": 57.8,
+      "avg_optimal_ret": 52.66,
+      "avg_opt_days": 15.0,
+      "avg_peak_days": 10.0,
+      "ret_5d": 10.72,
+      "ret_10d": 23.73,
+      "ret_15d": 25.79,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2020-05-27",
+          "year": 2020,
+          "close_at_signal": 32.75,
+          "patterns": [
+            "Dragonfly Doji"
+          ],
+          "primary_pattern": "Dragonfly Doji",
+          "fall_15d_pct": -8.01,
+          "vol_ratio": 2.01,
+          "entry_date": "2020-05-28",
+          "entry_px": 32.7,
+          "optimal_days": 15,
+          "optimal_ret": 51.99,
+          "peak_days": 10,
+          "peak_ret": 57.8,
+          "hold_rets": {
+            "3": 8.41,
+            "5": 19.42,
+            "10": 57.8,
+            "20": 46.33,
+            "44": 82.72,
+            "66": 95.41
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 19.42,
+              "weekly_inc": 19.42
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 57.8,
+              "weekly_inc": 38.38
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 51.99,
+              "weekly_inc": -5.81
+            }
+          ],
+          "ret_5d_before": 7.91,
+          "ret_10d_before": -2.82,
+          "ret_20d_before": -14.6
+        },
+        {
+          "date": "2020-05-22",
+          "year": 2020,
+          "close_at_signal": 31.15,
+          "patterns": [
+            "Morning Star"
+          ],
+          "primary_pattern": "Morning Star",
+          "fall_15d_pct": -16.82,
+          "vol_ratio": 1.5,
+          "entry_date": "2020-05-26",
+          "entry_px": 31.5,
+          "optimal_days": 15,
+          "optimal_ret": 53.33,
+          "peak_days": 10,
+          "peak_ret": 64.76,
+          "hold_rets": {
+            "3": 4.92,
+            "5": 12.54,
+            "10": 64.76,
+            "20": 58.57,
+            "44": 77.3,
+            "66": 104.44
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 12.54,
+              "weekly_inc": 12.54
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 64.76,
+              "weekly_inc": 52.22
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 53.33,
+              "weekly_inc": -11.43
+            }
+          ],
+          "ret_5d_before": -5.03,
+          "ret_10d_before": -12.13,
+          "ret_20d_before": -19.2
+        }
+      ]
+    },
+    {
+      "sym": "ITI",
+      "price": 302.0,
+      "last_date": "2026-06-05",
+      "turnover_cr": 19.37,
+      "n_signals": 4,
+      "years": [
+        2020
+      ],
+      "dominant_pattern": "Three White Soldiers",
+      "pattern_counts": {
+        "Three White Soldiers": 3,
+        "Morning Star": 1
+      },
+      "avg_peak_ret": 55.96,
+      "min_peak_ret": 38.73,
+      "avg_optimal_ret": 44.23,
+      "avg_opt_days": 15.0,
+      "avg_peak_days": 10.0,
+      "ret_5d": 0.53,
+      "ret_10d": 5.15,
+      "ret_15d": 3.67,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2020-03-31",
+          "year": 2020,
+          "close_at_signal": 62.75,
+          "patterns": [
+            "Three White Soldiers"
+          ],
+          "primary_pattern": "Three White Soldiers",
+          "fall_15d_pct": -5.57,
+          "vol_ratio": 2.1,
+          "entry_date": "2020-04-01",
+          "entry_px": 59.45,
+          "optimal_days": 10,
+          "optimal_ret": 36.67,
+          "peak_days": 5,
+          "peak_ret": 46.93,
+          "hold_rets": {
+            "3": 16.23,
+            "5": 46.93,
+            "10": 36.67,
+            "20": 38.6,
+            "44": 45.42,
+            "66": 109.67
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 46.93,
+              "weekly_inc": 46.93
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 36.67,
+              "weekly_inc": -10.26
+            }
+          ],
+          "ret_5d_before": 25.88,
+          "ret_10d_before": 13.78,
+          "ret_20d_before": -15.37
+        },
+        {
+          "date": "2020-03-30",
+          "year": 2020,
+          "close_at_signal": 57.25,
+          "patterns": [
+            "Three White Soldiers"
+          ],
+          "primary_pattern": "Three White Soldiers",
+          "fall_15d_pct": -19.48,
+          "vol_ratio": 1.57,
+          "entry_date": "2020-03-31",
+          "entry_px": 62.75,
+          "optimal_days": 15,
+          "optimal_ret": 34.18,
+          "peak_days": 10,
+          "peak_ret": 38.73,
+          "hold_rets": {
+            "3": 1.67,
+            "5": 16.02,
+            "10": 38.73,
+            "20": 32.27,
+            "44": 37.77,
+            "66": 104.94
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 16.02,
+              "weekly_inc": 16.02
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 38.73,
+              "weekly_inc": 22.71
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 34.18,
+              "weekly_inc": -4.54
+            }
+          ],
+          "ret_5d_before": 13.82,
+          "ret_10d_before": 8.94,
+          "ret_20d_before": -19.82
+        },
+        {
+          "date": "2020-03-27",
+          "year": 2020,
+          "close_at_signal": 54.35,
+          "patterns": [
+            "Three White Soldiers"
+          ],
+          "primary_pattern": "Three White Soldiers",
+          "fall_15d_pct": -28.25,
+          "vol_ratio": 1.62,
+          "entry_date": "2020-03-30",
+          "entry_px": 57.25,
+          "optimal_days": 15,
+          "optimal_ret": 43.14,
+          "peak_days": 10,
+          "peak_ret": 58.17,
+          "hold_rets": {
+            "3": 5.15,
+            "5": 20.7,
+            "10": 58.17,
+            "20": 43.76,
+            "44": 53.62,
+            "66": 125.07
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 20.7,
+              "weekly_inc": 20.7
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 58.17,
+              "weekly_inc": 37.47
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 43.14,
+              "weekly_inc": -15.02
+            }
+          ],
+          "ret_5d_before": -4.48,
+          "ret_10d_before": 1.97,
+          "ret_20d_before": -30.41
+        },
+        {
+          "date": "2020-03-20",
+          "year": 2020,
+          "close_at_signal": 56.9,
+          "patterns": [
+            "Morning Star"
+          ],
+          "primary_pattern": "Morning Star",
+          "fall_15d_pct": -27.14,
+          "vol_ratio": 2.59,
+          "entry_date": "2020-03-23",
+          "entry_px": 50.3,
+          "optimal_days": 20,
+          "optimal_ret": 62.92,
+          "peak_days": 15,
+          "peak_ret": 80.02,
+          "hold_rets": {
+            "3": 1.69,
+            "5": 13.82,
+            "10": 37.38,
+            "20": 62.92,
+            "44": 69.48,
+            "66": 106.46
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 13.82,
+              "weekly_inc": 13.82
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 37.38,
+              "weekly_inc": 23.56
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 80.02,
+              "weekly_inc": 42.64
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 62.92,
+              "weekly_inc": -17.1
+            }
+          ],
+          "ret_5d_before": 6.75,
+          "ret_10d_before": -24.88,
+          "ret_20d_before": -34.11
+        }
+      ]
+    },
+    {
+      "sym": "SPARC",
+      "price": 212.82,
+      "last_date": "2026-06-05",
+      "turnover_cr": 102.63,
+      "n_signals": 2,
+      "years": [
+        2020
+      ],
+      "dominant_pattern": "Morning Star",
+      "pattern_counts": {
+        "Morning Star": 2
+      },
+      "avg_peak_ret": 54.59,
+      "min_peak_ret": 48.63,
+      "avg_optimal_ret": 54.59,
+      "avg_opt_days": 17.5,
+      "avg_peak_days": 17.5,
+      "ret_5d": 0.33,
+      "ret_10d": 18.02,
+      "ret_15d": 25.13,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2020-03-26",
+          "year": 2020,
+          "close_at_signal": 97.65,
+          "patterns": [
+            "Morning Star"
+          ],
+          "primary_pattern": "Morning Star",
+          "fall_15d_pct": -37.2,
+          "vol_ratio": 1.9,
+          "entry_date": "2020-03-27",
+          "entry_px": 95.1,
+          "optimal_days": 15,
+          "optimal_ret": 48.63,
+          "peak_days": 15,
+          "peak_ret": 48.63,
+          "hold_rets": {
+            "3": 2.79,
+            "5": 21.82,
+            "10": 45.9,
+            "20": 38.43,
+            "44": 49.16,
+            "66": 70.24
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 21.82,
+              "weekly_inc": 21.82
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 45.9,
+              "weekly_inc": 24.08
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 48.63,
+              "weekly_inc": 2.73
+            }
+          ],
+          "ret_5d_before": 4.77,
+          "ret_10d_before": -13.35,
+          "ret_20d_before": -36.86
+        },
+        {
+          "date": "2020-03-20",
+          "year": 2020,
+          "close_at_signal": 104.55,
+          "patterns": [
+            "Morning Star"
+          ],
+          "primary_pattern": "Morning Star",
+          "fall_15d_pct": -32.87,
+          "vol_ratio": 1.91,
+          "entry_date": "2020-03-23",
+          "entry_px": 87.1,
+          "optimal_days": 20,
+          "optimal_ret": 60.56,
+          "peak_days": 20,
+          "peak_ret": 60.56,
+          "hold_rets": {
+            "3": 12.11,
+            "5": 1.32,
+            "10": 37.26,
+            "20": 60.56,
+            "44": 58.27,
+            "66": 82.95
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 1.32,
+              "weekly_inc": 1.32
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 37.26,
+              "weekly_inc": 35.94
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 57.69,
+              "weekly_inc": 20.44
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 60.56,
+              "weekly_inc": 2.87
+            }
+          ],
+          "ret_5d_before": -10.83,
+          "ret_10d_before": -32.79,
+          "ret_20d_before": -36.39
+        }
+      ]
+    },
+    {
+      "sym": "INTELLECT",
+      "price": 745.95,
+      "last_date": "2026-06-05",
+      "turnover_cr": 48.44,
+      "n_signals": 2,
+      "years": [
+        2020,
+        2022
+      ],
+      "dominant_pattern": "Hammer",
+      "pattern_counts": {
+        "Hammer": 1,
+        "Bullish Engulfing": 1
+      },
+      "avg_peak_ret": 53.85,
+      "min_peak_ret": 40.66,
+      "avg_optimal_ret": 41.89,
+      "avg_opt_days": 27.5,
+      "avg_peak_days": 22.5,
+      "ret_5d": 4.06,
+      "ret_10d": 7.12,
+      "ret_15d": 7.55,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2022-03-04",
+          "year": 2022,
+          "close_at_signal": 679.0,
+          "patterns": [
+            "Bullish Engulfing"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -5.7,
+          "vol_ratio": 2.93,
+          "entry_date": "2022-03-07",
+          "entry_px": 681.2,
+          "optimal_days": 25,
+          "optimal_ret": 34.77,
+          "peak_days": 20,
+          "peak_ret": 40.66,
+          "hold_rets": {
+            "3": 5.62,
+            "5": 7.81,
+            "10": 20.18,
+            "20": 40.66,
+            "44": -15.02,
+            "66": -8.76
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 7.81,
+              "weekly_inc": 7.81
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 20.18,
+              "weekly_inc": 12.38
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 32.65,
+              "weekly_inc": 12.46
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 40.66,
+              "weekly_inc": 8.01
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 34.77,
+              "weekly_inc": -5.89
+            }
+          ],
+          "ret_5d_before": 9.33,
+          "ret_10d_before": 0.95,
+          "ret_20d_before": -9.42
+        },
+        {
+          "date": "2020-05-12",
+          "year": 2020,
+          "close_at_signal": 72.45,
+          "patterns": [
+            "Hammer"
+          ],
+          "primary_pattern": "Hammer",
+          "fall_15d_pct": -18.0,
+          "vol_ratio": 1.64,
+          "entry_date": "2020-05-13",
+          "entry_px": 69.8,
+          "optimal_days": 30,
+          "optimal_ret": 49.0,
+          "peak_days": 25,
+          "peak_ret": 67.05,
+          "hold_rets": {
+            "3": -6.88,
+            "5": -9.24,
+            "10": -3.01,
+            "20": 26.22,
+            "44": 72.85,
+            "66": 169.05
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -9.24,
+              "weekly_inc": -9.24
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": -3.01,
+              "weekly_inc": 6.23
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 9.96,
+              "weekly_inc": 12.97
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 26.22,
+              "weekly_inc": 16.26
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 67.05,
+              "weekly_inc": 40.83
+            },
+            {
+              "week": 6,
+              "days": 30,
+              "cum_ret": 49.0,
+              "weekly_inc": -18.05
+            }
+          ],
+          "ret_5d_before": 7.25,
+          "ret_10d_before": -4.48,
+          "ret_20d_before": 4.55
+        }
+      ]
+    },
+    {
+      "sym": "SHAKTIPUMP",
+      "price": 540.5,
+      "last_date": "2026-06-05",
+      "turnover_cr": 52.76,
+      "n_signals": 2,
+      "years": [
+        2024
+      ],
+      "dominant_pattern": "Piercing Line",
+      "pattern_counts": {
+        "Piercing Line": 1,
+        "Dragonfly Doji": 1
+      },
+      "avg_peak_ret": 53.45,
+      "min_peak_ret": 35.64,
+      "avg_optimal_ret": 37.8,
+      "avg_opt_days": 25.0,
+      "avg_peak_days": 20.0,
+      "ret_5d": 3.0,
+      "ret_10d": 7.46,
+      "ret_15d": 3.48,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2024-12-12",
+          "year": 2024,
+          "close_at_signal": 856.55,
+          "patterns": [
+            "Dragonfly Doji"
+          ],
+          "primary_pattern": "Dragonfly Doji",
+          "fall_15d_pct": -82.52,
+          "vol_ratio": 2.62,
+          "entry_date": "2024-12-13",
+          "entry_px": 899.35,
+          "optimal_days": 20,
+          "optimal_ret": 34.99,
+          "peak_days": 15,
+          "peak_ret": 35.64,
+          "hold_rets": {
+            "3": 2.99,
+            "5": 2.44,
+            "10": 16.22,
+            "20": 34.99,
+            "44": -6.03,
+            "66": 9.06
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 2.44,
+              "weekly_inc": 2.44
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 16.22,
+              "weekly_inc": 13.78
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 35.64,
+              "weekly_inc": 19.43
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 34.99,
+              "weekly_inc": -0.66
+            }
+          ],
+          "ret_5d_before": 10.56,
+          "ret_10d_before": 4.36,
+          "ret_20d_before": -81.28
+        },
+        {
+          "date": "2024-12-02",
+          "year": 2024,
+          "close_at_signal": 795.75,
+          "patterns": [
+            "Piercing Line"
+          ],
+          "primary_pattern": "Piercing Line",
+          "fall_15d_pct": -83.5,
+          "vol_ratio": 3.27,
+          "entry_date": "2024-12-03",
+          "entry_px": 785.3,
+          "optimal_days": 30,
+          "optimal_ret": 40.61,
+          "peak_days": 25,
+          "peak_ret": 71.25,
+          "hold_rets": {
+            "3": -2.62,
+            "5": -0.5,
+            "10": 22.85,
+            "20": 42.74,
+            "44": 20.07,
+            "66": 16.94
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -0.5,
+              "weekly_inc": -0.5
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 22.85,
+              "weekly_inc": 23.35
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 29.31,
+              "weekly_inc": 6.46
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 42.74,
+              "weekly_inc": 13.43
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 71.25,
+              "weekly_inc": 28.51
+            },
+            {
+              "week": 6,
+              "days": 30,
+              "cum_ret": 40.61,
+              "weekly_inc": -30.64
+            }
+          ],
+          "ret_5d_before": -3.75,
+          "ret_10d_before": -82.19,
+          "ret_20d_before": -82.29
+        }
+      ]
+    },
+    {
+      "sym": "EMKAY",
+      "price": 291.86,
+      "last_date": "2026-06-05",
+      "turnover_cr": 25.71,
+      "n_signals": 2,
+      "years": [
+        2020,
+        2024
+      ],
+      "dominant_pattern": "Hammer",
+      "pattern_counts": {
+        "Hammer": 1,
+        "Bullish Marubozu": 1
+      },
+      "avg_peak_ret": 52.85,
+      "min_peak_ret": 41.45,
+      "avg_optimal_ret": 37.38,
+      "avg_opt_days": 15.0,
+      "avg_peak_days": 10.0,
+      "ret_5d": 32.81,
+      "ret_10d": 30.86,
+      "ret_15d": 43.44,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2024-03-22",
+          "year": 2024,
+          "close_at_signal": 107.35,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -10.54,
+          "vol_ratio": 2.94,
+          "entry_date": "2024-03-26",
+          "entry_px": 107.7,
+          "optimal_days": 15,
+          "optimal_ret": 43.73,
+          "peak_days": 10,
+          "peak_ret": 64.25,
+          "hold_rets": {
+            "3": 14.35,
+            "5": 15.51,
+            "10": 64.25,
+            "20": 51.25,
+            "44": 46.75,
+            "66": 55.77
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 15.51,
+              "weekly_inc": 15.51
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 64.25,
+              "weekly_inc": 48.75
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 43.73,
+              "weekly_inc": -20.52
+            }
+          ],
+          "ret_5d_before": -2.45,
+          "ret_10d_before": -17.3,
+          "ret_20d_before": -16.1
+        },
+        {
+          "date": "2020-03-31",
+          "year": 2020,
+          "close_at_signal": 25.75,
+          "patterns": [
+            "Hammer"
+          ],
+          "primary_pattern": "Hammer",
+          "fall_15d_pct": -38.62,
+          "vol_ratio": 1.51,
+          "entry_date": "2020-04-01",
+          "entry_px": 26.9,
+          "optimal_days": 15,
+          "optimal_ret": 31.04,
+          "peak_days": 10,
+          "peak_ret": 41.45,
+          "hold_rets": {
+            "3": 15.43,
+            "5": 27.14,
+            "10": 41.45,
+            "20": 23.42,
+            "44": 61.34,
+            "66": 86.8
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 27.14,
+              "weekly_inc": 27.14
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 41.45,
+              "weekly_inc": 14.31
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 31.04,
+              "weekly_inc": -10.41
+            }
+          ],
+          "ret_5d_before": -2.09,
+          "ret_10d_before": -31.79,
+          "ret_20d_before": -51.23
+        }
+      ]
+    },
+    {
+      "sym": "RPOWER",
+      "price": 28.59,
+      "last_date": "2026-06-05",
+      "turnover_cr": 109.03,
+      "n_signals": 3,
+      "years": [
+        2020,
+        2021,
+        2024
+      ],
+      "dominant_pattern": "Piercing Line",
+      "pattern_counts": {
+        "Piercing Line": 2,
+        "Dragonfly Doji": 1
+      },
+      "avg_peak_ret": 52.68,
+      "min_peak_ret": 37.1,
+      "avg_optimal_ret": 39.17,
+      "avg_opt_days": 20.0,
+      "avg_peak_days": 15.0,
+      "ret_5d": 3.44,
+      "ret_10d": 4.88,
+      "ret_15d": 2.62,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2024-03-14",
+          "year": 2024,
+          "close_at_signal": 21.05,
+          "patterns": [
+            "Piercing Line"
+          ],
+          "primary_pattern": "Piercing Line",
+          "fall_15d_pct": -17.29,
+          "vol_ratio": 2.32,
+          "entry_date": "2024-03-15",
+          "entry_px": 22.1,
+          "optimal_days": 15,
+          "optimal_ret": 34.84,
+          "peak_days": 10,
+          "peak_ret": 37.1,
+          "hold_rets": {
+            "3": 8.14,
+            "5": 19.0,
+            "10": 37.1,
+            "20": 29.86,
+            "44": 20.36,
+            "66": 32.49
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 19.0,
+              "weekly_inc": 19.0
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 37.1,
+              "weekly_inc": 18.1
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 34.84,
+              "weekly_inc": -2.26
+            }
+          ],
+          "ret_5d_before": -5.61,
+          "ret_10d_before": -10.23,
+          "ret_20d_before": -20.42
+        },
+        {
+          "date": "2021-08-18",
+          "year": 2021,
+          "close_at_signal": 10.6,
+          "patterns": [
+            "Piercing Line"
+          ],
+          "primary_pattern": "Piercing Line",
+          "fall_15d_pct": -7.02,
+          "vol_ratio": 2.09,
+          "entry_date": "2021-08-20",
+          "entry_px": 10.1,
+          "optimal_days": 20,
+          "optimal_ret": 32.67,
+          "peak_days": 15,
+          "peak_ret": 37.62,
+          "hold_rets": {
+            "3": 4.46,
+            "5": 10.89,
+            "10": 20.79,
+            "20": 32.67,
+            "44": 47.52,
+            "66": 34.16
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 10.89,
+              "weekly_inc": 10.89
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 20.79,
+              "weekly_inc": 9.9
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 37.62,
+              "weekly_inc": 16.83
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 32.67,
+              "weekly_inc": -4.95
+            }
+          ],
+          "ret_5d_before": -8.23,
+          "ret_10d_before": -16.21,
+          "ret_20d_before": -17.83
+        },
+        {
+          "date": "2020-03-27",
+          "year": 2020,
+          "close_at_signal": 1.15,
+          "patterns": [
+            "Dragonfly Doji"
+          ],
+          "primary_pattern": "Dragonfly Doji",
+          "fall_15d_pct": -30.3,
+          "vol_ratio": 2.08,
+          "entry_date": "2020-03-30",
+          "entry_px": 1.2,
+          "optimal_days": 25,
+          "optimal_ret": 50.0,
+          "peak_days": 20,
+          "peak_ret": 83.33,
+          "hold_rets": {
+            "3": 12.5,
+            "5": 20.83,
+            "10": 41.67,
+            "20": 83.33,
+            "44": 100.0,
+            "66": 220.83
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 20.83,
+              "weekly_inc": 20.83
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 41.67,
+              "weekly_inc": 20.83
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 62.5,
+              "weekly_inc": 20.83
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 83.33,
+              "weekly_inc": 20.83
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 50.0,
+              "weekly_inc": -33.33
+            }
+          ],
+          "ret_5d_before": -4.17,
+          "ret_10d_before": -17.86,
+          "ret_20d_before": -36.11
+        }
+      ]
+    },
+    {
+      "sym": "FACT",
+      "price": 866.85,
+      "last_date": "2026-06-05",
+      "turnover_cr": 10.45,
+      "n_signals": 2,
+      "years": [
+        2020
+      ],
+      "dominant_pattern": "Bullish Engulfing",
+      "pattern_counts": {
+        "Bullish Engulfing": 1,
+        "Piercing Line": 1,
+        "Morning Star": 1
+      },
+      "avg_peak_ret": 51.95,
+      "min_peak_ret": 47.83,
+      "avg_optimal_ret": 44.41,
+      "avg_opt_days": 22.5,
+      "avg_peak_days": 17.5,
+      "ret_5d": -1.0,
+      "ret_10d": -0.14,
+      "ret_15d": -1.45,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2020-03-26",
+          "year": 2020,
+          "close_at_signal": 27.95,
+          "patterns": [
+            "Morning Star"
+          ],
+          "primary_pattern": "Morning Star",
+          "fall_15d_pct": -9.25,
+          "vol_ratio": 2.31,
+          "entry_date": "2020-03-27",
+          "entry_px": 27.2,
+          "optimal_days": 15,
+          "optimal_ret": 46.88,
+          "peak_days": 10,
+          "peak_ret": 56.07,
+          "hold_rets": {
+            "3": 10.85,
+            "5": 11.76,
+            "10": 56.07,
+            "20": 51.47,
+            "44": 59.56,
+            "66": 86.03
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 11.76,
+              "weekly_inc": 11.76
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 56.07,
+              "weekly_inc": 44.3
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 46.88,
+              "weekly_inc": -9.19
+            }
+          ],
+          "ret_5d_before": 11.13,
+          "ret_10d_before": 11.35,
+          "ret_20d_before": -20.48
+        },
+        {
+          "date": "2020-03-13",
+          "year": 2020,
+          "close_at_signal": 30.1,
+          "patterns": [
+            "Bullish Engulfing",
+            "Piercing Line"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -17.19,
+          "vol_ratio": 2.61,
+          "entry_date": "2020-03-16",
+          "entry_px": 28.85,
+          "optimal_days": 30,
+          "optimal_ret": 41.94,
+          "peak_days": 25,
+          "peak_ret": 47.83,
+          "hold_rets": {
+            "3": -12.82,
+            "5": -15.94,
+            "10": -2.6,
+            "20": 41.94,
+            "44": 37.78,
+            "66": 57.37
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -15.94,
+              "weekly_inc": -15.94
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": -2.6,
+              "weekly_inc": 13.34
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 19.93,
+              "weekly_inc": 22.53
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 41.94,
+              "weekly_inc": 22.01
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 47.83,
+              "weekly_inc": 5.89
+            },
+            {
+              "week": 6,
+              "days": 30,
+              "cum_ret": 41.94,
+              "weekly_inc": -5.89
+            }
+          ],
+          "ret_5d_before": -3.68,
+          "ret_10d_before": -11.73,
+          "ret_20d_before": -21.31
+        }
+      ]
+    },
+    {
+      "sym": "WANBURY",
+      "price": 262.3,
+      "last_date": "2026-06-05",
+      "turnover_cr": 5.14,
+      "n_signals": 2,
+      "years": [
+        2020,
+        2023
+      ],
+      "dominant_pattern": "Piercing Line",
+      "pattern_counts": {
+        "Piercing Line": 1,
+        "Bullish Engulfing": 1,
+        "Bullish Marubozu": 1
+      },
+      "avg_peak_ret": 50.59,
+      "min_peak_ret": 33.25,
+      "avg_optimal_ret": 29.23,
+      "avg_opt_days": 17.5,
+      "avg_peak_days": 12.5,
+      "ret_5d": -15.02,
+      "ret_10d": -7.31,
+      "ret_15d": 1.45,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2023-04-19",
+          "year": 2023,
+          "close_at_signal": 36.25,
+          "patterns": [
+            "Bullish Engulfing",
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -7.76,
+          "vol_ratio": 2.48,
+          "entry_date": "2023-04-20",
+          "entry_px": 38.05,
+          "optimal_days": 15,
+          "optimal_ret": 26.68,
+          "peak_days": 10,
+          "peak_ret": 33.25,
+          "hold_rets": {
+            "3": 12.48,
+            "5": 23.78,
+            "10": 33.25,
+            "20": 26.54,
+            "44": 41.92,
+            "66": 46.52
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 23.78,
+              "weekly_inc": 23.78
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 33.25,
+              "weekly_inc": 9.46
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 26.68,
+              "weekly_inc": -6.57
+            }
+          ],
+          "ret_5d_before": -2.29,
+          "ret_10d_before": -2.82,
+          "ret_20d_before": 5.69
+        },
+        {
+          "date": "2020-02-04",
+          "year": 2020,
+          "close_at_signal": 18.25,
+          "patterns": [
+            "Piercing Line"
+          ],
+          "primary_pattern": "Piercing Line",
+          "fall_15d_pct": -9.43,
+          "vol_ratio": 1.51,
+          "entry_date": "2020-02-05",
+          "entry_px": 18.4,
+          "optimal_days": 20,
+          "optimal_ret": 31.79,
+          "peak_days": 15,
+          "peak_ret": 67.93,
+          "hold_rets": {
+            "3": 2.99,
+            "5": 13.04,
+            "10": 42.93,
+            "20": 31.79,
+            "44": 26.09,
+            "66": -4.35
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 13.04,
+              "weekly_inc": 13.04
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 42.93,
+              "weekly_inc": 29.89
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 67.93,
+              "weekly_inc": 25.0
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 31.79,
+              "weekly_inc": -36.14
+            }
+          ],
+          "ret_5d_before": -8.75,
+          "ret_10d_before": -7.36,
+          "ret_20d_before": -3.44
+        }
+      ]
+    },
+    {
+      "sym": "PGEL",
+      "price": 485.35,
+      "last_date": "2026-06-05",
+      "turnover_cr": 134.79,
+      "n_signals": 2,
+      "years": [
+        2021,
+        2022
+      ],
+      "dominant_pattern": "Hammer",
+      "pattern_counts": {
+        "Hammer": 1,
+        "Three White Soldiers": 1
+      },
+      "avg_peak_ret": 50.23,
+      "min_peak_ret": 32.52,
+      "avg_optimal_ret": 46.72,
+      "avg_opt_days": 20.0,
+      "avg_peak_days": 17.5,
+      "ret_5d": 0.58,
+      "ret_10d": 4.54,
+      "ret_15d": -1.3,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2022-05-23",
+          "year": 2022,
+          "close_at_signal": 733.85,
+          "patterns": [
+            "Three White Soldiers"
+          ],
+          "primary_pattern": "Three White Soldiers",
+          "fall_15d_pct": -6.97,
+          "vol_ratio": 1.61,
+          "entry_date": "2022-05-24",
+          "entry_px": 725.2,
+          "optimal_days": 15,
+          "optimal_ret": 25.5,
+          "peak_days": 10,
+          "peak_ret": 32.52,
+          "hold_rets": {
+            "3": -4.61,
+            "5": 22.21,
+            "10": 32.52,
+            "20": 15.64,
+            "44": 28.08,
+            "66": 19.15
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 22.21,
+              "weekly_inc": 22.21
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 32.52,
+              "weekly_inc": 10.31
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 25.5,
+              "weekly_inc": -7.03
+            }
+          ],
+          "ret_5d_before": 18.75,
+          "ret_10d_before": 3.67,
+          "ret_20d_before": -6.65
+        },
+        {
+          "date": "2021-01-08",
+          "year": 2021,
+          "close_at_signal": 152.75,
+          "patterns": [
+            "Hammer"
+          ],
+          "primary_pattern": "Hammer",
+          "fall_15d_pct": -5.48,
+          "vol_ratio": 1.72,
+          "entry_date": "2021-01-11",
+          "entry_px": 147.8,
+          "optimal_days": 25,
+          "optimal_ret": 67.93,
+          "peak_days": 25,
+          "peak_ret": 67.93,
+          "hold_rets": {
+            "3": -2.13,
+            "5": -8.73,
+            "10": 1.39,
+            "20": 64.99,
+            "44": 205.48,
+            "66": 115.7
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -8.73,
+              "weekly_inc": -8.73
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 1.39,
+              "weekly_inc": 10.12
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 29.33,
+              "weekly_inc": 27.94
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 64.99,
+              "weekly_inc": 35.66
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 67.93,
+              "weekly_inc": 2.94
+            }
+          ],
+          "ret_5d_before": 10.85,
+          "ret_10d_before": 2.52,
+          "ret_20d_before": -5.48
+        }
+      ]
+    },
+    {
+      "sym": "INDSWFTLAB",
+      "price": 158.0,
+      "last_date": "2026-06-05",
+      "turnover_cr": 35.66,
+      "n_signals": 3,
+      "years": [
+        2020,
+        2024
+      ],
+      "dominant_pattern": "Morning Star",
+      "pattern_counts": {
+        "Morning Star": 2,
+        "Bullish Marubozu": 1,
+        "Three White Soldiers": 1,
+        "Hammer": 1
+      },
+      "avg_peak_ret": 47.97,
+      "min_peak_ret": 31.66,
+      "avg_optimal_ret": 35.57,
+      "avg_opt_days": 18.33,
+      "avg_peak_days": 13.33,
+      "ret_5d": 3.87,
+      "ret_10d": 16.73,
+      "ret_15d": 17.38,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2024-03-28",
+          "year": 2024,
+          "close_at_signal": 100.15,
+          "patterns": [
+            "Morning Star"
+          ],
+          "primary_pattern": "Morning Star",
+          "fall_15d_pct": -8.25,
+          "vol_ratio": 2.92,
+          "entry_date": "2024-04-01",
+          "entry_px": 100.6,
+          "optimal_days": 10,
+          "optimal_ret": 20.13,
+          "peak_days": 5,
+          "peak_ret": 31.66,
+          "hold_rets": {
+            "3": 11.38,
+            "5": 31.66,
+            "10": 20.13,
+            "20": 22.61,
+            "44": 10.19,
+            "66": 33.82
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 31.66,
+              "weekly_inc": 31.66
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 20.13,
+              "weekly_inc": -11.53
+            }
+          ],
+          "ret_5d_before": -4.35,
+          "ret_10d_before": -2.77,
+          "ret_20d_before": -9.57
+        },
+        {
+          "date": "2020-09-14",
+          "year": 2020,
+          "close_at_signal": 35.75,
+          "patterns": [
+            "Hammer",
+            "Morning Star"
+          ],
+          "primary_pattern": "Hammer",
+          "fall_15d_pct": -8.22,
+          "vol_ratio": 1.63,
+          "entry_date": "2020-09-15",
+          "entry_px": 37.5,
+          "optimal_days": 20,
+          "optimal_ret": 51.2,
+          "peak_days": 15,
+          "peak_ret": 53.47,
+          "hold_rets": {
+            "3": 15.6,
+            "5": 20.13,
+            "10": 32.4,
+            "20": 51.2,
+            "44": 58.13,
+            "66": 55.2
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 20.13,
+              "weekly_inc": 20.13
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 32.4,
+              "weekly_inc": 12.27
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 53.47,
+              "weekly_inc": 21.07
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 51.2,
+              "weekly_inc": -2.27
+            }
+          ],
+          "ret_5d_before": 4.69,
+          "ret_10d_before": 2.14,
+          "ret_20d_before": -4.28
+        },
+        {
+          "date": "2020-03-11",
+          "year": 2020,
+          "close_at_signal": 17.05,
+          "patterns": [
+            "Bullish Marubozu",
+            "Three White Soldiers"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -19.95,
+          "vol_ratio": 2.61,
+          "entry_date": "2020-03-12",
+          "entry_px": 16.25,
+          "optimal_days": 25,
+          "optimal_ret": 35.38,
+          "peak_days": 20,
+          "peak_ret": 58.77,
+          "hold_rets": {
+            "3": 12.0,
+            "5": 23.38,
+            "10": 29.23,
+            "20": 58.77,
+            "44": 52.62,
+            "66": 132.62
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 23.38,
+              "weekly_inc": 23.38
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 29.23,
+              "weekly_inc": 5.85
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 36.92,
+              "weekly_inc": 7.69
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 58.77,
+              "weekly_inc": 21.85
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 35.38,
+              "weekly_inc": -23.38
+            }
+          ],
+          "ret_5d_before": -4.75,
+          "ret_10d_before": -16.01,
+          "ret_20d_before": -21.97
+        }
+      ]
+    },
+    {
+      "sym": "ELECTHERM",
+      "price": 970.6,
+      "last_date": "2026-06-05",
+      "turnover_cr": 25.5,
+      "n_signals": 2,
+      "years": [
+        2024,
+        2025
+      ],
+      "dominant_pattern": "Bullish Marubozu",
+      "pattern_counts": {
+        "Bullish Marubozu": 2
+      },
+      "avg_peak_ret": 47.89,
+      "min_peak_ret": 33.55,
+      "avg_optimal_ret": 42.67,
+      "avg_opt_days": 22.5,
+      "avg_peak_days": 17.5,
+      "ret_5d": 9.88,
+      "ret_10d": 14.11,
+      "ret_15d": 32.61,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2025-03-17",
+          "year": 2025,
+          "close_at_signal": 723.0,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -5.42,
+          "vol_ratio": 1.77,
+          "entry_date": "2025-03-18",
+          "entry_px": 719.0,
+          "optimal_days": 30,
+          "optimal_ret": 58.89,
+          "peak_days": 25,
+          "peak_ret": 62.24,
+          "hold_rets": {
+            "3": 6.11,
+            "5": 10.4,
+            "10": 21.86,
+            "20": 46.96,
+            "44": 47.89,
+            "66": 73.53
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 10.4,
+              "weekly_inc": 10.4
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 21.86,
+              "weekly_inc": 11.47
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 33.12,
+              "weekly_inc": 11.26
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 46.96,
+              "weekly_inc": 13.84
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 62.24,
+              "weekly_inc": 15.28
+            },
+            {
+              "week": 6,
+              "days": 30,
+              "cum_ret": 58.89,
+              "weekly_inc": -3.35
+            }
+          ],
+          "ret_5d_before": -0.96,
+          "ret_10d_before": -6.34,
+          "ret_20d_before": -7.72
+        },
+        {
+          "date": "2024-07-16",
+          "year": 2024,
+          "close_at_signal": 669.95,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -16.17,
+          "vol_ratio": 3.08,
+          "entry_date": "2024-07-18",
+          "entry_px": 683.3,
+          "optimal_days": 15,
+          "optimal_ret": 26.45,
+          "peak_days": 10,
+          "peak_ret": 33.55,
+          "hold_rets": {
+            "3": 12.18,
+            "5": 23.67,
+            "10": 33.55,
+            "20": 35.63,
+            "44": 47.23,
+            "66": 39.41
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 23.67,
+              "weekly_inc": 23.67
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 33.55,
+              "weekly_inc": 9.88
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 26.45,
+              "weekly_inc": -7.11
+            }
+          ],
+          "ret_5d_before": -5.92,
+          "ret_10d_before": -13.35,
+          "ret_20d_before": -11.08
+        }
+      ]
+    },
+    {
+      "sym": "JPPOWER",
+      "price": 19.03,
+      "last_date": "2026-06-05",
+      "turnover_cr": 460.11,
+      "n_signals": 2,
+      "years": [
+        2020
+      ],
+      "dominant_pattern": "Bullish Marubozu",
+      "pattern_counts": {
+        "Bullish Marubozu": 2
+      },
+      "avg_peak_ret": 45.84,
+      "min_peak_ret": 41.67,
+      "avg_optimal_ret": 37.5,
+      "avg_opt_days": 10.0,
+      "avg_peak_days": 5.0,
+      "ret_5d": -12.99,
+      "ret_10d": 2.53,
+      "ret_15d": 6.55,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2020-03-30",
+          "year": 2020,
+          "close_at_signal": 0.55,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -45.0,
+          "vol_ratio": 2.75,
+          "entry_date": "2020-03-31",
+          "entry_px": 0.6,
+          "optimal_days": 10,
+          "optimal_ret": 25.0,
+          "peak_days": 5,
+          "peak_ret": 41.67,
+          "hold_rets": {
+            "3": 25.0,
+            "5": 41.67,
+            "10": 25.0,
+            "20": 16.67,
+            "44": 100.0,
+            "66": 225.0
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 41.67,
+              "weekly_inc": 41.67
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 25.0,
+              "weekly_inc": -16.67
+            }
+          ],
+          "ret_5d_before": 10.0,
+          "ret_10d_before": -26.67,
+          "ret_20d_before": -56.0
+        },
+        {
+          "date": "2020-03-26",
+          "year": 2020,
+          "close_at_signal": 0.45,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -59.09,
+          "vol_ratio": 6.4,
+          "entry_date": "2020-03-27",
+          "entry_px": 0.5,
+          "optimal_days": 10,
+          "optimal_ret": 50.0,
+          "peak_days": 5,
+          "peak_ret": 50.0,
+          "hold_rets": {
+            "3": 30.0,
+            "5": 50.0,
+            "10": 50.0,
+            "20": 40.0,
+            "44": 120.0,
+            "66": 300.0
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 50.0,
+              "weekly_inc": 50.0
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 50.0,
+              "weekly_inc": 0.0
+            }
+          ],
+          "ret_5d_before": -25.0,
+          "ret_10d_before": -47.06,
+          "ret_20d_before": -66.67
+        }
+      ]
+    },
+    {
+      "sym": "TERASOFT",
+      "price": 443.0,
+      "last_date": "2026-06-05",
+      "turnover_cr": 3.1,
+      "n_signals": 2,
+      "years": [
+        2025
+      ],
+      "dominant_pattern": "Bullish Engulfing",
+      "pattern_counts": {
+        "Bullish Engulfing": 1,
+        "Piercing Line": 1,
+        "Hammer": 1
+      },
+      "avg_peak_ret": 45.27,
+      "min_peak_ret": 37.62,
+      "avg_optimal_ret": 45.27,
+      "avg_opt_days": 20.0,
+      "avg_peak_days": 20.0,
+      "ret_5d": 12.31,
+      "ret_10d": 29.44,
+      "ret_15d": 46.3,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2025-08-20",
+          "year": 2025,
+          "close_at_signal": 294.8,
+          "patterns": [
+            "Hammer"
+          ],
+          "primary_pattern": "Hammer",
+          "fall_15d_pct": -6.56,
+          "vol_ratio": 1.5,
+          "entry_date": "2025-08-21",
+          "entry_px": 295.0,
+          "optimal_days": 25,
+          "optimal_ret": 52.93,
+          "peak_days": 25,
+          "peak_ret": 52.93,
+          "hold_rets": {
+            "3": -0.27,
+            "5": 3.73,
+            "10": 16.24,
+            "20": 51.73,
+            "44": 72.27,
+            "66": 81.56
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 3.73,
+              "weekly_inc": 3.73
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 16.24,
+              "weekly_inc": 12.51
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 27.56,
+              "weekly_inc": 11.32
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 51.73,
+              "weekly_inc": 24.17
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 52.93,
+              "weekly_inc": 1.2
+            }
+          ],
+          "ret_5d_before": 2.2,
+          "ret_10d_before": -3.82,
+          "ret_20d_before": -14.81
+        },
+        {
+          "date": "2025-01-10",
+          "year": 2025,
+          "close_at_signal": 176.34,
+          "patterns": [
+            "Bullish Engulfing",
+            "Piercing Line"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -12.12,
+          "vol_ratio": 2.36,
+          "entry_date": "2025-01-13",
+          "entry_px": 185.15,
+          "optimal_days": 15,
+          "optimal_ret": 37.62,
+          "peak_days": 15,
+          "peak_ret": 37.62,
+          "hold_rets": {
+            "3": 15.75,
+            "5": 20.43,
+            "10": 32.94,
+            "20": 29.44,
+            "44": 3.14,
+            "66": 19.25
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 20.43,
+              "weekly_inc": 20.43
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 32.94,
+              "weekly_inc": 12.51
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 37.62,
+              "weekly_inc": 4.68
+            }
+          ],
+          "ret_5d_before": -9.01,
+          "ret_10d_before": -6.57,
+          "ret_20d_before": -2.98
+        }
+      ]
+    },
+    {
+      "sym": "PANAMAPET",
+      "price": 344.75,
+      "last_date": "2026-06-05",
+      "turnover_cr": 11.54,
+      "n_signals": 2,
+      "years": [
+        2020
+      ],
+      "dominant_pattern": "Bullish Engulfing",
+      "pattern_counts": {
+        "Bullish Engulfing": 2
+      },
+      "avg_peak_ret": 44.85,
+      "min_peak_ret": 39.98,
+      "avg_optimal_ret": 34.48,
+      "avg_opt_days": 20.0,
+      "avg_peak_days": 15.0,
+      "ret_5d": 4.77,
+      "ret_10d": 6.52,
+      "ret_15d": 16.18,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2020-08-05",
+          "year": 2020,
+          "close_at_signal": 41.85,
+          "patterns": [
+            "Bullish Engulfing"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -7.82,
+          "vol_ratio": 3.34,
+          "entry_date": "2020-08-06",
+          "entry_px": 40.9,
+          "optimal_days": 20,
+          "optimal_ret": 26.41,
+          "peak_days": 15,
+          "peak_ret": 39.98,
+          "hold_rets": {
+            "3": 0.73,
+            "5": 4.16,
+            "10": 11.98,
+            "20": 26.41,
+            "44": 32.27,
+            "66": 43.28
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 4.16,
+              "weekly_inc": 4.16
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 11.98,
+              "weekly_inc": 7.82
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 39.98,
+              "weekly_inc": 28.0
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 26.41,
+              "weekly_inc": -13.57
+            }
+          ],
+          "ret_5d_before": -1.99,
+          "ret_10d_before": -4.23,
+          "ret_20d_before": -11.8
+        },
+        {
+          "date": "2020-03-20",
+          "year": 2020,
+          "close_at_signal": 33.65,
+          "patterns": [
+            "Bullish Engulfing"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -38.93,
+          "vol_ratio": 1.8,
+          "entry_date": "2020-03-23",
+          "entry_px": 27.15,
+          "optimal_days": 20,
+          "optimal_ret": 42.54,
+          "peak_days": 15,
+          "peak_ret": 49.72,
+          "hold_rets": {
+            "3": 14.0,
+            "5": 0.18,
+            "10": 27.62,
+            "20": 42.54,
+            "44": 31.12,
+            "66": 53.96
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 0.18,
+              "weekly_inc": 0.18
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 27.62,
+              "weekly_inc": 27.44
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 49.72,
+              "weekly_inc": 22.1
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 42.54,
+              "weekly_inc": -7.18
+            }
+          ],
+          "ret_5d_before": -26.37,
+          "ret_10d_before": -28.48,
+          "ret_20d_before": -41.33
+        }
+      ]
+    },
+    {
+      "sym": "SPMLINFRA",
+      "price": 197.0,
+      "last_date": "2026-06-05",
+      "turnover_cr": 5.81,
+      "n_signals": 5,
+      "years": [
+        2022,
+        2023
+      ],
+      "dominant_pattern": "Hammer",
+      "pattern_counts": {
+        "Hammer": 2,
+        "Bullish Marubozu": 2,
+        "Three White Soldiers": 1,
+        "Bullish Engulfing": 1
+      },
+      "avg_peak_ret": 44.07,
+      "min_peak_ret": 35.88,
+      "avg_optimal_ret": 31.67,
+      "avg_opt_days": 18.0,
+      "avg_peak_days": 13.0,
+      "ret_5d": -5.12,
+      "ret_10d": -1.41,
+      "ret_15d": -0.94,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2023-08-30",
+          "year": 2023,
+          "close_at_signal": 35.7,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -11.3,
+          "vol_ratio": 1.65,
+          "entry_date": "2023-08-31",
+          "entry_px": 36.4,
+          "optimal_days": 20,
+          "optimal_ret": 35.85,
+          "peak_days": 15,
+          "peak_ret": 50.0,
+          "hold_rets": {
+            "3": 5.91,
+            "5": 10.03,
+            "10": 35.99,
+            "20": 35.85,
+            "44": 46.84,
+            "66": 139.97
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 10.03,
+              "weekly_inc": 10.03
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 35.99,
+              "weekly_inc": 25.96
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 50.0,
+              "weekly_inc": 14.01
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 35.85,
+              "weekly_inc": -14.15
+            }
+          ],
+          "ret_5d_before": 0.14,
+          "ret_10d_before": -9.28,
+          "ret_20d_before": -16.0
+        },
+        {
+          "date": "2023-08-29",
+          "year": 2023,
+          "close_at_signal": 35.0,
+          "patterns": [
+            "Hammer"
+          ],
+          "primary_pattern": "Hammer",
+          "fall_15d_pct": -11.39,
+          "vol_ratio": 3.59,
+          "entry_date": "2023-08-30",
+          "entry_px": 35.7,
+          "optimal_days": 20,
+          "optimal_ret": 41.18,
+          "peak_days": 15,
+          "peak_ret": 56.02,
+          "hold_rets": {
+            "3": 5.88,
+            "5": 10.08,
+            "10": 32.07,
+            "20": 41.18,
+            "44": 51.4,
+            "66": 139.92
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 10.08,
+              "weekly_inc": 10.08
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 32.07,
+              "weekly_inc": 21.99
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 56.02,
+              "weekly_inc": 23.95
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 41.18,
+              "weekly_inc": -14.85
+            }
+          ],
+          "ret_5d_before": -3.71,
+          "ret_10d_before": -12.83,
+          "ret_20d_before": -13.79
+        },
+        {
+          "date": "2023-05-29",
+          "year": 2023,
+          "close_at_signal": 31.2,
+          "patterns": [
+            "Bullish Engulfing",
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -11.61,
+          "vol_ratio": 1.65,
+          "entry_date": "2023-05-30",
+          "entry_px": 32.75,
+          "optimal_days": 20,
+          "optimal_ret": 15.57,
+          "peak_days": 15,
+          "peak_ret": 35.88,
+          "hold_rets": {
+            "3": 11.91,
+            "5": 4.58,
+            "10": 14.2,
+            "20": 15.57,
+            "44": 6.87,
+            "66": 50.99
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 4.58,
+              "weekly_inc": 4.58
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 14.2,
+              "weekly_inc": 9.62
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 35.88,
+              "weekly_inc": 21.68
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 15.57,
+              "weekly_inc": -20.31
+            }
+          ],
+          "ret_5d_before": -11.74,
+          "ret_10d_before": -8.77,
+          "ret_20d_before": -1.27
+        },
+        {
+          "date": "2022-06-28",
+          "year": 2022,
+          "close_at_signal": 36.15,
+          "patterns": [
+            "Three White Soldiers"
+          ],
+          "primary_pattern": "Three White Soldiers",
+          "fall_15d_pct": -9.4,
+          "vol_ratio": 3.07,
+          "entry_date": "2022-06-29",
+          "entry_px": 37.95,
+          "optimal_days": 15,
+          "optimal_ret": 29.51,
+          "peak_days": 10,
+          "peak_ret": 36.76,
+          "hold_rets": {
+            "3": 5.14,
+            "5": 15.68,
+            "10": 36.76,
+            "20": 8.04,
+            "44": 17.26,
+            "66": -17.39
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 15.68,
+              "weekly_inc": 15.68
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 36.76,
+              "weekly_inc": 21.08
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 29.51,
+              "weekly_inc": -7.25
+            }
+          ],
+          "ret_5d_before": 14.76,
+          "ret_10d_before": -1.63,
+          "ret_20d_before": -5.49
+        },
+        {
+          "date": "2022-06-24",
+          "year": 2022,
+          "close_at_signal": 33.0,
+          "patterns": [
+            "Hammer"
+          ],
+          "primary_pattern": "Hammer",
+          "fall_15d_pct": -14.95,
+          "vol_ratio": 1.67,
+          "entry_date": "2022-06-27",
+          "entry_px": 34.65,
+          "optimal_days": 15,
+          "optimal_ret": 36.22,
+          "peak_days": 10,
+          "peak_ret": 41.7,
+          "hold_rets": {
+            "3": 4.47,
+            "5": 15.15,
+            "10": 41.7,
+            "20": 27.99,
+            "44": 33.33,
+            "66": -3.9
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 15.15,
+              "weekly_inc": 15.15
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 41.7,
+              "weekly_inc": 26.55
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 36.22,
+              "weekly_inc": -5.48
+            }
+          ],
+          "ret_5d_before": -5.31,
+          "ret_10d_before": -12.7,
+          "ret_20d_before": -13.95
+        }
+      ]
+    },
+    {
+      "sym": "EDELWEISS",
+      "price": 114.67,
+      "last_date": "2026-06-05",
+      "turnover_cr": 34.16,
+      "n_signals": 2,
+      "years": [
+        2020,
+        2025
+      ],
+      "dominant_pattern": "Bullish Engulfing",
+      "pattern_counts": {
+        "Bullish Engulfing": 2,
+        "Piercing Line": 2,
+        "Bullish Marubozu": 1
+      },
+      "avg_peak_ret": 43.66,
+      "min_peak_ret": 40.33,
+      "avg_optimal_ret": 36.19,
+      "avg_opt_days": 25.0,
+      "avg_peak_days": 20.0,
+      "ret_5d": 1.64,
+      "ret_10d": 4.79,
+      "ret_15d": -1.01,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2025-05-09",
+          "year": 2025,
+          "close_at_signal": 78.6,
+          "patterns": [
+            "Bullish Engulfing",
+            "Piercing Line"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -5.52,
+          "vol_ratio": 1.67,
+          "entry_date": "2025-05-12",
+          "entry_px": 80.94,
+          "optimal_days": 25,
+          "optimal_ret": 32.31,
+          "peak_days": 20,
+          "peak_ret": 40.33,
+          "hold_rets": {
+            "3": 5.36,
+            "5": 12.8,
+            "10": 24.89,
+            "20": 40.33,
+            "44": 40.88,
+            "66": 16.75
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 12.8,
+              "weekly_inc": 12.8
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 24.89,
+              "weekly_inc": 12.1
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 34.82,
+              "weekly_inc": 9.92
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 40.33,
+              "weekly_inc": 5.51
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 32.31,
+              "weekly_inc": -8.02
+            }
+          ],
+          "ret_5d_before": -1.57,
+          "ret_10d_before": -9.68,
+          "ret_20d_before": 0.64
+        },
+        {
+          "date": "2020-11-04",
+          "year": 2020,
+          "close_at_signal": 53.0,
+          "patterns": [
+            "Bullish Engulfing",
+            "Piercing Line",
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -9.79,
+          "vol_ratio": 5.14,
+          "entry_date": "2020-11-05",
+          "entry_px": 55.65,
+          "optimal_days": 25,
+          "optimal_ret": 40.07,
+          "peak_days": 20,
+          "peak_ret": 46.99,
+          "hold_rets": {
+            "3": -4.04,
+            "5": -2.7,
+            "10": 10.24,
+            "20": 46.99,
+            "44": 25.97,
+            "66": 23.81
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -2.7,
+              "weekly_inc": -2.7
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 10.24,
+              "weekly_inc": 12.94
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 25.79,
+              "weekly_inc": 15.54
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 46.99,
+              "weekly_inc": 21.2
+            },
+            {
+              "week": 5,
+              "days": 25,
+              "cum_ret": 40.07,
+              "weekly_inc": -6.92
+            }
+          ],
+          "ret_5d_before": -7.26,
+          "ret_10d_before": -7.91,
+          "ret_20d_before": -18.08
+        }
+      ]
+    },
+    {
+      "sym": "SIMPLEXINF",
+      "price": 241.0,
+      "last_date": "2026-06-05",
+      "turnover_cr": 4.35,
+      "n_signals": 3,
+      "years": [
+        2020,
+        2025
+      ],
+      "dominant_pattern": "Bullish Marubozu",
+      "pattern_counts": {
+        "Bullish Marubozu": 1,
+        "Dragonfly Doji": 1,
+        "Piercing Line": 1
+      },
+      "avg_peak_ret": 41.95,
+      "min_peak_ret": 30.99,
+      "avg_optimal_ret": 26.76,
+      "avg_opt_days": 16.67,
+      "avg_peak_days": 11.67,
+      "ret_5d": -3.85,
+      "ret_10d": 12.02,
+      "ret_15d": 15.84,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2025-03-05",
+          "year": 2025,
+          "close_at_signal": 235.5,
+          "patterns": [
+            "Piercing Line"
+          ],
+          "primary_pattern": "Piercing Line",
+          "fall_15d_pct": -14.63,
+          "vol_ratio": 3.12,
+          "entry_date": "2025-03-06",
+          "entry_px": 245.85,
+          "optimal_days": 20,
+          "optimal_ret": 24.53,
+          "peak_days": 15,
+          "peak_ret": 30.99,
+          "hold_rets": {
+            "3": 0.04,
+            "5": 2.48,
+            "10": 18.97,
+            "20": 24.53,
+            "44": 14.72,
+            "66": 16.39
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 2.48,
+              "weekly_inc": 2.48
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 18.97,
+              "weekly_inc": 16.49
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 30.99,
+              "weekly_inc": 12.02
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 24.53,
+              "weekly_inc": -6.47
+            }
+          ],
+          "ret_5d_before": -10.88,
+          "ret_10d_before": -13.74,
+          "ret_20d_before": -16.07
+        },
+        {
+          "date": "2020-04-09",
+          "year": 2020,
+          "close_at_signal": 21.05,
+          "patterns": [
+            "Dragonfly Doji"
+          ],
+          "primary_pattern": "Dragonfly Doji",
+          "fall_15d_pct": -30.3,
+          "vol_ratio": 3.86,
+          "entry_date": "2020-04-13",
+          "entry_px": 22.1,
+          "optimal_days": 15,
+          "optimal_ret": 16.74,
+          "peak_days": 10,
+          "peak_ret": 32.81,
+          "hold_rets": {
+            "3": 15.61,
+            "5": 27.15,
+            "10": 32.81,
+            "20": 16.74,
+            "44": 25.34,
+            "66": 61.54
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 27.15,
+              "weekly_inc": 27.15
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 32.81,
+              "weekly_inc": 5.66
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 16.74,
+              "weekly_inc": -16.06
+            }
+          ],
+          "ret_5d_before": 15.34,
+          "ret_10d_before": -10.43,
+          "ret_20d_before": -45.82
+        },
+        {
+          "date": "2020-04-03",
+          "year": 2020,
+          "close_at_signal": 18.2,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -48.22,
+          "vol_ratio": 8.06,
+          "entry_date": "2020-04-07",
+          "entry_px": 19.1,
+          "optimal_days": 15,
+          "optimal_ret": 39.01,
+          "peak_days": 10,
+          "peak_ret": 62.04,
+          "hold_rets": {
+            "3": 15.71,
+            "5": 27.49,
+            "10": 62.04,
+            "20": 26.44,
+            "44": 47.64,
+            "66": 97.12
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 27.49,
+              "weekly_inc": 27.49
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 62.04,
+              "weekly_inc": 34.55
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 39.01,
+              "weekly_inc": -23.04
+            }
+          ],
+          "ret_5d_before": -14.35,
+          "ret_10d_before": -33.33,
+          "ret_20d_before": -59.78
+        }
+      ]
+    },
+    {
+      "sym": "XPROINDIA",
+      "price": 1170.7,
+      "last_date": "2026-06-05",
+      "turnover_cr": 5.98,
+      "n_signals": 2,
+      "years": [
+        2021
+      ],
+      "dominant_pattern": "Bullish Marubozu",
+      "pattern_counts": {
+        "Bullish Marubozu": 2,
+        "Piercing Line": 1
+      },
+      "avg_peak_ret": 40.34,
+      "min_peak_ret": 36.11,
+      "avg_optimal_ret": 40.34,
+      "avg_opt_days": 17.5,
+      "avg_peak_days": 17.5,
+      "ret_5d": 5.2,
+      "ret_10d": 6.18,
+      "ret_15d": 6.54,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2021-08-23",
+          "year": 2021,
+          "close_at_signal": 288.05,
+          "patterns": [
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Bullish Marubozu",
+          "fall_15d_pct": -10.07,
+          "vol_ratio": 1.59,
+          "entry_date": "2021-08-24",
+          "entry_px": 302.45,
+          "optimal_days": 15,
+          "optimal_ret": 36.11,
+          "peak_days": 15,
+          "peak_ret": 36.11,
+          "hold_rets": {
+            "3": 15.74,
+            "5": 27.59,
+            "10": 32.8,
+            "20": 69.86,
+            "44": 88.54,
+            "66": 157.84
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 27.59,
+              "weekly_inc": 27.59
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 32.8,
+              "weekly_inc": 5.21
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 36.11,
+              "weekly_inc": 3.31
+            }
+          ],
+          "ret_5d_before": 6.35,
+          "ret_10d_before": 8.72,
+          "ret_20d_before": -6.51
+        },
+        {
+          "date": "2021-08-11",
+          "year": 2021,
+          "close_at_signal": 264.5,
+          "patterns": [
+            "Piercing Line",
+            "Bullish Marubozu"
+          ],
+          "primary_pattern": "Piercing Line",
+          "fall_15d_pct": -5.37,
+          "vol_ratio": 2.07,
+          "entry_date": "2021-08-12",
+          "entry_px": 277.7,
+          "optimal_days": 20,
+          "optimal_ret": 44.58,
+          "peak_days": 20,
+          "peak_ret": 44.58,
+          "hold_rets": {
+            "3": -2.77,
+            "5": -1.21,
+            "10": 26.05,
+            "20": 44.58,
+            "44": 140.87,
+            "66": 164.62
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -1.21,
+              "weekly_inc": -1.21
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 26.05,
+              "weekly_inc": 27.26
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 42.49,
+              "weekly_inc": 16.44
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 44.58,
+              "weekly_inc": 2.09
+            }
+          ],
+          "ret_5d_before": -4.68,
+          "ret_10d_before": -9.42,
+          "ret_20d_before": 20.75
+        }
+      ]
+    },
+    {
+      "sym": "KPITTECH",
+      "price": 777.8,
+      "last_date": "2026-06-05",
+      "turnover_cr": 157.12,
+      "n_signals": 3,
+      "years": [
+        2020,
+        2021
+      ],
+      "dominant_pattern": "Piercing Line",
+      "pattern_counts": {
+        "Piercing Line": 1,
+        "Three White Soldiers": 1,
+        "Morning Star": 1
+      },
+      "avg_peak_ret": 38.87,
+      "min_peak_ret": 34.42,
+      "avg_optimal_ret": 38.13,
+      "avg_opt_days": 15.0,
+      "avg_peak_days": 13.33,
+      "ret_5d": 0.76,
+      "ret_10d": 3.58,
+      "ret_15d": 9.7,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2021-11-02",
+          "year": 2021,
+          "close_at_signal": 327.15,
+          "patterns": [
+            "Morning Star"
+          ],
+          "primary_pattern": "Morning Star",
+          "fall_15d_pct": -5.52,
+          "vol_ratio": 1.5,
+          "entry_date": "2021-11-03",
+          "entry_px": 344.75,
+          "optimal_days": 15,
+          "optimal_ret": 34.42,
+          "peak_days": 15,
+          "peak_ret": 34.42,
+          "hold_rets": {
+            "3": 8.32,
+            "5": 17.1,
+            "10": 30.37,
+            "20": 44.41,
+            "44": 82.87,
+            "66": 78.07
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 17.1,
+              "weekly_inc": 17.1
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 30.37,
+              "weekly_inc": 13.27
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 34.42,
+              "weekly_inc": 4.05
+            }
+          ],
+          "ret_5d_before": 1.1,
+          "ret_10d_before": -5.38,
+          "ret_20d_before": -4.1
+        },
+        {
+          "date": "2020-05-27",
+          "year": 2020,
+          "close_at_signal": 44.75,
+          "patterns": [
+            "Three White Soldiers"
+          ],
+          "primary_pattern": "Three White Soldiers",
+          "fall_15d_pct": -18.71,
+          "vol_ratio": 3.64,
+          "entry_date": "2020-05-28",
+          "entry_px": 46.95,
+          "optimal_days": 15,
+          "optimal_ret": 34.61,
+          "peak_days": 15,
+          "peak_ret": 34.61,
+          "hold_rets": {
+            "3": 15.55,
+            "5": 17.47,
+            "10": 30.99,
+            "20": 34.19,
+            "44": 39.3,
+            "66": 88.5
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 17.47,
+              "weekly_inc": 17.47
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 30.99,
+              "weekly_inc": 13.53
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 34.61,
+              "weekly_inc": 3.62
+            }
+          ],
+          "ret_5d_before": -1.32,
+          "ret_10d_before": -10.77,
+          "ret_20d_before": -8.95
+        },
+        {
+          "date": "2020-05-22",
+          "year": 2020,
+          "close_at_signal": 41.7,
+          "patterns": [
+            "Piercing Line"
+          ],
+          "primary_pattern": "Piercing Line",
+          "fall_15d_pct": -25.2,
+          "vol_ratio": 4.9,
+          "entry_date": "2020-05-26",
+          "entry_px": 43.2,
+          "optimal_days": 15,
+          "optimal_ret": 45.37,
+          "peak_days": 10,
+          "peak_ret": 47.57,
+          "hold_rets": {
+            "3": 14.0,
+            "5": 25.58,
+            "10": 47.57,
+            "20": 46.06,
+            "44": 54.98,
+            "66": 112.27
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 25.58,
+              "weekly_inc": 25.58
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 47.57,
+              "weekly_inc": 21.99
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 45.37,
+              "weekly_inc": -2.2
+            }
+          ],
+          "ret_5d_before": -15.76,
+          "ret_10d_before": -21.54,
+          "ret_20d_before": -16.6
+        }
+      ]
+    },
+    {
+      "sym": "MARATHON",
+      "price": 408.9,
+      "last_date": "2026-06-05",
+      "turnover_cr": 4.25,
+      "n_signals": 2,
+      "years": [
+        2025
+      ],
+      "dominant_pattern": "Bullish Engulfing",
+      "pattern_counts": {
+        "Bullish Engulfing": 2
+      },
+      "avg_peak_ret": 32.84,
+      "min_peak_ret": 32.36,
+      "avg_optimal_ret": 24.34,
+      "avg_opt_days": 15.0,
+      "avg_peak_days": 12.5,
+      "ret_5d": -11.45,
+      "ret_10d": -16.15,
+      "ret_15d": -15.45,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2025-03-12",
+          "year": 2025,
+          "close_at_signal": 383.3,
+          "patterns": [
+            "Bullish Engulfing"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -16.09,
+          "vol_ratio": 4.77,
+          "entry_date": "2025-03-13",
+          "entry_px": 388.5,
+          "optimal_days": 15,
+          "optimal_ret": 16.31,
+          "peak_days": 10,
+          "peak_ret": 33.31,
+          "hold_rets": {
+            "3": 21.08,
+            "5": 27.54,
+            "10": 33.31,
+            "20": 31.53,
+            "44": 29.85,
+            "66": 62.47
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 27.54,
+              "weekly_inc": 27.54
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 33.31,
+              "weekly_inc": 5.77
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 16.31,
+              "weekly_inc": -17.0
+            }
+          ],
+          "ret_5d_before": 1.47,
+          "ret_10d_before": -10.88,
+          "ret_20d_before": -26.18
+        },
+        {
+          "date": "2025-03-06",
+          "year": 2025,
+          "close_at_signal": 387.5,
+          "patterns": [
+            "Bullish Engulfing"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -25.22,
+          "vol_ratio": 1.62,
+          "entry_date": "2025-03-07",
+          "entry_px": 388.0,
+          "optimal_days": 15,
+          "optimal_ret": 32.36,
+          "peak_days": 15,
+          "peak_ret": 32.36,
+          "hold_rets": {
+            "3": -1.21,
+            "5": -0.63,
+            "10": 27.91,
+            "20": 18.9,
+            "44": 36.6,
+            "66": 51.48
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": -0.63,
+              "weekly_inc": -0.63
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 27.91,
+              "weekly_inc": 28.54
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 32.36,
+              "weekly_inc": 4.45
+            }
+          ],
+          "ret_5d_before": -5.07,
+          "ret_10d_before": -14.98,
+          "ret_20d_before": -31.12
+        }
+      ]
+    },
+    {
+      "sym": "DBREALTY",
+      "price": 114.45,
+      "last_date": "2026-06-05",
+      "turnover_cr": 6.88,
+      "n_signals": 3,
+      "years": [
+        2023,
+        2026
+      ],
+      "dominant_pattern": "Bullish Engulfing",
+      "pattern_counts": {
+        "Bullish Engulfing": 2,
+        "Hammer": 1
+      },
+      "avg_peak_ret": 30.72,
+      "min_peak_ret": 30.28,
+      "avg_optimal_ret": 28.33,
+      "avg_opt_days": 16.67,
+      "avg_peak_days": 13.33,
+      "ret_5d": -4.72,
+      "ret_10d": 0.14,
+      "ret_15d": -9.78,
+      "today_alert": null,
+      "active_alerts": [],
+      "has_today": false,
+      "has_active": false,
+      "signals": [
+        {
+          "date": "2026-01-23",
+          "year": 2026,
+          "close_at_signal": 102.65,
+          "patterns": [
+            "Bullish Engulfing"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -12.79,
+          "vol_ratio": 3.95,
+          "entry_date": "2026-01-27",
+          "entry_px": 97.85,
+          "optimal_days": 15,
+          "optimal_ret": 26.71,
+          "peak_days": 10,
+          "peak_ret": 30.59,
+          "hold_rets": {
+            "3": 8.97,
+            "5": 12.45,
+            "10": 30.59,
+            "20": 15.34,
+            "44": -7.49,
+            "66": 43.43
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 12.45,
+              "weekly_inc": 12.45
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 30.59,
+              "weekly_inc": 18.14
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 26.71,
+              "weekly_inc": -3.87
+            }
+          ],
+          "ret_5d_before": -1.4,
+          "ret_10d_before": -11.18,
+          "ret_20d_before": -15.19
+        },
+        {
+          "date": "2026-01-19",
+          "year": 2026,
+          "close_at_signal": 102.86,
+          "patterns": [
+            "Hammer"
+          ],
+          "primary_pattern": "Hammer",
+          "fall_15d_pct": -13.45,
+          "vol_ratio": 1.52,
+          "entry_date": "2026-01-20",
+          "entry_px": 98.34,
+          "optimal_days": 15,
+          "optimal_ret": 31.3,
+          "peak_days": 15,
+          "peak_ret": 31.3,
+          "hold_rets": {
+            "3": 4.38,
+            "5": 3.65,
+            "10": 29.87,
+            "20": 24.42,
+            "44": -3.77,
+            "66": 5.32
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 3.65,
+              "weekly_inc": 3.65
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 29.87,
+              "weekly_inc": 26.22
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 31.3,
+              "weekly_inc": 1.43
+            }
+          ],
+          "ret_5d_before": -8.07,
+          "ret_10d_before": -14.67,
+          "ret_20d_before": -10.94
+        },
+        {
+          "date": "2023-10-26",
+          "year": 2023,
+          "close_at_signal": 148.8,
+          "patterns": [
+            "Bullish Engulfing"
+          ],
+          "primary_pattern": "Bullish Engulfing",
+          "fall_15d_pct": -8.77,
+          "vol_ratio": 1.51,
+          "entry_date": "2023-10-27",
+          "entry_px": 162.65,
+          "optimal_days": 20,
+          "optimal_ret": 26.99,
+          "peak_days": 15,
+          "peak_ret": 30.28,
+          "hold_rets": {
+            "3": 6.95,
+            "5": 8.95,
+            "10": 14.97,
+            "20": 26.99,
+            "44": 14.17,
+            "66": 67.88
+          },
+          "weekly_track": [
+            {
+              "week": 1,
+              "days": 5,
+              "cum_ret": 8.95,
+              "weekly_inc": 8.95
+            },
+            {
+              "week": 2,
+              "days": 10,
+              "cum_ret": 14.97,
+              "weekly_inc": 6.03
+            },
+            {
+              "week": 3,
+              "days": 15,
+              "cum_ret": 30.28,
+              "weekly_inc": 15.31
+            },
+            {
+              "week": 4,
+              "days": 20,
+              "cum_ret": 26.99,
+              "weekly_inc": -3.29
+            }
+          ],
+          "ret_5d_before": -9.63,
+          "ret_10d_before": -13.49,
+          "ret_20d_before": -9.74
+        }
+      ]
+    }
+  ]
+}
