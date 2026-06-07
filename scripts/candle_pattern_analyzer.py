@@ -38,16 +38,16 @@ MANIFEST = ROOT / "data" / "manifest.json"
 OUT.mkdir(exist_ok=True)
 
 # ── CONFIG ─────────────────────────────────────────────────────────────────────
-MIN_TURNOVER     = 20_000_000    # Rs 20 Cr daily value
+MIN_TURNOVER     = 5_000_000     # Rs 5 Cr daily value (big profile mid-large cap)
 MIN_YEARS        = 5
 RECENT_DAYS      = 5             # must have traded in last 5 dates
 MIN_RETURN       = 30.0          # minimum 30% after signal
 WIN_RATE         = 100.0         # every occurrence must give 30%+
 MIN_OCC          = 2             # minimum 2 occurrences (can be rare)
-PRIOR_FALL_PCT   = 5.0           # stock must have fallen at least 5% in 15d before signal
-VOL_RATIO_MIN    = 1.5           # volume must be 1.5x 20-day average
+PRIOR_FALL_PCT   = 3.0           # stock must have fallen at least 3% in 15d before signal
+VOL_RATIO_MIN    = 1.3           # volume must be 1.3x 20-day average (above normal)
 WEEKLY_GROWTH_MIN= 5.0           # track until weekly growth drops below 5%
-MAX_TRACK_WEEKS  = 16            # track up to 16 weeks (80 trading days) for optimal exit
+MAX_TRACK_WEEKS  = 26            # track up to 26 weeks (130 trading days ~6 months)
 HOLD_LABELS      = {3:"3 Days", 5:"5 Days", 10:"10 Days", 20:"1 Month",
                     44:"2 Months", 66:"3 Months"}
 
