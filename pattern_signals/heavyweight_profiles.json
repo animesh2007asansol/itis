@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-06T01:47:27+05:30",
-  "data_range": "2020-01-01 to 2026-06-05",
+  "generated_at": "2026-06-09T02:07:56+05:30",
+  "data_range": "2020-01-01 to 2026-06-08",
   "thresholds": {
     "min_years_traded": 4,
     "min_turnover_cr": 2.0,
@@ -11,7 +11,7 @@
   "n_stocks": 5,
   "n_aplus": 0,
   "n_a": 0,
-  "n_b": 1,
+  "n_b": 2,
   "profiles": {
     "PUNJABCHEM": {
       "sym": "PUNJABCHEM",
@@ -143,21 +143,211 @@
         }
       ]
     },
-    "BDL": {
-      "sym": "BDL",
+    "POONAWALLA": {
+      "sym": "POONAWALLA",
       "grade": "B",
-      "score": 75.2,
+      "score": 84.7,
       "n_years": 3,
       "years": [
         2024,
         2025,
         2026
       ],
-      "n_events": 4,
+      "n_events": 5,
+      "best_window_days": 30,
+      "best_beats15_rate": 100.0,
+      "best_min_return": 15.75,
+      "avg_floor_depth": 2.2,
+      "win_stats": {
+        "5": {
+          "n": 4,
+          "win_rate": 75.0,
+          "beats15_rate": 50.0,
+          "avg_return": 12.57,
+          "min_return": -2.02,
+          "max_return": 27.34,
+          "med_return": 19.9
+        },
+        "10": {
+          "n": 4,
+          "win_rate": 75.0,
+          "beats15_rate": 75.0,
+          "avg_return": 14.12,
+          "min_return": -2.93,
+          "max_return": 23.18,
+          "med_return": 20.63
+        },
+        "20": {
+          "n": 4,
+          "win_rate": 75.0,
+          "beats15_rate": 50.0,
+          "avg_return": 15.72,
+          "min_return": -3.48,
+          "max_return": 32.8,
+          "med_return": 22.4
+        },
+        "30": {
+          "n": 4,
+          "win_rate": 100.0,
+          "beats15_rate": 100.0,
+          "avg_return": 22.68,
+          "min_return": 15.75,
+          "max_return": 33.92,
+          "med_return": 20.82
+        }
+      },
+      "events": [
+        {
+          "date": "2024-08-05",
+          "close": 345.75,
+          "low": 343.5,
+          "year": 2024,
+          "pos_in_range": 5.2,
+          "vol": 2764797,
+          "recovery": {
+            "5": {
+              "return_pct": 5.05,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": 15.62,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "20": {
+              "return_pct": 11.18,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "30": {
+              "return_pct": 15.75,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2024-10-25",
+          "close": 297.05,
+          "low": 287.0,
+          "year": 2024,
+          "pos_in_range": -21.4,
+          "vol": 12657285,
+          "recovery": {
+            "5": {
+              "return_pct": 27.34,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "10": {
+              "return_pct": 23.18,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "20": {
+              "return_pct": 22.4,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 20.82,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2025-02-12",
+          "close": 291.5,
+          "low": 287.9,
+          "year": 2025,
+          "pos_in_range": 8.8,
+          "vol": 1865540,
+          "recovery": {
+            "5": {
+              "return_pct": -2.02,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": -2.93,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": -3.48,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "30": {
+              "return_pct": 20.22,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2025-03-17",
+          "close": 289.65,
+          "low": 281.35,
+          "year": 2025,
+          "pos_in_range": 9.1,
+          "vol": 2066710,
+          "recovery": {
+            "5": {
+              "return_pct": 19.9,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "10": {
+              "return_pct": 20.63,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "20": {
+              "return_pct": 32.8,
+              "positive": true,
+              "beats_15pct": true
+            },
+            "30": {
+              "return_pct": 33.92,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2026-06-08",
+          "close": 381.05,
+          "low": 378.2,
+          "year": 2026,
+          "pos_in_range": 9.5,
+          "vol": 663325,
+          "recovery": {
+            "5": null,
+            "10": null,
+            "20": null,
+            "30": null
+          }
+        }
+      ]
+    },
+    "BDL": {
+      "sym": "BDL",
+      "grade": "B",
+      "score": 83.7,
+      "n_years": 3,
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "n_events": 5,
       "best_window_days": 30,
       "best_beats15_rate": 100.0,
       "best_min_return": 15.58,
-      "avg_floor_depth": 6.4,
+      "avg_floor_depth": 7.1,
       "win_stats": {
         "5": {
           "n": 4,
@@ -316,6 +506,20 @@
               "beats_15pct": true
             }
           }
+        },
+        {
+          "date": "2026-06-08",
+          "close": 1187.0,
+          "low": 1172.0,
+          "year": 2026,
+          "pos_in_range": 10.0,
+          "vol": 1313509,
+          "recovery": {
+            "5": null,
+            "10": null,
+            "20": null,
+            "30": null
+          }
         }
       ]
     },
@@ -457,181 +661,6 @@
             },
             "30": {
               "return_pct": 18.83,
-              "positive": true,
-              "beats_15pct": true
-            }
-          }
-        }
-      ]
-    },
-    "POONAWALLA": {
-      "sym": "POONAWALLA",
-      "grade": "C",
-      "score": 50.7,
-      "n_years": 2,
-      "years": [
-        2024,
-        2025
-      ],
-      "n_events": 4,
-      "best_window_days": 30,
-      "best_beats15_rate": 100.0,
-      "best_min_return": 15.75,
-      "avg_floor_depth": 0.4,
-      "win_stats": {
-        "5": {
-          "n": 4,
-          "win_rate": 75.0,
-          "beats15_rate": 50.0,
-          "avg_return": 12.57,
-          "min_return": -2.02,
-          "max_return": 27.34,
-          "med_return": 19.9
-        },
-        "10": {
-          "n": 4,
-          "win_rate": 75.0,
-          "beats15_rate": 75.0,
-          "avg_return": 14.12,
-          "min_return": -2.93,
-          "max_return": 23.18,
-          "med_return": 20.63
-        },
-        "20": {
-          "n": 4,
-          "win_rate": 75.0,
-          "beats15_rate": 50.0,
-          "avg_return": 15.72,
-          "min_return": -3.48,
-          "max_return": 32.8,
-          "med_return": 22.4
-        },
-        "30": {
-          "n": 4,
-          "win_rate": 100.0,
-          "beats15_rate": 100.0,
-          "avg_return": 22.68,
-          "min_return": 15.75,
-          "max_return": 33.92,
-          "med_return": 20.82
-        }
-      },
-      "events": [
-        {
-          "date": "2024-08-05",
-          "close": 345.75,
-          "low": 343.5,
-          "year": 2024,
-          "pos_in_range": 5.2,
-          "vol": 2764797,
-          "recovery": {
-            "5": {
-              "return_pct": 5.05,
-              "positive": true,
-              "beats_15pct": false
-            },
-            "10": {
-              "return_pct": 15.62,
-              "positive": true,
-              "beats_15pct": true
-            },
-            "20": {
-              "return_pct": 11.18,
-              "positive": true,
-              "beats_15pct": false
-            },
-            "30": {
-              "return_pct": 15.75,
-              "positive": true,
-              "beats_15pct": true
-            }
-          }
-        },
-        {
-          "date": "2024-10-25",
-          "close": 297.05,
-          "low": 287.0,
-          "year": 2024,
-          "pos_in_range": -21.4,
-          "vol": 12657285,
-          "recovery": {
-            "5": {
-              "return_pct": 27.34,
-              "positive": true,
-              "beats_15pct": true
-            },
-            "10": {
-              "return_pct": 23.18,
-              "positive": true,
-              "beats_15pct": true
-            },
-            "20": {
-              "return_pct": 22.4,
-              "positive": true,
-              "beats_15pct": true
-            },
-            "30": {
-              "return_pct": 20.82,
-              "positive": true,
-              "beats_15pct": true
-            }
-          }
-        },
-        {
-          "date": "2025-02-12",
-          "close": 291.5,
-          "low": 287.9,
-          "year": 2025,
-          "pos_in_range": 8.8,
-          "vol": 1865540,
-          "recovery": {
-            "5": {
-              "return_pct": -2.02,
-              "positive": false,
-              "beats_15pct": false
-            },
-            "10": {
-              "return_pct": -2.93,
-              "positive": false,
-              "beats_15pct": false
-            },
-            "20": {
-              "return_pct": -3.48,
-              "positive": false,
-              "beats_15pct": false
-            },
-            "30": {
-              "return_pct": 20.22,
-              "positive": true,
-              "beats_15pct": true
-            }
-          }
-        },
-        {
-          "date": "2025-03-17",
-          "close": 289.65,
-          "low": 281.35,
-          "year": 2025,
-          "pos_in_range": 9.1,
-          "vol": 2066710,
-          "recovery": {
-            "5": {
-              "return_pct": 19.9,
-              "positive": true,
-              "beats_15pct": true
-            },
-            "10": {
-              "return_pct": 20.63,
-              "positive": true,
-              "beats_15pct": true
-            },
-            "20": {
-              "return_pct": 32.8,
-              "positive": true,
-              "beats_15pct": true
-            },
-            "30": {
-              "return_pct": 33.92,
               "positive": true,
               "beats_15pct": true
             }
