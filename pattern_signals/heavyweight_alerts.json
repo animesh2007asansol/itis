@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-10T01:56:16+05:30",
-  "latest_date": "2026-06-09",
-  "alert_date": "2026-06-09",
+  "generated_at": "2026-06-11T02:20:22+05:30",
+  "latest_date": "2026-06-10",
+  "alert_date": "2026-06-10",
   "window_days": 20,
   "total_alerts": 3,
   "today_count": 0,
@@ -11,12 +11,12 @@
       "sym": "POONAWALLA",
       "sig_date": "2026-06-08",
       "is_today": false,
-      "days_ago": 1,
+      "days_ago": 2,
       "grade": "B",
       "score": 84.7,
       "sig_close": 381.05,
-      "cur_price": 383.7,
-      "pct_since": 0.7,
+      "cur_price": 380.2,
+      "pct_since": -0.22,
       "floor_depth_pct": 9.5,
       "best_window_days": 30,
       "beats15_rate": 100.0,
@@ -63,18 +63,18 @@
           "med_return": 20.82
         }
       },
-      "zone": "RUNNING"
+      "zone": "BUY ZONE"
     },
     {
       "sym": "BDL",
       "sig_date": "2026-06-08",
       "is_today": false,
-      "days_ago": 1,
+      "days_ago": 2,
       "grade": "B",
       "score": 83.7,
       "sig_close": 1187.0,
-      "cur_price": 1202.8,
-      "pct_since": 1.33,
+      "cur_price": 1183.8,
+      "pct_since": -0.27,
       "floor_depth_pct": 10.0,
       "best_window_days": 30,
       "beats15_rate": 100.0,
@@ -121,18 +121,18 @@
           "med_return": 21.03
         }
       },
-      "zone": "RUNNING"
+      "zone": "BUY ZONE"
     },
     {
       "sym": "PUNJABCHEM",
       "sig_date": "2026-06-05",
       "is_today": false,
-      "days_ago": 4,
+      "days_ago": 5,
       "grade": "C",
       "score": 86.8,
       "sig_close": 936.8,
-      "cur_price": 947.7,
-      "pct_since": 1.16,
+      "cur_price": 999.2,
+      "pct_since": 6.66,
       "floor_depth_pct": 7.6,
       "best_window_days": 30,
       "beats15_rate": 100.0,
