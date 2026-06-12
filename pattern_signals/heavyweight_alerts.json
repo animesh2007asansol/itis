@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-12T02:10:47+05:30",
-  "latest_date": "2026-06-11",
-  "alert_date": "2026-06-11",
+  "generated_at": "2026-06-13T02:00:36+05:30",
+  "latest_date": "2026-06-12",
+  "alert_date": "2026-06-12",
   "window_days": 20,
   "total_alerts": 3,
   "today_count": 0,
@@ -11,12 +11,12 @@
       "sym": "POONAWALLA",
       "sig_date": "2026-06-08",
       "is_today": false,
-      "days_ago": 3,
+      "days_ago": 4,
       "grade": "B",
       "score": 84.7,
       "sig_close": 381.05,
-      "cur_price": 372.5,
-      "pct_since": -2.24,
+      "cur_price": 391.9,
+      "pct_since": 2.85,
       "floor_depth_pct": 9.5,
       "best_window_days": 30,
       "beats15_rate": 100.0,
@@ -63,18 +63,18 @@
           "med_return": 20.82
         }
       },
-      "zone": "BUY ZONE"
+      "zone": "RUNNING"
     },
     {
       "sym": "BDL",
       "sig_date": "2026-06-08",
       "is_today": false,
-      "days_ago": 3,
+      "days_ago": 4,
       "grade": "B",
       "score": 83.7,
       "sig_close": 1187.0,
-      "cur_price": 1160.3,
-      "pct_since": -2.25,
+      "cur_price": 1200.2,
+      "pct_since": 1.11,
       "floor_depth_pct": 10.0,
       "best_window_days": 30,
       "beats15_rate": 100.0,
@@ -121,18 +121,18 @@
           "med_return": 21.03
         }
       },
-      "zone": "BUY ZONE"
+      "zone": "RUNNING"
     },
     {
       "sym": "PUNJABCHEM",
       "sig_date": "2026-06-05",
       "is_today": false,
-      "days_ago": 6,
+      "days_ago": 7,
       "grade": "C",
       "score": 86.8,
       "sig_close": 936.8,
-      "cur_price": 998.4,
-      "pct_since": 6.58,
+      "cur_price": 1005.2,
+      "pct_since": 7.3,
       "floor_depth_pct": 7.6,
       "best_window_days": 30,
       "beats15_rate": 100.0,
@@ -143,13 +143,13 @@
       "n_events": 3,
       "win_stats": {
         "5": {
-          "n": 2,
+          "n": 3,
           "win_rate": 100.0,
-          "beats15_rate": 50.0,
-          "avg_return": 12.68,
+          "beats15_rate": 33.3,
+          "avg_return": 10.89,
           "min_return": 6.8,
           "max_return": 18.56,
-          "med_return": 18.56
+          "med_return": 7.3
         },
         "10": {
           "n": 2,
