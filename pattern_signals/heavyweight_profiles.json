@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-13T02:00:36+05:30",
-  "data_range": "2020-01-01 to 2026-06-12",
+  "generated_at": "2026-06-16T02:56:39+05:30",
+  "data_range": "2020-01-01 to 2026-06-15",
   "thresholds": {
     "min_years_traded": 4,
     "min_turnover_cr": 2.0,
@@ -164,13 +164,13 @@
       "avg_floor_depth": 2.2,
       "win_stats": {
         "5": {
-          "n": 4,
-          "win_rate": 75.0,
-          "beats15_rate": 50.0,
-          "avg_return": 12.57,
+          "n": 5,
+          "win_rate": 80.0,
+          "beats15_rate": 40.0,
+          "avg_return": 11.02,
           "min_return": -2.02,
           "max_return": 27.34,
-          "med_return": 19.9
+          "med_return": 5.05
         },
         "10": {
           "n": 4,
@@ -329,7 +329,11 @@
           "pos_in_range": 9.5,
           "vol": 663325,
           "recovery": {
-            "5": null,
+            "5": {
+              "return_pct": 4.84,
+              "positive": true,
+              "beats_15pct": false
+            },
             "10": null,
             "20": null,
             "30": null
@@ -354,13 +358,13 @@
       "avg_floor_depth": 7.1,
       "win_stats": {
         "5": {
-          "n": 4,
-          "win_rate": 50.0,
-          "beats15_rate": 25.0,
-          "avg_return": 5.04,
+          "n": 5,
+          "win_rate": 60.0,
+          "beats15_rate": 20.0,
+          "avg_return": 4.42,
           "min_return": -5.63,
           "max_return": 22.94,
-          "med_return": 3.92
+          "med_return": 1.91
         },
         "10": {
           "n": 4,
@@ -519,7 +523,11 @@
           "pos_in_range": 10.0,
           "vol": 1313509,
           "recovery": {
-            "5": null,
+            "5": {
+              "return_pct": 1.91,
+              "positive": true,
+              "beats_15pct": false
+            },
             "10": null,
             "20": null,
             "30": null
