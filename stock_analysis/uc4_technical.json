@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-16T00:30:50+05:30",
+  "generated_at": "2026-06-17T23:11:00+05:30",
   "n": 11,
   "stocks": [
     {
       "sym": "TTML",
-      "price": 45.66,
+      "price": 45.47,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -64,7 +64,7 @@
     },
     {
       "sym": "HAL",
-      "price": 4284.7,
+      "price": 4460.5,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -124,18 +124,18 @@
     },
     {
       "sym": "EXICOM",
-      "price": 161.57,
+      "price": 165.05,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
       "desc": "",
-      "ret_rate": 1.21,
-      "avg_ret": 24.19,
+      "ret_rate": 1.23,
+      "avg_ret": 24.68,
       "min_ret": 11.46,
       "hold_days": 20,
       "win_rate": 100.0,
       "n_trades": 5,
-      "sharpe": 4.8,
+      "sharpe": 4.98,
       "years": [
         "2024",
         "2025",
@@ -183,7 +183,7 @@
     },
     {
       "sym": "SALZERELEC",
-      "price": 639.75,
+      "price": 654.05,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -212,7 +212,7 @@
     },
     {
       "sym": "THYROCARE",
-      "price": 535.6,
+      "price": 533.5,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -243,18 +243,18 @@
     },
     {
       "sym": "FOCUS",
-      "price": 91.95,
+      "price": 92.72,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
       "desc": "",
-      "ret_rate": 1.0,
-      "avg_ret": 20.08,
-      "min_ret": 10.25,
+      "ret_rate": 1.02,
+      "avg_ret": 20.31,
+      "min_ret": 11.18,
       "hold_days": 20,
       "win_rate": 100.0,
       "n_trades": 4,
-      "sharpe": 9.5,
+      "sharpe": 10.01,
       "years": [
         "2022",
         "2026"
@@ -272,7 +272,7 @@
     },
     {
       "sym": "ANURAS",
-      "price": 1269.5,
+      "price": 1294.5,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
