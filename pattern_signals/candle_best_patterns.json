@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-19T02:15:40+05:30",
-  "latest_date": "2026-06-18",
-  "n_patterns": 356,
+  "generated_at": "2026-06-20T01:40:04+05:30",
+  "latest_date": "2026-06-19",
+  "n_patterns": 357,
   "description": "100% next-day positive. Ranked by minimum return (highest first).",
   "patterns": [
     {
@@ -1085,7 +1085,13 @@
         "min": -10.58,
         "max": 6.81
       },
-      "win_20d": null,
+      "win_20d": {
+        "n": 6,
+        "wr": 83.3,
+        "avg": 4.18,
+        "min": -6.03,
+        "max": 13.67
+      },
       "years": [
         2020,
         2021,
@@ -5806,46 +5812,6 @@
       "last_date": "2026-03-13"
     },
     {
-      "sym": "MAHESHWARI",
-      "candle_key": "R_small_Lmedium_Utiny",
-      "desc": "Red small body | lower:medium | upper:tiny",
-      "occurrences": 6,
-      "nd_wr": 100.0,
-      "nd_avg": 1.66,
-      "nd_min": 0.29,
-      "nd_max": 3.43,
-      "gap_up_rate": 50.0,
-      "avg_gap_pct": 0.63,
-      "win_5d": {
-        "n": 6,
-        "wr": 66.7,
-        "avg": 0.51,
-        "min": -2.84,
-        "max": 2.45
-      },
-      "win_10d": {
-        "n": 6,
-        "wr": 83.3,
-        "avg": 3.4,
-        "min": -3.54,
-        "max": 11.68
-      },
-      "win_20d": {
-        "n": 6,
-        "wr": 33.3,
-        "avg": -2.72,
-        "min": -10.66,
-        "max": 6.95
-      },
-      "years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "last_date": "2025-03-27"
-    },
-    {
       "sym": "MOTHERSUMI",
       "candle_key": "G_doji_Lvery_long_Ulong",
       "desc": "Green doji body | lower:very_long | upper:long",
@@ -6738,7 +6704,13 @@
       "nd_max": 10.0,
       "gap_up_rate": 83.3,
       "avg_gap_pct": 2.48,
-      "win_5d": null,
+      "win_5d": {
+        "n": 6,
+        "wr": 83.3,
+        "avg": 10.21,
+        "min": -1.3,
+        "max": 29.37
+      },
       "win_10d": null,
       "win_20d": null,
       "years": [
@@ -7739,6 +7711,26 @@
         2024
       ],
       "last_date": "2024-08-30"
+    },
+    {
+      "sym": "KRN",
+      "candle_key": "R_tiny_Llong_Ulong",
+      "desc": "Red tiny body | lower:long | upper:long",
+      "occurrences": 6,
+      "nd_wr": 100.0,
+      "nd_avg": 2.76,
+      "nd_min": 0.17,
+      "nd_max": 6.82,
+      "gap_up_rate": 50.0,
+      "avg_gap_pct": 0.13,
+      "win_5d": null,
+      "win_10d": null,
+      "win_20d": null,
+      "years": [
+        2025,
+        2026
+      ],
+      "last_date": "2026-06-18"
     },
     {
       "sym": "MUFIN",
@@ -11136,6 +11128,28 @@
       "last_date": "2023-03-28"
     },
     {
+      "sym": "ANGELONE",
+      "candle_key": "G_tiny_Lsmall_Umedium",
+      "desc": "Green tiny body | lower:small | upper:medium",
+      "occurrences": 6,
+      "nd_wr": 100.0,
+      "nd_avg": 1.04,
+      "nd_min": 0.01,
+      "nd_max": 2.9,
+      "gap_up_rate": 83.3,
+      "avg_gap_pct": 0.58,
+      "win_5d": null,
+      "win_10d": null,
+      "win_20d": null,
+      "years": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "last_date": "2026-06-18"
+    },
+    {
       "sym": "AONELIQUID",
       "candle_key": "R_doji_Lmedium_Unone",
       "desc": "Red doji body | lower:medium | upper:none",
@@ -11425,7 +11439,13 @@
         "min": 0.09,
         "max": 0.2
       },
-      "win_10d": null,
+      "win_10d": {
+        "n": 6,
+        "wr": 100.0,
+        "avg": 0.25,
+        "min": 0.18,
+        "max": 0.31
+      },
       "win_20d": null,
       "years": [
         2024,
@@ -11446,7 +11466,7 @@
       "gap_up_rate": 94.1,
       "avg_gap_pct": 0.03,
       "win_5d": {
-        "n": 16,
+        "n": 17,
         "wr": 100.0,
         "avg": 0.12,
         "min": 0.1,
@@ -11531,7 +11551,7 @@
         "max": 0.14
       },
       "win_10d": {
-        "n": 32,
+        "n": 33,
         "wr": 100.0,
         "avg": 0.21,
         "min": 0.19,
@@ -11941,7 +11961,7 @@
         "max": 0.15
       },
       "win_10d": {
-        "n": 13,
+        "n": 14,
         "wr": 100.0,
         "avg": 0.22,
         "min": 0.17,
@@ -11972,7 +11992,7 @@
       "gap_up_rate": 92.9,
       "avg_gap_pct": 0.0,
       "win_5d": {
-        "n": 54,
+        "n": 55,
         "wr": 100.0,
         "avg": 0.11,
         "min": 0.08,
@@ -12432,12 +12452,12 @@
       "sym": "GROWWLIQID",
       "candle_key": "G_doji_Lnone_Uvery_long",
       "desc": "Green doji body | lower:none | upper:very_long",
-      "occurrences": 95,
+      "occurrences": 96,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.06,
-      "gap_up_rate": 77.9,
+      "gap_up_rate": 77.1,
       "avg_gap_pct": 0.01,
       "win_5d": {
         "n": 94,
@@ -12454,7 +12474,7 @@
         "max": 0.3
       },
       "win_20d": {
-        "n": 86,
+        "n": 87,
         "wr": 100.0,
         "avg": 0.4,
         "min": 0.32,
@@ -12465,7 +12485,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-06-17"
+      "last_date": "2026-06-18"
     },
     {
       "sym": "GROWWLIQID",
@@ -12963,7 +12983,7 @@
         "max": 0.0
       },
       "win_10d": {
-        "n": 184,
+        "n": 185,
         "wr": 2.7,
         "avg": 0.0,
         "min": 0.0,
@@ -13027,12 +13047,12 @@
       "sym": "LIQUID1",
       "candle_key": "G_doji_Lnone_Uvery_long",
       "desc": "Green doji body | lower:none | upper:very_long",
-      "occurrences": 85,
+      "occurrences": 86,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.06,
-      "gap_up_rate": 76.5,
+      "gap_up_rate": 75.6,
       "avg_gap_pct": 0.04,
       "win_5d": {
         "n": 84,
@@ -13060,7 +13080,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-06-17"
+      "last_date": "2026-06-18"
     },
     {
       "sym": "LIQUID1",
@@ -13144,12 +13164,12 @@
       "sym": "LIQUIDADD",
       "candle_key": "G_doji_Lnone_Umedium",
       "desc": "Green doji body | lower:none | upper:medium",
-      "occurrences": 93,
+      "occurrences": 94,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.07,
-      "gap_up_rate": 91.4,
+      "gap_up_rate": 91.5,
       "avg_gap_pct": 0.01,
       "win_5d": {
         "n": 92,
@@ -13159,14 +13179,14 @@
         "max": 0.16
       },
       "win_10d": {
-        "n": 89,
+        "n": 90,
         "wr": 100.0,
         "avg": 0.22,
         "min": 0.16,
         "max": 0.28
       },
       "win_20d": {
-        "n": 84,
+        "n": 85,
         "wr": 100.0,
         "avg": 0.45,
         "min": 0.34,
@@ -13177,7 +13197,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-06-15"
+      "last_date": "2026-06-18"
     },
     {
       "sym": "LIQUIDADD",
@@ -13230,7 +13250,7 @@
       "gap_up_rate": 82.8,
       "avg_gap_pct": 0.09,
       "win_5d": {
-        "n": 63,
+        "n": 64,
         "wr": 100.0,
         "avg": 0.11,
         "min": 0.09,
@@ -13378,12 +13398,12 @@
       "sym": "LIQUIDPLUS",
       "candle_key": "R_doji_Lnone_Unone",
       "desc": "Red doji body | lower:none | upper:none",
-      "occurrences": 24,
+      "occurrences": 25,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.06,
-      "gap_up_rate": 87.5,
+      "gap_up_rate": 88.0,
       "avg_gap_pct": 0.02,
       "win_5d": {
         "n": 24,
@@ -13410,7 +13430,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-04-16"
+      "last_date": "2026-06-18"
     },
     {
       "sym": "LTIM",
