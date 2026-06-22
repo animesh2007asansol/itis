@@ -1,0 +1,30 @@
+name: Breakout Analyzer (Consolidation Breakout)
+
+"on":
+  workflow_dispatch: {}
+  workflow_run:
+    workflows: ["NSE Daily Data Fetch"]
+    types: [completed]
+  schedule:
+    - cron: '30 16 * * 1-5'   # 10 PM IST Mon-Fri
+
+jobs:
+  breakout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas numpy --quiet
+      - name: Run Breakout Analyzer
+        run: python scripts/breakout_analyzer.py
+      - name: Commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add stock_analysis/breakout_signals.json
+          git diff --staged --quiet && echo "No changes" || \
+            git commit -m "Breakout signals: consolidation breakouts [$(date '+%Y-%m-%d')]"
+          git push
