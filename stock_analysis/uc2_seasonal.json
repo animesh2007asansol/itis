@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-19T22:40:46+05:30",
-  "n": 53,
+  "generated_at": "2026-06-23T00:13:12+05:30",
+  "n": 54,
   "stocks": [
     {
       "sym": "JUBLINDS",
@@ -36,7 +36,7 @@
     },
     {
       "sym": "TPLPLASTEH",
-      "price": 66.81,
+      "price": 72.07,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -165,7 +165,7 @@
     },
     {
       "sym": "E2E",
-      "price": 425.9,
+      "price": 447.1,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -196,7 +196,7 @@
     },
     {
       "sym": "ANGELONE",
-      "price": 353.7,
+      "price": 354.8,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -291,7 +291,7 @@
     },
     {
       "sym": "GMRP&UI",
-      "price": 100.51,
+      "price": 101.74,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -355,7 +355,7 @@
     },
     {
       "sym": "LXCHEM",
-      "price": 152.37,
+      "price": 162.91,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -418,7 +418,7 @@
     },
     {
       "sym": "SEJALLTD",
-      "price": 825.2,
+      "price": 785.45,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -449,7 +449,7 @@
     },
     {
       "sym": "ZODIAC",
-      "price": 280.7,
+      "price": 280.25,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -513,7 +513,7 @@
     },
     {
       "sym": "DYCL",
-      "price": 366.75,
+      "price": 365.6,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -575,7 +575,7 @@
     },
     {
       "sym": "ZIMLAB",
-      "price": 119.43,
+      "price": 125.4,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -606,7 +606,7 @@
     },
     {
       "sym": "STOVEKRAFT",
-      "price": 694.25,
+      "price": 732.65,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -669,7 +669,7 @@
     },
     {
       "sym": "INOXGREEN",
-      "price": 199.47,
+      "price": 205.11,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -700,7 +700,7 @@
     },
     {
       "sym": "MANORAMA",
-      "price": 1558.2,
+      "price": 1547.4,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -764,7 +764,7 @@
     },
     {
       "sym": "TITAGARH",
-      "price": 922.45,
+      "price": 920.6,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -795,7 +795,7 @@
     },
     {
       "sym": "PRUDENT",
-      "price": 3029.2,
+      "price": 3079.3,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -890,7 +890,7 @@
     },
     {
       "sym": "KERNEX",
-      "price": 1999.5,
+      "price": 1969.2,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -923,18 +923,18 @@
     },
     {
       "sym": "NGLFINE",
-      "price": 3055.6,
+      "price": 3149.4,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
       "desc": "Buy on first trading day of Jun, hold 30d",
-      "ret_rate": 0.77,
-      "avg_ret": 23.15,
-      "min_ret": 11.61,
+      "ret_rate": 0.8,
+      "avg_ret": 24.0,
+      "min_ret": 15.03,
       "hold_days": 30,
       "win_rate": 100.0,
       "n_trades": 4,
-      "sharpe": 7.2,
+      "sharpe": 8.36,
       "years": [
         "2023",
         "2024",
@@ -950,6 +950,38 @@
         "min": 0.2,
         "max": 0.83,
         "avg": 0.53
+      }
+    },
+    {
+      "sym": "SPLPETRO",
+      "price": 774.85,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC2",
+      "desc": "Buy on first trading day of Jun, hold 20d",
+      "ret_rate": 0.77,
+      "avg_ret": 15.43,
+      "min_ret": 10.19,
+      "hold_days": 20,
+      "win_rate": 100.0,
+      "n_trades": 5,
+      "sharpe": 16.24,
+      "years": [
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "ctx_rsi": {
+        "min": 23.37,
+        "max": 68.14,
+        "avg": 38.14
+      },
+      "ctx_vol_r": {
+        "min": 0.5,
+        "max": 1.12,
+        "avg": 0.75
       }
     },
     {
@@ -986,7 +1018,7 @@
     },
     {
       "sym": "SJS",
-      "price": 2215.3,
+      "price": 2185.2,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1014,38 +1046,6 @@
         "min": 0.27,
         "max": 1.43,
         "avg": 0.94
-      }
-    },
-    {
-      "sym": "SPLPETRO",
-      "price": 750.25,
-      "grade": "C",
-      "confidence": 0,
-      "uc": "UC2",
-      "desc": "Buy on first trading day of Jun, hold 20d",
-      "ret_rate": 0.74,
-      "avg_ret": 14.7,
-      "min_ret": 10.19,
-      "hold_days": 20,
-      "win_rate": 100.0,
-      "n_trades": 5,
-      "sharpe": 13.65,
-      "years": [
-        "2022",
-        "2023",
-        "2024",
-        "2025",
-        "2026"
-      ],
-      "ctx_rsi": {
-        "min": 23.37,
-        "max": 68.14,
-        "avg": 38.14
-      },
-      "ctx_vol_r": {
-        "min": 0.5,
-        "max": 1.12,
-        "avg": 0.75
       }
     },
     {
@@ -1083,7 +1083,7 @@
     },
     {
       "sym": "MOTHERSON",
-      "price": 145.54,
+      "price": 145.85,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1114,7 +1114,7 @@
     },
     {
       "sym": "AGI",
-      "price": 731.15,
+      "price": 732.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1178,7 +1178,7 @@
     },
     {
       "sym": "RAMRAT",
-      "price": 407.15,
+      "price": 424.4,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1209,7 +1209,7 @@
     },
     {
       "sym": "AARTIPHARM",
-      "price": 691.8,
+      "price": 678.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1332,8 +1332,39 @@
       }
     },
     {
+      "sym": "RAMAPHO",
+      "price": 134.92,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC2",
+      "desc": "Buy on first trading day of Jun, hold 30d",
+      "ret_rate": 0.63,
+      "avg_ret": 18.81,
+      "min_ret": 12.62,
+      "hold_days": 30,
+      "win_rate": 100.0,
+      "n_trades": 4,
+      "sharpe": 14.16,
+      "years": [
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "ctx_rsi": {
+        "min": 23.64,
+        "max": 62.14,
+        "avg": 35.86
+      },
+      "ctx_vol_r": {
+        "min": 0.63,
+        "max": 1.99,
+        "avg": 1.14
+      }
+    },
+    {
       "sym": "ARTEMISMED",
-      "price": 258.65,
+      "price": 268.35,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1366,7 +1397,7 @@
     },
     {
       "sym": "JYOTISTRUC",
-      "price": 12.37,
+      "price": 12.24,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1397,7 +1428,7 @@
     },
     {
       "sym": "ROTO",
-      "price": 64.39,
+      "price": 65.16,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1463,7 +1494,7 @@
     },
     {
       "sym": "STYRENIX",
-      "price": 2312.9,
+      "price": 2383.8,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1494,7 +1525,7 @@
     },
     {
       "sym": "SBC",
-      "price": 43.59,
+      "price": 44.09,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1556,7 +1587,7 @@
     },
     {
       "sym": "KPIGREEN",
-      "price": 409.15,
+      "price": 411.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1588,7 +1619,7 @@
     },
     {
       "sym": "KIRLPNU",
-      "price": 1950.0,
+      "price": 2091.5,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
