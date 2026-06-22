@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-20T01:38:11+05:30",
-  "data_range": "2020-01-01 to 2026-06-19",
+  "generated_at": "2026-06-23T02:48:27+05:30",
+  "data_range": "2020-01-01 to 2026-06-22",
   "thresholds": {
     "min_years_traded": 4,
     "min_turnover_cr": 2.0,
@@ -177,13 +177,13 @@
           "med_return": 5.05
         },
         "10": {
-          "n": 4,
-          "win_rate": 75.0,
-          "beats15_rate": 75.0,
-          "avg_return": 14.12,
+          "n": 5,
+          "win_rate": 80.0,
+          "beats15_rate": 60.0,
+          "avg_return": 13.59,
           "min_return": -2.93,
           "max_return": 23.18,
-          "med_return": 20.63
+          "med_return": 15.62
         },
         "20": {
           "n": 4,
@@ -338,7 +338,11 @@
               "positive": true,
               "beats_15pct": false
             },
-            "10": null,
+            "10": {
+              "return_pct": 11.46,
+              "positive": true,
+              "beats_15pct": false
+            },
             "20": null,
             "30": null
           }
@@ -371,10 +375,10 @@
           "med_return": 1.91
         },
         "10": {
-          "n": 4,
-          "win_rate": 50.0,
-          "beats15_rate": 25.0,
-          "avg_return": 10.07,
+          "n": 5,
+          "win_rate": 60.0,
+          "beats15_rate": 40.0,
+          "avg_return": 11.76,
           "min_return": -2.42,
           "max_return": 30.4,
           "med_return": 14.42
@@ -532,7 +536,11 @@
               "positive": true,
               "beats_15pct": false
             },
-            "10": null,
+            "10": {
+              "return_pct": 18.51,
+              "positive": true,
+              "beats_15pct": true
+            },
             "20": null,
             "30": null
           }
