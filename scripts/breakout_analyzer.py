@@ -24,6 +24,7 @@ Requirements:
 - 3+ years of history
 - Currently active
 - Pattern must have 100% post-breakout positive (or >= 80% win rate)
+- EVERY historical breakout must have peaked >= 5% within T+1..T+4 (guaranteed profit filter)
 
 Output: stock_analysis/breakout_signals.json
 """
@@ -43,17 +44,18 @@ MANIFEST = ROOT / "data" / "manifest.json"
 OUT.mkdir(exist_ok=True)
 
 # ── CONFIG ─────────────────────────────────────────────────────────────────────
-MIN_PRICE         = 15.0
-MIN_TURNOVER      = 5_000_000       # Rs 5 Cr daily
-MIN_YEARS         = 3
-RECENT_DAYS       = 5
-CONSOL_WINDOWS    = [20, 30, 40, 60, 80, 120]  # trading days (1mo to 6mo)
-CONSOL_BAND_MAX   = 12.0            # max % range to be considered consolidation
-BREAKOUT_MIN      = 1.5             # breakout must exceed consolidation top by 1.5%
-MIN_POST_POSITIVE = 3               # need 3 of 4 post-breakout days to be up
-POST_DAYS         = 4               # track 4 days after breakout
-MIN_OCCURRENCES   = 2               # need at least 2 historical breakouts
-ALERT_WINDOW      = 3               # show alerts for last 3 trading days
+MIN_PRICE           = 15.0
+MIN_TURNOVER        = 5_000_000       # Rs 5 Cr daily
+MIN_YEARS           = 3
+RECENT_DAYS         = 5
+CONSOL_WINDOWS      = [20, 30, 40, 60, 80, 120]  # trading days (1mo to 6mo)
+CONSOL_BAND_MAX     = 12.0            # max % range to be considered consolidation
+BREAKOUT_MIN        = 1.5             # breakout must exceed consolidation top by 1.5%
+MIN_POST_POSITIVE   = 3               # need 3 of 4 post-breakout days to be up
+POST_DAYS           = 4               # track 4 days after breakout
+MIN_OCCURRENCES     = 2               # need at least 2 historical breakouts
+ALERT_WINDOW        = 3               # show alerts for last 3 trading days
+MIN_GUARANTEED_PEAK = 5.0             # EVERY historical breakout must peak >= this % within T+1..T+4
 
 EXCL_SFX = ("ETF","BEES","CASE","SETF","GILT","LIQUID","NIFTY","SENSEX")
 
@@ -238,7 +240,31 @@ def analyze_stock(sym, df, latest_set, all_dates):
 
     if len(deduped) < MIN_OCCURRENCES: return None
 
-    # Aggregate stats
+    # ── GUARANTEED PROFIT FILTER ────────────────────────────────────────────────
+    # Every single historical breakout must have peaked >= MIN_GUARANTEED_PEAK%
+    # within T+1 to T+4. If even ONE breakout failed to reach this threshold,
+    # the stock is excluded — the pattern is unreliable and may produce junk signals.
+    #
+    # We use the PEAK (max of T+1..T+4) rather than T+4 close because:
+    # - A stock may run +8% by T+2 then consolidate back to +2% by T+4
+    # - The entry/exit logic (T+1 dip entry, exit at peak) captures this move
+    # - Filtering only on T+4 close would wrongly discard fast-movers
+    def _peak_ret(b):
+        pr = b.get("post_rets", {})
+        vals = [pr[d] for d in range(1, POST_DAYS + 1) if pr.get(d) is not None]
+        return max(vals) if vals else None
+
+    peak_rets = [_peak_ret(b) for b in deduped]
+
+    # Exclude any stock where even one breakout failed to peak >= 5%
+    if not all(p is not None and p >= MIN_GUARANTEED_PEAK for p in peak_rets):
+        return None
+
+    # Attach individual peak_ret to each breakout for display in History tab
+    for b, pk in zip(deduped, peak_rets):
+        b["peak_ret"] = r2(pk)
+
+    # ── Aggregate stats ─────────────────────────────────────────────────────────
     brk_pcts    = [b["brk_pct"] for b in deduped]
     t1_dips     = [b["t1_dip_pct"] for b in deduped if b["t1_dip_pct"] is not None]
     t1_gaps     = [b["t1_open_gap"] for b in deduped if b["t1_open_gap"] is not None]
@@ -254,6 +280,10 @@ def analyze_stock(sym, df, latest_set, all_dates):
     avg_t4_ret    = r2(sum(all_t4_rets)/len(all_t4_rets)) if all_t4_rets else None
     avg_consol_rng= r2(sum(consol_rngs)/len(consol_rngs))
     avg_consol_days=r2(sum(consol_days)/len(consol_days))
+
+    # Peak return stats across all historical breakouts
+    min_peak_ret  = r2(min(peak_rets))   # worst-case peak — the "guarantee" floor
+    avg_peak_ret  = r2(sum(peak_rets)/len(peak_rets))
 
     # Entry recommendation
     # If T+1 typically dips below signal close → "Wait for dip at open T+1"
@@ -309,37 +339,42 @@ def analyze_stock(sym, df, latest_set, all_dates):
                 "t1_open_gap": b["t1_open_gap"],
                 "t1_dip_pct":  b["t1_dip_pct"],
                 "post_rets":   b["post_rets"],
+                "peak_ret":    b.get("peak_ret"),
                 "action":      action,
                 "buy_on":      buy_on,
                 "entry_type":  entry_type,
                 "entry_rec":   entry_rec,
                 "avg_t4_ret":  avg_t4_ret,
+                "min_peak_ret":min_peak_ret,
             })
 
     return {
-        "sym":           sym,
-        "price":         r2(cur_price),
-        "last_date":     last_date,
-        "turnover_cr":   turnover_cr,
-        "n_breakouts":   len(deduped),
-        "years":         sorted(set(b["year"] for b in deduped)),
-        "avg_brk_pct":   avg_brk_pct,
-        "avg_consol_rng":avg_consol_rng,
+        "sym":            sym,
+        "price":          r2(cur_price),
+        "last_date":      last_date,
+        "turnover_cr":    turnover_cr,
+        "n_breakouts":    len(deduped),
+        "years":          sorted(set(b["year"] for b in deduped)),
+        "avg_brk_pct":    avg_brk_pct,
+        "avg_consol_rng": avg_consol_rng,
         "avg_consol_days":avg_consol_days,
-        "avg_t1_dip":    avg_t1_dip,
-        "avg_t1_gap":    avg_t1_gap,
-        "avg_t1_ret":    avg_t1_ret,
-        "avg_t4_ret":    avg_t4_ret,
-        "entry_type":    entry_type,
-        "entry_rec":     entry_rec,
-        "has_alert":     len(alerts) > 0,
-        "alerts":        alerts,
-        "breakouts":     sorted(deduped, key=lambda x: x["date"], reverse=True),
+        "avg_t1_dip":     avg_t1_dip,
+        "avg_t1_gap":     avg_t1_gap,
+        "avg_t1_ret":     avg_t1_ret,
+        "avg_t4_ret":     avg_t4_ret,
+        "min_peak_ret":   min_peak_ret,   # worst-case peak across all breakouts (the guarantee)
+        "avg_peak_ret":   avg_peak_ret,   # average peak across all breakouts
+        "entry_type":     entry_type,
+        "entry_rec":      entry_rec,
+        "has_alert":      len(alerts) > 0,
+        "alerts":         alerts,
+        "breakouts":      sorted(deduped, key=lambda x: x["date"], reverse=True),
     }
 
 
 def main():
     print(f"\n{'='*60}\nBreakout Analyzer (Consolidation → Breakout)\nIST: {now_str}\n{'='*60}")
+    print(f"Guaranteed peak filter: every breakout must peak >= {MIN_GUARANTEED_PEAK}% within T+1..T+4")
 
     all_data   = load_all()
     grouped    = all_data.groupby("sym")
@@ -363,20 +398,22 @@ def main():
             else:   skipped += 1
         except: skipped += 1
 
-    # Sort: alerts first by turnover, then all stocks by avg_t4_ret
+    # Sort: alerts first by turnover, then all stocks by min_peak_ret (guaranteed floor)
     alert_stocks = sorted([r for r in results if r["has_alert"]],
                           key=lambda x: -(x.get("turnover_cr") or 0))
-    all_stocks   = sorted(results, key=lambda x: -(x.get("avg_t4_ret") or 0))
+    all_stocks   = sorted(results, key=lambda x: -(x.get("min_peak_ret") or 0))
 
     # All alerts flat list
     all_alerts = []
     for r in results:
         for a in (r.get("alerts") or []):
             all_alerts.append({**a, "sym": r["sym"], "price": r["price"],
-                                "turnover_cr": r["turnover_cr"],
-                                "avg_t1_dip":  r["avg_t1_dip"],
-                                "entry_rec":   r["entry_rec"],
-                                "entry_type":  r["entry_type"]})
+                                "turnover_cr":  r["turnover_cr"],
+                                "avg_t1_dip":   r["avg_t1_dip"],
+                                "entry_rec":    r["entry_rec"],
+                                "entry_type":   r["entry_type"],
+                                "min_peak_ret": r["min_peak_ret"],
+                                "avg_peak_ret": r["avg_peak_ret"]})
     all_alerts.sort(key=lambda x: (x.get("days_since") or 99, -(x.get("turnover_cr") or 0)))
 
     output = {
@@ -392,6 +429,7 @@ def main():
         "description": (
             "Stocks that consolidate in a tight range (±7%) for 1-6 months, "
             "then break out upward and sustain for 3+ days. "
+            "GUARANTEED FILTER: every historical breakout peaked >= 5% within T+1..T+4. "
             "Includes entry timing analysis and 3-day alert window."
         ),
     }
@@ -400,10 +438,10 @@ def main():
     path.write_text(json.dumps(output, indent=2))
     print(f"\n✓ Written {len(results)} stocks | {len(alert_stocks)} alerts today | {len(all_alerts)} total alerts")
     if alert_stocks:
-        print(f"\n*** BREAKOUT ALERTS ***")
+        print(f"\n*** BREAKOUT ALERTS (all guaranteed 5%+ peak) ***")
         for r in alert_stocks[:10]:
             a = r["alerts"][0]
-            print(f"  {r['sym']:<14} brk=+{a['brk_pct']}% consol={a['consol_days']}d({a['consol_rng']}%) {a['action']}")
+            print(f"  {r['sym']:<14} brk=+{a['brk_pct']}% consol={a['consol_days']}d({a['consol_rng']}%) min_peak=+{r['min_peak_ret']}% {a['action']}")
 
 
 if __name__ == "__main__":
