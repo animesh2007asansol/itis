@@ -6,20 +6,46 @@ name: Breakout Analyzer (Consolidation Breakout)
     workflows: ["NSE Daily Data Fetch"]
     types: [completed]
   schedule:
-    - cron: '30 16 * * 1-5'   # 10 PM IST Mon-Fri
+    - cron: '30 16 * * 1-5'   # 10 PM IST Mon-Fri (fallback if workflow_run misses)
 
 jobs:
   breakout:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # CRITICAL FIX: workflow_run trigger checks out the SHA that *initiated*
+          # the upstream workflow, not the SHA after it pushes new data files.
+          # Pinning ref to main ensures we always get the absolute latest commit,
+          # including any CSV files the NSE Daily Data Fetch just pushed.
+          ref: main
+          fetch-depth: 1
+
+      - name: Pull latest data (safety net)
+        # Extra guarantee: if any commits landed between checkout and now, pull them.
+        # This closes the race window where NSE fetch pushes while we're checking out.
+        run: git pull origin main --ff-only || true
+
+      - name: Verify data freshness
+        # Print the latest CSV date on disk so lag is visible in CI logs.
+        # If this shows a date older than yesterday, the NSE fetch pipeline has a problem.
+        run: |
+          echo "=== Latest CSVs on disk ==="
+          find data/equity -name "*.csv" | sort | tail -10
+          echo "=== Most recent date ==="
+          find data/equity -name "*.csv" | sort | tail -1
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
       - run: pip install pandas numpy --quiet
+
       - name: Run Breakout Analyzer
         run: python scripts/breakout_analyzer.py
+
       - name: Commit
         run: |
           git config user.name  "github-actions[bot]"
