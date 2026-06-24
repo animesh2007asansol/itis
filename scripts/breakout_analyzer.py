@@ -11,15 +11,19 @@ KEY FIXES vs previous version
    HIGH prices include intraday wicks/spikes that don't represent real resistance.
    Using CLOSE gives the actual range where the market consistently closed.
 
-2. Sliding window is now a correct while-loop. The old for-loop with
-   `start += cw//2` inside had NO effect in Python — range() pre-computes
-   all values, so modifying `start` was silently ignored.
+2. ROOT CAUSE OF EMPTY ALERTS — while loop boundary fixed.
+   Old boundary: `while start < n - cw - POST_DAYS - 1`
+   This stopped the loop BEFORE reaching any breakout in the last POST_DAYS+1
+   trading days. With ALERT_WINDOW=5, the code could NEVER detect any recent
+   breakout — the scan terminated 5 days too early. Zero alerts every single run.
+   Fix: `while start < n - cw` — the breakout day can now reach today's data.
+   The avail_days check inside already handles 0-3 incomplete post-data days.
 
 3. Guaranteed peak filter is 75% of HISTORICAL breakouts must peak >= 5%
    (not 100%). One bad breakout during a market crash should not permanently
    exclude a high-quality stock.
 
-4. Peak filter now SKIPS recent breakouts with incomplete post-data (< POST_DAYS).
+4. Peak filter skips recent breakouts with incomplete post-data (< POST_DAYS).
    A 2-day-old breakout only has T+1, T+2. Judging it against the 5% peak
    threshold was suppressing exactly the alerts you want to see.
 
@@ -195,11 +199,15 @@ def analyze_stock(sym, df, latest_set, all_dates):
     breakouts = []
 
     for cw in CONSOL_WINDOWS:
-        # BUG FIX: while-loop so start += skip actually works.
-        # Old for-loop: `for start in range(...): start += cw//2`
-        # Python ignores range-variable reassignment — had ZERO effect.
+        # CRITICAL BUG FIX: old boundary was `n - cw - POST_DAYS - 1`
+        # which stopped the loop BEFORE reaching any breakout in the last
+        # POST_DAYS+1 = 5 trading days.  With ALERT_WINDOW = 5, this gave
+        # zero alerts — the loop literally never scanned recent data.
+        #
+        # Fix: use `n - cw` so brk = start + cw can reach the last row (today).
+        # avail_days inside the loop already handles 0..3 incomplete post-days.
         start = 0
-        while start < n - cw - POST_DAYS - 1:
+        while start < n - cw:
             brk = start + cw     # day immediately after consolidation window
 
             res = find_consolidation(c_arr, start, cw)
