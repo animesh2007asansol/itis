@@ -72,15 +72,36 @@ def r2(x):
 
 
 def load_all():
-    if not MANIFEST.exists(): sys.exit("ERROR: manifest.json missing")
-    manifest = json.loads(MANIFEST.read_text())
-    dates    = sorted(manifest.keys())
-    print(f"  Loading {len(dates)} dates...")
+    """
+    Load all daily CSV files by scanning the DATA directory directly.
+
+    WHY directory scan instead of manifest:
+    The manifest.json is written by the NSE data fetch pipeline. Due to GitHub
+    Actions checkout timing (workflow_run trigger checks out the SHA that initiated
+    the upstream workflow, not the SHA after it pushes), the manifest in the checked-
+    out repo can be several trading days stale even though new CSV files exist.
+
+    Scanning DATA/**/*.csv directly is the ground truth — any file on disk is loaded,
+    regardless of whether manifest.json has been updated to include it.
+    """
+    if not DATA.exists():
+        sys.exit(f"ERROR: data directory not found: {DATA}")
+
+    # Walk year/month/date.csv structure
+    csv_files = sorted(DATA.glob("*/*/*.csv"))
+    if not csv_files:
+        sys.exit("ERROR: no CSV files found under data/equity/")
+
+    print(f"  Found {len(csv_files)} CSV files on disk (direct scan, manifest ignored)")
+
     frames = []
-    for ds in dates:
-        y, mo, _ = ds.split("-")
-        p = DATA / y / mo / f"{ds}.csv"
-        if not p.exists(): continue
+    skipped_files = 0
+    for p in csv_files:
+        # Derive date from filename (YYYY-MM-DD.csv)
+        ds = p.stem  # filename without extension
+        if len(ds) != 10 or ds[4] != '-' or ds[7] != '-':
+            skipped_files += 1
+            continue
         try:
             df = pd.read_csv(p, low_memory=False)
             df.columns = df.columns.str.strip()
@@ -95,16 +116,33 @@ def load_all():
                 elif u in ("CLOSE","CLSPRIC","CLOSE PRICE"): cm[col]="c"
                 elif u in ("TOTTRDQTY","TTLTRADGVOL"):       cm[col]="v"
             df = df.rename(columns=cm)
-            if not {"sym","series","o","h","l","c","v"}.issubset(df.columns): continue
+            if not {"sym","series","o","h","l","c","v"}.issubset(df.columns):
+                skipped_files += 1
+                continue
             df = df[df["series"].str.strip().isin(["EQ","BE"])].copy()
             df["date"] = pd.to_datetime(ds)
             frames.append(df[["sym","o","h","l","c","v","date"]])
-        except: continue
-    if not frames: sys.exit("ERROR: no data")
+        except:
+            skipped_files += 1
+            continue
+
+    if not frames:
+        sys.exit("ERROR: no usable data in CSV files")
+
+    if skipped_files:
+        print(f"  Skipped {skipped_files} unreadable files")
+
     all_data = pd.concat(frames, ignore_index=True)
     for col in ["o","h","l","c","v"]:
         all_data[col] = pd.to_numeric(all_data[col], errors="coerce")
-    return all_data.dropna(subset=["o","h","l","c","v"]).sort_values(["sym","date"]).reset_index(drop=True)
+    result = all_data.dropna(subset=["o","h","l","c","v"]).sort_values(["sym","date"]).reset_index(drop=True)
+
+    # Report actual date coverage so lag is visible in logs
+    all_dates_found = sorted(result["date"].dt.strftime("%Y-%m-%d").unique())
+    print(f"  Date range in data: {all_dates_found[0]} → {all_dates_found[-1]} ({len(all_dates_found)} trading days)")
+    print(f"  Latest 5 dates: {all_dates_found[-5:]}")
+
+    return result
 
 
 def find_consolidation_top(c_arr, h_arr, start, length):
