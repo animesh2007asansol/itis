@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-25T23:58:35",
-  "today_ist": "2026-06-25",
+  "generated_at": "2026-06-26T23:35:31",
+  "today_ist": "2026-06-26",
   "last_fetch": "2026-06-25",
   "n_stocks": 184,
   "n_today": 5,
-  "n_active": 2,
+  "n_active": 0,
   "n_all_hist": 584,
   "today_alerts": [
     {
@@ -451,22 +451,9 @@
       "ret10": -4.15,
       "ret15": -0.83,
       "alert_now": true,
-      "active": [
-        {
-          "date": "2026-05-21",
-          "entry_px": 2740.5,
-          "cur_price": 2684.9,
-          "live_ret": -2.03,
-          "yr_low": 2700.0,
-          "pct_above": 1.5,
-          "days_elapsed": 35,
-          "best_hold": 3,
-          "avg_tgt": 2810.11,
-          "min_tgt": 2756.12
-        }
-      ],
+      "active": [],
       "has_today": true,
-      "has_active": true,
+      "has_active": false,
       "tgt_prices": {
         "3": {
           "min_tgt": 2700.2,
@@ -548,229 +535,7 @@
       ]
     }
   ],
-  "active_alerts": [
-    {
-      "sym": "INDRAMEDCO",
-      "price": 385.45,
-      "last_date": "2026-06-25",
-      "turnover_cr": 9.91,
-      "yr_low_now": 342.0,
-      "pct_above_low": 12.7,
-      "n_signals": 3,
-      "years": [
-        2022,
-        2026
-      ],
-      "best_hold": 10,
-      "best_hold_label": "10 Days",
-      "avg_pk": 5.94,
-      "min_pk": 0.59,
-      "max_pk": 11.41,
-      "hold_stats": {
-        "10": {
-          "label": "10 Days",
-          "n": 3,
-          "avg_ret": 5.94,
-          "min_ret": 0.59,
-          "max_ret": 11.41,
-          "win_rate": 100.0
-        }
-      },
-      "ret5": 1.49,
-      "ret10": 2.3,
-      "ret15": -4.15,
-      "alert_now": false,
-      "active": [
-        {
-          "date": "2026-05-21",
-          "entry_px": 355.45,
-          "cur_price": 385.45,
-          "live_ret": 8.44,
-          "yr_low": 342.0,
-          "pct_above": 3.93,
-          "days_elapsed": 35,
-          "best_hold": 10,
-          "avg_tgt": 376.56,
-          "min_tgt": 357.55
-        }
-      ],
-      "has_today": false,
-      "has_active": true,
-      "tgt_prices": {},
-      "signals": [
-        {
-          "date": "2026-05-21",
-          "year": 2026,
-          "price": 355.45,
-          "yr_low": 342.0,
-          "pct_above_low": 3.93,
-          "hold_rets": {
-            "3": 4.57,
-            "5": 7.01,
-            "10": 11.41,
-            "20": 7.74,
-            "22": 11.17
-          }
-        },
-        {
-          "date": "2022-06-20",
-          "year": 2022,
-          "price": 52.3,
-          "yr_low": 52.05,
-          "pct_above_low": 0.48,
-          "hold_rets": {
-            "3": 2.77,
-            "5": 7.36,
-            "10": 5.83,
-            "20": 6.6,
-            "22": 8.7
-          }
-        },
-        {
-          "date": "2022-05-09",
-          "year": 2022,
-          "price": 59.45,
-          "yr_low": 56.8,
-          "pct_above_low": 4.67,
-          "hold_rets": {
-            "3": -3.62,
-            "5": -1.6,
-            "10": 0.59,
-            "20": -1.01,
-            "22": -0.59
-          }
-        }
-      ]
-    },
-    {
-      "sym": "PIIND",
-      "price": 2684.9,
-      "last_date": "2026-06-25",
-      "turnover_cr": 73.26,
-      "yr_low_now": 2657.2,
-      "pct_above_low": 1.04,
-      "n_signals": 5,
-      "years": [
-        2022,
-        2025,
-        2026
-      ],
-      "best_hold": 3,
-      "best_hold_label": "3 Days",
-      "avg_pk": 2.54,
-      "min_pk": 0.57,
-      "max_pk": 4.46,
-      "hold_stats": {
-        "3": {
-          "label": "3 Days",
-          "n": 5,
-          "avg_ret": 2.54,
-          "min_ret": 0.57,
-          "max_ret": 4.46,
-          "win_rate": 100.0
-        }
-      },
-      "ret5": -5.66,
-      "ret10": -4.15,
-      "ret15": -0.83,
-      "alert_now": true,
-      "active": [
-        {
-          "date": "2026-05-21",
-          "entry_px": 2740.5,
-          "cur_price": 2684.9,
-          "live_ret": -2.03,
-          "yr_low": 2700.0,
-          "pct_above": 1.5,
-          "days_elapsed": 35,
-          "best_hold": 3,
-          "avg_tgt": 2810.11,
-          "min_tgt": 2756.12
-        }
-      ],
-      "has_today": true,
-      "has_active": true,
-      "tgt_prices": {
-        "3": {
-          "min_tgt": 2700.2,
-          "avg_tgt": 2753.1,
-          "label": "3 Days"
-        }
-      },
-      "signals": [
-        {
-          "date": "2026-05-21",
-          "year": 2026,
-          "price": 2740.5,
-          "yr_low": 2700.0,
-          "pct_above_low": 1.5,
-          "hold_rets": {
-            "3": 3.55,
-            "5": 1.26,
-            "10": -0.82,
-            "20": 2.3,
-            "22": 0.97
-          }
-        },
-        {
-          "date": "2026-03-17",
-          "year": 2026,
-          "price": 2893.0,
-          "yr_low": 2840.1,
-          "pct_above_low": 1.86,
-          "hold_rets": {
-            "3": 0.57,
-            "5": -4.63,
-            "10": -3.31,
-            "20": 4.98,
-            "22": 5.68
-          }
-        },
-        {
-          "date": "2026-02-02",
-          "year": 2026,
-          "price": 3091.4,
-          "yr_low": 2951.1,
-          "pct_above_low": 4.75,
-          "hold_rets": {
-            "3": 1.63,
-            "5": 4.03,
-            "10": -1.19,
-            "20": 0.26,
-            "22": -0.08
-          }
-        },
-        {
-          "date": "2025-01-27",
-          "year": 2025,
-          "price": 3373.3,
-          "yr_low": 3220.0,
-          "pct_above_low": 4.76,
-          "hold_rets": {
-            "3": 2.47,
-            "5": 7.3,
-            "10": 4.47,
-            "20": -8.38,
-            "22": -10.7
-          }
-        },
-        {
-          "date": "2022-05-12",
-          "year": 2022,
-          "price": 2410.7,
-          "yr_low": 2333.55,
-          "pct_above_low": 3.31,
-          "hold_rets": {
-            "3": 4.46,
-            "5": 10.62,
-            "10": 8.35,
-            "20": 7.47,
-            "22": 7.57
-          }
-        }
-      ]
-    }
-  ],
+  "active_alerts": [],
   "all_open": [
     {
       "sym": "ONGC",
@@ -880,99 +645,6 @@
             "10": 6.2,
             "20": 5.91,
             "22": 8.3
-          }
-        }
-      ]
-    },
-    {
-      "sym": "INDRAMEDCO",
-      "price": 385.45,
-      "last_date": "2026-06-25",
-      "turnover_cr": 9.91,
-      "yr_low_now": 342.0,
-      "pct_above_low": 12.7,
-      "n_signals": 3,
-      "years": [
-        2022,
-        2026
-      ],
-      "best_hold": 10,
-      "best_hold_label": "10 Days",
-      "avg_pk": 5.94,
-      "min_pk": 0.59,
-      "max_pk": 11.41,
-      "hold_stats": {
-        "10": {
-          "label": "10 Days",
-          "n": 3,
-          "avg_ret": 5.94,
-          "min_ret": 0.59,
-          "max_ret": 11.41,
-          "win_rate": 100.0
-        }
-      },
-      "ret5": 1.49,
-      "ret10": 2.3,
-      "ret15": -4.15,
-      "alert_now": false,
-      "active": [
-        {
-          "date": "2026-05-21",
-          "entry_px": 355.45,
-          "cur_price": 385.45,
-          "live_ret": 8.44,
-          "yr_low": 342.0,
-          "pct_above": 3.93,
-          "days_elapsed": 35,
-          "best_hold": 10,
-          "avg_tgt": 376.56,
-          "min_tgt": 357.55
-        }
-      ],
-      "has_today": false,
-      "has_active": true,
-      "tgt_prices": {},
-      "signals": [
-        {
-          "date": "2026-05-21",
-          "year": 2026,
-          "price": 355.45,
-          "yr_low": 342.0,
-          "pct_above_low": 3.93,
-          "hold_rets": {
-            "3": 4.57,
-            "5": 7.01,
-            "10": 11.41,
-            "20": 7.74,
-            "22": 11.17
-          }
-        },
-        {
-          "date": "2022-06-20",
-          "year": 2022,
-          "price": 52.3,
-          "yr_low": 52.05,
-          "pct_above_low": 0.48,
-          "hold_rets": {
-            "3": 2.77,
-            "5": 7.36,
-            "10": 5.83,
-            "20": 6.6,
-            "22": 8.7
-          }
-        },
-        {
-          "date": "2022-05-09",
-          "year": 2022,
-          "price": 59.45,
-          "yr_low": 56.8,
-          "pct_above_low": 4.67,
-          "hold_rets": {
-            "3": -3.62,
-            "5": -1.6,
-            "10": 0.59,
-            "20": -1.01,
-            "22": -0.59
           }
         }
       ]
@@ -1309,22 +981,9 @@
       "ret10": -4.15,
       "ret15": -0.83,
       "alert_now": true,
-      "active": [
-        {
-          "date": "2026-05-21",
-          "entry_px": 2740.5,
-          "cur_price": 2684.9,
-          "live_ret": -2.03,
-          "yr_low": 2700.0,
-          "pct_above": 1.5,
-          "days_elapsed": 35,
-          "best_hold": 3,
-          "avg_tgt": 2810.11,
-          "min_tgt": 2756.12
-        }
-      ],
+      "active": [],
       "has_today": true,
-      "has_active": true,
+      "has_active": false,
       "tgt_prices": {
         "3": {
           "min_tgt": 2700.2,
@@ -20877,22 +20536,9 @@
       "ret10": 2.3,
       "ret15": -4.15,
       "alert_now": false,
-      "active": [
-        {
-          "date": "2026-05-21",
-          "entry_px": 355.45,
-          "cur_price": 385.45,
-          "live_ret": 8.44,
-          "yr_low": 342.0,
-          "pct_above": 3.93,
-          "days_elapsed": 35,
-          "best_hold": 10,
-          "avg_tgt": 376.56,
-          "min_tgt": 357.55
-        }
-      ],
+      "active": [],
       "has_today": false,
-      "has_active": true,
+      "has_active": false,
       "tgt_prices": {},
       "signals": [
         {
@@ -25149,22 +24795,9 @@
       "ret10": -4.15,
       "ret15": -0.83,
       "alert_now": true,
-      "active": [
-        {
-          "date": "2026-05-21",
-          "entry_px": 2740.5,
-          "cur_price": 2684.9,
-          "live_ret": -2.03,
-          "yr_low": 2700.0,
-          "pct_above": 1.5,
-          "days_elapsed": 35,
-          "best_hold": 3,
-          "avg_tgt": 2810.11,
-          "min_tgt": 2756.12
-        }
-      ],
+      "active": [],
       "has_today": true,
-      "has_active": true,
+      "has_active": false,
       "tgt_prices": {
         "3": {
           "min_tgt": 2700.2,
