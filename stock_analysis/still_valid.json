@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-02T22:03:05+05:30",
-  "latest_date": "2026-07-02",
-  "n": 2,
+  "generated_at": "2026-07-03T21:47:44+05:30",
+  "latest_date": "2026-07-03",
+  "n": 1,
   "positions": [
     {
       "sym": "CHOLAHLDNG",
@@ -21,35 +21,11 @@
       "avg_target_price": 2158.59,
       "current_return_pct": -4.37,
       "gap_to_min_target_pct": 23.78,
-      "days_elapsed": 84,
-      "days_remaining": 6,
+      "days_elapsed": 85,
+      "days_remaining": 5,
       "avg_turnover_cr": 47.47,
       "rsi": 63.86,
       "vol_r": 1.03
-    },
-    {
-      "sym": "HDFCSML250",
-      "sig_date": "2026-04-17",
-      "entry_date": "2026-04-20",
-      "entry_px": 164.87,
-      "current_price": 168.43,
-      "uc": "UC1",
-      "desc": "Stock rises \u226510% over 20d \u2192 hold 60d",
-      "grade": "C",
-      "confidence": 0,
-      "hold_days": 60,
-      "min_ret": 12.35,
-      "avg_ret": 14.25,
-      "max_ret": 18.36,
-      "min_target_price": 185.23,
-      "avg_target_price": 188.36,
-      "current_return_pct": 2.16,
-      "gap_to_min_target_pct": 9.98,
-      "days_elapsed": 73,
-      "days_remaining": 17,
-      "avg_turnover_cr": 39.27,
-      "rsi": 82.61,
-      "vol_r": 0.54
     }
   ]
 }
