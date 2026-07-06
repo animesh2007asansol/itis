@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-04T01:23:36+05:30",
-  "data_range": "2020-01-01 to 2026-07-03",
+  "generated_at": "2026-07-07T01:49:17+05:30",
+  "data_range": "2020-01-01 to 2026-07-06",
   "thresholds": {
     "min_years_traded": 4,
     "min_turnover_cr": 2.0,
@@ -48,13 +48,13 @@
           "med_return": 8.42
         },
         "20": {
-          "n": 2,
+          "n": 3,
           "win_rate": 100.0,
-          "beats15_rate": 50.0,
-          "avg_return": 16.72,
+          "beats15_rate": 33.3,
+          "avg_return": 15.99,
           "min_return": 4.6,
           "max_return": 28.84,
-          "med_return": 28.84
+          "med_return": 14.53
         },
         "30": {
           "n": 2,
@@ -145,7 +145,11 @@
               "positive": true,
               "beats_15pct": false
             },
-            "20": null,
+            "20": {
+              "return_pct": 14.53,
+              "positive": true,
+              "beats_15pct": false
+            },
             "30": null
           }
         }

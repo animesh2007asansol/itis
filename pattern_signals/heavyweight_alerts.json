@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-04T01:23:36+05:30",
-  "latest_date": "2026-07-03",
-  "alert_date": "2026-07-03",
+  "generated_at": "2026-07-07T01:49:17+05:30",
+  "latest_date": "2026-07-06",
+  "alert_date": "2026-07-06",
   "window_days": 20,
-  "total_alerts": 3,
+  "total_alerts": 2,
   "today_count": 0,
   "grade_a": 0,
   "alerts": [
@@ -11,12 +11,12 @@
       "sym": "POONAWALLA",
       "sig_date": "2026-06-08",
       "is_today": false,
-      "days_ago": 25,
+      "days_ago": 28,
       "grade": "B",
       "score": 84.7,
       "sig_close": 381.05,
-      "cur_price": 460.95,
-      "pct_since": 20.97,
+      "cur_price": 476.35,
+      "pct_since": 25.01,
       "floor_depth_pct": 9.5,
       "best_window_days": 30,
       "beats15_rate": 100.0,
@@ -63,18 +63,18 @@
           "med_return": 20.82
         }
       },
-      "zone": "RUNNING"
+      "zone": "TARGET MET"
     },
     {
       "sym": "BDL",
       "sig_date": "2026-06-08",
       "is_today": false,
-      "days_ago": 25,
+      "days_ago": 28,
       "grade": "B",
       "score": 83.7,
       "sig_close": 1187.0,
-      "cur_price": 1388.2,
-      "pct_since": 16.95,
+      "cur_price": 1409.6,
+      "pct_since": 18.75,
       "floor_depth_pct": 10.0,
       "best_window_days": 30,
       "beats15_rate": 100.0,
@@ -119,64 +119,6 @@
           "min_return": 15.58,
           "max_return": 25.34,
           "med_return": 21.03
-        }
-      },
-      "zone": "RUNNING"
-    },
-    {
-      "sym": "PUNJABCHEM",
-      "sig_date": "2026-06-05",
-      "is_today": false,
-      "days_ago": 28,
-      "grade": "C",
-      "score": 86.8,
-      "sig_close": 936.8,
-      "cur_price": 1078.3,
-      "pct_since": 15.1,
-      "floor_depth_pct": 7.6,
-      "best_window_days": 30,
-      "beats15_rate": 100.0,
-      "min_return": 20.87,
-      "target_conservative": 1132.31,
-      "target_realistic": 1241.82,
-      "n_years": 3,
-      "n_events": 3,
-      "win_stats": {
-        "5": {
-          "n": 3,
-          "win_rate": 100.0,
-          "beats15_rate": 33.3,
-          "avg_return": 10.89,
-          "min_return": 6.8,
-          "max_return": 18.56,
-          "med_return": 7.3
-        },
-        "10": {
-          "n": 3,
-          "win_rate": 100.0,
-          "beats15_rate": 0.0,
-          "avg_return": 7.23,
-          "min_return": 1.95,
-          "max_return": 11.32,
-          "med_return": 8.42
-        },
-        "20": {
-          "n": 2,
-          "win_rate": 100.0,
-          "beats15_rate": 50.0,
-          "avg_return": 16.72,
-          "min_return": 4.6,
-          "max_return": 28.84,
-          "med_return": 28.84
-        },
-        "30": {
-          "n": 2,
-          "win_rate": 100.0,
-          "beats15_rate": 100.0,
-          "avg_return": 32.56,
-          "min_return": 20.87,
-          "max_return": 44.26,
-          "med_return": 44.26
         }
       },
       "zone": "RUNNING"

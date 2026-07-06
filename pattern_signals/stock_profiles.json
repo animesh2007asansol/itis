@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-04T01:23:09+05:30",
-  "n_stocks": 11,
-  "stocks_with_100pct": 11,
+  "generated_at": "2026-07-07T01:48:50+05:30",
+  "n_stocks": 12,
+  "stocks_with_100pct": 12,
   "n_aplus": 0,
   "n_a": 1,
-  "n_b": 10,
+  "n_b": 11,
   "all_results": [
     {
       "sym": "UMESLTD",
@@ -468,6 +468,53 @@
         }
       },
       "best_window_min": 23.61
+    },
+    {
+      "sym": "LLOYDSENT",
+      "signal": "T2",
+      "name": "Golden Cross",
+      "grade": "B",
+      "n_years": 2,
+      "years": [
+        2025,
+        2026
+      ],
+      "occ_20d": 3,
+      "wr_5d": 100.0,
+      "avg_5d": 3.56,
+      "min_5d": 0.1,
+      "wr_10d": 100.0,
+      "avg_10d": 11.33,
+      "min_10d": 0.63,
+      "wr_20d": 100.0,
+      "avg_20d": 23.99,
+      "min_20d": 16.24,
+      "max_20d": 30.22,
+      "med_20d": 25.5,
+      "worst_return": 0.1,
+      "avg_vol": 4701874,
+      "score": 66.5,
+      "yr_detail": {
+        "2025": {
+          "occ": 2,
+          "wr_20d": 100.0,
+          "avg_20d": 27.86,
+          "min_20d": 25.5,
+          "max_20d": 30.22,
+          "avg_5d": 5.29,
+          "avg_10d": 9.24
+        },
+        "2026": {
+          "occ": 1,
+          "wr_20d": 100.0,
+          "avg_20d": 16.24,
+          "min_20d": 16.24,
+          "max_20d": 16.24,
+          "avg_5d": 0.1,
+          "avg_10d": 15.5
+        }
+      },
+      "best_window_min": 16.24
     },
     {
       "sym": "ASIANENE",
