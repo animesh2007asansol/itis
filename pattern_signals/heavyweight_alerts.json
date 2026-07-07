@@ -1,127 +1,69 @@
 {
-  "generated_at": "2026-07-07T01:49:17+05:30",
-  "latest_date": "2026-07-06",
-  "alert_date": "2026-07-06",
+  "generated_at": "2026-07-08T01:48:52+05:30",
+  "latest_date": "2026-07-07",
+  "alert_date": "2026-07-07",
   "window_days": 20,
-  "total_alerts": 2,
-  "today_count": 0,
+  "total_alerts": 1,
+  "today_count": 1,
   "grade_a": 0,
   "alerts": [
     {
-      "sym": "POONAWALLA",
-      "sig_date": "2026-06-08",
-      "is_today": false,
-      "days_ago": 28,
-      "grade": "B",
-      "score": 84.7,
-      "sig_close": 381.05,
-      "cur_price": 476.35,
-      "pct_since": 25.01,
-      "floor_depth_pct": 9.5,
+      "sym": "E2E",
+      "sig_date": "2026-07-07",
+      "is_today": true,
+      "days_ago": 0,
+      "grade": "C",
+      "score": 96.1,
+      "sig_close": 371.3,
+      "cur_price": 371.3,
+      "pct_since": 0.0,
+      "floor_depth_pct": 0.2,
       "best_window_days": 30,
       "beats15_rate": 100.0,
-      "min_return": 15.75,
-      "target_conservative": 441.07,
-      "target_realistic": 467.47,
-      "n_years": 3,
-      "n_events": 5,
+      "min_return": 34.66,
+      "target_conservative": 499.99,
+      "target_realistic": 499.99,
+      "n_years": 2,
+      "n_events": 3,
       "win_stats": {
         "5": {
-          "n": 5,
-          "win_rate": 80.0,
-          "beats15_rate": 40.0,
-          "avg_return": 11.02,
-          "min_return": -2.02,
-          "max_return": 27.34,
-          "med_return": 5.05
+          "n": 2,
+          "win_rate": 50.0,
+          "beats15_rate": 0.0,
+          "avg_return": -3.93,
+          "min_return": -14.68,
+          "max_return": 6.82,
+          "med_return": 6.82
         },
         "10": {
-          "n": 5,
-          "win_rate": 80.0,
-          "beats15_rate": 60.0,
-          "avg_return": 13.59,
-          "min_return": -2.93,
-          "max_return": 23.18,
-          "med_return": 15.62
+          "n": 2,
+          "win_rate": 50.0,
+          "beats15_rate": 0.0,
+          "avg_return": -1.19,
+          "min_return": -5.96,
+          "max_return": 3.59,
+          "med_return": 3.59
         },
         "20": {
-          "n": 4,
-          "win_rate": 75.0,
-          "beats15_rate": 50.0,
-          "avg_return": 15.72,
-          "min_return": -3.48,
-          "max_return": 32.8,
-          "med_return": 22.4
+          "n": 2,
+          "win_rate": 50.0,
+          "beats15_rate": 0.0,
+          "avg_return": -4.76,
+          "min_return": -15.72,
+          "max_return": 6.2,
+          "med_return": 6.2
         },
         "30": {
-          "n": 4,
+          "n": 1,
           "win_rate": 100.0,
           "beats15_rate": 100.0,
-          "avg_return": 22.68,
-          "min_return": 15.75,
-          "max_return": 33.92,
-          "med_return": 20.82
+          "avg_return": 34.66,
+          "min_return": 34.66,
+          "max_return": 34.66,
+          "med_return": 34.66
         }
       },
-      "zone": "TARGET MET"
-    },
-    {
-      "sym": "BDL",
-      "sig_date": "2026-06-08",
-      "is_today": false,
-      "days_ago": 28,
-      "grade": "B",
-      "score": 83.7,
-      "sig_close": 1187.0,
-      "cur_price": 1409.6,
-      "pct_since": 18.75,
-      "floor_depth_pct": 10.0,
-      "best_window_days": 30,
-      "beats15_rate": 100.0,
-      "min_return": 15.58,
-      "target_conservative": 1371.93,
-      "target_realistic": 1433.07,
-      "n_years": 3,
-      "n_events": 5,
-      "win_stats": {
-        "5": {
-          "n": 5,
-          "win_rate": 60.0,
-          "beats15_rate": 20.0,
-          "avg_return": 4.42,
-          "min_return": -5.63,
-          "max_return": 22.94,
-          "med_return": 1.91
-        },
-        "10": {
-          "n": 5,
-          "win_rate": 60.0,
-          "beats15_rate": 40.0,
-          "avg_return": 11.76,
-          "min_return": -2.42,
-          "max_return": 30.4,
-          "med_return": 14.42
-        },
-        "20": {
-          "n": 4,
-          "win_rate": 75.0,
-          "beats15_rate": 50.0,
-          "avg_return": 13.18,
-          "min_return": -12.38,
-          "max_return": 32.48,
-          "med_return": 20.88
-        },
-        "30": {
-          "n": 4,
-          "win_rate": 100.0,
-          "beats15_rate": 100.0,
-          "avg_return": 20.73,
-          "min_return": 15.58,
-          "max_return": 25.34,
-          "med_return": 21.03
-        }
-      },
-      "zone": "RUNNING"
+      "zone": "BUY ZONE"
     }
   ]
 }

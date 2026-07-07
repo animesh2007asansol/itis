@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-07T01:49:17+05:30",
-  "data_range": "2020-01-01 to 2026-07-06",
+  "generated_at": "2026-07-08T01:48:52+05:30",
+  "data_range": "2020-01-01 to 2026-07-07",
   "thresholds": {
     "min_years_traded": 4,
     "min_turnover_cr": 2.0,
@@ -8,11 +8,136 @@
     "min_recovery_pct": 15.0,
     "min_win_rate_pct": 80.0
   },
-  "n_stocks": 5,
+  "n_stocks": 6,
   "n_aplus": 0,
   "n_a": 0,
   "n_b": 2,
   "profiles": {
+    "E2E": {
+      "sym": "E2E",
+      "grade": "C",
+      "score": 96.1,
+      "n_years": 2,
+      "years": [
+        2025,
+        2026
+      ],
+      "n_events": 3,
+      "best_window_days": 30,
+      "best_beats15_rate": 100.0,
+      "best_min_return": 34.66,
+      "avg_floor_depth": -13.9,
+      "win_stats": {
+        "5": {
+          "n": 2,
+          "win_rate": 50.0,
+          "beats15_rate": 0.0,
+          "avg_return": -3.93,
+          "min_return": -14.68,
+          "max_return": 6.82,
+          "med_return": 6.82
+        },
+        "10": {
+          "n": 2,
+          "win_rate": 50.0,
+          "beats15_rate": 0.0,
+          "avg_return": -1.19,
+          "min_return": -5.96,
+          "max_return": 3.59,
+          "med_return": 3.59
+        },
+        "20": {
+          "n": 2,
+          "win_rate": 50.0,
+          "beats15_rate": 0.0,
+          "avg_return": -4.76,
+          "min_return": -15.72,
+          "max_return": 6.2,
+          "med_return": 6.2
+        },
+        "30": {
+          "n": 1,
+          "win_rate": 100.0,
+          "beats15_rate": 100.0,
+          "avg_return": 34.66,
+          "min_return": 34.66,
+          "max_return": 34.66,
+          "med_return": 34.66
+        }
+      },
+      "events": [
+        {
+          "date": "2025-12-29",
+          "close": 1955.2,
+          "low": 1942.0,
+          "year": 2025,
+          "pos_in_range": 9.1,
+          "vol": 105748,
+          "recovery": {
+            "5": {
+              "return_pct": 6.82,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": 3.59,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": 6.2,
+              "positive": true,
+              "beats_15pct": false
+            },
+            "30": {
+              "return_pct": 34.66,
+              "positive": true,
+              "beats_15pct": true
+            }
+          }
+        },
+        {
+          "date": "2026-06-05",
+          "close": 452.9,
+          "low": 452.9,
+          "year": 2026,
+          "pos_in_range": -51.1,
+          "vol": 83746,
+          "recovery": {
+            "5": {
+              "return_pct": -14.68,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "10": {
+              "return_pct": -5.96,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "20": {
+              "return_pct": -15.72,
+              "positive": false,
+              "beats_15pct": false
+            },
+            "30": null
+          }
+        },
+        {
+          "date": "2026-07-07",
+          "close": 371.3,
+          "low": 369.05,
+          "year": 2026,
+          "pos_in_range": 0.2,
+          "vol": 688160,
+          "recovery": {
+            "5": null,
+            "10": null,
+            "20": null,
+            "30": null
+          }
+        }
+      ]
+    },
     "PUNJABCHEM": {
       "sym": "PUNJABCHEM",
       "grade": "C",
@@ -190,10 +315,10 @@
           "med_return": 15.62
         },
         "20": {
-          "n": 4,
-          "win_rate": 75.0,
-          "beats15_rate": 50.0,
-          "avg_return": 15.72,
+          "n": 5,
+          "win_rate": 80.0,
+          "beats15_rate": 60.0,
+          "avg_return": 17.34,
           "min_return": -3.48,
           "max_return": 32.8,
           "med_return": 22.4
@@ -347,7 +472,11 @@
               "positive": true,
               "beats_15pct": false
             },
-            "20": null,
+            "20": {
+              "return_pct": 23.8,
+              "positive": true,
+              "beats_15pct": true
+            },
             "30": null
           }
         }
@@ -388,13 +517,13 @@
           "med_return": 14.42
         },
         "20": {
-          "n": 4,
-          "win_rate": 75.0,
-          "beats15_rate": 50.0,
-          "avg_return": 13.18,
+          "n": 5,
+          "win_rate": 80.0,
+          "beats15_rate": 60.0,
+          "avg_return": 14.06,
           "min_return": -12.38,
           "max_return": 32.48,
-          "med_return": 20.88
+          "med_return": 17.58
         },
         "30": {
           "n": 4,
@@ -545,7 +674,11 @@
               "positive": true,
               "beats_15pct": true
             },
-            "20": null,
+            "20": {
+              "return_pct": 17.58,
+              "positive": true,
+              "beats_15pct": true
+            },
             "30": null
           }
         }
