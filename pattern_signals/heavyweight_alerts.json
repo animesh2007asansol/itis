@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-07-08T01:48:52+05:30",
-  "latest_date": "2026-07-07",
-  "alert_date": "2026-07-07",
+  "generated_at": "2026-07-09T01:30:20+05:30",
+  "latest_date": "2026-07-08",
+  "alert_date": "2026-07-08",
   "window_days": 20,
   "total_alerts": 1,
-  "today_count": 1,
+  "today_count": 0,
   "grade_a": 0,
   "alerts": [
     {
       "sym": "E2E",
       "sig_date": "2026-07-07",
-      "is_today": true,
-      "days_ago": 0,
+      "is_today": false,
+      "days_ago": 1,
       "grade": "C",
       "score": 96.1,
       "sig_close": 371.3,
-      "cur_price": 371.3,
-      "pct_since": 0.0,
+      "cur_price": 378.8,
+      "pct_since": 2.02,
       "floor_depth_pct": 0.2,
       "best_window_days": 30,
       "beats15_rate": 100.0,
@@ -63,7 +63,7 @@
           "med_return": 34.66
         }
       },
-      "zone": "BUY ZONE"
+      "zone": "RUNNING"
     }
   ]
 }
