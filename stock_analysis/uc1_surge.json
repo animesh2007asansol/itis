@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-09T22:43:10+05:30",
-  "n": 66,
+  "generated_at": "2026-07-10T22:18:59+05:30",
+  "n": 69,
   "stocks": [
     {
       "sym": "CCCL",
-      "price": 16.49,
+      "price": 16.23,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -64,7 +64,7 @@
     },
     {
       "sym": "CUPID",
-      "price": 210.01,
+      "price": 212.24,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -93,7 +93,7 @@
     },
     {
       "sym": "POCL",
-      "price": 1416.6,
+      "price": 1425.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -152,7 +152,7 @@
     },
     {
       "sym": "BALUFORGE",
-      "price": 452.1,
+      "price": 465.1,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -182,7 +182,7 @@
     },
     {
       "sym": "PARAS",
-      "price": 1216.8,
+      "price": 1253.1,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -243,7 +243,7 @@
     },
     {
       "sym": "JINDALSTEL",
-      "price": 1029.8,
+      "price": 1051.3,
       "grade": "A",
       "confidence": 100,
       "uc": "UC1",
@@ -273,18 +273,18 @@
     },
     {
       "sym": "STLTECH",
-      "price": 554.35,
+      "price": 543.05,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
       "desc": "Stock rises \u226520% over 5d \u2192 hold 60d",
-      "ret_rate": 1.27,
-      "avg_ret": 76.24,
+      "ret_rate": 1.26,
+      "avg_ret": 75.49,
       "min_ret": 18.21,
       "hold_days": 60,
       "win_rate": 100.0,
       "n_trades": 4,
-      "sharpe": 2.72,
+      "sharpe": 2.68,
       "years": [
         "2021",
         "2025",
@@ -303,18 +303,18 @@
     },
     {
       "sym": "NACLIND",
-      "price": 225.85,
+      "price": 234.56,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
-      "desc": "Stock rises \u226520% over 3d \u2192 hold 60d",
-      "ret_rate": 1.13,
-      "avg_ret": 67.91,
-      "min_ret": 31.98,
+      "desc": "Stock rises \u226520% over 2d \u2192 hold 60d",
+      "ret_rate": 1.14,
+      "avg_ret": 68.56,
+      "min_ret": 11.26,
       "hold_days": 60,
       "win_rate": 100.0,
       "n_trades": 4,
-      "sharpe": 2.66,
+      "sharpe": 2.59,
       "years": [
         "2020",
         "2021",
@@ -323,18 +323,18 @@
       ],
       "ctx_rsi": {
         "min": 55.58,
-        "max": 84.99,
-        "avg": 70.12
+        "max": 84.52,
+        "avg": 70.07
       },
       "ctx_vol_r": {
         "min": 1.35,
-        "max": 6.84,
-        "avg": 3.82
+        "max": 8.95,
+        "avg": 5.53
       }
     },
     {
       "sym": "CGPOWER",
-      "price": 910.9,
+      "price": 916.6,
       "grade": "A",
       "confidence": 100,
       "uc": "UC1",
@@ -364,7 +364,7 @@
     },
     {
       "sym": "INTELLECT",
-      "price": 743.25,
+      "price": 758.75,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -395,7 +395,7 @@
     },
     {
       "sym": "GOODLUCK",
-      "price": 1549.8,
+      "price": 1565.9,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -425,7 +425,7 @@
     },
     {
       "sym": "DBREALTY",
-      "price": 111.14,
+      "price": 114.27,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -456,7 +456,7 @@
     },
     {
       "sym": "SHREDIGCEM",
-      "price": 73.93,
+      "price": 74.58,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -485,8 +485,38 @@
       }
     },
     {
+      "sym": "EXICOM",
+      "price": 170.04,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC1",
+      "desc": "Stock rises \u226520% over 10d \u2192 hold 30d",
+      "ret_rate": 0.95,
+      "avg_ret": 28.64,
+      "min_ret": 10.38,
+      "hold_days": 30,
+      "win_rate": 100.0,
+      "n_trades": 5,
+      "sharpe": 5.94,
+      "years": [
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "ctx_rsi": {
+        "min": 56.16,
+        "max": 70.45,
+        "avg": 63.17
+      },
+      "ctx_vol_r": {
+        "min": 0.35,
+        "max": 2.0,
+        "avg": 1.23
+      }
+    },
+    {
       "sym": "KIRLOSBROS",
-      "price": 1908.1,
+      "price": 1920.5,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -516,7 +546,7 @@
     },
     {
       "sym": "KESORAMIND",
-      "price": 10.17,
+      "price": 10.37,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -546,7 +576,7 @@
     },
     {
       "sym": "SAREGAMA",
-      "price": 476.1,
+      "price": 479.2,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -576,7 +606,7 @@
     },
     {
       "sym": "VISAKAIND",
-      "price": 77.65,
+      "price": 81.92,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -607,7 +637,7 @@
     },
     {
       "sym": "LIKHITHA",
-      "price": 238.8,
+      "price": 243.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -638,7 +668,7 @@
     },
     {
       "sym": "DATAPATTNS",
-      "price": 4284.0,
+      "price": 4343.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -670,7 +700,7 @@
     },
     {
       "sym": "KIRLFER",
-      "price": 455.95,
+      "price": 468.1,
       "grade": "A",
       "confidence": 100,
       "uc": "UC1",
@@ -699,7 +729,7 @@
     },
     {
       "sym": "MANALIPETC",
-      "price": 60.9,
+      "price": 62.48,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -730,7 +760,7 @@
     },
     {
       "sym": "ZENTEC",
-      "price": 1813.0,
+      "price": 1880.4,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -760,7 +790,7 @@
     },
     {
       "sym": "KPITTECH",
-      "price": 548.15,
+      "price": 561.75,
       "grade": "A",
       "confidence": 100,
       "uc": "UC1",
@@ -789,7 +819,7 @@
     },
     {
       "sym": "MASTEK",
-      "price": 1612.1,
+      "price": 1680.1,
       "grade": "A",
       "confidence": 100,
       "uc": "UC1",
@@ -817,8 +847,38 @@
       }
     },
     {
+      "sym": "OFSS",
+      "price": 11651.0,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC1",
+      "desc": "Stock rises \u226515% over 3d \u2192 hold 60d",
+      "ret_rate": 0.64,
+      "avg_ret": 38.49,
+      "min_ret": 23.95,
+      "hold_days": 60,
+      "win_rate": 100.0,
+      "n_trades": 4,
+      "sharpe": 7.53,
+      "years": [
+        "2020",
+        "2024",
+        "2026"
+      ],
+      "ctx_rsi": {
+        "min": 33.93,
+        "max": 91.13,
+        "avg": 68.1
+      },
+      "ctx_vol_r": {
+        "min": 0.97,
+        "max": 5.37,
+        "avg": 2.65
+      }
+    },
+    {
       "sym": "JIOFIN",
-      "price": 233.37,
+      "price": 241.96,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -876,7 +936,7 @@
     },
     {
       "sym": "KRISHANA",
-      "price": 138.15,
+      "price": 140.2,
       "grade": "A",
       "confidence": 100,
       "uc": "UC1",
@@ -901,36 +961,6 @@
         "min": 3.29,
         "max": 9.55,
         "avg": 5.38
-      }
-    },
-    {
-      "sym": "OFSS",
-      "price": 11134.0,
-      "grade": "C",
-      "confidence": 0,
-      "uc": "UC1",
-      "desc": "Stock rises \u226515% over 3d \u2192 hold 60d",
-      "ret_rate": 0.62,
-      "avg_ret": 37.11,
-      "min_ret": 18.45,
-      "hold_days": 60,
-      "win_rate": 100.0,
-      "n_trades": 4,
-      "sharpe": 6.1,
-      "years": [
-        "2020",
-        "2024",
-        "2026"
-      ],
-      "ctx_rsi": {
-        "min": 33.93,
-        "max": 91.13,
-        "avg": 68.1
-      },
-      "ctx_vol_r": {
-        "min": 0.97,
-        "max": 5.37,
-        "avg": 2.65
       }
     },
     {
@@ -965,18 +995,18 @@
     },
     {
       "sym": "NOVARTIND",
-      "price": 1491.7,
+      "price": 1494.6,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
       "desc": "Stock rises \u226520% over 20d \u2192 hold 30d",
       "ret_rate": 0.61,
-      "avg_ret": 18.37,
-      "min_ret": 10.09,
+      "avg_ret": 18.42,
+      "min_ret": 10.3,
       "hold_days": 30,
       "win_rate": 100.0,
       "n_trades": 4,
-      "sharpe": 5.36,
+      "sharpe": 5.4,
       "years": [
         "2021",
         "2023",
@@ -1086,7 +1116,7 @@
     },
     {
       "sym": "MANINDS",
-      "price": 574.3,
+      "price": 566.5,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1147,7 +1177,7 @@
     },
     {
       "sym": "ACE",
-      "price": 976.6,
+      "price": 989.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1177,7 +1207,7 @@
     },
     {
       "sym": "HITECH",
-      "price": 84.33,
+      "price": 86.93,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1207,18 +1237,18 @@
     },
     {
       "sym": "THYROCARE",
-      "price": 535.55,
+      "price": 515.7,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
       "desc": "Stock rises \u226515% over 3d \u2192 hold 60d",
-      "ret_rate": 0.49,
-      "avg_ret": 29.57,
-      "min_ret": 15.3,
+      "ret_rate": 0.48,
+      "avg_ret": 28.71,
+      "min_ret": 11.02,
       "hold_days": 60,
       "win_rate": 100.0,
       "n_trades": 5,
-      "sharpe": 5.37,
+      "sharpe": 4.73,
       "years": [
         "2020",
         "2021",
@@ -1239,7 +1269,7 @@
     },
     {
       "sym": "WIPRO",
-      "price": 172.76,
+      "price": 175.46,
       "grade": "A",
       "confidence": 100,
       "uc": "UC1",
@@ -1268,7 +1298,7 @@
     },
     {
       "sym": "JINDALSAW",
-      "price": 272.3,
+      "price": 275.8,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1299,7 +1329,7 @@
     },
     {
       "sym": "MOIL",
-      "price": 270.5,
+      "price": 274.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1329,7 +1359,7 @@
     },
     {
       "sym": "TVSHLTD",
-      "price": 13954.0,
+      "price": 14016.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1359,7 +1389,7 @@
     },
     {
       "sym": "ORIENTCEM",
-      "price": 135.5,
+      "price": 137.95,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1390,7 +1420,7 @@
     },
     {
       "sym": "KAYNES",
-      "price": 3429.1,
+      "price": 3336.1,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1420,7 +1450,7 @@
     },
     {
       "sym": "KAJARIACER",
-      "price": 1215.0,
+      "price": 1218.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1450,7 +1480,7 @@
     },
     {
       "sym": "IDFCFIRSTB",
-      "price": 79.46,
+      "price": 80.83,
       "grade": "A",
       "confidence": 100,
       "uc": "UC1",
@@ -1480,7 +1510,7 @@
     },
     {
       "sym": "NEULANDLAB",
-      "price": 19542.0,
+      "price": 19506.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1511,7 +1541,7 @@
     },
     {
       "sym": "DHARMAJ",
-      "price": 259.35,
+      "price": 260.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1541,7 +1571,7 @@
     },
     {
       "sym": "MATRIMONY",
-      "price": 417.5,
+      "price": 437.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1570,18 +1600,18 @@
     },
     {
       "sym": "NUVAMA",
-      "price": 1934.6,
+      "price": 1977.6,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
       "desc": "Stock rises \u226520% over 10d \u2192 hold 60d",
-      "ret_rate": 0.4,
-      "avg_ret": 24.0,
+      "ret_rate": 0.41,
+      "avg_ret": 24.61,
       "min_ret": 13.7,
       "hold_days": 60,
       "win_rate": 100.0,
       "n_trades": 5,
-      "sharpe": 4.82,
+      "sharpe": 4.56,
       "years": [
         "2023",
         "2024",
@@ -1721,7 +1751,7 @@
     },
     {
       "sym": "BODALCHEM",
-      "price": 59.5,
+      "price": 58.12,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1749,6 +1779,37 @@
         "min": 5.63,
         "max": 12.08,
         "avg": 8.6
+      }
+    },
+    {
+      "sym": "GODREJIND",
+      "price": 1417.7,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC1",
+      "desc": "Stock rises \u226520% over 2d \u2192 hold 60d",
+      "ret_rate": 0.35,
+      "avg_ret": 20.91,
+      "min_ret": 14.24,
+      "hold_days": 60,
+      "win_rate": 100.0,
+      "n_trades": 4,
+      "sharpe": 5.62,
+      "years": [
+        "2020",
+        "2023",
+        "2025",
+        "2026"
+      ],
+      "ctx_rsi": {
+        "min": 66.87,
+        "max": 87.44,
+        "avg": 79.13
+      },
+      "ctx_vol_r": {
+        "min": 4.17,
+        "max": 11.04,
+        "avg": 8.03
       }
     },
     {
@@ -1871,7 +1932,7 @@
     },
     {
       "sym": "CAPACITE",
-      "price": 234.8,
+      "price": 240.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1901,8 +1962,38 @@
       }
     },
     {
+      "sym": "TMB",
+      "price": 801.6,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC1",
+      "desc": "Stock rises \u22657% over 2d \u2192 hold 60d",
+      "ret_rate": 0.24,
+      "avg_ret": 14.52,
+      "min_ret": 10.63,
+      "hold_days": 60,
+      "win_rate": 100.0,
+      "n_trades": 4,
+      "sharpe": 6.93,
+      "years": [
+        "2023",
+        "2025",
+        "2026"
+      ],
+      "ctx_rsi": {
+        "min": 64.78,
+        "max": 82.22,
+        "avg": 70.75
+      },
+      "ctx_vol_r": {
+        "min": 3.23,
+        "max": 7.3,
+        "avg": 4.48
+      }
+    },
+    {
       "sym": "GILLETTE",
-      "price": 7788.5,
+      "price": 7845.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC1",
@@ -1928,6 +2019,37 @@
         "min": 0.58,
         "max": 2.82,
         "avg": 1.67
+      }
+    },
+    {
+      "sym": "HDFCSML250",
+      "price": 182.6,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC1",
+      "desc": "Stock rises \u226510% over 20d \u2192 hold 60d",
+      "ret_rate": 0.23,
+      "avg_ret": 13.55,
+      "min_ret": 10.75,
+      "hold_days": 60,
+      "win_rate": 100.0,
+      "n_trades": 5,
+      "sharpe": 10.83,
+      "years": [
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "ctx_rsi": {
+        "min": 70.54,
+        "max": 92.36,
+        "avg": 82.31
+      },
+      "ctx_vol_r": {
+        "min": 0.63,
+        "max": 3.18,
+        "avg": 1.2
       }
     },
     {
@@ -1958,37 +2080,6 @@
         "min": 0.0,
         "max": 3.85,
         "avg": 1.32
-      }
-    },
-    {
-      "sym": "HDFCSML250",
-      "price": 182.15,
-      "grade": "C",
-      "confidence": 0,
-      "uc": "UC1",
-      "desc": "Stock rises \u226510% over 20d \u2192 hold 60d",
-      "ret_rate": 0.22,
-      "avg_ret": 13.5,
-      "min_ret": 10.48,
-      "hold_days": 60,
-      "win_rate": 100.0,
-      "n_trades": 5,
-      "sharpe": 10.54,
-      "years": [
-        "2023",
-        "2024",
-        "2025",
-        "2026"
-      ],
-      "ctx_rsi": {
-        "min": 70.54,
-        "max": 92.36,
-        "avg": 82.31
-      },
-      "ctx_vol_r": {
-        "min": 0.63,
-        "max": 3.18,
-        "avg": 1.2
       }
     }
   ]

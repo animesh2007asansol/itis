@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-09T22:43:10+05:30",
-  "latest": "2026-07-09",
+  "generated_at": "2026-07-10T22:18:59+05:30",
+  "latest": "2026-07-10",
   "picks": [
     {
       "sym": "CGPOWER",
-      "price": 910.9,
+      "price": 916.6,
       "longterm_score": 66,
       "grade": "A",
       "confidence": 100,
@@ -16,9 +16,9 @@
       "hold_days": 60,
       "win_rate": 100.0,
       "n_trades": 6,
-      "rsi": 41.46,
-      "ret20": 0.31,
-      "avg_turnover_cr": 405.21,
+      "rsi": 40.63,
+      "ret20": 1.69,
+      "avg_turnover_cr": 405.9,
       "uc1": {
         "uc": "UC1",
         "desc": "Stock rises \u226520% over 5d \u2192 hold 60d",
@@ -119,7 +119,7 @@
     },
     {
       "sym": "IDFCFIRSTB",
-      "price": 79.46,
+      "price": 80.83,
       "longterm_score": 60,
       "grade": "A",
       "confidence": 100,
@@ -131,9 +131,9 @@
       "hold_days": 60,
       "win_rate": 100.0,
       "n_trades": 4,
-      "rsi": 54.55,
-      "ret20": 8.86,
-      "avg_turnover_cr": 185.85,
+      "rsi": 56.79,
+      "ret20": 10.8,
+      "avg_turnover_cr": 185.73,
       "uc1": {
         "uc": "UC1",
         "desc": "Stock rises \u226510% over 2d \u2192 hold 60d",
@@ -189,9 +189,9 @@
       "hold_days": 60,
       "win_rate": 100.0,
       "n_trades": 5,
-      "rsi": 69.15,
-      "ret20": 10.41,
-      "avg_turnover_cr": 19.35,
+      "rsi": 70.7,
+      "ret20": 11.56,
+      "avg_turnover_cr": 19.9,
       "uc1": {
         "uc": "UC1",
         "desc": "Stock rises \u226515% over 3d \u2192 hold 60d",
@@ -226,6 +226,63 @@
         "train": {
           "wr": 100.0,
           "avg_ret": 20.97,
+          "n": 4
+        },
+        "oos_23": null,
+        "oos_24": null,
+        "oos_25": null,
+        "recent": null
+      }
+    },
+    {
+      "sym": "MASTEK",
+      "price": 1680.1,
+      "longterm_score": 50,
+      "grade": "A",
+      "confidence": 100,
+      "best_uc": "UC1",
+      "best_desc": "Stock rises \u226515% over 2d \u2192 hold 60d",
+      "ret_rate": 0.68,
+      "avg_ret": 40.86,
+      "min_ret": 15.88,
+      "hold_days": 60,
+      "win_rate": 100.0,
+      "n_trades": 4,
+      "rsi": 60.12,
+      "ret20": 6.71,
+      "avg_turnover_cr": 10.59,
+      "uc1": {
+        "uc": "UC1",
+        "desc": "Stock rises \u226515% over 2d \u2192 hold 60d",
+        "ret_rate": 0.68,
+        "avg_ret": 40.86,
+        "min_ret": 15.88,
+        "hold_days": 60,
+        "win_rate": 100.0,
+        "n_trades": 4,
+        "sharpe": 4.43,
+        "years": [
+          "2020",
+          "2021"
+        ],
+        "ctx_rsi": {
+          "min": 45.09,
+          "max": 84.83,
+          "avg": 73.38
+        },
+        "ctx_vol_r": {
+          "min": 0.85,
+          "max": 3.32,
+          "avg": 2.42
+        }
+      },
+      "uc2": null,
+      "uc3": null,
+      "uc4": null,
+      "val_results": {
+        "train": {
+          "wr": 100.0,
+          "avg_ret": 40.86,
           "n": 4
         },
         "oos_23": null,
@@ -294,7 +351,7 @@
     },
     {
       "sym": "KIRLFER",
-      "price": 455.95,
+      "price": 468.1,
       "longterm_score": 40,
       "grade": "A",
       "confidence": 100,
@@ -306,9 +363,9 @@
       "hold_days": 30,
       "win_rate": 100.0,
       "n_trades": 4,
-      "rsi": 42.37,
-      "ret20": 9.39,
-      "avg_turnover_cr": 10.57,
+      "rsi": 46.53,
+      "ret20": 13.11,
+      "avg_turnover_cr": 10.46,
       "uc1": {
         "uc": "UC1",
         "desc": "Stock rises \u226520% over 3d \u2192 hold 30d",
@@ -350,65 +407,8 @@
       }
     },
     {
-      "sym": "MASTEK",
-      "price": 1612.1,
-      "longterm_score": 35,
-      "grade": "A",
-      "confidence": 100,
-      "best_uc": "UC1",
-      "best_desc": "Stock rises \u226515% over 2d \u2192 hold 60d",
-      "ret_rate": 0.68,
-      "avg_ret": 40.86,
-      "min_ret": 15.88,
-      "hold_days": 60,
-      "win_rate": 100.0,
-      "n_trades": 4,
-      "rsi": 46.36,
-      "ret20": 1.8,
-      "avg_turnover_cr": 10.4,
-      "uc1": {
-        "uc": "UC1",
-        "desc": "Stock rises \u226515% over 2d \u2192 hold 60d",
-        "ret_rate": 0.68,
-        "avg_ret": 40.86,
-        "min_ret": 15.88,
-        "hold_days": 60,
-        "win_rate": 100.0,
-        "n_trades": 4,
-        "sharpe": 4.43,
-        "years": [
-          "2020",
-          "2021"
-        ],
-        "ctx_rsi": {
-          "min": 45.09,
-          "max": 84.83,
-          "avg": 73.38
-        },
-        "ctx_vol_r": {
-          "min": 0.85,
-          "max": 3.32,
-          "avg": 2.42
-        }
-      },
-      "uc2": null,
-      "uc3": null,
-      "uc4": null,
-      "val_results": {
-        "train": {
-          "wr": 100.0,
-          "avg_ret": 40.86,
-          "n": 4
-        },
-        "oos_23": null,
-        "oos_24": null,
-        "oos_25": null,
-        "recent": null
-      }
-    },
-    {
       "sym": "JINDALSTEL",
-      "price": 1029.8,
+      "price": 1051.3,
       "longterm_score": 31,
       "grade": "A",
       "confidence": 100,
@@ -420,9 +420,9 @@
       "hold_days": 15,
       "win_rate": 100.0,
       "n_trades": 5,
-      "rsi": 27.12,
-      "ret20": -8.14,
-      "avg_turnover_cr": 155.46,
+      "rsi": 31.91,
+      "ret20": -6.24,
+      "avg_turnover_cr": 155.34,
       "uc1": {
         "uc": "UC1",
         "desc": "Stock rises \u226510% over 2d \u2192 hold 15d",
@@ -466,7 +466,7 @@
     },
     {
       "sym": "KPITTECH",
-      "price": 548.15,
+      "price": 561.75,
       "longterm_score": 25,
       "grade": "A",
       "confidence": 100,
@@ -478,9 +478,9 @@
       "hold_days": 60,
       "win_rate": 100.0,
       "n_trades": 4,
-      "rsi": 10.5,
-      "ret20": -25.21,
-      "avg_turnover_cr": 185.45,
+      "rsi": 10.32,
+      "ret20": -23.77,
+      "avg_turnover_cr": 187.87,
       "uc1": {
         "uc": "UC1",
         "desc": "Stock rises \u226520% over 5d \u2192 hold 60d",
@@ -523,7 +523,7 @@
     },
     {
       "sym": "KRISHANA",
-      "price": 138.15,
+      "price": 140.2,
       "longterm_score": 25,
       "grade": "A",
       "confidence": 100,
@@ -535,9 +535,9 @@
       "hold_days": 30,
       "win_rate": 100.0,
       "n_trades": 4,
-      "rsi": 12.99,
-      "ret20": -79.24,
-      "avg_turnover_cr": 23.82,
+      "rsi": 13.36,
+      "ret20": -78.97,
+      "avg_turnover_cr": 23.67,
       "uc1": {
         "uc": "UC1",
         "desc": "Stock rises \u226520% over 3d \u2192 hold 30d",
@@ -580,7 +580,7 @@
     },
     {
       "sym": "WIPRO",
-      "price": 172.76,
+      "price": 175.46,
       "longterm_score": 25,
       "grade": "A",
       "confidence": 100,
@@ -592,9 +592,9 @@
       "hold_days": 60,
       "win_rate": 100.0,
       "n_trades": 4,
-      "rsi": 29.05,
-      "ret20": -3.45,
-      "avg_turnover_cr": 545.69,
+      "rsi": 39.2,
+      "ret20": -1.08,
+      "avg_turnover_cr": 543.02,
       "uc1": {
         "uc": "UC1",
         "desc": "Stock rises \u22657% over 1d \u2192 hold 60d",
