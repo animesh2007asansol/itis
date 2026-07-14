@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-13T22:37:37+05:30",
-  "n": 57,
+  "generated_at": "2026-07-14T21:42:21+05:30",
+  "n": 56,
   "stocks": [
     {
       "sym": "JUBLINDS",
@@ -67,7 +67,7 @@
     },
     {
       "sym": "TPLPLASTEH",
-      "price": 82.73,
+      "price": 80.5,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -196,7 +196,7 @@
     },
     {
       "sym": "E2E",
-      "price": 386.95,
+      "price": 394.6,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -227,7 +227,7 @@
     },
     {
       "sym": "ANGELONE",
-      "price": 340.25,
+      "price": 333.55,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -322,7 +322,7 @@
     },
     {
       "sym": "GMRP&UI",
-      "price": 99.87,
+      "price": 99.93,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -386,7 +386,7 @@
     },
     {
       "sym": "LXCHEM",
-      "price": 164.2,
+      "price": 166.73,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -449,7 +449,7 @@
     },
     {
       "sym": "SEJALLTD",
-      "price": 745.75,
+      "price": 712.65,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -480,7 +480,7 @@
     },
     {
       "sym": "ZODIAC",
-      "price": 273.8,
+      "price": 266.25,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -544,7 +544,7 @@
     },
     {
       "sym": "DYCL",
-      "price": 369.65,
+      "price": 390.85,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -606,7 +606,7 @@
     },
     {
       "sym": "ZIMLAB",
-      "price": 115.89,
+      "price": 118.2,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -637,7 +637,7 @@
     },
     {
       "sym": "STOVEKRAFT",
-      "price": 791.15,
+      "price": 772.05,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -700,7 +700,7 @@
     },
     {
       "sym": "INOXGREEN",
-      "price": 190.58,
+      "price": 185.95,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -731,7 +731,7 @@
     },
     {
       "sym": "MANORAMA",
-      "price": 1627.3,
+      "price": 1577.6,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -758,37 +758,6 @@
         "min": 0.56,
         "max": 1.84,
         "avg": 1.12
-      }
-    },
-    {
-      "sym": "NOVARTIND",
-      "price": 1664.8,
-      "grade": "C",
-      "confidence": 0,
-      "uc": "UC2",
-      "desc": "Buy on first trading day of Jun, hold 30d",
-      "ret_rate": 0.88,
-      "avg_ret": 26.48,
-      "min_ret": 10.09,
-      "hold_days": 30,
-      "win_rate": 100.0,
-      "n_trades": 4,
-      "sharpe": 3.56,
-      "years": [
-        "2021",
-        "2022",
-        "2023",
-        "2026"
-      ],
-      "ctx_rsi": {
-        "min": 46.71,
-        "max": 76.11,
-        "avg": 63.63
-      },
-      "ctx_vol_r": {
-        "min": 0.46,
-        "max": 1.46,
-        "avg": 0.96
       }
     },
     {
@@ -826,7 +795,7 @@
     },
     {
       "sym": "TITAGARH",
-      "price": 849.3,
+      "price": 858.7,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -952,7 +921,7 @@
     },
     {
       "sym": "KERNEX",
-      "price": 2233.4,
+      "price": 2192.9,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -985,18 +954,18 @@
     },
     {
       "sym": "NGLFINE",
-      "price": 3160.9,
+      "price": 3130.8,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
       "desc": "Buy on first trading day of Jun, hold 30d",
-      "ret_rate": 0.8,
-      "avg_ret": 24.11,
-      "min_ret": 15.45,
+      "ret_rate": 0.79,
+      "avg_ret": 23.83,
+      "min_ret": 14.35,
       "hold_days": 30,
       "win_rate": 100.0,
       "n_trades": 4,
-      "sharpe": 8.51,
+      "sharpe": 8.12,
       "years": [
         "2023",
         "2024",
@@ -1048,7 +1017,7 @@
     },
     {
       "sym": "SJS",
-      "price": 2154.6,
+      "price": 2159.2,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1145,7 +1114,7 @@
     },
     {
       "sym": "MOTHERSON",
-      "price": 144.06,
+      "price": 142.06,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1240,7 +1209,7 @@
     },
     {
       "sym": "RAMRAT",
-      "price": 423.95,
+      "price": 419.2,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1271,7 +1240,7 @@
     },
     {
       "sym": "AARTIPHARM",
-      "price": 717.8,
+      "price": 709.75,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1364,7 +1333,7 @@
     },
     {
       "sym": "FAZE3Q",
-      "price": 593.9,
+      "price": 577.55,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1395,7 +1364,7 @@
     },
     {
       "sym": "EMIL",
-      "price": 131.82,
+      "price": 132.01,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1457,7 +1426,7 @@
     },
     {
       "sym": "ARTEMISMED",
-      "price": 277.4,
+      "price": 271.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1490,7 +1459,7 @@
     },
     {
       "sym": "JYOTISTRUC",
-      "price": 11.45,
+      "price": 11.41,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1521,7 +1490,7 @@
     },
     {
       "sym": "ROTO",
-      "price": 68.32,
+      "price": 67.56,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1587,7 +1556,7 @@
     },
     {
       "sym": "STYRENIX",
-      "price": 2317.7,
+      "price": 2264.3,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1618,7 +1587,7 @@
     },
     {
       "sym": "SBC",
-      "price": 42.17,
+      "price": 42.29,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1680,7 +1649,7 @@
     },
     {
       "sym": "KPIGREEN",
-      "price": 401.35,
+      "price": 399.3,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
@@ -1712,7 +1681,7 @@
     },
     {
       "sym": "KIRLPNU",
-      "price": 1768.8,
+      "price": 1749.9,
       "grade": "C",
       "confidence": 0,
       "uc": "UC2",
