@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-17T01:10:53+05:30",
-  "latest_date": "2026-07-16",
-  "n_patterns": 361,
+  "generated_at": "2026-07-18T01:09:01+05:30",
+  "latest_date": "2026-07-17",
+  "n_patterns": 359,
   "description": "100% next-day positive. Ranked by minimum return (highest first).",
   "patterns": [
     {
@@ -1027,9 +1027,9 @@
         "max": 23.18
       },
       "win_10d": {
-        "n": 8,
-        "wr": 87.5,
-        "avg": 5.71,
+        "n": 9,
+        "wr": 88.9,
+        "avg": 6.39,
         "min": -11.03,
         "max": 14.55
       },
@@ -2709,7 +2709,13 @@
         "min": -2.92,
         "max": 8.67
       },
-      "win_10d": null,
+      "win_10d": {
+        "n": 6,
+        "wr": 66.7,
+        "avg": 6.26,
+        "min": -6.12,
+        "max": 19.6
+      },
       "win_20d": null,
       "years": [
         2023,
@@ -4584,9 +4590,9 @@
         "max": 14.54
       },
       "win_10d": {
-        "n": 6,
-        "wr": 50.0,
-        "avg": 5.92,
+        "n": 7,
+        "wr": 57.1,
+        "avg": 6.13,
         "min": -6.41,
         "max": 26.82
       },
@@ -4683,44 +4689,6 @@
         2026
       ],
       "last_date": "2026-05-06"
-    },
-    {
-      "sym": "AVALON",
-      "candle_key": "G_medium_Lnone_Unone",
-      "desc": "Green medium body | lower:none | upper:none",
-      "occurrences": 6,
-      "nd_wr": 100.0,
-      "nd_avg": 3.38,
-      "nd_min": 0.4,
-      "nd_max": 5.0,
-      "gap_up_rate": 66.7,
-      "avg_gap_pct": 1.32,
-      "win_5d": {
-        "n": 6,
-        "wr": 83.3,
-        "avg": 4.93,
-        "min": -0.49,
-        "max": 9.26
-      },
-      "win_10d": {
-        "n": 6,
-        "wr": 83.3,
-        "avg": 6.64,
-        "min": -3.64,
-        "max": 14.46
-      },
-      "win_20d": {
-        "n": 6,
-        "wr": 83.3,
-        "avg": 12.97,
-        "min": -2.35,
-        "max": 29.46
-      },
-      "years": [
-        2023,
-        2025
-      ],
-      "last_date": "2025-12-31"
     },
     {
       "sym": "HCG",
@@ -5508,48 +5476,6 @@
       "last_date": "2022-12-16"
     },
     {
-      "sym": "MOIL",
-      "candle_key": "R_tiny_Lmedium_Uvery_long",
-      "desc": "Red tiny body | lower:medium | upper:very_long",
-      "occurrences": 8,
-      "nd_wr": 100.0,
-      "nd_avg": 2.0,
-      "nd_min": 0.33,
-      "nd_max": 5.7,
-      "gap_up_rate": 87.5,
-      "avg_gap_pct": 0.66,
-      "win_5d": {
-        "n": 8,
-        "wr": 75.0,
-        "avg": 3.29,
-        "min": -5.54,
-        "max": 13.91
-      },
-      "win_10d": {
-        "n": 8,
-        "wr": 75.0,
-        "avg": 2.53,
-        "min": -5.28,
-        "max": 7.94
-      },
-      "win_20d": {
-        "n": 8,
-        "wr": 75.0,
-        "avg": 4.73,
-        "min": -9.26,
-        "max": 14.6
-      },
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2025,
-        2026
-      ],
-      "last_date": "2026-04-15"
-    },
-    {
       "sym": "RAMCOIND",
       "candle_key": "G_tiny_Lmedium_Ulong",
       "desc": "Green tiny body | lower:medium | upper:long",
@@ -5593,13 +5519,13 @@
       "sym": "SHAILY",
       "candle_key": "G_tiny_Lmedium_Umedium",
       "desc": "Green tiny body | lower:medium | upper:medium",
-      "occurrences": 6,
+      "occurrences": 7,
       "nd_wr": 100.0,
-      "nd_avg": 2.25,
+      "nd_avg": 2.18,
       "nd_min": 0.33,
       "nd_max": 3.97,
-      "gap_up_rate": 83.3,
-      "avg_gap_pct": 0.95,
+      "gap_up_rate": 71.4,
+      "avg_gap_pct": 0.76,
       "win_5d": {
         "n": 6,
         "wr": 66.7,
@@ -5619,7 +5545,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-06-24"
+      "last_date": "2026-07-16"
     },
     {
       "sym": "ACC",
@@ -6779,7 +6705,13 @@
       "nd_max": 8.89,
       "gap_up_rate": 100.0,
       "avg_gap_pct": 1.27,
-      "win_5d": null,
+      "win_5d": {
+        "n": 6,
+        "wr": 50.0,
+        "avg": 1.82,
+        "min": -2.91,
+        "max": 6.45
+      },
       "win_10d": null,
       "win_20d": null,
       "years": [
@@ -6951,13 +6883,13 @@
       "sym": "IZMO",
       "candle_key": "G_medium_Lsmall_Unone",
       "desc": "Green medium body | lower:small | upper:none",
-      "occurrences": 6,
+      "occurrences": 7,
       "nd_wr": 100.0,
-      "nd_avg": 2.28,
+      "nd_avg": 2.01,
       "nd_min": 0.22,
       "nd_max": 5.0,
       "gap_up_rate": 100.0,
-      "avg_gap_pct": 2.98,
+      "avg_gap_pct": 2.84,
       "win_5d": {
         "n": 6,
         "wr": 66.7,
@@ -6986,7 +6918,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-06-08"
+      "last_date": "2026-07-16"
     },
     {
       "sym": "PFIZER",
@@ -7968,7 +7900,13 @@
         "min": -13.81,
         "max": 23.21
       },
-      "win_20d": null,
+      "win_20d": {
+        "n": 6,
+        "wr": 50.0,
+        "avg": 10.11,
+        "min": -8.66,
+        "max": 57.76
+      },
       "years": [
         2025,
         2026
@@ -8901,9 +8839,9 @@
         "max": 8.23
       },
       "win_10d": {
-        "n": 7,
-        "wr": 85.7,
-        "avg": 5.02,
+        "n": 8,
+        "wr": 87.5,
+        "avg": 5.45,
         "min": -3.48,
         "max": 10.75
       },
@@ -11366,7 +11304,13 @@
         "min": -8.51,
         "max": 24.78
       },
-      "win_20d": null,
+      "win_20d": {
+        "n": 6,
+        "wr": 50.0,
+        "avg": 5.97,
+        "min": -15.79,
+        "max": 41.04
+      },
       "years": [
         2023,
         2024,
@@ -11394,7 +11338,7 @@
         "max": 0.18
       },
       "win_10d": {
-        "n": 16,
+        "n": 17,
         "wr": 100.0,
         "avg": 0.21,
         "min": 0.18,
@@ -11627,7 +11571,7 @@
         "max": 0.18
       },
       "win_10d": {
-        "n": 100,
+        "n": 101,
         "wr": 100.0,
         "avg": 0.2,
         "min": 0.14,
@@ -11705,7 +11649,7 @@
         "max": 0.17
       },
       "win_10d": {
-        "n": 18,
+        "n": 19,
         "wr": 100.0,
         "avg": 0.23,
         "min": 0.19,
@@ -11970,7 +11914,7 @@
       "gap_up_rate": 88.0,
       "avg_gap_pct": 0.07,
       "win_5d": {
-        "n": 49,
+        "n": 50,
         "wr": 100.0,
         "avg": 0.11,
         "min": 0.08,
@@ -12016,7 +11960,7 @@
         "max": 0.17
       },
       "win_10d": {
-        "n": 17,
+        "n": 18,
         "wr": 100.0,
         "avg": 0.21,
         "min": 0.17,
@@ -12242,7 +12186,7 @@
       "gap_up_rate": 91.7,
       "avg_gap_pct": 0.01,
       "win_5d": {
-        "n": 58,
+        "n": 59,
         "wr": 100.0,
         "avg": 0.11,
         "min": 0.08,
@@ -12672,7 +12616,7 @@
       "gap_up_rate": 66.7,
       "avg_gap_pct": 0.25,
       "win_5d": {
-        "n": 8,
+        "n": 9,
         "wr": 100.0,
         "avg": 0.09,
         "min": 0.08,
@@ -12702,12 +12646,12 @@
       "sym": "GROWWLIQID",
       "candle_key": "G_doji_Lnone_Uvery_long",
       "desc": "Green doji body | lower:none | upper:very_long",
-      "occurrences": 102,
+      "occurrences": 103,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.06,
-      "gap_up_rate": 78.4,
+      "gap_up_rate": 78.6,
       "avg_gap_pct": 0.01,
       "win_5d": {
         "n": 101,
@@ -12724,7 +12668,7 @@
         "max": 0.3
       },
       "win_20d": {
-        "n": 95,
+        "n": 96,
         "wr": 100.0,
         "avg": 0.39,
         "min": 0.32,
@@ -12735,7 +12679,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-07-15"
+      "last_date": "2026-07-16"
     },
     {
       "sym": "GROWWLIQID",
@@ -13219,12 +13163,12 @@
       "sym": "LIQUID",
       "candle_key": "R_doji_Lnone_Unone",
       "desc": "Red doji body | lower:none | upper:none",
-      "occurrences": 190,
+      "occurrences": 191,
       "nd_wr": 100.0,
       "nd_avg": 0.0,
       "nd_min": 0.0,
       "nd_max": 0.0,
-      "gap_up_rate": 32.1,
+      "gap_up_rate": 31.9,
       "avg_gap_pct": -0.0,
       "win_5d": {
         "n": 189,
@@ -13253,7 +13197,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-07-14"
+      "last_date": "2026-07-16"
     },
     {
       "sym": "LIQUID1",
@@ -13320,7 +13264,7 @@
         "max": 0.31
       },
       "win_20d": {
-        "n": 85,
+        "n": 86,
         "wr": 100.0,
         "avg": 0.45,
         "min": 0.35,
@@ -13384,7 +13328,7 @@
       "gap_up_rate": 75.0,
       "avg_gap_pct": 0.05,
       "win_5d": {
-        "n": 43,
+        "n": 44,
         "wr": 100.0,
         "avg": 0.1,
         "min": 0.0,
@@ -13437,7 +13381,7 @@
         "max": 0.28
       },
       "win_20d": {
-        "n": 93,
+        "n": 94,
         "wr": 100.0,
         "avg": 0.44,
         "min": 0.34,
@@ -13493,13 +13437,13 @@
       "sym": "LIQUIDADD",
       "candle_key": "G_doji_Lnone_Uvery_long",
       "desc": "Green doji body | lower:none | upper:very_long",
-      "occurrences": 70,
+      "occurrences": 71,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.07,
-      "gap_up_rate": 84.3,
-      "avg_gap_pct": 0.09,
+      "gap_up_rate": 84.5,
+      "avg_gap_pct": 0.08,
       "win_5d": {
         "n": 70,
         "wr": 100.0,
@@ -13526,7 +13470,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-07-08"
+      "last_date": "2026-07-16"
     },
     {
       "sym": "LIQUIDADD",
@@ -13649,12 +13593,12 @@
       "sym": "LIQUIDPLUS",
       "candle_key": "R_doji_Lnone_Unone",
       "desc": "Red doji body | lower:none | upper:none",
-      "occurrences": 25,
+      "occurrences": 26,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.06,
-      "gap_up_rate": 88.0,
+      "gap_up_rate": 88.5,
       "avg_gap_pct": 0.02,
       "win_5d": {
         "n": 25,
@@ -13671,7 +13615,7 @@
         "max": 0.28
       },
       "win_20d": {
-        "n": 24,
+        "n": 25,
         "wr": 100.0,
         "avg": 0.43,
         "min": 0.36,
@@ -13681,7 +13625,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-06-18"
+      "last_date": "2026-07-16"
     },
     {
       "sym": "LTIM",
