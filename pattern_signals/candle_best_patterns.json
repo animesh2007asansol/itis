@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-21T01:32:33+05:30",
-  "latest_date": "2026-07-20",
-  "n_patterns": 358,
+  "generated_at": "2026-07-22T01:28:25+05:30",
+  "latest_date": "2026-07-21",
+  "n_patterns": 363,
   "description": "100% next-day positive. Ranked by minimum return (highest first).",
   "patterns": [
     {
@@ -957,9 +957,9 @@
         "max": 32.35
       },
       "win_20d": {
-        "n": 8,
-        "wr": 62.5,
-        "avg": 3.09,
+        "n": 9,
+        "wr": 55.6,
+        "avg": 2.45,
         "min": -10.27,
         "max": 17.38
       },
@@ -1254,7 +1254,13 @@
       "nd_max": 6.41,
       "gap_up_rate": 50.0,
       "avg_gap_pct": 0.3,
-      "win_5d": null,
+      "win_5d": {
+        "n": 6,
+        "wr": 100.0,
+        "avg": 7.6,
+        "min": 2.04,
+        "max": 18.33
+      },
       "win_10d": null,
       "win_20d": null,
       "years": [
@@ -6063,13 +6069,13 @@
       "sym": "ROSSTECH",
       "candle_key": "R_small_Ltiny_Usmall",
       "desc": "Red small body | lower:tiny | upper:small",
-      "occurrences": 7,
+      "occurrences": 8,
       "nd_wr": 100.0,
-      "nd_avg": 2.02,
+      "nd_avg": 2.14,
       "nd_min": 0.26,
       "nd_max": 5.12,
-      "gap_up_rate": 71.4,
-      "avg_gap_pct": 0.68,
+      "gap_up_rate": 75.0,
+      "avg_gap_pct": 0.69,
       "win_5d": {
         "n": 7,
         "wr": 28.6,
@@ -6095,7 +6101,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-07-01"
+      "last_date": "2026-07-20"
     },
     {
       "sym": "RAMCOIND",
@@ -7575,7 +7581,13 @@
       "nd_max": 5.28,
       "gap_up_rate": 66.7,
       "avg_gap_pct": 0.24,
-      "win_5d": null,
+      "win_5d": {
+        "n": 6,
+        "wr": 83.3,
+        "avg": 4.4,
+        "min": -9.41,
+        "max": 21.0
+      },
       "win_10d": null,
       "win_20d": null,
       "years": [
@@ -9509,6 +9521,27 @@
       "last_date": "2026-04-15"
     },
     {
+      "sym": "BHARTIARTL",
+      "candle_key": "G_small_Lnone_Unone",
+      "desc": "Green small body | lower:none | upper:none",
+      "occurrences": 6,
+      "nd_wr": 100.0,
+      "nd_avg": 0.49,
+      "nd_min": 0.09,
+      "nd_max": 1.03,
+      "gap_up_rate": 50.0,
+      "avg_gap_pct": 0.21,
+      "win_5d": null,
+      "win_10d": null,
+      "win_20d": null,
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "last_date": "2026-07-20"
+    },
+    {
       "sym": "NAZARA",
       "candle_key": "G_tiny_Llong_Uvery_long",
       "desc": "Green tiny body | lower:long | upper:very_long",
@@ -9587,6 +9620,27 @@
         2026
       ],
       "last_date": "2026-03-24"
+    },
+    {
+      "sym": "ZENTEC",
+      "candle_key": "R_tiny_Lmedium_Usmall",
+      "desc": "Red tiny body | lower:medium | upper:small",
+      "occurrences": 6,
+      "nd_wr": 100.0,
+      "nd_avg": 2.3,
+      "nd_min": 0.09,
+      "nd_max": 4.08,
+      "gap_up_rate": 83.3,
+      "avg_gap_pct": 0.48,
+      "win_5d": null,
+      "win_10d": null,
+      "win_20d": null,
+      "years": [
+        2021,
+        2025,
+        2026
+      ],
+      "last_date": "2026-07-20"
     },
     {
       "sym": "BSOFT",
@@ -10420,6 +10474,28 @@
       "last_date": "2024-01-18"
     },
     {
+      "sym": "ZEEL",
+      "candle_key": "G_tiny_Llong_Uvery_long",
+      "desc": "Green tiny body | lower:long | upper:very_long",
+      "occurrences": 6,
+      "nd_wr": 100.0,
+      "nd_avg": 3.22,
+      "nd_min": 0.06,
+      "nd_max": 5.7,
+      "gap_up_rate": 83.3,
+      "avg_gap_pct": 0.5,
+      "win_5d": null,
+      "win_10d": null,
+      "win_20d": null,
+      "years": [
+        2020,
+        2021,
+        2023,
+        2026
+      ],
+      "last_date": "2026-07-20"
+    },
+    {
       "sym": "AEGISCHEM",
       "candle_key": "G_tiny_Lsmall_Ulong",
       "desc": "Green tiny body | lower:small | upper:long",
@@ -10852,6 +10928,44 @@
         2026
       ],
       "last_date": "2026-05-05"
+    },
+    {
+      "sym": "SIKKO",
+      "candle_key": "G_medium_Lsmall_Utiny",
+      "desc": "Green medium body | lower:small | upper:tiny",
+      "occurrences": 6,
+      "nd_wr": 100.0,
+      "nd_avg": 3.69,
+      "nd_min": 0.03,
+      "nd_max": 9.96,
+      "gap_up_rate": 66.7,
+      "avg_gap_pct": 0.58,
+      "win_5d": {
+        "n": 6,
+        "wr": 50.0,
+        "avg": -13.42,
+        "min": -89.92,
+        "max": 8.74
+      },
+      "win_10d": {
+        "n": 6,
+        "wr": 66.7,
+        "avg": -12.31,
+        "min": -89.97,
+        "max": 6.84
+      },
+      "win_20d": {
+        "n": 6,
+        "wr": 66.7,
+        "avg": -11.92,
+        "min": -95.46,
+        "max": 24.15
+      },
+      "years": [
+        2024,
+        2025
+      ],
+      "last_date": "2025-11-20"
     },
     {
       "sym": "ATULAUTO",
@@ -11661,7 +11775,7 @@
         "max": 0.14
       },
       "win_10d": {
-        "n": 20,
+        "n": 21,
         "wr": 100.0,
         "avg": 0.22,
         "min": 0.19,
@@ -12159,14 +12273,14 @@
       "gap_up_rate": 91.7,
       "avg_gap_pct": 0.01,
       "win_5d": {
-        "n": 59,
+        "n": 60,
         "wr": 100.0,
         "avg": 0.11,
         "min": 0.08,
         "max": 0.19
       },
       "win_10d": {
-        "n": 57,
+        "n": 58,
         "wr": 100.0,
         "avg": 0.21,
         "min": 0.16,
@@ -12550,7 +12664,7 @@
       "gap_up_rate": 44.4,
       "avg_gap_pct": -0.27,
       "win_5d": {
-        "n": 8,
+        "n": 9,
         "wr": 100.0,
         "avg": 0.1,
         "min": 0.07,
@@ -12634,14 +12748,14 @@
         "max": 0.17
       },
       "win_10d": {
-        "n": 99,
+        "n": 100,
         "wr": 100.0,
         "avg": 0.2,
         "min": 0.14,
         "max": 0.3
       },
       "win_20d": {
-        "n": 96,
+        "n": 97,
         "wr": 100.0,
         "avg": 0.39,
         "min": 0.32,
@@ -12731,6 +12845,26 @@
         2026
       ],
       "last_date": "2026-03-04"
+    },
+    {
+      "sym": "GROWWLIQID",
+      "candle_key": "G_tiny_Lnone_Utiny",
+      "desc": "Green tiny body | lower:none | upper:tiny",
+      "occurrences": 6,
+      "nd_wr": 100.0,
+      "nd_avg": 0.01,
+      "nd_min": 0.0,
+      "nd_max": 0.04,
+      "gap_up_rate": 66.7,
+      "avg_gap_pct": -0.07,
+      "win_5d": null,
+      "win_10d": null,
+      "win_20d": null,
+      "years": [
+        2025,
+        2026
+      ],
+      "last_date": "2026-07-20"
     },
     {
       "sym": "GROWWLIQID",
@@ -13023,10 +13157,10 @@
       "gap_up_rate": 37.5,
       "avg_gap_pct": -0.1,
       "win_5d": {
-        "n": 7,
-        "wr": 100.0,
-        "avg": 1.55,
-        "min": 0.35,
+        "n": 8,
+        "wr": 87.5,
+        "avg": 1.32,
+        "min": -0.23,
         "max": 4.8
       },
       "win_10d": {
@@ -13144,7 +13278,7 @@
       "gap_up_rate": 31.9,
       "avg_gap_pct": -0.0,
       "win_5d": {
-        "n": 189,
+        "n": 190,
         "wr": 2.1,
         "avg": 0.0,
         "min": 0.0,
@@ -13425,14 +13559,14 @@
         "max": 0.17
       },
       "win_10d": {
-        "n": 68,
+        "n": 69,
         "wr": 100.0,
         "avg": 0.22,
         "min": 0.17,
         "max": 0.29
       },
       "win_20d": {
-        "n": 65,
+        "n": 66,
         "wr": 100.0,
         "avg": 0.44,
         "min": 0.34,
@@ -13457,9 +13591,9 @@
       "gap_up_rate": 89.4,
       "avg_gap_pct": 0.13,
       "win_5d": {
-        "n": 46,
+        "n": 47,
         "wr": 100.0,
-        "avg": 0.11,
+        "avg": 0.1,
         "min": 0.08,
         "max": 0.14
       },
@@ -13566,12 +13700,12 @@
       "sym": "LIQUIDPLUS",
       "candle_key": "R_doji_Lnone_Unone",
       "desc": "Red doji body | lower:none | upper:none",
-      "occurrences": 26,
+      "occurrences": 27,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.06,
-      "gap_up_rate": 88.5,
+      "gap_up_rate": 88.9,
       "avg_gap_pct": 0.02,
       "win_5d": {
         "n": 25,
@@ -13598,7 +13732,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-07-16"
+      "last_date": "2026-07-20"
     },
     {
       "sym": "LTIM",
