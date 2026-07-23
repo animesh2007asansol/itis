@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-23T01:17:24+05:30",
-  "n_stocks": 12,
-  "stocks_with_100pct": 12,
+  "generated_at": "2026-07-24T01:19:39+05:30",
+  "n_stocks": 11,
+  "stocks_with_100pct": 11,
   "n_aplus": 0,
   "n_a": 1,
-  "n_b": 11,
+  "n_b": 10,
   "all_results": [
     {
       "sym": "UMESLTD",
@@ -562,53 +562,6 @@
         }
       },
       "best_window_min": 19.73
-    },
-    {
-      "sym": "PREMEXPLN",
-      "signal": "K10",
-      "name": "COMBO: Vol Dry-Up + NR4 + Above 200MA",
-      "grade": "B",
-      "n_years": 2,
-      "years": [
-        2023,
-        2025
-      ],
-      "occ_20d": 3,
-      "wr_5d": 100.0,
-      "avg_5d": 5.94,
-      "min_5d": 0.56,
-      "wr_10d": 100.0,
-      "avg_10d": 9.2,
-      "min_10d": 8.2,
-      "wr_20d": 100.0,
-      "avg_20d": 20.43,
-      "min_20d": 15.36,
-      "max_20d": 24.5,
-      "med_20d": 21.43,
-      "worst_return": 0.56,
-      "avg_vol": 294072,
-      "score": 56.6,
-      "yr_detail": {
-        "2023": {
-          "occ": 1,
-          "wr_20d": 100.0,
-          "avg_20d": 21.43,
-          "min_20d": 21.43,
-          "max_20d": 21.43,
-          "avg_5d": 2.23,
-          "avg_10d": 8.2
-        },
-        "2025": {
-          "occ": 2,
-          "wr_20d": 100.0,
-          "avg_20d": 19.93,
-          "min_20d": 15.36,
-          "max_20d": 24.5,
-          "avg_5d": 10.48,
-          "avg_10d": 9.7
-        }
-      },
-      "best_window_min": 15.36
     }
   ],
   "all_grade_a": [
