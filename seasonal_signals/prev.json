@@ -1,75 +1,75 @@
 {
   "label": "prev",
-  "date": "2026-07-29",
-  "generated_at": "2026-07-30T22:03:43+05:30",
+  "date": "2026-07-30",
+  "generated_at": "2026-07-31T22:32:50+05:30",
   "trading_day": true,
   "symbol_count": 22,
   "prices": {
     "AMBER": {
-      "close": 7411.5
+      "close": 7401.0
     },
     "ASIANPAINT": {
-      "close": 2758.4
+      "close": 2746.2
     },
     "BALRAMCHIN": {
-      "close": 606.3
+      "close": 596.3
     },
     "BERGEPAINT": {
-      "close": 520.05
+      "close": 521.35
     },
     "BLUESTARCO": {
-      "close": 1680.8
+      "close": 1691.4
     },
     "CHAMBLFERT": {
-      "close": 451.45
+      "close": 445.85
     },
     "COALINDIA": {
-      "close": 410.05
+      "close": 417.2
     },
     "COROMANDEL": {
-      "close": 2037.6
+      "close": 2054.2
     },
     "DEEPAKFERT": {
-      "close": 1626.3
+      "close": 1532.4
     },
     "EIDPARRY": {
-      "close": 778.9
+      "close": 763.2
     },
     "IRFC": {
-      "close": 89.13
+      "close": 88.92
     },
     "JWL": {
-      "close": 259.3
+      "close": 259.35
     },
     "KALYANKJIL": {
-      "close": 628.6
+      "close": 634.6
     },
     "KANSAINER": {
-      "close": 200.06
+      "close": 199.05
     },
     "NTPC": {
-      "close": 343.5
+      "close": 344.85
     },
     "RVNL": {
-      "close": 224.83
+      "close": 222.88
     },
     "RCF": {
-      "close": 127.92
+      "close": 125.54
     },
     "SENCO": {
-      "close": 413.4
+      "close": 404.85
     },
     "TITAGARH": {
-      "close": 833.85
+      "close": 824.8
     },
     "TITAN": {
-      "close": 4850.2
+      "close": 4850.0
     },
     "TRIVENI": {
-      "close": 233.85
+      "close": 226.4
     },
     "VOLTAS": {
-      "close": 1313.3
+      "close": 1333.2
     }
   },
   "csv_format": "new-format(sym=TCKRSYMB,close=CLSPRIC)",
