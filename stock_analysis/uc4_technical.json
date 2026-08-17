@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-14T21:00:52+05:30",
-  "n": 11,
+  "generated_at": "2026-08-17T20:33:54+05:30",
+  "n": 12,
   "stocks": [
     {
       "sym": "TTML",
-      "price": 38.59,
+      "price": 38.15,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -64,7 +64,7 @@
     },
     {
       "sym": "HAL",
-      "price": 5029.9,
+      "price": 5059.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -124,7 +124,7 @@
     },
     {
       "sym": "EXICOM",
-      "price": 151.79,
+      "price": 148.32,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -183,7 +183,7 @@
     },
     {
       "sym": "SALZERELEC",
-      "price": 570.25,
+      "price": 570.3,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -212,7 +212,7 @@
     },
     {
       "sym": "THYROCARE",
-      "price": 624.05,
+      "price": 618.6,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -272,7 +272,7 @@
     },
     {
       "sym": "ANURAS",
-      "price": 1209.4,
+      "price": 1196.9,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -298,6 +298,37 @@
         "min": 2.13,
         "max": 3.45,
         "avg": 2.66
+      }
+    },
+    {
+      "sym": "CENTEXT",
+      "price": 21.93,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC4",
+      "desc": "",
+      "ret_rate": 0.79,
+      "avg_ret": 15.79,
+      "min_ret": 11.67,
+      "hold_days": 20,
+      "win_rate": 100.0,
+      "n_trades": 4,
+      "sharpe": 14.57,
+      "years": [
+        "2021",
+        "2022",
+        "2023",
+        "2025"
+      ],
+      "ctx_rsi": {
+        "min": 68.89,
+        "max": 75.56,
+        "avg": 73.0
+      },
+      "ctx_vol_r": {
+        "min": 5.22,
+        "max": 10.07,
+        "avg": 6.66
       }
     },
     {
