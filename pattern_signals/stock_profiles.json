@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-22T00:32:47+05:30",
-  "n_stocks": 11,
-  "stocks_with_100pct": 11,
+  "generated_at": "2026-08-25T00:32:59+05:30",
+  "n_stocks": 12,
+  "stocks_with_100pct": 12,
   "n_aplus": 0,
   "n_a": 1,
-  "n_b": 10,
+  "n_b": 11,
   "all_results": [
     {
       "sym": "UMESLTD",
@@ -562,6 +562,53 @@
         }
       },
       "best_window_min": 19.73
+    },
+    {
+      "sym": "SETUINFRA",
+      "signal": "Q1",
+      "name": "5+ Consecutive Red Days",
+      "grade": "B",
+      "n_years": 2,
+      "years": [
+        2020,
+        2022
+      ],
+      "occ_20d": 4,
+      "wr_5d": 100.0,
+      "avg_5d": 18.37,
+      "min_5d": 10.0,
+      "wr_10d": 100.0,
+      "avg_10d": 33.54,
+      "min_10d": 19.15,
+      "wr_20d": 100.0,
+      "avg_20d": 22.45,
+      "min_20d": 2.5,
+      "max_20d": 36.17,
+      "med_20d": 25.56,
+      "worst_return": 2.5,
+      "avg_vol": 176579,
+      "score": 72.3,
+      "yr_detail": {
+        "2020": {
+          "occ": 1,
+          "wr_20d": 100.0,
+          "avg_20d": 20.0,
+          "min_20d": 20.0,
+          "max_20d": 20.0,
+          "avg_5d": 20.0,
+          "avg_10d": 53.33
+        },
+        "2022": {
+          "occ": 3,
+          "wr_20d": 100.0,
+          "avg_20d": 23.26,
+          "min_20d": 2.5,
+          "max_20d": 36.17,
+          "avg_5d": 17.83,
+          "avg_10d": 26.94
+        }
+      },
+      "best_window_min": 19.15
     }
   ],
   "all_grade_a": [
