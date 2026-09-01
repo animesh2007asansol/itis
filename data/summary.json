@@ -1,16 +1,16 @@
 {
-  "last_updated": "2026-08-26T13:33:36.915732Z",
-  "total_trading_days": 1645,
-  "successful_fetches": 1645,
+  "last_updated": "2026-09-01T16:50:01.125971Z",
+  "total_trading_days": 1646,
+  "successful_fetches": 1646,
   "categories_available": [
     "equity",
     "fo",
     "index"
   ],
-  "latest_date": "2026-08-26",
+  "latest_date": "2026-09-01",
   "latest_status": {
     "equity": true,
-    "fo": false,
+    "fo": true,
     "index": true,
     "delivery": false,
     "corporate_actions": false,
