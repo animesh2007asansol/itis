@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-11T02:30:30+05:30",
-  "latest_date": "2026-09-10",
-  "n_patterns": 364,
+  "generated_at": "2026-09-12T02:34:28+05:30",
+  "latest_date": "2026-09-11",
+  "n_patterns": 366,
   "description": "100% next-day positive. Ranked by minimum return (highest first).",
   "patterns": [
     {
@@ -1186,7 +1186,13 @@
       "nd_max": 4.24,
       "gap_up_rate": 83.3,
       "avg_gap_pct": 1.41,
-      "win_5d": null,
+      "win_5d": {
+        "n": 6,
+        "wr": 33.3,
+        "avg": 1.73,
+        "min": -2.44,
+        "max": 9.74
+      },
       "win_10d": null,
       "win_20d": null,
       "years": [
@@ -2909,6 +2915,26 @@
       "last_date": "2026-03-04"
     },
     {
+      "sym": "LOTUSDEV",
+      "candle_key": "G_large_Lnone_Unone",
+      "desc": "Green large body | lower:none | upper:none",
+      "occurrences": 6,
+      "nd_wr": 100.0,
+      "nd_avg": 3.02,
+      "nd_min": 0.67,
+      "nd_max": 6.68,
+      "gap_up_rate": 66.7,
+      "avg_gap_pct": 0.06,
+      "win_5d": null,
+      "win_10d": null,
+      "win_20d": null,
+      "years": [
+        2025,
+        2026
+      ],
+      "last_date": "2026-09-10"
+    },
+    {
       "sym": "SHARDACROP",
       "candle_key": "G_tiny_Lvery_long_Ulong",
       "desc": "Green tiny body | lower:very_long | upper:long",
@@ -3165,9 +3191,9 @@
         "max": 4.76
       },
       "win_10d": {
-        "n": 6,
-        "wr": 50.0,
-        "avg": -1.84,
+        "n": 7,
+        "wr": 42.9,
+        "avg": -2.56,
         "min": -8.34,
         "max": 7.29
       },
@@ -5284,7 +5310,13 @@
       "nd_max": 4.31,
       "gap_up_rate": 33.3,
       "avg_gap_pct": -0.08,
-      "win_5d": null,
+      "win_5d": {
+        "n": 6,
+        "wr": 66.7,
+        "avg": 2.34,
+        "min": -1.71,
+        "max": 7.56
+      },
       "win_10d": null,
       "win_20d": null,
       "years": [
@@ -5635,6 +5667,28 @@
         2022
       ],
       "last_date": "2022-12-16"
+    },
+    {
+      "sym": "MINDACORP",
+      "candle_key": "R_doji_Llong_Ulong",
+      "desc": "Red doji body | lower:long | upper:long",
+      "occurrences": 6,
+      "nd_wr": 100.0,
+      "nd_avg": 2.2,
+      "nd_min": 0.33,
+      "nd_max": 6.69,
+      "gap_up_rate": 66.7,
+      "avg_gap_pct": 0.09,
+      "win_5d": null,
+      "win_10d": null,
+      "win_20d": null,
+      "years": [
+        2020,
+        2023,
+        2024,
+        2026
+      ],
+      "last_date": "2026-09-10"
     },
     {
       "sym": "RAMCOIND",
@@ -6172,13 +6226,13 @@
       "sym": "COFORGE",
       "candle_key": "R_tiny_Lmedium_Uvery_long",
       "desc": "Red tiny body | lower:medium | upper:very_long",
-      "occurrences": 6,
+      "occurrences": 7,
       "nd_wr": 100.0,
-      "nd_avg": 1.43,
+      "nd_avg": 1.33,
       "nd_min": 0.26,
       "nd_max": 2.49,
-      "gap_up_rate": 50.0,
-      "avg_gap_pct": 0.2,
+      "gap_up_rate": 42.9,
+      "avg_gap_pct": -0.03,
       "win_5d": {
         "n": 6,
         "wr": 66.7,
@@ -6204,9 +6258,10 @@
         2020,
         2021,
         2022,
-        2023
+        2023,
+        2026
       ],
-      "last_date": "2023-02-13"
+      "last_date": "2026-09-10"
     },
     {
       "sym": "ROSSTECH",
@@ -9207,9 +9262,9 @@
         "max": 4.03
       },
       "win_20d": {
-        "n": 6,
-        "wr": 66.7,
-        "avg": 0.11,
+        "n": 7,
+        "wr": 71.4,
+        "avg": 0.21,
         "min": -11.47,
         "max": 7.32
       },
@@ -10037,10 +10092,10 @@
       "gap_up_rate": 85.7,
       "avg_gap_pct": 0.51,
       "win_5d": {
-        "n": 6,
-        "wr": 83.3,
-        "avg": 3.7,
-        "min": -2.09,
+        "n": 7,
+        "wr": 71.4,
+        "avg": 2.86,
+        "min": -2.17,
         "max": 8.34
       },
       "win_10d": {
@@ -10654,7 +10709,13 @@
         "min": -2.16,
         "max": 4.83
       },
-      "win_20d": null,
+      "win_20d": {
+        "n": 6,
+        "wr": 50.0,
+        "avg": 0.86,
+        "min": -2.65,
+        "max": 5.8
+      },
       "years": [
         2025,
         2026
@@ -11858,7 +11919,7 @@
         "max": 0.28
       },
       "win_20d": {
-        "n": 36,
+        "n": 37,
         "wr": 100.0,
         "avg": 0.43,
         "min": 0.38,
@@ -12310,7 +12371,7 @@
       "gap_up_rate": 100.0,
       "avg_gap_pct": 0.01,
       "win_5d": {
-        "n": 6,
+        "n": 7,
         "wr": 100.0,
         "avg": 0.11,
         "min": 0.09,
@@ -12747,7 +12808,7 @@
         "max": 0.3
       },
       "win_20d": {
-        "n": 107,
+        "n": 108,
         "wr": 100.0,
         "avg": 0.39,
         "min": 0.32,
@@ -12880,22 +12941,22 @@
       "sym": "GROWWLIQID",
       "candle_key": "R_doji_Lnone_Unone",
       "desc": "Red doji body | lower:none | upper:none",
-      "occurrences": 118,
+      "occurrences": 119,
       "nd_wr": 100.0,
       "nd_avg": 0.02,
       "nd_min": 0.0,
       "nd_max": 0.09,
-      "gap_up_rate": 76.3,
+      "gap_up_rate": 76.5,
       "avg_gap_pct": -0.02,
       "win_5d": {
-        "n": 116,
+        "n": 117,
         "wr": 100.0,
         "avg": 0.1,
         "min": 0.05,
         "max": 0.18
       },
       "win_10d": {
-        "n": 114,
+        "n": 115,
         "wr": 100.0,
         "avg": 0.2,
         "min": 0.14,
@@ -12913,7 +12974,7 @@
         2025,
         2026
       ],
-      "last_date": "2026-09-08"
+      "last_date": "2026-09-10"
     },
     {
       "sym": "GROWWLIQID",
@@ -13293,7 +13354,7 @@
         "max": 0.0
       },
       "win_10d": {
-        "n": 197,
+        "n": 198,
         "wr": 2.5,
         "avg": 0.0,
         "min": 0.0,
@@ -13496,7 +13557,7 @@
         "max": 0.28
       },
       "win_20d": {
-        "n": 98,
+        "n": 99,
         "wr": 100.0,
         "avg": 0.44,
         "min": 0.34,
@@ -13606,7 +13667,7 @@
         "max": 0.14
       },
       "win_10d": {
-        "n": 52,
+        "n": 53,
         "wr": 100.0,
         "avg": 0.21,
         "min": 0.17,
@@ -13723,14 +13784,14 @@
         "max": 0.19
       },
       "win_10d": {
-        "n": 66,
+        "n": 67,
         "wr": 100.0,
         "avg": 0.21,
         "min": 0.16,
         "max": 0.29
       },
       "win_20d": {
-        "n": 63,
+        "n": 64,
         "wr": 100.0,
         "avg": 0.42,
         "min": 0.34,
