@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-09-09T23:36:21+05:30",
+  "generated_at": "2026-09-11T23:32:32+05:30",
   "n": 15,
   "stocks": [
     {
       "sym": "TTML",
-      "price": 36.13,
+      "price": 35.6,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -33,7 +33,7 @@
     },
     {
       "sym": "KOPRAN",
-      "price": 234.37,
+      "price": 235.26,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -63,7 +63,7 @@
     },
     {
       "sym": "SOMICONVEY",
-      "price": 90.87,
+      "price": 92.93,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -124,7 +124,7 @@
     },
     {
       "sym": "HAL",
-      "price": 5000.5,
+      "price": 4905.0,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -150,6 +150,36 @@
         "min": 1.29,
         "max": 2.63,
         "avg": 1.73
+      }
+    },
+    {
+      "sym": "RPEL",
+      "price": 1845.2,
+      "grade": "C",
+      "confidence": 0,
+      "uc": "UC4",
+      "desc": "",
+      "ret_rate": 1.46,
+      "avg_ret": 29.1,
+      "min_ret": 14.85,
+      "hold_days": 20,
+      "win_rate": 100.0,
+      "n_trades": 5,
+      "sharpe": 13.25,
+      "years": [
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "ctx_rsi": {
+        "min": 58.78,
+        "max": 79.81,
+        "avg": 65.19
+      },
+      "ctx_vol_r": {
+        "min": 2.22,
+        "max": 5.21,
+        "avg": 3.86
       }
     },
     {
@@ -183,38 +213,8 @@
       }
     },
     {
-      "sym": "RPEL",
-      "price": 1670.8,
-      "grade": "C",
-      "confidence": 0,
-      "uc": "UC4",
-      "desc": "",
-      "ret_rate": 1.33,
-      "avg_ret": 26.68,
-      "min_ret": 14.85,
-      "hold_days": 20,
-      "win_rate": 100.0,
-      "n_trades": 5,
-      "sharpe": 10.06,
-      "years": [
-        "2024",
-        "2025",
-        "2026"
-      ],
-      "ctx_rsi": {
-        "min": 58.78,
-        "max": 79.81,
-        "avg": 65.19
-      },
-      "ctx_vol_r": {
-        "min": 2.22,
-        "max": 5.21,
-        "avg": 3.86
-      }
-    },
-    {
       "sym": "EXICOM",
-      "price": 180.42,
+      "price": 182.28,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -273,7 +273,7 @@
     },
     {
       "sym": "SALZERELEC",
-      "price": 552.15,
+      "price": 550.55,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -302,7 +302,7 @@
     },
     {
       "sym": "THYROCARE",
-      "price": 566.85,
+      "price": 549.7,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -362,7 +362,7 @@
     },
     {
       "sym": "ANURAS",
-      "price": 1229.6,
+      "price": 1219.4,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
@@ -392,7 +392,7 @@
     },
     {
       "sym": "CENTEXT",
-      "price": 21.94,
+      "price": 22.37,
       "grade": "C",
       "confidence": 0,
       "uc": "UC4",
