@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-15T03:20:40+05:30",
-  "data_range": "2020-01-01 to 2026-09-11",
+  "generated_at": "2026-09-16T02:55:24+05:30",
+  "data_range": "2020-01-01 to 2026-09-15",
   "thresholds": {
     "min_years_traded": 4,
     "min_turnover_cr": 2.0,
@@ -658,18 +658,18 @@
     "BDL": {
       "sym": "BDL",
       "grade": "B",
-      "score": 39.0,
+      "score": 42.4,
       "n_years": 3,
       "years": [
         2024,
         2025,
         2026
       ],
-      "n_events": 5,
+      "n_events": 6,
       "best_window_days": 30,
       "best_beats15_rate": 80.0,
       "best_min_return": 7.26,
-      "avg_floor_depth": 7.1,
+      "avg_floor_depth": 7.4,
       "win_stats": {
         "5": {
           "n": 5,
@@ -857,6 +857,20 @@
               "positive": true,
               "beats_15pct": false
             }
+          }
+        },
+        {
+          "date": "2026-09-15",
+          "close": 1135.0,
+          "low": 1123.0,
+          "year": 2026,
+          "pos_in_range": 8.6,
+          "vol": 1293584,
+          "recovery": {
+            "5": null,
+            "10": null,
+            "20": null,
+            "30": null
           }
         }
       ]
