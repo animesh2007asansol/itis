@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-22T03:33:55+05:30",
-  "data_range": "2020-01-01 to 2026-09-21",
+  "generated_at": "2026-09-23T02:52:39+05:30",
+  "data_range": "2020-01-01 to 2026-09-22",
   "thresholds": {
     "min_years_traded": 4,
     "min_turnover_cr": 2.0,
@@ -672,13 +672,13 @@
       "avg_floor_depth": 7.4,
       "win_stats": {
         "5": {
-          "n": 5,
-          "win_rate": 60.0,
-          "beats15_rate": 20.0,
-          "avg_return": 4.42,
+          "n": 6,
+          "win_rate": 66.7,
+          "beats15_rate": 16.7,
+          "avg_return": 4.17,
           "min_return": -5.63,
           "max_return": 22.94,
-          "med_return": 1.91
+          "med_return": 2.91
         },
         "10": {
           "n": 5,
@@ -867,7 +867,11 @@
           "pos_in_range": 8.6,
           "vol": 1293584,
           "recovery": {
-            "5": null,
+            "5": {
+              "return_pct": 2.91,
+              "positive": true,
+              "beats_15pct": false
+            },
             "10": null,
             "20": null,
             "30": null
