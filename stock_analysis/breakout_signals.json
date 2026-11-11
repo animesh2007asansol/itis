@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-11T03:25:40",
-  "today_ist": "2026-11-11",
+  "generated_at": "2026-11-12T04:27:49",
+  "today_ist": "2026-11-12",
   "last_fetch": "2026-10-30",
   "alert_window": "2026-10-22 to 2026-10-30",
   "n_stocks": 239,
@@ -40,7 +40,7 @@
       "alerts": [
         {
           "sig_date": "2026-10-22",
-          "days_since": 20,
+          "days_since": 21,
           "brk_close": 353.2,
           "brk_pct": 6.5,
           "consol_days": 15,
@@ -68,7 +68,7 @@
           "peak_ret": 12.81,
           "hold_signal": false,
           "accel_signal": false,
-          "action": "Signal 20d ago \u2014 late stage",
+          "action": "Signal 21d ago \u2014 late stage",
           "buy_on": "LATE",
           "entry_type": "t1_open",
           "entry_rec": "Enter at T+1 open (opens near/above signal close)",
@@ -190,7 +190,7 @@
       "alerts": [
         {
           "sig_date": "2026-10-30",
-          "days_since": 12,
+          "days_since": 13,
           "brk_close": 140.21,
           "brk_pct": 5.68,
           "consol_days": 15,
@@ -213,7 +213,7 @@
           "peak_ret": null,
           "hold_signal": false,
           "accel_signal": false,
-          "action": "Signal 12d ago \u2014 late stage",
+          "action": "Signal 13d ago \u2014 late stage",
           "buy_on": "LATE",
           "entry_type": "t1_open",
           "entry_rec": "Enter at T+1 open (opens near/above signal close)",
@@ -612,7 +612,7 @@
       "alerts": [
         {
           "sig_date": "2026-10-30",
-          "days_since": 12,
+          "days_since": 13,
           "brk_close": 237.2,
           "brk_pct": 3.11,
           "consol_days": 15,
@@ -635,7 +635,7 @@
           "peak_ret": null,
           "hold_signal": false,
           "accel_signal": false,
-          "action": "Signal 12d ago \u2014 late stage",
+          "action": "Signal 13d ago \u2014 late stage",
           "buy_on": "LATE",
           "entry_type": "wait_for_dip",
           "entry_rec": "Wait for T+1 dip to ~-1.5% below signal close",
@@ -840,7 +840,7 @@
       "alerts": [
         {
           "sig_date": "2026-10-30",
-          "days_since": 12,
+          "days_since": 13,
           "brk_close": 310.1,
           "brk_pct": 2.51,
           "consol_days": 15,
@@ -863,7 +863,7 @@
           "peak_ret": null,
           "hold_signal": false,
           "accel_signal": false,
-          "action": "Signal 12d ago \u2014 late stage",
+          "action": "Signal 13d ago \u2014 late stage",
           "buy_on": "LATE",
           "entry_type": "t1_open",
           "entry_rec": "Enter at T+1 open (opens near/above signal close)",
@@ -1201,7 +1201,7 @@
   "all_alerts": [
     {
       "sig_date": "2026-10-30",
-      "days_since": 12,
+      "days_since": 13,
       "brk_close": 140.21,
       "brk_pct": 5.68,
       "consol_days": 15,
@@ -1224,7 +1224,7 @@
       "peak_ret": null,
       "hold_signal": false,
       "accel_signal": false,
-      "action": "Signal 12d ago \u2014 late stage",
+      "action": "Signal 13d ago \u2014 late stage",
       "buy_on": "LATE",
       "entry_type": "t1_open",
       "entry_rec": "Enter at T+1 open (opens near/above signal close)",
@@ -1247,7 +1247,7 @@
     },
     {
       "sig_date": "2026-10-30",
-      "days_since": 12,
+      "days_since": 13,
       "brk_close": 237.2,
       "brk_pct": 3.11,
       "consol_days": 15,
@@ -1270,7 +1270,7 @@
       "peak_ret": null,
       "hold_signal": false,
       "accel_signal": false,
-      "action": "Signal 12d ago \u2014 late stage",
+      "action": "Signal 13d ago \u2014 late stage",
       "buy_on": "LATE",
       "entry_type": "wait_for_dip",
       "entry_rec": "Wait for T+1 dip to ~-1.5% below signal close",
@@ -1293,7 +1293,7 @@
     },
     {
       "sig_date": "2026-10-30",
-      "days_since": 12,
+      "days_since": 13,
       "brk_close": 310.1,
       "brk_pct": 2.51,
       "consol_days": 15,
@@ -1316,7 +1316,7 @@
       "peak_ret": null,
       "hold_signal": false,
       "accel_signal": false,
-      "action": "Signal 12d ago \u2014 late stage",
+      "action": "Signal 13d ago \u2014 late stage",
       "buy_on": "LATE",
       "entry_type": "t1_open",
       "entry_rec": "Enter at T+1 open (opens near/above signal close)",
@@ -1339,7 +1339,7 @@
     },
     {
       "sig_date": "2026-10-22",
-      "days_since": 20,
+      "days_since": 21,
       "brk_close": 353.2,
       "brk_pct": 6.5,
       "consol_days": 15,
@@ -1367,7 +1367,7 @@
       "peak_ret": 12.81,
       "hold_signal": false,
       "accel_signal": false,
-      "action": "Signal 20d ago \u2014 late stage",
+      "action": "Signal 21d ago \u2014 late stage",
       "buy_on": "LATE",
       "entry_type": "t1_open",
       "entry_rec": "Enter at T+1 open (opens near/above signal close)",
@@ -5074,7 +5074,7 @@
       "alerts": [
         {
           "sig_date": "2026-10-22",
-          "days_since": 20,
+          "days_since": 21,
           "brk_close": 353.2,
           "brk_pct": 6.5,
           "consol_days": 15,
@@ -5102,7 +5102,7 @@
           "peak_ret": 12.81,
           "hold_signal": false,
           "accel_signal": false,
-          "action": "Signal 20d ago \u2014 late stage",
+          "action": "Signal 21d ago \u2014 late stage",
           "buy_on": "LATE",
           "entry_type": "t1_open",
           "entry_rec": "Enter at T+1 open (opens near/above signal close)",
@@ -12130,7 +12130,7 @@
       "alerts": [
         {
           "sig_date": "2026-10-30",
-          "days_since": 12,
+          "days_since": 13,
           "brk_close": 237.2,
           "brk_pct": 3.11,
           "consol_days": 15,
@@ -12153,7 +12153,7 @@
           "peak_ret": null,
           "hold_signal": false,
           "accel_signal": false,
-          "action": "Signal 12d ago \u2014 late stage",
+          "action": "Signal 13d ago \u2014 late stage",
           "buy_on": "LATE",
           "entry_type": "wait_for_dip",
           "entry_rec": "Wait for T+1 dip to ~-1.5% below signal close",
@@ -18171,7 +18171,7 @@
       "alerts": [
         {
           "sig_date": "2026-10-30",
-          "days_since": 12,
+          "days_since": 13,
           "brk_close": 140.21,
           "brk_pct": 5.68,
           "consol_days": 15,
@@ -18194,7 +18194,7 @@
           "peak_ret": null,
           "hold_signal": false,
           "accel_signal": false,
-          "action": "Signal 12d ago \u2014 late stage",
+          "action": "Signal 13d ago \u2014 late stage",
           "buy_on": "LATE",
           "entry_type": "t1_open",
           "entry_rec": "Enter at T+1 open (opens near/above signal close)",
@@ -18967,7 +18967,7 @@
       "alerts": [
         {
           "sig_date": "2026-10-30",
-          "days_since": 12,
+          "days_since": 13,
           "brk_close": 310.1,
           "brk_pct": 2.51,
           "consol_days": 15,
@@ -18990,7 +18990,7 @@
           "peak_ret": null,
           "hold_signal": false,
           "accel_signal": false,
-          "action": "Signal 12d ago \u2014 late stage",
+          "action": "Signal 13d ago \u2014 late stage",
           "buy_on": "LATE",
           "entry_type": "t1_open",
           "entry_rec": "Enter at T+1 open (opens near/above signal close)",
